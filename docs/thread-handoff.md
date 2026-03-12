@@ -22,17 +22,32 @@
   - 但 2026-03-11 实机运行已确认当前发布版初始化失败
   - 失败日志指向：Harmony patch `UserDataPathProvider::get_IsRunningModded()` 时抛 `System.NotImplementedException`
   - Steam Cloud 也证明本次运行后仍在上传 `modded/profile1/...`
+- 已在工作区新增修正版：
+  - `mods/UnifiedSavePath/`
+  - 改用 `ModInitializerAttribute("Initialize")`
+  - 当前活动实现已不再依赖 Harmony patch
+  - 改为后台线程持续把 `UserDataPathProvider.IsRunningModded` 压回 `false`
+- 已补强 `shared/scripts/build-mod.sh`：
+  - 无 dotnet SDK 时优先走 `csc` + 游戏自带 .NET 9 运行库
+- 修正版已经安装到：
+  - `.../Contents/MacOS/mods/UnifiedSavePath/`
+- 旧公开版已移出 `mods/` 扫描目录，避免重复加载
+- 2026-03-11 21:25 的新日志已进一步确认：
+  - 连 `Harmony.Patch(GetProfileDir...)` 也会失败
+  - 所以当前判断已从“getter patch 失败”升级为“这台 macOS 主机上的 Harmony 动态 patch 普遍失败”
 
 当前最关键的问题：
 
-- 游戏内到底能否直接看到内置 mod 列表 / mod 管理界面，以及 `UnifiedSavePath` 的 Harmony patch 为什么会在 macOS 上失败。
+- 游戏内到底能否直接看到内置 mod 列表 / mod 管理界面，以及当前无 Harmony workaround 版 `UnifiedSavePath` 是否已经绕开了这台 macOS 主机上的 patch 失败。
 
 下一步该做：
 
 - 先在游戏内直接找设置页或相关入口，确认 mod 列表 / mod 管理界面是否实际可见。
 - 如需隔离存档问题，可手动删除游戏目录中的 `.../Contents/MacOS/mods/SmokeMod/`，再重新进游戏观察存档是否恢复。
 - 如果决定试 `UnifiedSavePath`，先看 `docs/unified-save-path-macos-check.md`，按其中的备份与最小试用方案执行。
+- 当前应直接启动游戏，优先验证工作区修正版 `UnifiedSavePath` 的日志与写盘路径。
 - 不要再重复安装当前这个 `UnifiedSavePath` 发布版做“是否能统一存档”的验证；它已经在本机日志里明确失败。
+- 不要再回到 Harmony patch 方案空转；当前本机证据已经显示 `Harmony.Patch(...)` 本身也会失败。
 - 不要再把主要时间花在“是否识别到 mod”上；该问题当前已跨过。
 
 接手时先看：

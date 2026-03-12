@@ -1,0 +1,2 @@
+references/game-dlls/shared/0Harmony.dll
+references/game-dlls/sts2/arm64/sts2.dll

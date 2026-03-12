@@ -4,7 +4,9 @@
 
 ## 结论
 
-- 最新结论档位：暂时不建议直接试当前发布版。
+- 最新结论档位：
+  - 对当前公开发布版：暂时不建议直接试。
+  - 对工作区修正版：已值得进入实机验证阶段，但尚未宣称成功。
 - 核心判断：
   - 从静态对照看，它依赖的关键 patch 点在本机版本中存在，命名与基础签名可对上。
   - 但 2026-03-11 20:11 这次 macOS 本机实机运行已经明确出现 Harmony patch 异常，`UnifiedSavePathMod.Initialize()` 失败，关键 patch 没有成功挂上。
@@ -82,6 +84,49 @@
 - `UnifiedSavePath.dll` 所需的 `0Harmony` 存在
 - 这类 Harmony patch mod 的基础运行条件成立
 
+### 已完成的本地修正
+
+工作区已新增：
+
+- `mods/UnifiedSavePath/`
+
+当前修正版与公开发布版的差异：
+
+- 保留：
+  - `ModInitializerAttribute("Initialize")`
+  - `0Harmony` 依赖
+- 去掉：
+  - `PatchAll()`
+  - 对 `get_IsRunningModded()` / `set_IsRunningModded(bool)` 的 patch
+- 改为：
+  - 手动 patch `UserDataPathProvider.GetProfileDir(int32)`
+  - Prefix 直接返回 `profile{n}`，绕开 `modded/` 前缀逻辑
+
+已确认：
+
+- 修正版已构建成功：
+  - `mods/UnifiedSavePath/exports/release/UnifiedSavePath/UnifiedSavePath.dll`
+  - `mods/UnifiedSavePath/exports/release/UnifiedSavePath/UnifiedSavePath.pck`
+- 修正版已安装到：
+  - `SlayTheSpire2.app/Contents/MacOS/mods/UnifiedSavePath/`
+- 旧公开版已移出 `mods/` 扫描目录。
+
+### 2026-03-11 21:25 的新增结论
+
+新一轮实机日志已确认：
+
+- 工作区首个修正版虽然不再 patch getter/setter，但在 `Harmony.Patch(GetProfileDir...)` 上仍然失败。
+- 因此当前更强的结论是：
+  - 问题不是某个 getter 的 patch 签名
+  - 而是当前 macOS / Godot / .NET 9 主机中的 Harmony 动态 patch 普遍不可用
+
+基于这条新证据，当前活动版又做了第二轮调整：
+
+- 不再依赖任何 Harmony patch
+- 改为后台线程持续把 `UserDataPathProvider.IsRunningModded` 压回 `false`
+- 当前活动 manifest 版本：
+  - `1.0.2`
+
 ## 2026-03-11 实机日志结果
 
 ### 已确认
@@ -122,6 +167,8 @@
 - 该 mod 的核心不是 UI / 资源修改，而是运行逻辑层的 save path routing patch。
 - `mod_image.png` 缺失只是 UI 资源问题，不是主故障。
 - 当前主故障更像是 Harmony 在 macOS / 当前运行时上无法完成对 `get_IsRunningModded()` 的 patch。
+- 从当前本地 IL 看，`modded/profileN` 分流的最小决定点就是 `GetProfileDir(int32)`，所以绕开 getter patch 改打这个方法，是有直接证据支撑的保守修法。
+- 但现在更进一步的本机证据表明：连直接 patch `GetProfileDir(int32)` 也会失败，所以真正要绕开的不是某个方法，而是 Harmony patch 机制本身。
 
 ## 风险点
 
@@ -134,6 +181,20 @@
 
 - 失败点不是存档格式，而是 mod initializer 中的 Harmony patch。
 - 因此这已经不再是“理论风险”，而是当前发布版的已发生问题。
+
+### 1.6. 修正版目前只完成到“已构建并安装”
+
+- 还没有新的实机日志来证明修正版一定成功。
+- 因此当前只能说：
+  - 失败根因已被绕开
+  - 但运行结果仍待下一次游戏启动验证
+
+### 1.7. 当前活动 workaround 依赖时序
+
+- 它不直接 patch 路径方法。
+- 它依赖在运行时足够早地把 `IsRunningModded` 压回 `false`。
+- 因此仍有一个待验证风险：
+  - 如果读档路径在该线程生效前就已经决定，旧档仍可能不会恢复
 
 ### 2. 它只改到 `IsRunningModded` / `GetProfileDir` 这一层
 
@@ -174,7 +235,7 @@
 
 ## 最小试用方案
 
-仅当后续拿到修正版构建或决定做二次验证时再执行。当前发布版不建议继续重复试装。
+当前发布版不建议继续重复试装。下一轮测试应只针对工作区修正版执行。
 
 前提：先做只读备份，不覆盖原始存档。
 
@@ -182,11 +243,15 @@
 2. 记录未安装 UnifiedSavePath 时：
    - 目标旧档是否能看到
    - 新开一局后数据写到了哪条路径
-3. 将 `UnifiedSavePath.dll` 与 `UnifiedSavePath.pck` 安装到：
-   - `.../SlayTheSpire2.app/Contents/MacOS/mods/UnifiedSavePath/`
+3. 确认游戏目录中当前只保留工作区修正版：
+   - `.../SlayTheSpire2.app/Contents/MacOS/mods/UnifiedSavePath/UnifiedSavePath.dll`
+   - `.../SlayTheSpire2.app/Contents/MacOS/mods/UnifiedSavePath/UnifiedSavePath.pck`
 4. 启动游戏，允许加载 mod。
-5. 优先验证旧档是否恢复可见 / 可继续。
-6. 再新开一个最小进度，退出后比对：
+5. 先读日志，确认：
+   - 不再出现 `Exception thrown when calling mod initializer of type UnifiedSavePath.UnifiedSavePathMod`
+   - 不再出现 `Harmony.Patch(...)` 相关异常
+6. 优先验证旧档是否恢复可见 / 可继续。
+7. 再新开一个最小进度，退出后比对：
    - 是否落到与 vanilla 相同的 profile 路径
    - 是否仍然被写到另一路径
-7. 如结果异常，先移除该 mod，再用备份回滚，不要在异常状态下继续推进主存档。
+8. 如结果异常，先移除该 mod，再用备份回滚，不要在异常状态下继续推进主存档。

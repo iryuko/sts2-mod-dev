@@ -5,6 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 LOCAL_DOTNET="${REPO_ROOT}/local/tools/dotnet/dotnet"
 LOCAL_GODOT="${REPO_ROOT}/local/tools/godot-4.5.1/Godot.app/Contents/MacOS/Godot"
+GAME_PATH_FILE="${REPO_ROOT}/local/game-path.txt"
 
 usage() {
   cat <<'EOF'
@@ -47,6 +48,34 @@ find_dotnet() {
   fi
 
   return 1
+}
+
+find_csc() {
+  if command -v csc >/dev/null 2>&1; then
+    command -v csc
+    return
+  fi
+
+  return 1
+}
+
+read_game_root() {
+  [[ -f "${GAME_PATH_FILE}" ]] || return 1
+
+  local game_root
+  game_root="$(awk 'NF { print; exit }' "${GAME_PATH_FILE}")"
+  [[ -n "${game_root}" ]] || return 1
+
+  printf '%s\n' "${game_root}"
+}
+
+resolve_runtime_dir() {
+  local game_root="$1"
+  local runtime_dir="${game_root}/SlayTheSpire2.app/Contents/Resources/data_sts2_macos_arm64"
+
+  [[ -d "${runtime_dir}" ]] || return 1
+
+  printf '%s\n' "${runtime_dir}"
 }
 
 collect_csproj() {
@@ -122,6 +151,14 @@ collect_mcs_refs() {
   done < "${refs_file}"
 }
 
+collect_csc_runtime_refs() {
+  local runtime_dir="$1"
+
+  find "${runtime_dir}" -maxdepth 1 -type f \
+    \( -name 'System*.dll' -o -name 'mscorlib.dll' -o -name 'netstandard.dll' \) \
+    | sort
+}
+
 MOD_INPUT=""
 CONFIGURATION="Release"
 
@@ -179,14 +216,17 @@ fi
 
 ASSEMBLY_PATH="${BUILD_ROOT}/${MOD_NAME}.dll"
 DOTNET_BIN=""
+CSC_BIN=""
 BUILD_MODE=""
 
 if DOTNET_BIN="$(find_dotnet)"; then
   BUILD_MODE="dotnet"
+elif CSC_BIN="$(find_csc)"; then
+  BUILD_MODE="csc"
 elif command -v mcs >/dev/null 2>&1; then
   BUILD_MODE="mcs"
 else
-  echo "未找到 dotnet 或 mcs，当前无法生成真实 DLL。" >&2
+  echo "未找到 dotnet、csc 或 mcs，当前无法生成真实 DLL。" >&2
   exit 1
 fi
 
@@ -195,6 +235,8 @@ echo "构建模式：${BUILD_MODE}"
 if [[ "${BUILD_MODE}" == "dotnet" ]]; then
   echo "dotnet：${DOTNET_BIN}"
   echo "项目文件：${CSPROJ_FILES[0]}"
+elif [[ "${BUILD_MODE}" == "csc" ]]; then
+  echo "csc：${CSC_BIN}"
 fi
 echo "构建配置：${CONFIGURATION}"
 echo "中间输出：${BUILD_ROOT}"
@@ -206,6 +248,37 @@ mkdir -p "${BUILD_ROOT}" "${EXPORT_ROOT}"
 
 if [[ "${BUILD_MODE}" == "dotnet" ]]; then
   "${DOTNET_BIN}" build "${CSPROJ_FILES[0]}" -c "${CONFIGURATION}" -o "${BUILD_ROOT}" >/dev/null
+elif [[ "${BUILD_MODE}" == "csc" ]]; then
+  CS_FILES=()
+  while IFS= read -r file; do
+    CS_FILES+=("${file}")
+  done < <(collect_cs_files "${MOD_DIR}")
+  if [[ "${#CS_FILES[@]}" -eq 0 ]]; then
+    echo "未找到可编译的 .cs 文件：${MOD_DIR}/src" >&2
+    exit 1
+  fi
+
+  GAME_ROOT=""
+  if ! GAME_ROOT="$(read_game_root)"; then
+    echo "未找到游戏目录配置，csc fallback 无法定位 .NET 运行库：${GAME_PATH_FILE}" >&2
+    exit 1
+  fi
+
+  RUNTIME_DIR=""
+  if ! RUNTIME_DIR="$(resolve_runtime_dir "${GAME_ROOT}")"; then
+    echo "未找到 macOS arm64 运行库目录：${GAME_ROOT}" >&2
+    exit 1
+  fi
+
+  CSC_REFS=("-nostdlib+")
+  while IFS= read -r runtime_ref; do
+    CSC_REFS+=("-r:${runtime_ref}")
+  done < <(collect_csc_runtime_refs "${RUNTIME_DIR}")
+  while IFS= read -r ref_file; do
+    CSC_REFS+=("-r:${ref_file}")
+  done < <(collect_mcs_refs "${MOD_DIR}")
+
+  "${CSC_BIN}" -nologo -target:library -langversion:latest -nullable:enable -debug:portable -deterministic -out:"${ASSEMBLY_PATH}" "${CSC_REFS[@]}" "${CS_FILES[@]}"
 else
   CS_FILES=()
   while IFS= read -r file; do
