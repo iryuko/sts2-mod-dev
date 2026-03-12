@@ -1,0 +1,2 @@
+SmokeMod real PCK marker
+This file exists only to make the generated PCK contain at least one real resource.

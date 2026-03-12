@@ -1,0 +1,22 @@
+{
+  "_note": "这是当前工作模板，不代表官方 manifest schema 已完全确认。",
+  "_status": "working-template-for-first-local-validation",
+  "_todo": [
+    "在第一次本机安装验证后，核对哪些字段被实际识别",
+    "确认是否需要更多字段，例如依赖、显示图标或入口说明",
+    "确认字段名是否必须与当前模板完全一致"
+  ],
+  "_evidence": [
+    "sts2.dll 字符串中出现 ModManifest, pck_name, author, version, schema_version 等名称",
+    "当前外部安装首要候选路径按 <GameRoot>/mods/ 处理，但仍待本机验证"
+  ],
+  "schema_version": 1,
+  "id": "replace-with-your-mod-id",
+  "name": "Replace With Mod Name",
+  "version": "0.1.0",
+  "author": "Your Name",
+  "description": "Short description for first local validation.",
+  "dll": "ReplaceWithYourMod.dll",
+  "pck": "ReplaceWithYourMod.pck",
+  "image": "mod_image.png"
+}

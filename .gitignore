@@ -1,0 +1,29 @@
+.DS_Store
+
+# Local machine tooling / transient analysis artifacts
+local/tools/
+local/tmp/
+
+# C# / .NET
+**/bin/
+**/obj/
+*.user
+*.rsuser
+*.sln.docstates
+
+# Godot
+**/.godot/
+
+# mod 导出目录中的构建产物
+**/exports/debug/**
+!**/exports/debug/
+!**/exports/debug/.gitkeep
+**/exports/release/**
+!**/exports/release/
+!**/exports/release/.gitkeep
+
+# 打包产物
+**/exports/*.zip
+**/exports/**/*.zip
+**/exports/*.pck
+**/exports/**/*.pck

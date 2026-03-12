@@ -1,0 +1,2 @@
+# Intentionally left empty for now.
+# The current smoke build uses a plain CLR assembly so it can compile via mcs.

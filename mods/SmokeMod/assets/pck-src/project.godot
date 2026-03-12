@@ -1,0 +1,10 @@
+; Minimal Godot project used only to generate a valid .pck for SmokeMod validation.
+; It does not claim to mirror STS2's expected runtime content layout.
+
+config_version=5
+
+[application]
+
+config/name="SmokeModPckSource"
+run/main_scene=""
+
