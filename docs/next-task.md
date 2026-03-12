@@ -6,7 +6,7 @@
 
 - 确认游戏内是否存在可见的 mod 列表 / mod 管理界面 / 已加载 mod 查看入口。
 - 维持“游戏目录安装版 SmokeMod 与工作区发布版一致”的状态，避免后续测试基线漂移。
-- 继续定位当前存档问题，但不要再重复试当前公开版 `UnifiedSavePath`；先分析它在 macOS 上的 Harmony patch 失败原因。
+- 继续定位当前存档问题，但不要再重复试当前公开版 `UnifiedSavePath`；优先验证已安装的无 Harmony workaround 版是否成功初始化并改写 profile 路径。
 
 ## 预期输出物
 
@@ -24,6 +24,10 @@
 - 一条失败根因结论：
   - 为什么 `UnifiedSavePath` 在 macOS 上初始化失败
   - 是否能通过改 patch 策略规避
+- 一条修正版验证结论：
+  - 当前工作区活动版 `UnifiedSavePath` 是否成功初始化
+  - 是否还会报 mod initializer 异常
+  - 是否仍然写入 `modded/profile1/...`
 - 对应文档更新：
   - `docs/current-status.md`
   - `docs/next-task.md`
@@ -46,5 +50,6 @@
 - 能明确说明安装版 SmokeMod 与工作区发布版是否一致。
 - 能对 `UnifiedSavePath` 给出基于本地证据的明确档位判断。
 - 能把 `UnifiedSavePath` 的 macOS 失败点收敛到可解释的技术原因。
+- 能明确说明无 Harmony workaround 是否真正绕开了当前 macOS 主机的 patch 失败。
 - 能给出一次面向存档问题的人工回归验证建议或结果，而不是只停留在文件分析。
 - 当前项目状态文档已更新到足以让下一线程直接接手，不必重新翻旧记录。

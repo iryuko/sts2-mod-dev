@@ -1,0 +1,7 @@
+{
+  "pck_name": "UnifiedSavePath",
+  "name": "Unified Save Path",
+  "author": "user",
+  "description": "Local macOS-compatible patch that forces modded and vanilla saves to share profile paths.",
+  "version": "1.0.2"
+}
