@@ -1,0 +1,45 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=10 format=3 uid="uid://ctu0okqoases1"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dqk5asoh2etei" path="res://animations/monsters/snapping_jaxfruit/snapping_jaxfruit.atlas" id="1_3n3s4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://jfxee640ory" path="res://animations/monsters/snapping_jaxfruit/snapping_jaxfruit.skel" id="2_dim63"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_k5r50"]
+from = "idle_loop"
+to = "charged_loop"
+mix = 0.5
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0j5v4"]
+from = "hurt_charged"
+to = "charged_loop"
+mix = 0.5
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ckvb6"]
+from = "hurt"
+to = "die"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cdt7f"]
+from = "charged_loop"
+to = "idle_loop"
+mix = 0.2
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_x8rml"]
+from = "idle_loop"
+to = "charge_up"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_eo1um"]
+from = "charge_up"
+to = "charged_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vtqmo"]
+from = "charged_loop"
+to = "cast"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_3n3s4")
+skeleton_file_res = ExtResource("2_dim63")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_k5r50"), SubResource("SpineAnimationMix_0j5v4"), SubResource("SpineAnimationMix_ckvb6"), SubResource("SpineAnimationMix_cdt7f"), SubResource("SpineAnimationMix_x8rml"), SubResource("SpineAnimationMix_eo1um"), SubResource("SpineAnimationMix_vtqmo")]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmf28g7uugba8"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_2udty"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bdmd3xnqq45ar" path="res://animations/monsters/slithering_strangler/slithering_strangler_skel_data.tres" id="2_slq0k"]
+
+[node name="SlitheringStrangler" type="Node2D"]
+script = ExtResource("1_2udty")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_slq0k")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(15, -21)
+scale = Vector2(0.3, 0.3)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -99.0
+offset_top = -220.0
+offset_right = 99.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -102)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -241)

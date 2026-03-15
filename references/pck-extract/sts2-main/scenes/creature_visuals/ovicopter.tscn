@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://xblekqufpmw6"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_tcjok"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://ckbdwnt5q7dme" path="res://animations/monsters/egg_layer/egg_layer_skel_data.tres" id="2_xmw26"]
+
+[node name="Ovicopter" type="Node2D"]
+script = ExtResource("1_tcjok")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-18, -13)
+scale = Vector2(0.3, 0.3)
+skeleton_data_res = ExtResource("2_xmw26")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -192.0
+offset_top = -476.0
+offset_right = 211.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-6, -269)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -465)

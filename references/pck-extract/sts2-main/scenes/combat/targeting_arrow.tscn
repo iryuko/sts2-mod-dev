@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://emx5gidfc1ao"]
+
+[ext_resource type="Script" uid="uid://flddin1ms2ol" path="res://src/Core/Nodes/Combat/NTargetingArrow.cs" id="1_82y2t"]
+
+[node name="TargetingArrow" type="Node2D"]
+script = ExtResource("1_82y2t")

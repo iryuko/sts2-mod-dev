@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://7hgnoiupcto1"]
+
+[ext_resource type="Script" uid="uid://c20okdw4gpcqa" path="res://src/Core/Nodes/Multiplayer/NMultiplayerWarningPopup.cs" id="2_3oirb"]
+[ext_resource type="PackedScene" uid="uid://dqberqa21r6y8" path="res://scenes/ui/vertical_popup.tscn" id="2_aai85"]
+
+[node name="MultiplayerPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_3oirb")
+
+[node name="VerticalPopup" parent="." instance=ExtResource("2_aai85")]
+layout_mode = 1

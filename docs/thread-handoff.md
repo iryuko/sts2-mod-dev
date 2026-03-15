@@ -1,60 +1,118 @@
 # 线程接班摘要
 
-本项目在做 STS2 本地 mod 加载链路验证，不是做功能 mod 开发。
+本项目最初在研究 STS2 macOS 的本地 mod 安装与加载链路，这条链路现在已经打通：
 
-当前已经做到：
+- 游戏会扫描：
+  - `SlayTheSpire2.app/Contents/MacOS/mods/`
+- `SmokeMod` 已经实机被识别和加载过
+- `UnifiedSavePath` 的 macOS 本地修正版也已经实机成功，说明当前工作区具备做可运行功能 mod 的基础条件
+- `UnifiedSavePath` 当前源码也已进一步整理成跨平台实现：
+  - Windows 走 Harmony patch 路线
+  - macOS / 非 Windows 走已验证成功的 flag-thread workaround
 
-- 工作区与游戏目录边界已固定。
-- macOS 本机已确认扫描 `SlayTheSpire2.app/Contents/MacOS/mods/`。
-- SmokeMod 已安装到该目录，而且最近一次游戏启动已经明确提示加载了我们的 mod。
-- 安装版 `SmokeMod.dll` / `SmokeMod.pck` 与工作区发布版 SHA-256 一致，可视为同一份发布产物。
-- 程序集与现有参考文件已确认存在内置 modding UI 线索：
-  - 设置页中的 `%ModdingButton`
-  - `OpenModdingScreen`
-  - `NModdingScreen`
-  - `NModMenuRow`
-  - `NModInfoContainer`
-  - `NConfirmModLoadingPopup`
-- `UnifiedSavePath` 已做过一轮 macOS 可行性检查：
-  - 本地 DLL 依赖 `sts2` 与 `0Harmony`
-  - 本机 `sts2.dll` 中存在 `UserDataPathProvider.IsRunningModded` 与 `GetProfileDir(int32)`
-  - 本机游戏运行时也自带 `0Harmony.dll`
-  - 但 2026-03-11 实机运行已确认当前发布版初始化失败
-  - 失败日志指向：Harmony patch `UserDataPathProvider::get_IsRunningModded()` 时抛 `System.NotImplementedException`
-  - Steam Cloud 也证明本次运行后仍在上传 `modded/profile1/...`
-- 已在工作区新增修正版：
-  - `mods/UnifiedSavePath/`
-  - 改用 `ModInitializerAttribute("Initialize")`
-  - 当前活动实现已不再依赖 Harmony patch
-  - 改为后台线程持续把 `UserDataPathProvider.IsRunningModded` 压回 `false`
-- 已补强 `shared/scripts/build-mod.sh`：
-  - 无 dotnet SDK 时优先走 `csc` + 游戏自带 .NET 9 运行库
-- 修正版已经安装到：
-  - `.../Contents/MacOS/mods/UnifiedSavePath/`
-- 旧公开版已移出 `mods/` 扫描目录，避免重复加载
-- 2026-03-11 21:25 的新日志已进一步确认：
-  - 连 `Harmony.Patch(GetProfileDir...)` 也会失败
-  - 所以当前判断已从“getter patch 失败”升级为“这台 macOS 主机上的 Harmony 动态 patch 普遍失败”
+当前主线已经切到：
+
+- 做一个最小“跨角色加卡”功能 mod
+
+当前已确认的技术结论：
+
+- 当前 run 角色通过 `Player.get_Character()` 读取
+- 角色正常卡牌来源走：
+  - `CharacterModel.get_CardPool()`
+  - `CardCreationOptions.ForRoom(...)`
+  - `CardPoolModel.GetUnlockedCards(...)`
+- 当前最适合的最小干预点不是 patch 奖励逻辑，而是直接走原生扩展点：
+  - `ModHelper.AddModelToPool<TPoolType, TModelType>()`
+- 角色卡池的 epoch 过滤只会移除该角色自己 epoch 中尚未解锁的卡
+- 因此，mod 追加进去的外来卡默认有机会保留下来
+- 当前用户后续实机观察到：
+  - `BodySlam` 是作为正常卡牌奖励出现的
+  - 这与 `ModHelper.AddModelToPool<SilentCardPool, BodySlam>()` 完全一致
+- 我们后来加上的“运行时直接塞进当前牌组”只是诊断路径，不是必要实现
+- 这条诊断路径曾导致两类真实问题：
+  - 在过早时机写牌组会黑屏
+  - 在 `Neow` / `Ancient` 房改牌组会卡住流程
+- 因此当前已决定删掉这条路径，保持 mod 只做卡池扩展
+
+当前首个验证组合已经固定：
+
+- 来源角色：`Ironclad`
+- 目标角色：`Silent`
+- 目标卡牌：`BodySlam`
+
+当前工作区新增内容：
+
+- 分析文档：
+  - `docs/character-cardpool-analysis.md`
+  - `docs/cross-character-card-plan.md`
+- 新 mod：
+  - `mods/CrossCharacterCard/`
+  - `mods/SilentBonusRelic/`
+
+`CrossCharacterCard` 当前实现：
+
+- 使用 `ModInitializerAttribute("Initialize")`
+- 初始化时按集中规则表逐条注册
+- 当前规则表中已有：
+  - `BodySlam -> SilentCardPool`
+- 当前版本不再订阅 `RunStarted` / `RoomEntered`
+- 当前版本不再运行时修改 `Silent` 当前牌组
+- 当前 release 产物已重新构建成功：
+  - `mods/CrossCharacterCard/exports/release/CrossCharacterCard/CrossCharacterCard.dll`
+  - `mods/CrossCharacterCard/exports/release/CrossCharacterCard/CrossCharacterCard.pck`
+- 当前新版已经安装到：
+  - `.../Contents/MacOS/mods/CrossCharacterCard/`
+
+`SilentBonusRelic` 当前实现：
+
+- 使用 `ModInitializerAttribute("Initialize")`
+- 目标角色：
+  - `Silent`
+- 目标遗物：
+  - `SneckoSkull`
+- 当前已确认：
+  - `Silent::get_StartingRelics()` 默认只有 `RingOfTheSnake`
+  - `RelicCmd.Obtain<TRelic>(player)` 是游戏内现成加遗物命令
+  - `Player.AddRelicInternal(...)` 是更底层的真实落地入口
+- 进一步确认到：
+  - `Player.PopulateStartingRelics()` 在 `RunStarted` 之前就完成
+  - 当前没找到原生“扩展角色 StartingRelics 列表”的 mod helper
+- 当前版本已改为更接近“第二个起始 relic”的实现：
+  - `RunStarted` 触发时立刻检查当前玩家
+  - 如果是 `Silent`
+  - 则按集中规则表依次补发额外起始 relic
+  - 当前规则表中已有：
+    - `SneckoSkull`
+    - `Shuriken`
+  - 每个 relic 都会：
+    - `FloorAddedToDeck = 1`
+    - `SaveManager.MarkRelicAsSeen(...)`
+    - `Player.AddRelicInternal(..., silent: true)`
+- 当前 release 产物已构建并安装到：
+  - `.../Contents/MacOS/mods/SilentBonusRelic/`
 
 当前最关键的问题：
 
-- 游戏内到底能否直接看到内置 mod 列表 / mod 管理界面，以及当前无 Harmony workaround 版 `UnifiedSavePath` 是否已经绕开了这台 macOS 主机上的 patch 失败。
+- `BodySlam` 进入 `Silent` 正常奖励池的频率是否足够稳定，能否作为后续多卡迁移的可靠模式
+- `SilentBonusRelic` 改成 `RunStarted` 立即补发后，是否能稳定表现为 `Silent` 的第二个起始 relic
+- `SilentBonusRelic` 新增 `Shuriken` 后，是否能稳定表现为 `Silent` 的两件额外起始 relic
 
 下一步该做：
 
-- 先在游戏内直接找设置页或相关入口，确认 mod 列表 / mod 管理界面是否实际可见。
-- 如需隔离存档问题，可手动删除游戏目录中的 `.../Contents/MacOS/mods/SmokeMod/`，再重新进游戏观察存档是否恢复。
-- 如果决定试 `UnifiedSavePath`，先看 `docs/unified-save-path-macos-check.md`，按其中的备份与最小试用方案执行。
-- 当前应直接启动游戏，优先验证工作区修正版 `UnifiedSavePath` 的日志与写盘路径。
-- 不要再重复安装当前这个 `UnifiedSavePath` 发布版做“是否能统一存档”的验证；它已经在本机日志里明确失败。
-- 不要再回到 Harmony patch 方案空转；当前本机证据已经显示 `Harmony.Patch(...)` 本身也会失败。
-- 不要再把主要时间花在“是否识别到 mod”上；该问题当前已跨过。
+1. 启动游戏，确认 mod 是否无异常加载
+2. 用 `Silent` 开新 run
+3. 正常推进几场战斗并观察奖励
+4. 确认 `BodySlam` 是否会作为正常奖励出现
+5. 选择后继续确认：
+   - `BodySlam` 能否正常进入牌组
+   - 能否正常抽到并打出
+6. 观察新 run 一开始是否就拥有 `SneckoSkull` 和 `Shuriken`
+7. 如果卡牌路径稳定成立，再考虑把同一模式扩展到更多卡牌与角色组合
 
 接手时先看：
 
 1. `AGENTS.md`
 2. `docs/current-status.md`
 3. `docs/next-task.md`
-4. `docs/decisions.md`
-
-默认不要先通读旧日志；只有当前结论文档不够时，再去看 `docs/findings.md` 和原始日志。
+4. `docs/thread-handoff.md`
+5. `docs/decisions.md`

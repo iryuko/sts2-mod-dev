@@ -1,0 +1,167 @@
+[gd_scene load_steps=11 format=3 uid="uid://cm4ocv4456kaq"]
+
+[ext_resource type="Script" uid="uid://b8ll880lwpf2n" path="res://src/Core/Nodes/Screens/Shops/NMerchantInventory.cs" id="1_ypdbi"]
+[ext_resource type="Texture2D" uid="uid://dmnu2gbfrnee4" path="res://images/rooms/merchant_room/shop_rug.png" id="2_sw1qd"]
+[ext_resource type="PackedScene" uid="uid://rdkoq04iuuhe" path="res://scenes/merchant/merchant_card.tscn" id="3_uu80r"]
+[ext_resource type="PackedScene" uid="uid://bro6sn3uqyhfr" path="res://scenes/merchant/merchant_relic.tscn" id="4_hw4i6"]
+[ext_resource type="PackedScene" uid="uid://lnojwtr7mw70" path="res://scenes/merchant/merchant_potion.tscn" id="5_cg3tn"]
+[ext_resource type="PackedScene" uid="uid://ca1bm16oq4u5v" path="res://scenes/merchant/merchant_card_removal.tscn" id="6_2p75s"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="7_qbecm"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cf07xueehrjqk" path="res://animations/backgrounds/merchant_room/hand/merchant_hand_skel_data.tres" id="8_bkfru"]
+[ext_resource type="Script" uid="uid://p34nsajneq80" path="res://src/Core/Nodes/Screens/Shops/NMerchantHand.cs" id="9_fems6"]
+[ext_resource type="PackedScene" uid="uid://slvrtr0urml" path="res://scenes/merchant/merchant_rug_dialogue.tscn" id="10_37ef2"]
+
+[node name="MerchantInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ypdbi")
+
+[node name="Backstop" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SlotsContainer" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -842.0
+offset_top = -1635.0
+offset_right = 905.0
+offset_bottom = -657.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_sw1qd")
+expand_mode = 1
+
+[node name="CharacterCards" type="Control" parent="SlotsContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 332.0
+offset_top = 303.0
+offset_right = 332.0
+offset_bottom = 303.0
+
+[node name="MerchantCardHolder" parent="SlotsContainer/CharacterCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = -13.0
+offset_right = 287.0
+
+[node name="MerchantCardHolder2" parent="SlotsContainer/CharacterCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = 250.0
+offset_right = 550.0
+
+[node name="MerchantCardHolder3" parent="SlotsContainer/CharacterCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = 511.0
+offset_right = 811.0
+
+[node name="MerchantCardHolder4" parent="SlotsContainer/CharacterCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = 770.0
+offset_right = 1070.0
+
+[node name="MerchantCardHolder5" parent="SlotsContainer/CharacterCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = 1036.0
+offset_top = -3.0
+offset_right = 1336.0
+offset_bottom = 419.0
+
+[node name="ColorlessCards" type="Control" parent="SlotsContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 397.0
+offset_top = 676.0
+offset_right = 397.0
+offset_bottom = 676.0
+
+[node name="MerchantCardHolder" parent="SlotsContainer/ColorlessCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = -13.0
+offset_right = 287.0
+
+[node name="MerchantCardHolder2" parent="SlotsContainer/ColorlessCards" instance=ExtResource("3_uu80r")]
+layout_mode = 2
+offset_left = 261.0
+offset_right = 561.0
+
+[node name="Relics" type="Control" parent="SlotsContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 871.0
+offset_top = 595.0
+offset_right = 911.0
+offset_bottom = 635.0
+
+[node name="MerchantRelic" parent="SlotsContainer/Relics" instance=ExtResource("4_hw4i6")]
+
+[node name="MerchantRelic2" parent="SlotsContainer/Relics" instance=ExtResource("4_hw4i6")]
+offset_left = 150.0
+offset_right = 272.0
+
+[node name="MerchantRelic3" parent="SlotsContainer/Relics" instance=ExtResource("4_hw4i6")]
+offset_left = 300.0
+offset_right = 422.0
+
+[node name="Potions" type="Control" parent="SlotsContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 871.0
+offset_top = 739.0
+offset_right = 911.0
+offset_bottom = 779.0
+
+[node name="MerchantPotion" parent="SlotsContainer/Potions" instance=ExtResource("5_cg3tn")]
+
+[node name="MerchantPotion2" parent="SlotsContainer/Potions" instance=ExtResource("5_cg3tn")]
+offset_left = 150.0
+offset_right = 272.0
+
+[node name="MerchantPotion3" parent="SlotsContainer/Potions" instance=ExtResource("5_cg3tn")]
+offset_left = 300.0
+offset_right = 422.0
+
+[node name="MerchantCardRemoval" parent="SlotsContainer" instance=ExtResource("6_2p75s")]
+unique_name_in_owner = true
+offset_left = 1370.0
+offset_top = 678.0
+offset_right = 1588.0
+offset_bottom = 896.0
+
+[node name="BackButton" parent="." instance=ExtResource("7_qbecm")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MerchantHandContainer" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("8_bkfru")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(234, -54)
+scale = Vector2(0.4, 0.4)
+
+[node name="MerchantHand" type="Node" parent="MerchantHandContainer"]
+unique_name_in_owner = true
+script = ExtResource("9_fems6")
+metadata/_custom_type_script = "uid://p34nsajneq80"
+
+[node name="Dialogue" parent="." instance=ExtResource("10_37ef2")]
+unique_name_in_owner = true
+position = Vector2(1410, 271)

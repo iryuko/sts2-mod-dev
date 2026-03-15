@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqgskqhjhaw7q"]
+
+[ext_resource type="Script" path="res://src/Core/Nodes/Vfx/Utilities/NVfxSpine.cs" id="1_n4adl"]
+[ext_resource type="SpineSkeletonDataResource" path="res://animations/vfx/vfx_bite/vfx_bite_skeleton_data_resource.tres" id="2_3d7hn"]
+
+[node name="VfxBite" type="Node2D"]
+script = ExtResource("1_n4adl")
+_animation = "bite"
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+show_behind_parent = true
+scale = Vector2(0.75, 0.75)
+skeleton_data_res = ExtResource("2_3d7hn")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0

@@ -1,0 +1,138 @@
+[gd_scene load_steps=16 format=3 uid="uid://ca1bm16oq4u5v"]
+
+[ext_resource type="Script" uid="uid://bkto0y55cule7" path="res://src/Core/Nodes/Screens/Shops/NMerchantCardRemoval.cs" id="1_iqwi2"]
+[ext_resource type="Script" uid="uid://bry8aaeikvcb3" path="res://src/Core/Nodes/GodotExtensions/NClickableControl.cs" id="2_ltd50"]
+[ext_resource type="Texture2D" uid="uid://iskcc4bpsixa" path="res://images/rooms/merchant_room/card_removal_00.png" id="2_mpe3d"]
+[ext_resource type="Texture2D" uid="uid://tdnej7jrx6o3" path="res://images/rooms/merchant_room/card_removal_01.png" id="3_4noyu"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_fr7qx"]
+[ext_resource type="Texture2D" uid="uid://bx8rkdm85ei27" path="res://images/rooms/merchant_room/card_removal_02.png" id="4_wub3p"]
+[ext_resource type="Texture2D" uid="uid://b1kjp5cje35j1" path="res://images/rooms/merchant_room/card_removal_04.png" id="5_835n5"]
+[ext_resource type="Texture2D" uid="uid://bmmuopj81ibpv" path="res://images/rooms/merchant_room/card_removal_05.png" id="6_mf38f"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="8_6mx3w"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="9_iwyus"]
+
+[sub_resource type="Animation" id="Animation_0dimg"]
+resource_name = "Available"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("2_mpe3d")]
+}
+
+[sub_resource type="Animation" id="Animation_8a8lb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("2_mpe3d")]
+}
+
+[sub_resource type="Animation" id="Animation_bw0pc"]
+resource_name = "Used"
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 0.533333, 0.6, 0.666667, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("2_mpe3d"), ExtResource("2_mpe3d"), ExtResource("3_4noyu"), ExtResource("4_wub3p"), ExtResource("5_835n5"), ExtResource("6_mf38f")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0fag"]
+_data = {
+&"Available": SubResource("Animation_0dimg"),
+&"RESET": SubResource("Animation_8a8lb"),
+&"Used": SubResource("Animation_bw0pc")
+}
+
+[node name="MerchantCardRemoval" type="Control"]
+custom_minimum_size = Vector2(122, 112)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 389.0
+offset_bottom = 357.0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_iqwi2")
+
+[node name="Visual" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1.53845, -1.53851)
+scale = Vector2(0.559943, 0.559943)
+texture = ExtResource("2_mpe3d")
+
+[node name="Visual2" type="Sprite2D" parent="Visual"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.25)
+show_behind_parent = true
+texture = ExtResource("2_mpe3d")
+offset = Vector2(16, 16)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_y0fag")
+}
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -157.0
+offset_top = -126.0
+offset_right = 154.0
+offset_bottom = 174.0
+pivot_offset = Vector2(56, 56)
+script = ExtResource("2_ltd50")
+
+[node name="Cost" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -147.692
+offset_top = 176.923
+offset_right = 149.308
+offset_bottom = 230.923
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Cost"]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+texture = ExtResource("8_6mx3w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_iwyus")
+theme_override_font_sizes/font_size = 39
+text = "99"
+theme_override_constants/line_spacing = 0.0
+theme_override_constants/outline_size = 15
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/shadow_outline_size = 0
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+script = ExtResource("4_fr7qx")
+MinFontSize = 40

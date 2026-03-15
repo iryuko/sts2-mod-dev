@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1ay07letu06p"]
+
+[ext_resource type="Script" uid="uid://c6f6llug4se4g" path="res://src/Core/Nodes/Screens/Shops/NFakeMerchantInventory.cs" id="1_2cdx4"]
+[ext_resource type="Texture2D" uid="uid://yagkc6fnfvt6" path="res://images/events/custom/fake_merchant_rug.png" id="2_2cdx4"]
+[ext_resource type="PackedScene" uid="uid://bro6sn3uqyhfr" path="res://scenes/merchant/merchant_relic.tscn" id="4_3hbj3"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bsti2atlmj7ri" path="res://animations/backgrounds/fake_merchant_room/hand/fake_merchant_hand_skel_data.tres" id="5_2cdx4"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="7_efch8"]
+[ext_resource type="Script" uid="uid://p34nsajneq80" path="res://src/Core/Nodes/Screens/Shops/NMerchantHand.cs" id="9_ldg6o"]
+[ext_resource type="PackedScene" uid="uid://slvrtr0urml" path="res://scenes/merchant/merchant_rug_dialogue.tscn" id="10_8cll6"]
+
+[node name="MerchantInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2cdx4")
+
+[node name="Backstop" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="SlotsContainer" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -842.0
+offset_top = -1635.0
+offset_right = 905.0
+offset_bottom = -657.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2cdx4")
+expand_mode = 1
+
+[node name="Relics" type="Control" parent="SlotsContainer"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 871.0
+offset_top = 595.0
+offset_right = 911.0
+offset_bottom = 635.0
+
+[node name="MerchantRelic1" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -377.0
+offset_right = 120.0
+offset_bottom = -255.0
+_iconSize = 1
+
+[node name="MerchantRelic2" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = 273.0
+offset_top = -307.0
+offset_right = 395.0
+offset_bottom = -185.0
+_iconSize = 1
+
+[node name="MerchantRelic3" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = -134.0
+offset_top = -79.0
+offset_right = -12.0
+offset_bottom = 43.0001
+_iconSize = 1
+
+[node name="MerchantRelic4" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = 139.0
+offset_top = -12.0
+offset_right = 261.0
+offset_bottom = 110.0001
+_iconSize = 1
+
+[node name="MerchantRelic5" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = 474.0
+offset_top = -97.0
+offset_right = 596.0
+offset_bottom = 25.0
+_iconSize = 1
+
+[node name="MerchantRelic6" parent="SlotsContainer/Relics" instance=ExtResource("4_3hbj3")]
+layout_mode = 0
+offset_left = -48.0
+offset_top = 252.0
+offset_right = 74.0
+offset_bottom = 374.0
+_iconSize = 1
+
+[node name="BackButton" parent="." instance=ExtResource("7_efch8")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MerchantHandContainer" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("5_2cdx4")
+preview_skin = "Default"
+preview_animation = "default"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(234, -54)
+scale = Vector2(0.4, 0.4)
+
+[node name="MerchantHand" type="Node" parent="MerchantHandContainer"]
+unique_name_in_owner = true
+script = ExtResource("9_ldg6o")
+metadata/_custom_type_script = "uid://p34nsajneq80"
+
+[node name="Dialogue" parent="." instance=ExtResource("10_8cll6")]
+unique_name_in_owner = true
+position = Vector2(1410, 271)

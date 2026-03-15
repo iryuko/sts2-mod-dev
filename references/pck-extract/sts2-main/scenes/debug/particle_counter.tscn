@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqlc7cxyykfm0"]
+
+[ext_resource type="Texture2D" uid="uid://blibj1fmssymf" path="res://images/debug/fps_happy.png" id="1_lckxo"]
+[ext_resource type="Script" uid="uid://c11w4prsoh4hf" path="res://src/Core/Nodes/Debug/NParticleCounter.cs" id="1_q6eqj"]
+[ext_resource type="FontVariation" uid="uid://db2l475v4scfm" path="res://themes/source_code_pro_semibold_shared.tres" id="3_dxh8l"]
+
+[node name="ParticleCounter" type="Control"]
+modulate = Color(1, 1, 1, 0.752941)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_q6eqj")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("1_lckxo")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 32.0
+offset_right = 90.0
+offset_bottom = 28.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_dxh8l")
+theme_override_font_sizes/font_size = 22
+text = "0000 (0000 CPU, 0000 GPU)"
+vertical_alignment = 1

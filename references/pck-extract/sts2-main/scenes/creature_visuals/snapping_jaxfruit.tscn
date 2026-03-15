@@ -1,0 +1,147 @@
+[gd_scene load_steps=21 format=3 uid="uid://bfqv7n60tdct6"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_nb076"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://ctu0okqoases1" path="res://animations/monsters/snapping_jaxfruit/snapping_jaxfruit_skel_data.tres" id="2_w13wy"]
+[ext_resource type="Script" uid="uid://rl204h8ayphu" path="res://src/Core/Nodes/Vfx/NSnappingJaxfruitVfx.cs" id="3_qxn7i"]
+[ext_resource type="Texture2D" uid="uid://bwhm5oqvliedc" path="res://images/vfx/monsters/snapping_jaxfruit/snapping_jaxfruit_blob.png" id="4_qty3y"]
+[ext_resource type="Texture2D" uid="uid://dmj4cflbb7v45" path="res://images/packed/vfx/generic/round_glow.png" id="5_mxkul"]
+[ext_resource type="Script" uid="uid://b5qsb7wn7ra2c" path="res://src/Core/Nodes/Vfx/NBasicTrail.cs" id="6_6ntx0"]
+[ext_resource type="Texture2D" uid="uid://co4rdu87x6mcr" path="res://images/packed/vfx/trail2.png" id="6_bxclq"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_5bqld"]
+_data = [Vector2(0, 0.00403225), 0.0, 8.71559, 0, 0, Vector2(0.25969, 1), 0.0, 0.0, 0, 0, Vector2(0.767442, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.6113, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hcw4r"]
+curve = SubResource("Curve_5bqld")
+
+[sub_resource type="Curve" id="Curve_ln3dr"]
+_data = [Vector2(0, 0.695968), 0.0, 0.253579, 0, 0, Vector2(0.98062, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6p0hd"]
+curve = SubResource("Curve_ln3dr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d528u"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = -45.0
+angular_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.85
+scale_curve = SubResource("CurveTexture_6p0hd")
+color = Color(0.49, 0.2744, 0.335487, 1)
+alpha_curve = SubResource("CurveTexture_hcw4r")
+
+[sub_resource type="Curve" id="Curve_xjr7l"]
+_data = [Vector2(0, 0.00403225), 0.0, 8.71559, 0, 0, Vector2(0.25969, 1), 0.0, 0.0, 0, 0, Vector2(0.767442, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.6113, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_dxfos"]
+curve = SubResource("Curve_xjr7l")
+
+[sub_resource type="Curve" id="Curve_xwdxh"]
+_data = [Vector2(0, 0.695968), 0.0, 0.253579, 0, 0, Vector2(0.98062, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_447b8"]
+curve = SubResource("Curve_xwdxh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8womq"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 54.7
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = -45.0
+angular_velocity_max = -10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_447b8")
+color = Color(0.63, 0.3591, 0.363615, 1)
+alpha_curve = SubResource("CurveTexture_dxfos")
+
+[sub_resource type="Curve" id="Curve_h704m"]
+_data = [Vector2(0.00671142, 0.60473), 0.0, 0.486989, 0, 0, Vector2(1, 1), 0.299151, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_byqcw"]
+offsets = PackedFloat32Array(0, 0.186047, 0.465116, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0103226, 0.0024086, 0, 1, 0.16, 0.042, 0.04, 1, 0.29, 0.06757, 0.0638, 1)
+
+[node name="SnappingJaxfruit" type="Node2D"]
+script = ExtResource("1_nb076")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(6, -20)
+scale = Vector2(0.3, 0.3)
+skeleton_data_res = ExtResource("2_w13wy")
+preview_skin = "Default"
+preview_animation = "charged_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="TargetBone" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-2873.33, -450)
+bone_name = "attack_target"
+bone_mode = 1
+
+[node name="ProjectileAttachBone" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(1000, -200)
+bone_name = "plasma_ball_attach"
+
+[node name="BlobParticles" type="GPUParticles2D" parent="Visuals/ProjectileAttachBone"]
+material = ExtResource("shared_additive_mat")
+amount = 5
+texture = ExtResource("4_qty3y")
+lifetime = 1.5
+preprocess = 1.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_d528u")
+
+[node name="GlowParticles" type="GPUParticles2D" parent="Visuals/ProjectileAttachBone"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.33333, 0)
+amount = 7
+texture = ExtResource("5_mxkul")
+preprocess = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_8womq")
+
+[node name="Trail" type="Line2D" parent="Visuals/ProjectileAttachBone"]
+material = ExtResource("shared_additive_mat")
+width = 80.0
+width_curve = SubResource("Curve_h704m")
+default_color = Color(0.75, 0.093625, 0.0825, 1)
+gradient = SubResource("Gradient_byqcw")
+texture = ExtResource("6_bxclq")
+texture_mode = 2
+script = ExtResource("6_6ntx0")
+
+[node name="NSnappingJaxfruitVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_qxn7i")
+metadata/_custom_type_script = "uid://rl204h8ayphu"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -101.0
+offset_top = -248.0
+offset_right = 101.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -82)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -285)

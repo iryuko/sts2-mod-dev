@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cklf612si75k6"]
+
+[ext_resource type="Script" uid="uid://bey515wuxhd7t" path="res://src/Core/Nodes/Debug/NMemoryMonitor.cs" id="1_2v76x"]
+
+[node name="MemoryMonitor" type="Node2D"]
+script = ExtResource("1_2v76x")

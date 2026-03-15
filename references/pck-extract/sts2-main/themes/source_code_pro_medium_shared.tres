@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dviusgklt13ts"]
+
+[ext_resource type="FontFile" uid="uid://eob683745t88" path="res://fonts/source_code_pro_medium.ttf" id="1_shared"]
+
+[resource]
+base_font = ExtResource("1_shared")

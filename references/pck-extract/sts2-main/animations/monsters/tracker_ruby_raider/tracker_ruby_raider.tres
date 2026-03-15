@@ -1,0 +1,18 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://dccgtcq2o6mp3"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://pspgdfqfpm5r" path="res://animations/monsters/tracker_ruby_raider/ruby_raider_tracker.atlas" id="1_ivib7"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cyuwdneeyl8pf" path="res://animations/monsters/tracker_ruby_raider/ruby_raider_tracker.skel" id="2_y4psl"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cgojd"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7853a"]
+from = "attack"
+to = "hurt"
+
+[resource]
+atlas_res = ExtResource("1_ivib7")
+skeleton_file_res = ExtResource("2_y4psl")
+default_mix = 0.25
+animation_mixes = [SubResource("SpineAnimationMix_cgojd"), SubResource("SpineAnimationMix_7853a")]

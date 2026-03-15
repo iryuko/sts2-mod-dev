@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://ioyx5324p88v"]
+
+[ext_resource type="Shader" uid="uid://b7qsxyckosakr" path="res://shaders/vfx/common/vfx_small_impact_shader.gdshader" id="1_6egd5"]
+
+[sub_resource type="Gradient" id="Gradient_6egd5"]
+offsets = PackedFloat32Array(0.85752, 0.902375)
+colors = PackedColorArray(1, 1, 1, 1, 1.8247963, 1.8247963, 1.8247963, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1kvso"]
+gradient = SubResource("Gradient_6egd5")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_6egd5")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/lut = SubResource("GradientTexture1D_1kvso")

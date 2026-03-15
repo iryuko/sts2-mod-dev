@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgv8lu2cr278w"]
+
+[ext_resource type="Texture2D" uid="uid://dmh3bilnwb17o" path="res://images/vfx/shared_use/motion_line.png" id="1_itgqu"]
+[ext_resource type="Script" uid="uid://1yuuvdnnfyds" path="res://src/Core/Nodes/Vfx/NHorizontalLinesVfx.cs" id="2_iosft"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_vp32w"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.376106), 0.0, 0.0, 0, 0, Vector2(0.113024, 0.756637), 0.0, 0.0, 0, 0, Vector2(0.245509, 0.400443), 0.0, 0.0, 0, 0, Vector2(0.375749, 0.807522), 0.0, 0.0, 0, 0, Vector2(0.498503, 0.376106), 0.0, 0.0, 0, 0, Vector2(0.618263, 0.79646), 0.0, 0.0, 0, 0, Vector2(0.751497, 0.378319), 0.0, 0.0, 0, 0, Vector2(0.88024, 0.776549), 0.0, 0.0, 0, 0, Vector2(1, 0.336283), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="Curve" id="Curve_eyc6u"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.68805), 0.0, 0.0, 0, 0, Vector2(0.125, 1), 0.0, 0.0, 0, 0, Vector2(0.252246, 1.68584), 0.0, 0.0, 0, 0, Vector2(0.373503, 0.973451), 0.0, 0.0, 0, 0, Vector2(0.499252, 1.65044), 0.0, 0.0, 0, 0, Vector2(0.636976, 0.984513), 0.0, 0.0, 0, 0, Vector2(0.751497, 1.62611), 0.0, 0.0, 0, 0, Vector2(0.881737, 0.975664), 0.0, 0.0, 0, 0, Vector2(0.99999, 1.63274), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="Curve" id="Curve_qj41t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ac6tn"]
+curve_x = SubResource("Curve_vp32w")
+curve_y = SubResource("Curve_eyc6u")
+curve_z = SubResource("Curve_qj41t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ki1x"]
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-500, 540, 0)
+emission_shape_scale = Vector3(200, 540, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+spread = 1.0
+initial_velocity_min = 8000.0
+initial_velocity_max = 13000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveXYZTexture_ac6tn")
+color = Color(1, 1, 1, 0.501961)
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+
+[node name="HorizontalLinesVfx" type="GPUParticles2D"]
+material = ExtResource("shared_additive_mat")
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_3ki1x")
+texture = ExtResource("1_itgqu")
+lifetime = 0.5
+preprocess = 0.5
+script = ExtResource("2_iosft")

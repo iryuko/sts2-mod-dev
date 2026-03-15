@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://coiwk4tjmnb04"]
+
+[ext_resource type="Script" uid="uid://bi5uhdnn538bv" path="res://src/Core/Nodes/NActBanner.cs" id="1_fo4u0"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_v7anc"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="3_s8fub"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_v7anc"]
+
+[node name="ActBanner" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_fo4u0")
+
+[node name="Banner" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.25)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.001
+anchor_top = 0.398
+anchor_right = 1.001
+anchor_bottom = 0.583
+offset_left = -0.92
+offset_top = 0.159973
+offset_right = -0.920044
+offset_bottom = 0.359985
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ActNumber" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.5
+offset_top = -100.0
+offset_right = 40.5
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.05)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_v7anc")
+theme_override_font_sizes/font_size = 40
+text = "Act 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_v7anc")
+AutoSizeEnabled = false
+
+[node name="ActName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -633.0
+offset_top = -125.0
+offset_right = 633.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.05)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_s8fub")
+theme_override_font_sizes/font_size = 120
+text = "The Overgrowth"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_v7anc")
+MinFontSize = 48
+MaxFontSize = 120
+metadata/_custom_type_script = "uid://dtfio45agppyj"

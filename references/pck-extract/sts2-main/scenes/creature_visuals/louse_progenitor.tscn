@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0yetqtkmmcfd"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_rd8tl"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cqxjf77etj57r" path="res://animations/monsters/louse_progenitor/louse_progenitor_skel_data.tres" id="2_x4aa2"]
+
+[node name="LouseProgenitor" type="Node2D"]
+script = ExtResource("1_rd8tl")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_x4aa2")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(31, -34)
+scale = Vector2(0.194175, 0.194175)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -284.0
+offset_top = -367.0
+offset_right = 284.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -199)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -416)

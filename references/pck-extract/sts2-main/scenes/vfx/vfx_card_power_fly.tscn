@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn6234eu78vqc"]
+
+[ext_resource type="Script" uid="uid://bxtipq5a5u6fg" path="res://src/Core/Nodes/Vfx/NCardFlyPowerVfx.cs" id="1_aelhc"]
+
+[sub_resource type="Curve2D" id="Curve2D_1ulwy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 50.0031, 14.2866, -50.0031, -14.2866, -85, -37, 1.86905, 73.8276, -1.86905, -73.8276, -182, -149, -115.699, -12.5866, 115.699, 12.5866, 67, -228, 40.9602, -107.087, -40.9602, 107.087, 209, 41, 162.128, 8.78094, -162.128, -8.78094, -167, 160, 0, 0, 0, 0, -427, 27)
+}
+point_count = 7
+
+[node name="VfxPowerCardPlaySwoosh" type="Node2D"]
+script = ExtResource("1_aelhc")
+
+[node name="SwooshPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_1ulwy")

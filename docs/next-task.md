@@ -2,54 +2,74 @@
 
 ## 本轮任务
 
-围绕新的主线推进三件事：
+围绕“干净版” `CrossCharacterCard` 做奖励池路径验证：
 
-- 确认游戏内是否存在可见的 mod 列表 / mod 管理界面 / 已加载 mod 查看入口。
-- 维持“游戏目录安装版 SmokeMod 与工作区发布版一致”的状态，避免后续测试基线漂移。
-- 继续定位当前存档问题，但不要再重复试当前公开版 `UnifiedSavePath`；优先验证已安装的无 Harmony workaround 版是否成功初始化并改写 profile 路径。
+- 已安装新版 `CrossCharacterCard`
+- 确认游戏是否正常加载该 mod
+- 验证 `Silent` 正常战后奖励里是否会出现 `BodySlam`
+- 验证选择后是否能正常进入牌组、抽到并打出
+- 验证集中规则表写法是否保持与旧版同样的行为
 
 ## 预期输出物
 
-- 一条明确结论：
-  - 游戏内是否有内置 mod 列表或 mod 管理界面
-  - 当前已观察到的入口和证据是什么
-- 一条一致性结论：
-  - 已安装版 SmokeMod 与工作区发布版是否一致
-  - 如果不一致，已按安装成功版本反向修正了哪些发布产物
-- 一次存档回归测试结论：
-  - 删除安装版 SmokeMod 后，目标存档是否恢复正常
-- 一条候选 mod 评估结论：
-  - `UnifiedSavePath` 在 macOS 上属于哪一档
-  - 关键证据和风险点是什么
-- 一条失败根因结论：
-  - 为什么 `UnifiedSavePath` 在 macOS 上初始化失败
-  - 是否能通过改 patch 策略规避
-- 一条修正版验证结论：
-  - 当前工作区活动版 `UnifiedSavePath` 是否成功初始化
-  - 是否还会报 mod initializer 异常
-  - 是否仍然写入 `modded/profile1/...`
-- 对应文档更新：
+- 一条加载结论：
+  - `CrossCharacterCard` 是否被游戏识别
+  - 是否出现 mod initializer 异常
+- 一条功能结论：
+  - `Silent` 是否能正常开新 run
+  - 正常奖励里是否会出现 `BodySlam`
+- 一条可用性结论：
+  - 通过奖励拿到的 `BodySlam` 是否能正常抽到并打出
+- 一条结构结论：
+  - `CrossCharacterCard` 是否已经改成“集中规则表维护”的形态
+- 文档更新：
   - `docs/current-status.md`
   - `docs/next-task.md`
   - `docs/thread-handoff.md`
-  - `docs/unified-save-path-macos-check.md`
+
+## 新增支线
+
+围绕 `SilentBonusRelic` 做第一轮 relic 注入验证：
+
+- 确认游戏是否正常加载该 mod
+- 用 `Silent` 开新 run
+- 进入 run 后立刻查看 relic 栏
+- 验证是否一开始就拥有：
+  - `SneckoSkull`
+  - `Shuriken`
+- 如果仍失败，优先判断：
+  - `RunStarted` 是否没命中
+  - 还是 `AddRelicInternal(..., silent: true)` 没有带来可见效果
+
+围绕 `UnifiedSavePath` 做跨平台实现整理：
+
+- 确认当前源码版是否已具备：
+  - Windows 走 Harmony patch
+  - macOS / 非 Windows 走 flag-thread workaround
+- 如果后续有 Windows 实机条件，再单独验证 Windows 分支是否保持原版行为
+
+## 建议执行顺序
+
+1. 启动游戏并进入 `Silent` 单人新 run
+2. 正常推进到数场战斗奖励
+3. 观察 `BodySlam` 是否作为正常奖励出现
+4. 选择后确认它能正常进牌组、抽到并打出
+5. 读取日志，确认 `CrossCharacterCard` 初始化是否成功且无异常
+6. 单独观察 `SilentBonusRelic`：
+   - 新 run 一开始是否就拥有 `SneckoSkull` 和 `Shuriken`
+   - 是否出现新的异常日志
 
 ## 不要做的事情
 
-- 不要重新回到“mod 是否被识别”这一已跨过的问题。
-- 不要继续扩展 SmokeMod 功能或引入新的实验变量。
-- 不要先通读全部旧日志或全部 `docs/`。
-- 不要把尚未在游戏内看到的 mod 菜单行为写成事实。
-- 不要在未备份真实存档前直接试装会改存档路由的 mod。
-- 不要重复安装当前这个已确认在 macOS 上初始化失败的 `UnifiedSavePath` 发布版。
-- 不要先讨论复杂 API、Harmony patch 或大规模 mod 框架。
+- 不要一开始就扩展到多张牌、多角色配置。
+- 不要引入 Harmony。
+- 不要重新引入运行时直接塞牌逻辑，除非再次需要做诊断。
+- 不要把“理论可行”写成“已实机确认”。
+- 不要把 `SilentBonusRelic` 的新实现直接写成“已经成功”，直到拿到实机结果。
 
 ## 完成标准
 
-- 能把“有无内置 mod 列表 / 管理界面”收敛到明确结论或极小候选范围。
-- 能明确说明安装版 SmokeMod 与工作区发布版是否一致。
-- 能对 `UnifiedSavePath` 给出基于本地证据的明确档位判断。
-- 能把 `UnifiedSavePath` 的 macOS 失败点收敛到可解释的技术原因。
-- 能明确说明无 Harmony workaround 是否真正绕开了当前 macOS 主机的 patch 失败。
-- 能给出一次面向存档问题的人工回归验证建议或结果，而不是只停留在文件分析。
-- 当前项目状态文档已更新到足以让下一线程直接接手，不必重新翻旧记录。
+- 能明确回答：
+  - 首版 `CrossCharacterCard` 是否成功加载
+  - `BodySlam` 是否已经通过卡池扩展稳定进入 `Silent` 正常奖励池
+  - 该实现是否在不干扰开局流程的前提下可复用到更多跨角色卡

@@ -1,0 +1,241 @@
+[gd_scene load_steps=26 format=3 uid="uid://b7h703c8cnsc1"]
+
+[ext_resource type="Script" uid="uid://dwcxdh1x2rowp" path="res://src/Core/Nodes/Screens/MainMenu/NMainMenuBg.cs" id="1_rvsy4"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c1gewd6mejiug" path="res://animations/backgrounds/mainmenu/bottom/main_menu_bottom_skel_data.tres" id="2_6g43i"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="3_u7mjq"]
+[ext_resource type="Script" uid="uid://b0oho7pjc1dtg" path="res://src/Core/Nodes/Animation/NSpineAutoPlayer.cs" id="3_yvrjj"]
+[ext_resource type="Texture2D" uid="uid://dmtn4qmn313ad" path="res://images/vfx/fog_sheet_2.png" id="5_ttftw"]
+[ext_resource type="Texture2D" uid="uid://cfgh8hdwbybji" path="res://images/packed/main_menu/rainbow.png" id="6_7es5e"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bbgijkibj2fr2" path="res://animations/backgrounds/mainmenu/top/main_menu_top_skel_data.tres" id="6_gu4ib"]
+[ext_resource type="Script" uid="uid://dxulqab00eqg3" path="res://src/Core/Nodes/Screens/MainMenu/NPrideRainbow.cs" id="7_f7xlh"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="7_xa1y1"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="8_ywh2w"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://byxuoj7vn2530" path="res://animations/backgrounds/mainmenu/logo/main_menu_logo_skel_data.tres" id="9_j8pjh"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_qqkat"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_qqkat"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_qqkat")
+
+[sub_resource type="Gradient" id="Gradient_8v0sd"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lrqsy"]
+gradient = SubResource("Gradient_8v0sd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qqkat"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1500, 300, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.04
+color = Color(0.278431, 0.839216, 0.878431, 1)
+color_ramp = SubResource("GradientTexture1D_lrqsy")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_qqkat")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yhfvi"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_20o0n"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 130.445, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3j28m"]
+curve = SubResource("Curve_20o0n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_335gg"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0.1, 0, 0)
+damping_max = 0.001
+damping_curve = SubResource("CurveTexture_3j28m")
+scale_min = 2.0
+scale_max = 2.4
+color = Color(0.290196, 0.352941, 0.388235, 0.439216)
+anim_offset_max = 1.0
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhage"]
+curve = SubResource("Curve_20o0n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_to4ad"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0.1, 0, 0)
+damping_max = 0.001
+damping_curve = SubResource("CurveTexture_yhage")
+scale_min = 1.8
+scale_max = 2.0
+color = Color(0.291395, 0.353031, 0.388276, 1)
+anim_offset_max = 1.0
+
+[sub_resource type="Curve" id="Curve_esvxd"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_luaaj"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[node name="MainMenuBg" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rvsy4")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BgContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -516.0
+offset_right = 1600.0
+offset_bottom = 684.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+
+[node name="Bg" type="SpineSprite" parent="BgContainer"]
+skeleton_data_res = ExtResource("2_6g43i")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.51, 0.51)
+
+[node name="NSpineAutoPlayer" type="Node" parent="BgContainer/Bg"]
+script = ExtResource("3_yvrjj")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"
+
+[node name="stars" type="GPUParticles2D" parent="BgContainer"]
+position = Vector2(926, 600)
+scale = Vector2(0.999997, 0.999997)
+amount = 200
+texture = ExtResource("3_u7mjq")
+lifetime = 5.0
+preprocess = 5.0
+fixed_fps = 0
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_qqkat")
+metadata/_edit_lock_ = true
+
+[node name="clouds2" type="GPUParticles2D" parent="BgContainer"]
+material = SubResource("CanvasItemMaterial_yhfvi")
+position = Vector2(-1000, 800)
+scale = Vector2(0.999997, 0.999997)
+amount = 40
+texture = ExtResource("5_ttftw")
+lifetime = 400.0
+preprocess = 400.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 20000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_335gg")
+metadata/_edit_lock_ = true
+
+[node name="clouds" type="GPUParticles2D" parent="BgContainer"]
+material = SubResource("CanvasItemMaterial_yhfvi")
+position = Vector2(-1000, 850)
+scale = Vector2(0.999997, 0.999997)
+amount = 40
+texture = ExtResource("5_ttftw")
+lifetime = 400.0
+preprocess = 400.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 20000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_to4ad")
+metadata/_edit_lock_ = true
+
+[node name="Fg" type="SpineSprite" parent="BgContainer"]
+skeleton_data_res = ExtResource("6_gu4ib")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.51, 0.51)
+
+[node name="NSpineAutoPlayer" type="Node" parent="BgContainer/Fg"]
+script = ExtResource("3_yvrjj")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"
+
+[node name="Rainbow" type="TextureRect" parent="BgContainer"]
+modulate = Color(1, 1, 1, 0.0313726)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = 149.0
+offset_right = -479.0
+offset_bottom = -166.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_7es5e")
+stretch_mode = 5
+script = ExtResource("7_f7xlh")
+metadata/_edit_lock_ = true
+
+[node name="Control" type="Control" parent="BgContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="SpineSprite" parent="BgContainer/Control"]
+skeleton_data_res = ExtResource("9_j8pjh")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(-1120, -582)
+scale = Vector2(0.45, 0.45)
+
+[node name="light_large" type="CPUParticles2D" parent="BgContainer/Control/Logo"]
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(1328, 692)
+scale = Vector2(2, 2)
+amount = 1
+texture = ExtResource("7_xa1y1")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_esvxd")
+color = Color(0.25098, 0.803922, 0.843137, 0.294118)
+color_ramp = SubResource("Gradient_luaaj")
+script = ExtResource("8_ywh2w")
+
+[node name="NSpineAutoPlayer" type="Node" parent="BgContainer/Control/Logo"]
+script = ExtResource("3_yvrjj")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"

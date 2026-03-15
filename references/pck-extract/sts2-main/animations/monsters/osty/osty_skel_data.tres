@@ -1,0 +1,34 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://w061e4iwxkil"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b5jqvn5gjbs4u" path="res://animations/monsters/osty/osty.atlas" id="1_raf2m"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d4nv1iw5u4vql" path="res://animations/monsters/osty/osty.skel" id="2_3lm5h"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vv85b"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wev3r"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_b5r46"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vpnd0"]
+from = "attack_poke"
+to = "attack_poke"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_r8t8k"]
+from = "attack"
+to = "attack_poke"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_c7qsh"]
+from = "attack_poke"
+to = "attack"
+
+[resource]
+atlas_res = ExtResource("1_raf2m")
+skeleton_file_res = ExtResource("2_3lm5h")
+default_mix = 0.02
+animation_mixes = [SubResource("SpineAnimationMix_vv85b"), SubResource("SpineAnimationMix_wev3r"), SubResource("SpineAnimationMix_b5r46"), SubResource("SpineAnimationMix_vpnd0"), SubResource("SpineAnimationMix_r8t8k"), SubResource("SpineAnimationMix_c7qsh")]

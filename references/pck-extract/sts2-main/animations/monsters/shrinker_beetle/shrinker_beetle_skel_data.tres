@@ -1,0 +1,25 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=6 format=3 uid="uid://2q2svw44dtaj"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b0vn66kxuuoqs" path="res://animations/monsters/shrinker_beetle/shrinker_beetle.atlas" id="1_d5gyu"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dsg1mk431iseg" path="res://animations/monsters/shrinker_beetle/shrinker_beetle.skel" id="2_w1dxr"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_a3h8v"]
+from = "hurt"
+to = "idle_loop"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ibuvh"]
+from = "idle_loop"
+to = "attack"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ph321"]
+from = "idle_loop"
+to = "cast"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_d5gyu")
+skeleton_file_res = ExtResource("2_w1dxr")
+default_mix = 0.25
+animation_mixes = [SubResource("SpineAnimationMix_a3h8v"), SubResource("SpineAnimationMix_ibuvh"), SubResource("SpineAnimationMix_ph321")]

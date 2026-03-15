@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dy5f5xm1nxhio"]
+
+[ext_resource type="Material" uid="uid://cv06vme1clbxo" path="res://materials/vfx/scream/vfx_scream_squiggly_ring_polar.tres" id="1_jjfar"]
+[ext_resource type="Texture2D" uid="uid://5u6tvtbintji" path="res://images/vfx/scream/scream_squiggly_ring_polar.png" id="2_s1khs"]
+
+[sub_resource type="Curve" id="Curve_myty7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.147287, 0.50096), 0.0, 0.0, 0, 0, Vector2(0.400517, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_warox"]
+curve = SubResource("Curve_myty7")
+
+[sub_resource type="Curve" id="Curve_tgt2i"]
+_data = [Vector2(0, 0.295106), 0.0, 1.34741, 0, 0, Vector2(1, 1), 0.209922, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e2vl1"]
+curve = SubResource("Curve_tgt2i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i4cs6"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_e2vl1")
+alpha_curve = SubResource("CurveTexture_warox")
+
+[node name="vfx_scream_squiggly_ring_polar" type="GPUParticles2D"]
+z_index = 2
+texture_repeat = 2
+material = ExtResource("1_jjfar")
+emitting = false
+texture = ExtResource("2_s1khs")
+lifetime = 2.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_i4cs6")

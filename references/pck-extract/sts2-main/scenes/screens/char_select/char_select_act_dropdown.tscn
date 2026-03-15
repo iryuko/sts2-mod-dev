@@ -1,0 +1,267 @@
+[gd_scene load_steps=14 format=3 uid="uid://ieqi0igl308n"]
+
+[ext_resource type="Script" uid="uid://bq6qwjcv0yoie" path="res://src/Core/Nodes/Screens/CharacterSelect/NActDropdown.cs" id="1_rw6kc"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="2_bteu2"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_uk4sm"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_10sib"]
+[ext_resource type="Script" uid="uid://d1ami1ihf5o73" path="res://src/Core/Nodes/CommonUi/NDropdownContainer.cs" id="4_18qk1"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="5_1cent"]
+[ext_resource type="PackedScene" uid="uid://ijwyu8psajop" path="res://scenes/ui/dropdown_item.tscn" id="5_dykag"]
+[ext_resource type="Script" uid="uid://bui13dym00l8v" path="res://src/Core/Nodes/CommonUi/NDropdownScrollbar.cs" id="6_ylqbg"]
+[ext_resource type="Texture2D" uid="uid://b711l3emin05d" path="res://images/packed/common_ui/small_scrollbar_train.png" id="9_m8vna"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/small_scrollbar_track_edge.tres" id="9_p8eoi"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/small_scrollbar_track_center.tres" id="10_p8eoi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wno1w"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.2346, 0.3723, 0.51, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k2r6"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.270588, 0, 0.305882, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="ActDropdown" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -320.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 77.0
+grow_horizontal = 0
+script = ExtResource("1_rw6kc")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Dismisser" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(2420, 1580)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -2170.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 1330.0
+grow_horizontal = 0
+script = ExtResource("2_bteu2")
+
+[node name="CurrentOption" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Highlight" type="Panel" parent="CurrentOption"]
+unique_name_in_owner = true
+modulate = Color(0.685547, 0.805183, 0.869833, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wno1w")
+
+[node name="Label" type="Label" parent="CurrentOption"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_uk4sm")
+theme_override_font_sizes/font_size = 28
+text = "Random"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_10sib")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -15.0
+offset_right = -13.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(16, 13)
+mouse_filter = 2
+texture = ExtResource("5_1cent")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DropdownContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 55.0
+offset_right = 150.0
+offset_bottom = 655.0
+grow_horizontal = 2
+script = ExtResource("4_18qk1")
+
+[node name="Highlight" type="Panel" parent="DropdownContainer"]
+modulate = Color(0.685547, 0.805183, 0.869833, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6k2r6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DropdownContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="DropdownItem1" parent="DropdownContainer/VBoxContainer" instance=ExtResource("5_dykag")]
+layout_mode = 2
+
+[node name="DropdownItem2" parent="DropdownContainer/VBoxContainer" instance=ExtResource("5_dykag")]
+layout_mode = 2
+
+[node name="DropdownItem3" parent="DropdownContainer/VBoxContainer" instance=ExtResource("5_dykag")]
+layout_mode = 2
+
+[node name="Scrollbar" type="Control" parent="DropdownContainer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -300.0
+offset_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("6_ylqbg")
+
+[node name="Track" type="Control" parent="DropdownContainer/Scrollbar"]
+modulate = Color(0, 0, 0, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TrackTop" type="TextureRect" parent="DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_right = 14.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("9_p8eoi")
+expand_mode = 3
+
+[node name="TrackBody" type="TextureRect" parent="DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -268.0
+offset_right = 14.0
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_p8eoi")
+expand_mode = 1
+
+[node name="TrackBot" type="TextureRect" parent="DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -41.0
+offset_right = 14.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("9_p8eoi")
+expand_mode = 3
+flip_v = true
+
+[node name="Train" type="NinePatchRect" parent="DropdownContainer/Scrollbar"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -291.0
+offset_right = -8.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 44)
+texture = ExtResource("9_m8vna")
+patch_margin_top = 20
+patch_margin_bottom = 20

@@ -1,0 +1,36 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://c2lqm1ncxb0f7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://biaiobchkaj2t" path="res://animations/monsters/spectral_knight/spectral_knight.atlas" id="1_oa5hr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cd54jihjw880v" path="res://animations/monsters/spectral_knight/spectral_knight.skel" id="2_lup2f"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_5n38g"]
+from = "idle_loop"
+to = "attack_sword"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_li4w8"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rixh2"]
+from = "attack_flame"
+to = "attack_flame"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6ftsp"]
+from = "attack_sword"
+to = "attack_sword"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hv75w"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_y5k0o"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_oa5hr")
+skeleton_file_res = ExtResource("2_lup2f")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_5n38g"), SubResource("SpineAnimationMix_li4w8"), SubResource("SpineAnimationMix_rixh2"), SubResource("SpineAnimationMix_6ftsp"), SubResource("SpineAnimationMix_hv75w"), SubResource("SpineAnimationMix_y5k0o")]

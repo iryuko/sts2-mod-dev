@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bghgnprs7hf37"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_avn6l"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c431frsfxkw1w" path="res://animations/monsters/paels_legion/paels_legion_skel_data.tres" id="2_3t7vj"]
+
+[node name="PaelsLegion" type="Node2D"]
+script = ExtResource("1_avn6l")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_3t7vj")
+preview_skin = "eyes"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 8.65
+unique_name_in_owner = true
+position = Vector2(0, -11)
+scale = Vector2(0.25, 0.25)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -72.0
+offset_top = -94.0
+offset_right = 82.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -42)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2, -129)

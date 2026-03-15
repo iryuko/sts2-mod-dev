@@ -1,0 +1,297 @@
+[gd_scene load_steps=20 format=3 uid="uid://bsb11jg3ecchr"]
+
+[ext_resource type="Script" uid="uid://dqtsf4g6qkrqq" path="res://src/Core/Nodes/Screens/CharacterSelect/NMultiplayerLoadGameScreen.cs" id="1_nbwrt"]
+[ext_resource type="Script" uid="uid://bwr42v37ujq67" path="res://src/Core/Nodes/Screens/CharacterSelect/NCharacterSelectScreenBg.cs" id="2_6w5ar"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="3_pj3pm"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="4_ln7xq"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_gilhf"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="6_jn3gc"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="7_o3otj"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="8_jn3gc"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_floor.tres" id="9_jn3gc"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="9_opnvd"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="10_dtt3k"]
+[ext_resource type="PackedScene" uid="uid://yo7mkjn0r07a" path="res://scenes/screens/ascension_panel.tscn" id="12_jn3gc"]
+[ext_resource type="PackedScene" uid="uid://s7gh3imur03n" path="res://scenes/screens/remote_player_load_container.tscn" id="15_jn3gc"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="16_6qlgr"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="17_kxkjh"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="18_kudh4"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="19_euhvi"]
+
+[sub_resource type="FontVariation" id="FontVariation_3rwao"]
+base_font = ExtResource("7_o3otj")
+spacing_glyph = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v411y"]
+resource_local_to_scene = true
+shader = ExtResource("17_kxkjh")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="MultiplayerLoadScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nbwrt")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="StaticBg" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1348.0
+offset_top = -620.0
+offset_right = 1212.0
+offset_bottom = 580.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(1280, 600)
+script = ExtResource("2_6w5ar")
+
+[node name="AnimatedBg" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -388.0
+offset_top = -80.0
+offset_right = 252.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(1280, 600)
+script = ExtResource("2_6w5ar")
+
+[node name="InfoPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -664.0
+offset_top = -195.0
+offset_right = -138.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InfoPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -24.0
+offset_right = 87.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pj3pm")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -21.0
+offset_right = 562.0
+offset_bottom = 359.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Name" type="Label" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("4_ln7xq")
+theme_override_font_sizes/font_size = 47
+text = "The Ironclad"
+vertical_alignment = 1
+script = ExtResource("5_gilhf")
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="HpGoldSpacer" type="Control" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HpGold" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer"]
+layout_mode = 0
+offset_top = -26.0
+offset_right = 551.0
+offset_bottom = 14.0
+theme_override_constants/separation = 48
+
+[node name="Hp" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Hp"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_jn3gc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Hp"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0.392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_3rwao")
+theme_override_font_sizes/font_size = 28
+text = "80/80"
+script = ExtResource("5_gilhf")
+AutoSizeEnabled = false
+
+[node name="Gold" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Gold"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_jn3gc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Gold"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_3rwao")
+theme_override_font_sizes/font_size = 28
+text = "99"
+script = ExtResource("5_gilhf")
+AutoSizeEnabled = false
+
+[node name="RunLocation" type="Control" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/RunLocation"]
+layout_mode = 1
+offset_top = 8.0
+offset_right = 48.0
+offset_bottom = 56.0
+texture = ExtResource("9_jn3gc")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ActLabel" type="RichTextLabel" parent="InfoPanel/VBoxContainer/RunLocation"]
+clip_contents = false
+layout_mode = 0
+offset_left = 54.0
+offset_top = 15.0
+offset_right = 134.0
+offset_bottom = 49.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.0313726, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("9_opnvd")
+theme_override_fonts/bold_font = ExtResource("7_o3otj")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Act: 1"
+scroll_active = false
+script = ExtResource("10_dtt3k")
+MinFontSize = 12
+MaxFontSize = 24
+
+[node name="FloorLabel" type="RichTextLabel" parent="InfoPanel/VBoxContainer/RunLocation"]
+clip_contents = false
+layout_mode = 1
+offset_left = 139.0
+offset_top = 15.0
+offset_right = 292.0
+offset_bottom = 49.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.0313726, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("9_opnvd")
+theme_override_fonts/bold_font = ExtResource("7_o3otj")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Floor: 11"
+scroll_active = false
+script = ExtResource("10_dtt3k")
+MinFontSize = 12
+MaxFontSize = 24
+
+[node name="AscensionPanel" parent="." instance=ExtResource("12_jn3gc")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -317.0
+offset_top = -342.0
+offset_right = 317.0
+offset_bottom = -225.0
+
+[node name="BackButton" parent="." instance=ExtResource("18_kudh4")]
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("18_kudh4")]
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("16_6qlgr")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_v411y")
+
+[node name="ConfirmButton" parent="." instance=ExtResource("19_euhvi")]
+layout_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 0
+offset_left = 906.0
+offset_top = 322.0
+offset_right = 1333.0
+offset_bottom = 724.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pj3pm")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="RemotePlayerLoadContainer" parent="." instance=ExtResource("15_jn3gc")]
+layout_mode = 1
+
+[editable path="UnreadyButton"]

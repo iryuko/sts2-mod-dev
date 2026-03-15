@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://bbprip0ib1x4g"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dwsq7aj6y52ia" path="res://animations/monsters/fossil_stalker/fossil_stalker.atlas" id="1_poy1a"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cayh2hq5qo0dj" path="res://animations/monsters/fossil_stalker/fossil_stalker.skel" id="2_o0o77"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_fvmsw"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_poy1a"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_o0o77"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_oc1l8"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_poy1a")
+skeleton_file_res = ExtResource("2_o0o77")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_fvmsw"), SubResource("SpineAnimationMix_poy1a"), SubResource("SpineAnimationMix_o0o77"), SubResource("SpineAnimationMix_oc1l8")]

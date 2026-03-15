@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbytgq521qxra"]
+
+[ext_resource type="Texture2D" uid="uid://d3vmiycr36blt" path="res://images/ui/hover_tip.png" id="1_dtqf3"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_xq0mx"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_b8wfq"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="4_x3e1h"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="19_fnrkf"]
+
+[node name="HoverTip" type="MarginContainer"]
+offset_right = 400.0
+offset_bottom = 118.0
+mouse_filter = 2
+theme_override_constants/margin_right = -8
+theme_override_constants/margin_bottom = -8
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="NinePatchRect" parent="."]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 2
+texture = ExtResource("1_dtqf3")
+region_rect = Rect2(-8, -8, 339, 107)
+patch_margin_left = 55
+patch_margin_top = 43
+patch_margin_right = 91
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Bg" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_dtqf3")
+region_rect = Rect2(0, 0, 339, 107)
+patch_margin_left = 55
+patch_margin_top = 43
+patch_margin_right = 91
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="Title" type="Label" parent="TextContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_xq0mx")
+theme_override_font_sizes/font_size = 22
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_b8wfq")
+AutoSizeEnabled = false
+
+[node name="Icon" type="TextureRect" parent="TextContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="TextContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_x3e1h")
+theme_override_fonts/bold_font = ExtResource("2_xq0mx")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "This is a description [gold]EXAMPLE[/gold]. Very exciting stuff!"
+fit_content = true
+script = ExtResource("19_fnrkf")
+AutoSizeEnabled = false

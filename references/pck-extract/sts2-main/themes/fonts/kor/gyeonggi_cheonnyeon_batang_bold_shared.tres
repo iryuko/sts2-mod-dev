@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cplgdwhutfyph"]
+
+[ext_resource type="FontFile" uid="uid://w6enj5w00e8f" path="res://fonts/kor/GyeonggiCheonnyeonBatangBold.ttf" id="1_ts1qc"]
+
+[resource]
+base_font = ExtResource("1_ts1qc")

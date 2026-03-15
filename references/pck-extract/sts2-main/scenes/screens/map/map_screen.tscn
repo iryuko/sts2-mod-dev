@@ -1,0 +1,662 @@
+[gd_scene load_steps=27 format=3 uid="uid://sm6dqs1oybao"]
+
+[ext_resource type="Script" uid="uid://bq0yj4xeu85h0" path="res://src/Core/Nodes/Screens/Map/NMapScreen.cs" id="1_se68p"]
+[ext_resource type="Script" uid="uid://dhh64x1cvm7ka" path="res://src/Core/Nodes/Screens/Map/NMapBg.cs" id="3_mc8yn"]
+[ext_resource type="Texture2D" uid="uid://b8ra3w" path="res://images/atlases/ui_atlas.sprites/map/map_legend.tres" id="5_i7oy3"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="7_8lavf"]
+[ext_resource type="Script" uid="uid://bedja71dpxxef" path="res://src/Core/Nodes/Screens/Map/NMapDrawings.cs" id="7_qa21d"]
+[ext_resource type="Texture2D" uid="uid://lplp03" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres" id="9_i7oy3"]
+[ext_resource type="Script" uid="uid://6xk4veb5i7om" path="res://src/Core/Nodes/Screens/Map/NMapMarker.cs" id="10_cf1pj"]
+[ext_resource type="Texture2D" uid="uid://b52jis7" path="res://images/atlases/ui_atlas.sprites/map/icons/map_shop.tres" id="10_i7oy3"]
+[ext_resource type="Texture2D" uid="uid://b3sludl" path="res://images/atlases/ui_atlas.sprites/map/icons/map_chest.tres" id="11_i7oy3"]
+[ext_resource type="Texture2D" uid="uid://b7jjoqq" path="res://images/atlases/ui_atlas.sprites/map/icons/map_rest.tres" id="12_i7oy3"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="12_thocf"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="13_e2251"]
+[ext_resource type="Texture2D" uid="uid://b4vyq55" path="res://images/atlases/ui_atlas.sprites/map/icons/map_monster.tres" id="13_i7oy3"]
+[ext_resource type="Script" uid="uid://de458ifcpk73n" path="res://src/Core/Nodes/Screens/Map/NMapLegendItem.cs" id="14_cug7j"]
+[ext_resource type="Texture2D" uid="uid://ba4j0gn" path="res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres" id="14_i7oy3"]
+[ext_resource type="Texture2D" uid="uid://cfccyk2wkh1du" path="res://images/packed/map/drawing_quill.png" id="19_vobao"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="21_1o3d0"]
+[ext_resource type="Texture2D" uid="uid://ce6dwayeevd5j" path="res://images/packed/map/drawing_eraser.png" id="21_vobao"]
+[ext_resource type="Texture2D" uid="uid://bykwcogxoyxd8" path="res://images/packed/map/drawing_clear.png" id="22_82mrn"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="24_i7oy3"]
+[ext_resource type="Script" uid="uid://b7q6oq5c6w3k6" path="res://src/Core/Nodes/Screens/Map/NMapDrawButton.cs" id="26_ndqqu"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="27_dd8od"]
+[ext_resource type="Script" uid="uid://dcfbx8j5qrt5v" path="res://src/Core/Nodes/Screens/Map/NMapEraseButton.cs" id="29_ql270"]
+[ext_resource type="Script" uid="uid://bydoucv4eno1k" path="res://src/Core/Nodes/Screens/Map/NMapClearButton.cs" id="30_q7r3k"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6n8p4"]
+resource_local_to_scene = true
+shader = ExtResource("27_dd8od")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="MapScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+script = ExtResource("1_se68p")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Backstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.85098)
+
+[node name="TheMap" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MapBg" type="VBoxContainer" parent="TheMap"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -1600.0
+offset_bottom = 1640.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("3_mc8yn")
+
+[node name="MapTop" type="TextureRect" parent="TheMap/MapBg"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 1080)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MapMid" type="TextureRect" parent="TheMap/MapBg"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 1080)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MapBot" type="TextureRect" parent="TheMap/MapBg"]
+use_parent_material = true
+custom_minimum_size = Vector2(0, 1080)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Paths" type="Control" parent="TheMap"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Points" type="Control" parent="TheMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Drawings" type="Control" parent="TheMap"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = -1600.0
+offset_right = 1920.0
+offset_bottom = 1640.0
+mouse_filter = 2
+script = ExtResource("7_qa21d")
+
+[node name="MapMarker" type="TextureRect" parent="TheMap"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -920.0
+offset_bottom = -500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("10_cf1pj")
+
+[node name="MapLegend" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 558.0
+offset_top = -251.0
+offset_right = 898.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_i7oy3")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="LegendHotkeyIcon" type="TextureRect" parent="MapLegend"]
+material = SubResource("ShaderMaterial_6n8p4")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.0
+offset_top = -261.0
+offset_right = -43.0
+offset_bottom = -139.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("7_8lavf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Header" type="Label" parent="MapLegend"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -123.0
+offset_top = 3.0
+offset_right = 123.0
+offset_bottom = 123.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0823529, 0.160784, 0.243137, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 42
+text = "Legend"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 24
+MaxFontSize = 42
+
+[node name="LegendItems" type="VBoxContainer" parent="MapLegend"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_top = 101.0
+offset_right = 156.0
+offset_bottom = 457.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="UnknownLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/UnknownLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("9_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/UnknownLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Unknown"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="MerchantLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/MerchantLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("10_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/MerchantLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Merchant"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="TreasureLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/TreasureLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("11_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/TreasureLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Treasure"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="RestSiteLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/RestSiteLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("12_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/RestSiteLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Rest Site"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="EnemyLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/EnemyLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("13_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/EnemyLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Enemy"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="EliteLegendItem" type="Control" parent="MapLegend/LegendItems"]
+custom_minimum_size = Vector2(280, 48)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("14_cug7j")
+
+[node name="Icon" type="TextureRect" parent="MapLegend/LegendItems/EliteLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -31.0
+offset_right = -56.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("14_i7oy3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaLabel" type="Label" parent="MapLegend/LegendItems/EliteLegendItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -65.0
+offset_right = 129.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.160784, 0.27451, 0.403922, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("12_thocf")
+theme_override_font_sizes/font_size = 28
+text = "Elite"
+vertical_alignment = 1
+script = ExtResource("13_e2251")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="Back" parent="." instance=ExtResource("21_1o3d0")]
+layout_mode = 1
+
+[node name="DrawingTools" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0.752941)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_top = -108.0
+offset_right = 264.0
+offset_bottom = -40.0
+grow_vertical = 0
+texture = ExtResource("24_i7oy3")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DrawingTools"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -30.0
+offset_right = 94.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+metadata/_edit_group_ = true
+
+[node name="DrawButton" type="Control" parent="DrawingTools/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+focus_neighbor_right = NodePath("../EraseButton")
+focus_mode = 2
+script = ExtResource("26_ndqqu")
+
+[node name="Icon" type="TextureRect" parent="DrawingTools/HBoxContainer/DrawButton"]
+self_modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+texture = ExtResource("19_vobao")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EraseButton" type="Control" parent="DrawingTools/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+focus_neighbor_left = NodePath("../DrawButton")
+focus_neighbor_right = NodePath("../ClearButton")
+focus_mode = 2
+script = ExtResource("29_ql270")
+
+[node name="Icon" type="TextureRect" parent="DrawingTools/HBoxContainer/EraseButton"]
+self_modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+texture = ExtResource("21_vobao")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ClearButton" type="Control" parent="DrawingTools/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(68, 60)
+layout_mode = 2
+focus_neighbor_left = NodePath("../EraseButton")
+focus_mode = 2
+script = ExtResource("30_q7r3k")
+
+[node name="Icon" type="TextureRect" parent="DrawingTools/HBoxContainer/ClearButton"]
+self_modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+texture = ExtResource("22_82mrn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DrawingToolsHotkey" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6n8p4")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1089.0
+offset_top = 338.0
+offset_right = -845.0
+offset_bottom = 460.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("7_8lavf")
+expand_mode = 1
+stretch_mode = 5

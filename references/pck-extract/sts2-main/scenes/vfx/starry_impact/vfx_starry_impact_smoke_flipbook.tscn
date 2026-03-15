@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvhhni2gsixy1"]
+
+[ext_resource type="Material" uid="uid://cesp4b6w7ux23" path="res://materials/vfx/starry_impact/vfx_starry_impact_smoke_flipbook.tres" id="1_qjwmo"]
+[ext_resource type="Texture2D" uid="uid://c7ghp1umsctuy" path="res://images/vfx/starry_impact/starry_impact_smoke_flipbook.png" id="2_ecw43"]
+
+[sub_resource type="Curve" id="Curve_ausm0"]
+_data = [Vector2(0, 0.50096), 0.0, -1.28096, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_syai8"]
+curve = SubResource("Curve_ausm0")
+
+[sub_resource type="Gradient" id="Gradient_4pjuu"]
+colors = PackedColorArray(0.761075, 0.421082, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hx3ww"]
+gradient = SubResource("Gradient_4pjuu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3qx84"]
+lifetime_randomness = 0.6
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 75.0
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.8
+color_initial_ramp = SubResource("GradientTexture1D_hx3ww")
+alpha_curve = SubResource("CurveTexture_syai8")
+
+[node name="vfx_starry_impact_smoke_flipbook" type="GPUParticles2D"]
+material = ExtResource("1_qjwmo")
+amount = 2
+texture = ExtResource("2_ecw43")
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_3qx84")

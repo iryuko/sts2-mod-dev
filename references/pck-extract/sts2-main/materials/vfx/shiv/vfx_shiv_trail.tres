@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b1vtsj2jfacxj"]
+
+[ext_resource type="Shader" uid="uid://caoaqompkoq3q" path="res://shaders/vfx/shiv/vfx_shiv_trail_shader.gdshader" id="1_0aa2s"]
+
+[sub_resource type="Curve" id="Curve_0aa2s"]
+_data = [Vector2(0, 0), 0.0, 2.22078, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8obg6"]
+width = 64
+curve = SubResource("Curve_0aa2s")
+
+[sub_resource type="Gradient" id="Gradient_0aa2s"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8obg6"]
+gradient = SubResource("Gradient_0aa2s")
+
+[resource]
+shader = ExtResource("1_0aa2s")
+shader_parameter/energy = 1.0
+shader_parameter/lut = SubResource("GradientTexture1D_8obg6")
+shader_parameter/erosion_curve = SubResource("CurveTexture_8obg6")
+shader_parameter/erosion_offset = 0.25
+shader_parameter/flipbook_speed = 10.0
+shader_parameter/frame_count = 7.0
+shader_parameter/flipbook_size = Vector2(3, 3)

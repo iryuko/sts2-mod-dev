@@ -1,0 +1,693 @@
+{
+	"textures": [
+		{
+			"image": "compressed_0.png",
+			"size": {
+				"w": 1936,
+				"h": 2020
+			},
+			"sprites": [
+				{
+					"filename": "card_template/ancient_card_border.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 821,
+						"h": 1148
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card_template/card_highlight_ancient.png",
+					"region": {
+						"x": 1,
+						"y": 1151,
+						"w": 612,
+						"h": 857
+					},
+					"margin": {
+						"x": 5,
+						"y": 7,
+						"w": 7,
+						"h": 9
+					}
+				},
+				{
+					"filename": "card_template/ancient_portrait_mask_large.png",
+					"region": {
+						"x": 615,
+						"y": 1151,
+						"w": 600,
+						"h": 847
+					},
+					"margin": {
+						"x": 3,
+						"y": 2,
+						"w": 6,
+						"h": 5
+					}
+				},
+				{
+					"filename": "card_template/ancient_card_text_bg_power.png",
+					"region": {
+						"x": 824,
+						"y": 1,
+						"w": 677,
+						"h": 507
+					},
+					"margin": {
+						"x": 8,
+						"y": 0,
+						"w": 16,
+						"h": 26
+					}
+				},
+				{
+					"filename": "card_template/ancient_card_text_bg_attack.png",
+					"region": {
+						"x": 824,
+						"y": 510,
+						"w": 676,
+						"h": 499
+					},
+					"margin": {
+						"x": 10,
+						"y": 10,
+						"w": 17,
+						"h": 34
+					}
+				},
+				{
+					"filename": "back_button_outline.png",
+					"region": {
+						"x": 824,
+						"y": 1011,
+						"w": 259,
+						"h": 137
+					},
+					"margin": {
+						"x": 0,
+						"y": 23,
+						"w": 41,
+						"h": 65
+					}
+				},
+				{
+					"filename": "confirm_button_outline.png",
+					"region": {
+						"x": 1085,
+						"y": 1011,
+						"w": 259,
+						"h": 137
+					},
+					"margin": {
+						"x": 41,
+						"y": 22,
+						"w": 41,
+						"h": 65
+					}
+				},
+				{
+					"filename": "card_template/ancient_card_text_bg_skill.png",
+					"region": {
+						"x": 1217,
+						"y": 1150,
+						"w": 674,
+						"h": 427
+					},
+					"margin": {
+						"x": 8,
+						"y": 106,
+						"w": 19,
+						"h": 106
+					}
+				},
+				{
+					"filename": "popup_confirm_button_outline.png",
+					"region": {
+						"x": 1346,
+						"y": 1011,
+						"w": 198,
+						"h": 91
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 5
+					}
+				},
+				{
+					"filename": "map/map_circle_0.png",
+					"region": {
+						"x": 1346,
+						"y": 1104,
+						"w": 72,
+						"h": 27
+					},
+					"margin": {
+						"x": 66,
+						"y": 37,
+						"w": 120,
+						"h": 165
+					}
+				},
+				{
+					"filename": "map/map_dot.png",
+					"region": {
+						"x": 1420,
+						"y": 1104,
+						"w": 14,
+						"h": 25
+					},
+					"margin": {
+						"x": 9,
+						"y": 3,
+						"w": 18,
+						"h": 7
+					}
+				},
+				{
+					"filename": "proceed_button_outline.png",
+					"region": {
+						"x": 1502,
+						"y": 510,
+						"w": 391,
+						"h": 188
+					},
+					"margin": {
+						"x": 1,
+						"y": 2,
+						"w": 2,
+						"h": 4
+					}
+				},
+				{
+					"filename": "feedback/flower.png",
+					"region": {
+						"x": 1502,
+						"y": 700,
+						"w": 235,
+						"h": 253
+					},
+					"margin": {
+						"x": 21,
+						"y": 3,
+						"w": 21,
+						"h": 3
+					}
+				},
+				{
+					"filename": "confirm_button_circle.png",
+					"region": {
+						"x": 1546,
+						"y": 955,
+						"w": 169,
+						"h": 169
+					},
+					"margin": {
+						"x": 6,
+						"y": 6,
+						"w": 11,
+						"h": 11
+					}
+				},
+				{
+					"filename": "back_button_x.png",
+					"region": {
+						"x": 1717,
+						"y": 955,
+						"w": 166,
+						"h": 166
+					},
+					"margin": {
+						"x": 7,
+						"y": 7,
+						"w": 14,
+						"h": 14
+					}
+				},
+				{
+					"filename": "feedback/cupcake.png",
+					"region": {
+						"x": 1739,
+						"y": 700,
+						"w": 149,
+						"h": 216
+					},
+					"margin": {
+						"x": 56,
+						"y": 21,
+						"w": 107,
+						"h": 40
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_5.png",
+					"region": {
+						"x": 1885,
+						"y": 918,
+						"w": 48,
+						"h": 68
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_0.png",
+					"region": {
+						"x": 1885,
+						"y": 988,
+						"w": 48,
+						"h": 67
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_9.png",
+					"region": {
+						"x": 1885,
+						"y": 1057,
+						"w": 48,
+						"h": 67
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 1,
+						"h": 2
+					}
+				},
+				{
+					"filename": "feedback/flower_anticipation.png",
+					"region": {
+						"x": 1503,
+						"y": 1,
+						"w": 235,
+						"h": 253
+					},
+					"margin": {
+						"x": 21,
+						"y": 3,
+						"w": 21,
+						"h": 3
+					}
+				},
+				{
+					"filename": "feedback/the_sun.png",
+					"region": {
+						"x": 1503,
+						"y": 256,
+						"w": 234,
+						"h": 224
+					},
+					"margin": {
+						"x": 10,
+						"y": 17,
+						"w": 22,
+						"h": 32
+					}
+				},
+				{
+					"filename": "back_button_arrow.png",
+					"region": {
+						"x": 1739,
+						"y": 256,
+						"w": 174,
+						"h": 146
+					},
+					"margin": {
+						"x": 0,
+						"y": 17,
+						"w": 6,
+						"h": 34
+					}
+				},
+				{
+					"filename": "popup_cancel_button_outline.png",
+					"region": {
+						"x": 1739,
+						"y": 404,
+						"w": 196,
+						"h": 89
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 7
+					}
+				},
+				{
+					"filename": "confirm_button_tick.png",
+					"region": {
+						"x": 1740,
+						"y": 1,
+						"w": 169,
+						"h": 144
+					},
+					"margin": {
+						"x": 6,
+						"y": 17,
+						"w": 11,
+						"h": 36
+					}
+				},
+				{
+					"filename": "map/map_chest_boss_outline.png",
+					"region": {
+						"x": 1740,
+						"y": 147,
+						"w": 96,
+						"h": 83
+					},
+					"margin": {
+						"x": 17,
+						"y": 16,
+						"w": 32,
+						"h": 45
+					}
+				},
+				{
+					"filename": "map/map_circle_1.png",
+					"region": {
+						"x": 1838,
+						"y": 147,
+						"w": 92,
+						"h": 80
+					},
+					"margin": {
+						"x": 66,
+						"y": 37,
+						"w": 100,
+						"h": 112
+					}
+				},
+				{
+					"filename": "map/map_select_box.png",
+					"region": {
+						"x": 1217,
+						"y": 1579,
+						"w": 600,
+						"h": 180
+					},
+					"margin": {
+						"x": 19,
+						"y": 14,
+						"w": 40,
+						"h": 28
+					}
+				},
+				{
+					"filename": "map/map_circle_2.png",
+					"region": {
+						"x": 1819,
+						"y": 1579,
+						"w": 96,
+						"h": 118
+					},
+					"margin": {
+						"x": 63,
+						"y": 37,
+						"w": 96,
+						"h": 74
+					}
+				},
+				{
+					"filename": "map/map_elite_outline.png",
+					"region": {
+						"x": 1819,
+						"y": 1699,
+						"w": 95,
+						"h": 77
+					},
+					"margin": {
+						"x": 17,
+						"y": 24,
+						"w": 33,
+						"h": 51
+					}
+				},
+				{
+					"filename": "feedback/flower_happy.png",
+					"region": {
+						"x": 1217,
+						"y": 1761,
+						"w": 235,
+						"h": 253
+					},
+					"margin": {
+						"x": 21,
+						"y": 3,
+						"w": 21,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/map_complete_icon.png",
+					"region": {
+						"x": 1454,
+						"y": 1761,
+						"w": 125,
+						"h": 128
+					},
+					"margin": {
+						"x": 67,
+						"y": 66,
+						"w": 131,
+						"h": 128
+					}
+				},
+				{
+					"filename": "map/map_circle_3.png",
+					"region": {
+						"x": 1581,
+						"y": 1761,
+						"w": 121,
+						"h": 118
+					},
+					"margin": {
+						"x": 38,
+						"y": 37,
+						"w": 71,
+						"h": 74
+					}
+				},
+				{
+					"filename": "map/map_rest_outline.png",
+					"region": {
+						"x": 1704,
+						"y": 1761,
+						"w": 73,
+						"h": 95
+					},
+					"margin": {
+						"x": 29,
+						"y": 15,
+						"w": 55,
+						"h": 33
+					}
+				},
+				{
+					"filename": "map/map_circle_4.png",
+					"region": {
+						"x": 1704,
+						"y": 1858,
+						"w": 121,
+						"h": 118
+					},
+					"margin": {
+						"x": 38,
+						"y": 37,
+						"w": 71,
+						"h": 74
+					}
+				},
+				{
+					"filename": "map/map_unknown_outline.png",
+					"region": {
+						"x": 1779,
+						"y": 1778,
+						"w": 80,
+						"h": 78
+					},
+					"margin": {
+						"x": 24,
+						"y": 25,
+						"w": 48,
+						"h": 50
+					}
+				},
+				{
+					"filename": "map/map_chest_outline.png",
+					"region": {
+						"x": 1581,
+						"y": 1881,
+						"w": 88,
+						"h": 67
+					},
+					"margin": {
+						"x": 20,
+						"y": 31,
+						"w": 40,
+						"h": 61
+					}
+				},
+				{
+					"filename": "map/map_shop_outline.png",
+					"region": {
+						"x": 1454,
+						"y": 1891,
+						"w": 74,
+						"h": 76
+					},
+					"margin": {
+						"x": 28,
+						"y": 25,
+						"w": 54,
+						"h": 52
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_6.png",
+					"region": {
+						"x": 1530,
+						"y": 1891,
+						"w": 49,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 4,
+						"w": 0,
+						"h": 4
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_3.png",
+					"region": {
+						"x": 1581,
+						"y": 1950,
+						"w": 48,
+						"h": 65
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 1,
+						"h": 3
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_1.png",
+					"region": {
+						"x": 1530,
+						"y": 1957,
+						"w": 48,
+						"h": 62
+					},
+					"margin": {
+						"x": 0,
+						"y": 6,
+						"w": 1,
+						"h": 6
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_8.png",
+					"region": {
+						"x": 1631,
+						"y": 1950,
+						"w": 48,
+						"h": 65
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 1,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/map_monster_outline.png",
+					"region": {
+						"x": 1827,
+						"y": 1858,
+						"w": 72,
+						"h": 74
+					},
+					"margin": {
+						"x": 28,
+						"y": 27,
+						"w": 56,
+						"h": 54
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_4.png",
+					"region": {
+						"x": 1861,
+						"y": 1778,
+						"w": 48,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 4,
+						"w": 1,
+						"h": 4
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_7.png",
+					"region": {
+						"x": 1827,
+						"y": 1934,
+						"w": 48,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 4,
+						"w": 1,
+						"h": 4
+					}
+				},
+				{
+					"filename": "card_template/ancient_flame/ancient_card_flame_2.png",
+					"region": {
+						"x": 1877,
+						"y": 1934,
+						"w": 49,
+						"h": 60
+					},
+					"margin": {
+						"x": 0,
+						"y": 8,
+						"w": 0,
+						"h": 8
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:ef00d8fc1c881209ffb502ccbfcd3c04:f9b0f144fdc1a861d60d125c77a7a18d:d02f58e20100645e8612f2db24e5c3f6$"
+	}
+}

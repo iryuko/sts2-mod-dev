@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxlw6hb5nck85"]
+
+[ext_resource type="Script" uid="uid://ddhjf8va3fyl0" path="res://src/Core/Nodes/NOneTimeInitialization.cs" id="1_jx321"]
+
+[node name="OneTimeInitialization" type="Node"]
+script = ExtResource("1_jx321")

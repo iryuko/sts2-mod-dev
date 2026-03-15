@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://lqi71n810ryt"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dc5pb8vqley2k" path="res://animations/vfx/vfx_vine_shamber_vines/vine_shambler_vines_back_skel_data.tres" id="1_2t277"]
+[ext_resource type="Texture2D" uid="uid://bt4mk6cetfhov" path="res://images/vfx/monsters/vine_shambler/vine_shambler_vine_dirt.png" id="2_plcjw"]
+
+[sub_resource type="Gradient" id="Gradient_kvl1r"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_t7a6h"]
+gradient = SubResource("Gradient_kvl1r")
+
+[sub_resource type="Curve" id="Curve_40rs5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.81783, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.9494, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bitwg"]
+curve = SubResource("Curve_40rs5")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_85fqj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_85fqj"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_85fqj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_85fqj"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0.4, -1, 0)
+spread = 10.0
+initial_velocity_min = 600.0
+initial_velocity_max = 800.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+gravity = Vector3(0, 1900, 0)
+scale_min = 0.3
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_bitwg")
+color_ramp = SubResource("GradientTexture1D_t7a6h")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_85fqj")
+
+[sub_resource type="Gradient" id="Gradient_ep0rr"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ltjyt"]
+gradient = SubResource("Gradient_ep0rr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wh05e"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 600.0
+initial_velocity_max = 900.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+gravity = Vector3(0, 1900, 0)
+scale_min = 0.3
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_bitwg")
+color_ramp = SubResource("GradientTexture1D_ltjyt")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_85fqj")
+
+[node name="VinesBackScene" type="Node2D"]
+
+[node name="VinesBack" type="SpineSprite" parent="."]
+scale = Vector2(0.3, 0.3)
+skeleton_data_res = ExtResource("1_2t277")
+preview_skin = "default"
+preview_animation = "animation"
+preview_frame = false
+preview_time = 0.0
+
+[node name="DirtBlast4" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-25, -9)
+scale = Vector2(0.999999, 0.999999)
+process_material = SubResource("ParticleProcessMaterial_85fqj")
+texture = ExtResource("2_plcjw")
+lifetime = 0.6
+explosiveness = 1.0
+fixed_fps = 0
+local_coords = true
+
+[node name="DirtBlast2" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(-101, -9)
+scale = Vector2(0.999999, 0.999999)
+process_material = SubResource("ParticleProcessMaterial_wh05e")
+texture = ExtResource("2_plcjw")
+lifetime = 0.65
+explosiveness = 1.0
+fixed_fps = 0
+local_coords = true

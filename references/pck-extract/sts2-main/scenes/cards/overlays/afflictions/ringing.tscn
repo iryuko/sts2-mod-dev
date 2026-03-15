@@ -1,0 +1,73 @@
+[gd_scene load_steps=19 format=3 uid="uid://c76cikq4iuwrc"]
+
+[ext_resource type="Texture2D" uid="uid://b16x8u4w300wv" path="res://images/card_overlays/afflictions/ringing/affliction_ringinga.png" id="1_eji3a"]
+[ext_resource type="Texture2D" uid="uid://dwmads7xjfpo5" path="res://images/powers/strength_power.png" id="2_qsvp7"]
+[ext_resource type="Texture2D" uid="uid://cekx2645fdoai" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_00.png" id="3_ag1l4"]
+[ext_resource type="Texture2D" uid="uid://do318neqwd61s" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_01.png" id="4_eyusg"]
+[ext_resource type="Texture2D" uid="uid://5bq87htgucgb" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_02.png" id="5_jk20c"]
+[ext_resource type="Texture2D" uid="uid://dyncj7nqt85d1" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_03.png" id="6_r61rc"]
+[ext_resource type="Texture2D" uid="uid://cr6p2wh4eqaxa" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_04.png" id="7_a02bt"]
+[ext_resource type="Texture2D" uid="uid://cunaotrk6iqpw" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_05.png" id="8_c0xep"]
+[ext_resource type="Texture2D" uid="uid://xxcaly6odxfw" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_06.png" id="9_k2gq5"]
+[ext_resource type="Texture2D" uid="uid://bug6cqa8521ka" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_07.png" id="10_gdydt"]
+[ext_resource type="Texture2D" uid="uid://8b8vdfl3b1di" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_08.png" id="11_g7v7r"]
+[ext_resource type="Texture2D" uid="uid://5pa68kdftuqe" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_09.png" id="12_rtg0s"]
+[ext_resource type="Texture2D" uid="uid://d02mmelfqwr1v" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_10.png" id="13_i47yh"]
+[ext_resource type="Texture2D" uid="uid://ktgl3ri214ji" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_11.png" id="14_63kdd"]
+[ext_resource type="Texture2D" uid="uid://cilvgewnsorqn" path="res://images/card_overlays/afflictions/ringing/affliction_ringingb_12.png" id="15_quyvi"]
+
+[sub_resource type="Animation" id="Animation_oa6m0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qsvp7")]
+}
+
+[sub_resource type="Animation" id="Animation_7qi5m"]
+resource_name = "new_animation"
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_ag1l4"), ExtResource("4_eyusg"), ExtResource("5_jk20c"), ExtResource("6_r61rc"), ExtResource("7_a02bt"), ExtResource("8_c0xep"), ExtResource("9_k2gq5"), ExtResource("10_gdydt"), ExtResource("11_g7v7r"), ExtResource("12_rtg0s"), ExtResource("13_i47yh"), ExtResource("14_63kdd"), ExtResource("15_quyvi")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_15utp"]
+_data = {
+&"RESET": SubResource("Animation_oa6m0"),
+&"new_animation": SubResource("Animation_7qi5m")
+}
+
+[node name="Ringing" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.498)
+texture = ExtResource("1_eji3a")
+
+[node name="VisualLayer2" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_qsvp7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualLayer2"]
+libraries = {
+&"": SubResource("AnimationLibrary_15utp")
+}
+autoplay = "new_animation"

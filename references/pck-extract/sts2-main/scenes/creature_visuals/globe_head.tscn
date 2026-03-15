@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bystobglupec4"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_bwjjj"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b5stsu3extubb" path="res://animations/monsters/orb_head/orb_head_skel_data.tres" id="3_0256f"]
+
+[node name="OrbHead" type="Node2D"]
+script = ExtResource("1_bwjjj")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(30, -27)
+scale = Vector2(0.15, 0.15)
+skeleton_data_res = ExtResource("3_0256f")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -111.0
+offset_top = -314.0
+offset_right = 111.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(10, -205)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -346)
+
+[node name="OrbPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -448)

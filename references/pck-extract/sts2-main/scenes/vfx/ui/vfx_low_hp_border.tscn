@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1xi488cri1wk"]
+
+[ext_resource type="Material" uid="uid://tdwq8bsljkkn" path="res://materials/vfx/ui/vfx_ui_low_hp_border.tres" id="1_1gg3e"]
+[ext_resource type="Script" uid="uid://3m82sx1vu751" path="res://src/Core/Nodes/Vfx/Ui/NLowHpBorderVfx.cs" id="2_q0cov"]
+
+[sub_resource type="Curve" id="Curve_ddpj8"]
+_data = [Vector2(0.2551724, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.002529502), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k5mkh"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.4957843), 0.0, -3.2509966, 0, 0, Vector2(1, 0), -0.33043665, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_kin38"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.75)
+colors = PackedColorArray(0.7372549, 0, 0, 1, 0.32156864, 0.02745098, 0.02745098, 1)
+
+[node name="vfx_low_hp_border" type="ColorRect"]
+self_modulate = Color(1, 1, 1, 0.7529412)
+material = ExtResource("1_1gg3e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_q0cov")
+_alphaMultiplierCurve = SubResource("Curve_ddpj8")
+_noiseOffsetCurve = SubResource("Curve_k5mkh")
+_gradient = SubResource("Gradient_kin38")

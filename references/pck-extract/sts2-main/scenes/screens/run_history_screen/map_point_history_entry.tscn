@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://j1d403kaptd8"]
+
+[ext_resource type="Script" uid="uid://bqrh82ianuc68" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NMapPointHistoryEntry.cs" id="1_cmn1y"]
+[ext_resource type="Texture2D" uid="uid://dbah2eckxsblq" path="res://images/ui/run_history/monster.png" id="2_rmp8e"]
+[ext_resource type="Texture2D" uid="uid://bwqw581e6vmjr" path="res://images/ui/run_history/monster_outline.png" id="3_o682f"]
+[ext_resource type="Texture2D" uid="uid://dgqkq5jdkfg3o" path="res://images/packed/map/icons/map_spoils_map_marker.png" id="4_d2rh6"]
+
+[node name="MapPointHistoryEntry" type="Control"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(30, 30)
+focus_mode = 2
+script = ExtResource("1_cmn1y")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("2_rmp8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.184314)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 17.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("3_o682f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuestIcon" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = -5.14286
+offset_right = 11.0
+offset_bottom = -36.1429
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_d2rh6")
+expand_mode = 1
+stretch_mode = 4

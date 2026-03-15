@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkg1relp5vs62"]
+
+[ext_resource type="Script" uid="uid://bbw56efwo5yds" path="res://src/Core/Nodes/Screens/CardLibrary/NCardRarityTickbox.cs" id="1_4ibve"]
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="2_rc1op"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_t85lh"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_y10o2"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_du6ro"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfhid"]
+resource_local_to_scene = true
+shader = ExtResource("3_t85lh")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="RarityTickbox" type="Control"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_4ibve")
+
+[node name="TickboxVisuals" parent="." instance=ExtResource("2_rc1op")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kfhid")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -32.0
+offset_right = 60.0
+offset_bottom = 32.0
+grow_vertical = 2
+scale = Vector2(0.66, 0.66)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 52.0
+offset_top = -20.0
+offset_right = -10.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 21)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_y10o2")
+theme_override_font_sizes/font_size = 17
+text = "Common"
+vertical_alignment = 1
+script = ExtResource("4_du6ro")
+MaxFontSize = 22

@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://bwqkpjh0dlesf"]
+
+[ext_resource type="Script" uid="uid://b1fj546dn3wyi" path="res://src/Core/Nodes/Screens/StatsScreen/NAchievementsGrid.cs" id="1_m02xk"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="2_58a1y"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="3_hb6cg"]
+
+[sub_resource type="Gradient" id="Gradient_6yb5x"]
+offsets = PackedFloat32Array(0.125, 0.15, 0.975, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0.0862745, 0.0862745, 0.0862745, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v5cun"]
+gradient = SubResource("Gradient_6yb5x")
+width = 1
+height = 128
+fill_to = Vector2(0, 1)
+
+[node name="AchievementsGrid" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_m02xk")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ScrollableContent" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_58a1y")
+
+[node name="Mask" type="TextureRect" parent="ScrollableContent"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_v5cun")
+
+[node name="Content" type="MarginContainer" parent="ScrollableContent/Mask"]
+show_behind_parent = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 410
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 410
+theme_override_constants/margin_bottom = 200
+
+[node name="AchievementsContainer" type="HFlowContainer" parent="ScrollableContent/Mask/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 24
+
+[node name="Scrollbar" parent="ScrollableContent" instance=ExtResource("3_hb6cg")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 130.0
+offset_right = -52.0
+offset_bottom = -77.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_behavior_recursive = 0
+mouse_behavior_recursive = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])

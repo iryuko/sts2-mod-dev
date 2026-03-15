@@ -1,0 +1,963 @@
+{
+	"textures": [
+		{
+			"image": "potion_outline_atlas.png",
+			"size": {
+				"w": 512,
+				"h": 1024
+			},
+			"sprites": [
+				{
+					"filename": "ashwater.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack_potion.png",
+					"region": {
+						"x": 83,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "power_potion.png",
+					"region": {
+						"x": 83,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "beetle_juice.png",
+					"region": {
+						"x": 165,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "bone_brew.png",
+					"region": {
+						"x": 247,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "bottled_potential.png",
+					"region": {
+						"x": 329,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless_potion.png",
+					"region": {
+						"x": 411,
+						"y": 1,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "cosmic_concoction.png",
+					"region": {
+						"x": 1,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "distilled_chaos.png",
+					"region": {
+						"x": 83,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "droplet_of_precognition.png",
+					"region": {
+						"x": 165,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "duplicator.png",
+					"region": {
+						"x": 247,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "energy_potion.png",
+					"region": {
+						"x": 329,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fairy_in_a_bottle.png",
+					"region": {
+						"x": 411,
+						"y": 83,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fire_potion.png",
+					"region": {
+						"x": 1,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ghost_in_a_jar.png",
+					"region": {
+						"x": 83,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "gigantification_potion.png",
+					"region": {
+						"x": 165,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "heart_of_iron.png",
+					"region": {
+						"x": 247,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "kings_courage.png",
+					"region": {
+						"x": 329,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "orobic_acid.png",
+					"region": {
+						"x": 411,
+						"y": 165,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "poison_potion.png",
+					"region": {
+						"x": 1,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "pot_of_ghouls.png",
+					"region": {
+						"x": 83,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion_of_binding.png",
+					"region": {
+						"x": 165,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion_of_capacity.png",
+					"region": {
+						"x": 247,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion_shaped_rock.png",
+					"region": {
+						"x": 329,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "radiant_tincture.png",
+					"region": {
+						"x": 411,
+						"y": 247,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regen_potion.png",
+					"region": {
+						"x": 1,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "shackling_potion.png",
+					"region": {
+						"x": 83,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ship_in_a_bottle.png",
+					"region": {
+						"x": 165,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "skill_potion.png",
+					"region": {
+						"x": 247,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "stable_serum.png",
+					"region": {
+						"x": 329,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "strength_potion.png",
+					"region": {
+						"x": 411,
+						"y": 329,
+						"w": 80,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "blessing_of_the_forge.png",
+					"region": {
+						"x": 1,
+						"y": 411,
+						"w": 80,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "cure_all.png",
+					"region": {
+						"x": 83,
+						"y": 411,
+						"w": 80,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "star_potion.png",
+					"region": {
+						"x": 165,
+						"y": 411,
+						"w": 80,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 1
+					}
+				},
+				{
+					"filename": "essence_of_darkness.png",
+					"region": {
+						"x": 247,
+						"y": 411,
+						"w": 80,
+						"h": 78
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "soldiers_stew.png",
+					"region": {
+						"x": 329,
+						"y": 411,
+						"w": 80,
+						"h": 77
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 0,
+						"h": 3
+					}
+				},
+				{
+					"filename": "weak_potion.png",
+					"region": {
+						"x": 411,
+						"y": 411,
+						"w": 80,
+						"h": 77
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 0,
+						"h": 3
+					}
+				},
+				{
+					"filename": "flex_potion.png",
+					"region": {
+						"x": 329,
+						"y": 490,
+						"w": 80,
+						"h": 75
+					},
+					"margin": {
+						"x": 0,
+						"y": 5,
+						"w": 0,
+						"h": 5
+					}
+				},
+				{
+					"filename": "cunning_potion.png",
+					"region": {
+						"x": 247,
+						"y": 491,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "focus_potion.png",
+					"region": {
+						"x": 411,
+						"y": 490,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "liquid_bronze.png",
+					"region": {
+						"x": 328,
+						"y": 567,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "liquid_memories.png",
+					"region": {
+						"x": 409,
+						"y": 572,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "lucky_tonic.png",
+					"region": {
+						"x": 1,
+						"y": 492,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion_of_doom.png",
+					"region": {
+						"x": 82,
+						"y": 492,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "powdered_demise.png",
+					"region": {
+						"x": 163,
+						"y": 492,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "swift_potion.png",
+					"region": {
+						"x": 244,
+						"y": 573,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "touch_of_insanity.png",
+					"region": {
+						"x": 325,
+						"y": 649,
+						"w": 79,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "clarity.png",
+					"region": {
+						"x": 406,
+						"y": 654,
+						"w": 79,
+						"h": 79
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 1
+					}
+				},
+				{
+					"filename": "entropic_brew.png",
+					"region": {
+						"x": 1,
+						"y": 574,
+						"w": 78,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "explosive_ampoule.png",
+					"region": {
+						"x": 81,
+						"y": 574,
+						"w": 78,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "foul_potion.png",
+					"region": {
+						"x": 161,
+						"y": 574,
+						"w": 78,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fruit_juice.png",
+					"region": {
+						"x": 241,
+						"y": 655,
+						"w": 78,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fysh_oil.png",
+					"region": {
+						"x": 321,
+						"y": 731,
+						"w": 78,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "fortifier.png",
+					"region": {
+						"x": 401,
+						"y": 735,
+						"w": 78,
+						"h": 76
+					},
+					"margin": {
+						"x": 1,
+						"y": 2,
+						"w": 2,
+						"h": 4
+					}
+				},
+				{
+					"filename": "blood_potion.png",
+					"region": {
+						"x": 1,
+						"y": 813,
+						"w": 77,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 3,
+						"h": 0
+					}
+				},
+				{
+					"filename": "block_potion.png",
+					"region": {
+						"x": 1,
+						"y": 895,
+						"w": 76,
+						"h": 80
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "mazaleths_gift.png",
+					"region": {
+						"x": 79,
+						"y": 895,
+						"w": 76,
+						"h": 80
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "glowwater_potion.png",
+					"region": {
+						"x": 80,
+						"y": 813,
+						"w": 75,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 5,
+						"h": 0
+					}
+				},
+				{
+					"filename": "vulnerable_potion.png",
+					"region": {
+						"x": 157,
+						"y": 656,
+						"w": 77,
+						"h": 78
+					},
+					"margin": {
+						"x": 2,
+						"y": 1,
+						"w": 3,
+						"h": 2
+					}
+				},
+				{
+					"filename": "speed_potion.png",
+					"region": {
+						"x": 157,
+						"y": 736,
+						"w": 75,
+						"h": 78
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 5,
+						"h": 2
+					}
+				},
+				{
+					"filename": "gamblers_brew.png",
+					"region": {
+						"x": 234,
+						"y": 737,
+						"w": 74,
+						"h": 80
+					},
+					"margin": {
+						"x": 4,
+						"y": 0,
+						"w": 6,
+						"h": 0
+					}
+				},
+				{
+					"filename": "snecko_oil.png",
+					"region": {
+						"x": 157,
+						"y": 816,
+						"w": 72,
+						"h": 80
+					},
+					"margin": {
+						"x": 5,
+						"y": 0,
+						"w": 8,
+						"h": 0
+					}
+				},
+				{
+					"filename": "dexterity_potion.png",
+					"region": {
+						"x": 157,
+						"y": 898,
+						"w": 70,
+						"h": 80
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 10,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:5498f753e83bdd6914999e5ba93efd9d:ff00540a46a0be9650163db49649aa61:ae8712eeea7e96ce7ea1ed38edec280c$"
+	}
+}

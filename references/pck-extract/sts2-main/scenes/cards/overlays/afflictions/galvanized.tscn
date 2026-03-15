@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3y6uaqy6ubre"]
+
+[ext_resource type="Texture2D" uid="uid://bltbl51yf4vt5" path="res://images/card_overlays/afflictions/affliction_galvanic.png" id="1_vjrr0"]
+
+[node name="Galvanic" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(6, -9.99998)
+scale = Vector2(0.37709, 0.380752)
+texture = ExtResource("1_vjrr0")

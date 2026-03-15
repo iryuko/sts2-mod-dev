@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://qnj5je7icu36"]
+
+[ext_resource type="Script" uid="uid://xba1vkhdp46c" path="res://src/Core/Nodes/Vfx/NCardFlyShuffleVfx.cs" id="1_x6flx"]
+[ext_resource type="Texture2D" uid="uid://bk4gpfmy1awke" path="res://images/packed/vfx/small_card_silhouette.png" id="3_efu7h"]
+
+[node name="VfxCardFlyShuffle" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_x6flx")
+
+[node name="CardSoul" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_efu7h")

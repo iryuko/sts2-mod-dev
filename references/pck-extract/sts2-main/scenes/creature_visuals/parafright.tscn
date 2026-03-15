@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://giagw8kihtac"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_cxa20"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bsec5xdlwadvu" path="res://animations/monsters/parafright/parafright_skel_data.tres" id="2_qh6ks"]
+[ext_resource type="Texture2D" uid="uid://cmqhhscoyueur" path="res://images/vfx/monsters/the_obscura/obscura_particle.png" id="4_8vsgo"]
+[ext_resource type="Script" uid="uid://d0oxelsvcvkb7" path="res://src/Core/Nodes/Vfx/NParafrightVfx.cs" id="5_8ytpc"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_8vsgo"]
+_data = [Vector2(0, 0.157303), 0.0, 2.54073, 0, 0, Vector2(0.268657, 0.516854), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.20987, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8ytpc"]
+curve = SubResource("Curve_8vsgo")
+
+[sub_resource type="Curve" id="Curve_rc035"]
+_data = [Vector2(0, 0.41573), 0.0, 1.61316, 0, 0, Vector2(0.343284, 0.797753), 0.955488, 0.955488, 0, 0, Vector2(1, 1), 0.112921, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aiuts"]
+curve = SubResource("Curve_rc035")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p14ud"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 50, 1)
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(-1, 0, 0)
+spread = 90.0
+initial_velocity_min = -100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 300.0
+angular_velocity_max = 800.0
+gravity = Vector3(0, -30, 0)
+scale_min = 4.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_aiuts")
+color = Color(0.39, 0.857667, 1, 1)
+alpha_curve = SubResource("CurveTexture_8ytpc")
+
+[node name="Parafright" type="Node2D"]
+script = ExtResource("1_cxa20")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_qh6ks")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(0, -120)
+scale = Vector2(0.3, 0.3)
+
+[node name="NParafrightVfx" type="Node" parent="Visuals"]
+script = ExtResource("5_8ytpc")
+
+[node name="ParticlesSlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "particles_attach"
+show_behind_parent = true
+position = Vector2(59.5096, -152.821)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/ParticlesSlot"]
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(-56.1763, -17.179)
+amount = 15
+texture = ExtResource("4_8vsgo")
+speed_scale = 1.2
+fixed_fps = 0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_p14ud")
+metadata/_edit_lock_ = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -169.0
+offset_top = -324.0
+offset_right = 164.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -187)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -361)

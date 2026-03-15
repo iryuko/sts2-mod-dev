@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://dch51y1q8iqb7"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_r6hdh"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dpr15khga7av5" path="res://animations/monsters/stabbot/stabbot_spine_data.tres" id="2_10n6q"]
+
+[node name="Stabbot" type="Node2D"]
+script = ExtResource("1_r6hdh")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(9, 128)
+scale = Vector2(0.16, 0.16)
+skeleton_data_res = ExtResource("2_10n6q")
+preview_skin = "Default"
+preview_animation = "die"
+preview_frame = false
+preview_time = 0.76
+
+[node name="HeightControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-556.25, 50)
+rotation = -0.000191215
+bone_name = "height_constrainer"
+bone_mode = 1
+
+[node name="FallControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-68.75, 856.25)
+rotation = -0.000191215
+bone_name = "height_bone"
+bone_mode = 1
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -110.0
+offset_top = -180.0
+offset_right = 110.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -79)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -220)

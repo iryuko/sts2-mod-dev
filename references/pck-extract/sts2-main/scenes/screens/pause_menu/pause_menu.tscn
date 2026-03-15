@@ -1,0 +1,226 @@
+[gd_scene load_steps=14 format=3 uid="uid://bsc2vwg24j0lf"]
+
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="1_b6i4v"]
+[ext_resource type="Script" uid="uid://b3t3fgrdwa1lw" path="res://src/Core/Nodes/Screens/PauseMenu/NPauseMenu.cs" id="1_dwihr"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="2_8wxuu"]
+[ext_resource type="Texture2D" uid="uid://dg21w1q37pjaq" path="res://images/ui/noise_mask_for_lines.tres" id="2_qppvp"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_ml3l1"]
+[ext_resource type="PackedScene" uid="uid://dk5mc73hacc7" path="res://scenes/pause_menu/pause_menu_button.tscn" id="3_swtnw"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="4_mpxe8"]
+
+[sub_resource type="Gradient" id="Gradient_qaula"]
+offsets = PackedFloat32Array(0, 0.1, 0.9, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h0wu7"]
+gradient = SubResource("Gradient_qaula")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smhtj"]
+resource_local_to_scene = true
+shader = ExtResource("4_mpxe8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ye7w7"]
+resource_local_to_scene = true
+shader = ExtResource("4_mpxe8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vegl2"]
+resource_local_to_scene = true
+shader = ExtResource("4_mpxe8")
+shader_parameter/h = 0.5
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_swwyn"]
+resource_local_to_scene = true
+shader = ExtResource("4_mpxe8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dwihr")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Backstop" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.149333, 0.28, 0.752941)
+
+[node name="PanelContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -200.0
+offset_right = 186.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PausedText" type="Control" parent="PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/PausedText"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -33.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_b6i4v")
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_ml3l1")
+AutoSizeEnabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="RightLine" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+visible = false
+clip_children = 1
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+texture = ExtResource("2_qppvp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer/RightLine"]
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_h0wu7")
+flip_h = true
+
+[node name="LeftLine" type="TextureRect" parent="PanelContainer"]
+visible = false
+clip_children = 1
+custom_minimum_size = Vector2(420, 32)
+layout_mode = 2
+texture = ExtResource("2_qppvp")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/LeftLine"]
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+texture = SubResource("GradientTexture1D_h0wu7")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Resume" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="Settings" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="ButtonImage" parent="PanelContainer/ButtonContainer/Settings" index="0"]
+material = SubResource("ShaderMaterial_smhtj")
+
+[node name="Label" parent="PanelContainer/ButtonContainer/Settings" index="1"]
+text = "Settings"
+
+[node name="Compendium" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="ButtonImage" parent="PanelContainer/ButtonContainer/Compendium" index="0"]
+material = SubResource("ShaderMaterial_ye7w7")
+
+[node name="Label" parent="PanelContainer/ButtonContainer/Compendium" index="1"]
+text = "Compendium"
+
+[node name="GiveUp" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="ButtonImage" parent="PanelContainer/ButtonContainer/GiveUp" index="0"]
+material = SubResource("ShaderMaterial_vegl2")
+
+[node name="Label" parent="PanelContainer/ButtonContainer/GiveUp" index="1"]
+theme_override_colors/font_outline_color = Color(0.36, 0.1944, 0.144, 1)
+text = "Give Up"
+
+[node name="Disconnect" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="ButtonImage" parent="PanelContainer/ButtonContainer/Disconnect" index="0"]
+material = SubResource("ShaderMaterial_swwyn")
+
+[node name="Label" parent="PanelContainer/ButtonContainer/Disconnect" index="1"]
+text = "Disconnect"
+
+[node name="SaveAndQuit" parent="PanelContainer/ButtonContainer" instance=ExtResource("3_swtnw")]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+
+[node name="ButtonImage" parent="PanelContainer/ButtonContainer/SaveAndQuit" index="0"]
+material = SubResource("ShaderMaterial_swwyn")
+
+[node name="Label" parent="PanelContainer/ButtonContainer/SaveAndQuit" index="1"]
+text = "Save and Quit"
+
+[node name="BackButton" parent="." instance=ExtResource("2_8wxuu")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[editable path="PanelContainer/ButtonContainer/Settings"]
+[editable path="PanelContainer/ButtonContainer/Compendium"]
+[editable path="PanelContainer/ButtonContainer/GiveUp"]
+[editable path="PanelContainer/ButtonContainer/Disconnect"]
+[editable path="PanelContainer/ButtonContainer/SaveAndQuit"]

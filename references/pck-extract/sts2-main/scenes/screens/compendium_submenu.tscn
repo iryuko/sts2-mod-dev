@@ -1,0 +1,306 @@
+[gd_scene load_steps=24 format=3 uid="uid://dwm0byos1upyd"]
+
+[ext_resource type="Script" uid="uid://dbiprc4auxrw8" path="res://src/Core/Nodes/Screens/MainMenu/NCompendiumSubmenu.cs" id="1_1v7f2"]
+[ext_resource type="PackedScene" uid="uid://cm2278sgnv4u0" path="res://scenes/screens/main_menu/submenu_button_short.tscn" id="2_i11q3"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_jy8lj"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_sessm"]
+[ext_resource type="PackedScene" uid="uid://c88a0p5i8jois" path="res://scenes/screens/main_menu/compendium_bottom_button.tscn" id="4_okatx"]
+[ext_resource type="Texture2D" uid="uid://d4l6kr43g6mc4" path="res://images/ui/main_menu/submenu_card_library.png" id="4_r0fyb"]
+[ext_resource type="Texture2D" uid="uid://cehrpetj5h6xb" path="res://images/ui/main_menu/submenu_relic_collection.png" id="5_okatx"]
+[ext_resource type="Texture2D" uid="uid://cwbkq81veo5xp" path="res://images/packed/main_menu/submenu_trophy_icon.png" id="5_r0fyb"]
+[ext_resource type="Texture2D" uid="uid://ceuubobox4v0s" path="res://images/ui/main_menu/submenu_potion_lab.png" id="6_okatx"]
+[ext_resource type="Texture2D" uid="uid://ds36ojudvbbiy" path="res://images/packed/main_menu/submenu_stats_icon.png" id="6_w5brt"]
+[ext_resource type="Texture2D" uid="uid://b3rysgo17ipid" path="res://images/packed/main_menu/submenu_leaderboards_icon.png" id="7_i11q3"]
+[ext_resource type="Texture2D" uid="uid://bytwf7p6w23mj" path="res://images/ui/main_menu/submenu_bestiary.png" id="7_okatx"]
+[ext_resource type="Texture2D" uid="uid://byd6boi22kuj7" path="res://images/packed/main_menu/submenu_history_icon.png" id="7_waivm"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="12_svfna"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="13_rbndy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_niny6"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.6000000285
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xtjeq"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.4800000228
+shader_parameter/s = 0.800000038
+shader_parameter/v = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwnu6"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.2400000114
+shader_parameter/s = 1.0000000475
+shader_parameter/v = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i11q3"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.930000044175
+shader_parameter/s = 1.200000057
+shader_parameter/v = 0.65
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jy8lj"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 1.0
+shader_parameter/s = 2.000000095
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nto0c"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.230000010925
+shader_parameter/s = 2.000000095
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02440"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.8400000399
+shader_parameter/s = 1.4000000665
+shader_parameter/v = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24rft"]
+resource_local_to_scene = true
+shader = ExtResource("3_jy8lj")
+shader_parameter/h = 0.7250000344375
+shader_parameter/s = 2.50000011875
+shader_parameter/v = 1.0
+
+[node name="CompendiumSubmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_1v7f2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 24
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="CardLibraryButton" parent="MarginContainer/VBoxContainer/TopRow" instance=ExtResource("2_i11q3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/TopRow/CardLibraryButton" index="0"]
+material = SubResource("ShaderMaterial_niny6")
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/TopRow/CardLibraryButton" index="3"]
+texture = ExtResource("4_r0fyb")
+
+[node name="RelicCollectionButton" parent="MarginContainer/VBoxContainer/TopRow" instance=ExtResource("2_i11q3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/TopRow/RelicCollectionButton" index="0"]
+material = SubResource("ShaderMaterial_xtjeq")
+
+[node name="Description" parent="MarginContainer/VBoxContainer/TopRow/RelicCollectionButton" index="2"]
+text = "Examine the various trinkets and artifacts obtained throughout your runs."
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/TopRow/RelicCollectionButton" index="3"]
+texture = ExtResource("5_okatx")
+
+[node name="PotionLabButton" parent="MarginContainer/VBoxContainer/TopRow" instance=ExtResource("2_i11q3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/TopRow/PotionLabButton" index="0"]
+material = SubResource("ShaderMaterial_uwnu6")
+
+[node name="Description" parent="MarginContainer/VBoxContainer/TopRow/PotionLabButton" index="2"]
+text = "Observe the numerous potions found climbing the Spire."
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/TopRow/PotionLabButton" index="3"]
+texture = ExtResource("6_okatx")
+
+[node name="BestiaryButton" parent="MarginContainer/VBoxContainer/TopRow" instance=ExtResource("2_i11q3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/TopRow/BestiaryButton" index="0"]
+material = SubResource("ShaderMaterial_i11q3")
+
+[node name="Description" parent="MarginContainer/VBoxContainer/TopRow/BestiaryButton" index="2"]
+text = "View all of the enemies you have encountered throughout the Spire."
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/TopRow/BestiaryButton" index="3"]
+texture = ExtResource("7_okatx")
+
+[node name="BottomRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 24
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/BottomRow"]
+visible = false
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+
+[node name="LeaderboardsButton" parent="MarginContainer/VBoxContainer/BottomRow" instance=ExtResource("4_okatx")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/BottomRow/LeaderboardsButton" index="0"]
+material = SubResource("ShaderMaterial_jy8lj")
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/BottomRow/LeaderboardsButton" index="2"]
+clip_contents = true
+custom_minimum_size = Vector2(194, 142)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -92.0
+offset_right = 105.0
+offset_bottom = 50.0
+texture = ExtResource("7_i11q3")
+stretch_mode = 5
+
+[node name="AchievementsButton" parent="MarginContainer/VBoxContainer/BottomRow" instance=ExtResource("4_okatx")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/BottomRow/AchievementsButton" index="0"]
+material = SubResource("ShaderMaterial_nto0c")
+
+[node name="Label" parent="MarginContainer/VBoxContainer/BottomRow/AchievementsButton" index="1"]
+text = "Achievements"
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/BottomRow/AchievementsButton" index="2"]
+clip_contents = true
+custom_minimum_size = Vector2(194, 142)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -86.0
+offset_right = 97.0
+offset_bottom = 56.0
+texture = ExtResource("5_r0fyb")
+stretch_mode = 5
+
+[node name="StatisticsButton" parent="MarginContainer/VBoxContainer/BottomRow" instance=ExtResource("4_okatx")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/BottomRow/StatisticsButton" index="0"]
+material = SubResource("ShaderMaterial_02440")
+
+[node name="Label" parent="MarginContainer/VBoxContainer/BottomRow/StatisticsButton" index="1"]
+text = "Statistics"
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/BottomRow/StatisticsButton" index="2"]
+offset_left = 52.888855
+offset_top = 27.0
+offset_right = -52.888855
+offset_bottom = -61.0
+texture = ExtResource("6_w5brt")
+stretch_mode = 5
+
+[node name="RunHistoryButton" parent="MarginContainer/VBoxContainer/BottomRow" instance=ExtResource("4_okatx")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="BgPanel" parent="MarginContainer/VBoxContainer/BottomRow/RunHistoryButton" index="0"]
+material = SubResource("ShaderMaterial_24rft")
+
+[node name="Label" parent="MarginContainer/VBoxContainer/BottomRow/RunHistoryButton" index="1"]
+text = "Run History"
+
+[node name="Icon" parent="MarginContainer/VBoxContainer/BottomRow/RunHistoryButton" index="2"]
+offset_top = 33.0
+offset_bottom = -62.0
+texture = ExtResource("7_waivm")
+stretch_mode = 5
+
+[node name="BackButton" parent="." instance=ExtResource("3_sessm")]
+layout_mode = 1
+
+[node name="MegaRichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = 377.0
+offset_right = 548.0
+offset_bottom = 409.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("12_svfna")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+bbcode_enabled = true
+text = "It's me! Your friendly neighborhood helper text :)"
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_rbndy")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[editable path="MarginContainer/VBoxContainer/TopRow/CardLibraryButton"]
+[editable path="MarginContainer/VBoxContainer/TopRow/RelicCollectionButton"]
+[editable path="MarginContainer/VBoxContainer/TopRow/PotionLabButton"]
+[editable path="MarginContainer/VBoxContainer/TopRow/BestiaryButton"]
+[editable path="MarginContainer/VBoxContainer/BottomRow/LeaderboardsButton"]
+[editable path="MarginContainer/VBoxContainer/BottomRow/AchievementsButton"]
+[editable path="MarginContainer/VBoxContainer/BottomRow/StatisticsButton"]
+[editable path="MarginContainer/VBoxContainer/BottomRow/RunHistoryButton"]

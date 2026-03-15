@@ -1,0 +1,598 @@
+[gd_scene load_steps=23 format=3 uid="uid://bww2pmk6vp4lp"]
+
+[ext_resource type="Script" uid="uid://brgdokebp8njj" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NRunHistory.cs" id="1_flggk"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="1_j0jyw"]
+[ext_resource type="PackedScene" uid="uid://ddrgq4iniyab8" path="res://scenes/screens/run_history_screen/map_point_history.tscn" id="1_tulff"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_2fadu"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="4_4d0xs"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="6_2xrly"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_63he4"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="9_yggd1"]
+[ext_resource type="Script" uid="uid://c3856g5bodxbj" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NRelicHistory.cs" id="10_y4ilg"]
+[ext_resource type="Script" uid="uid://d1ed7fcx0t5qe" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NDeckHistory.cs" id="11_8lycs"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="13_a5wtp"]
+[ext_resource type="Texture2D" uid="uid://bi1dpaj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="15_p5a1x"]
+[ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="17_p5a1x"]
+[ext_resource type="PackedScene" uid="uid://cga165o6isk0q" path="res://scenes/ui/share_button.tscn" id="18_0ksyv"]
+[ext_resource type="Texture2D" uid="uid://ch3nihw" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_char_backdrop.tres" id="18_nsgy2"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="19_er1vu"]
+[ext_resource type="Texture2D" uid="uid://bxj1tlj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_floor.tres" id="22_nsgy2"]
+[ext_resource type="Texture2D" uid="uid://bfmmrno" path="res://images/atlases/ui_atlas.sprites/top_bar/timer_icon.tres" id="23_p5a1x"]
+[ext_resource type="PackedScene" uid="uid://g4xukmlh45lk" path="res://scenes/screens/run_history_screen/run_history_arrow.tscn" id="29_i073e"]
+[ext_resource type="Texture2D" uid="uid://o5lbua" path="res://images/atlases/ui_atlas.sprites/card/card_unplayable_icon.tres" id="34_nalpt"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="38_2l5cw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xs4hu"]
+shader = ExtResource("13_a5wtp")
+shader_parameter/h = 0.463
+shader_parameter/s = 3.918
+shader_parameter/v = 2.0
+
+[node name="RunHistory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_flggk")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ScreenContents" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 250
+
+[node name="Container" type="VBoxContainer" parent="ScreenContents"]
+custom_minimum_size = Vector2(1420, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 24
+
+[node name="TopSection" type="Control" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+
+[node name="RightAlignedStuff" type="VBoxContainer" parent="ScreenContents/Container/TopSection"]
+layout_mode = 0
+offset_left = 1248.0
+offset_right = 1420.0
+offset_bottom = 154.0
+grow_horizontal = 0
+theme_override_constants/separation = -2
+
+[node name="DateLabel" type="RichTextLabel" parent="ScreenContents/Container/TopSection/RightAlignedStuff"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(140, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("1_j0jyw")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[right]February 16, 2024 9:21 PM[/right]"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+
+[node name="SeedLabel" type="RichTextLabel" parent="ScreenContents/Container/TopSection/RightAlignedStuff"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(140, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("1_j0jyw")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[right]Seed: 000[/right]"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+
+[node name="GameModeLabel" type="RichTextLabel" parent="ScreenContents/Container/TopSection/RightAlignedStuff"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(140, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("1_j0jyw")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[right][gold]Singleplayer:[/gold] Standard[/right]"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+
+[node name="BuildLabel" type="RichTextLabel" parent="ScreenContents/Container/TopSection/RightAlignedStuff"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.5)
+clip_contents = false
+custom_minimum_size = Vector2(140, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("1_j0jyw")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[right]BuildId: 000[/right]"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+
+[node name="Spacer" type="Control" parent="ScreenContents/Container/TopSection/RightAlignedStuff"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LeftAlignedStuff" type="HBoxContainer" parent="ScreenContents/Container/TopSection"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 1288.0
+offset_bottom = 80.0
+theme_override_constants/separation = 24
+
+[node name="PlayerIconContainer" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Hp" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HpIcon" type="TextureRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/Hp"]
+custom_minimum_size = Vector2(46, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("15_p5a1x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HpLabel" type="Label" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/Hp"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0.392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("38_2l5cw")
+theme_override_font_sizes/font_size = 32
+text = "??/??"
+vertical_alignment = 1
+script = ExtResource("7_63he4")
+AutoSizeEnabled = false
+
+[node name="Gold" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="GoldIcon" type="TextureRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/Gold"]
+custom_minimum_size = Vector2(44, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("17_p5a1x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldLabel" type="Label" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/Gold"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("38_2l5cw")
+theme_override_font_sizes/font_size = 32
+text = "?"
+vertical_alignment = 1
+script = ExtResource("7_63he4")
+AutoSizeEnabled = false
+
+[node name="PotionMarginifier" type="MarginContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+layout_mode = 2
+
+[node name="PotionContainer" type="MarginContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/PotionMarginifier"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 8
+
+[node name="PotionBg" type="NinePatchRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+layout_mode = 2
+texture = ExtResource("18_nsgy2")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="PotionErrorBg" type="NinePatchRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.552941)
+material = SubResource("ShaderMaterial_xs4hu")
+layout_mode = 2
+texture = ExtResource("18_nsgy2")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 6
+
+[node name="PotionHolders" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/PotionMarginifier/PotionContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="TopBarFloorAndRoom" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="RoomIconResizer" type="MarginContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = -8
+theme_override_constants/margin_right = 4
+
+[node name="FloorGroup" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="FloorIconPositioner" type="MarginContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom/FloorGroup"]
+layout_mode = 2
+theme_override_constants/margin_top = -4
+
+[node name="FloorInfoIcon" type="TextureRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom/FloorGroup/FloorIconPositioner"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("22_nsgy2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FloorInfoIcon2" type="TextureRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom/FloorGroup/FloorIconPositioner/FloorInfoIcon"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 0
+offset_right = 44.0
+offset_bottom = 84.0
+mouse_filter = 2
+texture = ExtResource("22_nsgy2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FloorNumLabel" type="Label" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TopBarFloorAndRoom/FloorGroup"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.772549, 0.854902, 0.807843, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("38_2l5cw")
+theme_override_font_sizes/font_size = 32
+text = "?"
+vertical_alignment = 1
+script = ExtResource("7_63he4")
+AutoSizeEnabled = false
+
+[node name="Spacer" type="Control" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="TimeContainer" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="TimerIcon" type="TextureRect" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TimeContainer"]
+custom_minimum_size = Vector2(48, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("23_p5a1x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RunTimeLabel" type="Label" parent="ScreenContents/Container/TopSection/LeftAlignedStuff/TimeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("38_2l5cw")
+theme_override_font_sizes/font_size = 32
+text = "??:??"
+vertical_alignment = 1
+script = ExtResource("7_63he4")
+AutoSizeEnabled = false
+
+[node name="Modifiers" type="HBoxContainer" parent="ScreenContents/Container/TopSection/LeftAlignedStuff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="DeathQuoteLabel" type="RichTextLabel" parent="ScreenContents/Container/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.333333, 0.333333, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("9_yggd1")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "[center]“Ironclad was killed by a Nibbit...”[/center]"
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("19_er1vu")
+MaxFontSize = 22
+
+[node name="CenterContainer" type="CenterContainer" parent="ScreenContents/Container"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="MapPointHistoryContainer" type="MarginContainer" parent="ScreenContents/Container/CenterContainer"]
+custom_minimum_size = Vector2(1280, 174)
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 0
+
+[node name="MapPointHistory" parent="ScreenContents/Container/CenterContainer/MapPointHistoryContainer" instance=ExtResource("1_tulff")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="RelicHistory" type="VBoxContainer" parent="ScreenContents/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("10_y4ilg")
+
+[node name="Header" type="RichTextLabel" parent="ScreenContents/Container/RelicHistory"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("4_2fadu")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[gold]Relics (x)[/gold]: Starter (1), Common(1), Uncommon(2)"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/RelicHistory"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="RelicsContainer" type="HFlowContainer" parent="ScreenContents/Container/RelicHistory/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="DeckHistory" type="VBoxContainer" parent="ScreenContents/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("11_8lycs")
+
+[node name="Header" type="RichTextLabel" parent="ScreenContents/Container/DeckHistory"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_4d0xs")
+theme_override_fonts/bold_font = ExtResource("4_2fadu")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[gold]Cards (30)[/gold]: Ancient (2), Rare (4), Uncommon (6), Common (12), Starter (1)"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_er1vu")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/DeckHistory"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 24
+
+[node name="CardContainer" type="HFlowContainer" parent="ScreenContents/Container/DeckHistory/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="OutOfDateVisual" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.498039)
+
+[node name="Label" type="Label" parent="OutOfDateVisual"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = 151.0
+offset_right = 433.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.445059
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
+theme_override_colors/font_outline_color = Color(0.25025707, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("38_2l5cw")
+theme_override_font_sizes/font_size = 63
+text = "Out of date run history"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_63he4")
+
+[node name="LeftArrow" parent="." instance=ExtResource("29_i073e")]
+layout_mode = 1
+
+[node name="RightArrow" parent="." instance=ExtResource("29_i073e")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -174.0
+offset_right = -46.0
+grow_horizontal = 0
+
+[node name="BackButton" parent="." instance=ExtResource("6_2xrly")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ShareButton" parent="." instance=ExtResource("18_0ksyv")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -112.0
+offset_right = -48.0
+offset_bottom = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="ShareButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("34_nalpt")
+expand_mode = 1
+stretch_mode = 3

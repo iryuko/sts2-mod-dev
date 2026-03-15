@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw4cyu81chaij"]
+
+[ext_resource type="Material" uid="uid://dt4r5xw8vca42" path="res://materials/vfx/scream/vfx_scream_squiggly_distortion_polar.tres" id="1_ac487"]
+[ext_resource type="Texture2D" uid="uid://sx5owl88vdsu" path="res://images/vfx/scream/scream_distortion_polar.png" id="2_3tsc4"]
+
+[sub_resource type="Curve" id="Curve_bth6h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.65608, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_if4ek"]
+curve = SubResource("Curve_bth6h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5bxo"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+alpha_curve = SubResource("CurveTexture_if4ek")
+
+[node name="vfx_scream_squiggly_distortion_polar" type="GPUParticles2D"]
+texture_repeat = 2
+material = ExtResource("1_ac487")
+emitting = false
+amount = 1
+texture = ExtResource("2_3tsc4")
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_r5bxo")

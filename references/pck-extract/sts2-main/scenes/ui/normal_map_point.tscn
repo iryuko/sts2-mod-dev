@@ -1,0 +1,276 @@
+[gd_scene load_steps=27 format=3 uid="uid://d146trmpuvr0q"]
+
+[ext_resource type="Script" uid="uid://bv6ve5swvwmkg" path="res://src/Core/Nodes/Screens/Map/NNormalMapPoint.cs" id="1_1xxvm"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_monster.tres" id="3_6jrr0"]
+[ext_resource type="Shader" uid="uid://chja3j371d0hi" path="res://scenes/ui/normal_map_point.gdshader" id="3_sx0xe"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_monster_outline.tres" id="4_6jrr0"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown.tres" id="5_btf4n"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_chest.tres" id="6_bqv7y"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_elite.tres" id="7_d3e5h"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_rest.tres" id="8_c8cgg"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_shop.tres" id="9_clmsp"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_unknown_outline.tres" id="10_bswir"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_chest_outline.tres" id="11_dvmfs"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_elite_outline.tres" id="12_dtl1h"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_rest_outline.tres" id="13_y5nc5"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_shop_outline.tres" id="14_d1hvr"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown_chest.tres" id="15_btf4a"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown_monster.tres" id="16_bqv7b"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown_shop.tres" id="17_d3e5c"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/map/icons/map_unknown_elite.tres" id="18_c8cgd"]
+[ext_resource type="FontVariation" uid="uid://dviusgklt13ts" path="res://themes/source_code_pro_medium_shared.tres" id="4_aicgc"]
+[ext_resource type="Texture2D" uid="uid://dgqkq5jdkfg3o" path="res://images/packed/map/icons/map_spoils_map_marker.png" id="4_fs4r4"]
+[ext_resource type="PackedScene" uid="uid://bf5067m5nxvaw" path="res://scenes/ui/multiplayer_vote_container.tscn" id="6_2ay1l"]
+[ext_resource type="Script" uid="uid://x0d65dc506fq" path="res://src/Core/Nodes/Combat/NSelectionReticle.cs" id="9_0fyvd"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="9_ahwix"]
+[ext_resource type="Texture2D" uid="uid://hm3yndjsncmt" path="res://images/ui/combat/combat_reticle.png" id="10_hsd70"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_et7n7"]
+shader = ExtResource("3_sx0xe")
+shader_parameter/initial_color = Color(0.705882, 0.615686, 0.537255, 1)
+shader_parameter/map_color = Color(0.970955, 0.536903, 0.660313, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_sm58j"]
+base_font = ExtResource("4_aicgc")
+spacing_glyph = -3
+
+[node name="NormalMapPoint" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -988.0
+offset_top = -568.0
+offset_right = -932.0
+offset_bottom = -512.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(28, 28)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_1xxvm")
+_ignoreDragThreshold = 20.0
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="IconContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(28, 28)
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="IconContainer"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.501961)
+material = SubResource("ShaderMaterial_et7n7")
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(46, 46)
+mouse_filter = 2
+texture = ExtResource("3_6jrr0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="IconContainer/Icon"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+show_behind_parent = true
+custom_minimum_size = Vector2(92, 92)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(46, 46)
+mouse_filter = 2
+texture = ExtResource("4_6jrr0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuestIcon" type="TextureRect" parent="IconContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 56)
+mouse_filter = 2
+texture = ExtResource("4_fs4r4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="SelectionReticle" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 24)
+mouse_filter = 2
+script = ExtResource("9_0fyvd")
+
+[node name="Border" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Shadow" type="TextureRect" parent="SelectionReticle/Border"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 36.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Border2" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = 23.0
+offset_right = 6.0
+offset_bottom = 55.0
+grow_vertical = 0
+scale = Vector2(1, -1)
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Shadow2" type="TextureRect" parent="SelectionReticle/Border2"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 36.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Border3" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 57.0
+offset_bottom = 7.0
+grow_horizontal = 0
+scale = Vector2(-1, 1)
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Shadow3" type="TextureRect" parent="SelectionReticle/Border3"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = 3.0
+offset_right = 28.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Border4" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 24.0
+offset_right = 57.0
+offset_bottom = 56.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(-1, -1)
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="Shadow4" type="TextureRect" parent="SelectionReticle/Border4"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 28.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("10_hsd70")
+expand_mode = 1
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 46.0
+offset_right = 100.0
+offset_bottom = 82.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_sm58j")
+theme_override_font_sizes/font_size = 24
+text = "[0,0]"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("9_ahwix")
+AutoSizeEnabled = false
+
+[node name="MapPointVoteContainer" parent="." instance=ExtResource("6_2ay1l")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -65.0
+offset_top = 42.0
+offset_right = 183.0
+offset_bottom = 74.0

@@ -1,0 +1,14 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=4 format=3 uid="uid://celwh77tfpmka"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://clhu5vpcdbnn" path="res://animations/monsters/flying_mushrooms/flying_mushrooms.atlas" id="1_eu7uo"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dm3dw211brl1t" path="res://animations/monsters/flying_mushrooms/flying_mushrooms.skel" id="2_vihli"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rb1j4"]
+from = "idle_loop"
+to = "hurt"
+
+[resource]
+atlas_res = ExtResource("1_eu7uo")
+skeleton_file_res = ExtResource("2_vihli")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_rb1j4")]

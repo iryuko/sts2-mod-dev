@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b0jdvx6s1o6i1"]
+
+[ext_resource type="Shader" uid="uid://c7v6xn7lpq6gn" path="res://shaders/vfx/monsters/waterfall_giant_water_shader.tres" id="1_xu4id"]
+[ext_resource type="Texture2D" uid="uid://bj4q736bei6ip" path="res://images/vfx/monsters/waterfall_giant/waterfall_giant_water_tex.png" id="2_keuqb"]
+[ext_resource type="Texture2D" uid="uid://c43u4f5sxg6pu" path="res://images/vfx/monsters/waterfall_giant/waterfall_giant_body_water_tex.png" id="3_kgf4y"]
+
+[resource]
+shader = ExtResource("1_xu4id")
+shader_parameter/ColorParameter = Color(0.2021, 0.47, 0.403025, 1)
+shader_parameter/movingTexOffset = Vector2(0, 0)
+shader_parameter/movingTexScale = Vector2(2, 1)
+shader_parameter/scrollSpeed = Vector2(0, -2)
+shader_parameter/movingTex = ExtResource("2_keuqb")
+shader_parameter/waterTex = ExtResource("3_kgf4y")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://ceh1ogkj2yx3g"]
+
+[ext_resource type="Material" uid="uid://ddbvxm3hp78f1" path="res://materials/vfx/common/vfx_poof.tres" id="1_fdyfm"]
+[ext_resource type="Texture2D" uid="uid://dt4hrh2odk8wi" path="res://images/vfx/common/common_poof.png" id="2_62oo3"]
+
+[sub_resource type="Curve" id="Curve_a1fhn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.99978, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kk5o2"]
+curve = SubResource("Curve_a1fhn")
+
+[sub_resource type="Curve" id="Curve_4agwv"]
+_data = [Vector2(0, 0.50096), 0.0, 1.58166, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ttyxi"]
+_data = [Vector2(0, 0.351248), 0.0, 8.12018, 0, 0, Vector2(0.149871, 0.900192), 0.125504, 0.125504, 0, 0, Vector2(1, 1), 0.0802272, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_gw8hd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_a1fhn"]
+curve_x = SubResource("Curve_4agwv")
+curve_y = SubResource("Curve_ttyxi")
+curve_z = SubResource("Curve_gw8hd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o3l8p"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+damping_min = 0.5
+damping_max = 0.5
+scale_min = 0.75
+scale_max = 0.75
+scale_curve = SubResource("CurveXYZTexture_a1fhn")
+alpha_curve = SubResource("CurveTexture_kk5o2")
+
+[node name="vfx_poof" type="GPUParticles2D"]
+texture_repeat = 2
+material = ExtResource("1_fdyfm")
+rotation = 3.14159
+amount = 1
+texture = ExtResource("2_62oo3")
+lifetime = 0.75
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_o3l8p")

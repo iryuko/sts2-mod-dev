@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2eq1kvugmow1"]
+
+[ext_resource type="Material" uid="uid://bbat1a8gr2fcg" path="res://materials/vfx/scratch/vfx_scratch_flipbook.tres" id="1_5iljm"]
+[ext_resource type="Texture2D" uid="uid://b603wjlt0csbi" path="res://images/vfx/scratch/scratch_flipbook.png" id="2_t2gb6"]
+
+[sub_resource type="Curve" id="Curve_3rtms"]
+_data = [Vector2(0.7531172, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -8.989194, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xyhpu"]
+curve = SubResource("Curve_3rtms")
+
+[sub_resource type="Gradient" id="Gradient_11que"]
+offsets = PackedFloat32Array(0, 0.14600551, 0.5261708, 0.8044077)
+colors = PackedColorArray(0.9063318, 0.9063318, 0.9063318, 1, 1, 1, 1, 1, 1.6124506, 1.6124506, 1.6124506, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7m1uf"]
+gradient = SubResource("Gradient_11que")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1rn20"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_7m1uf")
+alpha_curve = SubResource("CurveTexture_xyhpu")
+
+[node name="vfx_scratch_flipbook" type="GPUParticles2D"]
+material = ExtResource("1_5iljm")
+emitting = false
+amount = 1
+texture = ExtResource("2_t2gb6")
+lifetime = 0.55
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1rn20")

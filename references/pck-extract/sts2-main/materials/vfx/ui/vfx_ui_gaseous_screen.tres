@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c5pcr18nqub46"]
+
+[ext_resource type="Shader" uid="uid://cpdrxuykeeygd" path="res://shaders/vfx/ui/vfx_ui_gaseous_screen_shader.gdshader" id="1_13ssn"]
+[ext_resource type="Texture2D" uid="uid://bbp626mt5m0xv" path="res://images/vfx/noise/vfx_noise_3.png" id="2_thss8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_thss8"]
+seed = 305
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0an2m"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_thss8")
+seamless = true
+seamless_blend_skirt = 1.0
+
+[resource]
+shader = ExtResource("1_13ssn")
+shader_parameter/noise = ExtResource("2_thss8")
+shader_parameter/noise_st_a = Vector4(0.5, 0.75, -0.35, -0.035)
+shader_parameter/noise_a_static_offset = Vector2(0, 0.175)
+shader_parameter/noise_st_b = Vector4(1.15, 1.25, -1, 0.015)
+shader_parameter/noise_b_static_offset = Vector2(0, -0.225)
+shader_parameter/noise_layer_lerp = 0.40000000596048
+shader_parameter/noise_panning_multiplier = 1.0
+shader_parameter/noise_alpha_multiplier = 1.0
+shader_parameter/distortion = SubResource("NoiseTexture2D_0an2m")
+shader_parameter/distortion_st = Vector4(0.1, 0.1, 0.03, 0.03)
+shader_parameter/distortion_intensity = 0.35
+shader_parameter/min_base_alpha = 0.25
+shader_parameter/alpha_multiplier = 0.35
+shader_parameter/erosion_base = 0.0
+shader_parameter/erosion_offset = 1.0
+shader_parameter/bloat_intensity = 3.0
+shader_parameter/bloat_center = Vector2(0.5, 0.5)

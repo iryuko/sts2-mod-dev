@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bhyxo1pcdm73o"]
+
+[ext_resource type="FontFile" uid="uid://c680ei46ddqdb" path="res://fonts/bitter_medium_italic.ttf" id="1_ym1x5"]
+
+[resource]
+base_font = ExtResource("1_ym1x5")
+spacing_glyph = 1

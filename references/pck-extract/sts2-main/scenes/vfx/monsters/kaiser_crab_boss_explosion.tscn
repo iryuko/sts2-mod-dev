@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://6ovmurlohnbj"]
+
+[ext_resource type="Script" uid="uid://drep5x36bu257" path="res://src/Core/Nodes/Vfx/Utilities/NVfxSpine.cs" id="1_at7hp"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://clkxvbu8tv365" path="res://animations/vfx/vfx_kaiser_crab_boss_explosion/infested_boss_explosion_skel_data.tres" id="1_lc5ba"]
+[ext_resource type="Texture2D" uid="uid://qinrp8kdcart" path="res://images/vfx/tiny_glow_dot.png" id="2_yst6x"]
+[ext_resource type="Script" path="res://src/Core/Nodes/Vfx/NKaiserCrabBossExplosionVfx.cs" id="4_h4qlx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ojqjc"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_at7hp"]
+_limits = [-2.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.9642201), 0.0, -1.8650228, 0, 0, Vector2(0.40527576, 0.30229354), -1.2736742, -1.2736742, 0, 0, Vector2(0.6402877, 0.12339449), 0.0, 0.0, 0, 0, Vector2(1, 0.39174306), 2.4866948, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_iflym"]
+curve = SubResource("Curve_at7hp")
+
+[sub_resource type="Curve" id="Curve_ndvqd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.35491604, 1), 0.0, 0.0, 0, 0, Vector2(0.6450567, 0.72692305), -3.6161203, -3.6161203, 0, 0, Vector2(0.70016205, 0.37692308), -1.5820508, -1.5820508, 0, 0, Vector2(0.81361425, 0.5230769), -1.2204388, -1.2204388, 0, 0, Vector2(0.8654781, 0.22307688), -0.98878324, -0.98878324, 0, 0, Vector2(0.9562398, 0.29230767), -0.36508903, -0.36508903, 0, 0, Vector2(1, 0.14724773), -3.039289, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_mfj8p"]
+curve = SubResource("Curve_ndvqd")
+
+[sub_resource type="Curve" id="Curve_yeydm"]
+_data = [Vector2(0.006993007, 0), 0.0, 2.6533592, 0, 0, Vector2(0.09090909, 0.7864121), 2.358537, 2.358537, 0, 0, Vector2(0.35431236, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_v0sjr"]
+curve = SubResource("Curve_yeydm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2tkqk"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 300.0
+emission_ring_inner_radius = 299.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 130.0
+initial_velocity_min = 2500.0
+initial_velocity_max = 5000.0
+gravity = Vector3(0, -500, 0)
+linear_accel_min = 1000.0
+linear_accel_max = 5000.0
+linear_accel_curve = SubResource("CurveTexture_iflym")
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+scale_min = 0.099999994
+scale_max = 0.39999998
+scale_curve = SubResource("CurveTexture_mfj8p")
+color = Color(0.71000004, 0.9951667, 1, 1)
+hue_variation_min = -0.030000022
+hue_variation_max = 0.029999977
+turbulence_enabled = true
+turbulence_noise_strength = 0.2
+turbulence_noise_scale = 1000.0
+turbulence_noise_speed = Vector3(0, 1, 0)
+turbulence_noise_speed_random = 0.3
+turbulence_influence_min = 0.187
+turbulence_influence_max = 0.25500003
+turbulence_influence_over_life = SubResource("CurveTexture_v0sjr")
+
+[node name="InfestedBossExplosion" type="Node2D"]
+script = ExtResource("1_at7hp")
+_animation = "animation"
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_lc5ba")
+preview_skin = "Default"
+preview_animation = "animation"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.25, 0.25)
+
+[node name="ExplosionSlot" type="SpineSlotNode" parent="SpineSprite"]
+slot_name = "explosion_slot"
+show_behind_parent = true
+
+[node name="ExplosionParticles" type="GPUParticles2D" parent="SpineSprite/ExplosionSlot"]
+material = SubResource("CanvasItemMaterial_ojqjc")
+amount = 20
+texture = ExtResource("2_yst6x")
+lifetime = 1.5
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.05
+trail_sections = 2
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_2tkqk")
+
+[node name="NInfestedBossExplosionVfx" type="Node" parent="SpineSprite"]
+script = ExtResource("4_h4qlx")

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b5c1bk88xwuqr"]
+
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="1_gikdy"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_gikdy")
+shader_parameter/h = 0.634
+shader_parameter/s = 0.35
+shader_parameter/v = 0.8

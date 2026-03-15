@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://b88g4tn14a1my"]
+
+[ext_resource type="Material" uid="uid://btepoeydr3bxn" path="res://materials/vfx/missile/vfx_missile_sky_flare.tres" id="1_fic11"]
+[ext_resource type="Texture2D" uid="uid://7w45ilr3g0e0" path="res://images/vfx/missile/missile_sky_flare.png" id="2_kirx4"]
+
+[sub_resource type="Curve" id="Curve_tgt2i"]
+_limits = [1.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -2.48955, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e2vl1"]
+curve = SubResource("Curve_tgt2i")
+
+[sub_resource type="Curve" id="Curve_c7m04"]
+_data = [Vector2(0, 0.3762), 0.0, -0.804703, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ausm0"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 2.5882, 0, 0, Vector2(1, 2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_oiudl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_eh5cj"]
+curve_x = SubResource("Curve_c7m04")
+curve_y = SubResource("Curve_ausm0")
+curve_z = SubResource("Curve_oiudl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dlahl"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 1.8
+scale_max = 1.8
+scale_curve = SubResource("CurveXYZTexture_eh5cj")
+emission_curve = SubResource("CurveTexture_e2vl1")
+
+[node name="vfx_missile_sky_flare" type="GPUParticles2D"]
+z_index = 2
+material = ExtResource("1_fic11")
+rotation = -0.523599
+emitting = false
+amount = 1
+texture = ExtResource("2_kirx4")
+lifetime = 0.2
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_dlahl")

@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://x1ufv6vy68n5"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cuc5lmxth5gt2" path="res://animations/monsters/zapbot/zapbot.atlas" id="1_6qycb"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://3o5wl1poq00k" path="res://animations/monsters/zapbot/zapbot.skel" id="2_a4s36"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_eqtqu"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mmswr"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_21bs0"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hrm02"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_6qycb")
+skeleton_file_res = ExtResource("2_a4s36")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_eqtqu"), SubResource("SpineAnimationMix_mmswr"), SubResource("SpineAnimationMix_21bs0"), SubResource("SpineAnimationMix_hrm02")]

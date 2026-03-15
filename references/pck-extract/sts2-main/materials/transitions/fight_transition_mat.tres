@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://ci0um5dvn65fr"]
+
+[ext_resource type="Shader" path="res://shaders/texture_transition.gdshader" id="1_dvdi3"]
+[ext_resource type="Texture2D" uid="uid://ddhh4xuyvp3kl" path="res://images/ui/transitions/fight_transition.png" id="2_ueru0"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_dvdi3")
+shader_parameter/threshold = 1.0
+shader_parameter/additionalFade = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/transitionTex = ExtResource("2_ueru0")

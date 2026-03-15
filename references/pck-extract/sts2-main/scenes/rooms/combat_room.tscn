@@ -1,0 +1,155 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5newixt5ky5o"]
+
+[ext_resource type="Script" uid="uid://xvgktube4w61" path="res://src/Core/Nodes/Rooms/NCombatRoom.cs" id="1_1ofu5"]
+[ext_resource type="Script" uid="uid://df3q31atwkovi" path="res://src/Core/Nodes/Combat/NCombatSceneContainer.cs" id="2_2jxdh"]
+[ext_resource type="Shader" uid="uid://bludi7i5ecir4" path="res://shaders/radial_blur.gdshader" id="3_lgagf"]
+[ext_resource type="Script" uid="uid://cewj25rpddk4" path="res://src/Core/Nodes/Vfx/NRadialBlurVfx.cs" id="4_3bfae"]
+[ext_resource type="PackedScene" uid="uid://bylx12ikbsu6w" path="res://scenes/combat/combat_ui.tscn" id="4_rafew"]
+[ext_resource type="PackedScene" uid="uid://dk7qbpbg2o0ea" path="res://scenes/ui/proceed_button.tscn" id="6_d1hh8"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="7_vujjl"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="8_6v8j0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0pvaj"]
+shader = ExtResource("3_lgagf")
+shader_parameter/blur_center = Vector2(0.25, 0.5)
+shader_parameter/blur_power = 0.005
+shader_parameter/sampling_count = 12
+
+[node name="CombatRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ofu5")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CombatSceneContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+mouse_filter = 2
+script = ExtResource("2_2jxdh")
+
+[node name="BgContainer" type="Control" parent="CombatSceneContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 23.0
+offset_right = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackCombatVfxContainer" type="Node2D" parent="CombatSceneContainer"]
+unique_name_in_owner = true
+
+[node name="AllyContainer" type="Control" parent="CombatSceneContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EnemyContainer" type="Control" parent="CombatSceneContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CombatVfxContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RadialBlur" type="BackBufferCopy" parent="."]
+visible = false
+copy_mode = 2
+rect = Rect2(0, 0, 0, 0)
+script = ExtResource("4_3bfae")
+
+[node name="Rect" type="ColorRect" parent="RadialBlur"]
+material = SubResource("ShaderMaterial_0pvaj")
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CombatUi" parent="." instance=ExtResource("4_rafew")]
+unique_name_in_owner = true
+z_as_relative = false
+layout_mode = 2
+anchors_preset = 0
+
+[node name="ProceedButton" parent="." instance=ExtResource("6_d1hh8")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="WaitingForOtherPlayers" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="WaitingForOtherPlayers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 141.0
+offset_top = -9.0
+offset_right = -141.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_colors/font_outline_color = Color(0.290196, 0.235294, 0.164706, 0.752941)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("7_vujjl")
+theme_override_font_sizes/font_size = 44
+text = "Waiting for other players..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_6v8j0")
+MinFontSize = 32
+MaxFontSize = 44

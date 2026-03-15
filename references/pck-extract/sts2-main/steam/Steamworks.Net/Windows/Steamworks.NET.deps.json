@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Steamworks.NET/1.0.0": {
+        "dependencies": {
+          "Godot.SourceGenerators": "4.3.0",
+          "GodotSharp": "4.3.0"
+        },
+        "runtime": {
+          "Steamworks.NET.dll": {}
+        }
+      },
+      "Godot.SourceGenerators/4.3.0": {},
+      "GodotSharp/4.3.0": {
+        "runtime": {
+          "lib/net6.0/GodotSharp.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Steamworks.NET/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Godot.SourceGenerators/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QCef0Yk96+Ls9+3IM49+tvm8h6OdAu7RyK1POfLMpsElBsfHawzCVULQwjy57T/djL0nqyw+eWmzvSc7NIaa4g==",
+      "path": "godot.sourcegenerators/4.3.0",
+      "hashPath": "godot.sourcegenerators.4.3.0.nupkg.sha512"
+    },
+    "GodotSharp/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RlJH4MiY1Kg05QXzWfcgrV7a4CEY02cCv3yL9mhk0t47BiVkVkhA+wS6FQ6VbVEdpvUa/mxlaMIs+cpocnJxxQ==",
+      "path": "godotsharp/4.3.0",
+      "hashPath": "godotsharp.4.3.0.nupkg.sha512"
+    }
+  }
+}

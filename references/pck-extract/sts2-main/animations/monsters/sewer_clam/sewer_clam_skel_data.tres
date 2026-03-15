@@ -1,0 +1,33 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://c7iqlg1tm3x3m"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dvlteruf5hb0v" path="res://animations/monsters/sewer_clam/sewer_clam.atlas" id="1_cp485"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cwpwyglb7fk47" path="res://animations/monsters/sewer_clam/sewer_clam.skel" id="2_wa44p"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_myyv6"]
+from = "attack"
+to = "idle_loop"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cp485"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wa44p"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ga8ah"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2a20q"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_cp485")
+skeleton_file_res = ExtResource("2_wa44p")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_myyv6"), SubResource("SpineAnimationMix_cp485"), SubResource("SpineAnimationMix_wa44p"), SubResource("SpineAnimationMix_ga8ah"), SubResource("SpineAnimationMix_2a20q")]

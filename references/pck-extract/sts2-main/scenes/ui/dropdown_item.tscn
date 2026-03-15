@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://ijwyu8psajop"]
+
+[ext_resource type="Script" uid="uid://cfjowsx3a65tq" path="res://src/Core/Nodes/CommonUi/NDropdownItem.cs" id="1_ep0bw"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_6okbn"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_rov2t"]
+
+[node name="DropdownItem" type="Control"]
+custom_minimum_size = Vector2(316, 44)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_ep0bw")
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.172549, 0.345098, 0.439216, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_6okbn")
+theme_override_font_sizes/font_size = 24
+text = "DropdownItem"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_rov2t")
+AutoSizeEnabled = false

@@ -1,0 +1,372 @@
+[gd_scene load_steps=23 format=4 uid="uid://dmv21pjqlhkqf"]
+
+[ext_resource type="Script" uid="uid://nup24q26505e" path="res://src/Core/Nodes/Events/Custom/CrystalSphere/NCrystalSphereScreen.cs" id="1_12402"]
+[ext_resource type="Texture2D" uid="uid://deroqsearxm2d" path="res://images/events/crystal_sphere/crystal_sphere_minigame_bg.png" id="2_eb8pr"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_2svsg"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_onw3v"]
+[ext_resource type="Shader" uid="uid://lw482n4yqdd4" path="res://shaders/scry_reveal.gdshader" id="3_ylanb"]
+[ext_resource type="Texture2D" uid="uid://chyqkrnif5t54" path="res://images/vfx/crystal_sphere_noise.png" id="4_7eopf"]
+[ext_resource type="Texture2D" uid="uid://da8rs6khycc60" path="res://images/vfx/scry_voronoi_noise.png" id="5_onw3v"]
+[ext_resource type="Script" uid="uid://dh7b1y25it22y" path="res://src/Core/Nodes/Events/Custom/CrystalSphere/NCrystalSphereMask.cs" id="5_tsr0m"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="5_v340b"]
+[ext_resource type="Texture2D" uid="uid://bsh423guysxnx" path="res://images/vfx/crystal_sphere_outline.png" id="7_b4ibw"]
+[ext_resource type="PackedScene" uid="uid://dk7qbpbg2o0ea" path="res://scenes/ui/proceed_button.tscn" id="7_onw3v"]
+[ext_resource type="PackedScene" uid="uid://2xn7t08h01j6" path="res://scenes/events/custom/crystal_sphere/crystal_sphere_dialogue.tscn" id="8_2svsg"]
+[ext_resource type="Texture2D" uid="uid://bnaqrmholpuvc" path="res://images/events/crystal_sphere/big_divination_icon.png" id="9_nj12v"]
+[ext_resource type="PackedScene" uid="uid://canjgquyeoak7" path="res://scenes/events/custom/crystal_sphere/divination_button.tscn" id="10_2dh5v"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="10_vnwew"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="12_2dh5v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1hel"]
+shader = ExtResource("3_ylanb")
+shader_parameter/noiseTex1 = ExtResource("4_7eopf")
+shader_parameter/noiseTex2 = ExtResource("5_onw3v")
+shader_parameter/borderColor = Color(0.87451, 0.878431, 0.992157, 1)
+shader_parameter/colors = PackedColorArray(0.12549, 0.0431373, 0.411765, 1, 0.164706, 0.0980392, 0.745098, 1, 0.305882, 0.243137, 0.882353, 1, 0.313726, 0.286275, 0.929412, 1, 0.396078, 0.337255, 0.972549, 1, 0.541176, 0.556863, 0.980392, 1, 0.839216, 0.870588, 0.980392, 1, 0.952941, 1, 1, 1)
+shader_parameter/circleData = PackedVector4Array(0, 1.04, 0.065, 0.315, 0.495, 0.3, 0.2, 0.42, 0.57, 0.3, 0.1, 0.445, 0.615, 0.3, 0.1, 0.415, 0.625, 0.3, 0.5, 0.255, 0.775, 0.2, 0.1, 0.285, 0.785, 0.2, 0.1, 0.1, 0.835, 0.185, 0.1, 0.1)
+shader_parameter/circles = 8
+shader_parameter/outerCircle = 4
+shader_parameter/gridFadeParams = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/time = 0.0
+shader_parameter/uvMargin = 0.145
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3co4"]
+resource_local_to_scene = true
+shader = ExtResource("3_ylanb")
+shader_parameter/noiseTex1 = ExtResource("4_7eopf")
+shader_parameter/noiseTex2 = ExtResource("5_onw3v")
+shader_parameter/borderColor = Color(0.870588, 0.878431, 1, 1)
+shader_parameter/colors = PackedColorArray(0.541176, 0.552941, 0.980392, 1, 0.25098, 0.231373, 0.854902, 1, 0.541176, 0.552941, 0.980392, 1, 0.313726, 0.286275, 0.929412, 1)
+shader_parameter/circleData = PackedVector4Array(0.045, 1.435, 0.325, 0.56, 0.325, 0.295, 0.265, 0.075, 0.555, 0.94, 0.09, 0.52)
+shader_parameter/circles = 3
+shader_parameter/outerCircle = -1
+shader_parameter/gridFadeParams = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/time = 100.0
+shader_parameter/uvMargin = 0.145
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mftb4"]
+resource_local_to_scene = true
+shader = ExtResource("10_vnwew")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.9
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnwew"]
+resource_local_to_scene = true
+shader = ExtResource("10_vnwew")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfxwl"]
+resource_local_to_scene = true
+shader = ExtResource("10_vnwew")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.9
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nrix"]
+resource_local_to_scene = true
+shader = ExtResource("10_vnwew")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CrystalSphereScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_12402")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Bg" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2560, 1200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1280.0
+offset_top = -588.0
+offset_right = 1280.0
+offset_bottom = 612.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.04, 1.04)
+pivot_offset = Vector2(1280, 600)
+texture = ExtResource("2_eb8pr")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Sphere" type="ColorRect" parent="Bg"]
+material = SubResource("ShaderMaterial_r1hel")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.424
+anchor_top = 0.562
+anchor_right = 0.424
+anchor_bottom = 0.565
+offset_left = -394.863
+offset_top = -396.515
+offset_right = 397.137
+offset_bottom = 391.885
+
+[node name="Items" type="Control" parent="Bg/Sphere"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 6.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScryMask" type="ColorRect" parent="Bg/Sphere"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_r3co4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.653839
+offset_top = -5.7695465
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_tsr0m")
+
+[node name="Border" type="TextureRect" parent="Bg/Sphere"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.53845
+offset_top = -333.50034
+offset_right = 340.00006
+offset_bottom = 343.00015
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_b4ibw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Cells" type="Control" parent="Bg/Sphere"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 6.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ui" type="Control" parent="."]
+custom_minimum_size = Vector2(1544, 1078)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DivinationsLeft" type="RichTextLabel" parent="Ui"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -89.0
+offset_right = 770.0
+offset_bottom = -48.0
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.149883, 0.1035, 0.23, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("3_2svsg")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[gold]10[/gold] Divinations remain..."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("3_onw3v")
+AutoSizeEnabled = false
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="RightUi" type="VBoxContainer" parent="Ui"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.588
+anchor_right = 1.0
+anchor_bottom = 0.588
+offset_left = -419.0
+offset_top = -397.04
+offset_right = -48.0
+offset_bottom = 396.96
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="BigDivinationButton" parent="Ui/RightUi" instance=ExtResource("10_2dh5v")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ButtonImage" parent="Ui/RightUi/BigDivinationButton" index="0"]
+material = SubResource("ShaderMaterial_mftb4")
+
+[node name="Outline" parent="Ui/RightUi/BigDivinationButton/ButtonImage" index="0"]
+visible = true
+
+[node name="Label" parent="Ui/RightUi/BigDivinationButton" index="1"]
+text = "Big Divination"
+
+[node name="SizeIcon" parent="Ui/RightUi/BigDivinationButton" index="2"]
+texture = ExtResource("9_nj12v")
+
+[node name="ControllerIcon" parent="Ui/RightUi/BigDivinationButton" index="3"]
+material = SubResource("ShaderMaterial_vnwew")
+
+[node name="SmallDivinationButton" parent="Ui/RightUi" instance=ExtResource("10_2dh5v")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ButtonImage" parent="Ui/RightUi/SmallDivinationButton" index="0"]
+material = SubResource("ShaderMaterial_sfxwl")
+
+[node name="ControllerIcon" parent="Ui/RightUi/SmallDivinationButton" index="3"]
+material = SubResource("ShaderMaterial_8nrix")
+offset_top = -64.0
+offset_bottom = 64.0
+
+[node name="Spacer" type="Control" parent="Ui/RightUi"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Instructions" type="Control" parent="Ui/RightUi"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Ui/RightUi/Instructions"]
+modulate = Color(0.0156863, 0, 0.156863, 0.752941)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_2dh5v")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 13
+patch_margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ui/RightUi/Instructions"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 20.0
+offset_right = 367.0
+offset_bottom = 446.0
+mouse_filter = 2
+theme_override_constants/separation = 20
+
+[node name="InstructionsTitle" type="RichTextLabel" parent="Ui/RightUi/Instructions/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.996078, 0.819608, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_2svsg")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[center]How to Divine...[/center]"
+fit_content = true
+scroll_active = false
+script = ExtResource("3_onw3v")
+AutoSizeEnabled = false
+MaxFontSize = 32
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="InstructionsDescription" type="RichTextLabel" parent="Ui/RightUi/Instructions/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 380)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = ExtResource("5_v340b")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Reveal your future by revealing the tiles!
+
+Select [gold]Small Divination[/gold] or [gold]Big Divination[/gold] and reveal the tiles within the Crystal Sphere.
+
+Once an item is revealed, you will receive it at the end of the session...
+
+But beware, revealing some items may be [red]dangerous[/red]!"
+scroll_active = false
+script = ExtResource("3_onw3v")
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ProceedButton" parent="." instance=ExtResource("7_onw3v")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="Dialogue" parent="." instance=ExtResource("8_2svsg")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1291, 243)
+
+[editable path="Ui/RightUi/BigDivinationButton"]
+[editable path="Ui/RightUi/SmallDivinationButton"]

@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvaeo5yjgls3x"]
+
+[ext_resource type="Texture2D" uid="uid://cske71hwcslh8" path="res://images/timeline/epoch_card_back.png" id="1_fjkpv"]
+[ext_resource type="Script" uid="uid://cdfq04befilsx" path="res://src/Core/Nodes/Screens/Timeline/NEpochCard.cs" id="1_frafk"]
+[ext_resource type="Texture2D" uid="uid://6b04ac6ennyh" path="res://images/timeline/epoch_portraits/colorless1_epoch.png" id="6_v37eb"]
+[ext_resource type="Texture2D" uid="uid://c4mds13m5buvv" path="res://images/timeline/ui/slot_outline.png" id="6_vu4sn"]
+[ext_resource type="Shader" uid="uid://cmylquha3cjx4" path="res://shaders/dark_blur.gdshader" id="7_p16ti"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_aqgex"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wl8r2"]
+resource_local_to_scene = true
+shader = ExtResource("7_p16ti")
+shader_parameter/lod = 2.0
+shader_parameter/mix_percentage = 0.25
+
+[node name="EpochCard" type="Control"]
+custom_minimum_size = Vector2(324, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 324.0
+offset_bottom = 200.0
+pivot_offset = Vector2(162, 100)
+script = ExtResource("1_frafk")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Shadow" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 332.0
+offset_bottom = 208.0
+mouse_filter = 2
+texture = ExtResource("1_fjkpv")
+
+[node name="GlowPlaceholder" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.176471, 0.898039, 1, 0.501961)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(172, 110)
+mouse_filter = 2
+texture = ExtResource("6_vu4sn")
+
+[node name="Mask" type="TextureRect" parent="."]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(162, 100)
+mouse_filter = 2
+texture = ExtResource("1_fjkpv")
+
+[node name="ViewportTexture" type="TextureRect" parent="Mask"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_aqgex")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 686.0
+offset_top = 1827.0
+offset_right = 1010.0
+offset_bottom = 2027.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(324, 200)
+render_target_update_mode = 4
+
+[node name="Portrait" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_v37eb")
+expand_mode = 1
+
+[node name="Blur" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_wl8r2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

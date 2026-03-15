@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv73iq7dt02eb"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_e86k8"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://033sy7ja6os" path="res://animations/monsters/twig_slime_s/twig_slime_s_skel_data.tres" id="2_ibl67"]
+
+[node name="TwigSlimeS" type="Node2D"]
+script = ExtResource("1_e86k8")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -26)
+scale = Vector2(0.275, 0.275)
+skeleton_data_res = ExtResource("2_ibl67")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -66.0
+offset_top = -106.0
+offset_right = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -45)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -138)

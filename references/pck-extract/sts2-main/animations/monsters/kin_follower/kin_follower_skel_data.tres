@@ -1,0 +1,37 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://dso5p3mbf6rj5"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bo71r21et5cm2" path="res://animations/monsters/kin_follower/kin_follower.atlas" id="1_cvlmy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b16qbyd6gn8wu" path="res://animations/monsters/kin_follower/kin_follower.skel" id="2_p3dhj"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ft3wc"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_df8jc"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_nfywg"]
+from = "attack_slash"
+to = "attack_slash"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qcgwb"]
+from = "attack_boomerang"
+to = "idle_loop"
+mix = 0.085
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hitrh"]
+from = "attack_slash"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_glcfm"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_cvlmy")
+skeleton_file_res = ExtResource("2_p3dhj")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_ft3wc"), SubResource("SpineAnimationMix_df8jc"), SubResource("SpineAnimationMix_nfywg"), SubResource("SpineAnimationMix_qcgwb"), SubResource("SpineAnimationMix_hitrh"), SubResource("SpineAnimationMix_glcfm")]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1rfhhcpg22du"]
+
+[ext_resource type="Texture2D" uid="uid://cahpcdd33b2re" path="res://images/events/reflections.png" id="1_s2l28"]
+[ext_resource type="PackedScene" uid="uid://0g8u04aabrh0" path="res://scenes/vfx/whole_screen/mirror_vfx.tscn" id="2_oe3hm"]
+
+[node name="DebugMirroring" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EventBg" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -325.0
+offset_top = -173.0
+offset_right = 315.0
+offset_bottom = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_s2l28")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MirrorVfx" parent="." instance=ExtResource("2_oe3hm")]
+layout_mode = 1

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://t7u2rqm80oo7"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="amalgam" type="Marker2D" parent="."]
+position = Vector2(1207, 709)
+
+[node name="queen" type="Marker2D" parent="."]
+position = Vector2(1606, 695)

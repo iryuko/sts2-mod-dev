@@ -1,0 +1,18 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://bxgr4xva6bvb4"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dajqnrqtfw7rc" path="res://animations/monsters/exoskeleton/exoskeleton.atlas" id="1_qw87j"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dijv4cf3cs0ps" path="res://animations/monsters/exoskeleton/exoskeleton.skel" id="2_l6v06"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_o5l3u"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_dje8x"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_qw87j")
+skeleton_file_res = ExtResource("2_l6v06")
+default_mix = 0.2
+animation_mixes = [SubResource("SpineAnimationMix_o5l3u"), SubResource("SpineAnimationMix_dje8x")]

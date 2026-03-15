@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://da60d2xr5fx3j"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_6gh4f"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c0hdeqc1rqeah" path="res://animations/characters/defect/defect_skel_data.tres" id="2_6cwn0"]
+
+[node name="Defect" type="Node2D"]
+script = ExtResource("1_6gh4f")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.999999, -31)
+scale = Vector2(0.125, 0.125)
+skeleton_data_res = ExtResource("2_6cwn0")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -125.0
+offset_top = -260.0
+offset_right = 125.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -181)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -362)

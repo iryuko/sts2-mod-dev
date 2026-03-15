@@ -1,0 +1,88 @@
+[gd_scene load_steps=3 format=3 uid="uid://wjt3nn5ts5o3"]
+
+[ext_resource type="Script" uid="uid://cmwgl31pujnt" path="res://src/Core/Nodes/Cards/NUpgradePreview.cs" id="1_uyn3h"]
+[ext_resource type="Texture2D" uid="uid://nxhrbcu264p5" path="res://images/ui/cards/upgrade_preview/upgrade_arrow.png" id="3_rp7xx"]
+
+[node name="UpgradePreview" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_uyn3h")
+
+[node name="Before" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -280.0
+offset_right = -280.0
+
+[node name="After" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 280.0
+offset_right = 280.0
+
+[node name="Arrows" type="Control" parent="."]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Shadow" type="HBoxContainer" parent="Arrows"]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -24.5
+offset_right = 109.5
+offset_bottom = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Arrow1" type="TextureRect" parent="Arrows/Shadow"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")
+
+[node name="Arrow2" type="TextureRect" parent="Arrows/Shadow"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")
+
+[node name="Arrow3" type="TextureRect" parent="Arrows/Shadow"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Arrows"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -32.5
+offset_right = 101.5
+offset_bottom = 32.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Arrow1" type="TextureRect" parent="Arrows/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")
+
+[node name="Arrow2" type="TextureRect" parent="Arrows/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")
+
+[node name="Arrow3" type="TextureRect" parent="Arrows/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_rp7xx")

@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://qkhg21r4orx0"]
+
+[ext_resource type="Script" uid="uid://cdrtkcuyf71u5" path="res://src/Core/Nodes/Screens/RelicCollection/NRelicCollection.cs" id="1_k8vea"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="2_crnoy"]
+[ext_resource type="PackedScene" uid="uid://o1bubqsww8br" path="res://scenes/screens/relic_collection/relic_collection_category.tscn" id="3_xj87s"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="4_jt36u"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="5_k4fyq"]
+
+[sub_resource type="Gradient" id="Gradient_hvojf"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.05, 0.95, 1)
+colors = PackedColorArray(0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.9)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j70oc"]
+gradient = SubResource("Gradient_hvojf")
+width = 2
+height = 256
+fill_to = Vector2(0, 1)
+
+[node name="RelicCollection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k8vea")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ScreenContents" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_crnoy")
+
+[node name="Content" type="MarginContainer" parent="ScreenContents"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 150
+
+[node name="Relics" type="VBoxContainer" parent="ScreenContents/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1020, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 18
+
+[node name="Starter" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Common" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Uncommon" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Rare" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Shop" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Ancient" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Event" parent="ScreenContents/Content/Relics" instance=ExtResource("3_xj87s")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Scrollbar" parent="ScreenContents" instance=ExtResource("4_jt36u")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.948438
+anchor_top = 0.12
+anchor_right = 0.973
+anchor_bottom = 0.88
+offset_top = -1.52588e-05
+offset_right = 0.839844
+offset_bottom = -0.800049
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="BorderGradient" type="TextureRect" parent="ScreenContents"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.01)
+pivot_offset = Vector2(0, 540)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_j70oc")
+expand_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("5_k4fyq")]
+unique_name_in_owner = true
+layout_mode = 1

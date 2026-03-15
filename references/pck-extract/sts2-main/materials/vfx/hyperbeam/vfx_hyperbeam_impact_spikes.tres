@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bjwddk1l5ty75"]
+
+[ext_resource type="Shader" uid="uid://bat5b7dsonvql" path="res://shaders/vfx/hyperbeam/vfx_hyperbeam_impact_spikes_shader.gdshader" id="1_tw1v5"]
+
+[sub_resource type="Gradient" id="Gradient_tw1v5"]
+offsets = PackedFloat32Array(0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uviow"]
+gradient = SubResource("Gradient_tw1v5")
+fill = 1
+fill_from = Vector2(0.4957265, 0.43162394)
+fill_to = Vector2(0.517094, 0.89316237)
+
+[sub_resource type="Curve" id="Curve_uviow"]
+_data = [Vector2(0, 1), 0.0, -1.2042694, 0, 0, Vector2(1, 0.49999994), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g1dyj"]
+curve = SubResource("Curve_uviow")
+
+[resource]
+shader = ExtResource("1_tw1v5")
+shader_parameter/pivot_offset = Vector2(0, 0.3)
+shader_parameter/texture_tiling = Vector2(0.65, 0.5)
+shader_parameter/initial_offset = -0.5
+shader_parameter/offset_curve = SubResource("CurveTexture_g1dyj")
+shader_parameter/mask_texture = SubResource("GradientTexture2D_uviow")

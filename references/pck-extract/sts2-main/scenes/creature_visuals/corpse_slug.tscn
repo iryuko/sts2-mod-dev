@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cndt2basjk0qk"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_vmi5h"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bf4q0sbjvuh45" path="res://animations/monsters/corpse_slug/corpse_slug_skel_data.tres" id="2_aufvm"]
+
+[node name="CorpseSlug" type="Node2D"]
+script = ExtResource("1_vmi5h")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-6, -27)
+scale = Vector2(0.23, 0.23)
+skeleton_data_res = ExtResource("2_aufvm")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.54
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -164.0
+offset_right = 116.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-3, -74)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -183)

@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://cga165o6isk0q"]
+
+[ext_resource type="Texture2D" uid="uid://c8gvh40bj1ll6" path="res://images/packed/statistics_screen/share_stats.png" id="1_ua2ws"]
+[ext_resource type="Script" path="res://src/Core/Nodes/Screens/NShareButton.cs" id="1_uanyk"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="2_rghfo"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_rghfo"]
+
+[node name="ShareButton" type="Control"]
+custom_minimum_size = Vector2(172, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -32.0
+offset_right = 86.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(86, 32)
+script = ExtResource("1_uanyk")
+
+[node name="Visuals" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(86, 32)
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Visuals"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.797645, 0.240439, 0.325615, 1)
+
+[node name="Icon" type="TextureRect" parent="Visuals"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 11.0
+offset_right = 75.0
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("1_ua2ws")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ShareLabel" type="Label" parent="Visuals"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 79.0
+offset_right = 163.0
+offset_bottom = 64.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_rghfo")
+theme_override_font_sizes/font_size = 28
+text = "Share"
+vertical_alignment = 1
+text_overrun_behavior = 1
+script = ExtResource("3_rghfo")
+MinFontSize = 16
+MaxFontSize = 28

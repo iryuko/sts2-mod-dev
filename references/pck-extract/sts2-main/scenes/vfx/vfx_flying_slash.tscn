@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c584r04xd4xfs"]
+
+[ext_resource type="Script" uid="uid://drep5x36bu257" path="res://src/Core/Nodes/Vfx/Utilities/NVfxSpine.cs" id="1_1q3yg"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dtvtbgtfkfvie" path="res://animations/vfx/vfx_flying_slash/vfx_flying_slash_skeleton_data_resource.tres" id="2_0go2n"]
+
+[node name="VfxFlyingSlash" type="Node2D"]
+script = ExtResource("1_1q3yg")
+_animation = "flying_slash"
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+show_behind_parent = true
+skeleton_data_res = ExtResource("2_0go2n")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0

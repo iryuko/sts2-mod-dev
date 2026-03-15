@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://040k7ig5dss1"]
+
+[ext_resource type="Shader" uid="uid://dvpcw8y52des6" path="res://shaders/vfx/minion_divebomb/vfx_minion_divebomb_rings_shader.gdshader" id="1_uvo6h"]
+[ext_resource type="Texture2D" uid="uid://dxbcv7dgdbfby" path="res://images/vfx/lut/lut_minion_divebomb.png" id="2_a6fi0"]
+
+[sub_resource type="Curve" id="Curve_5w8ay"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dinch"]
+curve = SubResource("Curve_5w8ay")
+
+[resource]
+shader = ExtResource("1_uvo6h")
+shader_parameter/pivot_offset = Vector2(-0.1, 0)
+shader_parameter/lut = ExtResource("2_a6fi0")
+shader_parameter/erosion_curve = SubResource("CurveTexture_dinch")
+shader_parameter/erosion_offset = 0.05

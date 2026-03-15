@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://c2mrbqct15cgx"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bpm883hqkd573" path="res://animations/characters/regent/regent.atlas" id="1_86jqo"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dyyhq03h15cp3" path="res://animations/characters/regent/regent.skel" id="2_xr0sn"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_y55pg"]
+from = "cast"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qn61g"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_awe6h"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mlkqa"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_86jqo")
+skeleton_file_res = ExtResource("2_xr0sn")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_y55pg"), SubResource("SpineAnimationMix_qn61g"), SubResource("SpineAnimationMix_awe6h"), SubResource("SpineAnimationMix_mlkqa")]

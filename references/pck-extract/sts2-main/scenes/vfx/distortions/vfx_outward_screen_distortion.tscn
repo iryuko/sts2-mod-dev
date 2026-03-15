@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4yd32ieheum6"]
+
+[ext_resource type="Material" uid="uid://dksu61j1holvv" path="res://materials/vfx/distortion/vfx_screen_distortion_ring.tres" id="1_2ukhp"]
+[ext_resource type="Texture2D" uid="uid://ba2vce5m10dsd" path="res://images/vfx/distortion/distortion_ring.png" id="2_30kid"]
+
+[sub_resource type="Curve" id="Curve_vcpbd"]
+_data = [Vector2(0, 1), 0.0, -1.75571, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8mg5p"]
+curve = SubResource("Curve_vcpbd")
+
+[sub_resource type="Curve" id="Curve_o6cpj"]
+_data = [Vector2(0, 0.25144), 0.0, 5.73351, 0, 0, Vector2(0.250646, 0.850288), 0.0, 0.216437, 0, 0, Vector2(1, 1), 0.19707, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_2gmb7"]
+curve = SubResource("Curve_o6cpj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_21kn2"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 15.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_2gmb7")
+alpha_curve = SubResource("CurveTexture_8mg5p")
+
+[node name="vfx_outward_screen_distortion" type="GPUParticles2D"]
+material = ExtResource("1_2ukhp")
+emitting = false
+amount = 1
+texture = ExtResource("2_30kid")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_21kn2")

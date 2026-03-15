@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi8ulok8pl5nk"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_7rloq"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://x1ufv6vy68n5" path="res://animations/monsters/zapbot/zapbot_skel_data.tres" id="2_0017l"]
+
+[node name="Zapbot" type="Node2D"]
+script = ExtResource("1_7rloq")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, 98)
+scale = Vector2(0.15, 0.15)
+skeleton_data_res = ExtResource("2_0017l")
+preview_skin = "default"
+preview_animation = "die"
+preview_frame = false
+preview_time = 0.0
+
+[node name="HeightControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-513.333, -46.6666)
+rotation = -0.000191215
+bone_name = "height_constrainer"
+bone_mode = 1
+
+[node name="FallControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-40, 1286.67)
+rotation = -0.000191215
+bone_name = "height_bone"
+bone_mode = 1
+
+[node name="LaserAttach" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(281.035, 1185.73)
+rotation = -2.08752
+scale = Vector2(0.96582, 0.96582)
+bone_name = "laser_attach"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -194.0
+offset_right = 100.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -100)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -201)

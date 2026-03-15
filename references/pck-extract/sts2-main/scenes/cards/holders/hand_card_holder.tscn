@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://dresiwkk4eypa"]
+
+[ext_resource type="Script" uid="uid://bknmpbt02pldm" path="res://src/Core/Nodes/Cards/Holders/NHandCardHolder.cs" id="1_kqlk3"]
+[ext_resource type="Script" uid="uid://mpyf2phw1xgx" path="res://src/Core/Nodes/Cards/Holders/NCardHolderHitbox.cs" id="2_55nxo"]
+[ext_resource type="Texture2D" uid="uid://cll11yg0qsmlk" path="res://images/packed/card_template/card_flash.png" id="3_53sj8"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_s01oo"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_55nxo"]
+
+[node name="HandCardHolder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_kqlk3")
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+pivot_offset = Vector2(150, 211)
+script = ExtResource("2_55nxo")
+
+[node name="Flash" type="TextureRect" parent="."]
+modulate = Color(0.615686, 1, 0.996078, 1)
+layout_mode = 0
+offset_left = -179.0
+offset_top = -342.0
+offset_right = 191.0
+offset_bottom = 366.0
+mouse_filter = 2
+texture = ExtResource("3_53sj8")
+
+[node name="HandIndex" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -288.0
+offset_right = 32.0
+offset_bottom = -224.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_s01oo")
+theme_override_font_sizes/font_size = 36
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("5_55nxo")
+AutoSizeEnabled = false

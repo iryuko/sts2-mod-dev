@@ -1,0 +1,177 @@
+[gd_scene load_steps=20 format=3 uid="uid://bj5h8fu0wa8r5"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_hb8yh"]
+[ext_resource type="Script" uid="uid://bs6wnyqygjb8c" path="res://src/Core/Nodes/Vfx/NKinFollowerVfx.cs" id="3_c38li"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dso5p3mbf6rj5" path="res://animations/monsters/kin_follower/kin_follower_skel_data.tres" id="3_iddq6"]
+[ext_resource type="Texture2D" uid="uid://b7vqn8f75qh4x" path="res://images/packed/vfx/trail.png" id="4_abdvv"]
+[ext_resource type="Script" uid="uid://b5qsb7wn7ra2c" path="res://src/Core/Nodes/Vfx/NBasicTrail.cs" id="5_ol7rd"]
+[ext_resource type="Texture2D" uid="uid://8x8idtmeb3ri" path="res://images/vfx/monsters/kin_follower/hay_particle.png" id="6_028eg"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_fofxm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_dbyc7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.101652, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7h8rk"]
+_data = [Vector2(0.638672, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.341534), 2.50844, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qhsy1"]
+_data = [Vector2(0.390625, 0), 0.0, 0.0, 0, 0, Vector2(0.783203, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_8tsxb"]
+curve_x = SubResource("Curve_7h8rk")
+curve_y = SubResource("Curve_qhsy1")
+
+[sub_resource type="Curve" id="Curve_7mq5t"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0057888), 0.0, 0.0, 0, 0, Vector2(0.541016, 0.0057888), 0.0, 0.0, 0, 0, Vector2(0.992188, -0.615051), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bvycr"]
+curve = SubResource("Curve_7mq5t")
+
+[sub_resource type="Curve" id="Curve_uovly"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.796875, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -13.6283, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5tnjp"]
+curve = SubResource("Curve_uovly")
+
+[sub_resource type="Curve" id="Curve_uqxtp"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.520992, 0), 0.0, 0.0, 0, 0, Vector2(0.753817, 0.206982), 0.0, 0.0, 0, 0, Vector2(1, 0.101551), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_5xy3y"]
+curve = SubResource("Curve_uqxtp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ud5u2"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 600.0
+initial_velocity_max = 1200.0
+angular_velocity_min = -291.43
+angular_velocity_max = 485.71
+directional_velocity_min = -1000.0
+directional_velocity_max = 1000.0
+directional_velocity_curve = SubResource("CurveXYZTexture_8tsxb")
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+orbit_velocity_curve = SubResource("CurveTexture_bvycr")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 1800, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_5tnjp")
+turbulence_noise_scale = 20.0
+turbulence_influence_min = 0.224
+turbulence_influence_max = 0.239
+turbulence_influence_over_life = SubResource("CurveTexture_5xy3y")
+
+[node name="KinFollower" type="Node2D"]
+script = ExtResource("1_hb8yh")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_iddq6")
+preview_skin = "hair_2"
+preview_animation = "attack_boomerang"
+preview_frame = false
+preview_time = 1.11
+unique_name_in_owner = true
+position = Vector2(7, -12)
+scale = Vector2(0.29, 0.29)
+
+[node name="Boomerang1Slot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "trail_1_attach"
+show_behind_parent = true
+position = Vector2(-3127.6785, 219.30244)
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="Trail" type="Line2D" parent="Visuals/Boomerang1Slot"]
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+width = 25.0
+width_curve = SubResource("Curve_fofxm")
+default_color = Color(0.36, 1, 0.754667, 0.52549)
+texture = ExtResource("4_abdvv")
+texture_mode = 2
+joint_mode = 2
+sharp_limit = 4.0
+round_precision = 16
+script = ExtResource("5_ol7rd")
+
+[node name="Boomerang2Slot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "trail_2_attach"
+show_behind_parent = true
+position = Vector2(-2823.9307, -985.2348)
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="Trail" type="Line2D" parent="Visuals/Boomerang2Slot"]
+material = ExtResource("shared_additive_mat")
+use_parent_material = true
+width = 25.0
+width_curve = SubResource("Curve_dbyc7")
+default_color = Color(0.36, 1, 0.754667, 0.545098)
+texture = ExtResource("4_abdvv")
+texture_mode = 2
+joint_mode = 2
+sharp_limit = 4.0
+round_precision = 16
+script = ExtResource("5_ol7rd")
+
+[node name="HaySlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "hay_particles"
+show_behind_parent = true
+position = Vector2(632.2294, -431.24664)
+rotation = -1.5707964
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="HayParticles" type="GPUParticles2D" parent="Visuals/HaySlot"]
+use_parent_material = true
+rotation = 1.5708
+amount = 5
+texture = ExtResource("6_028eg")
+lifetime = 1.2
+speed_scale = 1.5
+explosiveness = 1.0
+fixed_fps = 0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ud5u2")
+
+[node name="AttackDistanceControl" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "target_adjustment_bone"
+show_behind_parent = true
+position = Vector2(-2772.4136, 300)
+
+[node name="NKinFollowerVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_c38li")
+metadata/_custom_type_script = "uid://bs6wnyqygjb8c"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -167.0
+offset_top = -200.0
+offset_right = 130.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, -94)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -237)

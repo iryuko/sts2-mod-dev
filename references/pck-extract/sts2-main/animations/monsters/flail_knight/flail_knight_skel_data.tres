@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://dk3pv2qjemmhp"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://drdser83yp313" path="res://animations/monsters/flail_knight/flailknight.atlas" id="1_c5uek"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b28ks3ot2u63n" path="res://animations/monsters/flail_knight/flailknight.skel" id="2_8k64n"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_nvumx"]
+from = "attack_breaker"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qqvcm"]
+from = "idle_loop"
+to = "attack_flail"
+mix = 0.1
+
+[resource]
+atlas_res = ExtResource("1_c5uek")
+skeleton_file_res = ExtResource("2_8k64n")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_nvumx"), SubResource("SpineAnimationMix_qqvcm")]

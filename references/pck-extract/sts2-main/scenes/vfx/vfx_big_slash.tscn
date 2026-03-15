@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dja46i3et1fl3"]
+
+[ext_resource type="Script" uid="uid://cqph30ncnqail" path="res://src/Core/Nodes/Vfx/NBigSlashVfx.cs" id="1_jpf65"]
+[ext_resource type="PackedScene" uid="uid://je8jdkm07p48" path="res://scenes/vfx/slash/vfx_slash_core.tscn" id="2_40mh7"]
+
+[node name="vfx_big_slash" type="Node2D" node_paths=PackedStringArray("_slashParticles", "_modulateParticles")]
+script = ExtResource("1_jpf65")
+_slashParticles = [NodePath("vfx_slash_core")]
+_modulateParticles = [NodePath("vfx_slash_core")]
+
+[node name="vfx_slash_core" parent="." instance=ExtResource("2_40mh7")]
+position = Vector2(-320, -80)

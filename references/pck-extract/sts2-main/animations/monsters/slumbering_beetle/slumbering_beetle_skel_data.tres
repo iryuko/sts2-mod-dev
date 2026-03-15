@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://br2xk0rpftxq7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bthlkijgxqupq" path="res://animations/monsters/slumbering_beetle/slumberingbeetle.atlas" id="1_463pl"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://y06sjynfjrfr" path="res://animations/monsters/slumbering_beetle/slumberingbeetle.skel" id="2_7024b"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_b6awe"]
+from = "wake_up"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_8e5sv"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wdane"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_53y2x"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_463pl")
+skeleton_file_res = ExtResource("2_7024b")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_b6awe"), SubResource("SpineAnimationMix_8e5sv"), SubResource("SpineAnimationMix_wdane"), SubResource("SpineAnimationMix_53y2x")]

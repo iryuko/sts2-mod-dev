@@ -1,0 +1,56 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=13 format=3 uid="uid://bep4rvo4wxvor"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cla4d0v5flugx" path="res://animations/monsters/thieving_hopper/thievinghopper.atlas" id="1_f63ou"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dwihyu7u7wi6h" path="res://animations/monsters/thieving_hopper/thievinghopper.skel" id="2_vq40v"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rxn85"]
+from = "take_off"
+to = "hover_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2yrib"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hoyuv"]
+from = "idle_loop"
+to = "attack"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_d8kpt"]
+from = "hover_loop"
+to = "hurt_hover"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wg1rf"]
+from = "hover_loop"
+to = "attack_hover"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_tvq5s"]
+from = "hover_loop"
+to = "flee_hover"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rils7"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vgtt5"]
+from = "hurt_hover"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_et3nf"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vmypi"]
+from = "hurt_hover"
+to = "hurt_hover"
+
+[resource]
+atlas_res = ExtResource("1_f63ou")
+skeleton_file_res = ExtResource("2_vq40v")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_rxn85"), SubResource("SpineAnimationMix_2yrib"), SubResource("SpineAnimationMix_hoyuv"), SubResource("SpineAnimationMix_d8kpt"), SubResource("SpineAnimationMix_wg1rf"), SubResource("SpineAnimationMix_tvq5s"), SubResource("SpineAnimationMix_rils7"), SubResource("SpineAnimationMix_vgtt5"), SubResource("SpineAnimationMix_et3nf"), SubResource("SpineAnimationMix_vmypi")]

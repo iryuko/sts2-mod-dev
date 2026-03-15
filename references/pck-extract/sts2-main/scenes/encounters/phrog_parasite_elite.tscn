@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://beh83ui2dbveq"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="phrog" type="Marker2D" parent="."]
+position = Vector2(1366, 694)
+
+[node name="wriggler1" type="Marker2D" parent="."]
+position = Vector2(1115, 685)
+
+[node name="wriggler2" type="Marker2D" parent="."]
+position = Vector2(1336, 706)
+
+[node name="wriggler3" type="Marker2D" parent="."]
+position = Vector2(1577, 714)
+
+[node name="wriggler4" type="Marker2D" parent="."]
+position = Vector2(1802, 690)

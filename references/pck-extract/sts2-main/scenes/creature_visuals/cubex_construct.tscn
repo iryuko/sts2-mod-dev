@@ -1,0 +1,166 @@
+[gd_scene load_steps=12 format=3 uid="uid://bpgujwaxps1uy"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_x1ask"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://pcd1ck6ipeab" path="res://animations/monsters/cubex_construct/cubex_construct_skel_data.tres" id="2_w26d6"]
+[ext_resource type="Shader" uid="uid://j3ad1mmuvjju" path="res://shaders/vfx/2d_sphere_shader.tres" id="3_h3im0"]
+[ext_resource type="Script" uid="uid://dol3p05mi6r34" path="res://src/Core/Nodes/Vfx/NCubexConstructVfx.cs" id="3_seakk"]
+[ext_resource type="Texture2D" uid="uid://2q2mkrmdlexb" path="res://images/vfx/environment/fire/tileable_noise_4.png" id="4_r234m"]
+[ext_resource type="Texture2D" uid="uid://duxdrbok38ydi" path="res://images/vfx/vfx_2d_sphere/2d_sphere_sides_mask.png" id="5_8fosm"]
+[ext_resource type="Texture2D" uid="uid://btwuqmlvbicm" path="res://images/vfx/vfx_2d_sphere/2d_sphere_top_bottom_mask.png" id="6_um3ww"]
+[ext_resource type="Texture2D" uid="uid://dsg1lfp0ahewl" path="res://images/vfx/monsters/cubex_construct/cubex_blast_rings.png" id="7_wb05r"]
+[ext_resource type="PackedScene" uid="uid://biw20816y6wks" path="res://scenes/vfx/laser_vfx.tscn" id="8_g36s7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6d42q"]
+shader = ExtResource("3_h3im0")
+shader_parameter/AddColor = Color(0, 1, 0.916667, 1)
+shader_parameter/NoisePanSpeed = Vector2(0, 0.1)
+shader_parameter/NoiseScale = Vector2(20, 20)
+shader_parameter/NoiseTexture = ExtResource("4_r234m")
+shader_parameter/NoiseStrength = 0.004
+shader_parameter/TexturePanSpeed = Vector2(1.5, 0)
+shader_parameter/TextureOffset = Vector2(0, -0.355)
+shader_parameter/SidesMaskStep = Vector2(-0.1, 0)
+shader_parameter/Sides_Mask = ExtResource("5_8fosm")
+shader_parameter/TopBottomMaskStep = Vector2(0.1, 0.2)
+shader_parameter/TopBottomMaskOffset = Vector2(0, -0.2)
+shader_parameter/TopBottomMask = ExtResource("6_um3ww")
+
+[sub_resource type="SphereMesh" id="SphereMesh_ucs7b"]
+
+[node name="CubexConstruct" type="Node2D"]
+script = ExtResource("1_x1ask")
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-24, -19)
+scale = Vector2(0.33, 0.33)
+skeleton_data_res = ExtResource("2_w26d6")
+preview_skin = "moss2"
+preview_animation = "attack_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="LaserBone" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-59.6898, -284.294)
+scale = Vector2(1, 1)
+bone_name = "laser_attach"
+
+[node name="Laser" parent="Visuals/LaserBone" instance=ExtResource("8_g36s7")]
+show_behind_parent = true
+position = Vector2(12.8681, -4.90643)
+
+[node name="Rings" type="Node2D" parent="Visuals/LaserBone"]
+show_behind_parent = true
+position = Vector2(2.11408, -9.6453)
+
+[node name="SphereMesh" type="MeshInstance2D" parent="Visuals/LaserBone/Rings"]
+show_behind_parent = true
+z_as_relative = false
+texture_repeat = 2
+material = SubResource("ShaderMaterial_6d42q")
+position = Vector2(-445.455, -3.03029)
+rotation = 1.56685
+scale = Vector2(757.882, 936.795)
+mesh = SubResource("SphereMesh_ucs7b")
+texture = ExtResource("7_wb05r")
+
+[node name="NCubexConstructVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_seakk")
+metadata/_custom_type_script = "uid://dol3p05mi6r34"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -92.0
+offset_top = -294.0
+offset_right = 88.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -176)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -335)
+
+[node name="ChargingBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 216.0
+offset_bottom = 329.0
+metadata/_edit_lock_ = true
+
+[node name="Bounds" type="Control" parent="ChargingBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -330.0
+offset_right = -128.0
+offset_bottom = -330.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="ChargingBounds"]
+position = Vector2(1, -208)
+
+[node name="IntentPos" type="Marker2D" parent="ChargingBounds"]
+position = Vector2(-6, -370)
+
+[node name="BurrowedBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 170.0
+offset_bottom = 199.0
+metadata/_edit_lock_ = true
+
+[node name="Bounds" type="Control" parent="BurrowedBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -198.0
+offset_right = -82.0
+offset_bottom = -198.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="BurrowedBounds"]
+position = Vector2(-22, -96)
+
+[node name="IntentPos" type="Marker2D" parent="BurrowedBounds"]
+position = Vector2(0, -238)
+
+[node name="IdleBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 190.0
+offset_bottom = 294.0
+metadata/_edit_lock_ = true
+
+[node name="Bounds" type="Control" parent="IdleBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -293.0
+offset_right = -102.0
+offset_bottom = -293.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="IdleBounds"]
+position = Vector2(0, -175)
+
+[node name="IntentPos" type="Marker2D" parent="IdleBounds"]
+position = Vector2(0, -334)

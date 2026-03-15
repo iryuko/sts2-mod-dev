@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbgtvc7r8lmjn"]
+
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="1_nsm8w"]
+[ext_resource type="Texture2D" uid="uid://cxm4djquicsx2" path="res://images/vfx/vfx_giant_horizontal_slash/giant_horizontal_slash.png" id="2_yfg0v"]
+
+[sub_resource type="Gradient" id="Gradient_lc63p"]
+offsets = PackedFloat32Array(0, 0.107456, 0.149123, 0.394737, 0.532895, 0.719298, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.666667, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dsr8g"]
+gradient = SubResource("Gradient_lc63p")
+
+[sub_resource type="Curve" id="Curve_kn45m"]
+_data = [Vector2(0, 0), 0.0, 3.86049, 0, 0, Vector2(0.492218, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a3yg4"]
+curve = SubResource("Curve_kn45m")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_2mcfy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_2mcfy"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_2mcfy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2mcfy"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = -10.0
+angle_max = 10.0
+velocity_pivot = Vector3(100, 0, 0)
+spread = 0.0
+initial_velocity_min = 400.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.85
+scale_max = 0.85
+scale_curve = SubResource("CurveTexture_a3yg4")
+color_ramp = SubResource("GradientTexture1D_dsr8g")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_2mcfy")
+turbulence_enabled = true
+turbulence_noise_strength = 8.43
+turbulence_noise_scale = 3.0
+
+[node name="VfxGiantHorizontalSlash" type="Node2D"]
+script = ExtResource("1_nsm8w")
+_lifetime = 2.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_2mcfy")
+texture = ExtResource("2_yfg0v")
+lifetime = 0.5
+one_shot = true

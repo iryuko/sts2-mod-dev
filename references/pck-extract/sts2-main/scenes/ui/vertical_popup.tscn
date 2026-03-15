@@ -1,0 +1,114 @@
+[gd_scene load_steps=12 format=3 uid="uid://dqberqa21r6y8"]
+
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="1_1c76a"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/popup_vertical.tres" id="1_v6wul"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="2_406a8"]
+[ext_resource type="Script" uid="uid://8dksvinaag5j" path="res://src/Core/Nodes/CommonUi/NVerticalPopup.cs" id="2_qmv3e"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_w1g8k"]
+[ext_resource type="PackedScene" uid="uid://igj7lu34snpy" path="res://scenes/ui/abandon_run_no_button.tscn" id="8_v6wul"]
+[ext_resource type="PackedScene" uid="uid://ce8s1or8wkljj" path="res://scenes/ui/abandon_run_yes_button.tscn" id="9_1c76a"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="9_ioql3"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="10_c3mxc"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="11_vwsrq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhdfu"]
+shader = ExtResource("1_1c76a")
+shader_parameter/h = 0.505
+shader_parameter/s = 1.0
+shader_parameter/v = 0.75
+
+[node name="VerticalPopup" type="TextureRect"]
+material = SubResource("ShaderMaterial_dhdfu")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -300.0
+offset_right = 261.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_v6wul")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_qmv3e")
+
+[node name="Header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 56.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.33, 0.2475, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_406a8")
+theme_override_font_sizes/font_size = 32
+text = "Uhhhh"
+horizontal_alignment = 1
+script = ExtResource("3_w1g8k")
+MaxFontSize = 32
+
+[node name="NoButton" parent="." instance=ExtResource("8_v6wul")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -152.0
+offset_bottom = -80.0
+grow_vertical = 0
+
+[node name="YesButton" parent="." instance=ExtResource("9_1c76a")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -152.0
+offset_right = 0.0
+offset_bottom = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 115.0
+offset_right = -50.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = ExtResource("9_ioql3")
+theme_override_fonts/bold_font = ExtResource("10_c3mxc")
+theme_override_font_sizes/bold_italics_font_size = 26
+theme_override_font_sizes/italics_font_size = 26
+theme_override_font_sizes/mono_font_size = 26
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 26
+bbcode_enabled = true
+text = "[center]You should never see this!
+
+If you see this, report a bug to the devs.[/center]"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("11_vwsrq")
+MaxFontSize = 26

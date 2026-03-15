@@ -1,0 +1,281 @@
+[gd_scene load_steps=16 format=3 uid="uid://i0agyocasfdy"]
+
+[ext_resource type="Script" uid="uid://d4g2xyw4054af" path="res://src/Core/Nodes/Combat/NHealthBar.cs" id="1_t2a6f"]
+[ext_resource type="Texture2D" uid="uid://bydu5n4y1b5o" path="res://images/ui/combat/health_bar_bg.png" id="2_ekte7"]
+[ext_resource type="Texture2D" uid="uid://dg2dkaqkccg86" path="res://images/ui/combat/health_bar_stroke.png" id="3_0axb8"]
+[ext_resource type="Texture2D" uid="uid://ta0irxtri5jj" path="res://images/ui/combat/health_bar.png" id="4_ug58b"]
+[ext_resource type="Texture2D" uid="uid://g08m1dy2l4bh" path="res://images/ui/combat/health_bar_fill.png" id="6_0ys5h"]
+[ext_resource type="Shader" uid="uid://lqmv7hbtjcx0" path="res://scenes/combat/doom_bar.gdshader" id="7_sobi1"]
+[ext_resource type="Texture2D" uid="uid://bjasdjdame6gg" path="res://images/ui/combat/combat_infinity_hp.png" id="10_0o73q"]
+[ext_resource type="Texture2D" uid="uid://bihrw7avwc3xa" path="res://images/ui/combat/block.png" id="11_m2cse"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="12_7w44v"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="13_v44cv"]
+
+[sub_resource type="Gradient" id="Gradient_1sjfe"]
+offsets = PackedFloat32Array(0, 0.514583, 1)
+colors = PackedColorArray(0.300863, 0.162626, 0.528347, 1, 0.513726, 0.254902, 0.505882, 1, 0.354657, 0.0421873, 0.437114, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ftis3"]
+gradient = SubResource("Gradient_1sjfe")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1ua4f"]
+noise_type = 3
+frequency = 0.0383
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ikjt"]
+noise = SubResource("FastNoiseLite_1ua4f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tji0h"]
+shader = ExtResource("7_sobi1")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_8ikjt")
+shader_parameter/gradient_tex = SubResource("GradientTexture1D_ftis3")
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t2a6f")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="HpBarContainer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -130.0
+offset_right = 120.0
+offset_bottom = 16.0
+mouse_filter = 2
+
+[node name="HpBackground" type="NinePatchRect" parent="HpBarContainer"]
+modulate = Color(0.164706, 0.376471, 0.419608, 0.752941)
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ekte7")
+patch_margin_left = 9
+patch_margin_right = 9
+
+[node name="BlockOutline" type="NinePatchRect" parent="HpBarContainer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.705882, 0.886275, 1, 1)
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0axb8")
+patch_margin_left = 9
+patch_margin_right = 9
+
+[node name="HpForegroundContainer" type="Control" parent="HpBarContainer"]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Mask" type="NinePatchRect" parent="HpBarContainer/HpForegroundContainer"]
+unique_name_in_owner = true
+clip_children = 1
+texture_filter = 2
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_ug58b")
+patch_margin_left = 6
+patch_margin_right = 6
+
+[node name="HpMiddleground" type="NinePatchRect" parent="HpBarContainer/HpForegroundContainer/Mask"]
+unique_name_in_owner = true
+modulate = Color(1, 0.498039, 0, 1)
+texture_filter = 2
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = -1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0ys5h")
+patch_margin_left = 6
+patch_margin_right = 6
+
+[node name="PoisonForeground" type="NinePatchRect" parent="HpBarContainer/HpForegroundContainer/Mask"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.47451, 0.752941, 0.235294, 1)
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0ys5h")
+patch_margin_left = 6
+patch_margin_right = 6
+
+[node name="HpForeground" type="NinePatchRect" parent="HpBarContainer/HpForegroundContainer/Mask"]
+unique_name_in_owner = true
+self_modulate = Color(0.8, 0.0470588, 0.0470588, 1)
+clip_children = 2
+texture_filter = 2
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0ys5h")
+patch_margin_left = 6
+patch_margin_right = 6
+
+[node name="DoomForeground" type="NinePatchRect" parent="HpBarContainer/HpForegroundContainer/Mask"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.352941, 0.258824, 0.647059, 1)
+material = SubResource("ShaderMaterial_tji0h")
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0ys5h")
+patch_margin_left = 6
+patch_margin_right = 6
+
+[node name="HpLabel" type="Label" parent="HpBarContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -7.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.564706, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("12_7w44v")
+theme_override_font_sizes/font_size = 24
+text = "88/88"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_v44cv")
+AutoSizeEnabled = false
+
+[node name="InfinityTex" type="TextureRect" parent="HpBarContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -16.0
+offset_right = 37.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(37, 16)
+mouse_filter = 2
+texture = ExtResource("10_0o73q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BlockContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+offset_left = -166.0
+offset_top = -26.0
+offset_right = -106.0
+offset_bottom = 34.0
+mouse_filter = 2
+
+[node name="BlockIcon" type="TextureRect" parent="BlockContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_m2cse")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="BlockLabel" type="Label" parent="BlockContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -5.0
+offset_right = -9.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.042, 0.3318, 0.42, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 14
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("12_7w44v")
+theme_override_font_sizes/font_size = 24
+text = "24"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("13_v44cv")
+MaxFontSize = 24

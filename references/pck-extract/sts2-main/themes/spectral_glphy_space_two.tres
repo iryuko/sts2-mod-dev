@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://c71uw4aqpsn1b"]
+
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="1_shared"]
+
+[resource]
+base_font = ExtResource("1_shared")
+spacing_glyph = 2

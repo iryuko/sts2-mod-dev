@@ -1,0 +1,40 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=10 format=3 uid="uid://c2cbs0pckfb88"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://csx6rxbv7251j" path="res://animations/monsters/axebot/axe_bot.atlas" id="1_xychi"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b1cnsnf2nw7ua" path="res://animations/monsters/axebot/axe_bot.skel" id="2_cl4cc"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6uf2c"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_1j8ra"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_u387n"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_3qjkr"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vw8uh"]
+from = "hurt"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rs7sw"]
+from = "die"
+to = "respawn"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_e6dou"]
+from = "idle_loop"
+to = "respawn"
+
+[resource]
+atlas_res = ExtResource("1_xychi")
+skeleton_file_res = ExtResource("2_cl4cc")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_6uf2c"), SubResource("SpineAnimationMix_1j8ra"), SubResource("SpineAnimationMix_u387n"), SubResource("SpineAnimationMix_3qjkr"), SubResource("SpineAnimationMix_vw8uh"), SubResource("SpineAnimationMix_rs7sw"), SubResource("SpineAnimationMix_e6dou")]

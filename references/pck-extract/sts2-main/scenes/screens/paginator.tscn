@@ -1,0 +1,186 @@
+[gd_scene load_steps=10 format=3 uid="uid://c42e8hjphxta7"]
+
+[ext_resource type="Script" uid="uid://b0kc4bkc0bgr1" path="res://src/Core/Nodes/Screens/Settings/NPaginateArrow.cs" id="1_hkvnt"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_lb08q"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_or01d"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_4niof"]
+[ext_resource type="Texture2D" uid="uid://b4ffylh" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="4_lb08q"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="7_7snux"]
+[ext_resource type="Texture2D" uid="uid://c7kumcmbdvuji" path="res://images/packed/common_ui/settings_tiny_right_arrow.png" id="7_lb08q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7snux"]
+resource_local_to_scene = true
+shader = ExtResource("2_lb08q")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ej6b"]
+resource_local_to_scene = true
+shader = ExtResource("2_lb08q")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="Paginator" type="Control"]
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 324.0
+offset_bottom = 64.0
+size_flags_horizontal = 8
+focus_mode = 2
+mouse_filter = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="LeftArrow" type="Control" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hkvnt")
+_pageLeft = true
+
+[node name="Image" type="TextureRect" parent="LeftArrow"]
+material = SubResource("ShaderMaterial_7snux")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("4_lb08q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(188, 64)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Mask" type="Control" parent="LabelContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="LabelContainer/Mask"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(112, 32)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_or01d")
+theme_override_font_sizes/font_size = 28
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_4niof")
+MinFontSize = 12
+MaxFontSize = 28
+
+[node name="VfxLabel" type="Label" parent="LabelContainer/Mask"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(112, 32)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_or01d")
+theme_override_font_sizes/font_size = 28
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_4niof")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="RightArrow" type="Control" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_hkvnt")
+
+[node name="Image" type="TextureRect" parent="RightArrow"]
+material = SubResource("ShaderMaterial_2ej6b")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("7_lb08q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="." instance=ExtResource("7_7snux")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

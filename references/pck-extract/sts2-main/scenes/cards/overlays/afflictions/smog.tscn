@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://duxgqfkqk2b0t"]
+
+[ext_resource type="Texture2D" uid="uid://cmxqayfx7v1y4" path="res://images/card_overlays/afflictions/affliction_smog.png" id="1_f1m3q"]
+
+[node name="Entangled" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+scale = Vector2(0.546823, 0.552133)
+texture = ExtResource("1_f1m3q")

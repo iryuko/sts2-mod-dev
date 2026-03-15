@@ -1,0 +1,423 @@
+{
+	"textures": [
+		{
+			"image": "era_atlas.png",
+			"size": {
+				"w": 256,
+				"h": 256
+			},
+			"sprites": [
+				{
+					"filename": "era_3000.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 85,
+						"h": 74
+					},
+					"margin": {
+						"x": 0,
+						"y": 8,
+						"w": 0,
+						"h": 11
+					}
+				},
+				{
+					"filename": "era_2733.png",
+					"region": {
+						"x": 88,
+						"y": 1,
+						"w": 85,
+						"h": 72
+					},
+					"margin": {
+						"x": 0,
+						"y": 5,
+						"w": 0,
+						"h": 13
+					}
+				},
+				{
+					"filename": "era_1.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_3.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1202.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1203.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1801.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1802.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1803.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2734.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2735.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2736.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2737.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2738.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2739.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_2740.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_3001.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_10000.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_10001.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_minus_19998.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_minus_19999.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_missing.png",
+					"region": {
+						"x": 175,
+						"y": 1,
+						"w": 36,
+						"h": 36
+					},
+					"margin": {
+						"x": 24,
+						"y": 24,
+						"w": 49,
+						"h": 49
+					}
+				},
+				{
+					"filename": "era_1800.png",
+					"region": {
+						"x": 88,
+						"y": 75,
+						"w": 85,
+						"h": 65
+					},
+					"margin": {
+						"x": 0,
+						"y": 8,
+						"w": 0,
+						"h": 20
+					}
+				},
+				{
+					"filename": "era_minus_20000.png",
+					"region": {
+						"x": 1,
+						"y": 77,
+						"w": 84,
+						"h": 83
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 1,
+						"h": 2
+					}
+				},
+				{
+					"filename": "era_0.png",
+					"region": {
+						"x": 1,
+						"y": 162,
+						"w": 83,
+						"h": 75
+					},
+					"margin": {
+						"x": 1,
+						"y": 6,
+						"w": 2,
+						"h": 10
+					}
+				},
+				{
+					"filename": "era_1201.png",
+					"region": {
+						"x": 86,
+						"y": 162,
+						"w": 83,
+						"h": 73
+					},
+					"margin": {
+						"x": 1,
+						"y": 8,
+						"w": 2,
+						"h": 12
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:d657ae8ed93abb5188b356ea9293ce0b:e197bccc332fb5bf6c2ed5c722d24bd3:11629a4dfe5c84aa5e0bb8c8a682735c$"
+	}
+}

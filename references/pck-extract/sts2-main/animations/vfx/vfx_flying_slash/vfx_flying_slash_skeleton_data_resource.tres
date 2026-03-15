@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dtvtbgtfkfvie"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cqjw54idw7vyd" path="res://animations/vfx/vfx_flying_slash/flying_slash.atlas" id="1_l81er"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bg17kfr1nidqt" path="res://animations/vfx/vfx_flying_slash/flying_slash.skel" id="2_5td62"]
+
+[resource]
+atlas_res = ExtResource("1_l81er")
+skeleton_file_res = ExtResource("2_5td62")

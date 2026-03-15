@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7ucx5hkmny5a"]
+
+[ext_resource type="Material" uid="uid://do8e3gwrg8akt" path="res://materials/vfx/common/vfx_round_smoke.tres" id="1_7x14l"]
+[ext_resource type="Texture2D" uid="uid://h0f4qthcje3v" path="res://images/vfx/common/common_round_smoke_a.png" id="2_r6ok6"]
+
+[sub_resource type="Curve" id="Curve_kpk5e"]
+_data = [Vector2(0, 0.804288), 0.0, -2.30583, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rv5i7"]
+curve = SubResource("Curve_kpk5e")
+
+[sub_resource type="Curve" id="Curve_trixi"]
+_data = [Vector2(0, 1), 0.0, -1.49308, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_flrgv"]
+curve = SubResource("Curve_trixi")
+
+[sub_resource type="Curve" id="Curve_ny88h"]
+_data = [Vector2(0, 0.756843), 0.0, 0.686261, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_41406"]
+curve = SubResource("Curve_ny88h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acegf"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+angular_velocity_min = -30.0
+angular_velocity_max = 30.0
+angular_velocity_curve = SubResource("CurveTexture_flrgv")
+gravity = Vector3(0, 0, 0)
+scale_min = 1.8
+scale_max = 2.15
+scale_curve = SubResource("CurveTexture_41406")
+alpha_curve = SubResource("CurveTexture_rv5i7")
+
+[node name="vfx_common_round_smoke" type="GPUParticles2D"]
+texture_repeat = 2
+material = ExtResource("1_7x14l")
+amount = 1
+texture = ExtResource("2_r6ok6")
+lifetime = 1.25
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_acegf")

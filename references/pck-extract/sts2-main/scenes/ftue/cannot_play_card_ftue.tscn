@@ -1,0 +1,195 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnkoofmbhfadj"]
+
+[ext_resource type="Script" uid="uid://c4chnm58ygbai" path="res://src/Core/Nodes/Ftue/NCannotPlayCardFtue.cs" id="1_h4ugr"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_age1b"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="2_r8slw"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_qsb82"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_lxng1"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_n1ond"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_mcs0n"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_4kqev"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="8_ukrfs"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="10_2yyko"]
+[ext_resource type="Texture2D" uid="uid://cscfaualt5exf" path="res://images/ftue/ftue_pointer_arrow.png" id="12_2m0pv"]
+
+[sub_resource type="Shader" id="Shader_51tao"]
+code = "shader_type canvas_item;
+
+uniform float h: hint_range(0,1) = 1;
+uniform float s: hint_range(0,5) = 1;
+uniform float v = 1;
+
+// ⚠I am a very commonly used and important shader!
+// Please be careful when handling me
+void fragment() {
+    mat3 RGB_to_YIQ = mat3(
+        vec3(0.2989,  0.5959,  0.2115),
+        vec3(0.5870, -0.2774, -0.5229),
+        vec3(0.1140, -0.3216,  0.3114));
+
+    vec4 col = texture(TEXTURE, UV);
+
+    vec4 ModularCol = COLOR / col;
+
+    col.rgb = RGB_to_YIQ * col.rgb;
+    float hue = 1.0 - h;
+    hue = mix(0, 6.283185, hue);
+
+    float sin_hue = sin(hue);
+    float cos_hue = cos(hue);
+    mat3 hue_shift = mat3(
+        vec3(1.0, 0, 0),
+        vec3(0, cos_hue, -sin_hue),
+        vec3(0, sin_hue, cos_hue));
+    col.rgb *= hue_shift;
+
+    mat3 sat_shift = mat3(
+        vec3(1.0, 0, 0),
+        vec3(0, s, 0),
+        vec3(0, 0, s));
+    col.rgb = sat_shift * col.rgb;
+
+    col.rgb = mix(vec3(0,0,0), col.rgb, v);
+
+    col.rgb = inverse(RGB_to_YIQ) * col.rgb;
+    COLOR = col;
+    COLOR *= ModularCol;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtrow"]
+resource_local_to_scene = true
+shader = SubResource("Shader_51tao")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CannotPlayCardFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h4ugr")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FtuePopup" type="TextureRect" parent="."]
+material = ExtResource("2_age1b")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -289.0
+offset_top = -128.0
+offset_right = 290.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_r8slw")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Header" type="Label" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.22, 0.192793, 0.1034, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_qsb82")
+theme_override_font_sizes/font_size = 26
+text = "Tip: 	You Can't Play This Card!"
+vertical_alignment = 1
+script = ExtResource("4_lxng1")
+MaxFontSize = 26
+
+[node name="FtueConfirmButton" parent="FtuePopup" instance=ExtResource("8_ukrfs")]
+material = SubResource("ShaderMaterial_vtrow")
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -137.5
+offset_top = -67.0
+offset_right = 137.5
+offset_bottom = 8.0
+grow_vertical = 0
+
+[node name="DescriptionContainer" type="MarginContainer" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 73.0
+offset_right = -35.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 6
+
+[node name="Description" type="RichTextLabel" parent="FtuePopup/DescriptionContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("5_n1ond")
+theme_override_fonts/bold_font = ExtResource("6_mcs0n")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "Cards cannot be played if you don't have Energy.
+
+End your turn to replenish your energy and draw new cards."
+scroll_active = false
+script = ExtResource("7_4kqev")
+MaxFontSize = 22
+
+[node name="SneakyHitbox" type="Control" parent="."]
+custom_minimum_size = Vector2(220, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_2yyko")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -478.0
+offset_top = -475.0
+offset_right = -234.0
+offset_bottom = -271.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("12_2m0pv")
+flip_h = true

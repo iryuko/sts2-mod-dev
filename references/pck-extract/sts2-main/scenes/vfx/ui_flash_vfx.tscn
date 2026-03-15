@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cph352eox1arb"]
+
+[ext_resource type="Script" uid="uid://twkbjhmsxsqe" path="res://src/Core/Nodes/Vfx/NUiFlashVfx.cs" id="1_m2x2l"]
+[ext_resource type="Shader" uid="uid://b0jlo1dsq67w1" path="res://shaders/power_flash_vfx.gdshader" id="2_2s453"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrfdp"]
+shader = ExtResource("2_2s453")
+shader_parameter/strength = 1.0
+
+[node name="UiFlashVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_m2x2l")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65098)
+material = SubResource("ShaderMaterial_vrfdp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true

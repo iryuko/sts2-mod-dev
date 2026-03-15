@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b3ohj6eh8hh3l"]
+
+[ext_resource type="Shader" uid="uid://cnimcw10l5qdq" path="res://shaders/vfx/boss_map_point_unavailable.gdshader" id="1_hx0gi"]
+
+[resource]
+shader = ExtResource("1_hx0gi")
+shader_parameter/additive_tint = Color(0.443137, 0.368627, 0.262745, 1)

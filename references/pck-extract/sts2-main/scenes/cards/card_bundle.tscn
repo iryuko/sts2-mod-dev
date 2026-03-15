@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://daf84g0ujiltq"]
+
+[ext_resource type="Script" uid="uid://clyjp6onjfl84" path="res://src/Core/Nodes/Cards/NCardBundle.cs" id="1_4hjwy"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="2_cx1x3"]
+
+[node name="CardBundle" type="Control"]
+custom_minimum_size = Vector2(300, 422)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+mouse_filter = 2
+script = ExtResource("1_4hjwy")
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -194.0
+offset_top = -307.0
+offset_right = 205.0
+offset_bottom = 253.0
+pivot_offset = Vector2(150, 211)
+focus_mode = 2
+script = ExtResource("2_cx1x3")
+
+[node name="Cards" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0

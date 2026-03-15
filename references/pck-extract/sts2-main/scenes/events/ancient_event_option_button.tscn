@@ -1,0 +1,181 @@
+[gd_scene load_steps=11 format=3 uid="uid://cphnait7nejtv"]
+
+[ext_resource type="Script" uid="uid://ciaipjg10g6in" path="res://src/Core/Nodes/Events/NEventOptionButton.cs" id="1_pnf1f"]
+[ext_resource type="Texture2D" uid="uid://dtb0v8fepvdyr" path="res://images/packed/common_ui/event_button_sdf.png" id="2_b1sfw"]
+[ext_resource type="Texture2D" uid="uid://ckdr7u7ds42xr" path="res://images/packed/common_ui/ancient_event_option_button_outline.png" id="3_pnf1f"]
+[ext_resource type="Texture2D" uid="uid://bi648q3cavtx7" path="res://images/packed/common_ui/ancient_event_option_button.png" id="5_pnf1f"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="6_a65fi"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="7_7gvu8"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="8_ny4vd"]
+[ext_resource type="PackedScene" uid="uid://bf5067m5nxvaw" path="res://scenes/ui/multiplayer_vote_container.tscn" id="9_gilgf"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qjeyd"]
+
+[node name="AncientEventOptionButton" type="Control"]
+custom_minimum_size = Vector2(1000, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 900.0
+offset_bottom = 100.0
+pivot_offset = Vector2(450, 50)
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_pnf1f")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="RedFlash" type="NinePatchRect" parent="."]
+modulate = Color(1, 0.333333, 0.333333, 0)
+material = SubResource("CanvasItemMaterial_qjeyd")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -261.0
+offset_right = 110.0
+offset_bottom = 241.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.005, 1.05)
+pivot_offset = Vector2(400, 50)
+texture = ExtResource("2_b1sfw")
+region_rect = Rect2(0, 0, 512, 512)
+patch_margin_left = 237
+patch_margin_top = 251
+patch_margin_right = 229
+patch_margin_bottom = 251
+
+[node name="BlueFlash" type="NinePatchRect" parent="."]
+modulate = Color(0.6048, 0.80472, 0.84, 0)
+material = SubResource("CanvasItemMaterial_qjeyd")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -111.0
+offset_top = -251.0
+offset_right = 111.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(511, 251)
+texture = ExtResource("2_b1sfw")
+region_rect = Rect2(0, 0, 512, 512)
+patch_margin_left = 237
+patch_margin_top = 251
+patch_margin_right = 229
+patch_margin_bottom = 251
+
+[node name="Image" type="NinePatchRect" parent="."]
+modulate = Color(0, 0, 0, 0.35)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(400, 50)
+texture = ExtResource("5_pnf1f")
+region_rect = Rect2(0, 0, 100, 100)
+patch_margin_left = 34
+patch_margin_top = 34
+patch_margin_right = 34
+patch_margin_bottom = 34
+
+[node name="Outline" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -63.0
+offset_right = 12.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.005, 1.05)
+pivot_offset = Vector2(400, 50)
+texture = ExtResource("3_pnf1f")
+patch_margin_left = 44
+patch_margin_top = 44
+patch_margin_right = 44
+patch_margin_bottom = 44
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 964.0
+offset_bottom = 87.0
+theme_override_constants/separation = 0
+
+[node name="RelicIcon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="HBoxContainer/RelicIcon"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Text" type="RichTextLabel" parent="HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(830, 74)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("6_a65fi")
+theme_override_fonts/bold_font = ExtResource("7_7gvu8")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[b]This is some event option text.[/b]
+The quick brown fox jumps over the lazy dog."
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("8_ny4vd")
+MinFontSize = 12
+MaxFontSize = 24
+
+[node name="PlayerVoteContainer" parent="." instance=ExtResource("9_gilgf")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 532.0
+offset_top = 75.0
+offset_right = 781.0
+offset_bottom = 105.0
+alignment = 2

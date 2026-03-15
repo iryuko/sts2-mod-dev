@@ -1,0 +1,456 @@
+[gd_scene load_steps=28 format=3 uid="uid://boe5m0pjpg2eo"]
+
+[ext_resource type="Texture2D" uid="uid://b27fj1e6y767" path="res://images/rooms/architect_victory/architect_bg_clouds.png" id="1_1poc4"]
+[ext_resource type="Texture2D" uid="uid://d2j6mr7oiuuyh" path="res://images/rooms/architect_victory/architect_victory_bg.png" id="1_vjpqy"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://2hrpjgw6lpfm" path="res://scenes/backgrounds/the_architect_event_encounter/architect_bg_animate.tres" id="2_hn5xq"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="2_uiei8"]
+[ext_resource type="Texture2D" uid="uid://16ckme3wwomq" path="res://images/rooms/architect_victory/cloud_sheet_architect_2.png" id="2_x07rk"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="3_1poc4"]
+[ext_resource type="Texture2D" uid="uid://bwpe350bh6aj4" path="res://images/rooms/architect_victory/cloud_sheet_architect.png" id="3_tt470"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="4_uiei8"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="5_rpk2d"]
+[ext_resource type="Script" uid="uid://b0oho7pjc1dtg" path="res://src/Core/Nodes/Animation/NSpineAutoPlayer.cs" id="6_x07rk"]
+[ext_resource type="Texture2D" uid="uid://bukyhsjanpsnl" path="res://images/vfx/monsters/queen/false_queen_light.png" id="11_tt470"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u8drx"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_5qrcf"]
+_data = [Vector2(0, 0.28118986), 0.0, 0.0, 0, 0, Vector2(0.5458333, 0.9169729), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_yrori"]
+offsets = PackedFloat32Array(0, 0.137803, 0.351955, 0.523277, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.313726, 1, 1, 1, 1, 1, 1, 1, 0.678431, 1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_gxndh"]
+_data = [Vector2(0.035416666, 0), 0.0, 0.0, 0, 0, Vector2(0.22812498, 1), 0.0, 0.0, 0, 0, Vector2(0.45416665, 0.6974628), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_tt470"]
+_data = [Vector2(0, 0.23910761), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_rpk2d"]
+offsets = PackedFloat32Array(0, 0.061810154, 0.9403973, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tt470"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_40bcv"]
+
+[sub_resource type="Curve" id="Curve_u8drx"]
+_data = [Vector2(0, 0.321019), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.36242), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_5qrcf"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5qrcf"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_40bcv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_u8drx"]
+curve = SubResource("Curve_40bcv")
+
+[sub_resource type="Gradient" id="Gradient_gxndh"]
+offsets = PackedFloat32Array(0, 0.170306, 0.286026, 0.423581, 0.611354, 0.720524, 0.847162, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.513726, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.513726, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sbu3o"]
+gradient = SubResource("Gradient_gxndh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5dumb"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+color = Color(1, 0.7372549, 0.34901962, 1)
+color_ramp = SubResource("GradientTexture1D_sbu3o")
+alpha_curve = SubResource("CurveTexture_u8drx")
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1440.77
+offset_top = -675.36
+offset_right = 1440.77
+offset_bottom = 675.36
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Clouds" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 418.77002
+offset_top = -4.6400146
+offset_right = 4702.77
+offset_bottom = 712.36
+scale = Vector2(0.47, 0.47)
+texture = ExtResource("1_1poc4")
+expand_mode = 1
+
+[node name="clouds7" type="CPUParticles2D" parent="Clouds"]
+material = SubResource("CanvasItemMaterial_u8drx")
+position = Vector2(1757.4467, 874.46814)
+rotation = -0.02617994
+scale = Vector2(0.5, 0.5)
+amount = 10
+texture = ExtResource("2_x07rk")
+lifetime = 15.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(40, -5)
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+angle_min = 20.0
+angle_max = 33.0
+scale_amount_min = 8.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_5qrcf")
+color_ramp = SubResource("Gradient_yrori")
+hue_variation_max = 0.3
+anim_offset_max = 1.0
+
+[node name="clouds6" type="CPUParticles2D" parent="Clouds"]
+material = SubResource("CanvasItemMaterial_u8drx")
+position = Vector2(91.48936, -265.9575)
+rotation = 0.7749262
+scale = Vector2(0.5, 0.5)
+amount = 10
+texture = ExtResource("2_x07rk")
+lifetime = 20.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(40, -5)
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+angle_min = 20.0
+angle_max = 33.0
+scale_amount_min = 8.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_gxndh")
+color_ramp = SubResource("Gradient_yrori")
+hue_variation_max = 0.3
+anim_offset_max = 1.0
+
+[node name="clouds4" type="CPUParticles2D" parent="Clouds"]
+material = SubResource("CanvasItemMaterial_u8drx")
+position = Vector2(1534.0425, 863.8298)
+rotation = 0.075049154
+scale = Vector2(0.999997, 0.999997)
+amount = 10
+texture = ExtResource("3_tt470")
+lifetime = 14.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(50, -5)
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+angle_min = 20.0
+angle_max = 33.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_5qrcf")
+color = Color(0.8453288, 0.8453288, 0.84532875, 1)
+color_ramp = SubResource("Gradient_yrori")
+hue_variation_max = 0.3
+anim_offset_max = 1.0
+
+[node name="clouds5" type="CPUParticles2D" parent="Clouds"]
+material = SubResource("CanvasItemMaterial_u8drx")
+position = Vector2(-802.1277, -244.68085)
+rotation = 0.7190757
+scale = Vector2(0.999997, 0.999997)
+amount = 10
+texture = ExtResource("3_tt470")
+lifetime = 14.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(50, -5)
+orbit_velocity_min = 0.01
+orbit_velocity_max = 0.01
+angle_min = 20.0
+angle_max = 33.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_gxndh")
+color_ramp = SubResource("Gradient_yrori")
+anim_offset_max = 1.0
+
+[node name="stars" type="CPUParticles2D" parent="Clouds"]
+position = Vector2(2210.6382, -104.25537)
+scale = Vector2(1, 0.285)
+amount = 60
+texture = ExtResource("2_uiei8")
+lifetime = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2000, 2000)
+gravity = Vector2(0, 0)
+orbit_velocity_min = 0.05
+orbit_velocity_max = 0.05
+scale_amount_min = 0.08
+scale_amount_max = 0.25
+split_scale = true
+scale_curve_x = SubResource("Curve_tt470")
+scale_curve_y = null
+color = Color(1, 1, 1, 0.7254902)
+color_ramp = SubResource("Gradient_rpk2d")
+
+[node name="bg" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 6144.0
+offset_bottom = 2880.0
+scale = Vector2(0.47, 0.47)
+texture = ExtResource("1_vjpqy")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_hn5xq")
+multiply_material = SubResource("CanvasItemMaterial_tt470")
+screen_material = SubResource("CanvasItemMaterial_40bcv")
+preview_skin = "Default"
+preview_animation = "animation"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(1442.77, 675.36)
+scale = Vector2(0.47, 0.47)
+
+[node name="NSpineAutoPlayer" type="Node" parent="SpineSprite"]
+script = ExtResource("6_x07rk")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"
+
+[node name="SpineBoneNode2" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "desk_lamp"
+show_behind_parent = true
+position = Vector2(1533.8805, -282.18335)
+rotation = -0.07308695
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2"]
+material = ExtResource("3_1poc4")
+position = Vector2(10.561844, 31.304638)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="SpineBoneNode3" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "floaty_1"
+show_behind_parent = true
+position = Vector2(-241.15857, -634.407)
+rotation = 0.09916873
+scale = Vector2(0.9999999, 0.99999994)
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode3"]
+material = ExtResource("3_1poc4")
+position = Vector2(-1.4549408, 3.9812737)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0, 0.63529414, 0.6627451, 0.2784314)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="SpineBoneNode6" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "robot_1"
+show_behind_parent = true
+position = Vector2(-1525.8895, -763.6985)
+rotation = -0.011891525
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode6"]
+material = ExtResource("3_1poc4")
+position = Vector2(24.564964, 96.33757)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 8.48
+scale_amount_max = 8.48
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0, 0.63529414, 0.6627451, 0.2784314)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="SpineBoneNode7" type="SpineBoneNode" parent="SpineSprite"]
+color = Color(0.95076007, 0.06513556, 0.5235309, 0.46666667)
+bone_name = "robot_3"
+show_behind_parent = true
+position = Vector2(-2065.746, -450.54822)
+rotation = -0.24510068
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode7"]
+material = ExtResource("3_1poc4")
+position = Vector2(-4.466736, 18.633316)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 8.48
+scale_amount_max = 8.48
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0.70669144, 0.52083707, 0.19508404, 0.2784314)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="SpineBoneNode4" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "floaty_2"
+show_behind_parent = true
+position = Vector2(-314.667, -536.8648)
+rotation = 0.0682049
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode4"]
+material = ExtResource("3_1poc4")
+position = Vector2(-2.4305935, 12.448084)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0.84705883, 0.42352942, 0.06666667, 0.28627452)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="SpineBoneNode5" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "floaty_3"
+show_behind_parent = true
+position = Vector2(-549.32434, -407.74255)
+rotation = 0.17778198
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode5"]
+material = ExtResource("3_1poc4")
+position = Vector2(-3.0086098, 1.6334972)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0.84705883, 0.42352942, 0.06666667, 0.28235295)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="light_small4" type="CPUParticles2D" parent="SpineSprite"]
+show_behind_parent = true
+material = ExtResource("3_1poc4")
+position = Vector2(-125.53174, -1293.6171)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 40.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0.9019608, 0.62352943, 0.27058825, 0.5137255)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="light_small3" type="CPUParticles2D" parent="SpineSprite"]
+show_behind_parent = true
+material = ExtResource("3_1poc4")
+position = Vector2(389.3618, -885.1063)
+rotation = 0.34941474
+scale = Vector2(0.5420753, 0.5423925)
+amount = 2
+texture = ExtResource("4_uiei8")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 8.48
+scale_amount_max = 8.48
+scale_amount_curve = SubResource("Curve_u8drx")
+color = Color(0, 0.63529414, 0.6627451, 0.2784314)
+color_ramp = SubResource("Gradient_5qrcf")
+script = ExtResource("5_rpk2d")
+
+[node name="light_overlay4" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_5qrcf")
+position = Vector2(1692.77, 280.35992)
+rotation = -0.43633232
+scale = Vector2(0.6, 0.8)
+skew = -0.058907032
+amount = 1
+texture = ExtResource("11_tt470")
+lifetime = 10.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_5dumb")
+
+[node name="light_overlay3" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_5qrcf")
+position = Vector2(1142.7701, 332.35995)
+rotation = 0.19547687
+scale = Vector2(0.6, 0.7)
+amount = 1
+texture = ExtResource("11_tt470")
+lifetime = 10.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_5dumb")

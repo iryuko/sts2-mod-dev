@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=3 uid="uid://c5dlii3gjj3ag"]
+
+[ext_resource type="Script" uid="uid://yde0lmskts5v" path="res://src/Core/Nodes/Screens/MainMenu/NMultiplayerSubmenu.cs" id="1_sr0w7"]
+[ext_resource type="PackedScene" uid="uid://3aikvufhmv6o" path="res://scenes/ui/submenu_button.tscn" id="2_es0v0"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_7yv1c"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_ugdd2"]
+[ext_resource type="Texture2D" uid="uid://b0vgso400ufke" path="res://images/ui/main_menu/submenu_host.png" id="4_fkwn1"]
+[ext_resource type="PackedScene" uid="uid://cy0r6ow54kklb" path="res://scenes/screens/main_menu/loading_overlay.tscn" id="4_pvavi"]
+[ext_resource type="Texture2D" uid="uid://dy0hv5t63djdw" path="res://images/ui/main_menu/submenu_load.png" id="5_3c0tt"]
+[ext_resource type="Texture2D" uid="uid://w26gm6qs0hjh" path="res://images/ui/main_menu/submenu_abandon.png" id="6_shjsx"]
+[ext_resource type="Texture2D" uid="uid://bntogfwhyaj0j" path="res://images/ui/main_menu/submenu_join.png" id="7_5hbl1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shjsx"]
+resource_local_to_scene = true
+shader = ExtResource("3_ugdd2")
+shader_parameter/h = 0.0
+shader_parameter/s = 0.8
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ugdd2"]
+resource_local_to_scene = true
+shader = ExtResource("3_ugdd2")
+shader_parameter/h = 0.4800000228
+shader_parameter/s = 0.8
+shader_parameter/v = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkwn1"]
+resource_local_to_scene = true
+shader = ExtResource("3_ugdd2")
+shader_parameter/h = 0.930000044175
+shader_parameter/s = 1.200000057
+shader_parameter/v = 0.65
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3c0tt"]
+resource_local_to_scene = true
+shader = ExtResource("3_ugdd2")
+shader_parameter/h = 0.2400000114
+shader_parameter/s = 1.0000000475
+shader_parameter/v = 0.7
+
+[node name="MultiplayerSubmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_sr0w7")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -350.0
+offset_right = 606.0
+offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="HostButton" parent="ButtonContainer" instance=ExtResource("2_es0v0")]
+custom_minimum_size = Vector2(330, 705)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BgPanel" parent="ButtonContainer/HostButton" index="0"]
+material = SubResource("ShaderMaterial_shjsx")
+
+[node name="Icon" parent="ButtonContainer/HostButton" index="1"]
+texture = ExtResource("4_fkwn1")
+
+[node name="LoadButton" parent="ButtonContainer" instance=ExtResource("2_es0v0")]
+custom_minimum_size = Vector2(330, 705)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BgPanel" parent="ButtonContainer/LoadButton" index="0"]
+material = SubResource("ShaderMaterial_ugdd2")
+
+[node name="Icon" parent="ButtonContainer/LoadButton" index="1"]
+texture = ExtResource("5_3c0tt")
+
+[node name="AbandonButton" parent="ButtonContainer" instance=ExtResource("2_es0v0")]
+custom_minimum_size = Vector2(330, 705)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BgPanel" parent="ButtonContainer/AbandonButton" index="0"]
+material = SubResource("ShaderMaterial_fkwn1")
+
+[node name="Icon" parent="ButtonContainer/AbandonButton" index="1"]
+texture = ExtResource("6_shjsx")
+
+[node name="JoinButton" parent="ButtonContainer" instance=ExtResource("2_es0v0")]
+custom_minimum_size = Vector2(330, 705)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BgPanel" parent="ButtonContainer/JoinButton" index="0"]
+material = SubResource("ShaderMaterial_3c0tt")
+
+[node name="Icon" parent="ButtonContainer/JoinButton" index="1"]
+texture = ExtResource("7_5hbl1")
+
+[node name="BackButton" parent="." instance=ExtResource("3_7yv1c")]
+layout_mode = 1
+
+[node name="LoadingOverlay" parent="." instance=ExtResource("4_pvavi")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[editable path="ButtonContainer/HostButton"]
+[editable path="ButtonContainer/LoadButton"]
+[editable path="ButtonContainer/AbandonButton"]
+[editable path="ButtonContainer/JoinButton"]

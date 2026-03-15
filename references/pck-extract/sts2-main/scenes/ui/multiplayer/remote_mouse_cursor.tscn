@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://eg3xy5y21sr5"]
+
+[ext_resource type="Script" uid="uid://8yjqc01qddud" path="res://src/Core/Nodes/Multiplayer/NRemoteMouseCursor.cs" id="1_nl8yg"]
+[ext_resource type="Image" uid="uid://byq6ow7a185ws" path="res://images/packed/common_ui/cursor_default.png" id="2_cursor_default"]
+[ext_resource type="Image" uid="uid://ceouejemr6l2v" path="res://images/packed/common_ui/cursor_tilted.png" id="3_cursor_tilted"]
+[ext_resource type="Image" uid="uid://cw0fubq8uyv8m" path="res://images/packed/common_ui/cursor_quill.png" id="4_cursor_quill"]
+[ext_resource type="Image" uid="uid://cxacdys1tptha" path="res://images/packed/common_ui/cursor_quill_tilted.png" id="5_cursor_quill_tilted"]
+[ext_resource type="Image" uid="uid://bbahyu1toistm" path="res://images/packed/common_ui/cursor_eraser.png" id="6_cursor_eraser"]
+[ext_resource type="Image" uid="uid://cpqcvrgm3wwg3" path="res://images/packed/common_ui/cursor_eraser_tilted.png" id="7_cursor_eraser_tilted"]
+
+[node name="RemoteMouseCursor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1920.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nl8yg")
+_defaultCursorImage = ExtResource("2_cursor_default")
+_tiltedCursorImage = ExtResource("3_cursor_tilted")
+_defaultDrawingImage = ExtResource("4_cursor_quill")
+_tiltedDrawingImage = ExtResource("5_cursor_quill_tilted")
+_defaultErasingImage = ExtResource("6_cursor_eraser")
+_tiltedErasingImage = ExtResource("7_cursor_eraser_tilted")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 0
+offset_left = -14.0
+offset_top = -5.0
+offset_right = 50.0
+offset_bottom = 59.0
+mouse_filter = 2
+expand_mode = 1

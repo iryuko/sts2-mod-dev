@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwx78mmkb3jgs"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_dk646"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_exia0"]
+
+[node name="OvergrowthBossBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dk646")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+VisibleLayer = 1
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_04" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")

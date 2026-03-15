@@ -1,0 +1,178 @@
+[gd_scene load_steps=18 format=3 uid="uid://bssv3yaw1l65i"]
+
+[ext_resource type="Script" uid="uid://b64aobp5wi2hq" path="res://src/Core/Nodes/RestSite/NRestSiteCharacter.cs" id="1_dkbwi"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bxwvk7umu4fv6" path="res://animations/rest_site/necrobinder/rest_site_necrobinder_skel_data.tres" id="2_umdbn"]
+[ext_resource type="Shader" uid="uid://citjsgmko2rak" path="res://shaders/vfx/vfx_stepped_shader_fire_dark.tres" id="3_ohou1"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://djuj28o32bscn" path="res://animations/rest_site/necrobinder/rest_site_osty_skel_data.tres" id="3_usn31"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="4_alp1q"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="5_5igrk"]
+[ext_resource type="Texture2D" uid="uid://cv34jqejd8qm4" path="res://images/vfx/characters/necro_fire_bottom_mask.png" id="6_aiipe"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="7_lkssx"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="8_x8cl8"]
+[ext_resource type="Texture2D" uid="uid://d3ymohgo6fgl" path="res://images/vfx/characters/necro_fire_shape.png" id="9_lac0e"]
+[ext_resource type="Texture2D" uid="uid://yo1hlqb47gj2" path="res://images/vfx/characters/osty_fire_bottom_mask.png" id="13_bvox3"]
+[ext_resource type="Texture2D" uid="uid://c6lhnt43gwaoc" path="res://images/vfx/characters/osty_rest_fire_tex.png" id="13_ir40p"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="14_s8aer"]
+[ext_resource type="Texture2D" uid="uid://bywmvh2esrlwm" path="res://images/vfx/characters/osty_fire_noise_mask.png" id="14_vs05w"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ysxny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64dyv"]
+resource_local_to_scene = true
+shader = ExtResource("3_ohou1")
+shader_parameter/GlobalOffset = Vector2(0, 0)
+shader_parameter/OuterColor = Color(0.17, 0.612667, 1, 1)
+shader_parameter/InnerColorStep = Vector2(0.52, 0.92)
+shader_parameter/Noise2Strength = 0.51
+shader_parameter/Noise2Scaling = Vector2(3, 3)
+shader_parameter/Noise2Panning = Vector2(-0.2, 1.4)
+shader_parameter/Noise2Texture = ExtResource("7_lkssx")
+shader_parameter/Noise1Strength = 0.87
+shader_parameter/Noise1Scaling = Vector2(2.2, 2.2)
+shader_parameter/Noise1Panning = Vector2(0.8, 1.3)
+shader_parameter/Noise1Texture = ExtResource("4_alp1q")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 0.91)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.015)
+shader_parameter/NoiseMask = ExtResource("8_x8cl8")
+shader_parameter/Distortion2Scale = Vector2(1, 0.8)
+shader_parameter/Distortion2Panning = Vector2(0, 0.5)
+shader_parameter/Distortion2Texture = ExtResource("5_5igrk")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.03, 0.6)
+shader_parameter/Distortion1Texture = ExtResource("4_alp1q")
+shader_parameter/Distortion1Strength = 0.125
+shader_parameter/DistortionMaskScale = Vector2(1, 0.88)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.18)
+shader_parameter/DistortionMask = ExtResource("6_aiipe")
+shader_parameter/InnerColor = Color(0, 0.0373333, 0.08, 1)
+shader_parameter/OuterStep = Vector2(0.025, 0.045)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fldsw"]
+resource_local_to_scene = true
+shader = ExtResource("3_ohou1")
+shader_parameter/GlobalOffset = Vector2(0, 0)
+shader_parameter/OuterColor = Color(0.17, 0.612667, 1, 1)
+shader_parameter/InnerColorStep = Vector2(0.52, 0.92)
+shader_parameter/Noise2Strength = 1.105
+shader_parameter/Noise2Scaling = Vector2(4, 4)
+shader_parameter/Noise2Panning = Vector2(0.8, 2)
+shader_parameter/Noise2Texture = ExtResource("7_lkssx")
+shader_parameter/Noise1Strength = 0.44
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(-0.3, 0.6)
+shader_parameter/Noise1Texture = ExtResource("4_alp1q")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1.2, 1.195)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.31)
+shader_parameter/NoiseMask = ExtResource("14_vs05w")
+shader_parameter/Distortion2Scale = Vector2(0.8, 0.8)
+shader_parameter/Distortion2Panning = Vector2(0, 0.65)
+shader_parameter/Distortion2Texture = ExtResource("5_5igrk")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1.5, 1.5)
+shader_parameter/Distortion1Panning = Vector2(-0.2, 0.6)
+shader_parameter/Distortion1Texture = ExtResource("4_alp1q")
+shader_parameter/Distortion1Strength = 0.055
+shader_parameter/DistortionMaskScale = Vector2(1, 0.815)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.105)
+shader_parameter/DistortionMask = ExtResource("13_bvox3")
+shader_parameter/InnerColor = Color(0, 0.0373333, 0.08, 1)
+shader_parameter/OuterStep = Vector2(0.025, 0.05)
+
+[node name="NecrobinderRestSite" type="Node2D"]
+position = Vector2(-2, 42)
+scale = Vector2(0.760006, 0.760006)
+script = ExtResource("1_dkbwi")
+
+[node name="OstyRightAnchor" type="Node2D" parent="."]
+position = Vector2(239.472, -84.2099)
+
+[node name="Necro" type="SpineSprite" parent="."]
+position = Vector2(6.5789, -10.5262)
+scale = Vector2(1.12518, 1.12518)
+skeleton_data_res = ExtResource("2_umdbn")
+multiply_material = SubResource("CanvasItemMaterial_ysxny")
+preview_skin = "Default"
+preview_animation = "overgrowth_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineBoneNode" type="SpineSlotNode" parent="Necro"]
+show_behind_parent = true
+position = Vector2(-19.1323, -144.057)
+rotation = -0.330681
+slot_name = "glow"
+
+[node name="NecroFire" type="Sprite2D" parent="Necro/SpineBoneNode"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_64dyv")
+position = Vector2(-15.6357, -158.444)
+rotation = -0.121304
+scale = Vector2(0.594738, 0.557086)
+texture = ExtResource("9_lac0e")
+
+[node name="Osty" type="SpineSprite" parent="."]
+position = Vector2(-227.63, 352.629)
+scale = Vector2(0.812, 0.812)
+skeleton_data_res = ExtResource("3_usn31")
+preview_skin = "Default"
+preview_animation = "hive_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineSlotNode" type="SpineSlotNode" parent="Osty"]
+show_behind_parent = true
+position = Vector2(-163.665, -182.206)
+rotation = -0.22361
+slot_name = "fire_attach_slot"
+
+[node name="OstyFire" type="Sprite2D" parent="Osty/SpineSlotNode"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("ShaderMaterial_fldsw")
+position = Vector2(487.672, -17.9788)
+rotation = 0.110037
+scale = Vector2(1.03668, 1.05773)
+texture = ExtResource("13_ir40p")
+offset = Vector2(-392.494, 11.2686)
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="SelectionReticle" parent="ControlRoot" instance=ExtResource("14_s8aer")]
+unique_name_in_owner = true
+offset_left = -205.0
+offset_top = -453.0
+offset_right = 242.0
+offset_bottom = 284.0
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -191.0
+offset_top = -446.0
+offset_right = 237.0
+offset_bottom = 280.0
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 127.631
+offset_top = -356.576
+offset_right = 127.631
+offset_bottom = -356.576
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -172.367
+offset_top = -342.103
+offset_right = -172.367
+offset_bottom = -342.103

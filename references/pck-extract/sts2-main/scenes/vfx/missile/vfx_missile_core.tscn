@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwa0568gilvi7"]
+
+[ext_resource type="Material" uid="uid://dwhgj1t6e8wmh" path="res://materials/vfx/missile/vfx_missile_core.tres" id="1_g6hys"]
+[ext_resource type="Texture2D" uid="uid://cmgpnd3fm0gco" path="res://images/vfx/missile/missile_core_b.png" id="2_8fxau"]
+
+[sub_resource type="Curve" id="Curve_21kn2"]
+_limits = [0.0, 0.3, 0.0, 1.0]
+_data = [Vector2(0, 0.25144), 0.0, -0.110858, 0, 0, Vector2(1, 0.198944), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bskm1"]
+_limits = [1.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.177964, 0, 0, Vector2(1, 1.10173), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1gnb1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_yxndf"]
+curve_x = SubResource("Curve_21kn2")
+curve_y = SubResource("Curve_bskm1")
+curve_z = SubResource("Curve_1gnb1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c7m04"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 3.5
+scale_max = 3.5
+scale_curve = SubResource("CurveXYZTexture_yxndf")
+
+[node name="vfx_missile_core" type="GPUParticles2D"]
+material = ExtResource("1_g6hys")
+emitting = false
+amount = 1
+texture = ExtResource("2_8fxau")
+lifetime = 0.15
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_c7m04")

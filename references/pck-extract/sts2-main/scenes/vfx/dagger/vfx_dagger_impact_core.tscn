@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://c07so86tgf0vp"]
+
+[ext_resource type="Material" uid="uid://ogglydwehs02" path="res://materials/vfx/dagger/vfx_dagger_impact_core.tres" id="1_4y5pb"]
+[ext_resource type="Texture2D" uid="uid://bn4qpndv5760" path="res://images/vfx/big_slash/big_slash_impact_core_flipbook.png" id="2_nspgb"]
+
+[sub_resource type="Curve" id="Curve_5nv8a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.2902, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_551kh"]
+curve = SubResource("Curve_5nv8a")
+
+[sub_resource type="Curve" id="Curve_dg4vw"]
+_limits = [0.35, 1.0, 0.0, 1.0]
+_data = [Vector2(0.204938, 0.35), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_xh717"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.254321, 1.25274), 2.13504, 0.0, 0, 0, Vector2(1, 1.34763), 0.461907, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kymbk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kwl7k"]
+curve_x = SubResource("Curve_dg4vw")
+curve_y = SubResource("Curve_xh717")
+curve_z = SubResource("Curve_kymbk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_14470"]
+lifetime_randomness = 0.65
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(80, 100, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = -500.0
+initial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 0.3
+scale_max = 0.5
+scale_curve = SubResource("CurveXYZTexture_kwl7k")
+alpha_curve = SubResource("CurveTexture_551kh")
+
+[node name="vfx_dagger_impact_core" type="GPUParticles2D"]
+self_modulate = Color(0.611801, 0.841306, 1, 1)
+z_index = 2
+material = ExtResource("1_4y5pb")
+rotation = 1.57079
+emitting = false
+texture = ExtResource("2_nspgb")
+lifetime = 0.2
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_14470")

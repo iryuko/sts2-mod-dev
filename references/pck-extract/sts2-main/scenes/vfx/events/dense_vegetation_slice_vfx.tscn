@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7w2stewirifv"]
+
+[ext_resource type="Texture2D" uid="uid://c03hpa1j67lgm" path="res://images/vfx/dense_vegetation_particles.png" id="1_qvslh"]
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="2_n7t4x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r3ksh"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n7t4x"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_1gyl3"]
+_data = [Vector2(0, 1), 0.0, -1.13909, 0, 0, Vector2(0.985611, 0.0245172), -0.767141, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r3ksh"]
+width = 64
+curve = SubResource("Curve_1gyl3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_56kei"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 50, 1)
+angle_min = -180.0
+angle_max = 180.0
+spread = 90.0
+initial_velocity_min = 410.83
+initial_velocity_max = 550.64
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+gravity = Vector3(0, 600, 0)
+linear_accel_min = -400.0
+linear_accel_max = -400.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_r3ksh")
+alpha_curve = SubResource("CurveTexture_r3ksh")
+anim_offset_max = 1.0
+
+[node name="DenseVegetationSliceVfx" type="Node2D"]
+material = SubResource("CanvasItemMaterial_r3ksh")
+script = ExtResource("2_n7t4x")
+_lifetime = 2.0
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_n7t4x")
+emitting = false
+texture = ExtResource("1_qvslh")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_56kei")

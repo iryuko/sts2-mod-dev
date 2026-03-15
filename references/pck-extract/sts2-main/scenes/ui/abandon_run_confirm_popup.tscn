@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh8dicosib643"]
+
+[ext_resource type="Script" uid="uid://b31mav052vo7y" path="res://src/Core/Nodes/CommonUi/NAbandonRunConfirmPopup.cs" id="2_b2ang"]
+[ext_resource type="PackedScene" uid="uid://dqberqa21r6y8" path="res://scenes/ui/vertical_popup.tscn" id="3_7qbxy"]
+
+[node name="AbandonRunConfirmPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_b2ang")
+metadata/_edit_group_ = true
+
+[node name="VerticalPopup" parent="." instance=ExtResource("3_7qbxy")]
+layout_mode = 1

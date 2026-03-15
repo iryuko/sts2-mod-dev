@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxygtjl7sb4cy"]
+
+[ext_resource type="Script" uid="uid://cws5ysuc6t635" path="res://src/Core/Nodes/Vfx/NDamageNumVfx.cs" id="1_76211"]
+[ext_resource type="FontVariation" uid="uid://drc58pa03nghs" path="res://themes/kreon_regular_glyph_space_two.tres" id="2_b1oi5"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_1275y"]
+
+[node name="DamageNumVfx" type="Node2D"]
+modulate = Color(0.97, 0.16684, 0.0776, 1)
+script = ExtResource("1_76211")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.21, 0.202685, 0.1869, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = ExtResource("2_b1oi5")
+theme_override_font_sizes/font_size = 64
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_1275y")
+AutoSizeEnabled = false
+MinFontSize = 12
+MaxFontSize = 72

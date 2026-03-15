@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddrgq4iniyab8"]
+
+[ext_resource type="Script" uid="uid://bcf0flkrwwtxu" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NMapPointHistory.cs" id="1_dmfik"]
+
+[node name="MapPointHistory" type="MarginContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -525.0
+offset_top = -74.0
+offset_right = 525.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dmfik")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Acts" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1

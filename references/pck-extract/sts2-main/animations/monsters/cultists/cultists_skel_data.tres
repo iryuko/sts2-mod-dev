@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://brd0a00fbi1ct"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cc4pqcwj2o6vr" path="res://animations/monsters/cultists/cultists.atlas" id="1_kp8p6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://r0s2c152fmb1" path="res://animations/monsters/cultists/cultists.skel" id="2_tco30"]
+
+[resource]
+atlas_res = ExtResource("1_kp8p6")
+skeleton_file_res = ExtResource("2_tco30")
+default_mix = 0.02

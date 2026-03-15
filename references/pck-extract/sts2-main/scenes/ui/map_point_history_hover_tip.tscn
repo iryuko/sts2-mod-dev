@@ -1,0 +1,247 @@
+[gd_scene load_steps=7 format=3 uid="uid://ubfqdgey1hn"]
+
+[ext_resource type="Script" uid="uid://cxsvagm8n3axt" path="res://src/Core/Nodes/HoverTips/NMapPointHistoryHoverTip.cs" id="1_efhlx"]
+[ext_resource type="Texture2D" uid="uid://d3vmiycr36blt" path="res://images/ui/hover_tip.png" id="2_gu8vg"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_1x34f"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_hilkj"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="4_ilbv1"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_or5kx"]
+
+[node name="map_point_history_hover_tip" type="MarginContainer"]
+offset_right = 359.0
+offset_bottom = 170.0
+mouse_filter = 2
+theme_override_constants/margin_right = -8
+theme_override_constants/margin_bottom = -8
+script = ExtResource("1_efhlx")
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="NinePatchRect" parent="."]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 2
+texture = ExtResource("2_gu8vg")
+region_rect = Rect2(-8, -8, 339, 107)
+patch_margin_left = 55
+patch_margin_top = 43
+patch_margin_right = 91
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Bg" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2_gu8vg")
+region_rect = Rect2(0, 0, 339, 107)
+patch_margin_left = 55
+patch_margin_top = 43
+patch_margin_right = 91
+patch_margin_bottom = 32
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 45
+theme_override_constants/margin_bottom = 28
+
+[node name="TopContainer" type="VBoxContainer" parent="TextContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TextContainer/TopContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_1x34f")
+theme_override_font_sizes/font_size = 22
+text = "Floor 22"
+vertical_alignment = 1
+script = ExtResource("4_hilkj")
+AutoSizeEnabled = false
+
+[node name="PlayerStats" type="RichTextLabel" parent="TextContainer/TopContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "67/67 HP      17 Gold
+"
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextContainer/TopContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RoomStats" type="RichTextLabel" parent="TextContainer/TopContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="CardStats" type="RichTextLabel" parent="TextContainer/TopContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="RewardStats" type="VBoxContainer" parent="TextContainer/TopContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Header" type="Label" parent="TextContainer/TopContainer/RewardStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_1x34f")
+theme_override_font_sizes/font_size = 22
+text = "Rewards:"
+vertical_alignment = 1
+script = ExtResource("4_hilkj")
+AutoSizeEnabled = false
+
+[node name="RewardRows" type="GridContainer" parent="TextContainer/TopContainer/RewardStats"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="ObtainedRow1" type="RichTextLabel" parent="TextContainer/TopContainer/RewardStats/RewardRows"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="ObtainedRow2" type="RichTextLabel" parent="TextContainer/TopContainer/RewardStats/RewardRows"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="SkippedStats" type="VBoxContainer" parent="TextContainer/TopContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Header" type="Label" parent="TextContainer/TopContainer/SkippedStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("3_1x34f")
+theme_override_font_sizes/font_size = 22
+text = "Skipped:"
+vertical_alignment = 1
+script = ExtResource("4_hilkj")
+AutoSizeEnabled = false
+
+[node name="SkippedRows" type="GridContainer" parent="TextContainer/TopContainer/SkippedStats"]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 2
+
+[node name="ObtainedRow1" type="RichTextLabel" parent="TextContainer/TopContainer/SkippedStats/SkippedRows"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false
+
+[node name="ObtainedRow2" type="RichTextLabel" parent="TextContainer/TopContainer/SkippedStats/SkippedRows"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("4_ilbv1")
+theme_override_fonts/bold_font = ExtResource("3_1x34f")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+script = ExtResource("5_or5kx")
+AutoSizeEnabled = false

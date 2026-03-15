@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://cypxv1tykr6co"]
+
+[ext_resource type="Script" uid="uid://d2avmax747n20" path="res://src/Core/Nodes/Combat/NPingButton.cs" id="1_2qcql"]
+[ext_resource type="Texture2D" uid="uid://co4nflor6pb3b" path="res://images/packed/common_ui/event_button.png" id="3_gxyrd"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_y2uuy"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="5_p30xf"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_na2c6"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="6_t24a8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q83kt"]
+resource_local_to_scene = true
+shader = ExtResource("3_y2uuy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="FontVariation" id="FontVariation_fdsbe"]
+base_font = ExtResource("5_p30xf")
+spacing_glyph = 1
+
+[node name="PingButton" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -328.0
+offset_top = -210.0
+offset_right = -178.0
+offset_bottom = -140.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(75, 35)
+script = ExtResource("1_2qcql")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Image" type="TextureRect" parent="Visuals"]
+material = SubResource("ShaderMaterial_q83kt")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_gxyrd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Visuals"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -19.5
+offset_right = 30.5
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 40)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.0756, 0.12084, 0.18, 1)
+theme_override_constants/line_spacing = -4
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_fdsbe")
+theme_override_font_sizes/font_size = 24
+text = "Ping"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_na2c6")
+MaxFontSize = 24
+
+[node name="ControllerIcon" type="TextureRect" parent="Visuals"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_q83kt")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -188.0
+offset_top = -47.0
+offset_right = 56.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("6_t24a8")
+expand_mode = 1
+stretch_mode = 5

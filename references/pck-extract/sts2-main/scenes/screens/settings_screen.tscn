@@ -1,0 +1,2157 @@
+[gd_scene load_steps=83 format=3 uid="uid://dws30qiqcim2u"]
+
+[ext_resource type="Script" uid="uid://cdkdoakbh3b80" path="res://src/Core/Nodes/Screens/Settings/NSettingsScreen.cs" id="1_1pf55"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="2_4vgu4"]
+[ext_resource type="Script" uid="uid://c71ik151x1rg2" path="res://src/Core/Nodes/Screens/Settings/NSettingsPanel.cs" id="2_apvu5"]
+[ext_resource type="Script" uid="uid://bugce7xw1mk8d" path="res://src/Core/Nodes/Screens/Settings/NSettingsTabManager.cs" id="2_pxuoj"]
+[ext_resource type="PackedScene" uid="uid://cfcqxx8wkmljw" path="res://scenes/screens/settings_tab.tscn" id="3_3nkkg"]
+[ext_resource type="Script" uid="uid://cbymam3j6x755" path="res://src/Core/Nodes/Screens/Settings/NSettingsGradientMask.cs" id="3_cplh6"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_o66x5"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="4_5hj6t"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="5_b5ao4"]
+[ext_resource type="Theme" uid="uid://brryqml7h0tef" path="res://themes/settings_screen_line_header.tres" id="6_s3c6d"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="9_phm87"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="10_cs3al"]
+[ext_resource type="Script" uid="uid://bcsxadv86rb2a" path="res://src/Core/Nodes/Screens/Settings/NFastModeHoverTip.cs" id="11_7w2t8"]
+[ext_resource type="Script" uid="uid://by1sdlqx5rfcc" path="res://src/Core/Nodes/Screens/Settings/NScreenshakePaginator.cs" id="11_djvml"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="11_f50ja"]
+[ext_resource type="Script" uid="uid://c6cc17u17foov" path="res://src/Core/Nodes/Screens/Settings/NCommonTooltipsTickbox.cs" id="12_6m73a"]
+[ext_resource type="PackedScene" uid="uid://c42e8hjphxta7" path="res://scenes/screens/paginator.tscn" id="12_8svkp"]
+[ext_resource type="Script" uid="uid://7ix5ld7esyce" path="res://src/Core/Nodes/Screens/Settings/NScreenshakeHoverTip.cs" id="12_dfmmu"]
+[ext_resource type="Script" uid="uid://b1vd5avjpw7s6" path="res://src/Core/Nodes/Screens/Settings/NCommonTooltipsHoverTip.cs" id="12_nl08w"]
+[ext_resource type="Script" uid="uid://bohnw22qu2qnm" path="res://src/Core/Nodes/Screens/Settings/NFastModeTickbox.cs" id="13_7w2t8"]
+[ext_resource type="PackedScene" uid="uid://cqq1trtsn7j7r" path="res://scenes/screens/settings_tickbox.tscn" id="13_8i3jg"]
+[ext_resource type="Script" uid="uid://blissc0yui87h" path="res://src/Core/Nodes/Screens/Settings/NUploadDataTickbox.cs" id="13_hm6re"]
+[ext_resource type="Script" uid="uid://cxhsay6eri8w3" path="res://src/Core/Nodes/Screens/Settings/NHandCardCountHoverTip.cs" id="14_bar6l"]
+[ext_resource type="Script" uid="uid://cgsp2ig77dtcm" path="res://src/Core/Nodes/Screens/Settings/NResolutionDropdown.cs" id="15_k6juu"]
+[ext_resource type="Script" uid="uid://b8yd0navixkf3" path="res://src/Core/Nodes/Screens/Settings/NResetTutorialsButton.cs" id="15_spmeg"]
+[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="15_xa157"]
+[ext_resource type="Script" uid="uid://di6qo5qdft3ch" path="res://src/Core/Nodes/Screens/Settings/NMasterVolumeSlider.cs" id="15_y5r3s"]
+[ext_resource type="Script" uid="uid://cjthasgxgb2fw" path="res://src/Core/Nodes/Screens/Settings/NHandCardCountTickbox.cs" id="16_p2ul6"]
+[ext_resource type="Script" uid="uid://rclph2reqg3o" path="res://src/Core/Nodes/Screens/Settings/NUploadGameplayDataHoverTip.cs" id="17_dtk20"]
+[ext_resource type="Script" uid="uid://cos0k02qoryvh" path="res://src/Core/Nodes/Screens/Settings/NBgmVolumeSlider.cs" id="17_krl0o"]
+[ext_resource type="Script" uid="uid://cvfjnvnkhaxo8" path="res://src/Core/Nodes/Screens/Settings/NRunTimerHoverTip.cs" id="18_1ufcf"]
+[ext_resource type="Script" uid="uid://bheth865geybs" path="res://src/Core/Nodes/Screens/Settings/NSfxVolumeSlider.cs" id="18_sy52n"]
+[ext_resource type="Script" uid="uid://bjbrwpkosbr1p" path="res://src/Core/Nodes/Screens/Settings/NRunTimerTickbox.cs" id="19_4vgu4"]
+[ext_resource type="Script" uid="uid://b30sbpehh83t8" path="res://src/Core/Nodes/Screens/Settings/NLongPressConfirmationHoverTip.cs" id="19_6qnjx"]
+[ext_resource type="Script" uid="uid://cfamhdq2ny6p7" path="res://src/Core/Nodes/Screens/Settings/NVSyncPaginator.cs" id="19_nuri1"]
+[ext_resource type="Script" uid="uid://bwv3momockmfl" path="res://src/Core/Nodes/Screens/Settings/NFpsPaginator.cs" id="19_w8d8h"]
+[ext_resource type="Script" uid="uid://bgx0xsybxy2l6" path="res://src/Core/Nodes/Screens/Settings/NLongPressConfirmationTickbox.cs" id="20_1ufcf"]
+[ext_resource type="Script" uid="uid://det0hm11v38x2" path="res://src/Core/Nodes/Screens/Settings/NOpenFeedbackScreenButton.cs" id="21_c1vt7"]
+[ext_resource type="Script" uid="uid://bxtn853jnfucw" path="res://src/Core/Nodes/Screens/Settings/NIntroLogoHoverTip.cs" id="22_627h1"]
+[ext_resource type="Script" uid="uid://cgh4bjejqp7rt" path="res://src/Core/Nodes/Screens/Settings/NDropdownPositioner.cs" id="22_euh6a"]
+[ext_resource type="Script" uid="uid://uu5ax0pfaab7" path="res://src/Core/Nodes/Screens/Settings/NIntroLogoTickbox.cs" id="22_p4ux7"]
+[ext_resource type="Script" uid="uid://dbt50332ukjbd" path="res://src/Core/Nodes/Screens/Settings/NFullscreenTickbox.cs" id="26_7v38b"]
+[ext_resource type="Script" uid="uid://q7r7i2x4gnpx" path="res://src/Core/Nodes/Screens/Settings/NDisplayDropdown.cs" id="26_mvhtd"]
+[ext_resource type="Script" uid="uid://bjpb26fy4dh4h" path="res://src/Core/Nodes/Screens/Settings/NAspectRatioDropdown.cs" id="27_7bhuc"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="27_v2xl6"]
+[ext_resource type="Script" uid="uid://bmj44tnmms16d" path="res://src/Core/Nodes/Screens/Settings/NFullscreenHoverTip.cs" id="27_yl2te"]
+[ext_resource type="PackedScene" uid="uid://4tl5ra0d0s4c" path="res://scenes/screens/settings_dropdown.tscn" id="28_02mol"]
+[ext_resource type="Script" uid="uid://bo8e5root785h" path="res://src/Core/Nodes/Screens/Settings/NTextEffectsHoverTip.cs" id="28_lue2e"]
+[ext_resource type="Script" uid="uid://bjpbhsmixn7gs" path="res://src/Core/Nodes/Screens/Settings/NLanguageDropdown.cs" id="28_x2scs"]
+[ext_resource type="Script" uid="uid://bkuh584757bti" path="res://src/Core/Nodes/Screens/Settings/NOpenModdingScreenButton.cs" id="29_1ufcf"]
+[ext_resource type="Script" uid="uid://tmqmb5h7n48r" path="res://src/Core/Nodes/Screens/Settings/NTextEffectsTickbox.cs" id="29_7w2t8"]
+[ext_resource type="Script" uid="uid://dbwh7kot7y1oa" path="res://src/Core/Nodes/Screens/Settings/NWindowResizeHoverTip.cs" id="30_6m7f6"]
+[ext_resource type="Script" uid="uid://dm6oqwffo8wox" path="res://src/Core/Nodes/Screens/Settings/NWindowResizeTickbox.cs" id="31_0lq70"]
+[ext_resource type="Script" uid="uid://b37icocjlkljb" path="res://src/Core/Nodes/Screens/Settings/NResetToDefaultControlsButton.cs" id="31_00ok6"]
+[ext_resource type="Script" uid="uid://boi012ocjdog0" path="res://src/Core/Nodes/Screens/Settings/NMsaaHoverTip.cs" id="34_6qnjx"]
+[ext_resource type="PackedScene" uid="uid://dj5xpv1lhwyd6" path="res://scenes/screens/settings_slider.tscn" id="34_u07sr"]
+[ext_resource type="Script" uid="uid://cawmlaankmelr" path="res://src/Core/Nodes/Screens/Settings/NMsaaPaginator.cs" id="34_x2scs"]
+[ext_resource type="Script" uid="uid://ltguskh40701" path="res://src/Core/Nodes/Screens/Settings/NCreditsButton.cs" id="35_yu3al"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="36_36woj"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="36_qscld"]
+[ext_resource type="Script" uid="uid://qm11jj1c6kov" path="res://src/Core/Nodes/Screens/Settings/NAmbienceSlider.cs" id="38_cg1ra"]
+[ext_resource type="Script" uid="uid://cm5mwvef3ilr2" path="res://src/Core/Nodes/Screens/Settings/NResetGameplayButton.cs" id="40_m6cp3"]
+[ext_resource type="Script" uid="uid://kt6onuyv0ml7" path="res://src/Core/Nodes/Screens/Settings/NMuteInBackgroundTickbox.cs" id="47_6qnjx"]
+[ext_resource type="Script" uid="uid://bkos28m4cxhvi" path="res://src/Core/Nodes/Screens/Settings/NBackgroundModeTickbox.cs" id="48_54lmw"]
+[ext_resource type="Script" uid="uid://cg308n8riuuch" path="res://src/Core/Nodes/Screens/Settings/NBackgroundModeHoverTip.cs" id="49_in1wt"]
+[ext_resource type="Script" uid="uid://n4ovm4nwu41i" path="res://src/Core/Nodes/Screens/Settings/NResetGraphicsButton.cs" id="51_0kcov"]
+[ext_resource type="Script" uid="uid://brygj0nhhmir2" path="res://src/Core/Nodes/Screens/Settings/NInputSettingsPanel.cs" id="56_627h1"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="58_6qnjx"]
+[ext_resource type="Script" uid="uid://c0i0cmw4hl6n4" path="res://src/Core/Nodes/Screens/Settings/NSettingsToast.cs" id="59_6qnjx"]
+[ext_resource type="PackedScene" uid="uid://cjt0wu4meosli" path="res://scenes/ui/language_dropdown_item.tscn" id="60_lang_dropdown"]
+[ext_resource type="PackedScene" uid="uid://vytj1jn3yq0k" path="res://scenes/ui/display_dropdown_item.tscn" id="61_display_dropdown"]
+[ext_resource type="PackedScene" uid="uid://be1g7medufysw" path="res://scenes/ui/resolution_dropdown_item.tscn" id="62_resolution_dropdown"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="63_j50rd"]
+[ext_resource type="FontFile" uid="uid://clypo64htko7l" path="res://fonts/kreon_regular.ttf" id="70_7w2t8"]
+
+[sub_resource type="Gradient" id="Gradient_ncxk2"]
+offsets = PackedFloat32Array(0, 0.0364078, 0.805825, 0.834951)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hcj65"]
+gradient = SubResource("Gradient_ncxk2")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prf3m"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 0.82
+shader_parameter/s = 1.4
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j50rd"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 0.610000028975
+shader_parameter/s = 1.6000000760000002
+shader_parameter/v = 1.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e4bt1"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 0.45
+shader_parameter/s = 1.5
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_phv7i"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sim8j"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdi6b"]
+resource_local_to_scene = true
+shader = ExtResource("27_v2xl6")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="SettingsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1pf55")
+metadata/_edit_group_ = true
+
+[node name="ScrollContainer" type="Control" parent="."]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_4vgu4")
+
+[node name="Mask" type="TextureRect" parent="ScrollContainer"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_hcj65")
+script = ExtResource("3_cplh6")
+
+[node name="Clipper" type="Control" parent="ScrollContainer/Mask"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 187.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GeneralSettings" type="Control" parent="ScrollContainer/Mask/Clipper"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 24.0
+offset_right = 506.0
+offset_bottom = 358.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("2_apvu5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings"]
+custom_minimum_size = Vector2(1012, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1316.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="LanguageLine" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LanguageLine"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Language"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="DisplayDropdownAnchor" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LanguageLine" node_paths=PackedStringArray("_dropdownNode")]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Fullscreen/FullscreenTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../WindowedResolution/ResolutionDropdownAnchor")
+focus_mode = 2
+script = ExtResource("22_euh6a")
+_dropdownNode = NodePath("../../../LanguageDropdown")
+
+[node name="ScreenshakeDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="Screenshake" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("12_dfmmu")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Screenshake"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Screenshake"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="Paginator" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Screenshake" instance=ExtResource("12_8svkp")]
+custom_minimum_size = Vector2(324, 64)
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../CommonTooltips/SettingsTickbox")
+script = ExtResource("11_djvml")
+
+[node name="CombatSpeedDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="FastMode" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("11_7w2t8")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/FastMode"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Fast Mode"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="FastModeTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/FastMode" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Screenshake/Paginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ShowRunTimer/SettingsTickbox")
+script = ExtResource("13_7w2t8")
+
+[node name="CommonTooltipsDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="CommonTooltips" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("12_nl08w")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/CommonTooltips"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "[red]Common Tooltips[/red]"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/CommonTooltips" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Screenshake/Paginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ShowRunTimer/SettingsTickbox")
+script = ExtResource("12_6m73a")
+
+[node name="ShowTimerDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="ShowRunTimer" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("18_1ufcf")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ShowRunTimer"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Show Run Timer"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ShowRunTimer" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../CommonTooltips/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ShowHandCardCount/SettingsTickbox")
+script = ExtResource("19_4vgu4")
+
+[node name="ShowCountDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="ShowHandCardCount" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("14_bar6l")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ShowHandCardCount"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Show Hand Card Count"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ShowHandCardCount" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../ShowRunTimer/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../LongPressConfirmations/SettingsTickbox")
+script = ExtResource("16_p2ul6")
+
+[node name="LongPressDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="LongPressConfirmations" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("19_6qnjx")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LongPressConfirmations"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Long Press Confirmations"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LongPressConfirmations" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../ShowHandCardCount/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../SkipIntroLogo/SettingsTickbox")
+script = ExtResource("20_1ufcf")
+
+[node name="SkipIntroDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="SkipIntroLogo" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("22_627h1")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SkipIntroLogo"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Skip Intro Logo"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SkipIntroLogo" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../LongPressConfirmations/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../LimitFpsInBackground/SettingsTickbox")
+script = ExtResource("22_p4ux7")
+
+[node name="LimiFpsDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="LimitFpsInBackground" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("49_in1wt")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LimitFpsInBackground"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Limit FPS in Background"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/LimitFpsInBackground" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../SkipIntroLogo/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../UploadGameplayData/SettingsTickbox")
+script = ExtResource("48_54lmw")
+
+[node name="UploadDataDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="UploadGameplayData" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("17_dtk20")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/UploadGameplayData"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Upload Gameplay Data"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/UploadGameplayData" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../LimitFpsInBackground/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../SendFeedback/FeedbackButton")
+script = ExtResource("13_hm6re")
+
+[node name="TextEffectsDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="TextEffects" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("28_lue2e")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/TextEffects"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Text Effects"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="TextEffectsTickbox" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/TextEffects" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../LimitFpsInBackground/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../SendFeedback/FeedbackButton")
+script = ExtResource("29_7w2t8")
+
+[node name="SendFeedbackDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="SendFeedback" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SendFeedback"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Send Feedback"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="FeedbackButton" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SendFeedback"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../UploadGameplayData/SettingsTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ResetTutorials/ResetTutorialsButton")
+focus_mode = 2
+script = ExtResource("21_c1vt7")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SendFeedback/FeedbackButton"]
+material = SubResource("ShaderMaterial_prf3m")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SendFeedback/FeedbackButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.1274, 0.26, 0.14066, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Feedback"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/SendFeedback/FeedbackButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModdingDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="Modding" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Modding"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Modding"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ModdingButton" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Modding"]
+unique_name_in_owner = true
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../ResetTutorials/ResetTutorialsButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("29_1ufcf")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Modding/ModdingButton"]
+material = SubResource("ShaderMaterial_prf3m")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Modding/ModdingButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.1274, 0.26, 0.14066, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Mod Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Modding/ModdingButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="Credits" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Credits"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "View Credits"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="CreditsButton" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Credits"]
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../SendFeedback/FeedbackButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("35_yu3al")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Credits/CreditsButton"]
+material = SubResource("ShaderMaterial_j50rd")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(160, 32)
+mouse_filter = 2
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Credits/CreditsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.2, 0.15750001, 0.098000005, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/Credits/CreditsButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetTutorialDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="ResetTutorials" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetTutorials"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Reset Tutorials"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ResetTutorialsButton" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetTutorials"]
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../SendFeedback/FeedbackButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("15_spmeg")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetTutorials/ResetTutorialsButton"]
+material = SubResource("ShaderMaterial_e4bt1")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(160, 32)
+mouse_filter = 2
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetTutorials/ResetTutorialsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.29, 0.14703, 0.1421, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Reset"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetTutorials/ResetTutorialsButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResetGameplayDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="ResetGameplay" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetGameplay"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Reset to Default"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ResetGameplayButton" type="Control" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetGameplay"]
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Msaa/MsaaPaginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("40_m6cp3")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetGameplay/ResetGameplayButton"]
+material = SubResource("ShaderMaterial_e4bt1")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetGameplay/ResetGameplayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.29, 0.14703, 0.1421, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Reset"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GeneralSettings/VBoxContainer/ResetGameplay/ResetGameplayButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LanguageDropdown" parent="ScrollContainer/Mask/Clipper/GeneralSettings" instance=ExtResource("28_02mol")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 176.0
+offset_right = 496.0
+offset_bottom = 64.0
+grow_vertical = 1
+size_flags_horizontal = 8
+focus_mode = 2
+script = ExtResource("28_x2scs")
+_dropdownItemScene = ExtResource("60_lang_dropdown")
+
+[node name="GraphicsSettings" type="Control" parent="ScrollContainer/Mask/Clipper"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 24.0
+offset_right = 506.0
+offset_bottom = 358.0
+grow_horizontal = 2
+script = ExtResource("2_apvu5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings"]
+custom_minimum_size = Vector2(1012, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 720.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Fullscreen" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("27_yl2te")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/Fullscreen"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Fullscreen"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="FullscreenTickbox" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/Fullscreen" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../DisplaySelection/DisplayDropdownAnchor")
+script = ExtResource("26_7v38b")
+
+[node name="FullscreenDivider" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="DisplaySelection" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/DisplaySelection"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Display Selection"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="DisplayDropdownAnchor" type="Control" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/DisplaySelection" node_paths=PackedStringArray("_dropdownNode")]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Fullscreen/FullscreenTickbox")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../WindowedResolution/ResolutionDropdownAnchor")
+focus_mode = 2
+script = ExtResource("22_euh6a")
+_dropdownNode = NodePath("../../../DisplayDropdown")
+
+[node name="Line11" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="WindowedResolution" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/WindowedResolution"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Windowed Resolution"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ResolutionDropdownAnchor" type="Control" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/WindowedResolution" node_paths=PackedStringArray("_dropdownNode")]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../DisplaySelection/DisplayDropdownAnchor")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../AspectRatio/AspectRatioDropdownAnchor")
+focus_mode = 2
+script = ExtResource("22_euh6a")
+_dropdownNode = NodePath("../../../ResolutionDropdown")
+
+[node name="Line12" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="AspectRatio" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/AspectRatio"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Aspect Ratio"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="AspectRatioDropdownAnchor" type="Control" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/AspectRatio" node_paths=PackedStringArray("_dropdownNode")]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../WindowedResolution/ResolutionDropdownAnchor")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../WindowResizing/SettingsTickbox")
+focus_mode = 2
+script = ExtResource("22_euh6a")
+_dropdownNode = NodePath("../../../AspectRatioDropdown")
+
+[node name="Line10" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="WindowResizing" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("30_6m7f6")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/WindowResizing"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Window Resizing"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/WindowResizing" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../AspectRatio/AspectRatioDropdownAnchor")
+focus_neighbor_right = NodePath(".")
+script = ExtResource("31_0lq70")
+
+[node name="Line14" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="VSync" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/VSync"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "VSync"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="VSyncPaginator" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/VSync" instance=ExtResource("12_8svkp")]
+custom_minimum_size = Vector2(324, 64)
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../MaxFps/MaxFpsPaginator")
+script = ExtResource("19_nuri1")
+
+[node name="Line13" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="MaxFps" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/MaxFps"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Max FPS"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="MaxFpsPaginator" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/MaxFps" instance=ExtResource("12_8svkp")]
+custom_minimum_size = Vector2(324, 64)
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../VSync/VSyncPaginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../Msaa/MsaaPaginator")
+script = ExtResource("19_w8d8h")
+
+[node name="Line5" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="Msaa" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+script = ExtResource("34_6qnjx")
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/Msaa"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "MSAA"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="MsaaPaginator" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/Msaa" instance=ExtResource("12_8svkp")]
+custom_minimum_size = Vector2(324, 64)
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../MaxFps/MaxFpsPaginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../ResetGraphics/ResetGraphicsButton")
+script = ExtResource("34_x2scs")
+
+[node name="Line6" type="ColorRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="ResetGraphics" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/ResetGraphics"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Reset to Default"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ResetGraphicsButton" type="Control" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/ResetGraphics"]
+process_mode = 3
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../Msaa/MsaaPaginator")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("51_0kcov")
+
+[node name="Image" type="TextureRect" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/ResetGraphics/ResetGraphicsButton"]
+material = SubResource("ShaderMaterial_e4bt1")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+texture = ExtResource("15_xa157")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/ResetGraphics/ResetGraphicsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(140, 32)
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.29, 0.14703, 0.1421, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("36_qscld")
+theme_override_font_sizes/font_size = 28
+text = "Reset"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_o66x5")
+MaxFontSize = 28
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/GraphicsSettings/VBoxContainer/ResetGraphics/ResetGraphicsButton" instance=ExtResource("36_36woj")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DisplayDropdown" parent="ScrollContainer/Mask/Clipper/GraphicsSettings" instance=ExtResource("28_02mol")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 178.0
+offset_top = 80.0
+offset_right = 498.0
+offset_bottom = 144.0
+grow_vertical = 1
+focus_mode = 2
+script = ExtResource("26_mvhtd")
+_dropdownItemScene = ExtResource("61_display_dropdown")
+
+[node name="ResolutionDropdown" parent="ScrollContainer/Mask/Clipper/GraphicsSettings" instance=ExtResource("28_02mol")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 178.0
+offset_top = 162.0
+offset_right = 498.0
+offset_bottom = 226.0
+grow_vertical = 1
+focus_mode = 2
+script = ExtResource("15_k6juu")
+_dropdownItemScene = ExtResource("62_resolution_dropdown")
+
+[node name="AspectRatioDropdown" parent="ScrollContainer/Mask/Clipper/GraphicsSettings" instance=ExtResource("28_02mol")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = 178.0
+offset_top = 244.0
+offset_right = 498.0
+offset_bottom = 308.0
+grow_vertical = 1
+focus_mode = 2
+script = ExtResource("27_7bhuc")
+
+[node name="SoundSettings" type="Control" parent="ScrollContainer/Mask/Clipper"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 24.0
+offset_right = 506.0
+offset_bottom = 358.0
+grow_horizontal = 2
+script = ExtResource("2_apvu5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings"]
+custom_minimum_size = Vector2(1012, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 392.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="MasterVolume" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/MasterVolume"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Master Volume"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="MasterVolumeSlider" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/MasterVolume" instance=ExtResource("34_u07sr")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../BgmVolume/BgmVolumeSlider")
+script = ExtResource("15_y5r3s")
+
+[node name="Line4" type="ColorRect" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="BgmVolume" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/BgmVolume"]
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "BGM Volume"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="BgmVolumeSlider" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/BgmVolume" instance=ExtResource("34_u07sr")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../MasterVolume/MasterVolumeSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../SfxVolume/SfxSlider")
+script = ExtResource("17_krl0o")
+
+[node name="Line10" type="ColorRect" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="SfxVolume" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/SfxVolume"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Sfx Volume"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SfxSlider" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/SfxVolume" instance=ExtResource("34_u07sr")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../BgmVolume/BgmVolumeSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../AmbienceVolume/AmbienceSlider")
+script = ExtResource("18_sy52n")
+
+[node name="Line7" type="ColorRect" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="AmbienceVolume" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/AmbienceVolume"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Ambience Volume"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="AmbienceSlider" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/AmbienceVolume" instance=ExtResource("34_u07sr")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../SfxVolume/SfxSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../MuteIfBackground/SettingsTickbox")
+script = ExtResource("38_cg1ra")
+
+[node name="Line5" type="ColorRect" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.909804, 0.862745, 0.745098, 0.25098)
+
+[node name="MuteIfBackground" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 0
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/MuteIfBackground"]
+layout_mode = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+bbcode_enabled = true
+text = "Mute in Background"
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="SettingsTickbox" parent="ScrollContainer/Mask/Clipper/SoundSettings/VBoxContainer/MuteIfBackground" instance=ExtResource("13_8i3jg")]
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../AmbienceVolume/AmbienceSlider")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+script = ExtResource("47_6qnjx")
+
+[node name="InputSettings" type="Control" parent="ScrollContainer/Mask/Clipper"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -506.0
+offset_top = 24.0
+offset_right = 506.0
+offset_bottom = 358.0
+grow_horizontal = 2
+script = ExtResource("56_627h1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Mask/Clipper/InputSettings"]
+custom_minimum_size = Vector2(1012, 0)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 64.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Padding" type="Control" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="SteamInputPrompt" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_colors/default_color = Color(0.49803922, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "Steam Input Detected. Disable Controller Remapping"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+IsVerticallyBound = false
+IsHorizontallyBound = true
+
+[node name="ResetToDefaultButton" type="MarginContainer" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 2
+script = ExtResource("31_00ok6")
+
+[node name="Image" type="ColorRect" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/HBoxContainer/ResetToDefaultButton"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.23591956, 0.52728134, 0.53395134, 1)
+
+[node name="Label" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/HBoxContainer/ResetToDefaultButton"]
+clip_contents = false
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Reset to Default"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 28
+MaxFontSize = 28
+IsVerticallyBound = false
+IsHorizontallyBound = true
+
+[node name="SelectionReticle" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/HBoxContainer/ResetToDefaultButton" instance=ExtResource("36_36woj")]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CommandHeader" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/Header"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "[b]Commands"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+IsHorizontallyBound = true
+
+[node name="KeyboardHeader" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/Header"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "[b]Keyboard"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+IsHorizontallyBound = true
+
+[node name="ControllerHeader" type="RichTextLabel" parent="ScrollContainer/Mask/Clipper/InputSettings/VBoxContainer/Header"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme = ExtResource("6_s3c6d")
+theme_override_fonts/normal_font = ExtResource("10_cs3al")
+theme_override_fonts/bold_font = ExtResource("5_b5ao4")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "[b]Controller"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+IsHorizontallyBound = true
+
+[node name="Scrollbar" parent="ScrollContainer" instance=ExtResource("4_5hj6t")]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.79375
+anchor_top = 0.187037
+anchor_right = 0.818312
+anchor_bottom = 0.947037
+offset_top = -1.52588e-05
+offset_right = 0.839844
+offset_bottom = -0.800049
+grow_horizontal = 0
+grow_vertical = 2
+focus_behavior_recursive = 0
+mouse_behavior_recursive = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+metadata/_edit_use_anchors_ = true
+
+[node name="SettingsTabManager" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -586.0
+offset_top = 102.0
+offset_right = 586.0
+offset_bottom = 192.0
+grow_horizontal = 2
+mouse_filter = 2
+alignment = 1
+script = ExtResource("2_pxuoj")
+
+[node name="LeftTriggerIcon" type="TextureRect" parent="SettingsTabManager"]
+layout_mode = 2
+texture = ExtResource("63_j50rd")
+stretch_mode = 5
+
+[node name="General" parent="SettingsTabManager" instance=ExtResource("3_3nkkg")]
+layout_mode = 2
+
+[node name="Graphics" parent="SettingsTabManager" instance=ExtResource("3_3nkkg")]
+layout_mode = 2
+
+[node name="TabImage" parent="SettingsTabManager/Graphics" index="1"]
+material = SubResource("ShaderMaterial_phv7i")
+
+[node name="Label" parent="SettingsTabManager/Graphics" index="2"]
+text = "Graphics"
+
+[node name="Sound" parent="SettingsTabManager" instance=ExtResource("3_3nkkg")]
+layout_mode = 2
+
+[node name="TabImage" parent="SettingsTabManager/Sound" index="1"]
+material = SubResource("ShaderMaterial_sim8j")
+
+[node name="Label" parent="SettingsTabManager/Sound" index="2"]
+text = "Sound"
+
+[node name="Input" parent="SettingsTabManager" instance=ExtResource("3_3nkkg")]
+layout_mode = 2
+
+[node name="TabImage" parent="SettingsTabManager/Input" index="1"]
+material = SubResource("ShaderMaterial_mdi6b")
+
+[node name="Label" parent="SettingsTabManager/Input" index="2"]
+text = "Input"
+
+[node name="RightTriggerIcon" type="TextureRect" parent="SettingsTabManager"]
+layout_mode = 2
+texture = ExtResource("63_j50rd")
+stretch_mode = 5
+
+[node name="BackButton" parent="." instance=ExtResource("11_f50ja")]
+layout_mode = 1
+
+[node name="Toast" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0.75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = 8.0
+offset_right = 350.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("58_6qnjx")
+patch_margin_left = 32
+patch_margin_top = 16
+patch_margin_right = 32
+patch_margin_bottom = 16
+script = ExtResource("59_6qnjx")
+
+[node name="Label" type="RichTextLabel" parent="Toast"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("70_7w2t8")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Run timer is now always shown in the top bar."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_phm87")
+MinFontSize = 16
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[editable path="SettingsTabManager/Graphics"]
+[editable path="SettingsTabManager/Sound"]
+[editable path="SettingsTabManager/Input"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cadil37qdruvq"]
+
+[ext_resource type="Script" uid="uid://bv6nu42x0m3ic" path="res://src/Core/Nodes/Potions/NPotionShortcutButton.cs" id="1_pk1cr"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="2_rh07e"]
+
+[node name="PotionShortcutButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 8
+mouse_filter = 2
+script = ExtResource("1_pk1cr")
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -36.0
+offset_right = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_rh07e")
+expand_mode = 1

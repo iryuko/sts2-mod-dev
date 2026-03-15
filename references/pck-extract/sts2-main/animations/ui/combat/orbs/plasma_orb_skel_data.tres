@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cwglww5ujsrf7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bo4f577c5n61y" path="res://animations/ui/combat/orbs/defect_plasma_orb.atlas" id="1_ec6ws"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b1h0b6h0j48xu" path="res://animations/ui/combat/orbs/plasma_orb.skel" id="2_ktl1f"]
+
+[resource]
+atlas_res = ExtResource("1_ec6ws")
+skeleton_file_res = ExtResource("2_ktl1f")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgvohe36yp62w"]
+
+[ext_resource type="Script" uid="uid://b8o5k4ddr48dv" path="res://src/Core/Nodes/Screens/RelicCollection/NRelicCollectionEntry.cs" id="1_pnpso"]
+
+[node name="RelicCollectionEntry" type="Control"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1852.0
+offset_bottom = -1012.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_default_cursor_shape = 16
+script = ExtResource("1_pnpso")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="RelicHolder" type="Control" parent="."]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -34.0
+offset_right = 34.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+pivot_offset = Vector2(34, 34)
+mouse_filter = 2

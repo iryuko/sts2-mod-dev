@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://druu0w375pord"]
+
+[ext_resource type="Shader" uid="uid://d30msndpum67s" path="res://shaders/vfx/scream/vfx_scream_distortion_polar_shader.gdshader" id="1_huyd8"]
+
+[resource]
+shader = ExtResource("1_huyd8")
+shader_parameter/distortion_base_intensity = 0.04
+shader_parameter/tiling = Vector2(5, 0.5)
+shader_parameter/offset_speed = Vector2(0, -2)

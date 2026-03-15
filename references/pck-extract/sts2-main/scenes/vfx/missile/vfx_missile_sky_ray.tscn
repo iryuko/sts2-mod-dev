@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://csg3nyyk2vyn0"]
+
+[ext_resource type="Material" uid="uid://cjbdgbup5ohhg" path="res://materials/vfx/missile/vfx_missile_sky_ray.tres" id="1_pke14"]
+[ext_resource type="Texture2D" uid="uid://concjwf60qspa" path="res://images/vfx/missile/missile_sky_ray.png" id="2_2kx3p"]
+
+[sub_resource type="Curve" id="Curve_e2vl1"]
+_data = [Vector2(0, 1), 0.0, -2.12441, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i4cs6"]
+curve = SubResource("Curve_e2vl1")
+
+[sub_resource type="Curve" id="Curve_rcmjv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_pqs3n"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.25144), 0.0, 0.622997, 0, 0, Vector2(1, 1.50096), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_a4107"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_7lu0x"]
+curve_x = SubResource("Curve_rcmjv")
+curve_y = SubResource("Curve_pqs3n")
+curve_z = SubResource("Curve_a4107")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vnklo"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 2.75
+scale_max = 2.75
+scale_curve = SubResource("CurveXYZTexture_7lu0x")
+color = Color(0.78279, 0.900664, 1, 1)
+alpha_curve = SubResource("CurveTexture_i4cs6")
+
+[node name="vfx_missile_sky_ray" type="GPUParticles2D"]
+material = ExtResource("1_pke14")
+rotation = -0.523599
+emitting = false
+amount = 1
+texture = ExtResource("2_2kx3p")
+lifetime = 0.3
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vnklo")

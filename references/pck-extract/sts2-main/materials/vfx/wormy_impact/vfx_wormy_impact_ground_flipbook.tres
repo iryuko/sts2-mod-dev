@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://deayg2wwj0m2p"]
+
+[ext_resource type="Shader" uid="uid://b74ju7rwrgwnc" path="res://shaders/vfx/common/vfx_flipbook_shader.gdshader" id="1_ar6bd"]
+
+[sub_resource type="Gradient" id="Gradient_1q5ip"]
+colors = PackedColorArray(0.8586454, 1, 0.62495375, 1, 0.35710335, 0.47284535, 0.19288725, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0sbr5"]
+gradient = SubResource("Gradient_1q5ip")
+
+[resource]
+shader = ExtResource("1_ar6bd")
+shader_parameter/pivot_offset = Vector2(0, -0.275)
+shader_parameter/lut = SubResource("GradientTexture1D_0sbr5")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(1, 4)
+shader_parameter/use_erosion_texture = 0.0
+shader_parameter/erosion_offset = 0.1
+shader_parameter/use_hue_shift = 0.0

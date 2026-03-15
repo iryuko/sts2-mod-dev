@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwo8ofiwaceef"]
+
+[ext_resource type="Material" uid="uid://gqhs1r3477sw" path="res://materials/vfx/fire_impact/vfx_fire_burst_flipbook.tres" id="1_rvixb"]
+[ext_resource type="Texture2D" uid="uid://ceyohp5nhw484" path="res://images/vfx/fire_impact/fire_burst_left_flipbook.png" id="2_x1s7s"]
+
+[sub_resource type="Curve" id="Curve_v7qmx"]
+_data = [Vector2(0.750617, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -9.51527, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_npm28"]
+curve = SubResource("Curve_v7qmx")
+
+[sub_resource type="Gradient" id="Gradient_pa3ay"]
+offsets = PackedFloat32Array(0.408719, 0.762943)
+colors = PackedColorArray(1, 1, 1, 1, 0.2, 0.2, 0.2, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3o76e"]
+gradient = SubResource("Gradient_pa3ay")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w2vbu"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.35
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_3o76e")
+alpha_curve = SubResource("CurveTexture_npm28")
+
+[node name="vfx_fire_burst_left_flipbook" type="GPUParticles2D"]
+self_modulate = Color(1, 0.54595, 0.342164, 1)
+z_index = 1
+material = ExtResource("1_rvixb")
+emitting = false
+amount = 1
+texture = ExtResource("2_x1s7s")
+lifetime = 0.5
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_w2vbu")

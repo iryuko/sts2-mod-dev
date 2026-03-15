@@ -1,0 +1,46 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=11 format=3 uid="uid://dbvllkmvl3t67"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bixqsp25ga7dd" path="res://animations/monsters/waterfall_giant/waterfall_giant.atlas" id="1_yffe8"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b12kudvtj64rk" path="res://animations/monsters/waterfall_giant/waterfall_giant.skel" id="2_ru0mi"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_yffe8"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ru0mi"]
+from = "erupt"
+to = "idle_loop"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jqb4h"]
+from = "die_loop"
+to = "attack_buff"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wcomm"]
+from = "die_loop"
+to = "attack_debuff"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_182pr"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_y3poj"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_skgn8"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_kpe11"]
+from = "die_loop"
+to = "erupt"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_yffe8")
+skeleton_file_res = ExtResource("2_ru0mi")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_yffe8"), SubResource("SpineAnimationMix_ru0mi"), SubResource("SpineAnimationMix_jqb4h"), SubResource("SpineAnimationMix_wcomm"), SubResource("SpineAnimationMix_182pr"), SubResource("SpineAnimationMix_y3poj"), SubResource("SpineAnimationMix_skgn8"), SubResource("SpineAnimationMix_kpe11")]

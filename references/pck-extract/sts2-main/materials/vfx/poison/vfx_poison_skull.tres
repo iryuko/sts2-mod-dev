@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cb3guesajfjhr"]
+
+[ext_resource type="Shader" uid="uid://bqtmifov1753t" path="res://shaders/vfx/poison/vfx_poison_skull_shader.gdshader" id="1_wlism"]
+
+[sub_resource type="Curve" id="Curve_wlism"]
+_limits = [-0.15, 1.0, 0.0, 1.0]
+_data = [Vector2(0.101265825, -0.15), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hdmit"]
+curve = SubResource("Curve_wlism")
+
+[sub_resource type="Gradient" id="Gradient_hdmit"]
+offsets = PackedFloat32Array(0, 0.50980395)
+colors = PackedColorArray(0, 0.5950413, 0.2163407, 1, 0.61980903, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7w8mp"]
+gradient = SubResource("Gradient_hdmit")
+
+[resource]
+shader = ExtResource("1_wlism")
+shader_parameter/lut = SubResource("GradientTexture1D_7w8mp")
+shader_parameter/distortion_panning_speed = Vector2(0, 0.375)
+shader_parameter/distortion_strength = 0.1
+shader_parameter/erosion_curve = SubResource("CurveTexture_hdmit")
+shader_parameter/erosion_offset = 0.125

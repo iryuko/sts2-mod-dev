@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://brjja71kk3m7d"]
+
+[ext_resource type="Script" uid="uid://bjpld2sbeavgt" path="res://src/Core/Nodes/HoverTips/NHoverTipSet.cs" id="1_o3hfq"]
+
+[node name="HoverTipSet" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 360.0
+offset_bottom = 116.0
+mouse_filter = 2
+script = ExtResource("1_o3hfq")

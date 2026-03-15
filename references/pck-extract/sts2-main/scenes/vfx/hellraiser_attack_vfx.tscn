@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjn61jqeq5kvw"]
+
+[ext_resource type="Script" uid="uid://uvpxkgxep6id" path="res://src/Core/Nodes/Vfx/Cards/NHellraiserAttackVfx.cs" id="1_po3v1"]
+[ext_resource type="Texture2D" uid="uid://dlnm7lf0yw6mi" path="res://images/packed/vfx/combat/hellraiser_sword.png" id="2_2b0m0"]
+
+[node name="HellraiserAttackVfx" type="Node2D"]
+clip_children = 1
+script = ExtResource("1_po3v1")
+
+[node name="ClippingRect" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+mouse_filter = 2
+
+[node name="Sword" type="TextureRect" parent="ClippingRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 111.5
+offset_top = 300.0
+offset_right = 188.5
+offset_bottom = 510.0
+mouse_filter = 2
+texture = ExtResource("2_2b0m0")

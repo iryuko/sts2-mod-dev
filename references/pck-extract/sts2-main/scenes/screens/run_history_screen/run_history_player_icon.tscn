@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://csm3qddfa5pif"]
+
+[ext_resource type="Script" uid="uid://dk8x4724577ju" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NRunHistoryPlayerIcon.cs" id="1_pr63a"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_ascension.tres" id="2_j6i7a"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="3_8a4iu"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_jwuf7"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="5_bgbpp"]
+
+[node name="PlayerIcon" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_pr63a")
+
+[node name="AscensionIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(34, 70)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = 28.0
+offset_right = 13.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_j6i7a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AscensionLabel" type="Label" parent="AscensionIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -3.0
+offset_right = -11.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.53, 0.16059, 0.0954, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_8a4iu")
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_jwuf7")
+MinFontSize = 12
+MaxFontSize = 20
+
+[node name="SelectionReticle" parent="." instance=ExtResource("5_bgbpp")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

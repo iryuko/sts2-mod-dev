@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvpmujh41hjxx"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_yjuhn"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://ba4pl3cr5k1vu" path="res://animations/monsters/living_shield/living_shield_skel_data.tres" id="2_y2k2h"]
+
+[node name="LivingShield" type="Node2D"]
+script = ExtResource("1_yjuhn")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_y2k2h")
+preview_skin = "default"
+preview_animation = "attack"
+preview_frame = true
+preview_time = 0.33
+unique_name_in_owner = true
+position = Vector2(-3, -28)
+scale = Vector2(0.15, 0.15)
+metadata/_edit_lock_ = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -176.0
+offset_top = -400.0
+offset_right = 180.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -204)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -460)

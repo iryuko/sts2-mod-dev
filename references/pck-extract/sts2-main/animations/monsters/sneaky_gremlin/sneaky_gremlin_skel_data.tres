@@ -1,0 +1,51 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=12 format=3 uid="uid://cuvpvej58ln3s"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://tedgbndcfcuj" path="res://animations/monsters/sneaky_gremlin/sneaky_gremlin.atlas" id="1_6kxyb"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://ct213h3fbbl8b" path="res://animations/monsters/sneaky_gremlin/sneaky_gremlin.skel" id="2_mn7rf"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_h8us5"]
+from = "stunned_loop"
+to = "hurt_stunned"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rnftj"]
+from = "stunned_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6kxyb"]
+from = "stunned_loop"
+to = "wake_up"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mn7rf"]
+from = "awake_loop"
+to = "hurt_awake"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ppqvu"]
+from = "awake_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qn3r0"]
+from = "hurt_stunned"
+to = "hurt_stunned"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ycwg0"]
+from = "hurt_stunned"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_xo271"]
+from = "hurt_awake"
+to = "hurt_awake"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_w5uxs"]
+from = "hurt_awake"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_6kxyb")
+skeleton_file_res = ExtResource("2_mn7rf")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_h8us5"), SubResource("SpineAnimationMix_rnftj"), SubResource("SpineAnimationMix_6kxyb"), SubResource("SpineAnimationMix_mn7rf"), SubResource("SpineAnimationMix_ppqvu"), SubResource("SpineAnimationMix_qn3r0"), SubResource("SpineAnimationMix_ycwg0"), SubResource("SpineAnimationMix_xo271"), SubResource("SpineAnimationMix_w5uxs")]

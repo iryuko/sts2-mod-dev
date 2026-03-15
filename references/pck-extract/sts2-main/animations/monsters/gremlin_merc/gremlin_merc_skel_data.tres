@@ -1,0 +1,43 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=10 format=3 uid="uid://dyoiqsh4v83aq"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://oab0ydgv5nxm" path="res://animations/monsters/gremlin_merc/gremlin_merc.atlas" id="1_0w3la"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://flo84rk1b6nx" path="res://animations/monsters/gremlin_merc/gremlin_merc.skel" id="2_my80i"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lf1qb"]
+from = "idle_loop"
+to = "attack_single"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0w3la"]
+from = "idle_loop"
+to = "attack_double"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_my80i"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hkhms"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_bopgp"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_e4exx"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_pcpkh"]
+from = "attack_single"
+to = "idle_loop"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_0w3la")
+skeleton_file_res = ExtResource("2_my80i")
+default_mix = 0.2
+animation_mixes = [SubResource("SpineAnimationMix_lf1qb"), SubResource("SpineAnimationMix_0w3la"), SubResource("SpineAnimationMix_my80i"), SubResource("SpineAnimationMix_hkhms"), SubResource("SpineAnimationMix_bopgp"), SubResource("SpineAnimationMix_e4exx"), SubResource("SpineAnimationMix_pcpkh")]

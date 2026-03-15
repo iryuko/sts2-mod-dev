@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=3 uid="uid://brffpswpskycl"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_8lk3e"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bep4rvo4wxvor" path="res://animations/monsters/thieving_hopper/thieving_hopper_skel_data.tres" id="2_ojstv"]
+
+[node name="ThievingHopper" type="Node2D"]
+script = ExtResource("1_8lk3e")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_ojstv")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(22, -18)
+scale = Vector2(0.25, 0.25)
+
+[node name="CardBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_name = "card_target_bone"
+show_behind_parent = true
+position = Vector2(-136.38635, -526.05475)
+rotation = -0.14572033
+scale = Vector2(0.42842698, 0.44721726)
+skew = 0.012295127
+
+[node name="StolenCardPos" type="Marker2D" parent="Visuals/CardBoneNode"]
+unique_name_in_owner = true
+position = Vector2(14.5292, 271.034)
+scale = Vector2(2.5, 2.5)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "attack_target_bone"
+show_behind_parent = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -137.0
+offset_top = -268.0
+offset_right = 137.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -130)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -288)
+
+[node name="FlyingBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 305.0
+offset_bottom = 465.0
+
+[node name="Bounds" type="Control" parent="FlyingBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -433.0
+offset_right = -125.0
+offset_bottom = -465.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="FlyingBounds"]
+position = Vector2(0, -220)
+
+[node name="IntentPos" type="Marker2D" parent="FlyingBounds"]
+position = Vector2(0, -366)
+
+[node name="GroundedBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bounds" type="Control" parent="GroundedBounds"]
+anchors_preset = 0
+offset_left = -137.0
+offset_top = -268.0
+offset_right = 137.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="GroundedBounds"]
+position = Vector2(0, -130)
+
+[node name="IntentPos" type="Marker2D" parent="GroundedBounds"]
+position = Vector2(0, -288)

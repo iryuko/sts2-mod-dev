@@ -1,0 +1,96 @@
+[gd_scene load_steps=20 format=3 uid="uid://cgv5t20ihk55d"]
+
+[ext_resource type="Texture2D" uid="uid://cy4b1c3fms4vc" path="res://images/card_overlays/afflictions/shattered/affliction_shattereda.png" id="2_rifao"]
+[ext_resource type="Texture2D" uid="uid://2fkvv103cmyx" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_00.png" id="3_0bb52"]
+[ext_resource type="Texture2D" uid="uid://dr7rtfwxjwxv6" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_01.png" id="4_miqsm"]
+[ext_resource type="Texture2D" uid="uid://b8e77gjlr4552" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_02.png" id="5_hvew5"]
+[ext_resource type="Texture2D" uid="uid://c14lvvbtbmgvc" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_03.png" id="6_snu2p"]
+[ext_resource type="Texture2D" uid="uid://d0eemdo858d1x" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_04.png" id="7_fro0s"]
+[ext_resource type="Texture2D" uid="uid://t56mpyfejwoq" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_05.png" id="8_7j5q5"]
+[ext_resource type="Texture2D" uid="uid://dkokrgyylqx" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_06.png" id="9_vexgp"]
+[ext_resource type="Texture2D" uid="uid://cf21reyosv6lu" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_07.png" id="10_wulch"]
+[ext_resource type="Texture2D" uid="uid://c26jc5eo4aq8j" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_08.png" id="11_xlayt"]
+[ext_resource type="Texture2D" uid="uid://bqs8mecv3vrmq" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_09.png" id="12_twxll"]
+[ext_resource type="Texture2D" uid="uid://3qisjoagqq6h" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_10.png" id="13_d22os"]
+[ext_resource type="Texture2D" uid="uid://c2iuga7kaolct" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_11.png" id="14_jp0lo"]
+[ext_resource type="Texture2D" uid="uid://yxlc4ktnsqgd" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_12.png" id="15_5ysuv"]
+[ext_resource type="Texture2D" uid="uid://u42xeu0f75uj" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_13.png" id="16_yo2xi"]
+[ext_resource type="Texture2D" uid="uid://v0hmd36flfsq" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_14.png" id="17_1lcrd"]
+[ext_resource type="Texture2D" uid="uid://0wpnbbl4g0yl" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_15.png" id="18_cc02u"]
+[ext_resource type="Texture2D" uid="uid://db4rc1mcvc14v" path="res://images/card_overlays/afflictions/shattered/affliction_shatteredb_16.png" id="19_m3pge"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_186x3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_0bb52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_miqsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hvew5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_snu2p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fro0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7j5q5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vexgp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wulch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xlayt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_twxll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_d22os")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jp0lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5ysuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yo2xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_1lcrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cc02u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_m3pge")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 12.0
+}]
+
+[node name="Bound" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(-2.5, -7.99999)
+scale = Vector2(0.473862, 0.47199)
+texture = ExtResource("2_rifao")
+
+[node name="VisualLayer2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -5)
+scale = Vector2(0.474, 0.47)
+sprite_frames = SubResource("SpriteFrames_186x3")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.0374513

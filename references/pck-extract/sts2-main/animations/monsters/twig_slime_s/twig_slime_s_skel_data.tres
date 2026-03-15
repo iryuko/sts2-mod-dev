@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://033sy7ja6os"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cu4qy12t7roas" path="res://animations/monsters/twig_slime_s/twig_slime_s.atlas" id="1_24dkh"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dfpdmtts32qkh" path="res://animations/monsters/twig_slime_s/twig_slime_s.skel" id="2_obfx1"]
+
+[resource]
+atlas_res = ExtResource("1_24dkh")
+skeleton_file_res = ExtResource("2_obfx1")
+default_mix = 0.05

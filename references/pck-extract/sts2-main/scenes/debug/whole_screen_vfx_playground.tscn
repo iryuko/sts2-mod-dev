@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdl4xtsfqa6os"]
+
+[ext_resource type="PackedScene" uid="uid://dyajueylolau7" path="res://scenes/debug/fps_visualizer.tscn" id="1_5jbty"]
+[ext_resource type="Texture2D" uid="uid://ccxjea8y404qu" path="res://images/events/dense_vegetation.png" id="2_764r3"]
+[ext_resource type="PackedScene" uid="uid://dd2emb4n2i760" path="res://scenes/vfx/whole_screen/vfx_rain.tscn" id="2_s0ea1"]
+[ext_resource type="Script" uid="uid://bwip5qorjg185" path="res://src/Core/Nodes/Vfx/Examples/NGlowExampleVfx.cs" id="3_mch1a"]
+[ext_resource type="Script" uid="uid://dfdbnmyr26gij" path="res://src/Core/Nodes/Vfx/Examples/NSaturationExampleVfx.cs" id="5_lvvn6"]
+[ext_resource type="Script" uid="uid://5q1daqmewngq" path="res://src/Core/Debug/NDebugVfxSpawner.cs" id="8_c5xvm"]
+
+[sub_resource type="Environment" id="Environment_ir8yb"]
+background_mode = 3
+ambient_light_source = 1
+reflected_light_source = 1
+glow_enabled = true
+adjustment_enabled = true
+
+[node name="VfxSandbox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_c5xvm")
+metadata/_edit_lock_ = true
+
+[node name="BgImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = -108.0
+offset_right = 340.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_764r3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_ir8yb")
+
+[node name="RainExample" parent="." instance=ExtResource("2_s0ea1")]
+visible = false
+
+[node name="GlowExample" type="Node" parent="."]
+process_mode = 2
+script = ExtResource("3_mch1a")
+
+[node name="SaturationExample" type="Node" parent="."]
+process_mode = 2
+script = ExtResource("5_lvvn6")
+
+[node name="Fps" parent="." instance=ExtResource("1_5jbty")]
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 62.0
+offset_bottom = 24.0

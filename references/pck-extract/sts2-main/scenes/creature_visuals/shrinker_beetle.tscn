@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn2wlp7o4q17t"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_u4ure"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://2q2svw44dtaj" path="res://animations/monsters/shrinker_beetle/shrinker_beetle_skel_data.tres" id="2_lry2l"]
+
+[node name="ShrinkerBeetle" type="Node2D"]
+script = ExtResource("1_u4ure")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, -25)
+scale = Vector2(0.25, 0.25)
+skeleton_data_res = ExtResource("2_lry2l")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -116.0
+offset_top = -161.0
+offset_right = 116.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -70)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -208)

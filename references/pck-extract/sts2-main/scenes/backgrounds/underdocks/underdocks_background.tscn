@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://b04fph0hpg8qc"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_pdhkx"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_hfax2"]
+
+[node name="UnderdocksBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_pdhkx")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -279.0
+offset_top = -533.0
+offset_right = -279.0
+offset_bottom = -533.0
+script = ExtResource("2_hfax2")
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_hfax2")
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_hfax2")
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_hfax2")
+VisibleLayer = 2
+
+[node name="Layer_04" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_hfax2")
+VisibleLayer = 1
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_hfax2")

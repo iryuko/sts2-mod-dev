@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bs7i15i8l37n7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cts3lh0u0un58" path="res://animations/rest_site/defect/restsite_defect.atlas" id="1_j44yb"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bgkhoqh8urq6h" path="res://animations/rest_site/defect/restsite_defect.skel" id="2_et4l2"]
+
+[resource]
+atlas_res = ExtResource("1_j44yb")
+skeleton_file_res = ExtResource("2_et4l2")
+default_mix = 0.2

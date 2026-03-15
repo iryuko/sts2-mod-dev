@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://btnorbf3763da"]
+
+[ext_resource type="Material" uid="uid://wnavfdw1eku4" path="res://materials/vfx/big_slash/vfx_big_slash_impact_smoke.tres" id="1_kcd48"]
+[ext_resource type="Texture2D" uid="uid://by1svayghwxxe" path="res://images/vfx/big_slash/big_slash_impact_smoke_flipbook.png" id="2_2jtdx"]
+
+[sub_resource type="Curve" id="Curve_2eh7x"]
+_data = [Vector2(0, 1), 0.0, -2.40192, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n5720"]
+curve = SubResource("Curve_2eh7x")
+
+[sub_resource type="Curve" id="Curve_8kyg5"]
+_data = [Vector2(0, 0.495894), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_8vl02"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kwak5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_pyd8j"]
+curve_x = SubResource("Curve_8kyg5")
+curve_y = SubResource("Curve_8vl02")
+curve_z = SubResource("Curve_kwak5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t38o2"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 100, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 1.75
+scale_max = 2.25
+scale_curve = SubResource("CurveXYZTexture_pyd8j")
+alpha_curve = SubResource("CurveTexture_n5720")
+
+[node name="vfx_big_slash_impact_side_smoke" type="GPUParticles2D"]
+material = ExtResource("1_kcd48")
+emitting = false
+amount = 1
+texture = ExtResource("2_2jtdx")
+lifetime = 0.75
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_t38o2")

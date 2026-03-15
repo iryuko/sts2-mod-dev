@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://bylx12ikbsu6w"]
+
+[ext_resource type="Script" uid="uid://boi7a7dcdm6r2" path="res://src/Core/Nodes/Combat/NCombatUi.cs" id="1_8bqby"]
+[ext_resource type="PackedScene" uid="uid://bbw67f6yb0yr8" path="res://scenes/combat/energy_counters/star_counter.tscn" id="2_47ykd"]
+[ext_resource type="PackedScene" uid="uid://buvelng5pukxl" path="res://scenes/combat/player_hand.tscn" id="2_vquxw"]
+[ext_resource type="PackedScene" uid="uid://dhd3c4yt4kci0" path="res://scenes/combat/end_turn_button.tscn" id="3_teadw"]
+[ext_resource type="PackedScene" uid="uid://crom4irts1tj0" path="res://scenes/combat/combat_piles_container.tscn" id="5_u72tk"]
+[ext_resource type="PackedScene" uid="uid://cypxv1tykr6co" path="res://scenes/combat/ping_button.tscn" id="8_3h05l"]
+[ext_resource type="Script" uid="uid://b536tb4ekbwyp" path="res://src/Core/Nodes/CommonUi/NCardPreviewContainer.cs" id="8_106yw"]
+[ext_resource type="Script" uid="uid://dljxijy12lds2" path="res://src/Core/Nodes/CommonUi/NMessyCardPreviewContainer.cs" id="9_sv3j0"]
+[ext_resource type="Script" uid="uid://krrr5l7pgq7c" path="res://src/Core/Nodes/Combat/NCardPlayQueue.cs" id="9_u72tk"]
+
+[node name="CombatUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_8bqby")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="EnergyCounterContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -252.0
+offset_right = 100.0
+offset_bottom = -252.0
+grow_vertical = 0
+
+[node name="StarCounter" parent="." instance=ExtResource("2_47ykd")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="PingButton" parent="." instance=ExtResource("8_3h05l")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -382.0
+offset_top = 100.0
+offset_right = -232.0
+offset_bottom = 170.0
+
+[node name="EndTurnButton" parent="." instance=ExtResource("3_teadw")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 16.0
+offset_bottom = 106.0
+
+[node name="CombatPileContainer" parent="." instance=ExtResource("5_u72tk")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="CardPreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_106yw")
+
+[node name="MessyCardPreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 263.0
+offset_top = 196.0
+offset_right = -302.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_sv3j0")
+
+[node name="Hand" parent="." instance=ExtResource("2_vquxw")]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+
+[node name="PlayQueue" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_u72tk")
+
+[node name="PlayContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

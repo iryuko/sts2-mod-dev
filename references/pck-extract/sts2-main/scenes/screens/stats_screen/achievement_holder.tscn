@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://c471jyj223aja"]
+
+[ext_resource type="Script" uid="uid://bpnpmtgt73u0c" path="res://src/Core/Nodes/Screens/StatsScreen/NAchievementHolder.cs" id="1_yxr33"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_h376p"]
+[ext_resource type="Texture2D" uid="uid://dog0uhodid52f" path="res://images/packed/achievements/achievement_lock.png" id="2_mktr0"]
+[ext_resource type="Material" uid="uid://bndon6241wmcf" path="res://materials/vfx/hsv.tres" id="3_4bsmw"]
+[ext_resource type="Texture2D" uid="uid://ulevpj842dey" path="res://images/packed/achievements/achievement_border.png" id="3_ckvm7"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="3_ex3x6"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_ndol7"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_yi8s2"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="4_65hmb"]
+[ext_resource type="Texture2D" uid="uid://bce77ddqv5gc0" path="res://images/packed/achievements/unlocked/all_cards_upgraded.png" id="6_4bsmw"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_uk4eq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mktr0"]
+resource_local_to_scene = true
+shader = ExtResource("2_h376p")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.2
+shader_parameter/v = 0.5
+
+[node name="AchievementHolder" type="Control"]
+custom_minimum_size = Vector2(550, 100)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 550.0
+offset_bottom = 100.0
+pivot_offset = Vector2(98, 98)
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_yxr33")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_mktr0")
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_4bsmw")
+expand_mode = 1
+
+[node name="Lock" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("2_mktr0")
+expand_mode = 1
+
+[node name="Border" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+material = ExtResource("3_4bsmw")
+custom_minimum_size = Vector2(110, 110)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ckvm7")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 110.0
+offset_right = 550.0
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="InfoText" type="RichTextLabel" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/line_separation = -3
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("3_ex3x6")
+theme_override_fonts/bold_font = ExtResource("3_ndol7")
+theme_override_fonts/italics_font = ExtResource("4_65hmb")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "[b][gold]Eternal One[/gold][/b]
+Complete all other achievements.
+"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("3_yi8s2")
+AutoSizeEnabled = false
+MaxFontSize = 22
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="DateText" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_65hmb")
+theme_override_font_sizes/font_size = 20
+text = "Unlocked Aug 23, 2025, 8:00 PM"
+vertical_alignment = 1
+script = ExtResource("7_uk4eq")
+AutoSizeEnabled = false
+MaxFontSize = 20
+metadata/_custom_type_script = "uid://dtfio45agppyj"

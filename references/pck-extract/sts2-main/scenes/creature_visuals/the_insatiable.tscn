@@ -1,0 +1,365 @@
+[gd_scene load_steps=22 format=3 uid="uid://swc1dc3aim6y"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v4b60"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b3r0mmgnjkmfi" path="res://animations/monsters/the_insatiable/the_insatiable_skel_data.tres" id="2_gkytr"]
+[ext_resource type="Texture2D" uid="uid://gvoysorwhaiq" path="res://images/vfx/monsters/the_insatiable/sand_cloud.png" id="3_1jnrf"]
+[ext_resource type="Script" uid="uid://csbo3fp1xhx3" path="res://src/Core/Nodes/Vfx/NTheInsatiableVfx.cs" id="3_vbiwf"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="4_igw0d"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ukbaf"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_cw4ma"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8pluu"]
+offsets = PackedFloat32Array(0, 0.0758853, 0.163575)
+colors = PackedColorArray(0.701961, 0.643137, 0.52549, 0, 0.835294, 0.686275, 0.552941, 0.694118, 0.701961, 0.643137, 0.52549, 0)
+
+[sub_resource type="Gradient" id="Gradient_11rxm"]
+offsets = PackedFloat32Array(0.451939)
+colors = PackedColorArray(0.835294, 0.686275, 0.552941, 0.694118)
+
+[sub_resource type="Curve" id="Curve_axoqr"]
+_data = [Vector2(0, 0.979808), 0.0, 0.0, 0, 0, Vector2(0.817276, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -22.3537, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_83se2"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.85098, 0.721569, 0.486275, 0.231373, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="Curve" id="Curve_yhgbv"]
+_data = [Vector2(0.00664452, 0.0367156), 0.0, 0.522431, 0, 0, Vector2(0.219269, 0.626836), 2.42557, 2.42557, 0, 0, Vector2(0.335548, 0.843792), 0.0, 0.0, 0, 0, Vector2(0.425249, 0.904539), 1.19413, 1.19413, 0, 0, Vector2(0.883721, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.331776), -10.1583, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Gradient" id="Gradient_kj7v2"]
+offsets = PackedFloat32Array(0, 0.0659341, 0.175824, 0.604396, 1)
+colors = PackedColorArray(0.701961, 0.643137, 0.52549, 0, 0.835294, 0.686275, 0.552941, 0.694118, 0.830732, 0.684834, 0.551981, 0.665547, 0.760784, 0.662745, 0.537255, 0.227451, 0.701961, 0.643137, 0.52549, 0)
+
+[sub_resource type="Gradient" id="Gradient_b0enu"]
+offsets = PackedFloat32Array(0, 0.267399, 0.600733, 1)
+colors = PackedColorArray(0.85098, 0.721569, 0.486275, 0.231373, 1, 1, 1, 1, 0.98, 0.98, 0.98, 0.92549, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wwcf0"]
+
+[sub_resource type="Gradient" id="Gradient_7pc0m"]
+offsets = PackedFloat32Array(0, 0.120879, 0.258845, 0.849515, 1)
+colors = PackedColorArray(0.85098, 0.721569, 0.486275, 0.231373, 0.981728, 0.96586, 0.937009, 0.905753, 1, 1, 1, 1, 0.94, 0.90381, 0.8366, 0.847059, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_iy5u3"]
+gradient = SubResource("Gradient_7pc0m")
+
+[sub_resource type="CurveTexture" id="CurveTexture_2gan7"]
+curve = SubResource("Curve_axoqr")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_cuxnw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_cuxnw"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_cuxnw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cuxnw"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.0
+direction = Vector3(0, -1, 0)
+spread = 7.0
+initial_velocity_min = 700.0
+initial_velocity_max = 1100.0
+gravity = Vector3(0, 500, 0)
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_min = 0.02
+scale_max = 0.03
+scale_curve = SubResource("CurveTexture_2gan7")
+color = Color(1, 0.958333, 0.9, 1)
+color_ramp = SubResource("GradientTexture1D_iy5u3")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+
+[node name="TheInsatiable" type="Node2D"]
+script = ExtResource("1_v4b60")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_gkytr")
+preview_skin = "Default"
+preview_animation = "intro_loop"
+preview_frame = false
+preview_time = 0.45
+unique_name_in_owner = true
+position = Vector2(77.0002, -25.9999)
+scale = Vector2(0.35, 0.35)
+
+[node name="SandSlotNode" type="SpineSlotNode" parent="Visuals"]
+slot_name = "sand_overlap"
+show_behind_parent = true
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="GroundSandMasterTransform" type="Node2D" parent="Visuals/SandSlotNode"]
+position = Vector2(-19.9997, 20.0002)
+scale = Vector2(1.96029, 1.41736)
+
+[node name="sand clouds2" type="CPUParticles2D" parent="Visuals/SandSlotNode/GroundSandMasterTransform"]
+material = SubResource("CanvasItemMaterial_ukbaf")
+position = Vector2(-7, 10)
+amount = 150
+texture = ExtResource("3_1jnrf")
+lifetime = 5.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(225, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_cw4ma")
+scale_amount_min = 0.3
+color = Color(1, 1, 1, 0.498039)
+color_ramp = SubResource("Gradient_8pluu")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+anim_offset_max = 1.0
+
+[node name="sand clouds3" type="CPUParticles2D" parent="Visuals/SandSlotNode/GroundSandMasterTransform"]
+material = SubResource("CanvasItemMaterial_ukbaf")
+position = Vector2(3, 3)
+amount = 150
+texture = ExtResource("3_1jnrf")
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(175, 10)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_cw4ma")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(1, 1, 1, 0.388235)
+color_ramp = SubResource("Gradient_11rxm")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+anim_offset_max = 1.0
+
+[node name="sand clouds4" type="CPUParticles2D" parent="Visuals/SandSlotNode/GroundSandMasterTransform"]
+material = SubResource("CanvasItemMaterial_ukbaf")
+position = Vector2(3, 3)
+scale = Vector2(4, 0.5)
+amount = 150
+texture = ExtResource("3_1jnrf")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_cw4ma")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(1, 1, 1, 0.388235)
+color_ramp = SubResource("Gradient_11rxm")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+anim_offset_max = 1.0
+
+[node name="sand3" type="CPUParticles2D" parent="Visuals/SandSlotNode/GroundSandMasterTransform"]
+position = Vector2(182.188, -18.1428)
+scale = Vector2(0.999997, 0.999997)
+amount = 100
+texture = ExtResource("4_igw0d")
+lifetime = 0.5
+preprocess = 5.0
+randomness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 123.49
+gravity = Vector2(0, 500)
+initial_velocity_max = 334.3
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_axoqr")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_83se2")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+
+[node name="sand4" type="CPUParticles2D" parent="Visuals/SandSlotNode/GroundSandMasterTransform"]
+position = Vector2(-172, -19)
+scale = Vector2(0.999997, 0.999997)
+amount = 100
+texture = ExtResource("4_igw0d")
+lifetime = 0.5
+preprocess = 5.0
+randomness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 123.49
+gravity = Vector2(0, 500)
+initial_velocity_max = 334.3
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_axoqr")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_83se2")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+
+[node name="SalivaSlotNode" type="SpineSlotNode" parent="Visuals"]
+slot_name = "saliva_base_attach"
+show_behind_parent = true
+position = Vector2(-42.345703, -464.60507)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SalivaCloudParticles" type="CPUParticles2D" parent="Visuals/SalivaSlotNode"]
+material = SubResource("CanvasItemMaterial_ukbaf")
+position = Vector2(1.98626, 29.1272)
+scale = Vector2(1.96029, 1.41736)
+emitting = false
+amount = 50
+texture = ExtResource("3_1jnrf")
+emission_shape = 3
+emission_rect_extents = Vector2(5, 5)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(100, 300)
+initial_velocity_min = 100.0
+initial_velocity_max = 700.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_cw4ma")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+scale_amount_curve = SubResource("Curve_yhgbv")
+color = Color(1, 1, 1, 0.498039)
+color_ramp = SubResource("Gradient_kj7v2")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+anim_offset_max = 1.0
+
+[node name="SalivaFountainParticles" type="CPUParticles2D" parent="Visuals/SalivaSlotNode"]
+show_behind_parent = true
+position = Vector2(-26.5852, 0.555769)
+scale = Vector2(1.96028, 1.41735)
+emitting = false
+amount = 300
+texture = ExtResource("4_igw0d")
+lifetime = 2.5
+speed_scale = 2.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 3.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 700.0
+initial_velocity_max = 950.0
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.02
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_axoqr")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_83se2")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+
+[node name="SalivaDroolParticles" type="CPUParticles2D" parent="Visuals/SalivaSlotNode"]
+show_behind_parent = true
+position = Vector2(-126.585, 6.27005)
+rotation = 0.303164
+scale = Vector2(1.96028, 1.41735)
+emitting = false
+amount = 60
+texture = ExtResource("4_igw0d")
+speed_scale = 1.5
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(35, 30)
+direction = Vector2(-1, -1)
+spread = 20.0
+gravity = Vector2(0, 500)
+initial_velocity_min = 100.0
+initial_velocity_max = 300.0
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.02
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_axoqr")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_b0enu")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_cuxnw")
+
+[node name="BaseBlastSlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "base_blast_attach"
+show_behind_parent = true
+position = Vector2(3.0517578e-05, 299.99997)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="BaseBlastParticles" type="GPUParticles2D" parent="Visuals/BaseBlastSlot"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_wwcf0")
+scale = Vector2(1.96028, 1.41735)
+amount = 1000
+texture = ExtResource("4_igw0d")
+lifetime = 1.8
+speed_scale = 2.0
+randomness = 1.0
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_cuxnw")
+
+[node name="NTheInsatiableVfx" type="Node" parent="Visuals" node_paths=PackedStringArray("_continuousParticles")]
+script = ExtResource("3_vbiwf")
+_continuousParticles = []
+metadata/_custom_type_script = "uid://csbo3fp1xhx3"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -234.0
+offset_top = -472.0
+offset_right = 234.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -214)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -512)

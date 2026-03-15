@@ -1,0 +1,57 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxox6rauuidmo"]
+
+[ext_resource type="Material" uid="uid://d1g6hocx67mqx" path="res://materials/vfx/common/vfx_horizontal_smoke.tres" id="1_ch71j"]
+[ext_resource type="Texture2D" uid="uid://chu2di7fhg37j" path="res://images/vfx/common/common_horizontal_smoke.png" id="2_382ed"]
+
+[sub_resource type="Curve" id="Curve_av4la"]
+_data = [Vector2(0, 0), 0.0, 10.208825, 0, 0, Vector2(0.14882508, 0.51407766), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hc2td"]
+curve = SubResource("Curve_av4la")
+
+[sub_resource type="Gradient" id="Gradient_y1d1k"]
+offsets = PackedFloat32Array(0, 0.3768116)
+colors = PackedColorArray(1, 1, 1, 1, 0.65, 0.65, 0.65, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xt6jm"]
+gradient = SubResource("Gradient_y1d1k")
+
+[sub_resource type="Curve" id="Curve_e5end"]
+_limits = [0.0, 2.25, 0.0, 1.0]
+_data = [Vector2(0, 1.7956309), 0.0, 1.1790215, 0, 0, Vector2(1, 2.25), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_palh0"]
+_data = [Vector2(0, 0.84854364), 0.0, 0.48339844, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_tbywl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_1j46p"]
+curve_x = SubResource("Curve_e5end")
+curve_y = SubResource("Curve_palh0")
+curve_z = SubResource("Curve_tbywl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3ql7w"]
+lifetime_randomness = 0.15
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 1.9
+scale_max = 2.1
+scale_curve = SubResource("CurveXYZTexture_1j46p")
+color_ramp = SubResource("GradientTexture1D_xt6jm")
+alpha_curve = SubResource("CurveTexture_hc2td")
+
+[node name="vfx_horizontal_smoke" type="GPUParticles2D"]
+texture_repeat = 2
+material = ExtResource("1_ch71j")
+emitting = false
+amount = 1
+texture = ExtResource("2_382ed")
+lifetime = 2.0
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_3ql7w")

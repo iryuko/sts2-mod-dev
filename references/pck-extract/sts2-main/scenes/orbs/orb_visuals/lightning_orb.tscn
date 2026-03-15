@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://d0yehrctd8otx"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://8odm3wcdfwr1" path="res://animations/ui/combat/orbs/lightning_orb_skel_data.tres" id="1_xhlno"]
+[ext_resource type="Texture2D" uid="uid://b8h74hib27jip" path="res://images/vfx/orbs/lightning_orb_particle.png" id="2_44wuo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gl81x"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_4cdi0"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.19297), 0.0, -0.0802492, 0, 0, Vector2(1, 0.880173), -0.465448, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_b4m8e"]
+curve = SubResource("Curve_4cdi0")
+
+[sub_resource type="Gradient" id="Gradient_nhjr6"]
+offsets = PackedFloat32Array(0, 0.486034, 1)
+colors = PackedColorArray(0.163408, 0.163408, 0.163408, 1, 0.847474, 0.847474, 0.847474, 1, 0.234958, 0.234958, 0.234958, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bu6x3"]
+gradient = SubResource("Gradient_nhjr6")
+
+[sub_resource type="Curve" id="Curve_ist5n"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ggvw"]
+curve = SubResource("Curve_ist5n")
+
+[sub_resource type="Curve" id="Curve_7o0l6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fn7s8"]
+curve = SubResource("Curve_7o0l6")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_x0aip"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_x0aip"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_x0aip")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x0aip"]
+lifetime_randomness = 0.14
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 12.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 11.0
+emission_ring_cone_angle = 90.0
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+radial_accel_curve = SubResource("CurveTexture_0ggvw")
+attractor_interaction_enabled = false
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_fn7s8")
+color_ramp = SubResource("GradientTexture1D_bu6x3")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_x0aip")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_speed_curve = SubResource("CurveTexture_b4m8e")
+
+[node name="LightningOrb" type="Node2D"]
+
+[node name="SpineSkeleton" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_xhlno")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.1, 0.1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_gl81x")
+amount = 1
+amount_ratio = 0.356
+texture = ExtResource("2_44wuo")
+lifetime = 0.25
+randomness = 0.46
+process_material = SubResource("ParticleProcessMaterial_x0aip")

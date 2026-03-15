@@ -1,0 +1,180 @@
+[gd_scene load_steps=22 format=3 uid="uid://dutobiuo40mmg"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_stday"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bs807jqviimw5" path="res://animations/monsters/slimed_berserker/slimed_berserker_skel_data.tres" id="2_28jym"]
+[ext_resource type="Texture2D" uid="uid://bir8sk2yb2twm" path="res://images/vfx/monsters/slimed_berserker/slimed_berserker_drop_1l.png" id="4_2nqh3"]
+[ext_resource type="Script" uid="uid://h0dkoyq1ktfn" path="res://src/Core/Nodes/Vfx/NSlimedBerserkerVfx.cs" id="4_33v88"]
+[ext_resource type="Texture2D" uid="uid://bmutyg44xrs83" path="res://images/vfx/monsters/slimed_berserker/slimed_berserker_drop_1r.png" id="4_enga7"]
+[ext_resource type="Texture2D" uid="uid://dvlj50dxa0ssn" path="res://images/vfx/monsters/slimed_berserker/slimed_berserker_drop_2.png" id="6_nmukw"]
+
+[sub_resource type="Gradient" id="Gradient_g5758"]
+offsets = PackedFloat32Array(0, 0.543689, 1)
+colors = PackedColorArray(0.746006, 0.622808, 0.753069, 1, 1, 1, 1, 1, 0.656904, 0.757926, 0.722568, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cem5r"]
+gradient = SubResource("Gradient_g5758")
+
+[sub_resource type="Curve" id="Curve_c2g6s"]
+_data = [Vector2(0, 0.269726), 0.0, 9.81132, 0, 0, Vector2(0.254545, 1), 0.0, 0.0, 0, 0, Vector2(0.727273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0021441), -12.2641, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_a7pmi"]
+curve = SubResource("Curve_c2g6s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_03gi1"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 20.0
+initial_velocity_min = 500.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 700, 0)
+damping_min = 1.0
+damping_max = 3.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_a7pmi")
+color_initial_ramp = SubResource("GradientTexture1D_cem5r")
+
+[sub_resource type="Curve" id="Curve_ff02k"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 63.1782, 0, 0, Vector2(0.956818, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0pxog"]
+curve = SubResource("Curve_ff02k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ri3vl"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 20.0
+initial_velocity_min = 500.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, 700, 0)
+damping_min = 2.0
+damping_max = 3.0
+damping_curve = SubResource("CurveTexture_0pxog")
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_a7pmi")
+color_initial_ramp = SubResource("GradientTexture1D_cem5r")
+
+[sub_resource type="Gradient" id="Gradient_2r6e0"]
+offsets = PackedFloat32Array(0, 0.543689, 1)
+colors = PackedColorArray(0.746006, 0.622808, 0.753069, 1, 1, 1, 1, 1, 0.656904, 0.757926, 0.722568, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_61e66"]
+gradient = SubResource("Gradient_2r6e0")
+
+[sub_resource type="Curve" id="Curve_g35ay"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 63.1782, 0, 0, Vector2(0.956818, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_28tkn"]
+curve = SubResource("Curve_g35ay")
+
+[sub_resource type="Curve" id="Curve_e8ym3"]
+_data = [Vector2(0, 0.269726), 0.0, 9.81132, 0, 0, Vector2(0.254545, 1), 0.0, 0.0, 0, 0, Vector2(0.727273, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0021441), -12.2641, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_yixqd"]
+curve = SubResource("Curve_e8ym3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tem22"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 43.89
+initial_velocity_min = 20.0
+initial_velocity_max = 1500.0
+gravity = Vector3(0, 700, 0)
+damping_min = 2.0
+damping_max = 3.0
+damping_curve = SubResource("CurveTexture_28tkn")
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_yixqd")
+color_initial_ramp = SubResource("GradientTexture1D_61e66")
+
+[node name="SlimedBerserker" type="Node2D"]
+script = ExtResource("1_stday")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_28jym")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.62
+unique_name_in_owner = true
+position = Vector2(-21.08997, -43)
+scale = Vector2(0.15, 0.15)
+
+[node name="ParticleSlotNodeL" type="SpineSlotNode" parent="Visuals"]
+slot_name = "goo_emitter_l"
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(-562.4435, -1534.3677)
+rotation = -2.459007
+scale = Vector2(0.99999803, 1.0000023)
+skew = -1.9669533e-05
+
+[node name="GooParticles" type="GPUParticles2D" parent="Visuals/ParticleSlotNodeL"]
+position = Vector2(-1.14501, -2.93494)
+amount = 100
+texture = ExtResource("4_2nqh3")
+lifetime = 0.75
+speed_scale = 2.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_03gi1")
+
+[node name="ParticleSlotNodeR" type="SpineSlotNode" parent="Visuals"]
+slot_name = "goo_emitter_r"
+show_behind_parent = true
+position = Vector2(479.62527, -1403.1914)
+rotation = -0.51221496
+scale = Vector2(0.9999979, 1.0000023)
+
+[node name="GooParticles" type="GPUParticles2D" parent="Visuals/ParticleSlotNodeR"]
+position = Vector2(-1.14501, -2.93494)
+amount = 100
+texture = ExtResource("4_enga7")
+lifetime = 0.9
+speed_scale = 2.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_ri3vl")
+
+[node name="ParticleSlotNodeVomit" type="SpineSlotNode" parent="Visuals"]
+slot_name = "vomit_emitter"
+show_behind_parent = true
+position = Vector2(-381.9541, -1107.7075)
+rotation = 3.1091952
+scale = Vector2(1.0000072, 0.99967915)
+skew = -2.1338463e-05
+
+[node name="GooParticles" type="GPUParticles2D" parent="Visuals/ParticleSlotNodeVomit"]
+rotation = -0.0343488
+scale = Vector2(0.999986, 1.00001)
+amount = 150
+texture = ExtResource("6_nmukw")
+lifetime = 0.85
+speed_scale = 2.0
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_tem22")
+
+[node name="NSlimedBerserkerVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_33v88")
+metadata/_custom_type_script = "uid://h0dkoyq1ktfn"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -320.0
+offset_top = -360.0
+offset_right = 320.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-9, -192)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -397)

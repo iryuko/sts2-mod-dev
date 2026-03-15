@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://dbp82ynip01k2"]
+
+[ext_resource type="Script" uid="uid://cws3v7ncxly3" path="res://src/Core/Nodes/Ftue/NRelicRewardFtue.cs" id="1_jypfj"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_4ynd8"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="2_44tc2"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="3_7dju3"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_pgvbx"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_4c71b"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_ihkt2"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_5c52v"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_rqimw"]
+[ext_resource type="Texture2D" uid="uid://cscfaualt5exf" path="res://images/ftue/ftue_pointer_arrow.png" id="12_8e43t"]
+
+[node name="ObtainRelicFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jypfj")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FtuePopup" type="TextureRect" parent="."]
+material = ExtResource("2_4ynd8")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 247.48254
+offset_top = 131.0
+offset_right = 887.3113
+offset_bottom = 415.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_44tc2")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FtueConfirmButton" parent="FtuePopup" instance=ExtResource("3_7dju3")]
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -137.5
+offset_top = -67.0
+offset_right = 137.5
+offset_bottom = 8.0
+grow_vertical = 0
+
+[node name="Header" type="Label" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.22, 0.192793, 0.1034, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_pgvbx")
+theme_override_font_sizes/font_size = 26
+text = "Tip: 	Relics"
+vertical_alignment = 1
+script = ExtResource("4_4c71b")
+MaxFontSize = 26
+
+[node name="DescriptionContainer" type="MarginContainer" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 73.0
+offset_right = -35.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="Description" type="RichTextLabel" parent="FtuePopup/DescriptionContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("5_ihkt2")
+theme_override_fonts/bold_font = ExtResource("6_5c52v")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "Relics found throughout the Spire grant unique bonuses and remain throughout your run.
+
+They can be found by defeating powerful foes or within chests."
+scroll_active = false
+script = ExtResource("7_rqimw")
+MaxFontSize = 22
+
+[node name="Arrow" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 926.0
+offset_top = 620.0
+offset_right = 1170.0
+offset_bottom = 824.0
+texture = ExtResource("12_8e43t")
+flip_v = true

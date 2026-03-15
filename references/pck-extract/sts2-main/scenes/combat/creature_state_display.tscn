@@ -1,0 +1,94 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqc3erx4y4lu4"]
+
+[ext_resource type="Script" uid="uid://dvad6qstded3t" path="res://src/Core/Nodes/Combat/NCreatureStateDisplay.cs" id="1_c5dax"]
+[ext_resource type="PackedScene" uid="uid://i0agyocasfdy" path="res://scenes/combat/health_bar.tscn" id="2_frhrx"]
+[ext_resource type="Script" uid="uid://dkdmbvq3w0236" path="res://src/Core/Nodes/Combat/NPowerContainer.cs" id="3_6fu0t"]
+[ext_resource type="Texture2D" uid="uid://drmgoyr4vi1nf" path="res://images/ui/combat/combat_nameplate_background.png" id="6_w2p1q"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_iaa4q"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="14_4w53k"]
+
+[node name="CreatureStateDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_c5dax")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PowerContainer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -115.0
+offset_top = 18.0
+offset_right = -115.0
+offset_bottom = 18.0
+script = ExtResource("3_6fu0t")
+
+[node name="HealthBar" parent="." instance=ExtResource("2_frhrx")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 1.0
+offset_right = 1.0
+offset_bottom = 0.0
+
+[node name="HpBarHitbox" type="Control" parent="HealthBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_top = -6.0
+offset_right = 120.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NameplateContainer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -125.0
+offset_top = 24.0
+offset_right = 113.0
+offset_bottom = 52.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="NameplateContainer"]
+modulate = Color(0, 0, 0, 0.662745)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_top = -21.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_w2p1q")
+expand_mode = 2
+
+[node name="NameplateLabel" type="Label" parent="NameplateContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 5.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("14_4w53k")
+theme_override_font_sizes/font_size = 24
+text = "Byrdlett"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_iaa4q")
+MinFontSize = 12
+MaxFontSize = 24

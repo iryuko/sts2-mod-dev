@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxmmo5d8bvuq8"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_c2g00"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c7e8cwdb2dyxi" path="res://animations/monsters/two_tailed_rat/two_tailed_rat_skel_data.tres" id="2_egxrb"]
+
+[node name="TwoTailedRat" type="Node2D"]
+script = ExtResource("1_c2g00")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_egxrb")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.51
+unique_name_in_owner = true
+position = Vector2(0, -28)
+scale = Vector2(0.33, 0.33)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -214.0
+offset_right = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -126)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -254)

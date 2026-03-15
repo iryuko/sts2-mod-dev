@@ -1,0 +1,51 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=12 format=3 uid="uid://jlbtpewkxbwt"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cn8djxs4io47i" path="res://animations/monsters/the_obscura/the_obscura.atlas" id="1_8bc73"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://435xvv30t4ov" path="res://animations/monsters/the_obscura/the_obscura.skel" id="2_7w5vo"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_gl8tv"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_8bc73"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_o4lg3"]
+from = "intro_loop"
+to = "hurt_intro"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_bxycn"]
+from = "intro_loop"
+to = "die_intro"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7w5vo"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_oh3kh"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0e8cy"]
+from = "hurt_intro"
+to = "hurt_intro"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2e6at"]
+from = "hurt_intro"
+to = "die_intro"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ytho7"]
+from = "intro_loop"
+to = "cast_intro"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_8bc73")
+skeleton_file_res = ExtResource("2_7w5vo")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_gl8tv"), SubResource("SpineAnimationMix_8bc73"), SubResource("SpineAnimationMix_o4lg3"), SubResource("SpineAnimationMix_bxycn"), SubResource("SpineAnimationMix_7w5vo"), SubResource("SpineAnimationMix_oh3kh"), SubResource("SpineAnimationMix_0e8cy"), SubResource("SpineAnimationMix_2e6at"), SubResource("SpineAnimationMix_ytho7")]

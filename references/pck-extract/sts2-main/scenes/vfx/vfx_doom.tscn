@@ -1,0 +1,493 @@
+[gd_scene load_steps=28 format=3 uid="uid://bfsdmthk387gn"]
+
+[ext_resource type="Texture2D" uid="uid://cj18xv7p002s8" path="res://images/vfx/vfx_doom/doom_glow.png" id="1_tc0i2"]
+[ext_resource type="Texture2D" uid="uid://cf16hlh5gob70" path="res://images/vfx/vfx_doom/doom_hole_bottom.png" id="2_5436l"]
+[ext_resource type="Script" uid="uid://m3dsxtyjvjd7" path="res://src/Core/Nodes/Vfx/NDoomSubEmitterVfx.cs" id="2_bf3s0"]
+[ext_resource type="Shader" uid="uid://bxs7wyhgnooig" path="res://shaders/vfx/vfx_doom_flame_shader.tres" id="2_djdd7"]
+[ext_resource type="Texture2D" uid="uid://bes415ift114f" path="res://images/vfx/vfx_doom/foom_glob_particles.png" id="2_hwsmy"]
+[ext_resource type="Texture2D" uid="uid://kd61m1rek8lf" path="res://images/vfx/vfx_doom/doom_flame.png" id="2_iq5u5"]
+[ext_resource type="Texture2D" uid="uid://cbn4w2u7pxydp" path="res://images/vfx/vfx_doom/doom_fill_particle.png" id="3_3jfsr"]
+[ext_resource type="Texture2D" uid="uid://cmqhxmoqg5qwc" path="res://images/vfx/vfx_doom/doom_spear_particle.png" id="4_a5mv6"]
+[ext_resource type="Texture2D" uid="uid://dtaovewempx07" path="res://images/vfx/tileable_noise_1.png" id="4_ls61p"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="9_85mjn"]
+[ext_resource type="Script" uid="uid://dbyq0bnfaawpt" path="res://src/Core/Nodes/Vfx/NDoomVfx.cs" id="9_wfdug"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="12_6vpnj"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rxg5m"]
+
+[sub_resource type="Curve" id="Curve_3d7vf"]
+_data = [Vector2(0, 0.018868), 0.0, 10.1179, 0, 0, Vector2(0.236364, 1), 0.0, 0.0, 0, 0, Vector2(0.736364, 0.682247), -1.30818, -1.30818, 0, 0, Vector2(1, 0), -3.43217, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hh0rg"]
+curve = SubResource("Curve_3d7vf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7onm7"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 12, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_hh0rg")
+color = Color(0.71, 0.71, 0.71, 1)
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u266u"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="CurveTexture" id="CurveTexture_wfkcd"]
+curve = SubResource("Curve_3d7vf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_27m04"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 0)
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -250.0
+angular_velocity_max = 250.0
+gravity = Vector3(0, -300, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_wfkcd")
+anim_offset_max = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_24bhi"]
+shader = ExtResource("2_djdd7")
+shader_parameter/OuterColor = Color(0.448213, 0.3168, 0.88, 1)
+shader_parameter/InnerColorStep = Vector2(0.5, 0.655)
+shader_parameter/Noise2Strength = 0.7
+shader_parameter/Noise2Scaling = Vector2(1.22, 2.545)
+shader_parameter/Noise2Panning = Vector2(0.74, -1.44)
+shader_parameter/Noise2Texture = ExtResource("4_ls61p")
+shader_parameter/Noise1Strength = 0.6
+shader_parameter/Noise1Scaling = Vector2(6, 6)
+shader_parameter/Noise1Panning = Vector2(-1.14, -1.735)
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 0.62)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.595)
+shader_parameter/NoiseMask = ExtResource("9_85mjn")
+shader_parameter/Distortion2Scale = Vector2(1.21, 1.275)
+shader_parameter/Distortion2Panning = Vector2(0.5, -0.8)
+shader_parameter/Distortion2Texture = ExtResource("4_ls61p")
+shader_parameter/Distortion2Strength = 0.02
+shader_parameter/Distortion1Scale = Vector2(1.5, 1.5)
+shader_parameter/Distortion1Panning = Vector2(-0.5, -1)
+shader_parameter/Distortion1Texture = ExtResource("4_ls61p")
+shader_parameter/Distortion1Strength = 0.05
+shader_parameter/DistortionMaskScale = Vector2(1, 1)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.09)
+shader_parameter/InnerColor = Color(0.34456, 0.2044, 0.73, 1)
+shader_parameter/OuterStep = Vector2(0.015, 0.165)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d0he2"]
+resource_local_to_scene = true
+shader = ExtResource("12_6vpnj")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pmaxo"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gw5xi"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6ssxv"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 0)
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+angular_velocity_min = -350.0
+angular_velocity_max = 350.0
+gravity = Vector3(0, 500, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_hh0rg")
+color = Color(0.71, 0.71, 0.71, 1)
+anim_offset_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_66gky"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(120, 10, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_hh0rg")
+color = Color(0.71, 0.71, 0.71, 1)
+anim_offset_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_scdj4"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(90, 10, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_hh0rg")
+color = Color(0.71, 0.71, 0.71, 1)
+anim_offset_max = 1.0
+
+[node name="VfxDoom" type="Node2D"]
+script = ExtResource("9_wfdug")
+
+[node name="DoomVfxBack" type="Node2D" parent="." node_paths=PackedStringArray("_scalableLayers", "_spears", "_verticalShrinkingLayer", "_particlesToKeepDense")]
+script = ExtResource("2_bf3s0")
+_scalableLayers = [NodePath("doom_floor_globs_back"), NodePath("doom_globs_floaty_back"), NodePath("DoomFlameHolder"), NodePath("DoomHoleHolder")]
+_spears = [NodePath("SpearHolderBack/Spear1"), NodePath("SpearHolderBack/Spear2"), NodePath("SpearHolderBack/Spear3"), NodePath("SpearHolderBack/Spear4")]
+_verticalShrinkingLayer = NodePath("DoomFlameHolder")
+_particlesToKeepDense = NodePath("doom_floor_globs_back")
+
+[node name="doom_floor_globs_back" type="GPUParticles2D" parent="DoomVfxBack"]
+material = SubResource("CanvasItemMaterial_rxg5m")
+position = Vector2(0, -22)
+scale = Vector2(1, 0.64)
+amount = 150
+texture = ExtResource("3_3jfsr")
+lifetime = 0.5
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_7onm7")
+
+[node name="doom_globs_floaty_back" type="GPUParticles2D" parent="DoomVfxBack"]
+material = SubResource("CanvasItemMaterial_u266u")
+position = Vector2(0, -18)
+amount = 30
+texture = ExtResource("2_hwsmy")
+lifetime = 0.7
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_27m04")
+
+[node name="DoomHoleHolder" type="Node2D" parent="DoomVfxBack"]
+position = Vector2(0, -15)
+
+[node name="DoomHole" type="TextureRect" parent="DoomVfxBack/DoomHoleHolder"]
+modulate = Color(0, 0, 0, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8, 0.16)
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("2_5436l")
+
+[node name="SpearHolderBack" type="Node2D" parent="DoomVfxBack"]
+position = Vector2(0, -8)
+
+[node name="Spear1" type="TextureRect" parent="DoomVfxBack/SpearHolderBack"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 168.45
+offset_top = -215.185
+offset_right = 208.45
+offset_bottom = -9.18475
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear2" type="TextureRect" parent="DoomVfxBack/SpearHolderBack"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 143.45
+offset_top = -215.185
+offset_right = 183.45
+offset_bottom = -9.18475
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear3" type="TextureRect" parent="DoomVfxBack/SpearHolderBack"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 116.225
+offset_top = -215.0
+offset_right = 156.225
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear4" type="TextureRect" parent="DoomVfxBack/SpearHolderBack"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 89.2248
+offset_top = -215.0
+offset_right = 129.225
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="DoomFlameHolder" type="Node2D" parent="DoomVfxBack"]
+position = Vector2(-1, 2)
+
+[node name="DoomFlames" type="TextureRect" parent="DoomVfxBack/DoomFlameHolder"]
+material = SubResource("ShaderMaterial_24bhi")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.47219, 2.71219)
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("2_iq5u5")
+
+[node name="Mask" type="ColorRect" parent="."]
+unique_name_in_owner = true
+clip_children = 1
+offset_left = -960.0
+offset_top = -1089.0
+offset_right = 960.0
+offset_bottom = -9.0
+mouse_filter = 2
+
+[node name="Visual" type="Sprite2D" parent="Mask"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_d0he2")
+position = Vector2(960, 1089)
+texture = SubResource("ViewportTexture_pmaxo")
+
+[node name="Viewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(687, 687)
+render_target_update_mode = 4
+
+[node name="DoomVfxFront" type="Node2D" parent="." node_paths=PackedStringArray("_scalableLayers", "_spears", "_verticalShrinkingLayer", "_particlesToKeepDense")]
+script = ExtResource("2_bf3s0")
+_scalableLayers = [NodePath("doom_globs_gravity"), NodePath("doom_globs_floaty"), NodePath("DoomGlowHolder"), NodePath("doom_floor_globs"), NodePath("doom_floor_globs_inner")]
+_spears = [NodePath("SpearHolder/Spear1"), NodePath("SpearHolder/Spear2"), NodePath("SpearHolder/Spear3"), NodePath("SpearHolder/Spear4")]
+_verticalShrinkingLayer = NodePath("DoomGlowHolder")
+_particlesToKeepDense = NodePath("doom_floor_globs")
+
+[node name="SpearHolder" type="Node2D" parent="DoomVfxFront"]
+z_as_relative = false
+position = Vector2(0, -7)
+
+[node name="Spear1" type="TextureRect" parent="DoomVfxFront/SpearHolder"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -213.0
+offset_right = -114.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761, 0.761)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear2" type="TextureRect" parent="DoomVfxFront/SpearHolder"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -183.775
+offset_top = -215.185
+offset_right = -143.775
+offset_bottom = -9.18475
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear3" type="TextureRect" parent="DoomVfxFront/SpearHolder"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -211.0
+offset_top = -215.0
+offset_right = -171.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="Spear4" type="TextureRect" parent="DoomVfxFront/SpearHolder"]
+modulate = Color(1, 1, 1, 0.533333)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -238.0
+offset_top = -215.0
+offset_right = -198.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.761239, 0.761239)
+pivot_offset = Vector2(20, 206)
+mouse_filter = 2
+texture = ExtResource("4_a5mv6")
+
+[node name="doom_globs_gravity" type="GPUParticles2D" parent="DoomVfxFront"]
+material = SubResource("CanvasItemMaterial_gw5xi")
+position = Vector2(0, -13)
+amount = 60
+texture = ExtResource("2_hwsmy")
+lifetime = 0.36
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_6ssxv")
+
+[node name="doom_globs_floaty" type="GPUParticles2D" parent="DoomVfxFront"]
+material = SubResource("CanvasItemMaterial_u266u")
+position = Vector2(0, -18)
+amount = 20
+texture = ExtResource("2_hwsmy")
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_27m04")
+
+[node name="DoomGlowHolder" type="Node2D" parent="DoomVfxFront"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -40)
+scale = Vector2(1, 1.44)
+
+[node name="doom_glow" type="TextureRect" parent="DoomVfxFront/DoomGlowHolder"]
+modulate = Color(1, 1, 1, 0.992157)
+material = ExtResource("shared_additive_mat")
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -114.28
+offset_right = 128.0
+offset_bottom = 141.72
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 0.59)
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("1_tc0i2")
+
+[node name="doom_floor_globs" type="GPUParticles2D" parent="DoomVfxFront"]
+material = SubResource("CanvasItemMaterial_rxg5m")
+position = Vector2(0, -13)
+scale = Vector2(1, 0.95999)
+amount = 300
+texture = ExtResource("3_3jfsr")
+lifetime = 0.5
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_66gky")
+
+[node name="doom_floor_globs_inner" type="GPUParticles2D" parent="DoomVfxFront"]
+material = SubResource("CanvasItemMaterial_rxg5m")
+position = Vector2(0, -4)
+scale = Vector2(1, 0.440005)
+amount = 100
+texture = ExtResource("3_3jfsr")
+lifetime = 0.5
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_scdj4")

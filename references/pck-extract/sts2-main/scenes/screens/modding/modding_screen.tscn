@@ -1,0 +1,337 @@
+[gd_scene load_steps=19 format=3 uid="uid://c0m1cvr0fqfdr"]
+
+[ext_resource type="Script" uid="uid://bnkleqlq4mo43" path="res://src/Core/Nodes/Screens/ModdingScreen/NModdingScreen.cs" id="1_lridw"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="2_r4xx8"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="3_f0owr"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_ri5h3"]
+[ext_resource type="Script" uid="uid://wvooa56jn2i5" path="res://src/Core/Nodes/Screens/ModdingScreen/NModMenuButton.cs" id="5_30qq7"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_822w5"]
+[ext_resource type="Texture2D" uid="uid://co4nflor6pb3b" path="res://images/packed/common_ui/event_button.png" id="7_ojb1d"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="8_bqqqu"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="9_p55vp"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="10_wkym0"]
+[ext_resource type="PackedScene" uid="uid://dk02ucetk63ke" path="res://scenes/screens/modding/modding_screen_row.tscn" id="11_qy042"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="12_8cw4e"]
+[ext_resource type="Script" uid="uid://ctkun6nv1hfsw" path="res://src/Core/Nodes/Screens/ModdingScreen/NModInfoContainer.cs" id="13_plcea"]
+[ext_resource type="Texture2D" uid="uid://b08u3k37ki577" path="res://images/packed/card_portraits/ironclad/strike_ironclad.png" id="14_td1pv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36dya"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.403922, 0.682353, 0.921569, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lridw"]
+resource_local_to_scene = true
+shader = ExtResource("6_822w5")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="FontVariation" id="FontVariation_fdsbe"]
+base_font = ExtResource("8_bqqqu")
+spacing_glyph = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4xx8"]
+resource_local_to_scene = true
+shader = ExtResource("6_822w5")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="ModdingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lridw")
+
+[node name="BackButton" parent="." instance=ExtResource("2_r4xx8")]
+layout_mode = 1
+
+[node name="ModsBorder" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 161.0
+offset_right = 994.0
+offset_bottom = 986.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_36dya")
+
+[node name="InstalledModsTitle" type="RichTextLabel" parent="ModsBorder"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 2.0
+offset_top = -78.0
+offset_right = 354.0
+offset_bottom = -6.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("3_f0owr")
+theme_override_font_sizes/normal_font_size = 56
+text = "Installed Mods"
+fit_content = true
+script = ExtResource("4_ri5h3")
+AutoSizeEnabled = false
+IsVerticallyBound = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="GetModsButton" type="Control" parent="ModsBorder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -172.0
+offset_top = -74.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 0
+pivot_offset = Vector2(75, 35)
+script = ExtResource("5_30qq7")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="Control" parent="ModsBorder/GetModsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Image" type="TextureRect" parent="ModsBorder/GetModsButton/Visuals"]
+material = SubResource("ShaderMaterial_lridw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_ojb1d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ModsBorder/GetModsButton/Visuals"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -19.5
+offset_right = 30.5
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 40)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.0756, 0.12084, 0.18, 1)
+theme_override_constants/line_spacing = -4
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_fdsbe")
+theme_override_font_sizes/font_size = 24
+text = "Get Mods"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_p55vp")
+AutoSizeEnabled = false
+MaxFontSize = 30
+
+[node name="MakeModsButton" type="Control" parent="ModsBorder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -347.0
+offset_top = -76.0
+offset_right = -177.0
+offset_bottom = -6.0
+grow_horizontal = 0
+pivot_offset = Vector2(75, 35)
+script = ExtResource("5_30qq7")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="Control" parent="ModsBorder/MakeModsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Image" type="TextureRect" parent="ModsBorder/MakeModsButton/Visuals"]
+material = SubResource("ShaderMaterial_r4xx8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_ojb1d")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ModsBorder/MakeModsButton/Visuals"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.5
+offset_top = -19.5
+offset_right = 30.5
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 40)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.0756, 0.12084, 0.18, 1)
+theme_override_constants/line_spacing = -4
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_fdsbe")
+theme_override_font_sizes/font_size = 24
+text = "Make Mods"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_p55vp")
+AutoSizeEnabled = false
+MaxFontSize = 30
+
+[node name="ModsScrollContainer" type="Control" parent="ModsBorder"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_wkym0")
+
+[node name="Mask" type="Control" parent="ModsBorder/ModsScrollContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="ModsBorder/ModsScrollContainer/Mask"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 72.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+
+[node name="ModRow" parent="ModsBorder/ModsScrollContainer/Mask/Content" instance=ExtResource("11_qy042")]
+layout_mode = 2
+
+[node name="Scrollbar" parent="ModsBorder/ModsScrollContainer" instance=ExtResource("12_8cw4e")]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -8.0
+offset_right = 54.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ModInfoContainer" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 86.0
+offset_right = 1727.0
+offset_bottom = 987.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_36dya")
+script = ExtResource("13_plcea")
+
+[node name="ModTitle" type="RichTextLabel" parent="ModInfoContainer"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 18.0
+offset_right = 652.0
+offset_bottom = 110.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("3_f0owr")
+theme_override_font_sizes/normal_font_size = 60
+text = "A Very Cool Mod"
+scroll_active = false
+script = ExtResource("4_ri5h3")
+MaxFontSize = 60
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ModImage" type="TextureRect" parent="ModInfoContainer"]
+custom_minimum_size = Vector2(500, 380)
+layout_mode = 0
+offset_left = 22.0
+offset_top = 104.0
+offset_right = 625.0
+offset_bottom = 484.0
+texture = ExtResource("14_td1pv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ModDescription" type="RichTextLabel" parent="ModInfoContainer"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 493.0
+offset_right = 635.0
+offset_bottom = 886.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("3_f0owr")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. 
+
+This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. This is a description for a very cool mod. "
+script = ExtResource("4_ri5h3")
+AutoSizeEnabled = false
+MinFontSize = 16
+MaxFontSize = 32
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="PendingChangesLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 236.0
+offset_top = 1012.0
+offset_right = 1724.0
+offset_bottom = 1056.0
+theme_override_colors/default_color = Color(1, 0.333333, 0.333333, 1)
+theme_override_fonts/normal_font = ExtResource("3_f0owr")
+theme_override_font_sizes/normal_font_size = 24
+text = "Disabling/Enabling mods will only take effect after a restart."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_ri5h3")
+MaxFontSize = 24
+IsHorizontallyBound = true
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"

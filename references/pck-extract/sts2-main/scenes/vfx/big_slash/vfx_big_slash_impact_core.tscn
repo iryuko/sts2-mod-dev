@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://m3ejt08i5g0d"]
+
+[ext_resource type="Material" uid="uid://bgquakghgf7o" path="res://materials/vfx/big_slash/vfx_big_slash_impact_core.tres" id="1_g5m4d"]
+[ext_resource type="Texture2D" uid="uid://bn4qpndv5760" path="res://images/vfx/big_slash/big_slash_impact_core_flipbook.png" id="2_nc5po"]
+
+[sub_resource type="Curve" id="Curve_ny88h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.2902, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_41406"]
+curve = SubResource("Curve_ny88h")
+
+[sub_resource type="Curve" id="Curve_trixi"]
+_limits = [0.35, 1.0, 0.0, 1.0]
+_data = [Vector2(0.185185, 1), 0.0, 0.0, 0, 0, Vector2(0.204938, 0.35), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_t4lxc"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.254321, 1.25274), 2.13504, 0.0, 0, 0, Vector2(1, 1.34763), 0.461907, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kpk5e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_rv5i7"]
+curve_x = SubResource("Curve_trixi")
+curve_y = SubResource("Curve_t4lxc")
+curve_z = SubResource("Curve_kpk5e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acegf"]
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = -300.0
+initial_velocity_max = -300.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 1.65
+scale_max = 1.65
+scale_curve = SubResource("CurveXYZTexture_rv5i7")
+alpha_curve = SubResource("CurveTexture_41406")
+
+[node name="vfx_big_slash_impact_core" type="GPUParticles2D"]
+self_modulate = Color(0.5, 0.858615, 1, 1)
+z_index = 1
+material = ExtResource("1_g5m4d")
+emitting = false
+amount = 1
+texture = ExtResource("2_nc5po")
+lifetime = 0.35
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_acegf")

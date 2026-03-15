@@ -1,0 +1,637 @@
+[gd_scene load_steps=44 format=3 uid="uid://c8q6rvfxw3grb"]
+
+[ext_resource type="Script" uid="uid://bw4u2vysdox8n" path="res://src/Core/Nodes/Rooms/NMerchantRoom.cs" id="1_dsr17"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://v18r3kbicekg" path="res://animations/backgrounds/merchant_room/bottom/shop_merchant_bottom.tres" id="2_02mko"]
+[ext_resource type="Shader" uid="uid://dryvqo67omhm" path="res://shaders/vfx/vfx_stepped_shader_fire_flat.tres" id="4_gfbok"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="5_2slyp"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="6_ame5j"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="6_d6ptj"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="7_pa38a"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="8_ikoet"]
+[ext_resource type="Texture2D" uid="uid://dppe2u2vje5i1" path="res://images/vfx/fire/fire_base_slim.png" id="9_ln14o"]
+[ext_resource type="Shader" uid="uid://cu7krqg4cighe" path="res://shaders/vfx/vfx_stepped_shader_fire_add.tres" id="10_ydood"]
+[ext_resource type="Texture2D" uid="uid://b1cq8w6uwgvbm" path="res://images/vfx/fire/fire_base_pointy.png" id="11_jkthl"]
+[ext_resource type="Texture2D" uid="uid://b47r2blhe2i3" path="res://images/vfx/fire/cinder_particle.png" id="12_4ns48"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="13_u02o8"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="14_62j65"]
+[ext_resource type="Script" uid="uid://b0oho7pjc1dtg" path="res://src/Core/Nodes/Animation/NSpineAutoPlayer.cs" id="14_we4kb"]
+[ext_resource type="PackedScene" uid="uid://cciqup5nyc2wd" path="res://scenes/screens/inspect_card_screen.tscn" id="15_emtxr"]
+[ext_resource type="Script" uid="uid://b7u5s7fkjlcd3" path="res://src/Core/Nodes/Rooms/NMerchantButton.cs" id="16_yojpp"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://3mtjig0b2ioa" path="res://animations/backgrounds/merchant_room/top/shop_merchant_top.tres" id="17_07ttb"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="17_77vyl"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="19_02400"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="21_a418v"]
+[ext_resource type="PackedScene" uid="uid://cm4ocv4456kaq" path="res://scenes/merchant/merchant_inventory.tscn" id="22_d2e0r"]
+[ext_resource type="PackedScene" uid="uid://dk7qbpbg2o0ea" path="res://scenes/ui/proceed_button.tscn" id="42_5m83r"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rafps"]
+shader = ExtResource("4_gfbok")
+shader_parameter/OuterColor = Color(0.760784, 0.4, 0.262745, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("8_ikoet")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("5_2slyp")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(0, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("7_pa38a")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.76)
+shader_parameter/Distortion2Texture = ExtResource("6_d6ptj")
+shader_parameter/Distortion2Strength = 0.05
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.23, 0.8)
+shader_parameter/Distortion1Texture = ExtResource("5_2slyp")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(0, 1.03)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.07)
+shader_parameter/DistortionMask = ExtResource("7_pa38a")
+shader_parameter/InnerColor = Color(0.308707, 0.155132, 0.0604987, 1)
+shader_parameter/OuterStep = Vector2(0.135, 0.175)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndsot"]
+shader = ExtResource("10_ydood")
+shader_parameter/OuterColor = Color(0.33, 0.1045, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.745, 0.995)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.4, 0.6)
+shader_parameter/Noise2Texture = ExtResource("8_ikoet")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(0, 1)
+shader_parameter/Noise1Panning = Vector2(0.8, 0.7)
+shader_parameter/Noise1Texture = ExtResource("5_2slyp")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2.01)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.32)
+shader_parameter/NoiseMask = ExtResource("7_pa38a")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0.045, 0.76)
+shader_parameter/Distortion2Texture = ExtResource("6_d6ptj")
+shader_parameter/Distortion2Strength = 0.05
+shader_parameter/Distortion1Scale = Vector2(1, 1.06)
+shader_parameter/Distortion1Panning = Vector2(0.06, 0.6)
+shader_parameter/Distortion1Texture = ExtResource("5_2slyp")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 1)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.095)
+shader_parameter/DistortionMask = ExtResource("7_pa38a")
+shader_parameter/InnerColor = Color(0.68, 0.561, 0.476, 1)
+shader_parameter/OuterStep = Vector2(0.335, 0.92)
+
+[sub_resource type="Curve" id="Curve_o61cq"]
+_data = [Vector2(0, 0.531754), 0.0, 2.99665, 0, 0, Vector2(0.300248, 0.969194), 0.0, 0.0, 0, 0, Vector2(0.573201, 0.981517), 0.0, 0.0, 0, 0, Vector2(0.734491, 0.969194), 0.0, 0.0, 0, 0, Vector2(1, 0.0265403), -7.44881, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_gglpj"]
+curve = SubResource("Curve_o61cq")
+
+[sub_resource type="Gradient" id="Gradient_ycmlo"]
+offsets = PackedFloat32Array(0, 0.00206612, 0.714876)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.0289256, 0.0289256, 0.0289256, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kx1m3"]
+gradient = SubResource("Gradient_ycmlo")
+
+[sub_resource type="Curve" id="Curve_l7rtd"]
+_limits = [-0.5, 0.5, 0.0, 1.0]
+_data = [Vector2(0, -0.020853), 0.0, 0.0, 0, 0, Vector2(0.255583, 0.0194313), 0.0, 0.0, 0, 0, Vector2(0.66005, -0.0298578), 0.0, 0.0, 0, 0, Vector2(1, -0.020853), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_013pf"]
+curve = SubResource("Curve_l7rtd")
+
+[sub_resource type="Curve" id="Curve_cak7b"]
+_data = [Vector2(0, 0.531754), 0.0, 5.89698, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.215881, 0.611848), 0.0, 0.0, 0, 0, Vector2(0.327543, 1), 0.0, 0.0, 0, 0, Vector2(0.48139, 0.605687), 0.0, 0.0, 0, 0, Vector2(0.600496, 1), 0.0, 0.0, 0, 0, Vector2(0.751861, 0.544076), -3.66529, -3.66529, 0, 0, Vector2(1, 0), -0.926037, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_7x6jo"]
+curve = SubResource("Curve_cak7b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5oqjk"]
+lifetime_randomness = 1.0
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 1)
+inherit_velocity_ratio = 1.0
+direction = Vector3(-1, -1, 0)
+spread = 60.0
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.5
+orbit_velocity_curve = SubResource("CurveTexture_013pf")
+gravity = Vector3(20, -200, 0)
+scale_min = 0.15
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_7x6jo")
+color = Color(0.737255, 0.396078, 0.262745, 1)
+color_ramp = SubResource("GradientTexture1D_kx1m3")
+alpha_curve = SubResource("CurveTexture_gglpj")
+hue_variation_min = -0.01
+hue_variation_max = 0.02
+
+[sub_resource type="Curve" id="Curve_pjmmk"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vvs8v"]
+offsets = PackedFloat32Array(0, 0.607407, 0.994413)
+colors = PackedColorArray(0.427493, 0.427493, 0.427493, 1, 1, 1, 1, 1, 0.427451, 0.427451, 0.427451, 1)
+
+[sub_resource type="Gradient" id="Gradient_g025t"]
+offsets = PackedFloat32Array(0, 0.277778, 0.994413)
+colors = PackedColorArray(0.427493, 0.427493, 0.427493, 1, 1, 1, 1, 1, 0.427451, 0.427451, 0.427451, 1)
+
+[sub_resource type="Gradient" id="Gradient_rwvsm"]
+offsets = PackedFloat32Array(0, 0.488889, 0.994413)
+colors = PackedColorArray(1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_1k2mj"]
+_data = [Vector2(0, 0.996333), 0.0, 0.0, 0, 0, Vector2(0.503344, 0.976164), 0.0, 0.0, 0, 0, Vector2(1, 0.996333), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_20xy5"]
+offsets = PackedFloat32Array(0, 0.607407, 0.994413)
+colors = PackedColorArray(0.720467, 0.720468, 0.720467, 1, 1, 1, 1, 1, 0.721569, 0.721569, 0.721569, 1)
+
+[sub_resource type="Gradient" id="Gradient_c8n4j"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o372i"]
+resource_local_to_scene = true
+shader = ExtResource("19_02400")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="MerchantRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dsr17")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="SceneContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BgContainer" type="Control" parent="SceneContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -970.0
+offset_top = -520.0
+offset_right = 1590.0
+offset_bottom = 680.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.01, 1.01)
+
+[node name="SpineSprite" type="SpineSprite" parent="SceneContainer/BgContainer"]
+skeleton_data_res = ExtResource("2_02mko")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.5, 0.5)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="SceneContainer/BgContainer/SpineSprite"]
+bone_name = "left_candle_flame"
+show_behind_parent = true
+position = Vector2(466.49268, 267.44156)
+
+[node name="fire4" type="Node2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode"]
+position = Vector2(2.81424, 5.82581)
+rotation = -0.0383972
+scale = Vector2(0.6, 0.6)
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode/fire4"]
+material = SubResource("ShaderMaterial_rafps")
+position = Vector2(3.68569, -34.2129)
+scale = Vector2(0.189, 0.189)
+texture = ExtResource("9_ln14o")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode/fire4"]
+visible = false
+material = SubResource("ShaderMaterial_ndsot")
+position = Vector2(-1.98017, -38.8886)
+scale = Vector2(0.104, 0.189)
+texture = ExtResource("11_jkthl")
+
+[node name="sparks big" type="GPUParticles2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode/fire4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -13.146)
+scale = Vector2(0.214, 0.214)
+amount = 40
+texture = ExtResource("12_4ns48")
+lifetime = 4.0
+fixed_fps = 60
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_5oqjk")
+
+[node name="light_small" type="CPUParticles2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode/fire4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.990143, -13.1461)
+scale = Vector2(0.189, 0.189)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.760645, 0.373027, 0.127069, 1)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="SpineBoneNode2" type="SpineBoneNode" parent="SceneContainer/BgContainer/SpineSprite"]
+bone_name = "purple light shine"
+show_behind_parent = true
+position = Vector2(2526.7698, 572.5172)
+
+[node name="light_small4" type="CPUParticles2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1.94312, 5.70081)
+rotation = 3.1032
+scale = Vector2(2, 2)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 9.0
+scale_amount_max = 9.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.733333, 0.443137, 0.792157, 0.443137)
+color_ramp = SubResource("Gradient_g025t")
+script = ExtResource("14_62j65")
+
+[node name="SpineBoneNode3" type="SpineBoneNode" parent="SceneContainer/BgContainer/SpineSprite"]
+bone_name = "white_light_shite"
+show_behind_parent = true
+position = Vector2(3016.495, 434.73965)
+
+[node name="light_small3" type="CPUParticles2D" parent="SceneContainer/BgContainer/SpineSprite/SpineBoneNode3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(31.0296, 12.7851)
+rotation = 3.1032
+scale = Vector2(2, 2)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.709804, 0.439216, 0.180392, 0.615686)
+color_ramp = SubResource("Gradient_rwvsm")
+script = ExtResource("14_62j65")
+
+[node name="NSpineAutoPlayer" type="Node" parent="SceneContainer/BgContainer/SpineSprite"]
+script = ExtResource("14_we4kb")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"
+
+[node name="light_small2" type="CPUParticles2D" parent="SceneContainer/BgContainer"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1746.53, 659.406)
+rotation = 3.1032
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.760784, 0.372549, 0.12549, 0.4)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="light_small5" type="CPUParticles2D" parent="SceneContainer/BgContainer"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1567.33, 617.822)
+rotation = 3.1032
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.360784, 0.45098, 0.796078, 0.309804)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="fire" type="Node2D" parent="SceneContainer/BgContainer"]
+position = Vector2(1306.93, 868.317)
+scale = Vector2(0.7, 0.8)
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SceneContainer/BgContainer/fire"]
+material = SubResource("ShaderMaterial_rafps")
+position = Vector2(3.68569, -34.2129)
+scale = Vector2(0.189, 0.189)
+texture = ExtResource("9_ln14o")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SceneContainer/BgContainer/fire"]
+visible = false
+material = SubResource("ShaderMaterial_ndsot")
+position = Vector2(-1.98017, -38.8886)
+scale = Vector2(0.104, 0.189)
+texture = ExtResource("11_jkthl")
+
+[node name="sparks big" type="GPUParticles2D" parent="SceneContainer/BgContainer/fire"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -13.146)
+scale = Vector2(0.214, 0.214)
+amount = 40
+texture = ExtResource("12_4ns48")
+lifetime = 4.0
+fixed_fps = 60
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_5oqjk")
+
+[node name="light_small" type="CPUParticles2D" parent="SceneContainer/BgContainer/fire"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.990143, -13.1461)
+scale = Vector2(0.189, 0.189)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.760645, 0.373027, 0.127069, 1)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="fire2" type="Node2D" parent="SceneContainer/BgContainer"]
+position = Vector2(1354.46, 898.02)
+rotation = -0.0383972
+scale = Vector2(-0.5, 0.6)
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SceneContainer/BgContainer/fire2"]
+material = SubResource("ShaderMaterial_rafps")
+position = Vector2(3.68569, -34.2129)
+scale = Vector2(0.189, 0.189)
+texture = ExtResource("9_ln14o")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SceneContainer/BgContainer/fire2"]
+visible = false
+material = SubResource("ShaderMaterial_ndsot")
+position = Vector2(-1.98017, -38.8886)
+scale = Vector2(0.104, 0.189)
+texture = ExtResource("11_jkthl")
+
+[node name="sparks big" type="GPUParticles2D" parent="SceneContainer/BgContainer/fire2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -13.146)
+scale = Vector2(0.214, 0.214)
+amount = 40
+texture = ExtResource("12_4ns48")
+lifetime = 4.0
+fixed_fps = 60
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_5oqjk")
+
+[node name="light_small" type="CPUParticles2D" parent="SceneContainer/BgContainer/fire2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.990143, -13.1461)
+scale = Vector2(0.189, 0.189)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.760645, 0.373027, 0.127069, 1)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="fire3" type="Node2D" parent="SceneContainer/BgContainer"]
+position = Vector2(1525.74, 333.663)
+rotation = -0.0383972
+scale = Vector2(-0.5, 0.6)
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SceneContainer/BgContainer/fire3"]
+material = SubResource("ShaderMaterial_rafps")
+position = Vector2(3.68569, -34.2129)
+scale = Vector2(0.189, 0.189)
+texture = ExtResource("9_ln14o")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SceneContainer/BgContainer/fire3"]
+visible = false
+material = SubResource("ShaderMaterial_ndsot")
+position = Vector2(-1.98017, -38.8886)
+scale = Vector2(0.104, 0.189)
+texture = ExtResource("11_jkthl")
+
+[node name="sparks big" type="GPUParticles2D" parent="SceneContainer/BgContainer/fire3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -13.146)
+scale = Vector2(0.214, 0.214)
+amount = 40
+texture = ExtResource("12_4ns48")
+lifetime = 4.0
+fixed_fps = 60
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_5oqjk")
+
+[node name="light_small" type="CPUParticles2D" parent="SceneContainer/BgContainer/fire3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.990143, -13.1461)
+scale = Vector2(0.189, 0.189)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_pjmmk")
+color = Color(0.760645, 0.373027, 0.127069, 1)
+color_ramp = SubResource("Gradient_vvs8v")
+script = ExtResource("14_62j65")
+
+[node name="CharacterContainer" type="Control" parent="SceneContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = 226.0
+offset_right = -396.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="light_small5" type="CPUParticles2D" parent="SceneContainer"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-267, -7)
+rotation = 3.1032
+scale = Vector2(1.01, 1.01)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_1k2mj")
+color = Color(0.882353, 0.305882, 0.317647, 0.301961)
+color_ramp = SubResource("Gradient_20xy5")
+script = ExtResource("14_62j65")
+
+[node name="light_small6" type="CPUParticles2D" parent="SceneContainer"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2248, 1165)
+rotation = 3.1032
+scale = Vector2(1.01, 1.01)
+amount = 1
+texture = ExtResource("13_u02o8")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_1k2mj")
+color = Color(0.415686, 0.305882, 0.658824, 0.301961)
+color_ramp = SubResource("Gradient_20xy5")
+script = ExtResource("14_62j65")
+
+[node name="stars" type="CPUParticles2D" parent="SceneContainer"]
+position = Vector2(925, 626)
+scale = Vector2(1.01, 1.01)
+amount = 300
+texture = ExtResource("17_77vyl")
+lifetime = 3.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(1500, 1000)
+gravity = Vector2(0, -10)
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color = Color(0.878431, 0.498039, 0.392157, 0.611765)
+color_ramp = SubResource("Gradient_c8n4j")
+
+[node name="MerchantButton" type="Control" parent="SceneContainer"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 246.0
+offset_top = -72.0
+offset_right = 516.0
+offset_bottom = 258.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(135, 165)
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+script = ExtResource("16_yojpp")
+
+[node name="MerchantSelectionReticle" parent="SceneContainer/MerchantButton" instance=ExtResource("6_ame5j")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MerchantVisual" type="SpineSprite" parent="SceneContainer/MerchantButton"]
+skeleton_data_res = ExtResource("17_07ttb")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(-1122.7, -396.68)
+scale = Vector2(0.470095, 0.470095)
+
+[node name="ControllerIcon" type="TextureRect" parent="SceneContainer/MerchantButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_o372i")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -204.0
+offset_top = 82.0
+offset_right = 92.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("21_a418v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProceedButton" parent="." instance=ExtResource("42_5m83r")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Inventory" parent="." instance=ExtResource("22_d2e0r")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="CardDetailScreen" parent="." instance=ExtResource("15_emtxr")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="InputBlocker" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

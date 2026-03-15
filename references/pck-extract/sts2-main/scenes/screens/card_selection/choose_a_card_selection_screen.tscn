@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwj36bwdo4kc"]
+
+[ext_resource type="Script" uid="uid://c3r36t47msqg3" path="res://src/Core/Nodes/Screens/CardSelection/NChooseACardSelectionScreen.cs" id="1_hpfhy"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="2_bpbuy"]
+[ext_resource type="PackedScene" uid="uid://ln43vtcwp04o" path="res://scenes/ui/choice_selection_skip_button.tscn" id="3_0ew8o"]
+[ext_resource type="PackedScene" uid="uid://crom4irts1tj0" path="res://scenes/combat/combat_piles_container.tscn" id="4_khnmp"]
+[ext_resource type="PackedScene" uid="uid://rxgwkwxf1dsr" path="res://scenes/combat/peek_button.tscn" id="5_ejxgl"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="5_n2dwv"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_n2dwv"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="8_u72vn"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="9_01cmx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1wpfw"]
+resource_local_to_scene = true
+shader = ExtResource("6_n2dwv")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="ChooseACardSelectionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hpfhy")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Banner" parent="." instance=ExtResource("2_bpbuy")]
+layout_mode = 1
+
+[node name="CardRow" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkipButton" parent="." instance=ExtResource("3_0ew8o")]
+layout_mode = 1
+offset_top = 322.0
+offset_bottom = 395.0
+
+[node name="InspectPrompt" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -68.0
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(0, 32)
+
+[node name="ControllerIcon" type="TextureRect" parent="InspectPrompt"]
+material = SubResource("ShaderMaterial_1wpfw")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 9.333334
+offset_right = 57.333336
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("5_n2dwv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InspectPrompt"]
+layout_mode = 0
+offset_left = 78.666664
+offset_top = 12.0
+offset_right = 206.66666
+offset_bottom = 51.375
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("8_u72vn")
+theme_override_font_sizes/font_size = 27
+text = "To Inspect"
+vertical_alignment = 1
+script = ExtResource("9_01cmx")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+
+[node name="CombatPiles" parent="." instance=ExtResource("4_khnmp")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="PeekButton" parent="." instance=ExtResource("5_ejxgl")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 100.0
+offset_top = -64.0
+offset_right = 228.0
+offset_bottom = 64.0
+grow_horizontal = 1

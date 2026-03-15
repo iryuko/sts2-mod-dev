@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dwhgj1t6e8wmh"]
+
+[ext_resource type="Shader" uid="uid://8t25huswvbvn" path="res://shaders/vfx/missile/vfx_missile_core_shader.gdshader" id="1_ad6md"]
+
+[sub_resource type="Gradient" id="Gradient_ad6md"]
+offsets = PackedFloat32Array(0.416887, 0.691293, 0.862797, 1)
+colors = PackedColorArray(0.39, 0.39, 0.39, 1, 0.56, 0.56, 0.56, 1, 1, 1, 1, 1, 8, 8, 8, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u1t8k"]
+gradient = SubResource("Gradient_ad6md")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_ad6md")
+shader_parameter/lut = SubResource("GradientTexture1D_u1t8k")
+shader_parameter/flipbook_speed = 15.0
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(4, 1)

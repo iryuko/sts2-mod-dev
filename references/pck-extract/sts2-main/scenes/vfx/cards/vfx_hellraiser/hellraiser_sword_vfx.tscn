@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbmmr6u7js0wd"]
+
+[ext_resource type="Script" uid="uid://xnoadnym4h26" path="res://src/Core/Nodes/Vfx/Cards/NHellraiserSwordVfx.cs" id="1_4y36x"]
+[ext_resource type="Texture2D" uid="uid://dlnm7lf0yw6mi" path="res://images/packed/vfx/combat/hellraiser_sword.png" id="1_5wfky"]
+
+[node name="HellraiserSwordVfx" type="Control"]
+clip_children = 1
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -200.0
+offset_right = 100.0
+pivot_offset = Vector2(50, 200)
+mouse_filter = 2
+script = ExtResource("1_4y36x")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -140.0
+offset_right = 26.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(25, 140)
+mouse_filter = 2
+texture = ExtResource("1_5wfky")
+expand_mode = 1

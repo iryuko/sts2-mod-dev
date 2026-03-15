@@ -1,0 +1,200 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2pin6ha30w4q"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_bkyyd"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="3_t2x0l"]
+[ext_resource type="Texture2D" uid="uid://c1giir6wm3oon" path="res://images/rooms/glory/cloud_sheet.png" id="4_74wdn"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="4_sjthc"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="16_klvr7"]
+
+[sub_resource type="Gradient" id="Gradient_t75ik"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 0.890196, 0.898039, 0.239216, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2dicm"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yox02"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 4
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_gwd6s"]
+offsets = PackedFloat32Array(0, 0.137803, 0.351955, 0.523277, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.313726, 1, 1, 1, 1, 1, 1, 1, 0.678431, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_me1s6"]
+offsets = PackedFloat32Array(0, 0.340782, 0.929236)
+colors = PackedColorArray(0, 0, 0, 1, 0.0421156, 0.0144603, 0.0104837, 1, 0.913725, 0.313726, 0.227451, 1)
+
+[sub_resource type="Gradient" id="Gradient_0mji2"]
+offsets = PackedFloat32Array(0, 0.283054, 1)
+colors = PackedColorArray(0.913725, 0.313726, 0.227451, 1, 0.913725, 0.313726, 0.227451, 1, 0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jr2nu"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_d6en1"]
+_data = [Vector2(0.339496, 0.600085), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[node name="TestSubjectBackground" type="TextureRect"]
+offset_left = -11.0
+offset_top = -18.0
+offset_right = -11.0
+offset_bottom = -18.0
+script = ExtResource("1_bkyyd")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("4_sjthc")
+
+[node name="stars" type="CPUParticles2D" parent="."]
+position = Vector2(351, -494)
+amount = 160
+texture = ExtResource("3_t2x0l")
+lifetime = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(1500, 200)
+gravity = Vector2(0, 0)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+color = Color(0.827451, 0.690196, 0.443137, 1)
+color_ramp = SubResource("Gradient_t75ik")
+
+[node name="Clouds1" type="Node2D" parent="."]
+position = Vector2(-252, -555)
+
+[node name="clouds" type="CPUParticles2D" parent="Clouds1"]
+material = SubResource("CanvasItemMaterial_2dicm")
+position = Vector2(3063, 32)
+scale = Vector2(0.999997, 0.999997)
+amount = 40
+texture = ExtResource("4_74wdn")
+lifetime = 600.0
+preprocess = 600.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 62.7
+gravity = Vector2(-0.1, 0)
+scale_amount_min = 0.6
+color = Color(0.776471, 0.776471, 0.776471, 0.266667)
+anim_offset_max = 1.0
+
+[node name="clouds2" type="CPUParticles2D" parent="Clouds1"]
+material = SubResource("CanvasItemMaterial_yox02")
+position = Vector2(3152, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 40
+texture = ExtResource("4_74wdn")
+lifetime = 400.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(-0.1, 0)
+scale_amount_min = 0.6
+color = Color(1, 1, 1, 0.317647)
+color_ramp = SubResource("Gradient_gwd6s")
+anim_offset_max = 1.0
+
+[node name="clouds3" type="CPUParticles2D" parent="Clouds1"]
+material = SubResource("CanvasItemMaterial_yox02")
+position = Vector2(3152, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 40
+texture = ExtResource("4_74wdn")
+lifetime = 400.0
+preprocess = 400.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 53.66
+gravity = Vector2(-0.1, 0)
+scale_amount_min = 0.0
+scale_amount_max = 0.0
+color = Color(0.305882, 0.305882, 0.305882, 1)
+color_ramp = SubResource("Gradient_gwd6s")
+anim_offset_max = 1.0
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("4_sjthc")
+VisibleLayer = 2
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("4_sjthc")
+VisibleLayer = 2
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = -1.0
+offset_bottom = -1.0
+script = ExtResource("4_sjthc")
+VisibleLayer = 2
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -4.0
+offset_top = -9.0
+offset_right = -4.0
+offset_bottom = -9.0
+script = ExtResource("4_sjthc")
+
+[node name="ash" type="CPUParticles2D" parent="Foreground"]
+position = Vector2(182, -863)
+amount = 40
+texture = ExtResource("3_t2x0l")
+lifetime = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2500, 1)
+gravity = Vector2(27.765, 27)
+orbit_velocity_max = 0.03
+scale_amount_min = 0.03
+scale_amount_max = 0.07
+color_ramp = SubResource("Gradient_me1s6")
+
+[node name="ash2" type="CPUParticles2D" parent="Foreground"]
+position = Vector2(182, -863)
+amount = 40
+texture = ExtResource("3_t2x0l")
+lifetime = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2500, 1)
+gravity = Vector2(27.765, 27)
+orbit_velocity_max = 0.03
+scale_amount_min = 0.03
+scale_amount_max = 0.07
+color_ramp = SubResource("Gradient_0mji2")
+
+[node name="fog4" type="CPUParticles2D" parent="Foreground"]
+material = SubResource("CanvasItemMaterial_jr2nu")
+position = Vector2(-1495, 630)
+scale = Vector2(0.999997, 0.999997)
+amount = 4
+texture = ExtResource("16_klvr7")
+lifetime = 120.0
+preprocess = 120.0
+local_coords = true
+gravity = Vector2(1, 0)
+scale_amount_min = 0.6
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_d6en1")
+color = Color(0, 0, 0, 1)
+anim_offset_max = 1.0

@@ -1,0 +1,69 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://d4ec612jln6pd"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_pghlt"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_ulol5"]
+parameter_name = "NoiseTexture"
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_heakg"]
+default_input_values = [0, 0.0, 1, 0.1, 2, 0.5]
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_d0boc"]
+parameter_name = "FloatParameter"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeMultiplyAdd" id="VisualShaderNodeMultiplyAdd_4sivx"]
+default_input_values = [0, 0.0, 1, 1.0, 2, 0.1]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform float FloatParameter = 0;
+uniform sampler2D NoiseTexture;
+
+
+
+void fragment() {
+// FloatParameter:8
+	float n_out8p0 = FloatParameter;
+
+
+// MultiplyAdd:9
+	float n_in9p1 = 1.00000;
+	float n_in9p2 = 0.10000;
+	float n_out9p0 = fma(n_out8p0, n_in9p1, n_in9p2);
+
+
+	vec4 n_out5p0;
+// Texture2D:5
+	n_out5p0 = texture(NoiseTexture, UV);
+	float n_out5p1 = n_out5p0.r;
+
+
+// SmoothStep:7
+	float n_out7p0 = smoothstep(n_out8p0, n_out9p0, n_out5p1);
+
+
+// Output:0
+	COLOR.a = n_out7p0;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(600, 120)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture_pghlt")
+nodes/fragment/5/position = Vector2(-60, 260)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_ulol5")
+nodes/fragment/6/position = Vector2(-440, 240)
+nodes/fragment/7/node = SubResource("VisualShaderNodeSmoothStep_heakg")
+nodes/fragment/7/position = Vector2(380, -20)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_d0boc")
+nodes/fragment/8/position = Vector2(-260, -20)
+nodes/fragment/9/node = SubResource("VisualShaderNodeMultiplyAdd_4sivx")
+nodes/fragment/9/position = Vector2(60, 60)
+nodes/fragment/connections = PackedInt32Array(6, 0, 5, 2, 5, 1, 7, 2, 7, 0, 0, 1, 8, 0, 7, 0, 8, 0, 9, 0, 9, 0, 7, 1)

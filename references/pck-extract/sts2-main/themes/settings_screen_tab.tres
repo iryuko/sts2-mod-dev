@@ -1,0 +1,9 @@
+[gd_resource type="Theme" format=3 uid="uid://cvl0a1ooy6gtg"]
+
+[resource]
+default_font_size = 32
+/colors/font_color = Color(1, 0.964706, 0.886275, 1)
+Label/colors/font_color = Color(1, 0.964706, 0.886275, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 0.25098)
+Label/constants/outline_size = 16
+Label/constants/shadow_outline_size = 0

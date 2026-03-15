@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxx78tt8ca3b3"]
+
+[ext_resource type="Script" uid="uid://deyocmnoxh2h" path="res://src/Core/Nodes/Events/Custom/CrystalSphere/NCrystalSphereCell.cs" id="1_pstm0"]
+[ext_resource type="Texture2D" uid="uid://g0txvye4uolo" path="res://images/events/crystal_sphere/crystal_ball_single_square_ui.png" id="2_i3xup"]
+
+[node name="CrystalSphereCell" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(57, 57)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_pstm0")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_i3xup")
+
+[node name="HoveredFg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 11.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.501961)

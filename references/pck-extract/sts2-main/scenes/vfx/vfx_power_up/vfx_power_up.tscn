@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://co1bq2s00r2i5"]
+
+[ext_resource type="PackedScene" uid="uid://bc4sc4yqi0adm" path="res://scenes/vfx/vfx_power_up/vfx_power_up_3d_back.tscn" id="1_0j3ll"]
+[ext_resource type="Script" uid="uid://cgelci5d3sbjv" path="res://src/Core/Nodes/Vfx/NPowerUpVfx.cs" id="1_aml4l"]
+[ext_resource type="PackedScene" uid="uid://bjm5ss53itk5f" path="res://scenes/vfx/vfx_power_up/vfx_power_up_2d_front.tscn" id="3_qlhs5"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nespl"]
+viewport_path = NodePath("SubViewport")
+
+[node name="vfx_power_up" type="Node2D"]
+position = Vector2(6, 0)
+script = ExtResource("1_aml4l")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(540, 540)
+render_target_update_mode = 4
+
+[node name="vfx_power_up" parent="SubViewport" instance=ExtResource("1_0j3ll")]
+
+[node name="outer_aura" parent="SubViewport/vfx_power_up" index="0"]
+speed_scale = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(-4.36642e-08, -0.0464614, 0.99892, -2.03089e-09, 0.99892, 0.0464614, -1, 3.33067e-15, -4.37114e-08, 1.44418, 0.603676, 0.00383413)
+
+[node name="BackVfx" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(-5.3963, -11.3963)
+rotation = 0.0066475
+scale = Vector2(1.04715, 1.04715)
+texture = SubResource("ViewportTexture_nespl")
+
+[node name="FrontVfx" parent="." instance=ExtResource("3_qlhs5")]
+position = Vector2(-6, -20)
+
+[editable path="SubViewport/vfx_power_up"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://buvelng5pukxl"]
+
+[ext_resource type="Script" uid="uid://cwyexp8hobpqu" path="res://src/Core/Nodes/Combat/NPlayerHand.cs" id="1_dixnn"]
+[ext_resource type="PackedScene" uid="uid://wjt3nn5ts5o3" path="res://scenes/cards/upgrade_preview.tscn" id="3_ffs7i"]
+[ext_resource type="Script" uid="uid://cksmtm0ty3xpc" path="res://src/Core/Nodes/Combat/NSelectedHandCardContainer.cs" id="3_tycli"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="5_86oeu"]
+[ext_resource type="Theme" uid="uid://cvl0a1ooy6gtg" path="res://themes/settings_screen_tab.tres" id="6_q3cml"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="7_4qpdc"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_btliv"]
+[ext_resource type="PackedScene" uid="uid://rxgwkwxf1dsr" path="res://scenes/combat/peek_button.tscn" id="8_3xbsa"]
+
+[node name="PlayerHand" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dixnn")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="SelectModeBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="CardHolderContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+mouse_filter = 2
+
+[node name="SelectedHandCardContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_tycli")
+
+[node name="UpgradePreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UpgradePreview" parent="UpgradePreviewContainer" instance=ExtResource("3_ffs7i")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+
+[node name="SelectModeConfirmButton" parent="." instance=ExtResource("5_86oeu")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="SelectionHeader" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = -342.0
+offset_right = 7.0
+offset_bottom = -292.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_q3cml")
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("7_4qpdc")
+bbcode_enabled = true
+text = "[center]What Shall I do?[/center]"
+scroll_active = false
+script = ExtResource("7_btliv")
+AutoSizeEnabled = false
+IsVerticallyBound = false
+
+[node name="PeekButton" parent="." instance=ExtResource("8_3xbsa")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 100.0
+offset_top = -64.0
+offset_right = 228.0
+offset_bottom = 64.0
+grow_horizontal = 1

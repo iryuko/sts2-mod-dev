@@ -1,0 +1,50 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=12 format=3 uid="uid://bpy4hwdrk82nf"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://co1w62mwuyjgc" path="res://animations/monsters/bowlbug/bowlbug.atlas" id="1_0dtyj"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bvbi45poh5hvb" path="res://animations/monsters/bowlbug/bowlbug.skel" id="2_rfgrg"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ivab5"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_teqxu"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wtr88"]
+from = "headbutt_stunned"
+to = "stunned_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7gysd"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_o4w10"]
+from = "stunned_loop"
+to = "idle_loop"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_8pu80"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_617gr"]
+from = "hurt_stunned"
+to = "hurt_stunned"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_3w4pn"]
+from = "stunned_loop"
+to = "hurt_stunned"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_54vc8"]
+from = "hurt_stunned"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_0dtyj")
+skeleton_file_res = ExtResource("2_rfgrg")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_ivab5"), SubResource("SpineAnimationMix_teqxu"), SubResource("SpineAnimationMix_wtr88"), SubResource("SpineAnimationMix_7gysd"), SubResource("SpineAnimationMix_o4w10"), SubResource("SpineAnimationMix_8pu80"), SubResource("SpineAnimationMix_617gr"), SubResource("SpineAnimationMix_3w4pn"), SubResource("SpineAnimationMix_54vc8")]

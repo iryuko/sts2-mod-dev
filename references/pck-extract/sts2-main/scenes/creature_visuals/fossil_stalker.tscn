@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://drnw6aojig3p0"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_82ajs"]
+[ext_resource type="Script" uid="uid://dg38nr46t2w5x" path="res://src/Core/Nodes/Vfx/NFossilStalkerVfx.cs" id="3_dtqvj"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bbprip0ib1x4g" path="res://animations/monsters/fossil_stalker/fossil_stalker_skel_data.tres" id="3_ngnuf"]
+[ext_resource type="Texture2D" uid="uid://bgs6ls5kyxlmh" path="res://images/vfx/long_rice_no__glow_particle.png" id="4_asrb2"]
+
+[sub_resource type="Curve" id="Curve_dtqvj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.610973, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.60341, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xh1j7"]
+curve = SubResource("Curve_dtqvj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dtqvj"]
+lifetime_randomness = 0.9
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 30.0
+initial_velocity_min = 600.0
+initial_velocity_max = 900.0
+gravity = Vector3(0, 200, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_xh1j7")
+color = Color(0.657, 0.80685, 0.9, 1)
+
+[node name="FossilStalker" type="Node2D"]
+script = ExtResource("1_82ajs")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_ngnuf")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(11, -47)
+scale = Vector2(0.25, 0.25)
+
+[node name="DebuffBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "debuff_particle_emitter"
+show_behind_parent = true
+position = Vector2(-295.411, -840.7)
+rotation = -0.270838
+
+[node name="DebuffParticles" type="GPUParticles2D" parent="Visuals/DebuffBone"]
+amount = 80
+texture = ExtResource("4_asrb2")
+lifetime = 1.2
+speed_scale = 2.0
+randomness = 0.47
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_dtqvj")
+
+[node name="NFossilStalkerVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_dtqvj")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -137.0
+offset_top = -224.0
+offset_right = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -108)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -251)

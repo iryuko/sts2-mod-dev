@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://dld4q0f6gsiyc"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://606bgnkkf3pm" path="res://animations/monsters/ceremonial_beast/ceremonial_beast.atlas" id="1_mr05q"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b6acudpk717hi" path="res://animations/monsters/ceremonial_beast/ceremonial_beast.skel" id="2_1a6ug"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_kmogd"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.03
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rftp7"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_igggc"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_aujt4"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_mr05q")
+skeleton_file_res = ExtResource("2_1a6ug")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_kmogd"), SubResource("SpineAnimationMix_rftp7"), SubResource("SpineAnimationMix_igggc"), SubResource("SpineAnimationMix_aujt4")]

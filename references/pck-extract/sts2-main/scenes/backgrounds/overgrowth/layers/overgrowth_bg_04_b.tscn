@@ -1,0 +1,793 @@
+[gd_scene load_steps=56 format=3 uid="uid://cxipav0wb20ap"]
+
+[ext_resource type="Texture2D" uid="uid://bqam4best4c4s" path="res://images/rooms/overgrowth/overgrowth_04_b.png" id="1_rqwst"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="2_ur5i3"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="3_h8bk2"]
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="4_7l5kk"]
+[ext_resource type="Texture2D" uid="uid://bmxedxu8xcejt" path="res://images/rooms/overgrowth/overgrowth_04_b_1.png" id="5_67nr1"]
+[ext_resource type="Texture2D" uid="uid://b606oevoopurd" path="res://images/rooms/overgrowth/overgrowth_04_b_2.png" id="6_qdv2k"]
+[ext_resource type="Texture2D" uid="uid://cc48jaiqh0wko" path="res://images/rooms/overgrowth/overgrowth_04_b_3.png" id="7_7dsd5"]
+[ext_resource type="Texture2D" uid="uid://cf4mx0c3ls4u7" path="res://images/rooms/overgrowth/overgrowth_04_b_4.png" id="8_xdbac"]
+[ext_resource type="Texture2D" uid="uid://bm8gqo2ipa017" path="res://images/rooms/overgrowth/overgrowth_04_b_5.png" id="9_dv4oe"]
+[ext_resource type="Texture2D" uid="uid://cf65q4yamqq5i" path="res://images/rooms/overgrowth/overgrowth_04_b_6.png" id="10_gh7c6"]
+[ext_resource type="Texture2D" uid="uid://mnsyf1fkswjy" path="res://images/rooms/overgrowth/overgrowth_04_b_7.png" id="11_8g3h5"]
+[ext_resource type="Texture2D" uid="uid://bl3t7oncpisfk" path="res://images/rooms/overgrowth/overgrowth_04_b_8.png" id="12_a34ai"]
+[ext_resource type="Texture2D" uid="uid://kwnpyquafsu1" path="res://images/rooms/overgrowth/overgrowth_04_b_9.png" id="13_k845f"]
+[ext_resource type="Texture2D" uid="uid://cuikwpsu5bcvr" path="res://images/rooms/overgrowth/overgrowth_04_b_10.png" id="14_efblu"]
+[ext_resource type="Texture2D" uid="uid://dw7p4n2od1vp2" path="res://images/rooms/overgrowth/overgrowth_04_b_11.png" id="15_jyppw"]
+[ext_resource type="Texture2D" uid="uid://dhk58aucv8q64" path="res://images/rooms/overgrowth/overgrowth_04_b_12.png" id="16_wamxo"]
+[ext_resource type="Texture2D" uid="uid://1v3qqpnmm1j6" path="res://images/rooms/overgrowth/overgrowth_04_b_13.png" id="17_1gwcr"]
+[ext_resource type="Texture2D" uid="uid://datcgyrpywfj4" path="res://images/rooms/overgrowth/overgrowth_04_b_14.png" id="18_q1krj"]
+[ext_resource type="Texture2D" uid="uid://becqvp3x6a3x7" path="res://images/rooms/overgrowth/overgrowth_04_b_15.png" id="19_djt1t"]
+[ext_resource type="Texture2D" uid="uid://dg3mdr1q0guiw" path="res://images/rooms/overgrowth/overgrowth_04_b_16.png" id="20_o0cn4"]
+[ext_resource type="Texture2D" uid="uid://c22xkqxugag2q" path="res://images/rooms/overgrowth/overgrowth_04_b_17.png" id="21_wqf18"]
+[ext_resource type="Texture2D" uid="uid://r1wxah1ysmwo" path="res://images/rooms/overgrowth/overgrowth_pillar_1.png" id="22_qxcr8"]
+[ext_resource type="Texture2D" uid="uid://b27uogssh011l" path="res://images/rooms/overgrowth/overgrowth_pillar_2.png" id="23_6m2my"]
+[ext_resource type="Texture2D" uid="uid://6hr67o7dvyg5" path="res://images/rooms/overgrowth/overgrowth_04_b_18.png" id="24_aq7i6"]
+[ext_resource type="Texture2D" uid="uid://dpyuxsh67ag0l" path="res://images/rooms/overgrowth/overgrowth_04_b_19.png" id="25_m7hhr"]
+[ext_resource type="Texture2D" uid="uid://b3mmh247m20hr" path="res://images/rooms/overgrowth/overgrowth_04_b_20.png" id="26_3xw0x"]
+[ext_resource type="Texture2D" uid="uid://lvx6aiphhb5l" path="res://images/rooms/overgrowth/overgrowth_04_b_21.png" id="27_ur51x"]
+[ext_resource type="Texture2D" uid="uid://ciduwosyqv3pj" path="res://images/rooms/overgrowth/overgrowth_04_b_22.png" id="28_q61og"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_ywrkm"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ckblp"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="Curve" id="Curve_rf4xq"]
+_data = [Vector2(0, 0.802807), 0.0, 0.0, 0, 0, Vector2(0.52605, 1), 0.0, 0.0, 0, 0, Vector2(0.988235, 0.797278), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_e0psq"]
+offsets = PackedFloat32Array(0, 0.493482, 1)
+colors = PackedColorArray(0.105882, 0.105882, 0.105882, 1, 0.499439, 0.49944, 0.499439, 1, 0.105882, 0.105882, 0.105882, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ogtvn"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pn0jj"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 3.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.02
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 100.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2gql"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.3
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wks2r"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.02
+shader_parameter/strengthScale = 105.195
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5drh7"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.03
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 9.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ra6pn"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.03
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tc76n"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.03
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_64wij"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_csk5g"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1y7q"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 15.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkk2y"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwh3k"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 15.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41i7e"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 7.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2tkb"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4mdb3"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 5.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 25.0
+shader_parameter/interval = 17.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxtok"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 5.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 15.0
+shader_parameter/interval = 15.0
+shader_parameter/detail = 2.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ntphc"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 5.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 25.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwnvj"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fh3nl"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 7.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ptrtq"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2uihj"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4fgu"]
+shader = ExtResource("4_7l5kk")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="B" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.4
+offset_top = -648.016
+offset_right = 1382.4
+offset_bottom = 648.016
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rqwst")
+expand_mode = 1
+
+[node name="little_light_31" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1902.24, 586.609)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_32" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1814.93, 421.577)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_33" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1552.03, 316.992)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_34" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1519.4, 343.858)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_35" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1476.23, 540.553)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_36" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(726.866, 505.052)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_37" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(678.892, 462.835)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_38" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(669.298, 547.27)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_39" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(882.305, 459.956)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_40" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(612.688, 672.003)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="little_light_41" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(675.053, 267.099)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_h8bk2")
+
+[node name="medium_light" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(296.054, 222.963)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.8
+scale_amount_curve = SubResource("Curve_rf4xq")
+color = Color(0.0705882, 0.12549, 0, 1)
+color_ramp = SubResource("Gradient_e0psq")
+script = ExtResource("3_h8bk2")
+
+[node name="medium_light_2" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1367.8, 165.396)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.8
+scale_amount_curve = SubResource("Curve_rf4xq")
+color = Color(0.0705882, 0.12549, 0, 1)
+color_ramp = SubResource("Gradient_e0psq")
+script = ExtResource("3_h8bk2")
+
+[node name="medium_light_3" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1980.92, 152.922)
+amount = 1
+texture = ExtResource("2_ur5i3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.8
+scale_amount_curve = SubResource("Curve_rf4xq")
+color = Color(0.0705882, 0.12549, 0, 1)
+color_ramp = SubResource("Gradient_e0psq")
+script = ExtResource("3_h8bk2")
+
+[node name="b_foliage_1" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ogtvn")
+layout_mode = 0
+offset_left = 107.4
+offset_top = 631.016
+offset_right = 220.8
+offset_bottom = 717.416
+texture = ExtResource("5_67nr1")
+expand_mode = 1
+
+[node name="b_foliage_2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_pn0jj")
+layout_mode = 0
+offset_left = 174.4
+offset_top = 603.016
+offset_right = 235.6
+offset_bottom = 651.616
+texture = ExtResource("6_qdv2k")
+expand_mode = 1
+
+[node name="b_foliage_3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_u2gql")
+layout_mode = 0
+offset_left = 321.4
+offset_top = 582.016
+offset_right = 411.4
+offset_bottom = 645.016
+texture = ExtResource("7_7dsd5")
+expand_mode = 1
+
+[node name="b_foliage_4" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_wks2r")
+layout_mode = 0
+offset_left = 963.4
+offset_top = 598.016
+offset_right = 1087.6
+offset_bottom = 686.216
+texture = ExtResource("8_xdbac")
+expand_mode = 1
+
+[node name="b_foliage_5" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_5drh7")
+layout_mode = 0
+offset_left = 1092.4
+offset_top = 606.016
+offset_right = 1150.0
+offset_bottom = 645.616
+texture = ExtResource("9_dv4oe")
+expand_mode = 1
+
+[node name="b_foliage_6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ra6pn")
+layout_mode = 0
+offset_left = 1259.4
+offset_top = 449.016
+offset_right = 1459.2
+offset_bottom = 670.416
+texture = ExtResource("10_gh7c6")
+expand_mode = 1
+
+[node name="b_foliage_7" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_tc76n")
+layout_mode = 0
+offset_left = 1600.4
+offset_top = 651.016
+offset_right = 1695.8
+offset_bottom = 717.616
+texture = ExtResource("11_8g3h5")
+expand_mode = 1
+
+[node name="b_foliage_8" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_64wij")
+layout_mode = 0
+offset_left = 1674.4
+offset_top = 617.016
+offset_right = 1762.6
+offset_bottom = 703.416
+texture = ExtResource("12_a34ai")
+expand_mode = 1
+
+[node name="b_foliage_9" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_csk5g")
+layout_mode = 0
+offset_left = 2138.4
+offset_top = 596.016
+offset_right = 2226.6
+offset_bottom = 666.216
+texture = ExtResource("13_k845f")
+expand_mode = 1
+
+[node name="b_foliage_10" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_r1y7q")
+layout_mode = 0
+offset_left = 2436.4
+offset_top = 638.016
+offset_right = 2643.4
+offset_bottom = 713.616
+texture = ExtResource("14_efblu")
+expand_mode = 1
+
+[node name="b_foliage_11" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hkk2y")
+layout_mode = 0
+offset_left = 2667.2
+offset_top = 147.416
+offset_right = 2775.2
+offset_bottom = 388.616
+texture = ExtResource("15_jyppw")
+expand_mode = 1
+
+[node name="b_foliage_12" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_cwh3k")
+layout_mode = 0
+offset_left = 2069.2
+offset_top = 344.416
+offset_right = 2157.4
+offset_bottom = 511.816
+rotation = 2.2986
+texture = ExtResource("16_wamxo")
+expand_mode = 1
+
+[node name="b_foliage_13" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_41i7e")
+layout_mode = 0
+offset_left = 1714.2
+offset_top = 547.416
+offset_right = 1957.2
+offset_bottom = 671.616
+rotation = -1.55335
+texture = ExtResource("17_1gwcr")
+expand_mode = 1
+
+[node name="b_foliage_14" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_c2tkb")
+layout_mode = 0
+offset_left = 1780.2
+offset_top = 275.416
+offset_right = 1983.6
+offset_bottom = 446.216
+rotation = 2.53596
+texture = ExtResource("18_q1krj")
+expand_mode = 1
+
+[node name="b_foliage_15" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4mdb3")
+layout_mode = 0
+offset_left = 2671.2
+offset_top = 281.416
+offset_right = 3493.8
+offset_bottom = 565.816
+rotation = 3.14159
+texture = ExtResource("19_djt1t")
+expand_mode = 1
+
+[node name="b_foliage_16" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nxtok")
+layout_mode = 0
+offset_left = 1759.2
+offset_top = 249.416
+offset_right = 2715.0
+offset_bottom = 505.016
+rotation = 3.14159
+texture = ExtResource("20_o0cn4")
+expand_mode = 1
+
+[node name="b_foliage_17" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ntphc")
+layout_mode = 0
+offset_left = 969.2
+offset_top = 315.416
+offset_right = 1952.0
+offset_bottom = 637.616
+rotation = 3.14159
+texture = ExtResource("21_wqf18")
+expand_mode = 1
+
+[node name="pillar_1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1446.4
+offset_top = 144.016
+offset_right = 1684.0
+offset_bottom = 418.516
+texture = ExtResource("22_qxcr8")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="pillar_2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 576.4
+offset_top = 136.016
+offset_right = 797.8
+offset_bottom = 394.766
+texture = ExtResource("23_6m2my")
+expand_mode = 1
+
+[node name="b_foliage_18" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_vwnvj")
+layout_mode = 0
+offset_left = 2609.2
+offset_top = 343.416
+offset_right = 2871.55
+offset_bottom = 594.066
+rotation = 3.14159
+texture = ExtResource("24_aq7i6")
+expand_mode = 1
+
+[node name="b_foliage_19" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_fh3nl")
+layout_mode = 0
+offset_left = 2269.2
+offset_top = 323.416
+offset_right = 2524.35
+offset_bottom = 458.866
+rotation = 3.14159
+texture = ExtResource("25_m7hhr")
+expand_mode = 1
+
+[node name="b_foliage_20" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_ptrtq")
+layout_mode = 0
+offset_left = 1194.2
+offset_top = 215.416
+offset_right = 1356.65
+offset_bottom = 270.316
+rotation = 3.14159
+texture = ExtResource("26_3xw0x")
+expand_mode = 1
+
+[node name="b_foliage_21" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_2uihj")
+layout_mode = 0
+offset_left = 427.201
+offset_top = 409.416
+offset_right = 555.901
+offset_bottom = 619.116
+rotation = 3.14159
+texture = ExtResource("27_ur51x")
+expand_mode = 1
+
+[node name="b_foliage_22" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_t4fgu")
+layout_mode = 0
+offset_left = 242.201
+offset_top = 384.416
+offset_right = 332.651
+offset_bottom = 574.316
+rotation = 3.14159
+texture = ExtResource("28_q61og")
+expand_mode = 1

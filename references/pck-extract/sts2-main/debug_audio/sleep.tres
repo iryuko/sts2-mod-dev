@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://qeq5buik40w2"]
+
+[ext_resource type="AudioStream" uid="uid://csu3hc5lf6br0" path="res://debug_audio/STS_SleepJingle_1a_NewMix_v1.mp3" id="1_h8sav"]
+[ext_resource type="AudioStream" uid="uid://twtdjvtl24er" path="res://debug_audio/STS_SleepJingle_1b_NewMix_v1.mp3" id="2_lfc5b"]
+[ext_resource type="AudioStream" uid="uid://cklke7spo8rra" path="res://debug_audio/STS_SleepJingle_1c_NewMix_v1.mp3" id="3_jsvyu"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_h8sav")
+stream_1/stream = ExtResource("2_lfc5b")
+stream_2/stream = ExtResource("3_jsvyu")

@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://bdn2wg65fw7oa"]
+
+[ext_resource type="Script" uid="uid://6jtijl8ha23p" path="res://src/Core/Nodes/Combat/NPower.cs" id="1_0v36d"]
+[ext_resource type="Shader" uid="uid://ds37fkvrtbs4d" path="res://shaders/power.gdshader" id="2_rvigt"]
+[ext_resource type="Shader" uid="uid://b0jlo1dsq67w1" path="res://shaders/power_flash_vfx.gdshader" id="3_daisb"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_ijbto"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_auir6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cgabo"]
+resource_local_to_scene = true
+shader = ExtResource("2_rvigt")
+shader_parameter/pulse = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mgt2"]
+shader = ExtResource("3_daisb")
+shader_parameter/strength = 2.0
+
+[sub_resource type="Curve" id="Curve_vbjv2"]
+_limits = [0.99, 2.0, 0.0, 1.0]
+_data = [Vector2(0.00275482, 1), 0.0, 1.83182, 0, 0, Vector2(1, 1.73684), 0.301663, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_7hgg3"]
+offsets = PackedFloat32Array(0, 0.0572289, 0.533133, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0.947369, 1, 1, 1, 0)
+
+[node name="Power" type="Control"]
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 40.0
+script = ExtResource("1_0v36d")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_cgabo")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+expand_mode = 1
+stretch_mode = 4
+
+[node name="AmountLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -56.0
+offset_top = 21.0
+offset_right = 44.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.12, 0.10208, 0.0816, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_ijbto")
+theme_override_font_sizes/font_size = 18
+text = "88"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("5_auir6")
+AutoSizeEnabled = false
+
+[node name="PowerFlash" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_5mgt2")
+position = Vector2(20, 20)
+emitting = false
+amount = 1
+one_shot = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.07
+scale_amount_max = 0.07
+scale_amount_curve = SubResource("Curve_vbjv2")
+color_ramp = SubResource("Gradient_7hgg3")

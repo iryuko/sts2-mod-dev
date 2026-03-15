@@ -1,0 +1,520 @@
+[gd_scene load_steps=15 format=4 uid="uid://dtbq057n2o8qb"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_wulim"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bkao71dkw1we0" path="res://animations/monsters/decimillipede/decimillipede_back_skel_data.tres" id="2_3i37v"]
+[ext_resource type="Script" uid="uid://cdkygs8f8mlg1" path="res://src/Core/Nodes/Animation/NDecimillipedeSegmentDriver.cs" id="3_hnhbu"]
+[ext_resource type="Script" uid="uid://6178tjjef8i" path="res://src/Core/Nodes/Vfx/NDecimillipedeSegmentVfx.cs" id="3_qv7s0"]
+[ext_resource type="Shader" uid="uid://dcoypfmn4ip2c" path="res://shaders/vfx/monsters/decimillipede_suck_shader.tres" id="5_g8rj3"]
+[ext_resource type="Texture2D" uid="uid://dl7n44l2pbefx" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_gradient.png" id="6_hrxg0"]
+[ext_resource type="Texture2D" uid="uid://dsn1mf6qium2y" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_texture.png" id="7_pc7ye"]
+[ext_resource type="Texture2D" uid="uid://bqelc57e7htdg" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_mask.png" id="8_yrebj"]
+[ext_resource type="Texture2D" uid="uid://c77td4all7ch6" path="res://images/vfx/monsters/decimillipede/decimillipede_flipflake.png" id="9_es2p7"]
+[ext_resource type="Texture2D" uid="uid://cutvcqhym65fg" path="res://images/vfx/monsters/decimillipede/decimillipede_blue_flipflake.png" id="10_vyw3g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ognr7"]
+shader = ExtResource("5_g8rj3")
+shader_parameter/direction = 1
+shader_parameter/suckPattern = ExtResource("7_pc7ye")
+shader_parameter/suckGradient = ExtResource("6_hrxg0")
+shader_parameter/suckShape = ExtResource("8_yrebj")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4sgak"]
+_surfaces = [{
+"aabb": AABB(-500, -1000, 0, 1000, 1000, 1e-05),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAAAAAgD4AAIA/AACAPgAAAAAAAAA/AACAPwAAAD8AAAAAAABAPwAAgD8AAEA/AAAAAAAAgD8AAIA/AACAPwAAAAA="),
+"format": 34359738385,
+"primitive": 4,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AABIwwAAAAAAAAAAAAD6wwAAesQAAAAAAADIwgAAAAAAAAAAAAB6wwAAesQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAesQAAAAAAADIQgAAAAAAAAAAAAB6QwAAesQAAAAAAABIQwAAAAAAAAAAAAD6QwAAesQAAAAA")
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_88536"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_bc2df"]
+_data = [Vector2(0.00483953, 1), 0.0, 0.0, 0, 0, Vector2(0.432756, 1), 0.0, 0.0, 0, 0, Vector2(0.726184, 0.813274), -1.30288, -1.30288, 0, 0, Vector2(1, 0.207965), -3.25931, 0.0, 0, 0]
+point_count = 4
+
+[node name="DecimillipedeSegmentBack" type="Node2D"]
+script = ExtResource("1_wulim")
+
+[node name="Node2D" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2(318, -19)
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_3i37v")
+preview_skin = "web"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(318, -19)
+scale = Vector2(-0.45, 0.45)
+
+[node name="fxnode2back" type="SpineSlotNode" parent="Visuals"]
+slot_name = "particle_slot_2"
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(643.602, -461.917)
+rotation = 0.210714
+scale = Vector2(0.971327, 0.994663)
+skew = -0.0103465
+
+[node name="spray" type="MeshInstance2D" parent="Visuals/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ognr7")
+position = Vector2(141.22, -50.8866)
+rotation = -2.4169
+scale = Vector2(0.442042, -0.421353)
+mesh = SubResource("ArrayMesh_4sgak")
+
+[node name="spray2" type="MeshInstance2D" parent="Visuals/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ognr7")
+position = Vector2(-50.7803, -28.8865)
+rotation = -1.15094
+scale = Vector2(0.648025, 0.487804)
+mesh = SubResource("ArrayMesh_4sgak")
+
+[node name="SegmentDriver" type="Node2D" parent="Visuals"]
+show_behind_parent = true
+script = ExtResource("3_hnhbu")
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals/SegmentDriver"]
+bone_mode = 1
+bone_name = "link_r_3"
+show_behind_parent = true
+position = Vector2(286.667, -275.556)
+
+[node name="fxnode1" type="SpineBoneNode" parent="Visuals"]
+bone_name = "particle_attach_1"
+show_behind_parent = true
+position = Vector2(411.02, -320.989)
+rotation = 0.192118
+scale = Vector2(0.967016, 0.998854)
+skew = -0.0126197
+
+[node name="spray" type="MeshInstance2D" parent="Visuals/fxnode1"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ognr7")
+position = Vector2(-53.2805, 13.9791)
+rotation = -1.87024
+scale = Vector2(0.59752, 0.505753)
+mesh = SubResource("ArrayMesh_4sgak")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(50.7195, 127.979)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-65.2805, 105.979)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(60.7195, -82.0208)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-37.2804, -184.021)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode2" type="SpineBoneNode" parent="Visuals"]
+bone_name = "particle_attach_2"
+show_behind_parent = true
+position = Vector2(643.602, -461.917)
+rotation = 0.210714
+scale = Vector2(0.971327, 0.994663)
+skew = -0.0103465
+
+[node name="spray" type="MeshInstance2D" parent="Visuals/fxnode2"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ognr7")
+position = Vector2(1.21973, -64.8866)
+rotation = 2.83256
+scale = Vector2(0.616991, 0.53887)
+mesh = SubResource("ArrayMesh_4sgak")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="Visuals/fxnode2"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(51.2196, 27.1134)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="Visuals/fxnode2"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(21.2197, -104.887)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode4" type="SpineBoneNode" parent="Visuals"]
+bone_name = "particle_attach_4"
+show_behind_parent = true
+position = Vector2(947.557, -167.871)
+rotation = 0.202695
+scale = Vector2(0.967149, 0.998726)
+skew = -0.0132804
+
+[node name="spray" type="MeshInstance2D" parent="Visuals/fxnode4"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ognr7")
+position = Vector2(-32.1184, -82.0249)
+rotation = 0.798375
+scale = Vector2(0.528021, 0.614745)
+mesh = SubResource("ArrayMesh_4sgak")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-22.1183, -10.0249)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.02
+scale_amount_max = 0.08
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-0.118286, -140.025)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-116.118, -106.025)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-58.1184, -254.025)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode3" type="SpineBoneNode" parent="Visuals/fxnode4"]
+bone_name = "particle_attach_3"
+show_behind_parent = true
+z_index = 1
+position = Vector2(-119.643, -210.488)
+rotation = 0.0105207
+scale = Vector2(1, 1)
+
+[node name="flakeparts1" type="CPUParticles2D" parent="Visuals/fxnode4/fxnode3"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-54.0039, -24.3945)
+emitting = false
+texture = ExtResource("9_es2p7")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="Visuals/fxnode4/fxnode3"]
+material = SubResource("CanvasItemMaterial_88536")
+position = Vector2(-2.00391, -156.394)
+emitting = false
+amount = 15
+texture = ExtResource("10_vyw3g")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_bc2df")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="NDecimillipedeSegmentVfx" type="Node" parent="Visuals" node_paths=PackedStringArray("_damageParticleNodes", "_sprayNodes")]
+unique_name_in_owner = true
+script = ExtResource("3_qv7s0")
+_damageParticleNodes = [NodePath("../fxnode1/flakeparts1"), NodePath("../fxnode1/blueflakeparts1"), NodePath("../fxnode1/flakeparts2"), NodePath("../fxnode1/blueflakeparts2"), NodePath("../fxnode2/flakeparts1"), NodePath("../fxnode2/blueflakeparts1"), NodePath("../fxnode4/fxnode3/flakeparts1"), NodePath("../fxnode4/fxnode3/blueflakeparts1"), NodePath("../fxnode4/flakeparts1"), NodePath("../fxnode4/blueflakeparts1"), NodePath("../fxnode4/flakeparts2"), NodePath("../fxnode4/blueflakeparts2")]
+_sprayNodes = [NodePath("../fxnode1/spray"), NodePath("../fxnode2/spray"), NodePath("../fxnode2back/spray"), NodePath("../fxnode2back/spray2"), NodePath("../fxnode4/spray")]
+metadata/_custom_type_script = "uid://6178tjjef8i"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -189.0
+offset_top = -299.0
+offset_right = 168.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -125)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -399)

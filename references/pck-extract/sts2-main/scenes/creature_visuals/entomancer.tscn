@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://b1ew6nhqtrrjc"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_w1l13"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://td55t4kpjmma" path="res://animations/monsters/entomancer/entomancer_skel_data.tres" id="2_1bg57"]
+[ext_resource type="Texture2D" uid="uid://d180byqkxenvd" path="res://images/vfx/monsters/entomancer/entomancer_bug_particle.png" id="3_i0dbq"]
+[ext_resource type="Script" uid="uid://he5qwkffb6r3" path="res://src/Core/Nodes/Vfx/NEntomancerVfx.cs" id="3_wyhs8"]
+
+[sub_resource type="Curve" id="Curve_jaghi"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0300171), 0.0, 0.0, 0, 0, Vector2(0.25, 0.921955), 0.0, 0.0, 0, 0, Vector2(0.497727, -0.839623), 0.0, 0.0, 0, 0, Vector2(0.722727, 0.966552), 0.0, 0.0, 0, 0, Vector2(0.972727, 0.0188679), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_n7xrb"]
+curve_x = SubResource("Curve_jaghi")
+
+[sub_resource type="Curve" id="Curve_7nuul"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0377357), 0.0, 0.0, 0, 0, Vector2(0.0227273, 0.639794), 0.0, 0.0, 0, 0, Vector2(0.0545455, 0.0154374), 0.0, 0.0, 0, 0, Vector2(0.0795455, 0.617496), 0.0, 0.0, 0, 0, Vector2(0.109091, -0.00686121), 0.338323, 0.338323, 0, 0, Vector2(0.136364, 0.595197), 0.0, 0.0, 0, 0, Vector2(0.172727, -0.00686121), 0.0, 0.0, 0, 0, Vector2(0.204545, 0.595197), 0.0, 0.0, 0, 0, Vector2(0.279545, -0.341338), 0.0, 0.0, 0, 0, Vector2(0.329545, 0.885077), 0.0, 0.0, 0, 0, Vector2(0.395455, -0.00686121), -2.1803, -2.1803, 0, 0, Vector2(0.434091, 0.528302), 0.0, 0.0, 0, 0, Vector2(0.470455, 0.0377357), 0.0, 0.0, 0, 0, Vector2(0.509091, 0.639794), 0.0, 0.0, 0, 0, Vector2(0.547727, 0.0154374), 0.0, 0.0, 0, 0, Vector2(0.668182, 0.41681), 0.0, 0.0, 0, 0, Vector2(0.813636, -0.0291595), 0.0, 0.0, 0, 0, Vector2(0.870454, 0.283019), 0.0, 0.0, 0, 0, Vector2(0.922727, -0.207547), 0.0, 0.0, 0, 0, Vector2(1, 0.0154374), 0.0, 0.0, 0, 0]
+point_count = 20
+
+[sub_resource type="CurveTexture" id="CurveTexture_4sp6f"]
+curve = SubResource("Curve_7nuul")
+
+[sub_resource type="Curve" id="Curve_7funk"]
+_data = [Vector2(0, 0.113636), 0.0, 6.67715, 0, 0, Vector2(0.0954545, 1), 1.25633, 1.25633, 0, 0, Vector2(0.261364, 0.615352), 0.0, 0.0, 0, 0, Vector2(0.393182, 0.988851), 0.0, 0.0, 0, 0, Vector2(0.559091, 0.682247), 0.0, 0.0, 0, 0, Vector2(0.647727, 0.938679), 0.0, 0.0, 0, 0, Vector2(0.736364, 0.687822), 0.0, 0.0, 0, 0, Vector2(0.840909, 0.882933), -1.43082, -1.43082, 0, 0, Vector2(1, 0), -5.4717, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_k1tyo"]
+curve = SubResource("Curve_7funk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4hf56"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 400.0
+emission_ring_inner_radius = 50.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+directional_velocity_min = -1.00002
+directional_velocity_max = 0.999984
+directional_velocity_curve = SubResource("CurveXYZTexture_n7xrb")
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveTexture_4sp6f")
+gravity = Vector3(0, 0, 0)
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_k1tyo")
+
+[sub_resource type="Curve" id="Curve_dq8xq"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0300171), 0.0, 0.0, 0, 0, Vector2(0.25, 0.921955), 0.0, 0.0, 0, 0, Vector2(0.497727, -0.839623), 0.0, 0.0, 0, 0, Vector2(0.722727, 0.966552), 0.0, 0.0, 0, 0, Vector2(0.972727, 0.0188679), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_8242m"]
+curve_x = SubResource("Curve_dq8xq")
+
+[sub_resource type="Curve" id="Curve_wndd6"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0377357), 0.0, 0.0, 0, 0, Vector2(0.0477273, 0.595197), 0.0, 0.0, 0, 0, Vector2(0.1, 0.0600343), 0.0, 0.0, 0, 0, Vector2(0.145455, 0.595197), 0.0, 0.0, 0, 0, Vector2(0.2, 0.0823326), 0.338323, 0.338323, 0, 0, Vector2(0.259091, 0.483705), 0.0, 0.0, 0, 0, Vector2(0.309091, 0.0600343), 0.0, 0.0, 0, 0, Vector2(0.354545, 0.483705), 0.0, 0.0, 0, 0, Vector2(0.402273, 0.0600343), 0.0, 0.0, 0, 0, Vector2(0.438636, 0.528302), 0.0, 0.0, 0, 0, Vector2(0.490909, 0.0377357), 0.0, 0.0, 0, 0, Vector2(0.670455, 0.283019), 0.0, 0.0, 0, 0, Vector2(0.854545, -0.0291595), 0.0, 0.0, 0, 0, Vector2(0.925, 0.238422), 0.0, 0.0, 0, 0, Vector2(1, 0.0154374), 0.0, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_whcxe"]
+curve = SubResource("Curve_wndd6")
+
+[sub_resource type="Curve" id="Curve_0gxr1"]
+_data = [Vector2(0, 0.113636), 0.0, 6.67715, 0, 0, Vector2(0.0954545, 1), 1.25633, 1.25633, 0, 0, Vector2(0.261364, 0.615352), 0.0, 0.0, 0, 0, Vector2(0.393182, 0.988851), 0.0, 0.0, 0, 0, Vector2(0.559091, 0.682247), 0.0, 0.0, 0, 0, Vector2(0.647727, 0.938679), 0.0, 0.0, 0, 0, Vector2(0.736364, 0.687822), 0.0, 0.0, 0, 0, Vector2(0.840909, 0.882933), -1.43082, -1.43082, 0, 0, Vector2(1, 0), -5.4717, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_e3ra5"]
+curve = SubResource("Curve_0gxr1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gg2jw"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 400.0
+emission_ring_inner_radius = 50.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+directional_velocity_min = -1.00002
+directional_velocity_max = 0.999984
+directional_velocity_curve = SubResource("CurveXYZTexture_8242m")
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+orbit_velocity_curve = SubResource("CurveTexture_whcxe")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_e3ra5")
+
+[node name="Entomancer" type="Node2D"]
+script = ExtResource("1_w1l13")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -19)
+scale = Vector2(0.3, 0.3)
+skeleton_data_res = ExtResource("2_1bg57")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SwarmTargetNode" type="Node2D" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-4648, -644)
+scale = Vector2(4, 4)
+
+[node name="SwarmParticles" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(0, -652)
+amount = 100
+texture = ExtResource("3_i0dbq")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_4hf56")
+
+[node name="AttackingBugParticles" type="GPUParticles2D" parent="Visuals/SwarmParticles"]
+visible = false
+position = Vector2(-20, 16)
+amount = 200
+texture = ExtResource("3_i0dbq")
+process_material = SubResource("ParticleProcessMaterial_gg2jw")
+
+[node name="NEntomancerVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_wyhs8")
+metadata/_custom_type_script = "uid://he5qwkffb6r3"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -212.0
+offset_top = -333.0
+offset_right = 219.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-3, -197)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -360)

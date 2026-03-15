@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxogug27a0xkg"]
+
+[ext_resource type="Script" uid="uid://by7kp3o2qy7ew" path="res://src/Core/Nodes/Combat/NEnemyTurnBanner.cs" id="1_b4kxy"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="2_wrqtx"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_v180t"]
+
+[node name="EnemyTurnBanner" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_b4kxy")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.433
+anchor_right = 0.5
+anchor_bottom = 0.433
+offset_left = -960.0
+offset_top = -539.64
+offset_right = 960.0
+offset_bottom = 540.36
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("2_wrqtx")
+theme_override_font_sizes/font_size = 96
+text = "Enemy Turn"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_v180t")
+MaxFontSize = 96

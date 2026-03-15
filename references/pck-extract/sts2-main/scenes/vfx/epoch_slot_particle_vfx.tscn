@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://kauhmljuch04"]
+
+[ext_resource type="Texture2D" uid="uid://b7gtl7gvi5tfc" path="res://images/vfx/short_grain_rice_particle.png" id="1_7xfnp"]
+[ext_resource type="Script" uid="uid://dsox2145lmmnt" path="res://src/Core/Nodes/Vfx/NEpochSlotParticle.cs" id="2_pycj2"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="EpochSlotParticle" type="Sprite2D"]
+material = ExtResource("shared_additive_mat")
+texture = ExtResource("1_7xfnp")
+script = ExtResource("2_pycj2")

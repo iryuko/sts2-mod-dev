@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy0r6ow54kklb"]
+
+[ext_resource type="Script" uid="uid://3v0nxc2w3rjr" path="res://src/Core/Nodes/CommonUi/NLoadingOverlay.cs" id="1_3shk8"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="1_ekkko"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_3shk8"]
+
+[node name="LoadingOverlay" type="ColorRect"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.1254902)
+script = ExtResource("1_3shk8")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(800, 200)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -848.0
+offset_top = -240.0
+offset_right = -48.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.498039, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.08354389, 0.20929179, 4.813075e-08, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_ekkko")
+theme_override_font_sizes/font_size = 48
+text = "Loading..."
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("3_3shk8")
+AutoSizeEnabled = false

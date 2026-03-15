@@ -1,0 +1,187 @@
+[gd_scene load_steps=17 format=3 uid="uid://c3umrknj8sk84"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_26x8q"]
+[ext_resource type="Texture2D" uid="uid://cl6xe1vi8sj4r" path="res://images/vfx/bubble_particle.png" id="3_b38uu"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dp0nynvlhdgn8" path="res://animations/monsters/haunted_ship/haunted_ship_skel_data.tres" id="3_lxtsx"]
+[ext_resource type="Script" uid="uid://bg63qhmtopupk" path="res://src/Core/Nodes/Vfx/NHauntedShipVfx.cs" id="5_b38uu"]
+
+[sub_resource type="Gradient" id="Gradient_4pvks"]
+colors = PackedColorArray(1, 1, 1, 0.611765, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b25o2"]
+gradient = SubResource("Gradient_4pvks")
+
+[sub_resource type="Curve" id="Curve_4pvks"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 23.2809, 0, 0, Vector2(0.111607, 1), 0.0, 0.0, 0, 0, Vector2(0.897436, 1.02721), 0.0, 0.0, 0, 0, Vector2(0.964286, 1.44944), 0.0, 0.0, 0, 0, Vector2(1, 0), -37.7528, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_b25o2"]
+curve = SubResource("Curve_4pvks")
+
+[sub_resource type="Curve" id="Curve_sugud"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0235426), 0.0, 0.0, 0, 0, Vector2(0.173789, 0.358744), 0.0, 0.0, 0, 0, Vector2(0.396011, -0.646861), 0.0, 0.0, 0, 0, Vector2(0.612536, 0.897982), 0.0, 0.0, 0, 0, Vector2(0.780627, -0.952915), 0.0, 0.0, 0, 0, Vector2(1, 0.0235426), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_b38uu"]
+curve = SubResource("Curve_sugud")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ipncm"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 15.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, -100, 0)
+tangential_accel_min = -400.0
+tangential_accel_max = 400.0
+tangential_accel_curve = SubResource("CurveTexture_b38uu")
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_b25o2")
+color_initial_ramp = SubResource("GradientTexture1D_b25o2")
+
+[sub_resource type="Gradient" id="Gradient_b38uu"]
+colors = PackedColorArray(1, 1, 1, 0.647059, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4pvks"]
+gradient = SubResource("Gradient_b38uu")
+
+[sub_resource type="Curve" id="Curve_x67np"]
+_limits = [0.0, 1.25, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 45.7426, 0, 0, Vector2(0.0484331, 0.934806), -0.0898876, -0.0898876, 0, 0, Vector2(0.900285, 0.917295), 0.0, 0.0, 0, 0, Vector2(0.959821, 1.22191), 0.0, 0.0, 0, 0, Vector2(1, 0), -41.528, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_jqvlg"]
+curve = SubResource("Curve_x67np")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lg3tx"]
+particle_flag_disable_z = true
+initial_velocity_min = -1000.0
+initial_velocity_max = -800.0
+gravity = Vector3(0, -150, 0)
+scale_min = 0.2
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_jqvlg")
+color_initial_ramp = SubResource("GradientTexture1D_4pvks")
+
+[node name="HauntedShip" type="Node2D"]
+script = ExtResource("1_26x8q")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_lxtsx")
+preview_skin = "Default"
+preview_animation = "debuff"
+preview_frame = true
+preview_time = 1.3
+unique_name_in_owner = true
+position = Vector2(42, -21)
+scale = Vector2(0.3, 0.3)
+
+[node name="HeadSlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "head_bubble_slot"
+show_behind_parent = true
+position = Vector2(8.137192, -523.04535)
+rotation = -2.73635
+scale = Vector2(0.9936938, 0.9936938)
+
+[node name="BubbleParticles" type="GPUParticles2D" parent="Visuals/HeadSlot"]
+position = Vector2(419.79, 524.396)
+rotation = -4.83456
+scale = Vector2(2, 2)
+amount = 1
+texture = ExtResource("3_b38uu")
+lifetime = 4.0
+randomness = 0.66
+fixed_fps = 0
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_ipncm")
+
+[node name="BubbleParticles2" type="GPUParticles2D" parent="Visuals/HeadSlot"]
+position = Vector2(831.189, 575.144)
+rotation = -4.83456
+scale = Vector2(2, 2)
+amount = 1
+texture = ExtResource("3_b38uu")
+lifetime = 3.5
+randomness = 0.73
+fixed_fps = 0
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_ipncm")
+
+[node name="NHauntedShipVfx" type="Node" parent="Visuals"]
+script = ExtResource("5_b38uu")
+
+[node name="EyeBone1" type="SpineBoneNode" parent="Visuals"]
+bone_name = "eye1"
+show_behind_parent = true
+position = Vector2(-656.18994, -907.4349)
+rotation = 0.6042579
+scale = Vector2(1.0693957, 1.0891335)
+skew = -0.042639732
+
+[node name="BubbleParticles" type="GPUParticles2D" parent="Visuals/EyeBone1"]
+position = Vector2(-0.0980273, -0.536597)
+amount = 60
+texture = ExtResource("3_b38uu")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lg3tx")
+
+[node name="EyeBone2" type="SpineBoneNode" parent="Visuals"]
+bone_name = "eye2"
+show_behind_parent = true
+position = Vector2(-889.2197, -1074.6481)
+rotation = 0.40820593
+scale = Vector2(0.9463421, 0.96468157)
+skew = -0.019631147
+
+[node name="BubbleParticles" type="GPUParticles2D" parent="Visuals/EyeBone2"]
+rotation = -0.0969028
+scale = Vector2(1.02489, 0.86119)
+skew = -0.0412351
+amount = 60
+texture = ExtResource("3_b38uu")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lg3tx")
+
+[node name="EyeBone3" type="SpineBoneNode" parent="Visuals"]
+bone_name = "eye3"
+show_behind_parent = true
+position = Vector2(-902.1309, -838.77094)
+rotation = 0.49165985
+scale = Vector2(1.0661795, 1.0588747)
+skew = 0.010563731
+
+[node name="BubbleParticles" type="GPUParticles2D" parent="Visuals/EyeBone3"]
+rotation = 0.346099
+scale = Vector2(1.01686, 1.01368)
+skew = -0.033394
+amount = 60
+texture = ExtResource("3_b38uu")
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_lg3tx")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -454.0
+offset_right = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-34, -234)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -468)

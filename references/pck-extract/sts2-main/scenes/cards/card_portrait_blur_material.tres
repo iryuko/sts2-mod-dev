@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cjo787c8p10ef"]
+
+[ext_resource type="Shader" uid="uid://15shwabns3a4" path="res://shaders/blur/Blur.gdshader" id="1_jyhuj"]
+
+[resource]
+shader = ExtResource("1_jyhuj")
+shader_parameter/step = Vector2(1, 0)
+shader_parameter/radius = 32.0

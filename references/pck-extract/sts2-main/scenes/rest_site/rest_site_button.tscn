@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://r4leephca58k"]
+
+[ext_resource type="Script" uid="uid://r6e2id7xe4s8" path="res://src/Core/Nodes/RestSite/NRestSiteButton.cs" id="1_w1w5t"]
+[ext_resource type="Texture2D" uid="uid://dtlpmsptpdlu" path="res://images/ui/rest_site/option_outline.png" id="2_wskqu"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_5fpkw"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_fyr3f"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_ov8pv"]
+[ext_resource type="Texture2D" uid="uid://njescmmhac11" path="res://images/ui/rest_site/option_toke.png" id="4_5yqad"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="5_dvmgc"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbuse"]
+resource_local_to_scene = true
+shader = ExtResource("3_5fpkw")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="RestSiteButton" type="Control"]
+custom_minimum_size = Vector2(246.786, 162.879)
+layout_mode = 3
+anchors_preset = 0
+offset_top = -1.0
+offset_right = 250.0
+offset_bottom = 163.0
+pivot_offset = Vector2(125, 82)
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_w1w5t")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 82)
+mouse_filter = 2
+
+[node name="Outline" type="TextureRect" parent="Visuals"]
+unique_name_in_owner = true
+modulate = Color(1, 0.701961, 0, 0.752941)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = -1.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(124, 86)
+mouse_filter = 2
+texture = ExtResource("2_wskqu")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="Visuals"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_qbuse")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 76)
+mouse_filter = 2
+texture = ExtResource("4_5yqad")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 165.0
+offset_bottom = 165.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 28
+text = "Dig"
+theme_override_fonts/font = ExtResource("3_fyr3f")
+theme_override_colors/font_color = Color(0.831373, 0.713726, 0.356863, 1)
+theme_override_constants/line_spacing = 40.0
+theme_override_constants/outline_size = 12
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+horizontal_alignment = 1
+script = ExtResource("3_ov8pv")
+MinFontSize = 18
+MaxFontSize = 28

@@ -1,0 +1,129 @@
+[gd_scene load_steps=4 format=3 uid="uid://dta84j1jaymty"]
+
+[ext_resource type="Script" uid="uid://bp5a2byg45r70" path="res://src/Core/Nodes/Vfx/NDecimillipedeRocksVfx.cs" id="1_uctoa"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://d1owsa1fngmrf" path="res://animations/monsters/decimillipede/rockstone_skel_data.tres" id="2_p3r0j"]
+
+[sub_resource type="GDScript" id="GDScript_yvbuj"]
+script/source = "extends SpineSprite
+
+
+var isKeyDown: bool = false
+
+var basePos: Vector2
+var animState: SpineAnimationState
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+    animState = get_animation_state()
+    playAnimation(\"idle_loop\", 0, 0, true)
+    basePos = position
+
+
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+    if( Input.is_key_pressed(KEY_A)):
+        if(!isKeyDown):
+            attack()
+        isKeyDown = true;
+    else:
+        isKeyDown = false;
+
+
+
+func attack():
+    var anim:String
+    var rand = randf_range(0, 4)
+    if ( rand < 1):
+        anim = \"fall1\"
+    elif (rand < 2):
+        anim = \"fall2\"
+    elif (rand < 3):
+        anim = \"fall3\"
+    else:
+        anim = \"fall4\"
+
+    playAnimation(anim, 0, 0, false)
+    queueAnimation(\"idle_loop\", 0, 0, true)
+    var xRand = randf_range(-200, 200)
+    position = Vector2(basePos.x + xRand, basePos.y)
+
+
+
+
+func playAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.set_animation(anim, loop, track)
+    te.set_mix_duration(blend)
+    return te
+    
+    
+    
+func queueAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.add_animation(anim, 0, loop, track)
+    te.set_mix_duration(blend)
+    return te
+    
+"
+
+[node name="VfxDecimillipedeRocks" type="Node2D" node_paths=PackedStringArray("_rocks")]
+script = ExtResource("1_uctoa")
+_rocks = [NodePath("Rock2"), NodePath("Rock1"), NodePath("Rock3"), NodePath("Rock4"), NodePath("Rock5")]
+
+[node name="Rock4" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_p3r0j")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(-359, 417)
+scale = Vector2(0.2, 0.2)
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock5" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_p3r0j")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(285, 234)
+scale = Vector2(0.2, 0.2)
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock1" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_p3r0j")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(-570, 303)
+scale = Vector2(0.2, 0.2)
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock2" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_p3r0j")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(-26, 444)
+scale = Vector2(0.2, 0.2)
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock3" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_p3r0j")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(988, 410)
+scale = Vector2(0.2, 0.2)
+script = SubResource("GDScript_yvbuj")

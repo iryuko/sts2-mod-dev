@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk02ucetk63ke"]
+
+[ext_resource type="Script" uid="uid://dhde76bcoejuy" path="res://src/Core/Nodes/Screens/ModdingScreen/NModMenuRow.cs" id="1_4i0ra"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="1_4l03m"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="2_4i0ra"]
+[ext_resource type="Texture2D" uid="uid://c1kosvcor5dsr" path="res://images/ui/mods/steam_logo.png" id="3_dg570"]
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="4_fcydb"]
+[ext_resource type="Script" uid="uid://h45v44q8fnkx" path="res://src/Core/Nodes/CommonUi/NTickbox.cs" id="5_opbjn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wyjbh"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ModRow" type="Control"]
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4i0ra")
+
+[node name="SelectionHighlight" type="Panel" parent="."]
+modulate = Color(0.594729, 0.78547, 0.959835, 0.203922)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wyjbh")
+
+[node name="Title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 562.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_4l03m")
+theme_override_font_sizes/normal_font_size = 32
+text = "A very cool mod"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("2_4i0ra")
+MinFontSize = 16
+MaxFontSize = 32
+IsHorizontallyBound = true
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="PlatformIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -25.0
+offset_right = -86.0
+offset_bottom = 23.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_dg570")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tickbox" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -32.0
+offset_right = -12.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("5_opbjn")
+
+[node name="TickboxVisuals" parent="Tickbox" instance=ExtResource("4_fcydb")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo7tdt6obie4o"]
+
+[ext_resource type="Script" uid="uid://ckvsc6e206f27" path="res://src/Core/Nodes/Vfx/Cards/NBolasVfx.cs" id="1_fro0s"]
+[ext_resource type="Texture2D" uid="uid://b7vqn8f75qh4x" path="res://images/packed/vfx/trail.png" id="2_bagmt"]
+[ext_resource type="Script" uid="uid://b5qsb7wn7ra2c" path="res://src/Core/Nodes/Vfx/NBasicTrail.cs" id="3_dyqqk"]
+[ext_resource type="Texture2D" uid="uid://dqldyaf024ykq" path="res://images/packed/cracked_ball.png" id="4_bux6q"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_bya6o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.578717, 0.578717, 0, 0, Vector2(1, 1), 0.646704, 0.0, 0, 0]
+point_count = 3
+
+[node name="BolasVfx" type="Node2D"]
+material = ExtResource("shared_additive_mat")
+script = ExtResource("1_fro0s")
+
+[node name="CenterBola" type="Node2D" parent="."]
+use_parent_material = true
+
+[node name="Trail" type="Line2D" parent="CenterBola"]
+modulate = Color(0.28, 0.604, 1, 1)
+use_parent_material = true
+width = 36.0
+width_curve = SubResource("Curve_bya6o")
+texture = ExtResource("2_bagmt")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("3_dyqqk")
+_maxSegments = 15
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterBola"]
+modulate = Color(0.27, 0.622833, 1, 1)
+use_parent_material = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_bux6q")
+
+[node name="Bola2" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(-50, 0)
+
+[node name="Trail" type="Line2D" parent="Bola2"]
+modulate = Color(0.4, 0.407843, 1, 1)
+use_parent_material = true
+width = 36.0
+width_curve = SubResource("Curve_bya6o")
+texture = ExtResource("2_bagmt")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("3_dyqqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bola2"]
+modulate = Color(0.32, 0.32, 1, 1)
+use_parent_material = true
+texture = ExtResource("4_bux6q")
+
+[node name="Bola3" type="Node2D" parent="."]
+use_parent_material = true
+position = Vector2(50, 0)
+
+[node name="Trail" type="Line2D" parent="Bola3"]
+modulate = Color(0.4, 0.407843, 1, 1)
+use_parent_material = true
+width = 36.0
+width_curve = SubResource("Curve_bya6o")
+texture = ExtResource("2_bagmt")
+texture_mode = 2
+joint_mode = 2
+script = ExtResource("3_dyqqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bola3"]
+modulate = Color(0.32, 0.32, 1, 1)
+use_parent_material = true
+texture = ExtResource("4_bux6q")

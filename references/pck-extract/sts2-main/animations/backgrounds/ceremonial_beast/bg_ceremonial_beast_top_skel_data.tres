@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://s270k2ms2r24"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bcfxngkfqde00" path="res://animations/backgrounds/ceremonial_beast/ceremonial_beast_bg_animation_top.atlas" id="1_cg0hi"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://i8vakr6doii6" path="res://animations/backgrounds/ceremonial_beast/ceremonial_beast_bg_animation_top.skel" id="2_gyq7b"]
+
+[resource]
+atlas_res = ExtResource("1_cg0hi")
+skeleton_file_res = ExtResource("2_gyq7b")
+default_mix = 0.15

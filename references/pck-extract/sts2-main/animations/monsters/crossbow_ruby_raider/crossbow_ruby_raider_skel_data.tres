@@ -1,0 +1,38 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://busj5qjt5mgi4"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://d2g1ix5403w5g" path="res://animations/monsters/crossbow_ruby_raider/crossbow_ruby_raider.atlas" id="1_x6kwl"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnu5e6lldpir5" path="res://animations/monsters/crossbow_ruby_raider/crossbow_ruby_raider.skel" id="2_8nu5x"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ejx2k"]
+from = "reload"
+to = "idle_loop"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_sout2"]
+from = "attack"
+to = "idle_loop_empty"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_nkwq6"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cx0py"]
+from = "idle_loop_empty"
+to = "hurt_empty"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_34415"]
+from = "hurt"
+to = "hurt_empty"
+mix = 0.15
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hy1sq"]
+from = "hurt_empty"
+to = "idle_loop_empty"
+mix = 0.15
+
+[resource]
+atlas_res = ExtResource("1_x6kwl")
+skeleton_file_res = ExtResource("2_8nu5x")
+default_mix = 0.25
+animation_mixes = [SubResource("SpineAnimationMix_ejx2k"), SubResource("SpineAnimationMix_sout2"), SubResource("SpineAnimationMix_nkwq6"), SubResource("SpineAnimationMix_cx0py"), SubResource("SpineAnimationMix_34415"), SubResource("SpineAnimationMix_hy1sq")]

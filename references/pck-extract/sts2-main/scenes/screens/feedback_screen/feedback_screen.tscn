@@ -1,0 +1,794 @@
+[gd_scene load_steps=33 format=3 uid="uid://dq84rqqbmq64n"]
+
+[ext_resource type="Script" uid="uid://b7knj3kel4tg3" path="res://src/Core/Nodes/Screens/FeedbackScreen/NSendFeedbackScreen.cs" id="1_yc05q"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_gelno"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_5wfa4"]
+[ext_resource type="Script" uid="uid://cd4nr0mdm6gb1" path="res://src/Core/Nodes/GodotExtensions/NMegaTextEdit.cs" id="3_dukvc"]
+[ext_resource type="Script" uid="uid://btkeaoyes81ps" path="res://src/Core/Nodes/Screens/FeedbackScreen/NSendFeedbackEmojiButton.cs" id="4_adygx"]
+[ext_resource type="Texture2D" uid="uid://d2xldvclojl2c" path="res://images/ui/emote/happy_cultist.png" id="5_r2p75"]
+[ext_resource type="Texture2D" uid="uid://bqdsxnj8vxlcd" path="res://images/ui/emote/heart.png" id="6_rm7rs"]
+[ext_resource type="Texture2D" uid="uid://djua54u4ky1y5" path="res://images/ui/emote/slime_sad.png" id="7_1snjv"]
+[ext_resource type="Texture2D" uid="uid://ft7c6dms8rrf" path="res://images/ui/emote/exclaim.png" id="8_3skdq"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="8_hoai2"]
+[ext_resource type="Texture2D" uid="uid://cwsjqpin06jwp" path="res://images/ui/emote/question.png" id="9_eku2k"]
+[ext_resource type="Script" uid="uid://bi15y4p8tkyr1" path="res://src/Core/Nodes/Screens/FeedbackScreen/NSendFeedbackButton.cs" id="10_k5i4y"]
+[ext_resource type="Script" uid="uid://q8857800o2r7" path="res://src/Core/Nodes/Screens/FeedbackScreen/NFeedbackCategoryDropdown.cs" id="11_wlmt6"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="12_1la2j"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="12_gelno"]
+[ext_resource type="Script" uid="uid://d1ami1ihf5o73" path="res://src/Core/Nodes/CommonUi/NDropdownContainer.cs" id="14_gj10k"]
+[ext_resource type="Script" uid="uid://bui13dym00l8v" path="res://src/Core/Nodes/CommonUi/NDropdownScrollbar.cs" id="16_50gd3"]
+[ext_resource type="Texture2D" uid="uid://djrebpfuvnktq" path="res://images/packed/common_ui/small_scrollbar_track_edge.png" id="17_wklgm"]
+[ext_resource type="Texture2D" uid="uid://dvc7bnxa2ellj" path="res://images/packed/common_ui/small_scrollbar_track_center.png" id="18_141yy"]
+[ext_resource type="Texture2D" uid="uid://lg1fd3" path="res://images/atlases/ui_atlas.sprites/small_scrollbar_train.tres" id="18_eeemu"]
+[ext_resource type="Texture2D" uid="uid://ll1i1g" path="res://images/atlases/compressed.sprites/feedback/the_sun.tres" id="20_eeemu"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="20_saum5"]
+[ext_resource type="Texture2D" uid="uid://cumaq3i" path="res://images/atlases/compressed.sprites/feedback/cupcake.tres" id="22_eeemu"]
+[ext_resource type="Script" uid="uid://flxw0da70sec" path="res://src/Core/Nodes/Screens/FeedbackScreen/NSendFeedbackCartoon.cs" id="22_jsgi0"]
+[ext_resource type="Texture2D" uid="uid://b4v8u4r" path="res://images/atlases/compressed.sprites/feedback/flower.tres" id="24_eeemu"]
+[ext_resource type="Script" uid="uid://8u0eqyharlbr" path="res://src/Core/Nodes/Screens/FeedbackScreen/NSendFeedbackFlower.cs" id="24_ujhq0"]
+[ext_resource type="PackedScene" uid="uid://cpd22pwyuoc6u" path="res://scenes/screens/feedback_screen/category_dropdown_item.tscn" id="27_category_dropdown_item"]
+[ext_resource type="Texture2D" uid="uid://b6yryuf4syvy8" path="res://images/atlases/ui_atlas_0.png" id="28_ud0lt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0dcp"]
+bg_color = Color(0.909804, 0.603922, 0.776471, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_size = 8
+shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mg53x"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.270588, 0, 0.305882, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbxwc"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.41003, 0.000265971, 0.460423, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3mbh"]
+bg_color = Color(1, 1, 1, 0.470588)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7j3v"]
+bg_color = Color(0.305882, 0.635294, 0.94902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.270588, 0, 0.305882, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gelno"]
+atlas = ExtResource("28_ud0lt")
+region = Rect2(1568, 1743, 109, 120)
+margin = Rect2(8, 4, 19, 8)
+
+[node name="FeedbackScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yc05q")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.678431)
+
+[node name="MainPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = -298.0
+offset_right = 368.0
+offset_bottom = 305.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g0dcp")
+
+[node name="DescriptionInput" type="TextEdit" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.5
+offset_top = -280.5
+offset_right = 350.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_gelno")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_mg53x")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lbxwc")
+placeholder_text = "Enter up to 500 characters of wonderful feedback here"
+wrap_mode = 1
+script = ExtResource("3_dukvc")
+
+[node name="SelectionReticle" parent="MainPanel/DescriptionInput" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.5
+offset_top = 16.0
+offset_right = -15.5
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CategoryLabel" type="Label" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.5
+offset_top = 36.5
+offset_right = -53.5
+offset_bottom = 69.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.390633, 0.127005, 0.293673, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("12_gelno")
+theme_override_font_sizes/font_size = 24
+text = "Category"
+script = ExtResource("3_5wfa4")
+AutoSizeEnabled = false
+
+[node name="EmojiLabel" type="Label" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.5
+offset_top = 163.5
+offset_right = 91.5
+offset_bottom = 196.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.392157, 0.12549, 0.294118, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("12_gelno")
+theme_override_font_sizes/font_size = 24
+text = "Add an Emoji"
+script = ExtResource("3_5wfa4")
+AutoSizeEnabled = false
+
+[node name="EmojiButtonContainer" type="HBoxContainer" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.5
+offset_top = 195.5
+offset_right = 63.5
+offset_bottom = 275.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HappyCultist" type="Panel" parent="MainPanel/EmojiButtonContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m3mbh")
+script = ExtResource("4_adygx")
+
+[node name="Image" type="TextureRect" parent="MainPanel/EmojiButtonContainer/HappyCultist"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_r2p75")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="MainPanel/EmojiButtonContainer/HappyCultist" instance=ExtResource("8_hoai2")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Heart" type="Panel" parent="MainPanel/EmojiButtonContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m3mbh")
+script = ExtResource("4_adygx")
+
+[node name="Image" type="TextureRect" parent="MainPanel/EmojiButtonContainer/Heart"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_rm7rs")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="MainPanel/EmojiButtonContainer/Heart" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SlimeSad" type="Panel" parent="MainPanel/EmojiButtonContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m3mbh")
+script = ExtResource("4_adygx")
+
+[node name="Image" type="TextureRect" parent="MainPanel/EmojiButtonContainer/SlimeSad"]
+modulate = Color(0.909804, 0.603922, 0.776471, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_1snjv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="MainPanel/EmojiButtonContainer/SlimeSad" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Exclaim" type="Panel" parent="MainPanel/EmojiButtonContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m3mbh")
+script = ExtResource("4_adygx")
+
+[node name="Image" type="TextureRect" parent="MainPanel/EmojiButtonContainer/Exclaim"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_3skdq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="MainPanel/EmojiButtonContainer/Exclaim" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Question" type="Panel" parent="MainPanel/EmojiButtonContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 1)
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m3mbh")
+script = ExtResource("4_adygx")
+
+[node name="Image" type="TextureRect" parent="MainPanel/EmojiButtonContainer/Question"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_eku2k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectionReticle" parent="MainPanel/EmojiButtonContainer/Question" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SendButton" type="Panel" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 153.5
+offset_top = 198.5
+offset_right = 350.5
+offset_bottom = 274.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(98.5, 38)
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l7j3v")
+script = ExtResource("10_k5i4y")
+
+[node name="Label" type="Label" parent="MainPanel/SendButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 21.0
+offset_right = -33.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.2166, 0.317363, 0.38, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("12_gelno")
+theme_override_font_sizes/font_size = 40
+text = "Send!"
+horizontal_alignment = 1
+script = ExtResource("3_5wfa4")
+AutoSizeEnabled = false
+
+[node name="SelectionReticle" parent="MainPanel/SendButton" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CategoryDropdown" type="Control" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.5
+offset_top = 71.5
+offset_right = -50.5
+offset_bottom = 128.5
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("11_wlmt6")
+_dropdownItemScene = ExtResource("27_category_dropdown_item")
+
+[node name="Dismisser" type="Control" parent="MainPanel/CategoryDropdown"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(2420, 1580)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -854.5
+offset_top = -869.0
+offset_right = 1265.5
+offset_bottom = 654.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_1la2j")
+
+[node name="CurrentOption" type="Control" parent="MainPanel/CategoryDropdown"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Highlight" type="Panel" parent="MainPanel/CategoryDropdown/CurrentOption"]
+unique_name_in_owner = true
+modulate = Color(0.685547, 0.805183, 0.869833, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg53x")
+
+[node name="Label" type="Label" parent="MainPanel/CategoryDropdown/CurrentOption"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_gelno")
+theme_override_font_sizes/font_size = 22
+text = "None"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_5wfa4")
+AutoSizeEnabled = false
+
+[node name="Arrow" type="TextureRect" parent="MainPanel/CategoryDropdown"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -15.0
+offset_right = -13.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(16, 13)
+mouse_filter = 2
+texture = SubResource("AtlasTexture_gelno")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DropdownContainer" type="Control" parent="MainPanel/CategoryDropdown"]
+unique_name_in_owner = true
+visible = false
+clip_contents = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 55.0
+offset_right = 150.0
+offset_bottom = 655.0
+grow_horizontal = 2
+script = ExtResource("14_gj10k")
+
+[node name="Highlight" type="Panel" parent="MainPanel/CategoryDropdown/DropdownContainer"]
+modulate = Color(0.685547, 0.805183, 0.869833, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mg53x")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/CategoryDropdown/DropdownContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Scrollbar" type="Control" parent="MainPanel/CategoryDropdown/DropdownContainer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -300.0
+offset_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("16_50gd3")
+metadata/_edit_lock_ = true
+
+[node name="Track" type="Control" parent="MainPanel/CategoryDropdown/DropdownContainer/Scrollbar"]
+modulate = Color(0, 0, 0, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TrackTop" type="TextureRect" parent="MainPanel/CategoryDropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_right = 14.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("17_wklgm")
+expand_mode = 3
+
+[node name="TrackBody" type="TextureRect" parent="MainPanel/CategoryDropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -268.0
+offset_right = 14.0
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("18_141yy")
+expand_mode = 1
+
+[node name="TrackBot" type="TextureRect" parent="MainPanel/CategoryDropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -41.0
+offset_right = 14.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("17_wklgm")
+expand_mode = 3
+flip_v = true
+
+[node name="Train" type="NinePatchRect" parent="MainPanel/CategoryDropdown/DropdownContainer/Scrollbar"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -291.0
+offset_right = -8.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 44)
+texture = ExtResource("18_eeemu")
+patch_margin_top = 20
+patch_margin_bottom = 20
+
+[node name="SelectionReticle" parent="MainPanel/CategoryDropdown" instance=ExtResource("8_hoai2")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.5
+offset_top = -7.0
+offset_right = 4.5
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SuccessBackstop" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SuccessPanel" type="Panel" parent="SuccessBackstop"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -99.0
+offset_right = 196.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g0dcp")
+
+[node name="SuccessLabel" type="Label" parent="SuccessBackstop/SuccessPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 70.0
+offset_right = -13.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_gelno")
+theme_override_font_sizes/font_size = 40
+text = "Success! Thank you!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_5wfa4")
+AutoSizeEnabled = false
+
+[node name="BackButton" parent="." instance=ExtResource("20_saum5")]
+layout_mode = 1
+
+[node name="Sun" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 92.0
+offset_top = 96.0
+offset_right = 348.0
+offset_bottom = 352.0
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("20_eeemu")
+script = ExtResource("22_jsgi0")
+
+[node name="Cupcake" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 219.0
+offset_top = -402.0
+offset_right = 530.0
+offset_bottom = -91.0
+grow_vertical = 0
+pivot_offset = Vector2(155, 155)
+mouse_filter = 2
+texture = ExtResource("22_eeemu")
+script = ExtResource("22_jsgi0")
+opposite = true
+
+[node name="FlowerContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -345.0
+offset_top = -343.0
+offset_right = 17.0
+offset_bottom = 13.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(300, 300)
+mouse_filter = 2
+script = ExtResource("24_ujhq0")
+
+[node name="Flower" type="TextureRect" parent="FlowerContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(181, 178)
+mouse_filter = 2
+texture = ExtResource("24_eeemu")
+script = ExtResource("22_jsgi0")

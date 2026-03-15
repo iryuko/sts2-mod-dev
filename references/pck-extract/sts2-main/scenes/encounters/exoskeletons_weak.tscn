@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dhw87ok51wqqm"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="first" type="Marker2D" parent="."]
+position = Vector2(1165, 691)
+
+[node name="second" type="Marker2D" parent="."]
+position = Vector2(1401, 756)
+
+[node name="third" type="Marker2D" parent="."]
+position = Vector2(1643, 712)

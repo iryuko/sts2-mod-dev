@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c40rg54hlwxma"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cgkgdjhujw6ot" path="res://animations/monsters/gas_bomb/gas_bomb.atlas" id="1_4tkq5"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d3hupsmc7t2lq" path="res://animations/monsters/gas_bomb/gas_bomb.skel" id="2_bjf0u"]
+
+[resource]
+atlas_res = ExtResource("1_4tkq5")
+skeleton_file_res = ExtResource("2_bjf0u")
+default_mix = 0.05

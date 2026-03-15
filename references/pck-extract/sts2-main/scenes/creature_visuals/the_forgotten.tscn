@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://bs46rvl5ucn23"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_oq1ut"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://6ket7h48gph8" path="res://animations/monsters/the_forgotten/the_forgotten_skel_data.tres" id="2_vixf0"]
+[ext_resource type="Script" uid="uid://cvbwldykr4fwm" path="res://src/Core/Nodes/Vfx/NLostAndForgottenVfx.cs" id="3_snomw"]
+[ext_resource type="Texture2D" uid="uid://11sstuicybvc" path="res://images/vfx/monsters/lost_and_forgotten/lost_forgotten_granule.png" id="4_csbss"]
+[ext_resource type="Material" uid="uid://fb0a85yp2ifv" path="res://materials/vfx/monsters/lost_and_forgotten/lost_smoke_2.tres" id="6_6pacf"]
+[ext_resource type="Material" uid="uid://dw8hgqjgv1lb2" path="res://materials/vfx/monsters/lost_and_forgotten/lost_smoke_3.tres" id="6_vixf0"]
+
+[sub_resource type="Curve" id="Curve_4nnq7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.63789, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -8.73531, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3ag27"]
+curve = SubResource("Curve_4nnq7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u8l5r"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(300, 50, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 500, 0)
+scale_min = 0.2
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_3ag27")
+color = Color(0.874, 0.902367, 0.92, 1)
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+
+[node name="TheForgotten" type="Node2D"]
+script = ExtResource("1_oq1ut")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -12)
+scale = Vector2(0.3, 0.3)
+skeleton_data_res = ExtResource("2_vixf0")
+preview_skin = "Default"
+preview_animation = "attack"
+preview_frame = false
+preview_time = 0.0
+
+[node name="GranuleEmitterBone" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(320, -320)
+rotation = -0.012345
+slot_name = "dustPosition"
+
+[node name="DustParticles" type="GPUParticles2D" parent="Visuals/GranuleEmitterBone"]
+amount = 120
+texture = ExtResource("4_csbss")
+lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_u8l5r")
+
+[node name="SpineSlotNode3" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(204.828, -615.025)
+rotation = -0.469674
+scale = Vector2(0.803296, 0.9726)
+skew = 0.178122
+slot_name = "smoke mesh3"
+normal_material = ExtResource("6_6pacf")
+
+[node name="SpineSlotNode2" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-126.391, -640.357)
+rotation = -1.18928
+scale = Vector2(0.958012, 0.830586)
+skew = 0.201809
+slot_name = "smoke mesh2"
+normal_material = ExtResource("6_6pacf")
+
+[node name="SpineSlotNode" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(86.8043, -695.707)
+rotation = -0.729608
+scale = Vector2(1.01815, 1.01551)
+skew = -0.0328149
+slot_name = "smoke mesh"
+normal_material = ExtResource("6_vixf0")
+
+[node name="NLostAndForgottenVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_snomw")
+metadata/_custom_type_script = "uid://cvbwldykr4fwm"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -119.0
+offset_top = -342.0
+offset_right = 131.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -183)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -351)

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://c2gu7vix7ttjv"]
+
+[ext_resource type="Shader" uid="uid://b74ju7rwrgwnc" path="res://shaders/vfx/common/vfx_flipbook_shader.gdshader" id="1_786ci"]
+[ext_resource type="Texture2D" uid="uid://dxbcv7dgdbfby" path="res://images/vfx/lut/lut_minion_divebomb.png" id="2_5p7ar"]
+
+[sub_resource type="Curve" id="Curve_786ci"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_5p7ar"]
+curve = SubResource("Curve_786ci")
+
+[resource]
+shader = ExtResource("1_786ci")
+shader_parameter/pivot_offset = Vector2(-0.29, 0)
+shader_parameter/lut = ExtResource("2_5p7ar")
+shader_parameter/frame_count = 9.0
+shader_parameter/flipbook_size = Vector2(1, 3)
+shader_parameter/flipbook_curve = SubResource("CurveTexture_5p7ar")
+shader_parameter/use_erosion_texture = 0.0
+shader_parameter/erosion_offset = 0.1
+shader_parameter/use_hue_shift = 0.0

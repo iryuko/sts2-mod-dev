@@ -1,0 +1,1857 @@
+[gd_scene load_steps=12 format=3 uid="uid://ywkphiq1bpo7"]
+
+[ext_resource type="Script" uid="uid://dbqvtp7e6f4nt" path="res://src/Core/Nodes/Screens/Credits/NCreditsScreen.cs" id="1_3383i"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="1_awf3s"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="2_k2vtp"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_t1765"]
+[ext_resource type="Texture2D" uid="uid://bn87py52xlyb1" path="res://images/ui/sts2_logo_static.png" id="3_a8o6n"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_a8o6n"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_g42y5"]
+[ext_resource type="Texture2D" uid="uid://cp6ed2au5l4cs" path="res://images/ui/game_over_screen/run_summary_merchant.png" id="8_a8o6n"]
+[ext_resource type="Texture2D" uid="uid://bg0t0p0oaldtg" path="res://images/ui/credits/fmod_logo.png" id="8_qg2dk"]
+[ext_resource type="Texture2D" uid="uid://jcljl1hkugwe" path="res://images/ui/credits/godot_logo.png" id="9_nq4lx"]
+[ext_resource type="Texture2D" uid="uid://c18stkfiixddy" path="res://images/ui/credits/spine_logo.png" id="10_c0fq5"]
+
+[node name="CreditsScreen" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_3383i")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BackButton" parent="." instance=ExtResource("1_awf3s")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="ScreenContents" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -12.0
+offset_right = 12.0
+offset_bottom = 6313.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 600
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 250
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenContents"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="StS2Logo" type="TextureRect" parent="ScreenContents/VBoxContainer"]
+modulate = Color(1, 0.9647059, 0.8862745, 1)
+custom_minimum_size = Vector2(650, 363)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_a8o6n")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MegaCritHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 240)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Mega Croak"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="CreatedByNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Froggy Yano
+Antoady Giovannetti
+Danielle Jumpkins"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Spacer" type="Control" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="MegaCritTeamRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Engineer
+Art Director
+Art & Illustration
+Animator
+Lead Engineer
+Community Manager
+Engineer"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="MegaCritTeamNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Jose Splashio
+Marlowe Hoppe
+Amphibius Dorta
+Chris Toadz
+Jake Frogged
+Ribbit Montes
+Ed Lu (Frog)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ComposerHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Composered"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ComposerNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Clark Abound"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="AdditionalProgrammingHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Additional Frogramming"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="AdditionalProgrammingNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Lake Rabinowitz
+Zach Lindfrog"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="AdditionalVfxHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Axolotl Vfx"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="AdditionalVfxNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Tup Luisking (froggy)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="MarketingSupportHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Marketing Hopport"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="MarketingSupportNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Dana Tadpolla"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ConsultantsHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Consultant"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ConsultantsNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Anita Sarkeesian"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="VoicesHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Voices"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="VoicesContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="VoicesRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/VoicesContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Cultist (Male)
+Neow
+Merchant
+
+Cultist (Female)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="VoicesNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/VoicesContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Will Lewis
+
+
+
+Marlowe Dobbe"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="LocalizationHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49803922, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_a8o6n")
+theme_override_font_sizes/font_size = 28
+text = "Frogalization"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ptbHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Brazilian Portuguese"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ptbNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Igor Canova"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="zhsHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Simplified Chinese"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="zhsContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="zhsRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/zhsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator
+?Proofreader"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="zhsNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/zhsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Name One
+?Name Two"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="fraHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?French"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="fraContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="fraRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/fraContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Lead Translator
+?Translator"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="fraNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/fraContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Timothy Tamim
+?Vincent Larcin"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="deuHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?German"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="deuNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Jonas Trodler"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="itaHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Italian"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="itaTeam" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?To Transcreation and Beyond"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="itaContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="itaRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/itaContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator
+?Proofreader"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="itaNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/itaContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Daniele Iannilli 
+?Francesco Caligiuri"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="jpnHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Japanese"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="jpnNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Shinichi Hirata"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="korHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Korean"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="korNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Sunwoo Hong (Fissh)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="polHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Polish"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="polNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Paweł Rewer
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="rusHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Russian"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="rusContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="rusRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/rusContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator
+?Translator
+?Proofreader"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="rusNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/rusContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Shield \"GremlinTsundere\" Gremlin
+?Dmitry \"Regallion\" Zhiryakov
+?Alexander Skazchenko
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="spaHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Spanish (Castilian)"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="spaNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Lucas Rubio Alonso"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="espHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Spanish (Latin American)"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="espTeam" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator’s Tale Team"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="espContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="espRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/espContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator
+?Translator
+?Proofreader"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="espNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/espContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Santiago Domínguez
+?Xiomara Imanoni
+?Kemel Cobresle"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="thaHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Thai"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="thaNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Noppon Varapaiboon (PlearnGaming)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="turHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "?Spanish (Latin American)"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="turContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="turRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/turContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Translator
+?Translator
+?Proofreader"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="turNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/turContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Santiago Domínguez
+?Xiomara Imanoni
+?Kemel Cobresle"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TwitchHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Twitch Integration?"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="TwitchContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TwitchRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TwitchContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Streamy Toolsmitho"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TwitchNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TwitchContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Thooomas"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ModdingSupportHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Modding Hopport"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ModdingSupportNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "ModderOne
+ModderTwo
+ModderThree
+(NOTE: Once >10 people, split into two columns)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="PlaytestersHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Raintesters"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="PlaytestersContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="PlaytesterNames1" type="RichTextLabel" parent="ScreenContents/VBoxContainer/PlaytestersContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+text = "Playtester One
+Playtester Three
+Playtester Five
+Playtester Seven"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="PlaytesterNames2" type="RichTextLabel" parent="ScreenContents/VBoxContainer/PlaytestersContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+text = "Playtester Two
+Playtester Four
+Playtester Six"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="PlaytesterNames3" type="RichTextLabel" parent="ScreenContents/VBoxContainer/PlaytestersContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+text = "Playtester One
+Playtester Three
+Playtester Five
+Playtester Seven"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TrailerHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.49803922, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_a8o6n")
+theme_override_font_sizes/font_size = 28
+text = "Traaaailer"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="TrailerAnimationHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Trailer Animatiossss!"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="TrailerAnimationTeam" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "WIZZ (Quad Productions) / CRCR Studioooooo"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TrailerAnimationContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TrailerAnimationRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TrailerAnimationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?directrrer
+?drawer"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TrailerAnimationNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TrailerAnimationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?persons one
+?perosnsdf ei2"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TrailerEditorHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Trailer Editorrr"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="TrailerEditorContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="TrailerEditorRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TrailerEditorContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Editorrr
+?Comserner?"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TrailerEditorNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/TrailerEditorContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "?Name One 
+?Editer 2"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="SpecialThanksHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 159)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 7
+text = "Special Franks"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="SpecialThanksContainer" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Names" type="RichTextLabel" parent="ScreenContents/VBoxContainer/SpecialThanksContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "For not submitting the Feedback:
+\"Credits screen is not done!\""
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="MegaCritterHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 159)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 7
+text = "Mega Critters"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="ScreenContents/VBoxContainer"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="MegaCritterRoles" type="RichTextLabel" parent="ScreenContents/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5294118, 0.80784315, 0.92156863, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Rabbit that Poops
+Wiley Cat
+Jake's Wife's Horse
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="MegaCritterNames" type="RichTextLabel" parent="ScreenContents/VBoxContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+text = "Name
+Name
+Name"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Spacer3" type="Control" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FmodLogo" type="TextureRect" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_qg2dk")
+stretch_mode = 5
+
+[node name="FmodHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Made using FMOD Studio by Firelight Technologies Pty Ltd."
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Spacer4" type="Control" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SpineLogo" type="TextureRect" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_c0fq5")
+stretch_mode = 5
+
+[node name="SpineHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Animation powered by Spine
+© Esoteric Software LLC"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Spacer2" type="Control" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(0, 104)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GodotLogo" type="TextureRect" parent="ScreenContents/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_nq4lx")
+stretch_mode = 5
+
+[node name="GodotHeader" type="Label" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_t1765")
+theme_override_font_sizes/font_size = 28
+text = "Made with Godot Engine"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_k2vtp")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ExitMessage" type="RichTextLabel" parent="ScreenContents/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_t1765")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[green]Thank you for playing Slay the Spire 2 during Early Access![/green]
+Click anywhere to Exit
+(or B button on controller)"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_g42y5")
+AutoSizeEnabled = false
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Control" type="Control" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2500)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="ScreenContents/VBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("8_a8o6n")
+expand_mode = 1
+stretch_mode = 5

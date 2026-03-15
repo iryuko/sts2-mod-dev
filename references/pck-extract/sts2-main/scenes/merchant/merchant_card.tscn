@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://rdkoq04iuuhe"]
+
+[ext_resource type="Script" uid="uid://7e0nsb3d1g5i" path="res://src/Core/Nodes/Screens/Shops/NMerchantCard.cs" id="1_ujvbu"]
+[ext_resource type="Script" uid="uid://bry8aaeikvcb3" path="res://src/Core/Nodes/GodotExtensions/NClickableControl.cs" id="2_okx32"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="3_6ghqk"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_tq12c"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="5_6j4fw"]
+[ext_resource type="Texture2D" uid="uid://wfgapejwhqy5" path="res://images/rooms/merchant_room/shop_sales_tag.png" id="6_dcvn4"]
+
+[node name="MerchantCard" type="Control"]
+custom_minimum_size = Vector2(300, 422)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 422.0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_ujvbu")
+
+[node name="CardHolder" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+pivot_offset = Vector2(150, 211)
+script = ExtResource("2_okx32")
+
+[node name="Cost" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -148.0
+offset_top = 220.0
+offset_right = 149.0
+offset_bottom = 278.0
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Cost"]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+texture = ExtResource("3_6ghqk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_6j4fw")
+theme_override_font_sizes/font_size = 39
+text = "99"
+theme_override_constants/line_spacing = 0.0
+theme_override_constants/outline_size = 15
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/shadow_outline_size = 0
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+script = ExtResource("4_tq12c")
+MinFontSize = 40
+
+[node name="SaleVisual" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(146.298, -153.154)
+scale = Vector2(0.780665, 0.780665)
+texture = ExtResource("6_dcvn4")

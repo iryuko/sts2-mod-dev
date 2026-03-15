@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://d33jv87p307ub"]
+
+[ext_resource type="Script" uid="uid://c6lmjttsyo6mb" path="res://src/Core/Nodes/Vfx/NPowerAppliedVfx.cs" id="1_wwd41"]
+[ext_resource type="Texture2D" uid="uid://c8gv13yrdncg" path="res://images/powers/missing_power.png" id="2_2up1g"]
+[ext_resource type="Shader" uid="uid://b0jlo1dsq67w1" path="res://shaders/power_flash_vfx.gdshader" id="2_gtiad"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="4_ape47"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_skxtl"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_r5f7r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrfdp"]
+shader = ExtResource("2_gtiad")
+shader_parameter/strength = 1.5
+
+[node name="PowerAppliedVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_wwd41")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("2_2up1g")
+expand_mode = 1
+
+[node name="IconEcho" type="TextureRect" parent="Icon"]
+self_modulate = Color(1, 1, 1, 0.501961)
+material = SubResource("ShaderMaterial_vrfdp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(128, 128)
+mouse_filter = 2
+texture = ExtResource("2_2up1g")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.498039, 1, 0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.5
+offset_top = -25.0
+offset_right = 109.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Power Name"
+theme_override_fonts/font = ExtResource("4_skxtl")
+theme_override_font_sizes/font_size = 48
+theme_override_constants/outline_size = 16
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_r5f7r")
+AutoSizeEnabled = false

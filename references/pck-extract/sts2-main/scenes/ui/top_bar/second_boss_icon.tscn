@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://gp0214c7vsw7"]
+
+[ext_resource type="Shader" uid="uid://l2u6sxjbbvrk" path="res://shaders/boss_map_point_placeholder.gdshader" id="1_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_icon"]
+shader = ExtResource("1_shader")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_outline"]
+shader = ExtResource("1_shader")
+
+[node name="SecondBossIcon" type="TextureRect"]
+visible = false
+show_behind_parent = true
+custom_minimum_size = Vector2(44, 44)
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.18)
+show_behind_parent = true
+custom_minimum_size = Vector2(44, 44)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -22.0
+offset_right = 22.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+material = SubResource("ShaderMaterial_outline")
+expand_mode = 1
+stretch_mode = 5

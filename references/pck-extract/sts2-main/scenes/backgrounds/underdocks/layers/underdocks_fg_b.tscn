@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://daikl8loo65v2"]
+
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="1_0h1fe"]
+[ext_resource type="Texture2D" uid="uid://b0eiom4e02oc2" path="res://images/rooms/underdocks/underdocks_05_b.png" id="2_ppy7k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykfmo"]
+shader = ExtResource("1_0h1fe")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.32
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="B" type="TextureRect"]
+material = SubResource("ShaderMaterial_ykfmo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ppy7k")
+expand_mode = 1

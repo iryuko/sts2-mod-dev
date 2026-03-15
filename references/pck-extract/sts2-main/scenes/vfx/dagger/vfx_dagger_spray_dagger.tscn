@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://y8lh2gle48b2"]
+
+[ext_resource type="Material" uid="uid://dxhg7e2ewjpyx" path="res://materials/vfx/dagger/vfx_dagger_spray_single.tres" id="1_0rql3"]
+[ext_resource type="Texture2D" uid="uid://b4ln76nx5i3qw" path="res://images/vfx/dagger/dagger_spray_single.png" id="2_padwl"]
+
+[sub_resource type="Curve" id="Curve_i2ak4"]
+_data = [Vector2(0.0493827, 0), 0.0, 22.1023, 0, 0, Vector2(0.0691358, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nmb1b"]
+curve = SubResource("Curve_i2ak4")
+
+[sub_resource type="Curve" id="Curve_0yqks"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u87pp"]
+curve = SubResource("Curve_0yqks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kko0u"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 120, 1)
+spread = 1.0
+initial_velocity_min = 9000.0
+initial_velocity_max = 12000.0
+radial_velocity_min = 50.0
+radial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.8
+scale_max = 2.2
+color = Color(0.611801, 0.841306, 1, 1)
+alpha_curve = SubResource("CurveTexture_nmb1b")
+turbulence_noise_strength = 3.0
+turbulence_noise_speed = Vector3(1, 1, 1)
+turbulence_influence_over_life = SubResource("CurveTexture_u87pp")
+
+[node name="vfx_dagger_spray_dagger" type="GPUParticles2D"]
+material = ExtResource("1_0rql3")
+emitting = false
+amount = 18
+texture = ExtResource("2_padwl")
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.5
+fixed_fps = 60
+visibility_rect = Rect2(0, -180, 1920, 360)
+trail_enabled = true
+trail_lifetime = 0.2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_kko0u")

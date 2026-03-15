@@ -1,0 +1,35 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://diilir2qa1c01"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cvyfqimgi17m0" path="res://animations/monsters/vine_shambler/vine_shambler.atlas" id="1_otex4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bwrg6tl4sg64o" path="res://animations/monsters/vine_shambler/vine_shambler.skel" id="2_kypn6"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_8ruye"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_l6md5"]
+from = "attack_swipe"
+to = "attack_swipe"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_45bv7"]
+from = "attack_chomp"
+to = "attack_chomp"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lrlbr"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6llj8"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_52jd1"]
+from = "attack_chomp"
+to = "idle_loop"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_otex4")
+skeleton_file_res = ExtResource("2_kypn6")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_8ruye"), SubResource("SpineAnimationMix_l6md5"), SubResource("SpineAnimationMix_45bv7"), SubResource("SpineAnimationMix_lrlbr"), SubResource("SpineAnimationMix_6llj8"), SubResource("SpineAnimationMix_52jd1")]

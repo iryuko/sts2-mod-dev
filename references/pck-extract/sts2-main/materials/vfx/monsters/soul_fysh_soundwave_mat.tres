@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://nud4wm4vxtbc"]
+
+[ext_resource type="Shader" uid="uid://dayrsssj0krrt" path="res://shaders/vfx/monsters/soul_fysh_soundwave_shader.tres" id="1_mn7c4"]
+[ext_resource type="Texture2D" uid="uid://dcc1tsqiqh4er" path="res://images/vfx/monsters/soul_fysh/soundwave.png" id="2_qthnp"]
+[ext_resource type="Texture2D" uid="uid://dbqcprloors3d" path="res://images/vfx/monsters/soul_fysh/soundwave_edge_mask.png" id="2_uvlja"]
+
+[resource]
+shader = ExtResource("1_mn7c4")
+shader_parameter/ColorParameter = Color(1, 0.763333, 0.29, 1)
+shader_parameter/step = Vector2(0.4, 0.6)
+shader_parameter/edgeMask = ExtResource("2_uvlja")
+shader_parameter/startingOffset = 0.0
+shader_parameter/ScrollSpeed = 0.8
+shader_parameter/soundwaveTex = ExtResource("2_qthnp")
+shader_parameter/amount = 1.0

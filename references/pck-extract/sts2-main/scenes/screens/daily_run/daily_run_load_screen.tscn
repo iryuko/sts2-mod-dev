@@ -1,0 +1,212 @@
+[gd_scene load_steps=18 format=3 uid="uid://desetfj1w8kxm"]
+
+[ext_resource type="Script" uid="uid://bem5whbmtid8a" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunLoadScreen.cs" id="1_asu6j"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_dnags"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_dj5ke"]
+[ext_resource type="PackedScene" uid="uid://s7gh3imur03n" path="res://scenes/screens/remote_player_load_container.tscn" id="4_asu6j"]
+[ext_resource type="PackedScene" uid="uid://cxxtaxgeppabk" path="res://scenes/screens/daily_run/daily_run_character_container.tscn" id="5_asu6j"]
+[ext_resource type="PackedScene" uid="uid://cpjvhv2w2ln7m" path="res://scenes/screens/daily_run/daily_run_screen_modifier.tscn" id="10_cpei0"]
+[ext_resource type="PackedScene" uid="uid://bdqspdbjjiqv5" path="res://scenes/screens/daily_run/daily_run_leaderboard.tscn" id="11_v7o8h"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="12_dhp82"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="13_8yyew"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="14_ung58"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="15_81gto"]
+[ext_resource type="Texture2D" uid="uid://ft7c6dms8rrf" path="res://images/ui/emote/exclaim.png" id="15_uiv6n"]
+[ext_resource type="Script" uid="uid://drm4tcwtxrx7u" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunScoreWarning.cs" id="16_is2rd"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="17_hv4ty"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="18_tyhb0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2b5y"]
+resource_local_to_scene = true
+shader = ExtResource("14_ung58")
+shader_parameter/h = 0.171
+shader_parameter/s = 3.072
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bxfb"]
+resource_local_to_scene = true
+shader = ExtResource("14_ung58")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="DailyRunLoadScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_asu6j")
+
+[node name="ChallengeContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="ChallengeContainer"]
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 0
+offset_left = 192.0
+offset_top = 131.0
+offset_right = 701.0
+offset_bottom = 233.0
+theme_override_fonts/font = ExtResource("2_dnags")
+theme_override_font_sizes/font_size = 80
+text = "Daily Challenge"
+script = ExtResource("3_dj5ke")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Date" type="Label" parent="ChallengeContainer"]
+unique_name_in_owner = true
+modulate = Color(0.529412, 0.807843, 0.921569, 1)
+layout_mode = 0
+offset_left = 196.0
+offset_top = 230.0
+offset_right = 705.0
+offset_bottom = 308.0
+theme_override_fonts/font = ExtResource("2_dnags")
+theme_override_font_sizes/font_size = 60
+text = "May 14 2025"
+script = ExtResource("3_dj5ke")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="RemotePlayerLoadContainer" parent="ChallengeContainer" instance=ExtResource("4_asu6j")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 86.0
+offset_top = -260.0
+offset_right = 464.0
+offset_bottom = 17.0
+
+[node name="CharacterContainer" parent="ChallengeContainer" instance=ExtResource("5_asu6j")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 234.0
+offset_top = 347.0
+offset_right = 518.0
+offset_bottom = 455.0
+
+[node name="ModifiersLabel" type="Label" parent="ChallengeContainer"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 0
+offset_left = 195.0
+offset_top = 497.0
+offset_right = 342.0
+offset_bottom = 541.479
+theme_override_fonts/font = ExtResource("2_dnags")
+theme_override_font_sizes/font_size = 35
+text = "Modifiers:"
+script = ExtResource("3_dj5ke")
+AutoSizeEnabled = false
+
+[node name="ModifiersContainer" type="VBoxContainer" parent="ChallengeContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 239.0
+offset_top = 576.0
+offset_right = 815.0
+offset_bottom = 917.0
+theme_override_constants/separation = 30
+
+[node name="ModifierContainer1" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("10_cpei0")]
+layout_mode = 2
+
+[node name="ModifierContainer2" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("10_cpei0")]
+layout_mode = 2
+
+[node name="ModifierContainer3" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("10_cpei0")]
+layout_mode = 2
+
+[node name="Leaderboards" parent="." instance=ExtResource("11_v7o8h")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ReadyAndWaitingPanel" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -214.0
+offset_right = 786.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="ReadyAndWaitingPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_dhp82")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="WaitingForReady" type="Label" parent="ReadyAndWaitingPanel"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("13_8yyew")
+theme_override_font_sizes/font_size = 50
+text = "Waiting for other players..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_dj5ke")
+AutoSizeEnabled = false
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="ScoreWarning" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_y2b5y")
+layout_mode = 0
+offset_left = 1715.0
+offset_top = 837.0
+offset_right = 1809.0
+offset_bottom = 916.0
+pivot_offset = Vector2(47, 39)
+texture = ExtResource("15_uiv6n")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("16_is2rd")
+
+[node name="ConfirmButton" parent="." instance=ExtResource("17_hv4ty")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("18_tyhb0")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("18_tyhb0")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("15_81gto")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_8bxfb")
+
+[editable path="UnreadyButton"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6oni2vq4ewg6"]
+
+[ext_resource type="Script" uid="uid://drep5x36bu257" path="res://src/Core/Nodes/Vfx/Utilities/NVfxSpine.cs" id="1_2aqy4"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bk1t0u8mj5u7" path="res://animations/vfx/vfx_adrenaline/vfx_adrenaline_skeleton_data_resource.tres" id="2_dj2ik"]
+
+[node name="VfxAdrenaline" type="Node2D"]
+script = ExtResource("1_2aqy4")
+_animation = "adrenaline"
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+show_behind_parent = true
+skeleton_data_res = ExtResource("2_dj2ik")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0

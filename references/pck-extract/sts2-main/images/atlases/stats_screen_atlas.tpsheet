@@ -1,0 +1,258 @@
+{
+	"textures": [
+		{
+			"image": "stats_screen_atlas.png",
+			"size": {
+				"w": 802,
+				"h": 256
+			},
+			"sprites": [
+				{
+					"filename": "stats_character_box.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 128,
+						"h": 128
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "stats_clock.png",
+					"region": {
+						"x": 1,
+						"y": 131,
+						"w": 128,
+						"h": 122
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 6
+					}
+				},
+				{
+					"filename": "stats_questionmark.png",
+					"region": {
+						"x": 131,
+						"y": 1,
+						"w": 102,
+						"h": 127
+					},
+					"margin": {
+						"x": 14,
+						"y": 0,
+						"w": 26,
+						"h": 1
+					}
+				},
+				{
+					"filename": "stats_chain.png",
+					"region": {
+						"x": 131,
+						"y": 130,
+						"w": 124,
+						"h": 125
+					},
+					"margin": {
+						"x": 2,
+						"y": 2,
+						"w": 4,
+						"h": 3
+					}
+				},
+				{
+					"filename": "stats_bluecards.png",
+					"region": {
+						"x": 235,
+						"y": 1,
+						"w": 105,
+						"h": 126
+					},
+					"margin": {
+						"x": 11,
+						"y": 2,
+						"w": 23,
+						"h": 2
+					}
+				},
+				{
+					"filename": "stats_cards.png",
+					"region": {
+						"x": 257,
+						"y": 129,
+						"w": 105,
+						"h": 126
+					},
+					"margin": {
+						"x": 11,
+						"y": 2,
+						"w": 23,
+						"h": 2
+					}
+				},
+				{
+					"filename": "stats_swords.png",
+					"region": {
+						"x": 342,
+						"y": 1,
+						"w": 122,
+						"h": 114
+					},
+					"margin": {
+						"x": 3,
+						"y": 8,
+						"w": 6,
+						"h": 14
+					}
+				},
+				{
+					"filename": "stats_trophy.png",
+					"region": {
+						"x": 364,
+						"y": 117,
+						"w": 118,
+						"h": 114
+					},
+					"margin": {
+						"x": 4,
+						"y": 9,
+						"w": 10,
+						"h": 14
+					}
+				},
+				{
+					"filename": "stats_monsters.png",
+					"region": {
+						"x": 466,
+						"y": 1,
+						"w": 108,
+						"h": 114
+					},
+					"margin": {
+						"x": 10,
+						"y": 7,
+						"w": 20,
+						"h": 14
+					}
+				},
+				{
+					"filename": "stats_stopwatch.png",
+					"region": {
+						"x": 484,
+						"y": 117,
+						"w": 121,
+						"h": 112
+					},
+					"margin": {
+						"x": 1,
+						"y": 7,
+						"w": 7,
+						"h": 16
+					}
+				},
+				{
+					"filename": "stats_chest.png",
+					"region": {
+						"x": 576,
+						"y": 1,
+						"w": 128,
+						"h": 97
+					},
+					"margin": {
+						"x": 0,
+						"y": 19,
+						"w": 0,
+						"h": 31
+					}
+				},
+				{
+					"filename": "stats_potions_seen.png",
+					"region": {
+						"x": 706,
+						"y": 1,
+						"w": 95,
+						"h": 92
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 1,
+						"h": 4
+					}
+				},
+				{
+					"filename": "stats_achievements.png",
+					"region": {
+						"x": 706,
+						"y": 95,
+						"w": 91,
+						"h": 88
+					},
+					"margin": {
+						"x": 2,
+						"y": 5,
+						"w": 5,
+						"h": 8
+					}
+				},
+				{
+					"filename": "stats_ancients.png",
+					"region": {
+						"x": 607,
+						"y": 100,
+						"w": 96,
+						"h": 96
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "stats_lock_m.png",
+					"region": {
+						"x": 705,
+						"y": 185,
+						"w": 59,
+						"h": 64
+					},
+					"margin": {
+						"x": 3,
+						"y": 0,
+						"w": 5,
+						"h": 0
+					}
+				},
+				{
+					"filename": "share_stats.png",
+					"region": {
+						"x": 607,
+						"y": 198,
+						"w": 61,
+						"h": 48
+					},
+					"margin": {
+						"x": 1,
+						"y": 8,
+						"w": 3,
+						"h": 16
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:f89fc09f9b969b5fc8ca7802ae62ed4d:dfe5d80a64f90e3d42a9db3de550fe6b:b8e194e3a7fa7a0c41de8076696d8802$"
+	}
+}

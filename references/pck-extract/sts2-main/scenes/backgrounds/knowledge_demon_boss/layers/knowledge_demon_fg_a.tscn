@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtjsfllacl5tr"]
+
+[ext_resource type="Texture2D" uid="uid://kqsnxw3p8hkl" path="res://images/rooms/hive/hive_04_a.png" id="1_qvewt"]
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2119.68
+offset_top = -675.36
+offset_right = 2119.68
+offset_bottom = 675.36
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qvewt")
+expand_mode = 1

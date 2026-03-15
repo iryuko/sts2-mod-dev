@@ -1,0 +1,502 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3ajj3k6pc5l1"]
+
+[ext_resource type="Texture2D" uid="uid://dgtoey1q52kw8" path="res://images/rooms/hive/hive_00.png" id="1_agi27"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="2_wklip"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="3_y8w57"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="4_an2bn"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eaipe"]
+blend_mode = 2
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_44nbh"]
+offsets = PackedFloat32Array(0, 0.227188, 0.804469, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.227451, 0.227451, 0.227451, 1, 0.227451, 0.227451, 0.227451, 1, 0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kodiu"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_eikm3"]
+offsets = PackedFloat32Array(0, 0.22905, 0.873371, 0.992551)
+colors = PackedColorArray(0, 0, 0, 1, 0.323584, 0.323584, 0.323584, 1, 0.466667, 0.239216, 0.0313726, 1, 0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_mr7ph"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_0aevu"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1440.77
+offset_top = -675.36
+offset_right = 1440.77
+offset_bottom = 675.36
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_agi27")
+expand_mode = 1
+
+[node name="floorfog_1" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_eaipe")
+position = Vector2(-108.232, 411.36)
+amount = 6
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_wklip")
+gravity = Vector2(0.469, 0)
+scale_amount_min = 0.38
+scale_amount_max = 0.47
+color = Color(0.466667, 0.239216, 0.0313726, 1)
+color_ramp = SubResource("Gradient_44nbh")
+anim_offset_max = 1.0
+
+[node name="floorfog_1" type="CPUParticles2D" parent="floorfog_1"]
+material = SubResource("CanvasItemMaterial_eaipe")
+position = Vector2(231.002, 656)
+amount = 6
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_wklip")
+gravity = Vector2(0.469, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+color = Color(0.466667, 0.239216, 0.0313726, 0.415686)
+color_ramp = SubResource("Gradient_44nbh")
+anim_offset_max = 1.0
+
+[node name="floorfog2" type="CPUParticles2D" parent="floorfog_1"]
+material = SubResource("CanvasItemMaterial_kodiu")
+position = Vector2(3930, 494)
+amount = 4
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_wklip")
+gravity = Vector2(-0.469, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+color = Color(0.466667, 0.239216, 0.0313726, 1)
+color_ramp = SubResource("Gradient_eikm3")
+anim_offset_max = 1.0
+
+[node name="floorfog2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_kodiu")
+position = Vector2(3860.77, 251.36)
+amount = 4
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_wklip")
+gravity = Vector2(-0.469, 0)
+scale_amount_min = 0.38
+scale_amount_max = 0.47
+color = Color(0.466667, 0.239216, 0.0313726, 1)
+color_ramp = SubResource("Gradient_eikm3")
+anim_offset_max = 1.0
+
+[node name="little_light_42" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1767.77, 1091.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_43" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1710.77, 1168.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_44" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1682.77, 1162.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_45" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1734.77, 1332.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_46" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1862.77, 1274.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_47" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1296.77, 1153.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_48" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1268.77, 1150.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_49" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1344.77, 1079.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_50" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1049.77, 977.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_51" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(885.768, 1013.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_52" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(854.767, 1163.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_53" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(544.768, 1326.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_54" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(524.77, 1312.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_55" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(389.768, 1219.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_56" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(404.767, 1245.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_57" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(610.77, 915.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_58" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1319.77, 904.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_59" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1300.77, 898.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_60" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2068.77, 1087.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_61" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2120.77, 1081.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_62" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2192.77, 1026.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_63" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2560.77, 1167.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_64" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2551.77, 999.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_65" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2527.77, 988.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_66" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2629.77, 948.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")
+
+[node name="little_light_67" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2866.77, 1005.36)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("3_y8w57")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_mr7ph")
+color = Color(0.0392157, 0.454902, 0.231373, 0.4)
+color_ramp = SubResource("Gradient_0aevu")
+script = ExtResource("4_an2bn")

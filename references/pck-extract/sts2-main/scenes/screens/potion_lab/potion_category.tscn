@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0nilq2hmglik"]
+
+[ext_resource type="Script" uid="uid://dgmk7wwwlp2c7" path="res://src/Core/Nodes/Screens/PotionLab/NPotionLabCategory.cs" id="1_2ruv2"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_v5sbc"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_v5sbc"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_ir56y"]
+
+[node name="PotionCategory" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_right = 44.0
+offset_bottom = 168.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_2ruv2")
+
+[node name="Header" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 2
+theme_override_fonts/normal_font = ExtResource("2_v5sbc")
+theme_override_fonts/bold_font = ExtResource("3_v5sbc")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[gold][b]Common:[/b][/gold] The most frequent potions found in the Spire."
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_ir56y")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 16
+
+[node name="PotionsContainer" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 10
+
+[node name="Spacer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+mouse_filter = 2

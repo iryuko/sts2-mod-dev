@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://dhtfl3vwg84xd"]
+
+[ext_resource type="Shader" uid="uid://b3jom04606xsl" path="res://shaders/vfx/potion/vfx_potion_splash_shader.gdshader" id="1_q5mdh"]
+
+[sub_resource type="Curve" id="Curve_xrvmc"]
+_data = [Vector2(0, 0), 0.0, 3.04516, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6nmkw"]
+curve = SubResource("Curve_xrvmc")
+
+[sub_resource type="Gradient" id="Gradient_vd4c5"]
+offsets = PackedFloat32Array(0.382271, 0.728532, 1)
+colors = PackedColorArray(0.6, 0.6, 0.6, 1, 0.8, 0.8, 0.8, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_redsh"]
+gradient = SubResource("Gradient_vd4c5")
+
+[resource]
+shader = ExtResource("1_q5mdh")
+shader_parameter/distortion_panning_speed = Vector2(0.2, 0.5)
+shader_parameter/distortion_strength = 0.04
+shader_parameter/lut = SubResource("GradientTexture1D_redsh")
+shader_parameter/erosion_curve = SubResource("CurveTexture_6nmkw")
+shader_parameter/erosion_offset = 0.2

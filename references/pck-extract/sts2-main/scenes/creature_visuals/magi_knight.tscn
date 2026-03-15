@@ -1,0 +1,172 @@
+[gd_scene load_steps=17 format=3 uid="uid://cugutuytfw6km"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_0rsoi"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c4mtxvythbly6" path="res://animations/monsters/magi_knight/magi_knight_skel_data.tres" id="2_qqih1"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="3_wpuca"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="4_aixp5"]
+[ext_resource type="Texture2D" uid="uid://c67idrcto5vwj" path="res://images/vfx/vfx_constant_fire/fire_texture_2.png" id="5_tvd43"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_koufu"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_8y05v"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7p3r0"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_22yu5"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_3w2l8"]
+_data = [Vector2(0.00835655, 0.00875008), 0.0, 1.20008, 0, 0, Vector2(0.277311, 0.975211), 0.374114, 0.374114, 0, 0, Vector2(0.671309, 0.35975), -1.436, -1.436, 0, 0, Vector2(1, 0), -0.488375, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_s5jl2"]
+offsets = PackedFloat32Array(0.0742459, 0.296984, 0.480278, 0.740139)
+colors = PackedColorArray(0.483242, 0.613571, 0.174705, 1, 0.281556, 0.324218, 0.130253, 0.858824, 0.387877, 0.460293, 0.18255, 0.505882, 0.0874, 0.38, 0.155673, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g0j5c"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_v3qja"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_65qyw"]
+_data = [Vector2(0.0139276, 0.0152501), 0.0, 7.96135, 0, 0, Vector2(0.270195, 1), 0.378403, 0.378403, 0, 0, Vector2(0.649025, 0.224214), -1.75738, -1.75738, 0, 0, Vector2(0.91922, 0), -0.488375, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_jb7s3"]
+offsets = PackedFloat32Array(0, 0.271462, 0.523188, 0.689855)
+colors = PackedColorArray(0.6, 1, 0, 0.905882, 0.669016, 0.900977, 0.219823, 0.941176, 0.63, 0.63, 0, 0.568627, 0.2415, 0.63, 0, 0)
+
+[node name="MagiKnight" type="Node2D"]
+script = ExtResource("1_0rsoi")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-20, -26)
+scale = Vector2(0.142567, 0.142567)
+skeleton_data_res = ExtResource("2_qqih1")
+preview_skin = "default"
+preview_animation = "attack_bomb"
+preview_frame = false
+preview_time = 0.4
+
+[node name="SpineSlotNode" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(75.1805, -1807.19)
+rotation = -1.51386
+scale = Vector2(1.02232, 0.980627)
+skew = 0.0049684
+slot_name = "head fire"
+
+[node name="fire1_small_green" type="Node2D" parent="Visuals/SpineSlotNode"]
+show_behind_parent = true
+position = Vector2(-21.782, 2.45594)
+rotation = 1.56421
+scale = Vector2(0.9, 0.9)
+
+[node name="light_small" type="CPUParticles2D" parent="Visuals/SpineSlotNode/fire1_small_green"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2, -51)
+amount = 1
+texture = ExtResource("3_wpuca")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_koufu")
+color = Color(0.576998, 0.589128, 0.200566, 1)
+color_ramp = SubResource("Gradient_8y05v")
+script = ExtResource("4_aixp5")
+
+[node name="fire_vfx_back_small" type="CPUParticles2D" parent="Visuals/SpineSlotNode/fire1_small_green"]
+material = SubResource("CanvasItemMaterial_7p3r0")
+position = Vector2(-1.08119, 2.2443)
+amount = 25
+texture = ExtResource("5_tvd43")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.1
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_22yu5")
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_3w2l8")
+color_ramp = SubResource("Gradient_s5jl2")
+anim_offset_max = 1.0
+
+[node name="fire_vfx_front_small" type="CPUParticles2D" parent="Visuals/SpineSlotNode/fire1_small_green"]
+material = SubResource("CanvasItemMaterial_g0j5c")
+position = Vector2(0.324208, -5.80864)
+amount = 20
+texture = ExtResource("5_tvd43")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -300)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_v3qja")
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_65qyw")
+color_ramp = SubResource("Gradient_jb7s3")
+anim_offset_max = 1.0
+
+[node name="AttackDistanceControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(147.299, -63.1282)
+bone_name = "attack_target_bone"
+bone_mode = 1
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -107.0
+offset_top = -327.0
+offset_right = 107.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -166)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, -371)

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cph5l30veg23k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dgmvyr6akwrh7" path="res://animations/backgrounds/tezcatara/tezcatara.atlas" id="1_7rww6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dchb4cx8k3o2s" path="res://animations/backgrounds/tezcatara/tezcatara.skel" id="2_u1ktw"]
+
+[resource]
+atlas_res = ExtResource("1_7rww6")
+skeleton_file_res = ExtResource("2_u1ktw")

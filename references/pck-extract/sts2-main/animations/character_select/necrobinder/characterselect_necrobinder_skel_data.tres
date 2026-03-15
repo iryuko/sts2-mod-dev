@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bvsubk4pagh72"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b6780pp84h6sm" path="res://animations/character_select/necrobinder/characterselect_necrobinder.atlas" id="1_hnxpn"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bdj8preq6y3v0" path="res://animations/character_select/necrobinder/characterselect_necrobinder.skel" id="2_l3mtc"]
+
+[resource]
+atlas_res = ExtResource("1_hnxpn")
+skeleton_file_res = ExtResource("2_l3mtc")

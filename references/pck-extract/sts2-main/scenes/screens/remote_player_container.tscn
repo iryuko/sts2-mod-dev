@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3 uid="uid://i17vjyd5x6eg"]
+
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_2r0yb"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="2_vx77g"]
+[ext_resource type="Script" uid="uid://l0ss1jy5qax0" path="res://src/Core/Nodes/Multiplayer/NRemoteLobbyPlayerContainer.cs" id="3_e2wyv"]
+[ext_resource type="Script" uid="uid://ctdwun1nb2uln" path="res://src/Core/Nodes/Multiplayer/NInvitePlayersButton.cs" id="4_xd00f"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="5_5egyg"]
+[ext_resource type="Texture2D" uid="uid://cl2heluxpg3p1" path="res://images/ui/reward_screen/reward_item_button.png" id="6_fn0c7"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="7_q0mdx"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="8_m0ma0"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="9_jpgfb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rqr6m"]
+resource_local_to_scene = true
+shader = ExtResource("5_5egyg")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.8
+
+[node name="RemotePlayerContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 36.0
+offset_top = 45.0
+offset_right = 554.0
+offset_bottom = 303.0
+script = ExtResource("3_e2wyv")
+
+[node name="Container" type="FlowContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+vertical = true
+
+[node name="SoloLabel" type="Label" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_2r0yb")
+theme_override_font_sizes/font_size = 31
+text = "You are the only player!"
+script = ExtResource("2_vx77g")
+MinFontSize = 32
+
+[node name="InviteButtonContainer" type="Control" parent="Container"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="InviteButton" type="Control" parent="Container/InviteButtonContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+focus_mode = 2
+script = ExtResource("4_xd00f")
+
+[node name="Background" type="TextureRect" parent="Container/InviteButtonContainer/InviteButton"]
+material = SubResource("ShaderMaterial_rqr6m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_fn0c7")
+expand_mode = 1
+
+[node name="Label" type="RichTextLabel" parent="Container/InviteButtonContainer/InviteButton"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.134729, 0.315898, 0.341731, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0627451)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("7_q0mdx")
+theme_override_fonts/bold_font = ExtResource("8_m0ma0")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "Invite"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_jpgfb")
+MaxFontSize = 24

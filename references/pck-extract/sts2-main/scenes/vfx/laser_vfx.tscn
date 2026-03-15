@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://biw20816y6wks"]
+
+[ext_resource type="Script" uid="uid://see6sleqjxds" path="res://src/Core/Nodes/Vfx/NLaserVfx.cs" id="1_krdjb"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dun6rw4mxs0hb" path="res://animations/vfx/vfx_laser/laser_skel_data.tres" id="1_yslr3"]
+[ext_resource type="Shader" uid="uid://nbpmvtjpotus" path="res://shaders/colorize_addblend.tres" id="2_ws2q3"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2iyyb"]
+shader = ExtResource("2_ws2q3")
+shader_parameter/Color = Color(0, 0.633333, 1, 1)
+shader_parameter/MultiplyVsAdd = false
+
+[node name="LaserVfx" type="Node2D"]
+script = ExtResource("1_krdjb")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+material = ExtResource("shared_additive_mat")
+skeleton_data_res = ExtResource("1_yslr3")
+additive_material = SubResource("ShaderMaterial_2iyyb")
+preview_skin = "Default"
+preview_animation = "animation"
+preview_frame = false
+preview_time = 0.0
+
+[node name="TargetingBone" type="SpineBoneNode" parent="SpineSprite"]
+show_behind_parent = true
+position = Vector2(-1727, 1)
+scale = Vector2(1, 1.25)
+bone_name = "aim_target_bone"
+bone_mode = 1

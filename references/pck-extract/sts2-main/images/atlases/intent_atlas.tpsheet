@@ -1,0 +1,4668 @@
+{
+	"textures": [
+		{
+			"image": "intent_atlas.png",
+			"size": {
+				"w": 932,
+				"h": 932
+			},
+			"sprites": [
+				{
+					"filename": "intent_escape.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 72,
+						"h": 63
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "attack/intent_attack_5.png",
+					"region": {
+						"x": 1,
+						"y": 66,
+						"w": 63,
+						"h": 62
+					},
+					"margin": {
+						"x": 4,
+						"y": 7,
+						"w": 9,
+						"h": 10
+					}
+				},
+				{
+					"filename": "intent_stun.png",
+					"region": {
+						"x": 75,
+						"y": 1,
+						"w": 72,
+						"h": 53
+					},
+					"margin": {
+						"x": 0,
+						"y": 7,
+						"w": 0,
+						"h": 19
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_00.png",
+					"region": {
+						"x": 149,
+						"y": 1,
+						"w": 72,
+						"h": 53
+					},
+					"margin": {
+						"x": 0,
+						"y": 7,
+						"w": 0,
+						"h": 19
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_08.png",
+					"region": {
+						"x": 223,
+						"y": 1,
+						"w": 72,
+						"h": 53
+					},
+					"margin": {
+						"x": 0,
+						"y": 7,
+						"w": 0,
+						"h": 19
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_00.png",
+					"region": {
+						"x": 1,
+						"y": 130,
+						"w": 56,
+						"h": 68
+					},
+					"margin": {
+						"x": 8,
+						"y": 3,
+						"w": 16,
+						"h": 4
+					}
+				},
+				{
+					"filename": "intent_debuff.png",
+					"region": {
+						"x": 1,
+						"y": 200,
+						"w": 56,
+						"h": 68
+					},
+					"margin": {
+						"x": 8,
+						"y": 3,
+						"w": 16,
+						"h": 4
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_02.png",
+					"region": {
+						"x": 1,
+						"y": 270,
+						"w": 57,
+						"h": 66
+					},
+					"margin": {
+						"x": 7,
+						"y": 3,
+						"w": 15,
+						"h": 6
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_10.png",
+					"region": {
+						"x": 1,
+						"y": 338,
+						"w": 57,
+						"h": 66
+					},
+					"margin": {
+						"x": 7,
+						"y": 3,
+						"w": 15,
+						"h": 6
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_10.png",
+					"region": {
+						"x": 1,
+						"y": 406,
+						"w": 58,
+						"h": 65
+					},
+					"margin": {
+						"x": 6,
+						"y": 6,
+						"w": 14,
+						"h": 7
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_07.png",
+					"region": {
+						"x": 1,
+						"y": 473,
+						"w": 57,
+						"h": 64
+					},
+					"margin": {
+						"x": 7,
+						"y": 7,
+						"w": 15,
+						"h": 8
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_05.png",
+					"region": {
+						"x": 1,
+						"y": 539,
+						"w": 56,
+						"h": 64
+					},
+					"margin": {
+						"x": 8,
+						"y": 7,
+						"w": 16,
+						"h": 8
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_06.png",
+					"region": {
+						"x": 1,
+						"y": 605,
+						"w": 57,
+						"h": 62
+					},
+					"margin": {
+						"x": 7,
+						"y": 9,
+						"w": 15,
+						"h": 10
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_09.png",
+					"region": {
+						"x": 1,
+						"y": 669,
+						"w": 57,
+						"h": 62
+					},
+					"margin": {
+						"x": 7,
+						"y": 9,
+						"w": 15,
+						"h": 10
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_03.png",
+					"region": {
+						"x": 1,
+						"y": 733,
+						"w": 58,
+						"h": 62
+					},
+					"margin": {
+						"x": 7,
+						"y": 4,
+						"w": 14,
+						"h": 10
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_11.png",
+					"region": {
+						"x": 1,
+						"y": 797,
+						"w": 58,
+						"h": 62
+					},
+					"margin": {
+						"x": 7,
+						"y": 4,
+						"w": 14,
+						"h": 10
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_08.png",
+					"region": {
+						"x": 1,
+						"y": 861,
+						"w": 60,
+						"h": 61
+					},
+					"margin": {
+						"x": 6,
+						"y": 10,
+						"w": 12,
+						"h": 11
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_01.png",
+					"region": {
+						"x": 297,
+						"y": 1,
+						"w": 65,
+						"h": 60
+					},
+					"margin": {
+						"x": 4,
+						"y": 5,
+						"w": 7,
+						"h": 12
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_09.png",
+					"region": {
+						"x": 364,
+						"y": 1,
+						"w": 65,
+						"h": 60
+					},
+					"margin": {
+						"x": 4,
+						"y": 5,
+						"w": 7,
+						"h": 12
+					}
+				},
+				{
+					"filename": "attack/intent_attack_4.png",
+					"region": {
+						"x": 431,
+						"y": 1,
+						"w": 58,
+						"h": 60
+					},
+					"margin": {
+						"x": 7,
+						"y": 9,
+						"w": 14,
+						"h": 12
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_03.png",
+					"region": {
+						"x": 491,
+						"y": 1,
+						"w": 56,
+						"h": 61
+					},
+					"margin": {
+						"x": 8,
+						"y": 10,
+						"w": 16,
+						"h": 11
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_04.png",
+					"region": {
+						"x": 549,
+						"y": 1,
+						"w": 56,
+						"h": 61
+					},
+					"margin": {
+						"x": 8,
+						"y": 10,
+						"w": 16,
+						"h": 11
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_04.png",
+					"region": {
+						"x": 607,
+						"y": 1,
+						"w": 57,
+						"h": 59
+					},
+					"margin": {
+						"x": 7,
+						"y": 7,
+						"w": 15,
+						"h": 13
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_12.png",
+					"region": {
+						"x": 666,
+						"y": 1,
+						"w": 57,
+						"h": 59
+					},
+					"margin": {
+						"x": 7,
+						"y": 7,
+						"w": 15,
+						"h": 13
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_01.png",
+					"region": {
+						"x": 725,
+						"y": 1,
+						"w": 56,
+						"h": 59
+					},
+					"margin": {
+						"x": 8,
+						"y": 12,
+						"w": 16,
+						"h": 13
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_07.png",
+					"region": {
+						"x": 783,
+						"y": 1,
+						"w": 72,
+						"h": 43
+					},
+					"margin": {
+						"x": 0,
+						"y": 13,
+						"w": 0,
+						"h": 29
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_15.png",
+					"region": {
+						"x": 857,
+						"y": 1,
+						"w": 72,
+						"h": 43
+					},
+					"margin": {
+						"x": 0,
+						"y": 13,
+						"w": 0,
+						"h": 29
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_06.png",
+					"region": {
+						"x": 783,
+						"y": 46,
+						"w": 66,
+						"h": 45
+					},
+					"margin": {
+						"x": 2,
+						"y": 12,
+						"w": 6,
+						"h": 27
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_14.png",
+					"region": {
+						"x": 851,
+						"y": 46,
+						"w": 66,
+						"h": 45
+					},
+					"margin": {
+						"x": 2,
+						"y": 12,
+						"w": 6,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_14.png",
+					"region": {
+						"x": 66,
+						"y": 66,
+						"w": 54,
+						"h": 59
+					},
+					"margin": {
+						"x": 8,
+						"y": 7,
+						"w": 18,
+						"h": 13
+					}
+				},
+				{
+					"filename": "debuff/intent_megadebuff_02.png",
+					"region": {
+						"x": 122,
+						"y": 56,
+						"w": 56,
+						"h": 58
+					},
+					"margin": {
+						"x": 8,
+						"y": 13,
+						"w": 16,
+						"h": 14
+					}
+				},
+				{
+					"filename": "attack/intent_attack_3.png",
+					"region": {
+						"x": 180,
+						"y": 56,
+						"w": 57,
+						"h": 56
+					},
+					"margin": {
+						"x": 7,
+						"y": 11,
+						"w": 15,
+						"h": 16
+					}
+				},
+				{
+					"filename": "heal/intent_heal_12.png",
+					"region": {
+						"x": 239,
+						"y": 56,
+						"w": 55,
+						"h": 58
+					},
+					"margin": {
+						"x": 10,
+						"y": 7,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_05.png",
+					"region": {
+						"x": 296,
+						"y": 63,
+						"w": 58,
+						"h": 50
+					},
+					"margin": {
+						"x": 5,
+						"y": 9,
+						"w": 14,
+						"h": 22
+					}
+				},
+				{
+					"filename": "stun/intent_stunned_13.png",
+					"region": {
+						"x": 356,
+						"y": 63,
+						"w": 58,
+						"h": 50
+					},
+					"margin": {
+						"x": 5,
+						"y": 9,
+						"w": 14,
+						"h": 22
+					}
+				},
+				{
+					"filename": "heal/intent_heal_13.png",
+					"region": {
+						"x": 416,
+						"y": 63,
+						"w": 55,
+						"h": 58
+					},
+					"margin": {
+						"x": 8,
+						"y": 7,
+						"w": 17,
+						"h": 14
+					}
+				},
+				{
+					"filename": "heal/intent_heal_11.png",
+					"region": {
+						"x": 473,
+						"y": 64,
+						"w": 54,
+						"h": 57
+					},
+					"margin": {
+						"x": 11,
+						"y": 8,
+						"w": 18,
+						"h": 15
+					}
+				},
+				{
+					"filename": "heal/intent_heal_10.png",
+					"region": {
+						"x": 529,
+						"y": 64,
+						"w": 53,
+						"h": 57
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 19,
+						"h": 15
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_10.png",
+					"region": {
+						"x": 584,
+						"y": 64,
+						"w": 40,
+						"h": 57
+					},
+					"margin": {
+						"x": 16,
+						"y": 7,
+						"w": 32,
+						"h": 15
+					}
+				},
+				{
+					"filename": "heal/intent_heal_15.png",
+					"region": {
+						"x": 626,
+						"y": 62,
+						"w": 53,
+						"h": 59
+					},
+					"margin": {
+						"x": 8,
+						"y": 7,
+						"w": 19,
+						"h": 13
+					}
+				},
+				{
+					"filename": "summon/intent_summon_05.png",
+					"region": {
+						"x": 681,
+						"y": 62,
+						"w": 52,
+						"h": 59
+					},
+					"margin": {
+						"x": 12,
+						"y": 5,
+						"w": 20,
+						"h": 13
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_07.png",
+					"region": {
+						"x": 735,
+						"y": 62,
+						"w": 46,
+						"h": 57
+					},
+					"margin": {
+						"x": 10,
+						"y": 7,
+						"w": 26,
+						"h": 15
+					}
+				},
+				{
+					"filename": "intent_death_blow.png",
+					"region": {
+						"x": 783,
+						"y": 93,
+						"w": 55,
+						"h": 51
+					},
+					"margin": {
+						"x": 7,
+						"y": 14,
+						"w": 17,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_26.png",
+					"region": {
+						"x": 840,
+						"y": 93,
+						"w": 55,
+						"h": 51
+					},
+					"margin": {
+						"x": 1,
+						"y": 12,
+						"w": 17,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_07.png",
+					"region": {
+						"x": 897,
+						"y": 93,
+						"w": 34,
+						"h": 55
+					},
+					"margin": {
+						"x": 20,
+						"y": 8,
+						"w": 38,
+						"h": 17
+					}
+				},
+				{
+					"filename": "buff/intent_buff_01.png",
+					"region": {
+						"x": 735,
+						"y": 121,
+						"w": 46,
+						"h": 52
+					},
+					"margin": {
+						"x": 13,
+						"y": 16,
+						"w": 26,
+						"h": 20
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_23.png",
+					"region": {
+						"x": 783,
+						"y": 146,
+						"w": 54,
+						"h": 51
+					},
+					"margin": {
+						"x": 2,
+						"y": 12,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_24.png",
+					"region": {
+						"x": 839,
+						"y": 146,
+						"w": 54,
+						"h": 51
+					},
+					"margin": {
+						"x": 2,
+						"y": 12,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_06.png",
+					"region": {
+						"x": 895,
+						"y": 150,
+						"w": 35,
+						"h": 54
+					},
+					"margin": {
+						"x": 20,
+						"y": 9,
+						"w": 37,
+						"h": 18
+					}
+				},
+				{
+					"filename": "summon/intent_summon_09.png",
+					"region": {
+						"x": 59,
+						"y": 130,
+						"w": 51,
+						"h": 59
+					},
+					"margin": {
+						"x": 9,
+						"y": 5,
+						"w": 21,
+						"h": 13
+					}
+				},
+				{
+					"filename": "summon/intent_summon_11.png",
+					"region": {
+						"x": 59,
+						"y": 191,
+						"w": 51,
+						"h": 59
+					},
+					"margin": {
+						"x": 9,
+						"y": 5,
+						"w": 21,
+						"h": 13
+					}
+				},
+				{
+					"filename": "summon/intent_summon_22.png",
+					"region": {
+						"x": 60,
+						"y": 252,
+						"w": 51,
+						"h": 59
+					},
+					"margin": {
+						"x": 9,
+						"y": 5,
+						"w": 21,
+						"h": 13
+					}
+				},
+				{
+					"filename": "summon/intent_summon_24.png",
+					"region": {
+						"x": 60,
+						"y": 313,
+						"w": 52,
+						"h": 59
+					},
+					"margin": {
+						"x": 9,
+						"y": 5,
+						"w": 20,
+						"h": 13
+					}
+				},
+				{
+					"filename": "summon/intent_summon_04.png",
+					"region": {
+						"x": 61,
+						"y": 374,
+						"w": 52,
+						"h": 58
+					},
+					"margin": {
+						"x": 12,
+						"y": 6,
+						"w": 20,
+						"h": 14
+					}
+				},
+				{
+					"filename": "attack/intent_attack_2.png",
+					"region": {
+						"x": 61,
+						"y": 434,
+						"w": 53,
+						"h": 56
+					},
+					"margin": {
+						"x": 9,
+						"y": 11,
+						"w": 19,
+						"h": 16
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_25.png",
+					"region": {
+						"x": 60,
+						"y": 492,
+						"w": 54,
+						"h": 51
+					},
+					"margin": {
+						"x": 2,
+						"y": 12,
+						"w": 18,
+						"h": 21
+					}
+				},
+				{
+					"filename": "summon/intent_summon_07.png",
+					"region": {
+						"x": 59,
+						"y": 545,
+						"w": 53,
+						"h": 58
+					},
+					"margin": {
+						"x": 11,
+						"y": 6,
+						"w": 19,
+						"h": 14
+					}
+				},
+				{
+					"filename": "summon/intent_summon_08.png",
+					"region": {
+						"x": 60,
+						"y": 605,
+						"w": 53,
+						"h": 58
+					},
+					"margin": {
+						"x": 9,
+						"y": 6,
+						"w": 19,
+						"h": 14
+					}
+				},
+				{
+					"filename": "summon/intent_summon_21.png",
+					"region": {
+						"x": 60,
+						"y": 665,
+						"w": 53,
+						"h": 58
+					},
+					"margin": {
+						"x": 9,
+						"y": 6,
+						"w": 19,
+						"h": 14
+					}
+				},
+				{
+					"filename": "summon/intent_summon_10.png",
+					"region": {
+						"x": 61,
+						"y": 725,
+						"w": 52,
+						"h": 58
+					},
+					"margin": {
+						"x": 9,
+						"y": 6,
+						"w": 20,
+						"h": 14
+					}
+				},
+				{
+					"filename": "summon/intent_summon_17.png",
+					"region": {
+						"x": 61,
+						"y": 785,
+						"w": 52,
+						"h": 58
+					},
+					"margin": {
+						"x": 12,
+						"y": 6,
+						"w": 20,
+						"h": 14
+					}
+				},
+				{
+					"filename": "summon/intent_summon_23.png",
+					"region": {
+						"x": 63,
+						"y": 845,
+						"w": 52,
+						"h": 58
+					},
+					"margin": {
+						"x": 9,
+						"y": 6,
+						"w": 20,
+						"h": 14
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_08.png",
+					"region": {
+						"x": 112,
+						"y": 127,
+						"w": 42,
+						"h": 58
+					},
+					"margin": {
+						"x": 18,
+						"y": 14,
+						"w": 30,
+						"h": 14
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_12.png",
+					"region": {
+						"x": 112,
+						"y": 187,
+						"w": 47,
+						"h": 57
+					},
+					"margin": {
+						"x": 13,
+						"y": 7,
+						"w": 25,
+						"h": 15
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_14.png",
+					"region": {
+						"x": 113,
+						"y": 246,
+						"w": 46,
+						"h": 57
+					},
+					"margin": {
+						"x": 16,
+						"y": 7,
+						"w": 26,
+						"h": 15
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_18.png",
+					"region": {
+						"x": 114,
+						"y": 305,
+						"w": 48,
+						"h": 57
+					},
+					"margin": {
+						"x": 13,
+						"y": 7,
+						"w": 24,
+						"h": 15
+					}
+				},
+				{
+					"filename": "summon/intent_summon_03.png",
+					"region": {
+						"x": 115,
+						"y": 364,
+						"w": 50,
+						"h": 57
+					},
+					"margin": {
+						"x": 12,
+						"y": 7,
+						"w": 22,
+						"h": 15
+					}
+				},
+				{
+					"filename": "summon/intent_summon_14.png",
+					"region": {
+						"x": 116,
+						"y": 423,
+						"w": 49,
+						"h": 57
+					},
+					"margin": {
+						"x": 12,
+						"y": 7,
+						"w": 23,
+						"h": 15
+					}
+				},
+				{
+					"filename": "summon/intent_summon_15.png",
+					"region": {
+						"x": 116,
+						"y": 482,
+						"w": 49,
+						"h": 57
+					},
+					"margin": {
+						"x": 12,
+						"y": 7,
+						"w": 23,
+						"h": 15
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_14.png",
+					"region": {
+						"x": 156,
+						"y": 116,
+						"w": 40,
+						"h": 57
+					},
+					"margin": {
+						"x": 16,
+						"y": 7,
+						"w": 32,
+						"h": 15
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_05.png",
+					"region": {
+						"x": 198,
+						"y": 114,
+						"w": 39,
+						"h": 49
+					},
+					"margin": {
+						"x": 18,
+						"y": 14,
+						"w": 33,
+						"h": 23
+					}
+				},
+				{
+					"filename": "escape/intent_escape_10.png",
+					"region": {
+						"x": 239,
+						"y": 116,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "summon/intent_summon_16.png",
+					"region": {
+						"x": 161,
+						"y": 175,
+						"w": 49,
+						"h": 57
+					},
+					"margin": {
+						"x": 13,
+						"y": 7,
+						"w": 23,
+						"h": 15
+					}
+				},
+				{
+					"filename": "summon/intent_summon_20.png",
+					"region": {
+						"x": 161,
+						"y": 234,
+						"w": 53,
+						"h": 57
+					},
+					"margin": {
+						"x": 11,
+						"y": 7,
+						"w": 19,
+						"h": 15
+					}
+				},
+				{
+					"filename": "summon/intent_summon_18.png",
+					"region": {
+						"x": 212,
+						"y": 165,
+						"w": 53,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 19,
+						"h": 16
+					}
+				},
+				{
+					"filename": "summon/intent_summon_01.png",
+					"region": {
+						"x": 216,
+						"y": 223,
+						"w": 49,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 23,
+						"h": 16
+					}
+				},
+				{
+					"filename": "summon/intent_summon_06.png",
+					"region": {
+						"x": 164,
+						"y": 293,
+						"w": 52,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 20,
+						"h": 16
+					}
+				},
+				{
+					"filename": "summon/intent_summon_02.png",
+					"region": {
+						"x": 167,
+						"y": 351,
+						"w": 49,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 23,
+						"h": 16
+					}
+				},
+				{
+					"filename": "summon/intent_summon_19.png",
+					"region": {
+						"x": 167,
+						"y": 409,
+						"w": 53,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 19,
+						"h": 16
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_04.png",
+					"region": {
+						"x": 167,
+						"y": 467,
+						"w": 51,
+						"h": 54
+					},
+					"margin": {
+						"x": 10,
+						"y": 10,
+						"w": 21,
+						"h": 18
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_10.png",
+					"region": {
+						"x": 218,
+						"y": 281,
+						"w": 48,
+						"h": 57
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 24,
+						"h": 15
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_11.png",
+					"region": {
+						"x": 218,
+						"y": 340,
+						"w": 48,
+						"h": 57
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 24,
+						"h": 15
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_06.png",
+					"region": {
+						"x": 222,
+						"y": 399,
+						"w": 48,
+						"h": 56
+					},
+					"margin": {
+						"x": 10,
+						"y": 8,
+						"w": 24,
+						"h": 16
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_12.png",
+					"region": {
+						"x": 267,
+						"y": 165,
+						"w": 40,
+						"h": 56
+					},
+					"margin": {
+						"x": 16,
+						"y": 8,
+						"w": 32,
+						"h": 16
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_11.png",
+					"region": {
+						"x": 267,
+						"y": 223,
+						"w": 47,
+						"h": 56
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 25,
+						"h": 16
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_17.png",
+					"region": {
+						"x": 268,
+						"y": 281,
+						"w": 46,
+						"h": 56
+					},
+					"margin": {
+						"x": 15,
+						"y": 8,
+						"w": 26,
+						"h": 16
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_09.png",
+					"region": {
+						"x": 268,
+						"y": 339,
+						"w": 49,
+						"h": 56
+					},
+					"margin": {
+						"x": 16,
+						"y": 15,
+						"w": 23,
+						"h": 16
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_13.png",
+					"region": {
+						"x": 272,
+						"y": 397,
+						"w": 45,
+						"h": 56
+					},
+					"margin": {
+						"x": 16,
+						"y": 8,
+						"w": 27,
+						"h": 16
+					}
+				},
+				{
+					"filename": "buff/intent_buff_03.png",
+					"region": {
+						"x": 167,
+						"y": 523,
+						"w": 51,
+						"h": 50
+					},
+					"margin": {
+						"x": 10,
+						"y": 18,
+						"w": 21,
+						"h": 22
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_06.png",
+					"region": {
+						"x": 116,
+						"y": 541,
+						"w": 49,
+						"h": 50
+					},
+					"margin": {
+						"x": 11,
+						"y": 14,
+						"w": 23,
+						"h": 22
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_05.png",
+					"region": {
+						"x": 115,
+						"y": 593,
+						"w": 50,
+						"h": 55
+					},
+					"margin": {
+						"x": 10,
+						"y": 9,
+						"w": 22,
+						"h": 17
+					}
+				},
+				{
+					"filename": "intent_summon.png",
+					"region": {
+						"x": 167,
+						"y": 575,
+						"w": 49,
+						"h": 55
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 23,
+						"h": 17
+					}
+				},
+				{
+					"filename": "summon/intent_summon_00.png",
+					"region": {
+						"x": 115,
+						"y": 650,
+						"w": 49,
+						"h": 55
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 23,
+						"h": 17
+					}
+				},
+				{
+					"filename": "summon/intent_summon_13.png",
+					"region": {
+						"x": 115,
+						"y": 707,
+						"w": 48,
+						"h": 55
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 24,
+						"h": 17
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_07.png",
+					"region": {
+						"x": 115,
+						"y": 764,
+						"w": 48,
+						"h": 54
+					},
+					"margin": {
+						"x": 12,
+						"y": 7,
+						"w": 24,
+						"h": 18
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_16.png",
+					"region": {
+						"x": 117,
+						"y": 820,
+						"w": 46,
+						"h": 55
+					},
+					"margin": {
+						"x": 16,
+						"y": 9,
+						"w": 26,
+						"h": 17
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_09.png",
+					"region": {
+						"x": 117,
+						"y": 877,
+						"w": 46,
+						"h": 54
+					},
+					"margin": {
+						"x": 10,
+						"y": 10,
+						"w": 26,
+						"h": 18
+					}
+				},
+				{
+					"filename": "buff/intent_buff_04.png",
+					"region": {
+						"x": 167,
+						"y": 632,
+						"w": 52,
+						"h": 49
+					},
+					"margin": {
+						"x": 10,
+						"y": 19,
+						"w": 20,
+						"h": 23
+					}
+				},
+				{
+					"filename": "escape/intent_escape_11.png",
+					"region": {
+						"x": 166,
+						"y": 683,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_02.png",
+					"region": {
+						"x": 165,
+						"y": 732,
+						"w": 52,
+						"h": 52
+					},
+					"margin": {
+						"x": 10,
+						"y": 12,
+						"w": 20,
+						"h": 20
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_03.png",
+					"region": {
+						"x": 165,
+						"y": 786,
+						"w": 51,
+						"h": 53
+					},
+					"margin": {
+						"x": 10,
+						"y": 11,
+						"w": 21,
+						"h": 19
+					}
+				},
+				{
+					"filename": "defend/intent_defend_00.png",
+					"region": {
+						"x": 165,
+						"y": 841,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "escape/intent_escape_03.png",
+					"region": {
+						"x": 165,
+						"y": 895,
+						"w": 33,
+						"h": 36
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 39,
+						"h": 36
+					}
+				},
+				{
+					"filename": "escape/intent_escape_04.png",
+					"region": {
+						"x": 200,
+						"y": 895,
+						"w": 33,
+						"h": 36
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 39,
+						"h": 36
+					}
+				},
+				{
+					"filename": "defend/intent_defend_01.png",
+					"region": {
+						"x": 217,
+						"y": 841,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_07.png",
+					"region": {
+						"x": 218,
+						"y": 786,
+						"w": 48,
+						"h": 53
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "defend/intent_defend_02.png",
+					"region": {
+						"x": 219,
+						"y": 732,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "escape/intent_escape_02.png",
+					"region": {
+						"x": 235,
+						"y": 895,
+						"w": 29,
+						"h": 36
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 43,
+						"h": 36
+					}
+				},
+				{
+					"filename": "escape/intent_escape_12.png",
+					"region": {
+						"x": 294,
+						"y": 116,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_22.png",
+					"region": {
+						"x": 349,
+						"y": 115,
+						"w": 53,
+						"h": 51
+					},
+					"margin": {
+						"x": 3,
+						"y": 12,
+						"w": 19,
+						"h": 21
+					}
+				},
+				{
+					"filename": "intent_unknown.png",
+					"region": {
+						"x": 309,
+						"y": 165,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "escape/intent_escape_13.png",
+					"region": {
+						"x": 348,
+						"y": 168,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_14.png",
+					"region": {
+						"x": 404,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_15.png",
+					"region": {
+						"x": 459,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_16.png",
+					"region": {
+						"x": 514,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_17.png",
+					"region": {
+						"x": 569,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_18.png",
+					"region": {
+						"x": 624,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_19.png",
+					"region": {
+						"x": 679,
+						"y": 123,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_20.png",
+					"region": {
+						"x": 403,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_21.png",
+					"region": {
+						"x": 458,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_22.png",
+					"region": {
+						"x": 513,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_23.png",
+					"region": {
+						"x": 568,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_24.png",
+					"region": {
+						"x": 623,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_25.png",
+					"region": {
+						"x": 678,
+						"y": 172,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "buff/intent_buff_00.png",
+					"region": {
+						"x": 733,
+						"y": 175,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_09.png",
+					"region": {
+						"x": 316,
+						"y": 218,
+						"w": 41,
+						"h": 55
+					},
+					"margin": {
+						"x": 15,
+						"y": 9,
+						"w": 31,
+						"h": 17
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_10.png",
+					"region": {
+						"x": 316,
+						"y": 275,
+						"w": 45,
+						"h": 55
+					},
+					"margin": {
+						"x": 11,
+						"y": 9,
+						"w": 27,
+						"h": 17
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_01.png",
+					"region": {
+						"x": 359,
+						"y": 217,
+						"w": 42,
+						"h": 50
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 30,
+						"h": 22
+					}
+				},
+				{
+					"filename": "escape/intent_escape_26.png",
+					"region": {
+						"x": 403,
+						"y": 221,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_27.png",
+					"region": {
+						"x": 458,
+						"y": 221,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_28.png",
+					"region": {
+						"x": 513,
+						"y": 221,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_29.png",
+					"region": {
+						"x": 568,
+						"y": 221,
+						"w": 53,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 19,
+						"h": 25
+					}
+				},
+				{
+					"filename": "heal/intent_heal_39.png",
+					"region": {
+						"x": 623,
+						"y": 221,
+						"w": 52,
+						"h": 47
+					},
+					"margin": {
+						"x": 6,
+						"y": 12,
+						"w": 20,
+						"h": 25
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_21.png",
+					"region": {
+						"x": 677,
+						"y": 221,
+						"w": 52,
+						"h": 51
+					},
+					"margin": {
+						"x": 4,
+						"y": 12,
+						"w": 20,
+						"h": 21
+					}
+				},
+				{
+					"filename": "defend/intent_defend_03.png",
+					"region": {
+						"x": 731,
+						"y": 228,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_04.png",
+					"region": {
+						"x": 783,
+						"y": 199,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_05.png",
+					"region": {
+						"x": 835,
+						"y": 199,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_08.png",
+					"region": {
+						"x": 887,
+						"y": 206,
+						"w": 44,
+						"h": 53
+					},
+					"margin": {
+						"x": 14,
+						"y": 11,
+						"w": 28,
+						"h": 19
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_15.png",
+					"region": {
+						"x": 319,
+						"y": 332,
+						"w": 46,
+						"h": 54
+					},
+					"margin": {
+						"x": 16,
+						"y": 10,
+						"w": 26,
+						"h": 18
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_06.png",
+					"region": {
+						"x": 319,
+						"y": 388,
+						"w": 48,
+						"h": 53
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_00.png",
+					"region": {
+						"x": 363,
+						"y": 269,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "intent_status_card.png",
+					"region": {
+						"x": 402,
+						"y": 270,
+						"w": 51,
+						"h": 50
+					},
+					"margin": {
+						"x": 11,
+						"y": 14,
+						"w": 21,
+						"h": 22
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_00.png",
+					"region": {
+						"x": 455,
+						"y": 270,
+						"w": 51,
+						"h": 50
+					},
+					"margin": {
+						"x": 11,
+						"y": 14,
+						"w": 21,
+						"h": 22
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_01.png",
+					"region": {
+						"x": 508,
+						"y": 270,
+						"w": 51,
+						"h": 51
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 21,
+						"h": 21
+					}
+				},
+				{
+					"filename": "defend/intent_defend_06.png",
+					"region": {
+						"x": 561,
+						"y": 270,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_07.png",
+					"region": {
+						"x": 613,
+						"y": 270,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_08.png",
+					"region": {
+						"x": 367,
+						"y": 322,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_09.png",
+					"region": {
+						"x": 419,
+						"y": 322,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_10.png",
+					"region": {
+						"x": 369,
+						"y": 376,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_11.png",
+					"region": {
+						"x": 421,
+						"y": 376,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_12.png",
+					"region": {
+						"x": 665,
+						"y": 274,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "heal/intent_heal_31.png",
+					"region": {
+						"x": 717,
+						"y": 282,
+						"w": 53,
+						"h": 45
+					},
+					"margin": {
+						"x": 5,
+						"y": 14,
+						"w": 19,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_30.png",
+					"region": {
+						"x": 783,
+						"y": 253,
+						"w": 53,
+						"h": 41
+					},
+					"margin": {
+						"x": 9,
+						"y": 20,
+						"w": 19,
+						"h": 31
+					}
+				},
+				{
+					"filename": "attack/intent_attack_1.png",
+					"region": {
+						"x": 838,
+						"y": 253,
+						"w": 47,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 13,
+						"w": 25,
+						"h": 23
+					}
+				},
+				{
+					"filename": "heal/intent_heal_00.png",
+					"region": {
+						"x": 887,
+						"y": 261,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_06.png",
+					"region": {
+						"x": 471,
+						"y": 322,
+						"w": 33,
+						"h": 42
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 39,
+						"h": 30
+					}
+				},
+				{
+					"filename": "heal/intent_heal_32.png",
+					"region": {
+						"x": 506,
+						"y": 323,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_33.png",
+					"region": {
+						"x": 560,
+						"y": 324,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_05.png",
+					"region": {
+						"x": 614,
+						"y": 324,
+						"w": 49,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 23,
+						"h": 27
+					}
+				},
+				{
+					"filename": "defend/intent_defend_13.png",
+					"region": {
+						"x": 665,
+						"y": 328,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_14.png",
+					"region": {
+						"x": 717,
+						"y": 329,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "heal/intent_heal_34.png",
+					"region": {
+						"x": 772,
+						"y": 296,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_35.png",
+					"region": {
+						"x": 769,
+						"y": 343,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_36.png",
+					"region": {
+						"x": 826,
+						"y": 304,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_09.png",
+					"region": {
+						"x": 880,
+						"y": 308,
+						"w": 51,
+						"h": 45
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 21,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_37.png",
+					"region": {
+						"x": 823,
+						"y": 351,
+						"w": 52,
+						"h": 45
+					},
+					"margin": {
+						"x": 6,
+						"y": 14,
+						"w": 20,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_38.png",
+					"region": {
+						"x": 877,
+						"y": 355,
+						"w": 52,
+						"h": 46
+					},
+					"margin": {
+						"x": 6,
+						"y": 13,
+						"w": 20,
+						"h": 26
+					}
+				},
+				{
+					"filename": "defend/intent_defend_15.png",
+					"region": {
+						"x": 473,
+						"y": 370,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "escape/intent_escape_05.png",
+					"region": {
+						"x": 525,
+						"y": 370,
+						"w": 33,
+						"h": 38
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 39,
+						"h": 34
+					}
+				},
+				{
+					"filename": "defend/intent_defend_16.png",
+					"region": {
+						"x": 560,
+						"y": 371,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_17.png",
+					"region": {
+						"x": 612,
+						"y": 371,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_18.png",
+					"region": {
+						"x": 664,
+						"y": 382,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_19.png",
+					"region": {
+						"x": 716,
+						"y": 383,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_20.png",
+					"region": {
+						"x": 768,
+						"y": 390,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_21.png",
+					"region": {
+						"x": 820,
+						"y": 398,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_22.png",
+					"region": {
+						"x": 872,
+						"y": 403,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_23.png",
+					"region": {
+						"x": 369,
+						"y": 430,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_24.png",
+					"region": {
+						"x": 421,
+						"y": 430,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_25.png",
+					"region": {
+						"x": 473,
+						"y": 424,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "buff/intent_buff_05.png",
+					"region": {
+						"x": 319,
+						"y": 443,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_02.png",
+					"region": {
+						"x": 272,
+						"y": 455,
+						"w": 45,
+						"h": 53
+					},
+					"margin": {
+						"x": 13,
+						"y": 15,
+						"w": 27,
+						"h": 19
+					}
+				},
+				{
+					"filename": "buff/intent_buff_06.png",
+					"region": {
+						"x": 222,
+						"y": 457,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "defend/intent_defend_26.png",
+					"region": {
+						"x": 220,
+						"y": 510,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_27.png",
+					"region": {
+						"x": 272,
+						"y": 510,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_08.png",
+					"region": {
+						"x": 324,
+						"y": 496,
+						"w": 48,
+						"h": 53
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "defend/intent_defend_28.png",
+					"region": {
+						"x": 374,
+						"y": 484,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_29.png",
+					"region": {
+						"x": 426,
+						"y": 484,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_09.png",
+					"region": {
+						"x": 478,
+						"y": 478,
+						"w": 48,
+						"h": 53
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_13.png",
+					"region": {
+						"x": 525,
+						"y": 425,
+						"w": 49,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 23,
+						"h": 21
+					}
+				},
+				{
+					"filename": "defend/intent_defend_30.png",
+					"region": {
+						"x": 576,
+						"y": 425,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "status/intent_statuscard_08.png",
+					"region": {
+						"x": 528,
+						"y": 478,
+						"w": 46,
+						"h": 53
+					},
+					"margin": {
+						"x": 10,
+						"y": 11,
+						"w": 26,
+						"h": 19
+					}
+				},
+				{
+					"filename": "defend/intent_defend_31.png",
+					"region": {
+						"x": 576,
+						"y": 479,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_32.png",
+					"region": {
+						"x": 628,
+						"y": 436,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_33.png",
+					"region": {
+						"x": 628,
+						"y": 490,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_34.png",
+					"region": {
+						"x": 680,
+						"y": 437,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_35.png",
+					"region": {
+						"x": 680,
+						"y": 491,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_36.png",
+					"region": {
+						"x": 732,
+						"y": 444,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_37.png",
+					"region": {
+						"x": 732,
+						"y": 498,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_38.png",
+					"region": {
+						"x": 784,
+						"y": 452,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_39.png",
+					"region": {
+						"x": 784,
+						"y": 506,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_40.png",
+					"region": {
+						"x": 836,
+						"y": 457,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "heal/intent_heal_25.png",
+					"region": {
+						"x": 888,
+						"y": 457,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "defend/intent_defend_41.png",
+					"region": {
+						"x": 836,
+						"y": 511,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "heal/intent_heal_26.png",
+					"region": {
+						"x": 888,
+						"y": 504,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_27.png",
+					"region": {
+						"x": 888,
+						"y": 551,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "defend/intent_defend_42.png",
+					"region": {
+						"x": 374,
+						"y": 538,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_43.png",
+					"region": {
+						"x": 426,
+						"y": 538,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "defend/intent_defend_44.png",
+					"region": {
+						"x": 478,
+						"y": 533,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "intent_defend.png",
+					"region": {
+						"x": 530,
+						"y": 533,
+						"w": 50,
+						"h": 52
+					},
+					"margin": {
+						"x": 11,
+						"y": 13,
+						"w": 22,
+						"h": 20
+					}
+				},
+				{
+					"filename": "buff/intent_buff_07.png",
+					"region": {
+						"x": 324,
+						"y": 551,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_02.png",
+					"region": {
+						"x": 582,
+						"y": 533,
+						"w": 42,
+						"h": 50
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 30,
+						"h": 22
+					}
+				},
+				{
+					"filename": "escape/intent_escape_31.png",
+					"region": {
+						"x": 626,
+						"y": 544,
+						"w": 50,
+						"h": 40
+					},
+					"margin": {
+						"x": 12,
+						"y": 21,
+						"w": 22,
+						"h": 32
+					}
+				},
+				{
+					"filename": "escape/intent_escape_32.png",
+					"region": {
+						"x": 678,
+						"y": 545,
+						"w": 50,
+						"h": 40
+					},
+					"margin": {
+						"x": 12,
+						"y": 21,
+						"w": 22,
+						"h": 32
+					}
+				},
+				{
+					"filename": "escape/intent_escape_33.png",
+					"region": {
+						"x": 730,
+						"y": 552,
+						"w": 50,
+						"h": 39
+					},
+					"margin": {
+						"x": 12,
+						"y": 22,
+						"w": 22,
+						"h": 33
+					}
+				},
+				{
+					"filename": "escape/intent_escape_34.png",
+					"region": {
+						"x": 782,
+						"y": 560,
+						"w": 50,
+						"h": 33
+					},
+					"margin": {
+						"x": 12,
+						"y": 28,
+						"w": 22,
+						"h": 39
+					}
+				},
+				{
+					"filename": "heal/intent_heal_04.png",
+					"region": {
+						"x": 834,
+						"y": 565,
+						"w": 50,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_03.png",
+					"region": {
+						"x": 886,
+						"y": 598,
+						"w": 45,
+						"h": 50
+					},
+					"margin": {
+						"x": 13,
+						"y": 14,
+						"w": 27,
+						"h": 22
+					}
+				},
+				{
+					"filename": "heal/intent_heal_07.png",
+					"region": {
+						"x": 374,
+						"y": 592,
+						"w": 50,
+						"h": 47
+					},
+					"margin": {
+						"x": 15,
+						"y": 12,
+						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "heal/intent_heal_08.png",
+					"region": {
+						"x": 426,
+						"y": 592,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 15,
+						"y": 11,
+						"w": 22,
+						"h": 24
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_12.png",
+					"region": {
+						"x": 478,
+						"y": 587,
+						"w": 48,
+						"h": 53
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 24,
+						"h": 19
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_10.png",
+					"region": {
+						"x": 528,
+						"y": 587,
+						"w": 48,
+						"h": 52
+					},
+					"margin": {
+						"x": 12,
+						"y": 8,
+						"w": 24,
+						"h": 20
+					}
+				},
+				{
+					"filename": "heal/intent_heal_09.png",
+					"region": {
+						"x": 220,
+						"y": 564,
+						"w": 50,
+						"h": 49
+					},
+					"margin": {
+						"x": 15,
+						"y": 10,
+						"w": 22,
+						"h": 23
+					}
+				},
+				{
+					"filename": "heal/intent_heal_16.png",
+					"region": {
+						"x": 272,
+						"y": 564,
+						"w": 50,
+						"h": 49
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 23
+					}
+				},
+				{
+					"filename": "buff/intent_buff_08.png",
+					"region": {
+						"x": 324,
+						"y": 604,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "summon/intent_summon_12.png",
+					"region": {
+						"x": 221,
+						"y": 615,
+						"w": 48,
+						"h": 52
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 24,
+						"h": 20
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_14.png",
+					"region": {
+						"x": 271,
+						"y": 615,
+						"w": 49,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 23,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_09.png",
+					"region": {
+						"x": 221,
+						"y": 669,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_10.png",
+					"region": {
+						"x": 271,
+						"y": 668,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_11.png",
+					"region": {
+						"x": 271,
+						"y": 721,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_17.png",
+					"region": {
+						"x": 374,
+						"y": 641,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 24
+					}
+				},
+				{
+					"filename": "heal/intent_heal_18.png",
+					"region": {
+						"x": 426,
+						"y": 642,
+						"w": 50,
+						"h": 47
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "buff/intent_buff_12.png",
+					"region": {
+						"x": 478,
+						"y": 642,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_13.png",
+					"region": {
+						"x": 528,
+						"y": 641,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_19.png",
+					"region": {
+						"x": 322,
+						"y": 657,
+						"w": 50,
+						"h": 46
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 26
+					}
+				},
+				{
+					"filename": "buff/intent_buff_14.png",
+					"region": {
+						"x": 321,
+						"y": 705,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_15.png",
+					"region": {
+						"x": 321,
+						"y": 758,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_16.png",
+					"region": {
+						"x": 271,
+						"y": 774,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_17.png",
+					"region": {
+						"x": 269,
+						"y": 827,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_18.png",
+					"region": {
+						"x": 269,
+						"y": 880,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_19.png",
+					"region": {
+						"x": 321,
+						"y": 811,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_20.png",
+					"region": {
+						"x": 319,
+						"y": 864,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_20.png",
+					"region": {
+						"x": 374,
+						"y": 691,
+						"w": 50,
+						"h": 45
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_21.png",
+					"region": {
+						"x": 426,
+						"y": 691,
+						"w": 50,
+						"h": 45
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "buff/intent_buff_21.png",
+					"region": {
+						"x": 371,
+						"y": 738,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_22.png",
+					"region": {
+						"x": 371,
+						"y": 791,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_23.png",
+					"region": {
+						"x": 421,
+						"y": 738,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_24.png",
+					"region": {
+						"x": 421,
+						"y": 791,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_25.png",
+					"region": {
+						"x": 478,
+						"y": 695,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_26.png",
+					"region": {
+						"x": 528,
+						"y": 694,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_27.png",
+					"region": {
+						"x": 471,
+						"y": 748,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "buff/intent_buff_28.png",
+					"region": {
+						"x": 471,
+						"y": 801,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_30.png",
+					"region": {
+						"x": 371,
+						"y": 844,
+						"w": 50,
+						"h": 45
+					},
+					"margin": {
+						"x": 8,
+						"y": 14,
+						"w": 22,
+						"h": 27
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_05.png",
+					"region": {
+						"x": 423,
+						"y": 844,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 13,
+						"y": 14,
+						"w": 26,
+						"h": 22
+					}
+				},
+				{
+					"filename": "buff/intent_buff_29.png",
+					"region": {
+						"x": 471,
+						"y": 854,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "escape/intent_escape_35.png",
+					"region": {
+						"x": 369,
+						"y": 891,
+						"w": 46,
+						"h": 33
+					},
+					"margin": {
+						"x": 16,
+						"y": 28,
+						"w": 26,
+						"h": 39
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_11.png",
+					"region": {
+						"x": 521,
+						"y": 748,
+						"w": 40,
+						"h": 54
+					},
+					"margin": {
+						"x": 16,
+						"y": 10,
+						"w": 32,
+						"h": 18
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_13.png",
+					"region": {
+						"x": 521,
+						"y": 804,
+						"w": 40,
+						"h": 54
+					},
+					"margin": {
+						"x": 16,
+						"y": 10,
+						"w": 32,
+						"h": 18
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_00.png",
+					"region": {
+						"x": 521,
+						"y": 860,
+						"w": 40,
+						"h": 51
+					},
+					"margin": {
+						"x": 16,
+						"y": 14,
+						"w": 32,
+						"h": 21
+					}
+				},
+				{
+					"filename": "intent_buff.png",
+					"region": {
+						"x": 563,
+						"y": 747,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 17,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_11.png",
+					"region": {
+						"x": 563,
+						"y": 800,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_12.png",
+					"region": {
+						"x": 563,
+						"y": 853,
+						"w": 48,
+						"h": 51
+					},
+					"margin": {
+						"x": 12,
+						"y": 9,
+						"w": 24,
+						"h": 21
+					}
+				},
+				{
+					"filename": "escape/intent_escape_36.png",
+					"region": {
+						"x": 417,
+						"y": 896,
+						"w": 37,
+						"h": 33
+					},
+					"margin": {
+						"x": 25,
+						"y": 28,
+						"w": 35,
+						"h": 39
+					}
+				},
+				{
+					"filename": "intent_card_debuff.png",
+					"region": {
+						"x": 578,
+						"y": 587,
+						"w": 40,
+						"h": 51
+					},
+					"margin": {
+						"x": 16,
+						"y": 14,
+						"w": 32,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_04.png",
+					"region": {
+						"x": 620,
+						"y": 586,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 12,
+						"y": 10,
+						"w": 24,
+						"h": 22
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_20.png",
+					"region": {
+						"x": 578,
+						"y": 640,
+						"w": 47,
+						"h": 51
+					},
+					"margin": {
+						"x": 9,
+						"y": 12,
+						"w": 25,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_02.png",
+					"region": {
+						"x": 578,
+						"y": 693,
+						"w": 48,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 10,
+						"w": 24,
+						"h": 23
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_05.png",
+					"region": {
+						"x": 670,
+						"y": 587,
+						"w": 49,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 23,
+						"h": 23
+					}
+				},
+				{
+					"filename": "heal/intent_heal_06.png",
+					"region": {
+						"x": 627,
+						"y": 638,
+						"w": 49,
+						"h": 48
+					},
+					"margin": {
+						"x": 15,
+						"y": 11,
+						"w": 23,
+						"h": 24
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_03.png",
+					"region": {
+						"x": 628,
+						"y": 688,
+						"w": 48,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 10,
+						"w": 24,
+						"h": 23
+					}
+				},
+				{
+					"filename": "card_debuff/intent_carddebuff_04.png",
+					"region": {
+						"x": 678,
+						"y": 638,
+						"w": 45,
+						"h": 50
+					},
+					"margin": {
+						"x": 13,
+						"y": 14,
+						"w": 27,
+						"h": 22
+					}
+				},
+				{
+					"filename": "heal/intent_heal_40.png",
+					"region": {
+						"x": 678,
+						"y": 690,
+						"w": 50,
+						"h": 47
+					},
+					"margin": {
+						"x": 8,
+						"y": 12,
+						"w": 22,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_08.png",
+					"region": {
+						"x": 721,
+						"y": 593,
+						"w": 47,
+						"h": 43
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 25,
+						"h": 29
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_13.png",
+					"region": {
+						"x": 725,
+						"y": 638,
+						"w": 48,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 10,
+						"w": 24,
+						"h": 23
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_14.png",
+					"region": {
+						"x": 730,
+						"y": 689,
+						"w": 48,
+						"h": 49
+					},
+					"margin": {
+						"x": 12,
+						"y": 10,
+						"w": 24,
+						"h": 23
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_01.png",
+					"region": {
+						"x": 613,
+						"y": 744,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_41.png",
+					"region": {
+						"x": 652,
+						"y": 739,
+						"w": 49,
+						"h": 47
+					},
+					"margin": {
+						"x": 9,
+						"y": 12,
+						"w": 23,
+						"h": 25
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_02.png",
+					"region": {
+						"x": 613,
+						"y": 797,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_15.png",
+					"region": {
+						"x": 652,
+						"y": 788,
+						"w": 47,
+						"h": 49
+					},
+					"margin": {
+						"x": 13,
+						"y": 10,
+						"w": 25,
+						"h": 23
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_03.png",
+					"region": {
+						"x": 613,
+						"y": 850,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_42.png",
+					"region": {
+						"x": 652,
+						"y": 839,
+						"w": 48,
+						"h": 47
+					},
+					"margin": {
+						"x": 10,
+						"y": 12,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "escape/intent_escape_07.png",
+					"region": {
+						"x": 652,
+						"y": 888,
+						"w": 37,
+						"h": 43
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 35,
+						"h": 29
+					}
+				},
+				{
+					"filename": "heal/intent_heal_29.png",
+					"region": {
+						"x": 703,
+						"y": 740,
+						"w": 49,
+						"h": 45
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 23,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_01.png",
+					"region": {
+						"x": 754,
+						"y": 740,
+						"w": 46,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 26,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_37.png",
+					"region": {
+						"x": 770,
+						"y": 595,
+						"w": 28,
+						"h": 32
+					},
+					"margin": {
+						"x": 34,
+						"y": 29,
+						"w": 44,
+						"h": 40
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_04.png",
+					"region": {
+						"x": 775,
+						"y": 629,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_15.png",
+					"region": {
+						"x": 780,
+						"y": 682,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_16.png",
+					"region": {
+						"x": 802,
+						"y": 735,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_43.png",
+					"region": {
+						"x": 841,
+						"y": 612,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_38.png",
+					"region": {
+						"x": 800,
+						"y": 595,
+						"w": 25,
+						"h": 30
+					},
+					"margin": {
+						"x": 37,
+						"y": 30,
+						"w": 47,
+						"h": 42
+					}
+				},
+				{
+					"filename": "heal/intent_heal_44.png",
+					"region": {
+						"x": 886,
+						"y": 650,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "intent_heal.png",
+					"region": {
+						"x": 841,
+						"y": 659,
+						"w": 43,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 29,
+						"h": 27
+					}
+				},
+				{
+					"filename": "intent_sleep.png",
+					"region": {
+						"x": 841,
+						"y": 706,
+						"w": 48,
+						"h": 47
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "heal/intent_heal_03.png",
+					"region": {
+						"x": 841,
+						"y": 755,
+						"w": 48,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 24,
+						"h": 27
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_17.png",
+					"region": {
+						"x": 891,
+						"y": 697,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_18.png",
+					"region": {
+						"x": 891,
+						"y": 750,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_22.png",
+					"region": {
+						"x": 703,
+						"y": 787,
+						"w": 48,
+						"h": 45
+					},
+					"margin": {
+						"x": 10,
+						"y": 14,
+						"w": 24,
+						"h": 27
+					}
+				},
+				{
+					"filename": "heal/intent_heal_02.png",
+					"region": {
+						"x": 753,
+						"y": 787,
+						"w": 47,
+						"h": 45
+					},
+					"margin": {
+						"x": 15,
+						"y": 14,
+						"w": 25,
+						"h": 27
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_19.png",
+					"region": {
+						"x": 802,
+						"y": 788,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_00.png",
+					"region": {
+						"x": 702,
+						"y": 834,
+						"w": 48,
+						"h": 47
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "sleep/intent_sleep_01.png",
+					"region": {
+						"x": 752,
+						"y": 834,
+						"w": 48,
+						"h": 47
+					},
+					"margin": {
+						"x": 12,
+						"y": 11,
+						"w": 24,
+						"h": 25
+					}
+				},
+				{
+					"filename": "heal/intent_heal_28.png",
+					"region": {
+						"x": 841,
+						"y": 802,
+						"w": 48,
+						"h": 45
+					},
+					"margin": {
+						"x": 10,
+						"y": 14,
+						"w": 24,
+						"h": 27
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_27.png",
+					"region": {
+						"x": 802,
+						"y": 841,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_23.png",
+					"region": {
+						"x": 841,
+						"y": 849,
+						"w": 47,
+						"h": 45
+					},
+					"margin": {
+						"x": 11,
+						"y": 14,
+						"w": 25,
+						"h": 27
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_28.png",
+					"region": {
+						"x": 891,
+						"y": 803,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "unknown/intent_unknown_29.png",
+					"region": {
+						"x": 890,
+						"y": 856,
+						"w": 37,
+						"h": 51
+					},
+					"margin": {
+						"x": 19,
+						"y": 12,
+						"w": 35,
+						"h": 21
+					}
+				},
+				{
+					"filename": "heal/intent_heal_24.png",
+					"region": {
+						"x": 702,
+						"y": 883,
+						"w": 46,
+						"h": 45
+					},
+					"margin": {
+						"x": 12,
+						"y": 14,
+						"w": 26,
+						"h": 27
+					}
+				},
+				{
+					"filename": "escape/intent_escape_01.png",
+					"region": {
+						"x": 750,
+						"y": 883,
+						"w": 21,
+						"h": 28
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 51,
+						"h": 44
+					}
+				},
+				{
+					"filename": "escape/intent_escape_00.png",
+					"region": {
+						"x": 773,
+						"y": 883,
+						"w": 21,
+						"h": 20
+					},
+					"margin": {
+						"x": 9,
+						"y": 14,
+						"w": 51,
+						"h": 52
+					}
+				},
+				{
+					"filename": "escape/intent_escape_39.png",
+					"region": {
+						"x": 63,
+						"y": 905,
+						"w": 14,
+						"h": 16
+					},
+					"margin": {
+						"x": 48,
+						"y": 34,
+						"w": 58,
+						"h": 56
+					}
+				},
+				{
+					"filename": "intent_hidden.png",
+					"region": {
+						"x": 872,
+						"y": 398,
+						"w": 3,
+						"h": 3
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 69,
+						"h": 60
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:65331244a4b11a1b2dc0fd12210df75e:704fa93d228f037cf47bd8082f18865b:dd7dfd3360dc05c98887271f9ceb0934$"
+	}
+}

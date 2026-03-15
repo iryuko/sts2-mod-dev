@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ie3xff1t0mbk"]
+
+[ext_resource type="Script" uid="uid://s1fwcya8ir41" path="res://src/Core/Nodes/Vfx/NSplashVfx.cs" id="1_n6u25"]
+[ext_resource type="PackedScene" uid="uid://b0gviidjq56ko" path="res://scenes/vfx/liquid/vfx_liquid_droplets.tscn" id="2_jm6ru"]
+[ext_resource type="PackedScene" uid="uid://3r7e1dbr1dvk" path="res://scenes/vfx/liquid/vfx_liquid_splash.tscn" id="3_bvk8x"]
+
+[node name="vfx_splash" type="Node2D" node_paths=PackedStringArray("_particles")]
+script = ExtResource("1_n6u25")
+_particles = [NodePath("vfx_liquid_droplets"), NodePath("vfx_liquid_splash")]
+
+[node name="vfx_liquid_droplets" parent="." instance=ExtResource("2_jm6ru")]
+
+[node name="vfx_liquid_splash" parent="." instance=ExtResource("3_bvk8x")]

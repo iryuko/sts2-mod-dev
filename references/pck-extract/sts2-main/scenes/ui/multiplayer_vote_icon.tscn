@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b851eavhyhehh"]
+
+[ext_resource type="Texture2D" uid="uid://pr1rqg2t44qx" path="res://images/debug/placeholder_64.png" id="1_0ar3c"]
+
+[node name="MapPointVoteIcon" type="TextureRect"]
+custom_minimum_size = Vector2(24, 24)
+mouse_filter = 2
+texture = ExtResource("1_0ar3c")
+expand_mode = 3
+
+[node name="Outline" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.7529412)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0ar3c")
+expand_mode = 1

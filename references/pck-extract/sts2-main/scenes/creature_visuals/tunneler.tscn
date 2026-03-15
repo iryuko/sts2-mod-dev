@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://wu44btn0pglj"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_bfx3i"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dmkvgooo1d6l7" path="res://animations/monsters/tunneler/tunneler_skel_data.tres" id="2_r1or8"]
+
+[node name="Tunneler" type="Node2D"]
+script = ExtResource("1_bfx3i")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -26)
+scale = Vector2(0.14838, 0.14838)
+skeleton_data_res = ExtResource("2_r1or8")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-118.214, 128.066)
+bone_name = "attack_target_bone"
+bone_mode = 1
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -128.0
+offset_top = -201.0
+offset_right = 128.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-6, -112)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -239)

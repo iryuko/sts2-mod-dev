@@ -1,0 +1,13 @@
+[gd_scene load_steps=8 format=3 uid="uid://dteh8dpwhj0md"]
+
+[ext_resource type="Script" uid="uid://dfliy3bq4j7re" path="res://src/Core/Nodes/Vfx/Utilities/NSpriteAnimator.cs" id="1_wx551"]
+[ext_resource type="Texture2D" uid="uid://b3u1e6o0ko0e" path="res://images/vfx/vfx_block/vfx_block_00.png" id="2_487cg"]
+[ext_resource type="Texture2D" uid="uid://ck0erv0ar72wp" path="res://images/vfx/vfx_block/vfx_block_01.png" id="3_r3jd8"]
+[ext_resource type="Texture2D" uid="uid://bkiys7hgv8tqy" path="res://images/vfx/vfx_block/vfx_block_02.png" id="4_p31pu"]
+[ext_resource type="Texture2D" uid="uid://rfgs3jjt74vw" path="res://images/vfx/vfx_block/vfx_block_03.png" id="5_x823g"]
+[ext_resource type="Texture2D" uid="uid://bwiwi8o5yhsll" path="res://images/vfx/vfx_block/vfx_block_04.png" id="6_clljk"]
+[ext_resource type="Texture2D" uid="uid://oapnn1u10pe3" path="res://images/vfx/vfx_block/vfx_block_05.png" id="7_6cts4"]
+
+[node name="VfxBlock" type="Sprite2D"]
+script = ExtResource("1_wx551")
+_frames = Array[Texture2D]([ExtResource("2_487cg"), ExtResource("3_r3jd8"), ExtResource("4_p31pu"), ExtResource("5_x823g"), ExtResource("6_clljk"), ExtResource("7_6cts4")])

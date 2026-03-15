@@ -1,0 +1,20 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://piu0oewydtvf"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://co2bmmcwbsyh3" path="res://animations/monsters/infested_guardian/infested_guardian.atlas" id="1_hr0h2"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bj6kcoof045qy" path="res://animations/monsters/infested_guardian/infested_guardian.skel" id="2_oquw5"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_oquw5"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_16o5q"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0acr1"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jkb0u"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ex4cp"]
+
+[resource]
+atlas_res = ExtResource("1_hr0h2")
+skeleton_file_res = ExtResource("2_oquw5")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_oquw5"), SubResource("SpineAnimationMix_16o5q"), SubResource("SpineAnimationMix_0acr1"), SubResource("SpineAnimationMix_jkb0u"), SubResource("SpineAnimationMix_ex4cp")]

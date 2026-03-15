@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://yaq52aulluy5"]
+
+[ext_resource type="Shader" uid="uid://bdmk11babrgij" path="res://shaders/blur/canvas_group_mask_blur.gdshader" id="1_fwxnl"]
+[ext_resource type="Texture2D" uid="uid://bgetqwobce1jr" path="res://images/atlases/compressed_0.png" id="2_fwxnl"]
+
+[resource]
+shader = ExtResource("1_fwxnl")
+shader_parameter/mask_texture = ExtResource("2_fwxnl")
+shader_parameter/mask_region = Vector4(615, 1151, 600, 847)
+shader_parameter/mask_offset = Vector2(9, 8)
+shader_parameter/step = Vector2(0, 1)
+shader_parameter/radius = 32.0
+shader_parameter/mask = true
+shader_parameter/blur = true

@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://wvmm62hrtps4"]
+
+[ext_resource type="Script" uid="uid://bc30h3w48uae0" path="res://src/Core/Nodes/Screens/Timeline/NUnlockConfirmButton.cs" id="1_bcvmc"]
+[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="2_05nv7"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_px5ew"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_3ci3p"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="4_e8nnx"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="6_3ci3p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqsgb"]
+resource_local_to_scene = true
+shader = ExtResource("4_e8nnx")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="ConfirmButton" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -160.0
+offset_right = 130.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(130, 29)
+script = ExtResource("1_bcvmc")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_05nv7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.115875, 0.25976, 0.288407, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_px5ew")
+theme_override_font_sizes/font_size = 28
+text = "Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_3ci3p")
+AutoSizeEnabled = false
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_fqsgb")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -94.0
+offset_right = -70.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("6_3ci3p")
+expand_mode = 1
+stretch_mode = 5

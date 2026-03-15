@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://d1ue1h3j7ystt"]
+
+[ext_resource type="Shader" uid="uid://b74ju7rwrgwnc" path="res://shaders/vfx/common/vfx_flipbook_shader.gdshader" id="1_a3vyv"]
+
+[sub_resource type="Curve" id="Curve_xdeyt"]
+_data = [Vector2(0, 0), 0.0, 2.24709, 0, 0, Vector2(1, 1), 0.222738, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g4tmq"]
+curve = SubResource("Curve_xdeyt")
+
+[sub_resource type="Gradient" id="Gradient_a3vyv"]
+colors = PackedColorArray(0.5, 0.5, 0.5, 1, 1.5, 1.5, 1.5, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xdeyt"]
+gradient = SubResource("Gradient_a3vyv")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_a3vyv")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/lut = SubResource("GradientTexture1D_xdeyt")
+shader_parameter/frame_count = 10.0
+shader_parameter/flipbook_size = Vector2(5, 2)
+shader_parameter/flipbook_curve = SubResource("CurveTexture_g4tmq")
+shader_parameter/use_erosion_texture = 0.0
+shader_parameter/erosion_offset = 0.1
+shader_parameter/use_hue_shift = 0.0

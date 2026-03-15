@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://deperm26e51kc"]
+
+[ext_resource type="Texture2D" uid="uid://dqcv0rkkoktj5" path="res://images/potions/potion_pop_up/potion_popup.png" id="1_pdufv"]
+[ext_resource type="Script" uid="uid://bibpij1w5ovkj" path="res://src/Core/Nodes/Potions/NPotionPopup.cs" id="2_6bqjd"]
+[ext_resource type="Texture2D" uid="uid://bvhjtfse0o6mv" path="res://images/potions/potion_pop_up/potion_popup_top.png" id="2_74th5"]
+[ext_resource type="Script" uid="uid://clefqux4uh4it" path="res://src/Core/Nodes/Potions/NPotionPopupButton.cs" id="3_j1e4v"]
+[ext_resource type="Texture2D" uid="uid://b5ah8gyravgjw" path="res://images/potions/potion_pop_up/potion_popup_bottom.png" id="4_3lova"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_6gjam"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_ytpr2"]
+
+[node name="PotionPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -131.0
+offset_right = 128.0
+offset_bottom = 239.0
+pivot_offset = Vector2(129, 0)
+focus_mode = 2
+script = ExtResource("2_6bqjd")
+
+[node name="Container" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_pdufv")
+expand_mode = 1
+
+[node name="UseButton" type="Control" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.494
+anchor_top = 0.385
+anchor_right = 0.494
+anchor_bottom = 0.385
+offset_left = -116.946
+offset_top = -42.015
+offset_right = 119.054
+offset_bottom = 43.985
+focus_mode = 2
+script = ExtResource("3_j1e4v")
+
+[node name="Label" type="Label" parent="Container/UseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 22)
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.5019608)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_6gjam")
+theme_override_font_sizes/font_size = 32
+text = "Use"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_ytpr2")
+MinFontSize = 18
+MaxFontSize = 32
+
+[node name="Background" type="TextureRect" parent="Container/UseButton"]
+modulate = Color(1, 1, 1, 0.266667)
+layout_mode = 0
+offset_left = -2.0
+offset_top = -39.0
+offset_right = 239.0
+offset_bottom = 90.0
+texture = ExtResource("2_74th5")
+expand_mode = 1
+
+[node name="DiscardButton" type="Control" parent="Container"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.494
+anchor_top = 0.385
+anchor_right = 0.494
+anchor_bottom = 0.385
+offset_left = -115.946
+offset_top = 50.985
+offset_right = 120.054
+offset_bottom = 136.985
+focus_mode = 2
+script = ExtResource("3_j1e4v")
+
+[node name="Label" type="Label" parent="Container/DiscardButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 22)
+theme_override_colors/font_color = Color(1, 0.33333334, 0.33333334, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.5019608)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_6gjam")
+theme_override_font_sizes/font_size = 32
+text = "Discard"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_ytpr2")
+MinFontSize = 18
+MaxFontSize = 32
+
+[node name="Background" type="TextureRect" parent="Container/DiscardButton"]
+modulate = Color(1, 1, 1, 0.266667)
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 238.0
+offset_bottom = 90.0
+texture = ExtResource("4_3lova")
+expand_mode = 1
+
+[node name="HoverTipBounds" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -5.0
+offset_top = 38.0
+offset_right = 263.0
+offset_bottom = 240.0
+mouse_filter = 2

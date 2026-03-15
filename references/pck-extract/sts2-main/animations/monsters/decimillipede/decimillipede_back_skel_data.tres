@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bkao71dkw1we0"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b0ltcu82r321m" path="res://animations/monsters/decimillipede/decimillipede_back.atlas" id="1_d24nj"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://124atsni5utf" path="res://animations/monsters/decimillipede/decimillipede3.skel" id="2_khd48"]
+
+[resource]
+atlas_res = ExtResource("1_d24nj")
+skeleton_file_res = ExtResource("2_khd48")

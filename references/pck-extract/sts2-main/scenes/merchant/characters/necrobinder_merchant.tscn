@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2m064qsif4gj"]
+
+[ext_resource type="Script" uid="uid://b2ww8leotjikm" path="res://src/Core/Nodes/Screens/Shops/NMerchantCharacter.cs" id="1_vkrcr"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://q1asiogtp47h" path="res://animations/merchant/necrobinder/necrobinder_merchant_skel_data.tres" id="2_vkrcr"]
+[ext_resource type="Shader" uid="uid://citjsgmko2rak" path="res://shaders/vfx/vfx_stepped_shader_fire_dark.tres" id="3_pgwby"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="4_sie4e"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="5_3a5ip"]
+[ext_resource type="Texture2D" uid="uid://cv34jqejd8qm4" path="res://images/vfx/characters/necro_fire_bottom_mask.png" id="6_6rucn"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="7_5a00l"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="8_3xhf6"]
+[ext_resource type="Texture2D" uid="uid://d3ymohgo6fgl" path="res://images/vfx/characters/necro_fire_shape.png" id="9_mm1hx"]
+[ext_resource type="Script" uid="uid://dsq50myoa0fc3" path="res://src/Core/Nodes/Vfx/NNecrobinderFlameVfx.cs" id="10_eg2pe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5dcj6"]
+shader = ExtResource("3_pgwby")
+shader_parameter/GlobalOffset = Vector2(0, 0)
+shader_parameter/OuterColor = Color(0.17, 0.612667, 1, 1)
+shader_parameter/InnerColorStep = Vector2(0.52, 0.92)
+shader_parameter/Noise2Strength = 0.51
+shader_parameter/Noise2Scaling = Vector2(3, 3)
+shader_parameter/Noise2Panning = Vector2(-0.2, 1.4)
+shader_parameter/Noise2Texture = ExtResource("7_5a00l")
+shader_parameter/Noise1Strength = 0.87
+shader_parameter/Noise1Scaling = Vector2(2.2, 2.2)
+shader_parameter/Noise1Panning = Vector2(0.8, 1.3)
+shader_parameter/Noise1Texture = ExtResource("4_sie4e")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 0.91)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.015)
+shader_parameter/NoiseMask = ExtResource("8_3xhf6")
+shader_parameter/Distortion2Scale = Vector2(1, 0.8)
+shader_parameter/Distortion2Panning = Vector2(0, 0.5)
+shader_parameter/Distortion2Texture = ExtResource("5_3a5ip")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.03, 0.6)
+shader_parameter/Distortion1Texture = ExtResource("4_sie4e")
+shader_parameter/Distortion1Strength = 0.125
+shader_parameter/DistortionMaskScale = Vector2(1, 0.88)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.125)
+shader_parameter/DistortionMask = ExtResource("6_6rucn")
+shader_parameter/InnerColor = Color(0, 0.0373333, 0.08, 1)
+shader_parameter/OuterStep = Vector2(0.025, 0.045)
+
+[node name="NecrobinderMerchant" type="Node2D"]
+script = ExtResource("1_vkrcr")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_vkrcr")
+preview_skin = "Default"
+preview_animation = "relaxed_loop"
+preview_frame = false
+preview_time = 5.4
+scale = Vector2(0.47, 0.47)
+
+[node name="HeadBoneNode" type="SpineSlotNode" parent="SpineSprite"]
+slot_name = "flameattach"
+show_behind_parent = true
+position = Vector2(-6.881861, -939.24023)
+rotation = -0.06435307
+
+[node name="SteppedFireMix_dark" type="Sprite2D" parent="SpineSprite/HeadBoneNode"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_5dcj6")
+position = Vector2(-4.03905, 72.364)
+rotation = -0.076478
+scale = Vector2(0.904831, 0.904343)
+texture = ExtResource("9_mm1hx")
+
+[node name="NNecrobinderFlameVfx" type="Node" parent="SpineSprite/HeadBoneNode"]
+script = ExtResource("10_eg2pe")
+metadata/_custom_type_script = "uid://dsq50myoa0fc3"

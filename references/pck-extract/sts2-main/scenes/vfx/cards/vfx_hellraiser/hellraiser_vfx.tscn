@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5fahw2uqegho"]
+
+[ext_resource type="Script" uid="uid://cpow7qc5a3gdm" path="res://src/Core/Nodes/Vfx/Cards/NHellraiserVfx.cs" id="1_nj5id"]
+
+[node name="HellraiserVfx" type="Control"]
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nj5id")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
