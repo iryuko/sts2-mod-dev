@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_visuals"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_togawasakiko.png" id="2_portrait"]
+
+[node name="Togawasakiko" type="Node2D"]
+script = ExtResource("1_visuals")
+
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5, -215)
+scale = Vector2(0.22, 0.22)
+
+[node name="Sprite" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("2_portrait")
+centered = true
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -121.0
+offset_top = -280.0
+offset_right = 121.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -165)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(20, -351)
