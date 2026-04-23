@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>Togawasakiko_in_Slay_the_Spire</AssemblyName>
+    <RootNamespace>Togawasakiko_in_Slay_the_Spire</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>../../../references/game-dlls/sts2/arm64/sts2.dll</HintPath>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>../../../references/game-dlls/shared/0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>../../../references/game-dlls/sts2/arm64/GodotSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,335 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_visuals"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/body_base_start.png" id="2_body"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/left_arm_start.png" id="3_upper_start"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/left_forearm_hand_start.png" id="4_fore_start"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/front_cover_start.png" id="5_cover"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/left_arm_extend_ref.png" id="6_upper_extend"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/left_forearm_hand_extend_ref.png" id="7_fore_extend"]
+[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_layers/workdraft/torso_bridge_extend_ref.png" id="8_bridge"]
+
+[sub_resource type="Animation" id="Animation_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(5, -138)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/LeftUpperArmPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/LeftUpperArmPivot/LeftForearmPivot:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/FrontCover:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/TorsoBridge:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/LeftUpperArmPivot/LeftUpperArm:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_upper_start")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/LeftUpperArmPivot/LeftForearmPivot/LeftForearmHand:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_fore_start")]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "idle_subtle"
+length = 1.6
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/LeftUpperArmPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/LeftUpperArmPivot/LeftForearmPivot:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8, 1.2, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cast"]
+resource_name = "cast_gesture_v1"
+length = 1.2
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.18, 0.32, 0.5, 0.82, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138), Vector2(5, -138)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.18, 0.32, 0.5, 0.82, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/LeftUpperArmPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.14, 0.22, 0.34, 0.5, 0.82, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, -4.0, -10.0, -16.0, -11.0, -4.0, 0.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/LeftUpperArmPivot/LeftForearmPivot:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.14, 0.22, 0.34, 0.5, 0.82, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 4.0, 10.0, 18.0, 13.0, 4.0, 0.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/FrontCover:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.22, 0.36, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, true, false, false, true, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/TorsoBridge:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.22, 0.36, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true, false, false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/LeftUpperArmPivot/LeftUpperArm:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.22, 0.36, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_upper_start"), ExtResource("3_upper_start"), ExtResource("6_upper_extend"), ExtResource("6_upper_extend"), ExtResource("3_upper_start"), ExtResource("3_upper_start")]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/LeftUpperArmPivot/LeftForearmPivot/LeftForearmHand:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.18, 0.22, 0.36, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_fore_start"), ExtResource("4_fore_start"), ExtResource("7_fore_extend"), ExtResource("7_fore_extend"), ExtResource("4_fore_start"), ExtResource("4_fore_start")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_layered"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"cast_gesture_v1": SubResource("Animation_cast"),
+&"idle_subtle": SubResource("Animation_idle")
+}
+
+[node name="Togawasakiko" type="Node2D"]
+script = ExtResource("1_visuals")
+
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(5, -138)
+scale = Vector2(0.28, 0.28)
+
+[node name="BodyBase" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("2_body")
+centered = true
+
+[node name="TorsoBridge" type="Sprite2D" parent="Visuals"]
+visible = false
+texture = ExtResource("8_bridge")
+centered = true
+z_index = 1
+
+[node name="LeftUpperArmPivot" type="Node2D" parent="Visuals"]
+position = Vector2(150, -281)
+z_index = 1
+
+[node name="LeftUpperArm" type="Sprite2D" parent="Visuals/LeftUpperArmPivot"]
+position = Vector2(-150, 281)
+texture = ExtResource("3_upper_start")
+centered = true
+
+[node name="LeftForearmPivot" type="Node2D" parent="Visuals/LeftUpperArmPivot"]
+position = Vector2(-88, 33)
+
+[node name="LeftForearmHand" type="Sprite2D" parent="Visuals/LeftUpperArmPivot/LeftForearmPivot"]
+visible = false
+position = Vector2(-62, 248)
+texture = ExtResource("4_fore_start")
+centered = true
+
+[node name="FrontCover" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("5_cover")
+centered = true
+z_index = 2
+
+[node name="TogawasakikoLayeredAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_layered")
+}
+autoplay = "idle_subtle"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -121.0
+offset_top = -280.0
+offset_right = 121.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -165)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(20, -351)

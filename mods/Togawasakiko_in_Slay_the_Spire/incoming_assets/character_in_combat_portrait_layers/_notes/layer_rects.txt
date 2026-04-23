@@ -1,0 +1,14 @@
+start_image: /Users/user/Desktop/sts2-mod-dev/mods/Togawasakiko_in_Slay_the_Spire/incoming_assets/character_in_combat_portrait/character_in_combat_portrait_togawasakiko1.png
+extend_image: /Users/user/Desktop/sts2-mod-dev/mods/Togawasakiko_in_Slay_the_Spire/incoming_assets/character_in_combat_portrait/character_in_combat_portrait_togawasakiko.png
+start transparent key: connected white background cut + near-white edge key + white matte decontam
+left_upper_arm_start rect: {{710, 770}, {230, 210}}
+left_forearm_hand_start rect: {{600, 845}, {280, 175}}
+front_cover_start rect: {{605, 760}, {250, 255}}
+left_upper_arm_extend_ref rect: {{690, 825}, {300, 180}}
+left_forearm_hand_extend_ref rect: {{845, 930}, {290, 155}}
+left_upper_arm_start polygon: [(515.0, 960.0), (560.0, 1015.0), (640.0, 1042.0), (730.0, 1046.0), (810.0, 1028.0), (872.0, 990.0), (882.0, 934.0), (840.0, 898.0), (760.0, 884.0), (650.0, 892.0), (565.0, 912.0), (518.0, 934.0)]
+left_forearm_hand_start polygon: [(515.0, 960.0), (560.0, 1015.0), (640.0, 1042.0), (730.0, 1046.0), (810.0, 1028.0), (872.0, 990.0), (882.0, 934.0), (840.0, 898.0), (760.0, 884.0), (650.0, 892.0), (565.0, 912.0), (518.0, 934.0)]
+front_cover_start polygon: [(565.0, 1000.0), (628.0, 1026.0), (706.0, 1028.0), (770.0, 1008.0), (784.0, 974.0), (744.0, 952.0), (664.0, 948.0), (590.0, 960.0)]
+left_upper_arm_extend_ref topRect: {{700, 150}, {360, 260}}
+left_forearm_hand_extend_ref topRect: {{840, 135}, {330, 170}}
+torso_bridge_extend_ref topRect: {{540, 300}, {170, 145}}
