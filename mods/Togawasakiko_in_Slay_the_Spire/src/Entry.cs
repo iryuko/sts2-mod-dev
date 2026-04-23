@@ -122,6 +122,8 @@ public static class TogawasakikoMod
             SanitizeShadowCards(runState, player);
         }
 
+        JukeboxRunInjector.HandleRoomEntered(runState?.CurrentRoom);
+
         if (runState?.CurrentRoom is not CombatRoom)
         {
             return;

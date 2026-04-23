@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace Togawasakiko_in_Slay_the_Spire;
@@ -51,6 +53,26 @@ internal sealed partial class JukeboxRunInjector : Node
         }
 
         _currentOverlay.ResetToOffForCombat();
+    }
+
+    public static void PrepareForRestSiteEnter()
+    {
+        if (_currentOverlay == null || !GodotObject.IsInstanceValid(_currentOverlay))
+        {
+            return;
+        }
+
+        _currentOverlay.SuspendBgmBusMuteForRestSiteTransition();
+    }
+
+    public static void HandleRoomEntered(AbstractRoom? room)
+    {
+        if (_currentOverlay == null || !GodotObject.IsInstanceValid(_currentOverlay))
+        {
+            return;
+        }
+
+        _currentOverlay.HandleRoomEntered(room);
     }
 
     public static bool TryInjectIntoGlobalUi(Control globalUi)
@@ -135,6 +157,8 @@ internal sealed partial class JukeboxOverlay : Control
     private int _bgmBusIndex = -1;
     private float _savedBgmBusVolumeDb;
     private bool _isBgmBusMutedForCustomTrack;
+    private bool _isBgmMuteSuspendedForRestSiteTransition;
+    private int _restSiteMuteRestoreSerial;
 
     public void InitializeForInjection(Control host)
     {
@@ -172,6 +196,7 @@ internal sealed partial class JukeboxOverlay : Control
     public override void _ExitTree()
     {
         RestoreBgmBusIfNeeded();
+        _isBgmMuteSuspendedForRestSiteTransition = false;
         _player?.Stop();
     }
 
@@ -478,6 +503,8 @@ internal sealed partial class JukeboxOverlay : Control
         _activeTrackPath = null;
         StopPlayerOnly();
         RestoreBgmBusIfNeeded();
+        _isBgmMuteSuspendedForRestSiteTransition = false;
+        _restSiteMuteRestoreSerial++;
 
         SetProgressValue(0);
         SetProgressEnabled(false);
@@ -511,6 +538,76 @@ internal sealed partial class JukeboxOverlay : Control
         }
 
         StopCustomTrackAndResumeRunMusic();
+    }
+
+    public void SuspendBgmBusMuteForRestSiteTransition()
+    {
+        if (!IsCustomTrackActive())
+        {
+            return;
+        }
+
+        _isBgmMuteSuspendedForRestSiteTransition = true;
+        _restSiteMuteRestoreSerial++;
+        RestoreBgmBusIfNeeded();
+        ModSupport.LogInfo("Jukebox temporarily restored original BGM bus for rest site transition.");
+    }
+
+    public void HandleRoomEntered(AbstractRoom? room)
+    {
+        if (room is not RestSiteRoom)
+        {
+            _isBgmMuteSuspendedForRestSiteTransition = false;
+            return;
+        }
+
+        if (!_isBgmMuteSuspendedForRestSiteTransition || !IsCustomTrackActive())
+        {
+            return;
+        }
+
+        int serial = _restSiteMuteRestoreSerial;
+        _ = ReapplyBgmBusMuteAfterRestSiteTransitionAsync(serial);
+    }
+
+    private async Task ReapplyBgmBusMuteAfterRestSiteTransitionAsync(int serial)
+    {
+        try
+        {
+            SceneTree? tree = GetTree();
+            if (tree == null)
+            {
+                return;
+            }
+
+            for (int frame = 0; frame < 3; frame++)
+            {
+                await tree.ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+            }
+
+            if (serial != _restSiteMuteRestoreSerial || !IsCustomTrackActive())
+            {
+                _isBgmMuteSuspendedForRestSiteTransition = false;
+                return;
+            }
+
+            MuteBgmBusForCustomTrackIfNeeded();
+            _isBgmMuteSuspendedForRestSiteTransition = false;
+            ModSupport.LogInfo("Jukebox re-muted original BGM bus after rest site transition.");
+        }
+        catch (Exception ex)
+        {
+            _isBgmMuteSuspendedForRestSiteTransition = false;
+            ModSupport.LogError("Jukebox failed to re-mute original BGM bus after rest site transition: " + ex);
+        }
+    }
+
+    private bool IsCustomTrackActive()
+    {
+        return _player != null
+            && !string.IsNullOrEmpty(_activeTrackPath)
+            && _player.Stream != null
+            && _player.IsPlaying();
     }
 
     private void UpdatePlacement()
