@@ -1,60 +1,102 @@
 # 线程接班摘要
 
-本项目在做 STS2 本地 mod 加载链路验证，不是做功能 mod 开发。
+## 这条线程在做什么
 
-当前已经做到：
+当前接班对象不是加载链研究，也不是 `PrimalForceStrike`。
 
-- 工作区与游戏目录边界已固定。
-- macOS 本机已确认扫描 `SlayTheSpire2.app/Contents/MacOS/mods/`。
-- SmokeMod 已安装到该目录，而且最近一次游戏启动已经明确提示加载了我们的 mod。
-- 安装版 `SmokeMod.dll` / `SmokeMod.pck` 与工作区发布版 SHA-256 一致，可视为同一份发布产物。
-- 程序集与现有参考文件已确认存在内置 modding UI 线索：
-  - 设置页中的 `%ModdingButton`
-  - `OpenModdingScreen`
-  - `NModdingScreen`
-  - `NModMenuRow`
-  - `NModInfoContainer`
-  - `NConfirmModLoadingPopup`
-- `UnifiedSavePath` 已做过一轮 macOS 可行性检查：
-  - 本地 DLL 依赖 `sts2` 与 `0Harmony`
-  - 本机 `sts2.dll` 中存在 `UserDataPathProvider.IsRunningModded` 与 `GetProfileDir(int32)`
-  - 本机游戏运行时也自带 `0Harmony.dll`
-  - 但 2026-03-11 实机运行已确认当前发布版初始化失败
-  - 失败日志指向：Harmony patch `UserDataPathProvider::get_IsRunningModded()` 时抛 `System.NotImplementedException`
-  - Steam Cloud 也证明本次运行后仍在上传 `modded/profile1/...`
-- 已在工作区新增修正版：
-  - `mods/UnifiedSavePath/`
-  - 改用 `ModInitializerAttribute("Initialize")`
-  - 当前活动实现已不再依赖 Harmony patch
-  - 改为后台线程持续把 `UserDataPathProvider.IsRunningModded` 压回 `false`
-- 已补强 `shared/scripts/build-mod.sh`：
-  - 无 dotnet SDK 时优先走 `csc` + 游戏自带 .NET 9 运行库
-- 修正版已经安装到：
-  - `.../Contents/MacOS/mods/UnifiedSavePath/`
-- 旧公开版已移出 `mods/` 扫描目录，避免重复加载
-- 2026-03-11 21:25 的新日志已进一步确认：
-  - 连 `Harmony.Patch(GetProfileDir...)` 也会失败
-  - 所以当前判断已从“getter patch 失败”升级为“这台 macOS 主机上的 Harmony 动态 patch 普遍失败”
+当前接班对象是：
 
-当前最关键的问题：
+- `mods/Togawasakiko_in_Slay_the_Spire`
 
-- 游戏内到底能否直接看到内置 mod 列表 / mod 管理界面，以及当前无 Harmony workaround 版 `UnifiedSavePath` 是否已经绕开了这台 macOS 主机上的 patch 失败。
+线程目的不是重写角色，而是接着 T4 中断前的实现，把已经落仓的角色 mod 稳定下来。
 
-下一步该做：
+## 当前主判断
 
-- 先在游戏内直接找设置页或相关入口，确认 mod 列表 / mod 管理界面是否实际可见。
-- 如需隔离存档问题，可手动删除游戏目录中的 `.../Contents/MacOS/mods/SmokeMod/`，再重新进游戏观察存档是否恢复。
-- 如果决定试 `UnifiedSavePath`，先看 `docs/unified-save-path-macos-check.md`，按其中的备份与最小试用方案执行。
-- 当前应直接启动游戏，优先验证工作区修正版 `UnifiedSavePath` 的日志与写盘路径。
-- 不要再重复安装当前这个 `UnifiedSavePath` 发布版做“是否能统一存档”的验证；它已经在本机日志里明确失败。
-- 不要再回到 Harmony patch 方案空转；当前本机证据已经显示 `Harmony.Patch(...)` 本身也会失败。
-- 不要再把主要时间花在“是否识别到 mod”上；该问题当前已跨过。
+- 角色已经不是“只有骨架”的状态
+- 角色已接入、可构建、可安装、能被游戏识别
+- 首批与第二批歌曲牌、压力体系、starter、商店/火堆/能量接线都已经有真实代码
+- 当前最重要的工作不是扩内容，而是稳定运行时闭环
 
-接手时先看：
+## 已经踩过且必须记住的坑
 
-1. `AGENTS.md`
-2. `docs/current-status.md`
-3. `docs/next-task.md`
-4. `docs/decisions.md`
+### 1. 不要把 `Entry` 与本地化 key 写偏
 
-默认不要先通读旧日志；只有当前结论文档不够时，再去看 `docs/findings.md` 和原始日志。
+- `KillKiss` 的真实 `Entry` 是：
+  - `KILL_KISS`
+- 不是：
+  - `KILLKISS`
+- 一旦 key 偏了，坏掉的不只是单卡显示：
+  - 奖励
+  - 商店
+  - `Compose`
+  - 卡组遍历
+  都可能被污染
+
+### 2. 不要在静态初始化里绑高风险反射
+
+- 这轮真实发生过：
+  - `LoseHpInternal` 反射失败
+  - 连带让 `EnsureLocalizationOverrides()` 整体提前失败
+- 后果是：
+  - 明明源码里写了本地化字典
+  - 运行时却根本没写进 `user://localization_override`
+
+### 3. 不要把卡牌左上角大费用图和文本小 icon 混成一条链
+
+- `CardPoolModel.EnergyIconPath`
+  - 是卡牌左上角用的大图
+- `EnergyIconHelper.GetPath(prefix)`
+  - 是对白 / hover / 事件 / 说明文本里的小 icon
+- 之前把 helper 也指向大图，直接把整段文本排版挤坏
+
+### 4. 自定义角色会撞到原版只认内置角色的系统
+
+- 这轮 `KillKiss` 的最后残留 bug，不是伤害链本身没跑完
+- 真正根因是：
+  - `ProgressSaveManager.CheckFifteenElitesDefeatedEpoch`
+  - `ProgressSaveManager.CheckFifteenBossesDefeatedEpoch`
+  只认原版角色
+- 自定义角色走进去会抛：
+  - `ArgumentOutOfRangeException`
+
+### 5. 商店 scene 是高脆弱资源
+
+- merchant 出问题时，不是“立绘不显示”这么简单
+- 它会连带：
+  - 商品位异常
+  - 交互失效
+  - 房间流程无法结束
+- 当前 merchant 先采用原版 `silent` scene 回退，是为了保交互稳定
+
+### 6. build / install / 校验必须串行
+
+- 先 `build`
+- 再 `install`
+- 再做 release/install 哈希比对
+- 不要并行开着赌时序
+
+## 当前最有价值的经验文档
+
+下一线程建议优先看：
+
+1. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-implementation-status.md`
+2. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-bugfix-round-2026-03-27.md`
+3. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-lessons-and-guardrails.md`
+4. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-asset-integration-status.md`
+
+## 当前真实断点
+
+- `KillKiss` 的代码侧兼容 patch 已落地
+- 文本小能量 icon 的全局分流与缩小版资源已落地
+- 奖励 / 商店 / `Compose` 污染问题已有成体系修补
+- 下一线程最值得做的是：
+  - 系统回归测试
+  - merchant 正式 scene 策略判断
+  - 文档继续追平实机状态
+
+## 这一轮明确不要做的事
+
+- 不要从零重写角色框架
+- 不要回到“只读文档不看代码”或“只看代码不更新文档”
+- 不要继续把未验证推测写成事实
+- 不要在当前稳定性回归结束前继续大规模扩新牌

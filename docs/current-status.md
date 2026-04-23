@@ -1,155 +1,119 @@
 # 当前状态
 
-记录日期：2026-03-11
+记录日期：2026-03-30
+
+## 当前主线
+
+当前仓库主线已经不是 `PrimalForceStrike`。
+
+当前真正服务中的线程目标是：
+
+- 稳定 `mods/Togawasakiko_in_Slay_the_Spire`
+- 不重写 T4，而是接着中断前线程收口
+- 优先修运行时 bug、资源接线 bug、文档落后问题
+- 暂不扩更多新卡、机制或美术框架
 
 ## 当前阶段
 
-已从“猜测安装目录和 manifest 位置”进入“已成功触发 SmokeMod 加载提示，转向确认内置 mod 界面与存档影响”阶段。
+`Togawasakiko_in_Slay_the_Spire` 已经走过“纯骨架”阶段，进入：
 
-## 当前目标
+- 角色可编译、可安装、可被游戏识别的阶段
+- 已能进选人、进局、进入战斗的阶段
+- 已实现 starter、压力体系、首批与第二批歌曲牌的阶段
+- 当前主任务是“稳定首个可玩闭环”的阶段
 
-确认游戏内是否存在内置 mod 列表 / 管理界面入口，继续定位当前存档问题，并验证工作区修正版 `UnifiedSavePath` 是否能在 macOS 上成功完成 patch。
+当前状态应理解为：
+
+- 第一次可运行闭环已经打通
+- 但仍在做高风险运行时问题收口
+- 文档必须持续追平真实代码和安装状态
 
 ## 已确认
 
-- 本仓库是工作区，不是游戏安装目录；真实游戏路径以 `local/game-path.txt` 为准。
-- macOS 本机实际扫描到的 mod 目录是：
+- 本仓库是工作区，不是游戏安装目录。
+- 真实游戏路径仍以 `local/game-path.txt` 为准。
+- 当前游戏 mod 安装目录仍是：
   - `SlayTheSpire2.app/Contents/MacOS/mods/`
-- 当前游戏目录中已存在：
-  - `.../Contents/MacOS/mods/SmokeMod/SmokeMod.dll`
-  - `.../Contents/MacOS/mods/SmokeMod/SmokeMod.pck`
-- 本机最近一次启动中，游戏已经明确提示加载了我们的 `SmokeMod`。
-- 已安装版与工作区发布版的核心产物一致：
-  - `SmokeMod.dll` 文件名、大小、SHA-256 一致
-  - `SmokeMod.pck` 文件名、大小、SHA-256 一致
-- 工作区内两个 `mod_manifest.json` 一致：
-  - `mods/SmokeMod/manifest/mod_manifest.json`
-  - `mods/SmokeMod/pack/mod_manifest.json`
-- `local/tmp/sts2-arm64.il` 显示游戏会读取 `res://mod_manifest.json`，说明 manifest 关键位置在 PCK 内。
-- `mods/SmokeMod/exports/release/SmokeMod/` 当前只保留 `SmokeMod.dll` 与 `SmokeMod.pck`，已符合当前最小安装产物模型。
-- `local/tmp/sts2-arm64.il` 与现有结论文件中已能确认一组内置 modding UI 线索：
-  - `NOpenModdingScreenButton`
-  - `OpenModdingScreen`
-  - `NModdingScreen`
-  - `NModMenuRow`
-  - `NModInfoContainer`
-  - `NConfirmModLoadingPopup`
-- `NSettingsScreen::_Ready()` 中存在 `%ModdingButton`，并把该按钮绑定到 `OpenModdingScreen(...)`。
-- `NMainMenuSubmenuStack` 中可实例化 `NModdingScreen`，说明该屏幕不是孤立的命名残留。
-- `NModdingScreen` 中存在：
-  - `OnGetModsPressed`，会打开 Steam Workshop 页面
-  - `OnMakeModsPressed`，会打开官方 example-mod wiki
-  - `OnRowSelected` / `OnModEnabledOrDisabled`
-  - `NModInfoContainer::Fill(...)`，会展示 mod 名称、作者、版本、描述与 `mod_image.png`
-- 工作区已存在 `UnifiedSavePath` 下载产物：
-  - `mods/UnifiedSavePaths-6-1-0-1-1773016995/UnifiedSavePath.dll`
-  - `mods/UnifiedSavePaths-6-1-0-1-1773016995/UnifiedSavePath.pck`
-- `UnifiedSavePath.dll` 已确认引用：
-  - `sts2` `0.1.0.0`
-  - `0Harmony` `2.4.2.0`
-- 本机 macOS `sts2.dll` 中已确认存在：
-  - `MegaCrit.Sts2.Core.Saves.UserDataPathProvider`
-  - `get_IsRunningModded()`
-  - `set_IsRunningModded(bool)`
-  - `GetProfileDir(int32)`
-- 本机 macOS 游戏运行时已确认自带：
-  - `.../data_sts2_macos_arm64/0Harmony.dll`
-- 已新增专题结论：
-  - `docs/unified-save-path-macos-check.md`
-- 2026-03-11 实机日志已确认：
-  - `UnifiedSavePath.UnifiedSavePathMod` 初始化时抛出 Harmony patch 异常
-  - 失败点是 `UserDataPathProvider::get_IsRunningModded()`
-  - 内层异常为 `System.NotImplementedException`
-- 同一次运行中还出现：
-  - `res://UnifiedSavePath/mod_image.png` 缺失
-- Steam Cloud 记录显示本次退出仍然上传了：
-  - `modded/profile1/saves/progress.save`
-  - `modded/profile1/saves/prefs.save`
-  说明当前发布版 `UnifiedSavePath` 没有把写盘路径统一回 vanilla profile
-- 已在工作区新增修正版：
-  - `mods/UnifiedSavePath/`
-- 修正版实现已确认：
-  - 使用 `ModInitializerAttribute("Initialize")`
-  - 不再调用 `PatchAll()`
-  - 不再 patch `get_IsRunningModded()` / `set_IsRunningModded(bool)`
-  - 改为只手动 patch `UserDataPathProvider.GetProfileDir(int32)`
-- `shared/scripts/build-mod.sh` 已新增 csc fallback：
-  - 无 dotnet SDK 时，优先用 `csc` + 游戏自带 .NET 9 运行库编译
-- 修正版已构建成功，release 产物为：
-  - `mods/UnifiedSavePath/exports/release/UnifiedSavePath/UnifiedSavePath.dll`
-  - `mods/UnifiedSavePath/exports/release/UnifiedSavePath/UnifiedSavePath.pck`
-- 修正版已安装到游戏目录：
-  - `.../Contents/MacOS/mods/UnifiedSavePath/UnifiedSavePath.dll`
-  - `.../Contents/MacOS/mods/UnifiedSavePath/UnifiedSavePath.pck`
-- 原公开下载版已移出 `mods/` 扫描目录，避免与修正版并存加载。
-- 2026-03-11 21:25 新一轮实机日志已确认：
-  - 工作区首个修正版在 `Harmony.Patch(GetProfileDir...)` 上仍然失败
-  - 说明当前问题不是 `get_IsRunningModded()` 这一处 getter 特例，而是当前 macOS / Godot / .NET 9 主机中的 Harmony 动态 patch 本身不可用
-- 当前活动版 `UnifiedSavePath` 已切换为无 Harmony workaround：
-  - 不再依赖任何 Harmony patch
-  - 改为后台线程持续把 `UserDataPathProvider.IsRunningModded` 压回 `false`
-  - manifest 版本已更新到 `1.0.2`
+- 构建与安装应优先使用：
+  - `shared/scripts/build-mod.sh`
+  - `shared/scripts/install-mod.sh`
+- `Togawasakiko_in_Slay_the_Spire` 当前已经有稳定的 release 导出物：
+  - `dll`
+  - `pck`
+  - `mod_manifest.json`
+- 这条线程中已多次使用 release/install 哈希比对确认：
+  - 游戏目录内运行中的安装包与工作区 release 一致
+  - 不是“工作区修了但游戏目录还留旧包”
 
-## 高可能
+## 当前已落地的重要修复
 
-- 游戏内存在一个内置的 modding screen，并且入口很可能挂在设置界面中。
-- 该 modding screen 不只是静态列表，还包含启用/禁用 mod、查看 mod 详情、显示 pending changes warning 的管理逻辑。
-- 当前更值得优先验证的是“修正版 UnifiedSavePath 是否能成功初始化并把 profile 路径统一回非 modded 路径”。
-- `UnifiedSavePath` 的静态依赖与本机程序集能对上，但当前发布版在 macOS 上的 Harmony patch 实际失败。
-- 从本地 IL 看，`GetProfileDir(int32)` 就是当前 `modded/profileN` 分流的最小决定点，因此单点 patch 有直接证据支撑。
-- 当前更高可能的根因已经收敛为：
-  - 这台 macOS 主机上的 STS2/Godot 运行环境无法完成 Harmony 动态 detour
-  - 而不是只对某个目标方法签名不兼容
+- 奖励 / 商店 / `Compose` 坏牌污染：
+  - 已定位到本地化 override 整体失效与 `KILL_KISS` key 错位
+  - 已收口到“只允许已本地化、可见、非 starter/basics 的牌进入标准链路”
+- `Slander / Unendurable` rarity：
+  - 已改回 `Basic`
+  - 不再应进入正常战斗奖励池
+- 伤害 / 格挡修正链：
+  - 已统一对齐原版 `ValueProp.Move`
+- `CrucifixX`：
+  - 已按原版 `X` 费 AOE 思路修正
+- `SakiMovePlz`：
+  - 已通过 `ShouldGlowGoldInternal` 对齐原版条件高亮逻辑
+- `GodYouFool / STheWay`：
+  - 已改为对齐原版 `Bloodletting` 路线，不再走危险的私有反射扣血
+- `AveMujica`：
+  - 现已先判定顶牌能否打出，不能打出则改为入手
+- `KillKiss`：
+  - 已从过早的回合钩子挪走
+  - 又额外定位到一个更底层的胜利结算问题：
+    - 原版 `ProgressSaveManager` 的部分 epoch 统计只识别内置角色
+    - 自定义角色会抛 `ArgumentOutOfRangeException`
+  - 当前已新增 patch，对自定义角色跳过这些 base-game-only 统计
+- `Black Birthday` 与全局文本能量 icon：
+  - 已改回原版小尺寸 `energyIcons()` 文本链
+  - 且已把“卡牌左上角大 icon”与“文本小 icon”彻底分流
 
-## 待验证
+## 当前最重要的经验结论
 
-- 游戏内实际可见的 mod 列表入口位置：
-  - 是否稳定出现在设置页
-  - 是否还存在主菜单或其他入口
-- 当前运行中的 modding screen 是否能直接列出 `SmokeMod` 并展示详情。
-- mod 启用后导致的“存档问题”具体表现是什么：
-  - 存档无法继续
-  - 存档被标记 modded
-  - 联机 / 校验不通过
-  - 其他运行时副作用
-- 修正版 `UnifiedSavePath` 是否真的能在 macOS 上成功初始化，并让旧档恢复到同一路径，而不只是理论上消除 `modded/` 前缀。
-- 如果试装 `UnifiedSavePath`，其实际生效路径究竟落到：
-  - `steam/<id>/...`
-  - `default/<id>/...`
-  - 或其他候选路径
-- 修正版只 patch `GetProfileDir(int32)` 是否足以覆盖当前本机的实际存档问题。
-- 无 Harmony workaround 是否能在运行时足够早地把 `IsRunningModded` 压回 `false`，从而影响实际读档与写档路径。
+- 自定义角色 mod 默认要优先对齐原版对象模型，不要自发明新链路。
+- 任何卡牌进入奖励 / 商店 / `Compose` / console 前，都要先确认：
+  - `Entry`
+  - 本地化 key
+  - pool
+  - rarity
+  - 是否应该显示在图鉴
+- `Slugify(type.Name)` 生成的 `Entry` 必须和本地化 key 严格一致。
+  - `KillKiss -> KILL_KISS` 是这轮最典型的实战坑。
+- 静态初始化不要绑高风险反射。
+  - 一旦静态构造炸掉，整套 `localization_override` 都可能没写进去。
+- 原版里有一批“只认内置角色”的系统。
+  - 自定义角色进入这些分支前，要么 patch，要么显式避开。
+- 文本中的 icon 与卡牌左上角费用图不是同一条资源链。
+  - 一个给 `CardPoolModel.EnergyIconPath`
+  - 一个给 `EnergyIconHelper.GetPath(prefix)`
+- 商店 scene 是高脆弱点。
+  - 不满足原版节点契约时，问题不只是“立绘不显示”，而是整间商店都可能半坏。
+- 构建与安装不要并行赌时序。
+  - 必须先 build 完，再 install，再做哈希核对。
 
-## 当前阻塞
+## 当前仍待复测 / 待收口
 
-- 当前缺的是一次对游戏内 mod 列表 / 管理界面的直接可见性验证，以及一次对修正版 `UnifiedSavePath` 的实机运行验证。
-- 当前还没有完成“移除安装版 SmokeMod 后重新进游戏，观察存档是否恢复”的人工回归验证。
-- 工作区结论文档仍然保留一部分以 consent gate 为中心的旧叙事，需要切换到新主线。
-- `UnifiedSavePath` 作者只公开确认了 Windows + 单人测试范围，而当前公开发布版已经在本机 macOS 上触发 Harmony patch 异常。
-- 当前还没有完成对 `1.0.2` 无 Harmony workaround 版本的实机验证。
+- `KillKiss` 击杀最后一只怪后，是否已彻底不再卡奖励结算
+- 全局文本中的祥子能量小 icon 是否已恢复到原版观感
+- merchant 目前虽已恢复交互，但角色立绘仍是回退方案，不是正式专属 scene
+- 仍需要一次成体系的回归测试，覆盖：
+  - 普通奖励
+  - 商店
+  - 火堆
+  - `Compose`
+  - 第二批歌曲牌
 
-## 最近完成
+## 下一线程先读什么
 
-- 已确认安装目录应为 `Contents/MacOS/mods/`，并已体现在安装脚本中。
-- 已把 `mod_manifest.json` 打进 SmokeMod 的 PCK 打包源。
-- 已将 SmokeMod release 收敛到 DLL + PCK 两个核心产物。
-- 已确认游戏最近一次启动已明确提示加载 `SmokeMod`。
-- 已确认安装版 `SmokeMod.dll` / `SmokeMod.pck` 与工作区发布版完全一致。
-- 已从程序集与现有参考文件中进一步确认游戏内部存在 modding screen、mod 行项、mod 信息面板、确认弹窗和外链按钮。
-- 已完成 `UnifiedSavePath` 的本地二进制与 macOS 程序集对照，确认其 patch 目标在本机版本中存在。
-- 已通过 macOS unified logging 确认 `UnifiedSavePath` 当前发布版初始化失败，根因落在 Harmony patch `get_IsRunningModded()`。
-- 已在工作区实现一个更保守的 `UnifiedSavePath` 修正版，改为手动 patch `GetProfileDir(int32)`。
-- 已把 `csc` + 游戏自带 .NET 9 运行库的编译 fallback 补入 `shared/scripts/build-mod.sh`。
-- 已构建并安装修正版 `UnifiedSavePath`，等待下一次游戏启动验证运行结果。
-- 已通过新一轮实机日志确认：`Harmony.Patch(GetProfileDir...)` 也会失败。
-- 已把当前活动修正版改成无 Harmony workaround，并重新构建安装。
-
-## 下一步依赖
-
-- 在游戏内直接确认 mod 列表 / 管理界面的可见入口与实际显示效果。
-- 如需隔离存档问题，可先手动删除游戏目录中的已安装 `SmokeMod`，再重新进游戏检查存档是否恢复。
-- 下一步应先启动游戏，读取新日志，确认无 Harmony workaround 是否成功运行且不再报 mod initializer 异常。
-- 同时检查：
-  - 是否仍然写入 `modded/profile1/...`
-  - 旧 vanilla 档是否恢复可见
-- 继续统一接班文件，避免新线程再回到“是否识别 mod”这一已跨过的问题。
+1. `AGENTS.md`
+2. `docs/current-status.md`
+3. `docs/next-task.md`
+4. `docs/thread-handoff.md`
+5. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-implementation-status.md`
+6. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-bugfix-round-2026-03-27.md`
+7. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-lessons-and-guardrails.md`
