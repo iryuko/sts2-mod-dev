@@ -73,7 +73,7 @@ internal sealed class AveMujica : TogawasakikoCard, ISongCard
 
 internal sealed class AWonderfulWorldYetNowhereToBeFound : TogawasakikoCard, ISongCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<MirrorFlowerWaterMoonPower>() };
 
     public AWonderfulWorldYetNowhereToBeFound()
@@ -110,7 +110,7 @@ internal sealed class AWonderfulWorldYetNowhereToBeFound : TogawasakikoCard, ISo
 
 internal sealed class Angles : TogawasakikoCard, ISongCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<InferiorityPower>(),
@@ -252,7 +252,7 @@ internal sealed class SymbolI : TogawasakikoCard, ISongCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(3m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SymbolIPower>() };
 
     public SymbolI()
@@ -296,7 +296,7 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(6m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SymbolIIPower>() };
 
     public SymbolIi()
@@ -348,7 +348,7 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { _blockVar };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SymbolIIIPower>() };
 
     public SymbolIii()
@@ -394,7 +394,7 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
 
 internal sealed class SymbolIv : TogawasakikoCard, ISongCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SymbolIVPower>() };
 
     public SymbolIv()
@@ -661,7 +661,7 @@ internal sealed class BlackBirthday : TogawasakikoCard, ISongCard
 
 internal sealed class TreasurePleasure : TogawasakikoCard, ISongCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<PersonaDissociationPower>(),
@@ -960,7 +960,7 @@ internal sealed class Sophie : TogawasakikoCard, ISongCard
 {
     public override bool GainsBlock => true;
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<InferiorityPower>() };
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>

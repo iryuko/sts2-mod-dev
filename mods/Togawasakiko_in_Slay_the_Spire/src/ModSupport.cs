@@ -110,6 +110,15 @@ internal static class ModSupport
         return HoverTipFactory.FromCard(ModelDb.Card<TCard>(), false);
     }
 
+    public static bool CardMentionsPressure(CardModel card)
+    {
+        string descriptionKey = card.Id.Entry + ".description";
+        return CardLocEntries.Values.Any(languageEntries =>
+            languageEntries.TryGetValue(descriptionKey, out string? description)
+            && (description.Contains("Pressure", StringComparison.OrdinalIgnoreCase)
+                || description.Contains("压力", StringComparison.Ordinal)));
+    }
+
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         WriteIndented = true
@@ -249,7 +258,7 @@ internal static class ModSupport
                 ["KILLKISS.title"] = "KillKiss",
                 ["KILLKISS.description"] = "At the start of the enemy turn, deal {IfUpgraded:show:damage equal to its Max HP|[blue]25[/blue] damage} to each enemy whose Pressure is greater than half its current HP.",
                 ["PERSONA_DISSOCIATION.title"] = "Persona Dissociation",
-                ["PERSONA_DISSOCIATION.description"] = "Apply Persona Dissociation. Ethereal. Exhaust.",
+                ["PERSONA_DISSOCIATION.description"] = "Apply [blue]1[/blue] Persona Dissociation.",
                 ["SOCIAL_WITHDRAWAL.title"] = "Social Withdrawal",
                 ["SOCIAL_WITHDRAWAL.description"] = "Apply 3 Social Withdrawal. Exhaust.",
                 ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.title"] = "All You Think About Is Yourself",
@@ -375,7 +384,7 @@ internal static class ModSupport
                 ["KILLKISS.title"] = "KillKiss",
                 ["KILLKISS.description"] = "怪物回合开始时，若其压力层数严格大于其当前剩余生命值的一半，则对其造成{IfUpgraded:show:等同于其最大生命值的伤害|[blue]25[/blue]点伤害}。",
                 ["PERSONA_DISSOCIATION.title"] = "人格解离",
-                ["PERSONA_DISSOCIATION.description"] = "施加人格解离。虚无。消耗。",
+                ["PERSONA_DISSOCIATION.description"] = "施加1层人格解离",
                 ["SOCIAL_WITHDRAWAL.title"] = "自闭",
                 ["SOCIAL_WITHDRAWAL.description"] = "施加3层自闭。消耗。",
                 ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.title"] = "满脑子都想着自己",
@@ -411,7 +420,7 @@ internal static class ModSupport
             ["eng"] = new Dictionary<string, string>
             {
                 ["PRESSURE_POWER.title"] = "Pressure",
-                ["PRESSURE_POWER.description"] = "They feel like they can't breathe... Pressure has no inherent effect and is spent by cards or debuffs.",
+                ["PRESSURE_POWER.description"] = "他们感觉喘不过气...",
                 ["SAKIKO_DESPAIR_ECHO_POWER.title"] = "Despair Echo",
                 ["SAKIKO_DESPAIR_ECHO_POWER.description"] = "This turn, whenever this creature takes damage, it gains [blue]3[/blue] Pressure per stack.",
                 ["PERSONA_DISSOCIATION_POWER.title"] = "Persona Dissociation",
@@ -452,7 +461,7 @@ internal static class ModSupport
             ["zhs"] = new Dictionary<string, string>
             {
                 ["PRESSURE_POWER.title"] = "压力",
-                ["PRESSURE_POWER.description"] = "他们感觉到喘不过气……压力本身没有基础效果，只会被牌效或其他 debuff 消耗并兑换为衍生牌。",
+                ["PRESSURE_POWER.description"] = "他们感觉喘不过气...",
                 ["SAKIKO_DESPAIR_ECHO_POWER.title"] = "绝望回响",
                 ["SAKIKO_DESPAIR_ECHO_POWER.description"] = "本回合内，每当该生物受到伤害时，都会按层数额外获得每层[blue]3[/blue]层压力。",
                 ["PERSONA_DISSOCIATION_POWER.title"] = "人格解离",

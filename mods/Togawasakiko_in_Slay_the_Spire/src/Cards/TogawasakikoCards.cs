@@ -42,6 +42,24 @@ internal abstract class TogawasakikoCard : CardModel
     public override CardPoolModel Pool => ModelDb.CardPool<TogawasakikoCardPool>();
 
     public override CardPoolModel VisualCardPool => ModelDb.CardPool<TogawasakikoCardPool>();
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips
+    {
+        get
+        {
+            foreach (IHoverTip hoverTip in ManualExtraHoverTips)
+            {
+                yield return hoverTip;
+            }
+
+            if (ModSupport.CardMentionsPressure(this))
+            {
+                yield return ModSupport.CreatePowerHoverTip<PressurePower>();
+            }
+        }
+    }
+
+    protected virtual IEnumerable<IHoverTip> ManualExtraHoverTips => Array.Empty<IHoverTip>();
 }
 
 internal abstract class TogawasakikoEventGrantedCard : TogawasakikoCard
@@ -284,7 +302,7 @@ internal sealed class Speak : TogawasakikoCard
             ? new[] { CardKeyword.Exhaust, CardKeyword.Innate }
             : new[] { CardKeyword.Exhaust };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreateCardHoverTip<PersonaDissociation>() };
 
     public Speak()
@@ -335,7 +353,7 @@ internal sealed class RestorationOfPower : TogawasakikoCard
 
 internal sealed class PutOnYourMask : TogawasakikoCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<WeakPower>(),
@@ -565,7 +583,7 @@ internal sealed class Notebook : TogawasakikoCard
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         IsUpgraded ? new[] { CardKeyword.Retain } : Array.Empty<CardKeyword>();
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SocialWithdrawalPower>() };
 
     public Notebook()
@@ -598,7 +616,7 @@ internal sealed class LeaveItToMe : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(11m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<WeakPower>() };
 
     public LeaveItToMe()
@@ -646,7 +664,7 @@ internal sealed class DawnOfDespair : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(2m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SakikoDespairEchoPower>() };
 
     public DawnOfDespair()
@@ -688,7 +706,7 @@ internal sealed class BarkingBarkingBarking : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(8m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<RegenPower>() };
 
     public override CardPoolModel Pool => ModelDb.CardPool<TogawasakikoRelicGrantedCardPool>();
@@ -726,7 +744,7 @@ internal sealed class BailMoney : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(8m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<DexterityPower>() };
 
     public BailMoney()
@@ -764,7 +782,7 @@ internal sealed class WeightliftingChampion : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new DynamicVar[] { new HpLossVar(4m) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<StrengthPower>(),
@@ -799,7 +817,7 @@ internal sealed class Housewarming : TogawasakikoCard
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         Array.Empty<CardKeyword>();
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreateCardHoverTip<BarkingBarkingBarking>() };
 
     public Housewarming()
@@ -840,7 +858,7 @@ internal sealed class PullmanCrash : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(49m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<VulnerablePower>() };
 
     public override CardPoolModel Pool => ModelDb.CardPool<TogawasakikoRelicGrantedCardPool>();
@@ -925,7 +943,7 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
     protected override IEnumerable<DynamicVar> CanonicalVars =>
         new[] { new DamageVar(12m, ValueProp.Move) };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<VulnerablePower>(),
@@ -985,7 +1003,7 @@ internal sealed class Fragility : TogawasakikoCard
             new HealVar(8m)
         };
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<FaceReactionPower>() };
 
     public Fragility()
@@ -1137,7 +1155,7 @@ internal sealed class ShadowOfThePastIII : ShadowOfThePastCard
 
 internal sealed class Innocence : TogawasakikoCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
             ModSupport.CreatePowerHoverTip<InnocencePower>(),
@@ -1180,7 +1198,7 @@ internal abstract class GeneratedPressureCard : TogawasakikoCard
 
 internal sealed class PersonaDissociation : GeneratedPressureCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<PersonaDissociationPower>() };
 
     public PersonaDissociation()
@@ -1202,7 +1220,7 @@ internal sealed class PersonaDissociation : GeneratedPressureCard
 
 internal sealed class SocialWithdrawal : GeneratedPressureCard
 {
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SocialWithdrawalPower>() };
 
     public SocialWithdrawal()
