@@ -1,0 +1,12 @@
+{
+  "id": "Togawasakiko_in_Slay_the_Spire",
+  "pck_name": "Togawasakiko_in_Slay_the_Spire",
+  "name": "Togawasakiko in Slay the Spire",
+  "author": "user",
+  "description": "Adds a playable Togawa Sakiko character with Pressure, starter relic and deck, song cards, generated pressure cards, custom scenes/icons, and localization overrides.",
+  "version": "0.2.1",
+  "has_pck": true,
+  "has_dll": true,
+  "dependencies": [],
+  "affects_gameplay": true
+}

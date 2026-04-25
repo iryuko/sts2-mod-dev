@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://images/ui/transitions/ironclad_transition.png" id="1_transition"]
+
+[sub_resource type="Shader" id="Shader_transition"]
+code = "shader_type canvas_item;\n\nuniform sampler2D transitionTex;\nuniform float threshold : hint_range(0,1);\n\nvoid fragment() {\n    float falloff = 1.0 - texture(transitionTex, UV).r;\n    float remap = mix(-0.1, 1.1, threshold);\n    falloff = step(falloff, remap);\n    COLOR.a = falloff;\n}\n"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource("Shader_transition")
+shader_parameter/threshold = 0.332
+shader_parameter/transitionTex = ExtResource("1_transition")

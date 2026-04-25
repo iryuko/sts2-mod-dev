@@ -1,0 +1,4 @@
+.build/
+pack/.godot/
+.DS_Store
+.Rhistory
