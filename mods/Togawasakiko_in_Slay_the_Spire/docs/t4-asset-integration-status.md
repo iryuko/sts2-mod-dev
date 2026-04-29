@@ -37,6 +37,7 @@
 | starter relic 图 | `assets/relics/starter/doll_mask.png` | `pack/images/relics/doll_mask.png` | 已接入且文件存在 | 使用正式资源 |
 | ancient relic 图 | `assets/relics/ancient/best_companion.png` | `pack/images/relics/best_companion.png` | 已接入且文件存在 | 2026-04-03 已由 `incoming_assets/relics/ancient/` 更新 |
 | ancient relic 图 | `assets/relics/ancient/black_limousine.png` | `pack/images/relics/black_limousine.png` | 已接入且文件存在 | 2026-04-04 已由中文来稿 `黑色高级车.png` 对齐替换 |
+| ancient relic 图 | `assets/relics/ancient/piano_of_mom.png` | `pack/images/relics/piano_of_mom.png` | 已接入且文件存在 | 2026-04-26 已由来稿 `incoming_assets/relics/ancient/Piano_of_mom.png` 缩放对齐替换；当前尺寸 `256x256` |
 
 ### 2. runtime scene / atlas
 
@@ -50,6 +51,8 @@
 | 费用图标 atlas | `pack/images/atlases/ui_atlas.sprites/card/energy_togawasakiko.tres` | 已接入且文件存在 | 已有实际贴图文件可供引用 |
 | starter relic atlas | `pack/images/atlases/relic_atlas.sprites/doll_mask.tres` | 已接入且文件存在 | 当前用单图 `AtlasTexture` 占位 |
 | starter relic outline atlas | `pack/images/atlases/relic_outline_atlas.sprites/doll_mask.tres` | 已接入且文件存在 | 当前用同图占位 |
+| ancient relic atlas | `pack/images/atlases/relic_atlas.sprites/piano_of_mom.tres` | 已接入且文件存在 | 2026-04-26 已新增，当前引用 `pack/images/relics/piano_of_mom.png` |
+| ancient relic outline atlas | `pack/images/atlases/relic_outline_atlas.sprites/piano_of_mom.tres` | 已接入且文件存在 | 2026-04-26 已新增，当前引用 `pack/images/relics/piano_of_mom.png` |
 | transition material | `pack/materials/transitions/togawasakiko_transition_mat.tres` | 已接入且文件存在 | 当前引用原版 transition 贴图作最小占位 |
 
 ## 三 已接入但当前仍是占位
@@ -209,8 +212,8 @@
 | 先古之民事件主图来稿 | `incoming_assets/ancients/event_main/丰川定治.png` | 已复制进入 runtime，原来稿仍保留 | 尺寸 `2560x1244`；当前已整理进 `assets/ancients/event_main/togawa_teiji.png`，并同步进入 `pack/images/events/togawa_teiji.png` |
 | 先古之民地图节点原型 | `assets/ancients/map_nodes/ancient_map_node_prototype.png` | 已入库存，且当前已复制出 runtime 占位版本 | 当前仍是原型资源来源 |
 | 先古之民地图节点 outline 原型 | `assets/ancients/map_nodes/ancient_map_node_prototype_outline.png` | 已入库存，且当前已复制出 runtime 占位版本 | 同上 |
-| 丰川定治地图节点 runtime 占位 | `assets/ancients/map_nodes/togawa_teiji_map_node.png` | `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png` | 已接入但仍是占位 | 当前复制 `prototype` 图用于 ancient runtime |
-| 丰川定治地图节点 outline runtime 占位 | `assets/ancients/map_nodes/togawa_teiji_map_node_outline.png` | `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node_outline.png` | 已接入但仍是占位 | 当前复制 `prototype outline` 图用于 ancient runtime |
+| 丰川定治地图节点 runtime 占位 | `assets/ancients/map_nodes/togawa_teiji_map_node.png` | `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png` | 已接入但仍是占位 | 当前复制 `prototype` 图用于 ancient runtime；这是唯一 canonical runtime 路径，旧重复路径 `pack/images/packed/map/ancients/ancient_node_togawa_teiji.png` 已停用 |
+| 丰川定治地图节点 outline runtime 占位 | `assets/ancients/map_nodes/togawa_teiji_map_node_outline.png` | `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node_outline.png` | 已接入但仍是占位 | 当前复制 `prototype outline` 图用于 ancient runtime；这是唯一 canonical runtime 路径，旧重复路径 `pack/images/packed/map/ancients/ancient_node_togawa_teiji_outline.png` 已停用 |
 | 丰川定治对话头像 | `assets/ancients/dialogue_icons/togawa_teiji.png` | 已入正式库，runtime 已同步 | 当前与 `incoming_assets/ancients/dialogue_icon/丰川定治.png` 一致；runtime 位于 `pack/images/ui/run_history/togawa_teiji.png` |
 | 丰川定治对话头像 outline | `assets/ancients/dialogue_icons/togawa_teiji_outline.png` | 已入正式库，runtime 已同步 | 当前与 `incoming_assets/ancients/dialogue_icon_outline/丰川定治.png` 一致；runtime 位于 `pack/images/ui/run_history/togawa_teiji_outline.png` |
 

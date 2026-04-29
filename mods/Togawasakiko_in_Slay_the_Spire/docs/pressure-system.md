@@ -21,6 +21,46 @@
 - 压力只会被各种牌效与 debuff 消耗，然后兑换压力衍生牌。
 - 单体敌人独立计算，不做全场共享。
 
+## 二点五 联机模式下的压力归属
+
+2026-04-28 冻结结论：
+
+- 压力是目标身上的共享 debuff，不按 Sakiko 玩家分池。
+- 同一个敌人身上只维护一份 `PressurePower` 层数。
+- 多个 Sakiko 对同一个敌人施加压力时，层数叠加到同一个 `PressurePower.Amount`。
+- 任意 Sakiko 的卡牌读取压力时，读取该目标当前总压力。
+- 任意 Sakiko 的卡牌消耗压力时，也从该目标当前总压力中扣除。
+- 当前不记录“每一层压力由哪个玩家施加”，也不做 per-player ownership。
+
+当前代码依据：
+
+- `ModSupport.ApplyPressure(...)` 直接调用 `PowerCmd.Apply<PressurePower>(target, ...)`。
+- `ModSupport.GetPressure(...)` 只读取目标身上的第一份 `PressurePower.Amount`。
+- `ModSupport.TryConsumePressure(...)` 只从目标身上的第一份 `PressurePower` 扣层数。
+- `PressurePower` 本身是 `PowerStackType.Counter`，没有保存施加者分账字段。
+- `DollMask.AfterPlayerTurnStart(...)` 只限制 relic owner 触发，但施加后的压力仍进入敌人的共享压力池。
+
+示例：
+
+- Sakiko A 对敌人施加 `3` 层压力。
+- Sakiko B 对同一敌人施加 `2` 层压力。
+- 该敌人显示与结算的压力为 `5`。
+- A 与 B 后续牌效都会按 `5` 层压力读取。
+- A 或 B 任一方触发压力消耗时，都会从这 `5` 层共享压力中扣除。
+
+设计含义：
+
+- 压力文本应描述为“目标的压力”或“敌人的压力”。
+- 不应把牌效写成“你的压力”或暗示压力属于某一名 Sakiko。
+- 压力衍生牌的获得者仍由具体触发牌 / 触发者决定；压力层数本身不携带贡献归属。
+
+若未来要改为“每个 Sakiko 独立压力池”，需要整体重构：
+
+- `ApplyPressure / GetPressure / TryConsumePressure` 都必须增加 owner 语义。
+- UI 需要能区分不同 Sakiko 的压力来源或合并显示规则。
+- 所有压力读取、消耗、衍生牌兑换、relic 与 power 触发都要逐一改成 owner-aware。
+- 该方案不再贴近原版 power 叠层模型，首版不采用。
+
 ## 三 当前推荐的系统理解
 
 现阶段应把压力理解成：

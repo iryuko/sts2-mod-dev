@@ -371,6 +371,7 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
         {
             AssertMutable();
             _currentBlock = value;
+            DynamicVars.Block.BaseValue = _currentBlock;
         }
     }
 
@@ -398,7 +399,6 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
     public SymbolIii()
         : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.Self, ModSupport.GetNormalUncommonPortraitPath("symbol_iii.png"))
     {
-        RefreshDisplayedBlock();
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -409,7 +409,9 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        BuffFromPlay(DynamicVars["Increase"].IntValue);
+        int extraBlock = DynamicVars["Increase"].IntValue;
+        BuffFromPlay(extraBlock);
+        (DeckVersion as SymbolIii)?.BuffFromPlay(extraBlock);
         await PowerCmd.Apply<SymbolIIIPower>(Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
@@ -433,15 +435,6 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
     private void UpdateBlock()
     {
         CurrentBlock = (IsUpgraded ? 7 : 3) + IncreasedBlock;
-        DynamicVars.Block.BaseValue = CurrentBlock;
-        RefreshDisplayedBlock();
-    }
-
-    private void RefreshDisplayedBlock()
-    {
-        decimal currentBlock = DynamicVars.Block.BaseValue;
-        DynamicVars.Block.PreviewValue = currentBlock;
-        DynamicVars.Block.EnchantedValue = currentBlock;
     }
 }
 

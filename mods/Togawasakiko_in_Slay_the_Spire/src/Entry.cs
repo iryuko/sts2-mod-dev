@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves.Runs;
 
 namespace Togawasakiko_in_Slay_the_Spire;
 
@@ -31,6 +32,7 @@ public static class TogawasakikoMod
 
         ModSupport.EnsureLocalizationOverrides();
         new Harmony(HarmonyId).PatchAll();
+        RegisterSavedPropertyTypes();
 
         ModHelper.AddModelToPool<TokenCardPool, PersonaDissociation>();
         ModHelper.AddModelToPool<TokenCardPool, SocialWithdrawal>();
@@ -44,11 +46,21 @@ public static class TogawasakikoMod
         ModHelper.AddModelToPool<TogawasakikoAncientRelicPool, BestCompanion>();
         ModHelper.AddModelToPool<TogawasakikoAncientRelicPool, BlackLimousine>();
         ModHelper.AddModelToPool<TogawasakikoSpecialRelicPool, UpgradedDollMask>();
+        ModHelper.AddModelToPool<TogawasakikoSpecialRelicPool, PianoOfMom>();
 
         RunManager.Instance.RunStarted += OnRunStarted;
         RunManager.Instance.RoomEntered += OnRoomEntered;
-
         ModSupport.LogInfo("Registered token/special cards, ancient relic stubs, character-list patch, localization overrides, and runtime hooks.");
+    }
+
+    private static void RegisterSavedPropertyTypes()
+    {
+        SavedPropertiesTypeCache.InjectTypeIntoCache(typeof(SymbolIii));
+        SavedPropertiesTypeCache.InjectTypeIntoCache(typeof(ShadowOfThePastI));
+        SavedPropertiesTypeCache.InjectTypeIntoCache(typeof(ShadowOfThePastII));
+        SavedPropertiesTypeCache.InjectTypeIntoCache(typeof(ShadowOfThePastIII));
+
+        ModSupport.LogInfo("Registered mod card saved-property types.");
     }
 
     private static void InstallCharacterSelectInjector()
@@ -124,28 +136,6 @@ public static class TogawasakikoMod
         }
 
         JukeboxRunInjector.HandleRoomEntered(runState?.CurrentRoom);
-
-        if (runState?.CurrentRoom is not CombatRoom)
-        {
-            return;
-        }
-
-        Creature? creature = player?.Creature;
-        if (player == null || creature == null || player.Character is not Togawasakiko)
-        {
-            return;
-        }
-
-        TogawasakikoCombatWatcherPower? watcher = creature.Powers.OfType<TogawasakikoCombatWatcherPower>().FirstOrDefault();
-        if (watcher != null)
-        {
-            watcher.ResetCombatState();
-            ModSupport.ClearPersistedTwoMoonsCostModifiers(player);
-            ModSupport.LogInfo("Reset combat watcher state for new combat.");
-            return;
-        }
-
-        _ = ApplyCombatWatcherAsync(creature, player);
     }
 
     private static void SanitizeShadowCards(RunState runState, Player player)
@@ -200,25 +190,6 @@ public static class TogawasakikoMod
         }
 
         return freshShadow;
-    }
-
-    private static async Task ApplyCombatWatcherAsync(Creature creature, Player player)
-    {
-        try
-        {
-            await MegaCrit.Sts2.Core.Commands.PowerCmd.Apply<TogawasakikoCombatWatcherPower>(
-                creature,
-                1m,
-                creature,
-                null,
-                true);
-            ModSupport.ClearPersistedTwoMoonsCostModifiers(player);
-            ModSupport.LogInfo("Applied combat watcher power.");
-        }
-        catch (Exception ex)
-        {
-            ModSupport.LogError("Failed to apply combat watcher power: " + ex);
-        }
     }
 
     public static Player? GetLocalPlayer(RunState? runState)

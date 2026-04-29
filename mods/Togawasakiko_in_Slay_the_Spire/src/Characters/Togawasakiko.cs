@@ -423,7 +423,8 @@ internal sealed class TogawasakikoSpecialRelicPool : RelicPoolModel
     {
         return new RelicModel[]
         {
-            ModelDb.Relic<UpgradedDollMask>()
+            ModelDb.Relic<UpgradedDollMask>(),
+            ModelDb.Relic<PianoOfMom>()
         };
     }
 }

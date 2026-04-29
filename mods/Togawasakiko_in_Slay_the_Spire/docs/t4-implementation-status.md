@@ -720,6 +720,9 @@
 - 丰川定治地图节点当前已用 prototype 复制出 runtime 占位：
   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png`
   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node_outline.png`
+- 2026-04-26 资源整理：
+  - 上述 `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node*` 已确认为唯一 canonical runtime 路径。
+  - 已删除内容完全重复的旧路径 `pack/images/packed/map/ancients/ancient_node_togawa_teiji*` 及其 import/runtime_imports 缓存，避免 Godot UID duplicate warning。
 
 当前明确未做：
 

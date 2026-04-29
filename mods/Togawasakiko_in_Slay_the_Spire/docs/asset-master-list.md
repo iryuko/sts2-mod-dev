@@ -161,6 +161,7 @@ song 牌不单开另一套卡图目录。
 | starter relic 升级态图 | `assets/relics/starter/upgraded_doll_mask.png` | 已建立独立正式文件位，当前仍复用 `doll_mask` 视觉 |
 | 先古之民 relic 图 | `assets/relics/ancient/best_companion.png` | 已入正式库 |
 | 先古之民 relic 图 | `assets/relics/ancient/black_limousine.png` | 已入正式库 |
+| 先古之民 relic 图 | `assets/relics/ancient/piano_of_mom.png` | 已入正式库 |
 | relic 附带入组卡图 | `assets/cards/relic_granted/barking_barking_barking.png` | 已入正式库 |
 | relic 附带入组卡图 | `assets/cards/relic_granted/pullman_crash.png` | 已入正式库 |
 | event-only 长期牌卡图 | `assets/cards/event_granted/shadow_of_the_past_i.png` | 已入正式库 |

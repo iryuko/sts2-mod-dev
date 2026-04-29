@@ -16,10 +16,12 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Characters;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.MonsterMoves.Intents;
@@ -68,7 +70,6 @@ internal static class ModSupport
         "SOPHIE"
     };
 
-    private static MethodInfo? _loseHpInternalMethod;
     private static AudioStream? _shadowEventMusicStream;
     private static AudioStreamPlayer? _shadowEventMusicPlayer;
     private static readonly FieldInfo? CardEnergyCostLocalModifiersField =
@@ -515,6 +516,9 @@ internal static class ModSupport
                 ["UPGRADED_DOLL_MASK.title"] = "Dollmusk Plus",
                 ["UPGRADED_DOLL_MASK.description"] = "At the start of your turn, apply [b][blue]3[/blue][/b] [b][gold]Pressure[/gold][/b] to all enemies.",
                 ["UPGRADED_DOLL_MASK.flavor"] = "A mask that no longer bothers to whisper.",
+                ["PIANO_OF_MOM.title"] = "Piano of Mom",
+                ["PIANO_OF_MOM.description"] = "At the start of each combat, add 1 random upgraded Song card to your hand.",
+                ["PIANO_OF_MOM.flavor"] = "The first sound that taught her what silence costs.",
                 ["BEST_COMPANION.title"] = "Best Companion(?)",
                 ["BEST_COMPANION.description"] = "Upon pickup, add [gold]Barking Barking Barking[/gold] to your deck.",
                 ["BEST_COMPANION.flavor"] = "A relic stub for Togawa Teiji's future ancient event.",
@@ -530,6 +534,9 @@ internal static class ModSupport
                 ["UPGRADED_DOLL_MASK.title"] = "人偶的假面Plus",
                 ["UPGRADED_DOLL_MASK.description"] = "在你的回合开始时，给予所有敌人[b][blue]3[/blue][/b]层[b][gold]压力[/gold][/b]。",
                 ["UPGRADED_DOLL_MASK.flavor"] = "它不再掩饰任何恶意。",
+                ["PIANO_OF_MOM.title"] = "妈妈的钢琴",
+                ["PIANO_OF_MOM.description"] = "每场战斗开始时，随机将1张升级后的歌曲牌加入手牌。",
+                ["PIANO_OF_MOM.flavor"] = "最初教会她沉默代价的声音。",
                 ["BEST_COMPANION.title"] = "最好的伙伴(?",
                 ["BEST_COMPANION.description"] = "获得时，将[gold]大狗大狗叫叫叫[/gold]加入你的牌组。",
                 ["BEST_COMPANION.flavor"] = "用于丰川定治先古之民事件的 relic 占位实现。",
@@ -585,6 +592,19 @@ internal static class ModSupport
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-3.ancient"] = "唉……拿上这些，继续走吧",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.title"] = "继续演出吧",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.description"] = "获得[gold]1000[/gold]金币。"
+            }
+        };
+
+    private static readonly IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> CardLibraryLocEntries =
+        new Dictionary<string, IReadOnlyDictionary<string, string>>
+        {
+            ["eng"] = new Dictionary<string, string>
+            {
+                ["POOL_TOGAWASAKIKO_TIP"] = "Togawa Sakiko cards."
+            },
+            ["zhs"] = new Dictionary<string, string>
+            {
+                ["POOL_TOGAWASAKIKO_TIP"] = "丰川祥子的卡牌。"
             }
         };
 
@@ -670,6 +690,8 @@ internal static class ModSupport
             changed |= UpsertLocalizationTable("zhs", "ancients", AncientLocEntries["zhs"]);
             changed |= UpsertLocalizationTable("eng", "events", EventLocEntries["eng"]);
             changed |= UpsertLocalizationTable("zhs", "events", EventLocEntries["zhs"]);
+            changed |= UpsertLocalizationTable("eng", "card_library", CardLibraryLocEntries["eng"]);
+            changed |= UpsertLocalizationTable("zhs", "card_library", CardLibraryLocEntries["zhs"]);
 
             if (changed)
             {
@@ -808,7 +830,7 @@ internal static class ModSupport
         }
 
         CardModel card = recipient.Creature.CombatState.CreateCard<T>(recipient);
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, false, CardPilePosition.Random);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
     }
 
     public static async Task<CardModel?> AddSpecificCardToCombatPile<T>(
@@ -829,7 +851,7 @@ internal static class ModSupport
             CardCmd.Upgrade(card, MegaCrit.Sts2.Core.Nodes.CommonUi.CardPreviewStyle.None);
         }
 
-        await CardPileCmd.Add(card, pileType, CardPilePosition.Random, source, false);
+        await CardPileCmd.AddGeneratedCardToCombat(card, pileType, true, CardPilePosition.Random);
         return card;
     }
 
@@ -883,22 +905,6 @@ internal static class ModSupport
         recipient.Deck.AddInternal(card, recipient.Deck.Cards.Count, silent);
         SaveManager.Instance?.Progress?.MarkCardAsSeen(card.Id);
         return card;
-    }
-
-    public static DamageResult LoseHp(Creature target, decimal amount)
-    {
-        if (amount <= 0 || !target.IsAlive)
-        {
-            return default!;
-        }
-
-        MethodInfo? loseHpInternalMethod = GetLoseHpInternalMethod();
-        if (loseHpInternalMethod == null)
-        {
-            throw new InvalidOperationException("Creature.LoseHpInternal reflection lookup failed at runtime.");
-        }
-
-        return (DamageResult)loseHpInternalMethod.Invoke(target, new object[] { amount, (ValueProp)0 })!;
     }
 
     public static async Task ApplyEventHpLoss(Creature target, decimal amount)
@@ -975,7 +981,11 @@ internal static class ModSupport
             .ToList();
     }
 
-    public static PlayerChoiceContext? CreateHookChoiceContext(AbstractModel source, CombatState combatState, Player? preferredPlayer = null)
+    public static PlayerChoiceContext? CreateHookChoiceContext(
+        AbstractModel source,
+        CombatState combatState,
+        Player? preferredPlayer = null,
+        GameActionType gameActionType = GameActionType.Combat)
     {
         ulong? localPlayerId = LocalContext.NetId;
         if (!localPlayerId.HasValue)
@@ -995,7 +1005,7 @@ internal static class ModSupport
             localPlayerId = fallbackPlayer.NetId;
         }
 
-        return new HookPlayerChoiceContext(source, localPlayerId.Value, combatState, GameActionType.CombatPlayPhaseOnly);
+        return new HookPlayerChoiceContext(source, localPlayerId.Value, combatState, gameActionType);
     }
 
     public static PlayerChoiceContext? CreateBestEffortCombatChoiceContext(AbstractModel source, Player? preferredPlayer)
@@ -1019,36 +1029,6 @@ internal static class ModSupport
 
         LogWarn($"CreateBestEffortCombatChoiceContext failed for source {source.GetType().Name}; skipping detached fallback in multiplayer.");
         return null;
-    }
-
-    private static MethodInfo? GetLoseHpInternalMethod()
-    {
-        if (_loseHpInternalMethod != null)
-        {
-            return _loseHpInternalMethod;
-        }
-
-        _loseHpInternalMethod = typeof(Creature)
-            .GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-            .FirstOrDefault(method =>
-            {
-                if (method.Name != "LoseHpInternal")
-                {
-                    return false;
-                }
-
-                ParameterInfo[] parameters = method.GetParameters();
-                return parameters.Length == 2
-                    && parameters[0].ParameterType == typeof(decimal)
-                    && parameters[1].ParameterType == typeof(ValueProp);
-            });
-
-        if (_loseHpInternalMethod == null)
-        {
-            LogWarn("Creature.LoseHpInternal reflection lookup failed; lose-hp cards will error until this is corrected.");
-        }
-
-        return _loseHpInternalMethod;
     }
 
     public static IReadOnlyList<CardModel> GetPressureGeneratedPoolCanonicals()
@@ -1121,8 +1101,11 @@ internal static class ModSupport
             return null;
         }
 
-        int index = recipient.PlayerRng.Rewards.NextInt(canonicals.Count);
-        return combatState.CreateCard(canonicals[index], recipient);
+        return CardFactory.GetDistinctForCombat(
+            recipient,
+            canonicals,
+            1,
+            recipient.RunState.Rng.CombatCardGeneration).FirstOrDefault();
     }
 
     public static async Task<CardModel?> GiveRandomSongCardToPlayer(Player recipient, bool setCostToZeroThisCombat)
@@ -1133,12 +1116,25 @@ internal static class ModSupport
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, false, CardPilePosition.Random);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
         if (setCostToZeroThisCombat)
         {
             card.EnergyCost.SetThisCombat(0, true);
         }
 
+        return card;
+    }
+
+    public static async Task<CardModel?> GiveRandomUpgradedSongCardToPlayer(Player recipient, AbstractModel source)
+    {
+        CardModel? card = CreateRandomCardFromCanonicalPool(recipient, GetSongPoolCanonicals());
+        if (card == null)
+        {
+            return null;
+        }
+
+        CardCmd.Upgrade(card, MegaCrit.Sts2.Core.Nodes.CommonUi.CardPreviewStyle.None);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
         return card;
     }
 
@@ -1150,19 +1146,25 @@ internal static class ModSupport
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, false, CardPilePosition.Random);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
         return card;
     }
 
     public static async Task<CardModel?> GiveRandomColorlessCardToPlayer(Player recipient)
     {
-        CardModel? card = CreateRandomCardFromCanonicalPool(recipient, GetColorlessPoolCanonicals());
+        CardModel? card = CardFactory.GetDistinctForCombat(
+            recipient,
+            ModelDb.CardPool<ColorlessCardPool>().GetUnlockedCards(
+                recipient.UnlockState,
+                recipient.RunState.CardMultiplayerConstraint),
+            1,
+            recipient.RunState.Rng.CombatCardGeneration).FirstOrDefault();
         if (card == null)
         {
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, false, CardPilePosition.Random);
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
         return card;
     }
 

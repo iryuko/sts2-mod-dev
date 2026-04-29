@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxfnmu4ombthm"
-path="res://runtime_imports/ancient_node_togawa_teiji_outline.png-8733c952159d9a8f52eb987fd52bc22b.ctex"
+uid="uid://dmr5c8dvw5o5m"
+path="res://runtime_imports/piano_of_mom.png-7a6e931416deb714cfa856dc0ef0d22f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/packed/map/ancients/ancient_node_togawa_teiji_outline.png"
-dest_files=["res://runtime_imports/ancient_node_togawa_teiji_outline.png-8733c952159d9a8f52eb987fd52bc22b.ctex"]
+source_file="res://images/relics/piano_of_mom.png"
+dest_files=["res://runtime_imports/piano_of_mom.png-7a6e931416deb714cfa856dc0ef0d22f.ctex"]
 
 [params]
 

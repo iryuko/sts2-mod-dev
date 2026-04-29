@@ -47,9 +47,12 @@
 21. `t4-bugfix-round-2026-03-27.md`
 22. `t4-lessons-and-guardrails.md`
 23. `t4-card-batch-02-workdraft-2026-03-29.md`
-24. `question-room-shadow-event-asset-spec.md`
-25. `question-room-shadow-event-design.md`
-25. `open-questions.md`
+24. `t5-bugfix-plan-2026-04-26.md`
+25. `t5-completed-fixes-2026-04-26.md`
+26. `t5-card-library-integration-plan-2026-04-26.md`
+27. `question-room-shadow-event-asset-spec.md`
+28. `question-room-shadow-event-design.md`
+29. `open-questions.md`
 
 ## 文档分工
 
@@ -76,6 +79,9 @@
 - `t4-bugfix-round-2026-03-27.md`：本轮 bug 定位、修复状态与复测清单。
 - `t4-lessons-and-guardrails.md`：T4 已踩实的经验、接线护栏与回归检查清单，供后续线程直接复用。
 - `t4-card-batch-02-workdraft-2026-03-29.md`：2026-03-29 新增 `8` 张歌曲牌工作稿、命名修正与实现口径备注。
+- `t5-bugfix-plan-2026-04-26.md`：T5 测试版反馈 bug 的定位、原版对照与修复计划。
+- `t5-completed-fixes-2026-04-26.md`：T5 已完成修复记录，供后续 git / release 公示使用。
+- `t5-card-library-integration-plan-2026-04-26.md`：百科大全 / 卡牌库原版结构反编译结论，以及 Sakiko 卡牌库入口的推荐接入方案。
 - `question-room-shadow-event-asset-spec.md`：普通问号房 `Shadow` 事件的资产需求、正式目录和来稿区建议。
 - `question-room-shadow-event-design.md`：普通问号房 `无人问津的钢琴` 事件的页面流程、数值、主图切换和音乐接口。
 - `open-questions.md`：当前未冻结设计项。

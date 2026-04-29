@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Togawasakiko_in_Slay_the_Spire;
@@ -849,7 +850,7 @@ internal sealed class WeightliftingChampion : TogawasakikoCard
             return;
         }
 
-        ModSupport.LoseHp(Owner.Creature, DynamicVars.HpLoss.BaseValue);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue, DamageProps.cardHpLoss, this);
         await PowerCmd.Apply<StrengthPower>(Owner.Creature, 1m, Owner.Creature, this, false);
         await PowerCmd.Apply<DexterityPower>(Owner.Creature, 1m, Owner.Creature, this, false);
     }
@@ -1081,6 +1082,9 @@ internal sealed class Fragility : TogawasakikoCard
 internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 {
     private const int MaxCombats = 2;
+    private const string CombatsKey = "Combats";
+
+    private int _combatsSeen;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         new[] { CardKeyword.Unplayable };
@@ -1089,7 +1093,20 @@ internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 
     public override int MaxUpgradeLevel => 0;
 
-    public int CombatsSeen { get; set; }
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new(CombatsKey, MaxCombats) };
+
+    [SavedProperty]
+    public int CombatsSeen
+    {
+        get => _combatsSeen;
+        set
+        {
+            AssertMutable();
+            _combatsSeen = value;
+            DynamicVars[CombatsKey].BaseValue = Math.Max(0, MaxCombats - _combatsSeen);
+        }
+    }
 
     protected ShadowOfThePastCard(string portraitPath)
         : base(0, CardType.Curse, CardRarity.Event, TargetType.None, portraitPath)
@@ -1107,51 +1124,26 @@ internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 
     public override async Task AfterCombatEnd(MegaCrit.Sts2.Core.Rooms.CombatRoom room)
     {
-        if (Owner == null)
+        if (Owner == null || Pile?.Type != PileType.Deck)
         {
             return;
         }
 
-        ShadowOfThePastCard? trackedCard = ResolveTrackedDeckCard(Owner);
-        if (trackedCard == null)
-        {
-            ModSupport.LogWarn($"Shadow card {Id.Entry} could not find a matching deck instance after combat.");
-            return;
-        }
-
-        trackedCard.CombatsSeen++;
-        if (trackedCard.CombatsSeen < MaxCombats)
+        CombatsSeen++;
+        if (CombatsSeen < MaxCombats)
         {
             return;
         }
 
         try
         {
-            await trackedCard.ResolveShadowReward(Owner);
-            await CardPileCmd.RemoveFromDeck(trackedCard, false);
+            await ResolveShadowReward(Owner);
+            await CardPileCmd.RemoveFromDeck(this, false);
         }
         catch (Exception ex)
         {
             ModSupport.LogError($"Shadow reward resolution failed for {Id.Entry}: {ex}");
         }
-    }
-
-    private ShadowOfThePastCard? ResolveTrackedDeckCard(Player owner)
-    {
-        CardPile? deck = owner.Deck;
-        if (deck == null)
-        {
-            return null;
-        }
-
-        if (deck.Cards.OfType<ShadowOfThePastCard>().FirstOrDefault(card => ReferenceEquals(card, this)) is { } exactCard)
-        {
-            return exactCard;
-        }
-
-        return deck.Cards
-            .OfType<ShadowOfThePastCard>()
-            .FirstOrDefault(card => card.Id == Id);
     }
 
     protected abstract Task ResolveShadowReward(Player owner);
