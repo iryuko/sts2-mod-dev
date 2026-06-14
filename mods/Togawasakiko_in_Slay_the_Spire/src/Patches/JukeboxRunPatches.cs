@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Nodes;
+using MegaCrit.Sts2.Core.Nodes.Audio;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
 namespace Togawasakiko_in_Slay_the_Spire;
@@ -21,5 +22,15 @@ internal static class JukeboxGlobalUiReadyPatch
     private static void InjectOverlay(NGlobalUi __instance)
     {
         JukeboxRunInjector.TryInjectIntoGlobalUi(__instance);
+    }
+}
+
+[HarmonyPatch(typeof(NRunMusicController), "_ExitTree")]
+internal static class JukeboxRunMusicControllerExitPatch
+{
+    [HarmonyPostfix]
+    private static void StopJukeboxPlayback()
+    {
+        JukeboxRunInjector.StopPlaybackForRunExit();
     }
 }

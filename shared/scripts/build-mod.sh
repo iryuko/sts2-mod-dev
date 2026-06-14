@@ -107,6 +107,78 @@ find_godot() {
   return 1
 }
 
+normalize_pack_imports() {
+  local pack_dir="$1"
+
+  python3 - "${pack_dir}" <<'PY'
+from pathlib import Path
+import shutil
+import sys
+
+pack_dir = Path(sys.argv[1])
+runtime_imports_dir = pack_dir / "runtime_imports"
+
+if runtime_imports_dir.exists():
+    shutil.rmtree(runtime_imports_dir)
+
+changed = 0
+
+for import_file in pack_dir.rglob("*.import"):
+    text = import_file.read_text()
+    lines = text.splitlines()
+    updated = False
+
+    for idx, line in enumerate(lines):
+        if (
+            line.startswith('path="res://.godot/imported/')
+            or line.startswith('path="res://runtime_imports/')
+        ) and line.endswith('"'):
+            if line.startswith('path="res://.godot/imported/'):
+                rel_name = line.removeprefix('path="res://.godot/imported/').removesuffix('"')
+            else:
+                rel_name = line.removeprefix('path="res://runtime_imports/').removesuffix('"')
+
+            source_path = pack_dir / ".godot" / "imported" / rel_name
+            if not source_path.exists():
+                continue
+
+            target_rel = Path("runtime_imports") / rel_name
+            target_path = pack_dir / target_rel
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, target_path)
+            lines[idx] = f'path="res://{target_rel.as_posix()}"'
+            updated = True
+            continue
+
+        if (
+            line.startswith('dest_files=["res://.godot/imported/')
+            or line.startswith('dest_files=["res://runtime_imports/')
+        ) and line.endswith('"]'):
+            if line.startswith('dest_files=["res://.godot/imported/'):
+                rel_name = line.removeprefix('dest_files=["res://.godot/imported/').removesuffix('"]')
+            else:
+                rel_name = line.removeprefix('dest_files=["res://runtime_imports/').removesuffix('"]')
+
+            source_path = pack_dir / ".godot" / "imported" / rel_name
+            if not source_path.exists():
+                continue
+
+            target_rel = Path("runtime_imports") / rel_name
+            target_path = pack_dir / target_rel
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(source_path, target_path)
+            lines[idx] = f'dest_files=["res://{target_rel.as_posix()}"]'
+            updated = True
+
+    if updated:
+        trailing_newline = "\n" if text.endswith("\n") else ""
+        import_file.write_text("\n".join(lines) + trailing_newline)
+        changed += 1
+
+print(f"Normalized {changed} import files into visible runtime_imports/")
+PY
+}
+
 resolve_pack_project_dir() {
   local mod_dir="$1"
 
@@ -157,6 +229,43 @@ collect_csc_runtime_refs() {
   find "${runtime_dir}" -maxdepth 1 -type f \
     \( -name 'System*.dll' -o -name 'mscorlib.dll' -o -name 'netstandard.dll' \) \
     | sort
+}
+
+generate_loader_manifest() {
+  local mod_dir="$1"
+  local export_root="$2"
+  local mod_name="$3"
+  local source_manifest="${mod_dir}/manifest/mod_manifest.json"
+  local output_manifest="${export_root}/mod_manifest.json"
+
+  python3 - "${source_manifest}" "${output_manifest}" "${mod_name}" <<'PY'
+import json
+import pathlib
+import sys
+
+source_manifest = pathlib.Path(sys.argv[1])
+output_manifest = pathlib.Path(sys.argv[2])
+mod_name = sys.argv[3]
+
+source = {}
+if source_manifest.exists():
+    source = json.loads(source_manifest.read_text())
+
+mod_id = source.get("id") or source.get("pck_name") or mod_name
+manifest = {
+    "id": mod_id,
+    "name": source.get("name") or mod_id,
+    "author": source.get("author") or "user",
+    "description": source.get("description") or "",
+    "version": source.get("version") or "0.1.0",
+    "has_pck": source.get("has_pck", True),
+    "has_dll": source.get("has_dll", True),
+    "dependencies": source.get("dependencies", []),
+    "affects_gameplay": source.get("affects_gameplay", True),
+}
+
+output_manifest.write_text(json.dumps(manifest, ensure_ascii=True, indent=2) + "\n")
+PY
 }
 
 MOD_INPUT=""
@@ -327,10 +436,12 @@ if [[ -f "${MOD_DIR}/manifest/mod_manifest.json" ]]; then
   cp -f "${MOD_DIR}/manifest/mod_manifest.json" "${PACK_PROJECT_DIR}/mod_manifest.json"
 fi
 
-rm -f "${EXPORT_ROOT}/mod_manifest.json"
+generate_loader_manifest "${MOD_DIR}" "${EXPORT_ROOT}" "${MOD_NAME}"
 
 if [[ -f "${PACK_SCRIPT_PATH}" ]]; then
   if GODOT_BIN="$(find_godot)"; then
+    "${GODOT_BIN}" --headless --path "${PACK_PROJECT_DIR}" --editor --quit >/dev/null
+    normalize_pack_imports "${PACK_PROJECT_DIR}"
     rm -f "${PCK_OUTPUT_PATH}"
     "${GODOT_BIN}" --headless --path "${PACK_PROJECT_DIR}" -s "${PACK_SCRIPT_PATH}" -- "${PCK_OUTPUT_PATH}" >/dev/null
     if [[ -f "${PCK_OUTPUT_PATH}" ]] && ! file "${PCK_OUTPUT_PATH}" | grep -q 'ASCII text'; then
@@ -345,6 +456,7 @@ if [[ -f "${PACK_SCRIPT_PATH}" ]]; then
 fi
 
 echo "构建完成：${EXPORT_ROOT}/${MOD_NAME}.dll"
+echo "生成外部 loader manifest：${EXPORT_ROOT}/mod_manifest.json"
 if [[ "${BUILD_MODE}" == "mcs" ]]; then
   echo "注意：当前 DLL 由 Mono 编译器生成，属于“真实程序集但目标框架仍待优化”的临时验证产物。"
 fi

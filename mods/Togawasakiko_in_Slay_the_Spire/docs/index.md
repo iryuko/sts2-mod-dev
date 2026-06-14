@@ -41,18 +41,26 @@
 15. `card-implementation-table-spec.md`
 16. `audio-asset-library.md`
 17. `audio-track-registry.md`
-18. `t3-asset-handoff.md`
-19. `t4-implementation-status.md`
-20. `t4-asset-integration-status.md`
-21. `t4-bugfix-round-2026-03-27.md`
-22. `t4-lessons-and-guardrails.md`
-23. `t4-card-batch-02-workdraft-2026-03-29.md`
-24. `t5-bugfix-plan-2026-04-26.md`
-25. `t5-completed-fixes-2026-04-26.md`
-26. `t5-card-library-integration-plan-2026-04-26.md`
-27. `question-room-shadow-event-asset-spec.md`
-28. `question-room-shadow-event-design.md`
-29. `open-questions.md`
+18. `combat-spine-asset-spec.md`
+19. `combat-spine-redesign-brief.md`
+20. `combat-spine-original-attack-audit.md`
+21. `combat-spine-motion-classification.md`
+22. `combat-spine-production-batch-plan.md`
+23. `combat-spine-blueprint-block-plan.md`
+24. `combat-spine-layer-split-plan.md`
+25. `t3-asset-handoff.md`
+26. `t4-implementation-status.md`
+27. `t4-asset-integration-status.md`
+28. `t4-bugfix-round-2026-03-27.md`
+29. `t4-lessons-and-guardrails.md`
+30. `t4-card-batch-02-workdraft-2026-03-29.md`
+31. `t5-bugfix-plan-2026-04-26.md`
+32. `t5-completed-fixes-2026-04-26.md`
+33. `t5-card-library-integration-plan-2026-04-26.md`
+34. `t5-update-audit-v0.103.3-2026-06-10.md`
+35. `question-room-shadow-event-asset-spec.md`
+36. `question-room-shadow-event-design.md`
+37. `open-questions.md`
 
 ## 文档分工
 
@@ -73,6 +81,13 @@
 - `card-implementation-table-spec.md`：后续交付卡牌实现表格时应使用的字段、列顺序与填写规范。
 - `audio-asset-library.md`：音频资产的来稿区、正式库存与 runtime staging 结构。
 - `audio-track-registry.md`：歌曲牌、角色选人音效与点歌系统所需 `track_id / cue_id` 登记位。
+- `combat-spine-asset-spec.md`：战斗 Spine 接入所需的原版资源接口、运行时文件和动画命名事实。
+- `combat-spine-redesign-brief.md`：战斗 Spine 改为重绘后的美术、拆件、动作和交稿设计规格。
+- `combat-spine-original-attack-audit.md`：原版角色攻击 Spine 资产对照，记录 attack 专用附件、手型变体和动画 mix 事实。
+- `combat-spine-motion-classification.md`：新战斗 Spine 的运动责任分类，区分主动受控、次级动态、被动跟随、overlay、合并和废弃参考层。
+- `combat-spine-production-batch-plan.md`：第一批战斗 Spine 分层生产清单，按批次列出父骨骼、运动责任、补画重叠区和验收预览。
+- `combat-spine-blueprint-block-plan.md`：当前战斗 Spine 蓝图三大块拆分计划，定义主体、头发和左臂源层的第一阶段产线。
+- `combat-spine-layer-split-plan.md`：新战斗 Spine 的分层拆分准则、必需图层、遮挡重叠和 bone / slot 草案。
 - `t3-asset-handoff.md`：T2 收尾后的 T3 交接摘要。
 - `t4-implementation-status.md`：T4 当前实现进度、功能接入范围与已知风险。
 - `t4-asset-integration-status.md`：面向 T3 的“已接入 / 占位 / 待补交”资源状态表。
@@ -82,6 +97,7 @@
 - `t5-bugfix-plan-2026-04-26.md`：T5 测试版反馈 bug 的定位、原版对照与修复计划。
 - `t5-completed-fixes-2026-04-26.md`：T5 已完成修复记录，供后续 git / release 公示使用。
 - `t5-card-library-integration-plan-2026-04-26.md`：百科大全 / 卡牌库原版结构反编译结论，以及 Sakiko 卡牌库入口的推荐接入方案。
+- `t5-update-audit-v0.103.3-2026-06-10.md`：本体 `v0.103.3` 更新后的程序集、loader、patch 目标、scene 路径和落后点审计。
 - `question-room-shadow-event-asset-spec.md`：普通问号房 `Shadow` 事件的资产需求、正式目录和来稿区建议。
 - `question-room-shadow-event-design.md`：普通问号房 `无人问津的钢琴` 事件的页面流程、数值、主图切换和音乐接口。
 - `open-questions.md`：当前未冻结设计项。

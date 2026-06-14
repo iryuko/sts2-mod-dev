@@ -14,6 +14,7 @@ usage() {
 说明：
   - 默认 dry-run，只展示将更新哪些 settings.save。
   - --apply 时会先把命中的 settings.save 备份到工作区，再写入：
+      .schema_version = max(现有值, 5)
       .mod_settings.mods_enabled = true
       .mod_settings.disabled_mods = 现有值或 []
 EOF
@@ -43,6 +44,8 @@ while [[ $# -gt 0 ]]; do
 done
 
 collect_settings_files() {
+  find "${HOME}/Library/Application Support/SlayTheSpire2/default" \
+    -type f -name 'settings.save' 2>/dev/null | sort
   find "${HOME}/Library/Application Support/SlayTheSpire2/steam" \
     -type f -name 'settings.save' 2>/dev/null | sort
   find "${HOME}/Library/Application Support/Steam/userdata" \
@@ -89,6 +92,8 @@ for settings_file in "${SETTINGS_FILES[@]}"; do
   cp -f "${settings_file}" "${backup_path}"
 
   jq '
+    .schema_version = ((.schema_version // 0) | if . < 5 then 5 else . end)
+    |
     .mod_settings =
       ((.mod_settings // {})
       + {mods_enabled: true}

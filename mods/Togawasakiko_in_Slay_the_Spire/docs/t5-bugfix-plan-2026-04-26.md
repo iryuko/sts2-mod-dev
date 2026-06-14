@@ -890,3 +890,229 @@ fight KAISER_CRAB_BOSS
 复测状态：
 
 - 2026-04-27 实机复测通过，`Perk Up` 标记完成。
+
+## 十 Bug 8：联机混合队伍遇到祥子专属事件导致队友卡住
+
+### 现象
+
+- 联机模式下，队伍中有 `Togawasakiko` 时可能遇到祥子专属普通问号房事件 `UnattendedPiano / 无人钢琴`。
+- 祥子玩家自己流程正常。
+- 非祥子队友进入该事件后会卡住。
+
+### 当前代码
+
+相关文件：
+
+- `src/Events/UnattendedPiano.cs`
+- `src/Patches/QuestionRoomEventPatches.cs`
+
+旧实现要点：
+
+- `UnattendedPiano.IsAllowed(...)` 只检查 run 中是否存在任意 `Togawasakiko` 玩家：
+  - `Players.Any(player => player.Character is Togawasakiko)`
+- 事件效果直接作用于 `Owner`：
+  - 回血
+  - 扣血
+  - 发放 `ShadowOfThePastI / II / III` 到 `Owner` 牌组
+  - 使用 `Owner.PlayerRng.Rewards`
+
+### 初判根因
+
+这是事件入池条件过宽导致的多人角色限制问题。
+
+`UnattendedPiano` 是祥子专属事件，但旧条件在“祥子 + 非祥子”的混合多人队伍中也会把事件加入问号房候选。事件本体没有给非祥子角色设计 fallback 分支，队友作为 `Owner` 进入后会走不适配自身角色的事件奖励 / 状态流程。
+
+### 本轮修改
+
+采用最保守修法，不改事件内容，不自造 shared event 分叉：
+
+- `UnattendedPiano.IsAllowed(...)` 改为要求 run 内所有玩家都是 `Togawasakiko`：
+  - 单人祥子：允许
+  - 多人全祥子：允许
+  - 多人混合队伍：不进池
+- 这样避免非祥子队友进入一个没有为其设计的专属事件。
+
+### 复测项
+
+- 单人祥子 run 中，`UnattendedPiano` 仍可进入问号房候选。
+- 单人非祥子 run 中，`UnattendedPiano` 不应出现。
+- 多人混合队伍 `Togawasakiko + 非祥子` 中，`UnattendedPiano` 不应出现。
+- 多人全祥子队伍中，`UnattendedPiano` 可出现，且玩家不应因角色不匹配卡住。
+- 已访问事件的一局一次限制仍应生效。
+
+## 十一 Bug 9：混合联机队伍中非祥子队友应可参与 `TogawaTeiji` ancient 奖励
+
+### 设计口径
+
+`TogawaTeiji / 丰川定治` 与 `UnattendedPiano` 的角色限制不同。
+
+- `UnattendedPiano` 是祥子专属普通事件，奖励链发放 `ShadowOfThePast`，非祥子不应进入。
+- `TogawaTeiji` 是 ancient 奖励事件，只要队伍里有丰川祥子，就可以遇到。
+- 非祥子队友可以和祥子一起参与奖励选择。
+- 非祥子队友可以获得 `BestCompanion / BlackLimousine`，并通过遗物获得可正常使用的 `BarkingBarkingBarking / PullmanCrash`。
+
+### 当前代码
+
+相关文件：
+
+- `src/Patches/TogawaAncientPatches.cs`
+- `src/Ancients/TogawaTeiji.cs`
+- `src/Relics/BestCompanion.cs`
+- `src/Cards/TogawasakikoCards.cs`
+
+旧实现要点：
+
+- `TogawaAncientAvailabilityPatch` 在 `Hook.ShouldAllowAncient(...)` 中按当前 `player.Character is Togawasakiko` 限制。
+- 这会让混合队伍中的非祥子队友被挡在 `TogawaTeiji` 奖励选择外。
+- `TogawaTeiji.DefineDialogues()` 只给 `TOGAWASAKIKO` 注册了角色对白，非祥子 owner 缺少通用对白入口。
+
+### 本轮修改
+
+- `TogawaAncientAvailabilityPatch` 改为按 run 判断：
+  - 只要 `runState.Players.Any(player => player.Character is Togawasakiko)`，`TogawaTeiji` 对该 run 中的玩家都允许。
+- `TogawaTeiji.DefineDialogues()` 新增 `AgnosticDialogues` 通用重复对白。
+- 补充 `TOGAWA_TEIJI.talk.ANY.*` 英中本地化，避免非祥子 owner 进入时拿不到 ancient 对白。
+- 不改 `BestCompanion / BlackLimousine` 的原有获得链路：
+  - relic `AfterObtained()` 继续向 `Owner` 牌组加入对应 relic-granted card。
+
+### 复测项
+
+- 单人非祥子 run 中，不应遇到 `TogawaTeiji`。
+- 单人祥子 run 中，仍可遇到 `TogawaTeiji`。
+- 多人混合队伍 `Togawasakiko + 非祥子` 中，双方都应可进入 `TogawaTeiji` 奖励选择。
+- 非祥子队友选择 `BestCompanion` 后，应获得 `BarkingBarkingBarking` 并可正常打出。
+- 非祥子队友选择 `BlackLimousine` 后，应获得 `PullmanCrash` 并可正常打出。
+- 非祥子队友进入事件时，不应因缺少 `TOGAWA_TEIJI.talk.<CHARACTER>` 对白而卡住。
+
+## 十二 Bug 10：`TogawaTeiji` 地图节点显示为 Neow 且无法交互
+
+### 现象
+
+- 有反馈称修正 `TogawaTeiji` 后，第三层原本应为 `TogawaTeiji` 的 ancient 节点显示成 Neow。
+- 该 ancient 节点无法正常交互。
+
+### 原版参考
+
+反编译原版确认：
+
+- `AncientEventModel.MapIconPath` 硬编码解析到：
+  - `res://images/packed/map/ancients/ancient_node_<ancient_id>.png`
+- `AncientEventModel.MapIconOutlinePath` 硬编码解析到：
+  - `res://images/packed/map/ancients/ancient_node_<ancient_id>_outline.png`
+- `scenes/ui/ancient_map_point.tscn` 的默认贴图是 Neow。
+- `NAncientMapPoint._Ready()` 运行时才会把默认 Neow 贴图替换为 `_runState.Act.Ancient.MapIcon / MapIconOutline`。
+
+### 根因
+
+这是资源路径和 ancient 入池条件共同导致的回归风险。
+
+1. Teiji 地图节点资源曾被整理到：
+   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png`
+   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node_outline.png`
+2. 但原版不会按该路径查找 ancient 地图节点。
+3. 原版实际查找：
+   - `pack/images/packed/map/ancients/ancient_node_togawa_teiji.png`
+   - `pack/images/packed/map/ancients/ancient_node_togawa_teiji_outline.png`
+4. 资源缺失时，`NAncientMapPoint._Ready()` 的替换链可能失败，节点保留场景默认 Neow 贴图，并可能因初始化异常导致不可交互。
+5. `TogawaAncientAvailabilityPatch` 之前直接访问 `runState.Players.Any(...)`，缺少空值/初始化阶段保护。
+6. `Glory.AllAncients / GetUnlockedAncients` 之前总是追加 Teiji，和“必须有祥子才可遇到 Teiji”的设计口径不完全一致。
+
+### 本轮修改
+
+- 补回原版硬编码路径下的 Teiji ancient 地图节点资源：
+  - `pack/images/packed/map/ancients/ancient_node_togawa_teiji.png`
+  - `pack/images/packed/map/ancients/ancient_node_togawa_teiji_outline.png`
+- 重新运行 PCK 构建，让 Godot 生成对应 `.import` 与 `runtime_imports/*.ctex`。
+- `TogawaAncientAvailabilityPatch` 改为调用空值安全的 `HasTogawasakiko(IRunState?)`。
+- `Glory.AllAncients / GetUnlockedAncients` 的 Teiji 追加改为当前 run 中存在 `Togawasakiko` 才追加。
+- `ModelDb.AllAncients` 仍保留 Teiji 注册，避免破坏 console / 全局模型查找。
+
+### 复测项
+
+- 单人祥子进入第三层，抽到 Teiji 时地图节点不应显示 Neow。
+- 单人祥子进入 Teiji ancient 后，应能正常选择三项奖励。
+- 单人非祥子 run 中，第三层 ancient 池不应出现 Teiji。
+- 多人混合队伍中，只要队伍有祥子，Teiji 仍可进入 ancient 池。
+- 多人混合队伍中，非祥子队友进入 Teiji 不应卡在对白或奖励选择。
+- PCK 中必须包含 `images/packed/map/ancients/ancient_node_togawa_teiji*` 及对应 runtime import。
+
+## 十三 Bug 11：`jukebox` 选曲后切换 room 停止播放
+
+日期：2026-05-13
+
+### 新目标
+
+旧口径“非战斗房间继续播放、进入战斗自动 Off”已废弃。
+
+当前目标：
+
+- 玩家用 `jukebox` 选中一首歌后，切换任何 room 都不应中断播放。
+- 包括 combat、merchant、fire、event、map 相关 room。
+- 原版房间 BGM / ambience 仍应正常加载，避免再次破坏火堆等房间初始化。
+- `jukebox` 自定义曲目播放期间，压住原版 run BGM，避免叠声。
+
+### 现象
+
+- 玩家用 `jukebox` 选中一首歌后，进入下一个 room 会停止播放音乐。
+- 该问题此前按旧口径修过火堆房冲突，但当前目标已变更为跨所有 room 持续播放。
+
+### 根因
+
+当前代码有两处与新目标冲突：
+
+1. `JukeboxOverlay.HandleRoomEntered(...)` 在 `room is CombatRoom` 时主动调用 `ResetToOffForCombat()`。
+   - 这会清空 `_activeTrackPath`。
+   - 停止 `AudioStreamPlayer`。
+   - 恢复原版 BGM bus。
+   - 因此进入 combat 停止播放不是原版音乐模块抢占，而是 `jukebox` 自己主动关掉。
+2. `AudioStreamPlayer` 挂在 `JukeboxOverlay` 子节点下。
+   - `JukeboxOverlay._ExitTree()` 会无条件停止播放器。
+   - 如果房间切换期间 `NGlobalUi / overlay` 重建，播放状态会被 UI 生命周期杀掉。
+   - 这会表现为非 combat room 切换也可能停止。
+3. 二次排查 merchant 后确认，单纯依赖 Godot `Bgm / Music` bus 静音不可靠。
+   - 原版 `default_bus_layout.tres` 只有 `Master` 与 `SFX`。
+   - run / merchant 音乐由 `NRunMusicController` 通过 FMOD proxy 管理。
+   - `MerchantRoom` 仍是 `RoomType.Shop`，`NRunMusicController.GetTrack(...)` 会映射到 `MusicProgressTrack.Merchant`。
+   - `NMerchantRoom` 在地图打开 / 关闭时调用 `ToggleMerchantTrack()`，把同一条 run music 的 `Progress` 参数切到 `MerchantEnd / Merchant`。
+   - 因此 merchant 的独特性是 FMOD 参数切换，不是另一套 Godot `AudioStreamPlayer`。
+   - 如果只静音 Godot bus，merchant FMOD BGM 仍可能与 `jukebox` 叠声。
+
+### 修改
+
+- 移除 `HandleRoomEntered(...)` 中的 `CombatRoom` 自动 Off 分支。
+- `HandleRoomEntered(...)` 现在对所有 room 统一处理：
+  - 如果存在选中的自定义曲目，则确保播放器继续播放。
+  - 重新施加原版 run BGM 静音遮罩。
+- 将 `jukebox` 的实际 `AudioStreamPlayer` 改为共享播放器：
+  - 挂到 `SceneTree.Root`，不再挂在 overlay 子节点下。
+  - overlay 退出 tree 时只解绑 `Finished` 事件，不停止共享播放器。
+  - `_activeTrackPath` 与 BGM bus 静音状态改为共享状态，避免 overlay 重建时丢失选曲。
+- 自定义曲目播放期间同步调用原版 `NAudioManager.SetBgmVol(0.0f)`：
+  - 用来压住 FMOD run / merchant BGM。
+  - 选择 `Off (null)` 时用 `SaveManager.Instance.SettingsSave.VolumeBgm` 恢复用户当前 BGM 音量设置。
+  - 保留 Godot `Bgm / Music` bus 静音作为兼容 fallback，但不再把它当作唯一静音机制。
+- 由于播放器挂到 `SceneTree.Root`，新增 `NRunMusicController._ExitTree` postfix：
+  - run 结束 / 离开 run 时停止共享 `jukebox` 播放器。
+  - 恢复 FMOD BGM 音量与 Godot BGM bus，避免回主菜单后继续播放或原版 BGM 保持静音。
+- 保留原版房间音乐加载链，不 patch `NRunMusicController`，不阻断 `UpdateTrack / UpdateAmbience`。
+
+### 当前验证状态
+
+- `dotnet build mods/Togawasakiko_in_Slay_the_Spire/src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- `./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过。
+- `./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire --apply --replace-target` 已覆盖安装。
+- release / installed 哈希已核对一致：
+  - dll：`f89c67aff44a3e8fab45955ed6d048a6bdff95ed8aba66233d2219304823602d`
+  - pck：`70c64d189f1911e04cd91f6f779e3a515ae8e9c5949708083dbe3f5fec8263b6`
+  - manifest：`1b77b1cc7269ccdd539c30e63cffb1c25613e914d5a957b0a6d9c7971d44a849`
+- 尚未实机复测。
+
+### 复测项
+
+- 在非战斗房间选中任意 `jukebox` 曲目后进入 combat，曲目应继续播放，selector 不应自动回到 `Off (null)`。
+- combat 结束进入奖励 / map / merchant / fire / event 时，曲目应继续播放。
+- 进入 merchant 时原版房间音乐可正常加载，但不应与 `jukebox` 叠声。
+- merchant 中打开 / 关闭地图时，`ToggleMerchantTrack()` 的 `MerchantEnd / Merchant` 参数切换不应让原版 BGM 漏声。
+- 进入 fire 时火堆 ambience / UI 初始化不应卡死，且不应与 `jukebox` 叠声。
+- 在 `jukebox` 中手动选择 `Off (null)` 后，应停止自定义曲目并恢复原版 FMOD BGM 音量与 Godot BGM bus。
+- 离开 run / 返回主菜单时，`jukebox` 不应继续播放，原版 BGM 音量不应残留为 0。

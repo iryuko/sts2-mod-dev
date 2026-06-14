@@ -267,3 +267,191 @@ T5 确认 `TouchOfOrobas` 的原版升级结果是“starter refinement”结果
   - 背击伤害是否按 `SurroundedPower` 的 `1.5x` 变化。
 - 若视觉不翻但伤害正常，优先修 scene / visual 层。
 - 若伤害也不变，再查 `SurroundedPower` 是否施加、`Facing` 是否更新、目标是否带 `BackAttackLeftPower / BackAttackRightPower`。
+
+## 6. 联机混合队伍遇到 `UnattendedPiano` 导致非祥子队友卡住
+
+### 现象
+
+- 联机队伍中有祥子时，可能遇到祥子专属普通问号房事件 `UnattendedPiano / 无人钢琴`。
+- 祥子玩家自己流程正常。
+- 非祥子队友进入该事件后会卡住。
+
+### 根因
+
+`UnattendedPiano.IsAllowed(...)` 旧实现只要求 run 中存在任意 `Togawasakiko` 玩家，因此“祥子 + 非祥子”的混合多人队伍也会把该事件加入候选池。
+
+事件效果直接作用于 `Owner`，并会发放 `ShadowOfThePastI / II / III` 这类祥子专属长期事件牌。该事件没有为非祥子角色设计 fallback 流程，因此混合队伍中队友进入后存在卡住风险。
+
+### 修复
+
+- `UnattendedPiano.IsAllowed(...)` 已改为要求 run 内所有玩家都是 `Togawasakiko`。
+- 单人祥子仍允许。
+- 多人全祥子仍允许。
+- 多人混合队伍不再让该事件进池。
+- 不改事件内容，不引入 shared event 分叉，先用最小角色限制保证稳定。
+
+### 验证状态
+
+- `dotnet build src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- 待实机复测多人混合队伍是否不再遇到该事件。
+
+## 7. 混合联机队伍中非祥子队友可参与 `TogawaTeiji` ancient 奖励
+
+### 设计口径
+
+- `TogawaTeiji / 丰川定治` 是 ancient 奖励事件，不同于祥子专属普通事件 `UnattendedPiano`。
+- 只要队伍中存在丰川祥子，就可以遇到 `TogawaTeiji`。
+- 非祥子队友可以正常参与奖励选择，并通过 `BestCompanion / BlackLimousine` 获得对应卡牌奖励。
+
+### 根因
+
+`TogawaAncientAvailabilityPatch` 旧实现按当前选择奖励的 `player.Character is Togawasakiko` 限制 `TogawaTeiji`。
+
+这会让混合联机队伍中非祥子队友被挡在定治奖励外，和当前设计口径不一致。同时，`TogawaTeiji` 只注册了 `TOGAWASAKIKO` 角色对白，非祥子 owner 进入时也缺少通用 dialogue fallback。
+
+### 修复
+
+- `TogawaAncientAvailabilityPatch` 已改为按 run 判断：
+  - `runState.Players.Any(player => player.Character is Togawasakiko)`
+- 只要本局队伍里有祥子，`TogawaTeiji` 对该 run 中所有玩家都允许。
+- `TogawaTeiji.DefineDialogues()` 新增 `AgnosticDialogues` 通用重复对白。
+- 补充 `TOGAWA_TEIJI.talk.ANY.*` 英中本地化，供非祥子 owner 使用。
+- `BestCompanion / BlackLimousine` 的原有发卡链保持不变。
+
+### 验证状态
+
+- `dotnet build src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- 待实机复测混合队伍中非祥子队友选择 relic 后是否正常获得并使用 `BarkingBarkingBarking / PullmanCrash`。
+
+## 8. `TogawaTeiji` 地图节点显示为 Neow 且无法交互
+
+### 现象
+
+- 第三层本应为 `TogawaTeiji` 的 ancient 节点显示为 Neow。
+- 节点无法正常交互。
+
+### 根因
+
+反编译原版确认，`AncientEventModel.MapIconPath` 并不会读取此前文档记录的 `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png`。
+
+原版硬编码路径是：
+
+- `res://images/packed/map/ancients/ancient_node_togawa_teiji.png`
+- `res://images/packed/map/ancients/ancient_node_togawa_teiji_outline.png`
+
+而 `scenes/ui/ancient_map_point.tscn` 默认贴图就是 Neow。Teiji 图标资源缺失时，`NAncientMapPoint._Ready()` 的运行时替换失败，表现上就可能保留 Neow 默认图，并因初始化异常导致不可交互。
+
+同时，`TogawaAncientAvailabilityPatch` 之前直接访问 `runState.Players.Any(...)`，缺少初始化阶段防御；`Glory.AllAncients / GetUnlockedAncients` 之前也总是追加 Teiji，和“有祥子才能遇到 Teiji”的设计口径不完全一致。
+
+### 修复
+
+- 补回原版硬编码路径下的地图节点资源：
+  - `pack/images/packed/map/ancients/ancient_node_togawa_teiji.png`
+  - `pack/images/packed/map/ancients/ancient_node_togawa_teiji_outline.png`
+- 运行 `build-mod.sh` 重新生成 `.import` 与 `runtime_imports/*.ctex`，并重新打包 PCK。
+- `TogawaAncientAvailabilityPatch` 改为调用空值安全的 `HasTogawasakiko(IRunState?)`。
+- `Glory.AllAncients / GetUnlockedAncients` 的 Teiji 追加改为当前 run 中有 `Togawasakiko` 才追加。
+- `ModelDb.AllAncients` 仍保持全局注册 Teiji，避免破坏 console / 模型查找。
+
+### 验证状态
+
+- `dotnet build src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- `../../shared/scripts/build-mod.sh . --configuration Release` 通过，并生成新的 PCK。
+- 已确认 `pack/images/packed/map/ancients/ancient_node_togawa_teiji*.png.import` 与对应 `pack/runtime_imports/ancient_node_togawa_teiji*.ctex` 存在。
+- 待实机复测第三层 Teiji 节点是否不再显示 Neow，且进入后可正常交互。
+
+## 9. 祥子第二层遇到 `Darv / 达弗` 卡死
+
+### 现象
+
+- 单人选择 `Togawasakiko` 后，第二层遇到先古之民 `Darv / 达弗` 时会卡住。
+- 当前日志没有直接捕捉到 Darv 异常堆栈，但原版 Darv 代码给出可复现的高风险入口。
+
+### 原版参考
+
+已对照原版：
+
+- `MegaCrit.Sts2.Core.Models.Events.Darv.GenerateInitialOptions()`
+- `MegaCrit.Sts2.Core.Models.Relics.DustyTome.SetupForPlayer(Player)`
+
+Darv 生成初始选项时有一半概率加入 `DustyTome`。
+
+`DustyTome.SetupForPlayer(...)` 会从当前角色卡池中筛选：
+
+- `CardRarity.Ancient`
+- 且不属于 `ArchaicTooth.TranscendenceCards`
+
+然后直接 `NextItem(...)` 取一张作为将来发放的 ancient card。
+
+### 根因
+
+`TogawasakikoCardPool` 当前没有任何 `CardRarity.Ancient` 卡。
+
+因此 Darv 在给祥子生成 `DustyTome` 选项时，候选 ancient card 集合为空。原版 `DustyTome.SetupForPlayer(...)` 没有为空集合做防守，会在事件初始选项生成阶段中断，表现为进入 Darv 后流程卡住。
+
+这不是 Darv 的对白缺失问题：
+
+- Darv 原版有 `AgnosticDialogues`
+- 自定义角色在非首次访问时理论上可以走 `ANY` 重复对白
+
+### 修复
+
+新增 `src/Patches/DarvPatches.cs`：
+
+- 只在 `Darv.Owner.Character is Togawasakiko` 时接管 `Darv.GenerateInitialOptions()`。
+- 复刻原版 Darv 的 boss relic 选项池与 Act 2 / Act 3 能量 relic 分支。
+- 在准备加入 `DustyTome` 前，先检查祥子卡池是否存在可供 `DustyTome` 使用的 `CardRarity.Ancient` 卡。
+- 若没有可用 ancient card，则跳过 `DustyTome`，改为返回普通 Darv relic 选项，避免空池 `NextItem(...)`。
+- 其他角色仍走原版 Darv 流程。
+
+### 验证状态
+
+- `dotnet build mods/Togawasakiko_in_Slay_the_Spire/src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- `./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过。
+- `./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire --apply --replace-target` 已覆盖安装。
+- release / installed 哈希已核对一致：
+  - dll：`cd44f51378538491c7b5c87692797fdee11070e355b4282b678e81cc4b0f6780`
+  - pck：`70c64d189f1911e04cd91f6f779e3a515ae8e9c5949708083dbe3f5fec8263b6`
+  - manifest：`1b77b1cc7269ccdd539c30e63cffb1c25613e914d5a957b0a6d9c7971d44a849`
+- 待实机复测：祥子第二层进入 Darv 是否不再卡住，且选项数量正常。
+
+### 后续设计修正：加入祥子 Ancient 卡
+
+为让 `DustyTome` 走原版正常流程，而不是长期依赖跳过选项，已新增独立 Ancient 卡 `Curseslander`：
+
+- 模型类：`Curseslander`
+- 本地化 id：`CURSESLANDER`
+- 中文名：`诅咒`
+- 英文名：`Curseslander`
+- 稀有度：`CardRarity.Ancient`
+- 类型：`Attack`
+- 费用：`1`，升级后 `0`
+- 效果：保留 `Slander / 中伤` 的伤害逻辑；打出后从压力衍生牌池有放回地随机生成 `2` 张牌，加入手牌，并只将这 `2` 张新生成实例的本场战斗费用改为 `0`。
+
+实现要点：
+
+- `Curseslander` 加入 `TogawasakikoCardPool`，因此 `DustyTome.SetupForPlayer(...)` 可以抽到合法 ancient card。
+- `Togawasakiko.IsRewardEligibleCard(...)` 显式排除 `CardRarity.Ancient`，避免该卡进入普通奖励修复池。
+- `Curseslander` 使用专用的 `GiveRandomZeroCostPressureGeneratedCardsToPlayer(...)` 生成压力衍生牌；该 helper 走 `CardFactory.GetForCombat(..., count, ...)`，原版实现为循环 `rng.NextItem(options)`，因此是有放回抽取，允许两张同名。
+- `0` 费只作用于 `Curseslander` 本次创建并加入手牌的卡实例，不改变压力衍生牌 canonical，也不影响同名牌从其他途径生成时的费用。
+- `CardModel` 原版会按 `Rarity == CardRarity.Ancient` 自动使用 ancient frame / text background / banner；mod 侧只需要提供 portrait。
+- 当前 `assets/cards/ancient/curseslander.png` 与 `pack/mod_assets/cards/ancient/curseslander.png` 已替换为正式 Ancient 风格卡图；尺寸 `606x852`，已重新 build / install 生成 runtime import。
+- 为排查 console 连续触发 Darv 时看不到 `DustyTome` 的情况，`DarvPatches.cs` 已加入诊断日志：记录 `dustyTomeRoll`、Darv relic 选项数、DustyTome ancient 候选数量与 id，以及最终是加入 `DustyTome` 还是走 relic-only fallback。当前逻辑仍保留原版 50% `DustyTome` 掷骰，不强制出现。
+- 最新诊断版已重新 build / install，release 与 installed hash 一致：dll `ee7bc54383e099917c99572bac59544de912870e47fe22eb3bcc1ae8078ee8de`，pck `e3bd5dac11e0136000759192bbf10ea0887311a3f00cd5aeba4fc6565b72182a`，manifest `1b77b1cc7269ccdd539c30e63cffb1c25613e914d5a957b0a6d9c7971d44a849`。
+
+为制作正式图，已从原版 `.ctex` 导出 8 张 Ancient portrait 参考图到：
+
+- `assets/cards/ancient/reference_original/apotheosis.png`
+- `assets/cards/ancient/reference_original/break.png`
+- `assets/cards/ancient/reference_original/corruption.png`
+- `assets/cards/ancient/reference_original/forbidden_grimoire.png`
+- `assets/cards/ancient/reference_original/neows_fury.png`
+- `assets/cards/ancient/reference_original/quadcast.png`
+- `assets/cards/ancient/reference_original/suppress.png`
+- `assets/cards/ancient/reference_original/wraith_form.png`
+
+补充验证：
+
+- `dotnet build mods/Togawasakiko_in_Slay_the_Spire/src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- 使用系统 Python 路径重跑 `./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过，并生成新的 PCK。
+- 已确认 `pack/mod_assets/cards/ancient/curseslander.png.import` 与 `pack/runtime_imports/curseslander*.ctex` 存在。

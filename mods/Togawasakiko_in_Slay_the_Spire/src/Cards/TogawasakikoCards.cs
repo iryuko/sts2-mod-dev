@@ -170,6 +170,39 @@ internal sealed class Slander : TogawasakikoCard
     }
 }
 
+internal sealed class Curseslander : TogawasakikoCard
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new DamageVar(4m, ValueProp.Move), new CardsVar(2) };
+
+    public Curseslander()
+        : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy, ModSupport.GetAncientPortraitPath("curseslander.png"))
+    {
+    }
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        decimal totalDamage = DynamicVars.Damage.BaseValue + (ModSupport.GetPressure(cardPlay.Target) * 2m);
+        await DamageCmd.Attack(totalDamage)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .Execute(choiceContext);
+
+        if (Owner == null)
+        {
+            return;
+        }
+
+        await ModSupport.GiveRandomZeroCostPressureGeneratedCardsToPlayer(Owner, DynamicVars.Cards.IntValue);
+    }
+
+    protected override void OnUpgrade()
+    {
+        MockSetEnergyCost(new CardEnergyCost(this, 0, false));
+    }
+}
+
 internal sealed class Unendurable : TogawasakikoCard
 {
     public override bool GainsBlock => true;

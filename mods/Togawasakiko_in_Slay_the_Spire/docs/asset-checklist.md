@@ -60,6 +60,7 @@
 - `assets/relics/starter/upgraded_doll_mask.png`
 - `assets/relics/ancient/best_companion.png`
 - `assets/cards/relic_granted/barking_barking_barking.png`
+- `assets/cards/ancient/curseslander.png`
 - `assets/cards/event_granted/shadow_of_the_past_i.png`
 - `assets/cards/event_granted/shadow_of_the_past_ii.png`
 - `assets/cards/event_granted/shadow_of_the_past_iii.png`

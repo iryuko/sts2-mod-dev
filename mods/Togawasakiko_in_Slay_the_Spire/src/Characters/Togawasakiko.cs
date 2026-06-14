@@ -272,6 +272,7 @@ internal sealed class Togawasakiko : CharacterModel
         return card != null
             && card.ShouldShowInCardLibrary
             && card.Rarity != CardRarity.Basic
+            && card.Rarity != CardRarity.Ancient
             && !ModSupport.IsStarterDeckCard(card)
             && ModSupport.HasCardLocalization(card);
     }
@@ -296,6 +297,7 @@ internal sealed class TogawasakikoCardPool : CardPoolModel
             ModelDb.Card<StrikeTogawasakiko>(),
             ModelDb.Card<DefendTogawasakiko>(),
             ModelDb.Card<Slander>(),
+            ModelDb.Card<Curseslander>(),
             ModelDb.Card<Unendurable>(),
             ModelDb.Card<IHaveAscended>(),
             ModelDb.Card<Thrilled>(),

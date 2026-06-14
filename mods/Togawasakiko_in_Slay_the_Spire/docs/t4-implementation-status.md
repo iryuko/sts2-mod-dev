@@ -358,6 +358,33 @@
     - 前者是自定义角色未补战斗 FMOD event 的资源噪音
     - 后者更像 `v0.103.2` 原版音乐参数链的边界问题，而不是 manifest / patch 失效
 
+## 一点五点零点一 2026-06-10 `v0.103.3` 主线更新兼容审计
+
+- 已确认当前本机游戏 live 版本为 `v0.103.3`：
+  - `commit`: `460a0ece`
+  - `date`: `2026-05-29T13:36:05-07:00`
+  - `main_assembly_hash`: `418053415`
+- 已刷新当前工作区引用基线：
+  - `references/api-notes/app/release_info.json`
+  - `references/game-dlls/sts2/arm64/sts2.dll`
+  - `references/game-dlls/sts2/x86_64/sts2.dll`
+- 使用 `v0.103.3` 的最新 `sts2.dll` 重新编译后，源码仍为 `0 warning / 0 error`。
+- 完整 `build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过，PCK 导出链仍可用。
+- 最新 `godot.log` 已确认：
+  - manifest 被发现
+  - DLL / PCK 被加载
+  - `TogawasakikoMod.Initialize()` 被调用
+  - 主菜单可进入
+- 已用反射探针核对当前高风险 patch / 私有字段目标，未发现本轮更新导致的直接签名断裂。
+- 当前明显落后点：
+  - `references/pck-extract/sts2-main` 仍停在 `v0.98.3`，不能再作为 scene 事实源。
+  - 选人按钮、百科按钮仍是手工 UI 注入，依赖私有字段和节点名。
+  - merchant / rest site 自定义 scene 仍需实机确认原版节点契约没有变化。
+  - `jukebox` 仍需实机复测火堆 / 商店音频遮罩。
+  - 日志出现 `Asset not cached: res://images/ui/top_panel/character_icon_togawasakiko.png`，安装 PCK 已确认包含资源，当前先视为预加载提示而非资源缺失。
+- 完整记录见：
+  - `docs/t5-update-audit-v0.103.3-2026-06-10.md`
+
 ## 一点五点零 2026-04-19 第五批补充卡牌与 `Despair / 绝望` 接线
 
 - 已新增并接入正常奖励池的第五批补充牌：
@@ -721,8 +748,9 @@
   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node.png`
   - `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node_outline.png`
 - 2026-04-26 资源整理：
-  - 上述 `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node*` 已确认为唯一 canonical runtime 路径。
-  - 已删除内容完全重复的旧路径 `pack/images/packed/map/ancients/ancient_node_togawa_teiji*` 及其 import/runtime_imports 缓存，避免 Godot UID duplicate warning。
+  - 旧结论曾误判 `pack/images/packed/ancients/map_nodes/togawa_teiji_map_node*` 为唯一 canonical runtime 路径。
+  - 2026-05-05 T5 反编译原版确认该结论错误：`AncientEventModel.MapIconPath` 实际硬编码读取 `pack/images/packed/map/ancients/ancient_node_<id>*`。
+  - 因此 `pack/images/packed/map/ancients/ancient_node_togawa_teiji*` 已恢复为运行时必需路径，不能再作为重复资源删除。
 
 当前明确未做：
 

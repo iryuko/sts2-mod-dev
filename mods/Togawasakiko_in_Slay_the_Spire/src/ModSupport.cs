@@ -172,6 +172,8 @@ internal static class ModSupport
                 ["DEFEND_TOGAWASAKIKO.description"] = "Gain {Block:diff()} [gold]Block[/gold].",
                 ["SLANDER.title"] = "Slander",
                 ["SLANDER.description"] = "Deal {Damage:diff()} damage. Deal [blue]2[/blue] more for each [b][gold]Pressure[/gold][/b] on the target.",
+                ["CURSESLANDER.title"] = "Curseslander",
+                ["CURSESLANDER.description"] = "Deal {Damage:diff()} damage. Deal [blue]2[/blue] more for each [b][gold]Pressure[/gold][/b] on the target. Add {Cards:diff()} random pressure-generated cards to your hand. They cost [blue]0[/blue] this combat.",
                 ["UNENDURABLE.title"] = "Unendurable",
                 ["UNENDURABLE.description"] = "Gain {Block:diff()} [gold]Block[/gold]. Apply {PressureAmount:diff()} [b][gold]Pressure[/gold][/b].",
                 ["COMPOSE.title"] = "Compose",
@@ -298,6 +300,8 @@ internal static class ModSupport
                 ["DEFEND_TOGAWASAKIKO.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。",
                 ["SLANDER.title"] = "中伤",
                 ["SLANDER.description"] = "造成{Damage:diff()}点伤害。目标每有[b][blue]1[/blue][/b]层[b][gold]压力[/gold][/b]，额外造成[blue]2[/blue]点伤害。",
+                ["CURSESLANDER.title"] = "诅咒",
+                ["CURSESLANDER.description"] = "造成{Damage:diff()}点伤害。目标每有[b][blue]1[/blue][/b]层[b][gold]压力[/gold][/b]，额外造成[blue]2[/blue]点伤害。随机将{Cards:diff()}张压力衍生牌加入手牌。这些牌本场战斗费用变为[blue]0[/blue]。",
                 ["UNENDURABLE.title"] = "难熬",
                 ["UNENDURABLE.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。给予目标{PressureAmount:diff()}层[b][gold]压力[/gold][/b]。",
                 ["COMPOSE.title"] = "谱曲",
@@ -568,6 +572,13 @@ internal static class ModSupport
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-2.char"] = "...",
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-2.next"] = "Continue",
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-3.ancient"] = "Sigh... take these, and keep going.",
+                ["TOGAWA_TEIJI.talk.ANY.0-0.ancient"] = "So you are traveling with Sakiko.",
+                ["TOGAWA_TEIJI.talk.ANY.0-0.next"] = "Continue",
+                ["TOGAWA_TEIJI.talk.ANY.0-1.char"] = "We are.",
+                ["TOGAWA_TEIJI.talk.ANY.0-1.next"] = "Continue",
+                ["TOGAWA_TEIJI.talk.ANY.0-2.ancient"] = "Then take these. If you are to stand beside her, do not fall behind.",
+                ["TOGAWA_TEIJI.talk.ANY.0-2.next"] = "Continue",
+                ["TOGAWA_TEIJI.talk.ANY.0-3.char"] = "Understood.",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.title"] = "Keep Performing",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.description"] = "Gain [gold]1000[/gold] Gold."
             },
@@ -590,6 +601,13 @@ internal static class ModSupport
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-2.char"] = "……",
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-2.next"] = "继续",
                 ["TOGAWA_TEIJI.talk.TOGAWASAKIKO.0-3.ancient"] = "唉……拿上这些，继续走吧",
+                ["TOGAWA_TEIJI.talk.ANY.0-0.ancient"] = "你们是和祥子同行的人。",
+                ["TOGAWA_TEIJI.talk.ANY.0-0.next"] = "继续",
+                ["TOGAWA_TEIJI.talk.ANY.0-1.char"] = "是的。",
+                ["TOGAWA_TEIJI.talk.ANY.0-1.next"] = "继续",
+                ["TOGAWA_TEIJI.talk.ANY.0-2.ancient"] = "那就拿上这些。既然要站在她身边，就不要落后。",
+                ["TOGAWA_TEIJI.talk.ANY.0-2.next"] = "继续",
+                ["TOGAWA_TEIJI.talk.ANY.0-3.char"] = "明白了。",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.title"] = "继续演出吧",
                 ["TOGAWA_TEIJI.pages.INITIAL.options.CONTINUE_PERFORMING.description"] = "获得[gold]1000[/gold]金币。"
             }
@@ -1150,6 +1168,36 @@ internal static class ModSupport
         return card;
     }
 
+    public static async Task<IReadOnlyList<CardModel>> GiveRandomZeroCostPressureGeneratedCardsToPlayer(Player recipient, int count)
+    {
+        if (count <= 0 || recipient.Creature?.CombatState == null)
+        {
+            return Array.Empty<CardModel>();
+        }
+
+        IReadOnlyList<CardModel> canonicals = GetPressureGeneratedPoolCanonicals();
+        if (canonicals.Count == 0)
+        {
+            return Array.Empty<CardModel>();
+        }
+
+        List<CardModel> generatedCards = CardFactory.GetForCombat(
+                recipient,
+                canonicals,
+                count,
+                recipient.RunState.Rng.CombatCardGeneration)
+            .ToList();
+
+        foreach (CardModel card in generatedCards)
+        {
+            // Only the instances created by this effect are discounted; future same-name cards keep their normal costs.
+            card.EnergyCost.SetThisCombat(0, true);
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+        }
+
+        return generatedCards;
+    }
+
     public static async Task<CardModel?> GiveRandomColorlessCardToPlayer(Player recipient)
     {
         CardModel? card = CardFactory.GetDistinctForCombat(
@@ -1434,6 +1482,11 @@ internal static class ModSupport
     public static string GetNormalRarePortraitPath(string fileName)
     {
         return $"res://mod_assets/cards/normal/rare/{fileName}";
+    }
+
+    public static string GetAncientPortraitPath(string fileName)
+    {
+        return $"res://mod_assets/cards/ancient/{fileName}";
     }
 
     public static string GetEventGrantedPortraitPath(string fileName)

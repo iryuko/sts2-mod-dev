@@ -164,6 +164,7 @@ song 牌不单开另一套卡图目录。
 | 先古之民 relic 图 | `assets/relics/ancient/piano_of_mom.png` | 已入正式库 |
 | relic 附带入组卡图 | `assets/cards/relic_granted/barking_barking_barking.png` | 已入正式库 |
 | relic 附带入组卡图 | `assets/cards/relic_granted/pullman_crash.png` | 已入正式库 |
+| ancient 卡图 | `assets/cards/ancient/curseslander.png` | 已入正式库；`606x852`；已同步 `pack/` 并接入 runtime |
 | event-only 长期牌卡图 | `assets/cards/event_granted/shadow_of_the_past_i.png` | 已入正式库 |
 | event-only 长期牌卡图 | `assets/cards/event_granted/shadow_of_the_past_ii.png` | 已入正式库 |
 | event-only 长期牌卡图 | `assets/cards/event_granted/shadow_of_the_past_iii.png` | 已入正式库 |

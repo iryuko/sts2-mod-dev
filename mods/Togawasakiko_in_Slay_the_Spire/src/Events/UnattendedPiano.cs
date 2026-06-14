@@ -50,7 +50,7 @@ internal sealed class UnattendedPiano : EventModel
             return false;
         }
 
-        if (!concreteRunState.Players.Any(player => player.Character is Togawasakiko))
+        if (!concreteRunState.Players.All(player => player.Character is Togawasakiko))
         {
             return false;
         }
