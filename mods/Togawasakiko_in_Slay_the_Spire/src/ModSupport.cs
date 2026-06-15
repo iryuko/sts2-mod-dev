@@ -143,7 +143,12 @@ internal static class ModSupport
                 ["TOGAWASAKIKO.unlockText"] = "This character is currently injected by the mod at runtime.",
                 ["TOGAWASAKIKO.cardsModifierTitle"] = "Togawa Sakiko Cards",
                 ["TOGAWASAKIKO.cardsModifierDescription"] = "Uses Togawa Sakiko's starter deck and pressure cards.",
-                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "Not yet."
+                ["TOGAWASAKIKO.eventDeathPrevention"] = "I still have a performance to finish.",
+                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "Not yet.",
+                ["TOGAWASAKIKO.aromaPrinciple"] = "[sine][blue]Keep performing... no matter what it costs.[/blue][/sine]",
+                ["TOGAWASAKIKO.goldMonologue"] = "[sine]Money is only another stage prop...[/sine]",
+                ["TOGAWASAKIKO.banter.alive.endTurnPing"] = "Please... decide.",
+                ["TOGAWASAKIKO.banter.dead.endTurnPing"] = "..."
             },
             ["zhs"] = new Dictionary<string, string>
             {
@@ -157,7 +162,12 @@ internal static class ModSupport
                 ["TOGAWASAKIKO.unlockText"] = "该角色当前通过 mod 在运行时注入到选人界面。",
                 ["TOGAWASAKIKO.cardsModifierTitle"] = "丰川祥子卡池",
                 ["TOGAWASAKIKO.cardsModifierDescription"] = "使用丰川祥子的起始牌组与压力体系卡牌。",
-                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "还没到这一步。"
+                ["TOGAWASAKIKO.eventDeathPrevention"] = "演出还没有结束。",
+                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "还没到这一步。",
+                ["TOGAWASAKIKO.aromaPrinciple"] = "[sine][blue]继续演出……无论代价为何。[/blue][/sine]",
+                ["TOGAWASAKIKO.goldMonologue"] = "[sine]金钱也不过是舞台上的道具……[/sine]",
+                ["TOGAWASAKIKO.banter.alive.endTurnPing"] = "请快点……决定。",
+                ["TOGAWASAKIKO.banter.dead.endTurnPing"] = "……"
             }
         };
 
@@ -523,6 +533,7 @@ internal static class ModSupport
                 ["PIANO_OF_MOM.title"] = "Piano of Mom",
                 ["PIANO_OF_MOM.description"] = "At the start of each combat, add 1 random upgraded Song card to your hand.",
                 ["PIANO_OF_MOM.flavor"] = "The first sound that taught her what silence costs.",
+                ["SEA_GLASS.TOGAWASAKIKO.title"] = "Togawa Sea Glass",
                 ["BEST_COMPANION.title"] = "Best Companion(?)",
                 ["BEST_COMPANION.description"] = "Upon pickup, add [gold]Barking Barking Barking[/gold] to your deck.",
                 ["BEST_COMPANION.flavor"] = "A relic stub for Togawa Teiji's future ancient event.",
@@ -541,6 +552,7 @@ internal static class ModSupport
                 ["PIANO_OF_MOM.title"] = "妈妈的钢琴",
                 ["PIANO_OF_MOM.description"] = "每场战斗开始时，随机将1张升级后的歌曲牌加入手牌。",
                 ["PIANO_OF_MOM.flavor"] = "最初教会她沉默代价的声音。",
+                ["SEA_GLASS.TOGAWASAKIKO.title"] = "丰川海玻璃",
                 ["BEST_COMPANION.title"] = "最好的伙伴(?",
                 ["BEST_COMPANION.description"] = "获得时，将[gold]大狗大狗叫叫叫[/gold]加入你的牌组。",
                 ["BEST_COMPANION.flavor"] = "用于丰川定治先古之民事件的 relic 占位实现。",

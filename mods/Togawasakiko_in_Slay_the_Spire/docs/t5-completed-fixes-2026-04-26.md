@@ -455,3 +455,81 @@ Darv 生成初始选项时有一半概率加入 `DustyTome`。
 - `dotnet build mods/Togawasakiko_in_Slay_the_Spire/src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
 - 使用系统 Python 路径重跑 `./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过，并生成新的 PCK。
 - 已确认 `pack/mod_assets/cards/ancient/curseslander.png.import` 与 `pack/runtime_imports/curseslander*.ctex` 存在。
+
+## 10. `Aroma of Chaos / 混沌芳香` 升级牌后事件卡住
+
+### 现象
+
+- 祥子遭遇普通事件 `Aroma of Chaos / 混沌芳香`。
+- 选择 `Maintain Control / 维持理智`，并在牌组中选择一张牌升级后，事件界面无法继续互动。
+
+### 原版参考
+
+反编译原版 `MegaCrit.Sts2.Core.Models.Events.AromaOfChaos.MaintainControl()` 确认流程为：
+
+- `CardSelectCmd.FromDeckForUpgrade(...)` 选择牌。
+- 若有选择结果，调用 `CardCmd.Upgrade(cardModel)`。
+- 然后读取 `characters` 表中的 `<角色ID>.aromaPrinciple`。
+- 将该文本作为 `AromaPrinciple` 变量插入事件结束描述。
+
+### 根因
+
+`TOGAWASAKIKO.aromaPrinciple` 缺失。
+
+因此升级本身已经完成，但原版事件在设置结束描述时读取：
+
+- table：`characters`
+- key：`TOGAWASAKIKO.aromaPrinciple`
+
+触发 `LocException`，导致 `EventOption.Chosen()` 的异步任务中断，事件没有进入 finished 状态。
+
+这不是升级牌命令的问题，也不需要 patch `AromaOfChaos`。
+
+### 修复
+
+在 `src/ModSupport.cs` 的角色本地化 override 中补充：
+
+- `eng/characters.json`：`TOGAWASAKIKO.aromaPrinciple`
+- `zhs/characters.json`：`TOGAWASAKIKO.aromaPrinciple`
+
+修复保持原版事件流程不变，只补齐自定义角色必须提供的角色本地化字段。
+
+### 同类缺 key 扫描
+
+继续扫描反编译结果后，确认当前原版还有以下按角色 id 拼接 localization key 的路径：
+
+- `SunkenTreasury.SecondChest()`：
+  - `characters/<角色ID>.goldMonologue`
+  - 选择大宝箱、获得金币并加入 `Greed` 后用于结束描述。
+- `NEventOptionButton.OnRelease()`：
+  - `CharacterModel.EventDeathPreventionLine`
+  - 实际读取 `characters/<角色ID>.eventDeathPrevention`
+  - 多人局中事件选项会杀死当前玩家时用于死亡保护气泡。
+- `FlavorSynchronizer.CreateEndTurnPingDialogueIfNecessary()`：
+  - `characters/<角色ID>.banter.alive.endTurnPing`
+  - `characters/<角色ID>.banter.dead.endTurnPing`
+  - 多人 end-turn ping 对话气泡使用。
+- `SeaGlass.Title`：
+  - `relics/SEA_GLASS.<角色ID>.title`
+  - 不是普通事件，但属于同一类“原版按角色拼 key”的自定义角色风险。
+
+已补齐：
+
+- `TOGAWASAKIKO.goldMonologue`
+- `TOGAWASAKIKO.eventDeathPrevention`
+- `TOGAWASAKIKO.banter.alive.endTurnPing`
+- `TOGAWASAKIKO.banter.dead.endTurnPing`
+- `SEA_GLASS.TOGAWASAKIKO.title`
+
+并用集合比较确认：祥子当前已经覆盖原版内置角色共有的 `characters` key 后缀。
+
+### 验证状态
+
+- `dotnet build mods/Togawasakiko_in_Slay_the_Spire/src/Togawasakiko_in_Slay_the_Spire.csproj -c Release` 通过，`0 warning / 0 error`。
+- `./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release` 通过。
+- `./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire --apply --replace-target` 已覆盖安装。
+- release / installed 哈希已核对一致：
+  - dll：`72793eaff2e9f942a885653cbd2384e1eb5e63fc558a9e01ed57b597d4054ca6`
+  - pck：`34c5b3d1f418c9d77cf9878e650a24222adfaab6d4ed3b957f168a233f371b49`
+  - manifest：`1b77b1cc7269ccdd539c30e63cffb1c25613e914d5a957b0a6d9c7971d44a849`
+- 待实机复测：重新进入 `Aroma of Chaos`，选择升级牌后应正常显示结束描述并允许离开事件。
