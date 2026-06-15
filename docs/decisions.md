@@ -38,8 +38,12 @@
 ## 已收敛的技术方向
 
 - 当前 macOS 本机应优先按 `SlayTheSpire2.app/Contents/MacOS/mods/` 作为安装根目录处理。
-- 当前最小安装产物模型以 `<ModName>.dll` 与 `<ModName>.pck` 为主。
-- `mod_manifest.json` 当前应视为 PCK 内资源，而不是默认外部安装产物。
+- `v0.99.1` 起，当前最小安装产物模型应按以下三件处理：
+  - `<ModId>.dll`
+  - `<ModId>.pck`
+  - 外部 `mod_manifest.json`
+- `v0.99.1` 的 loader 会先递归查找外部 `.json` manifest，再根据其中的 `id / has_dll / has_pck` 去加载同目录下的 DLL 与 PCK。
+- 因此，`mod_manifest.json` 不再只视为 PCK 内资源；当前应默认同时维护可供 loader 读取的外部 manifest。
 
 ## 当前不值得继续空转的旧思路
 
