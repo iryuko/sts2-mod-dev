@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -64,6 +65,16 @@ internal sealed partial class JukeboxRunInjector : Node
         }
 
         _currentOverlay.HandleRoomEntered(room);
+    }
+
+    public static void PreserveCustomPlaybackAfterRunMusicUpdate(string source)
+    {
+        if (_currentOverlay == null || !GodotObject.IsInstanceValid(_currentOverlay))
+        {
+            return;
+        }
+
+        _currentOverlay.HandleRunMusicUpdated(source);
     }
 
     public static void StopPlaybackForRunExit()
@@ -159,6 +170,7 @@ internal sealed partial class JukeboxOverlay : Control
     private bool _suppressVolumeSignal;
     private bool _suppressTrackSignal;
     private bool _suppressProgressSignal;
+    private bool _playerFinishedConnected;
 
     public void InitializeForInjection(Control host)
     {
@@ -195,11 +207,13 @@ internal sealed partial class JukeboxOverlay : Control
 
     public override void _ExitTree()
     {
-        if (_player != null)
+        if (_player != null && _playerFinishedConnected)
         {
             _player.Finished -= OnTrackFinished;
-            _player = null;
+            _playerFinishedConnected = false;
         }
+
+        _player = null;
     }
 
     private void EnsureUiBuilt()
@@ -580,11 +594,58 @@ internal sealed partial class JukeboxOverlay : Control
             return;
         }
 
+        ModSupport.LogInfo($"Jukebox preserving custom track after room entered: room={room?.RoomType.ToString() ?? "unknown"} track={_activeTrackPath}");
+        EnsureCustomTrackPlaying(forceReload: true);
+        MuteBgmBusForCustomTrackIfNeeded();
+        _ = RestoreCustomTrackAfterRoomSettledAsync(room?.RoomType.ToString() ?? "unknown");
+    }
+
+    public void HandleRunMusicUpdated(string source)
+    {
+        if (!IsCustomTrackActive())
+        {
+            return;
+        }
+
         EnsureCustomTrackPlaying();
         MuteBgmBusForCustomTrackIfNeeded();
     }
 
-    private void EnsureCustomTrackPlaying()
+    private async Task RestoreCustomTrackAfterRoomSettledAsync(string roomLabel)
+    {
+        try
+        {
+            for (int frame = 0; frame < 3; frame++)
+            {
+                if (!IsCustomTrackActive())
+                {
+                    return;
+                }
+
+                SceneTree? tree = GetTree();
+                if (tree == null)
+                {
+                    return;
+                }
+
+                await ToSignal(tree, SceneTree.SignalName.ProcessFrame);
+                if (!GodotObject.IsInstanceValid(this) || !IsCustomTrackActive())
+                {
+                    return;
+                }
+
+                ModSupport.LogInfo($"Jukebox delayed room restore frame={frame + 1} room={roomLabel} track={_activeTrackPath}");
+                EnsureCustomTrackPlaying(forceReload: frame == 0);
+                MuteBgmBusForCustomTrackIfNeeded();
+            }
+        }
+        catch (Exception ex)
+        {
+            ModSupport.LogWarn("Jukebox delayed room restore failed: " + ex);
+        }
+    }
+
+    private void EnsureCustomTrackPlaying(bool forceReload = false)
     {
         if (string.IsNullOrEmpty(_activeTrackPath))
         {
@@ -597,11 +658,25 @@ internal sealed partial class JukeboxOverlay : Control
             return;
         }
 
+        float resumePosition = 0.0f;
+        if (forceReload && _player.Stream != null && _player.IsPlaying())
+        {
+            resumePosition = _player.GetPlaybackPosition();
+        }
+
+        if (forceReload)
+        {
+            _streamCache.Remove(_activeTrackPath);
+            _player.Stop();
+            _player.Stream = null;
+        }
+
         if (_player.Stream == null)
         {
             AudioStream? stream = LoadTrack(_activeTrackPath);
             if (stream == null)
             {
+                ModSupport.LogWarn("Jukebox could not restore active track after room change: " + _activeTrackPath);
                 return;
             }
 
@@ -609,10 +684,18 @@ internal sealed partial class JukeboxOverlay : Control
         }
 
         _player.Bus = ResolveAudioBus();
-        if (!_player.IsPlaying())
+        if (forceReload || !_player.IsPlaying())
         {
             _player.Play();
+            if (resumePosition > 0.0f && _player.Stream.GetLength() > resumePosition)
+            {
+                _player.Seek(resumePosition);
+            }
         }
+
+        ApplyVolumeSliderToPlayer();
+        SetProgressEnabled(true);
+        SetVolumeEnabled(true);
     }
 
     private bool IsCustomTrackActive()
@@ -736,9 +819,10 @@ internal sealed partial class JukeboxOverlay : Control
 
     private void AttachFreshPlayer()
     {
-        if (_player != null)
+        if (_player != null && _playerFinishedConnected)
         {
             _player.Finished -= OnTrackFinished;
+            _playerFinishedConnected = false;
         }
 
         _player = GetOrCreateSharedPlayer();
@@ -748,8 +832,8 @@ internal sealed partial class JukeboxOverlay : Control
             return;
         }
 
-        _player.Finished -= OnTrackFinished;
         _player.Finished += OnTrackFinished;
+        _playerFinishedConnected = true;
     }
 
     private static AudioStreamPlayer? GetOrCreateSharedPlayer()

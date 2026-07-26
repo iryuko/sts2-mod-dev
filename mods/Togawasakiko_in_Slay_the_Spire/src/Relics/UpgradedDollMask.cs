@@ -28,7 +28,7 @@ internal sealed class UpgradedDollMask : RelicModel
 
         foreach (var enemy in ModSupport.GetEnemyCreatures(player.Creature))
         {
-            await ModSupport.ApplyPressure(enemy, 3m, player.Creature, null);
+            await ModSupport.ApplyPressure(choiceContext, enemy, 3m, player.Creature, null);
         }
 
         Flash();

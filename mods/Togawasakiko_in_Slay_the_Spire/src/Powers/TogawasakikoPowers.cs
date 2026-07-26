@@ -49,10 +49,10 @@ internal sealed class SakikoDespairEchoPower : PowerModel
             return;
         }
 
-        await ModSupport.ApplyPressure(target, Amount * 3m, dealer, cardSource);
+        await ModSupport.ApplyPressure(choiceContext, target, Amount * 3m, dealer, cardSource);
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side == CombatSide.Player)
         {
@@ -148,7 +148,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
         }
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (Owner != null && side == Owner.Side)
         {
@@ -167,7 +167,7 @@ internal sealed class SocialWithdrawalPower : PowerModel
 
     public override LocString Description => new("powers", "SOCIAL_WITHDRAWAL_POWER.description");
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (Owner == null || side != Owner.Side || !Owner.IsAlive)
         {
@@ -198,7 +198,7 @@ internal sealed class InnocencePower : PowerModel
 
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(Owner))
         {
-            await PowerCmd.Apply<SocialWithdrawalPower>(enemy, Amount, Owner, null, false);
+            await ModSupport.ApplyPower<SocialWithdrawalPower>(choiceContext, enemy, Amount, Owner, null, false);
         }
     }
 }
@@ -226,10 +226,10 @@ internal sealed class InferiorityPower : PowerModel
             return;
         }
 
-        await PowerCmd.Apply<StrengthPower>(Owner, -1m, dealer, cardSource, false);
+        await ModSupport.ApplyPower<StrengthPower>(choiceContext, Owner, -1m, dealer, cardSource, false);
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (Owner != null && side == Owner.Side)
         {
@@ -282,6 +282,7 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
     }
 
     public override async Task AfterPowerAmountChanged(
+        PlayerChoiceContext choiceContext,
         PowerModel power,
         decimal amount,
         Creature? applier,
@@ -298,19 +299,19 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
             return;
         }
 
-        if (power is WeakPower && amount > 0 && await ModSupport.TryConsumePressure(power.Owner, 2, applier, cardSource))
+        if (power is WeakPower && amount > 0 && await ModSupport.TryConsumePressure(choiceContext, power.Owner, 2, applier, cardSource))
         {
             await ModSupport.GiveGeneratedCardToPlayer<PersonaDissociation>(recipient);
             return;
         }
 
-        if (power is VulnerablePower && amount > 0 && await ModSupport.TryConsumePressure(power.Owner, 3, applier, cardSource))
+        if (power is VulnerablePower && amount > 0 && await ModSupport.TryConsumePressure(choiceContext, power.Owner, 3, applier, cardSource))
         {
             await ModSupport.GiveGeneratedCardToPlayer<AllYouThinkAboutIsYourself>(recipient);
             return;
         }
 
-        if ((power is StrengthPower or DexterityPower) && amount < 0 && await ModSupport.TryConsumePressure(power.Owner, 1, applier, cardSource))
+        if ((power is StrengthPower or DexterityPower) && amount < 0 && await ModSupport.TryConsumePressure(choiceContext, power.Owner, 1, applier, cardSource))
         {
             await ModSupport.GiveGeneratedCardToPlayer<SocialWithdrawal>(recipient);
             return;
@@ -318,7 +319,7 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
 
     }
 
-    public override async Task AfterTurnEnd(PlayerChoiceContext choiceContext, CombatSide side)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (Owner == null || side != Owner.Side || !Owner.IsAlive)
         {
@@ -344,7 +345,7 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
         {
             foreach (Creature enemy in ModSupport.GetEnemyCreatures(Owner))
             {
-                await ModSupport.ApplyPressure(enemy, 10m, Owner, null);
+                await ModSupport.ApplyPressure(choiceContext, enemy, 10m, Owner, null);
             }
         }
 

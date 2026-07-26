@@ -64,7 +64,7 @@ internal sealed class AveMujica : TogawasakikoCard, ISongCard
             return;
         }
 
-        await PowerCmd.Apply<AveMujicaPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<AveMujicaPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -105,7 +105,7 @@ internal sealed class AWonderfulWorldYetNowhereToBeFound : TogawasakikoCard, ISo
             await PowerCmd.Remove(existingPower);
         }
 
-        await PowerCmd.Apply<MirrorFlowerWaterMoonPower>(Owner.Creature, damageCap, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<MirrorFlowerWaterMoonPower>(choiceContext, Owner.Creature, damageCap, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -155,11 +155,11 @@ internal sealed class Angles : TogawasakikoCard, ISongCard
         {
             if (shouldApplyInferiority)
             {
-                await PowerCmd.Apply<InferiorityPower>(enemy, 1m, ownerCreature, this, false);
+                await ModSupport.ApplyPower<InferiorityPower>(choiceContext, enemy, 1m, ownerCreature, this, false);
                 continue;
             }
 
-            await PowerCmd.Apply<VulnerablePower>(enemy, 1m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<VulnerablePower>(choiceContext, enemy, 1m, ownerCreature, this, false);
         }
     }
 
@@ -215,7 +215,7 @@ internal sealed class Ether : TogawasakikoCard, ISongCard
         }
 
         decimal pressureAmount = DynamicVars["PressureAmount"].BaseValue;
-        await ModSupport.ApplyPressure(target, pressureAmount, ownerCreature, this);
+        await ModSupport.ApplyPressure(choiceContext, target, pressureAmount, ownerCreature, this);
     }
 
     protected override void OnUpgrade()
@@ -251,7 +251,7 @@ internal sealed class GeorgetteMeGeorgetteYou : TogawasakikoCard, ISongCard
         Creature target = cardPlay.Target;
         if (ownerCreature.CurrentHp >= target.CurrentHp)
         {
-            await ModSupport.ApplyPressure(target, DynamicVars["PressureAmount"].BaseValue, ownerCreature, this);
+            await ModSupport.ApplyPressure(choiceContext, target, DynamicVars["PressureAmount"].BaseValue, ownerCreature, this);
             return;
         }
 
@@ -300,7 +300,7 @@ internal sealed class SymbolI : TogawasakikoCard, ISongCard
                 .Execute(choiceContext);
         }
 
-        await PowerCmd.Apply<SymbolIPower>(ownerCreature, 1m, ownerCreature, this, false);
+        await ModSupport.ApplyPower<SymbolIPower>(choiceContext, ownerCreature, 1m, ownerCreature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -330,7 +330,7 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
         }
 
         Creature ownerCreature = Owner.Creature;
-        CombatState? combatState = ownerCreature.CombatState;
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
         if (combatState == null)
         {
             return;
@@ -338,16 +338,16 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(combatState)
+            .TargetingAllOpponentsCompat(combatState)
             .Execute(choiceContext);
 
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature).Where(enemy => enemy.IsAlive))
         {
-            await PowerCmd.Apply<InferiorityPower>(enemy, 1m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<InferiorityPower>(choiceContext, enemy, 1m, ownerCreature, this, false);
             await ModSupport.TryGenerateInferiorityPressureCard(enemy, ownerCreature, this);
         }
 
-        await PowerCmd.Apply<SymbolIIPower>(ownerCreature, 1m, ownerCreature, this, false);
+        await ModSupport.ApplyPower<SymbolIIPower>(choiceContext, ownerCreature, 1m, ownerCreature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -412,7 +412,7 @@ internal sealed class SymbolIii : TogawasakikoCard, ISongCard
         int extraBlock = DynamicVars["Increase"].IntValue;
         BuffFromPlay(extraBlock);
         (DeckVersion as SymbolIii)?.BuffFromPlay(extraBlock);
-        await PowerCmd.Apply<SymbolIIIPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<SymbolIIIPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -455,7 +455,7 @@ internal sealed class SymbolIv : TogawasakikoCard, ISongCard
             return;
         }
 
-        await PowerCmd.Apply<SymbolIVPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<SymbolIVPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -491,7 +491,7 @@ internal sealed class CrucifixX : TogawasakikoCard, ISongCard
         }
 
         Creature ownerCreature = Owner.Creature;
-        CombatState? combatState = ownerCreature.CombatState;
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
         if (combatState == null)
         {
             return;
@@ -507,7 +507,7 @@ internal sealed class CrucifixX : TogawasakikoCard, ISongCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(combatState)
+            .TargetingAllOpponentsCompat(combatState)
             .WithHitCount(totalHits)
             .Execute(choiceContext);
     }
@@ -538,7 +538,7 @@ internal sealed class Face : TogawasakikoCard, ISongCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await PowerCmd.Apply<FaceReactionPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<FaceReactionPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -575,7 +575,7 @@ internal sealed class SakiMovePlz : TogawasakikoCard
             return;
         }
 
-        await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<VulnerablePower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -621,7 +621,7 @@ internal sealed class MusicOfTheCelestialSphere : TogawasakikoCard, ISongCard
                 continue;
             }
 
-            await PowerCmd.Apply<StrengthPower>(enemy, -strengthLoss, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<StrengthPower>(choiceContext, enemy, -strengthLoss, Owner.Creature, this, false);
         }
     }
 
@@ -657,7 +657,7 @@ internal sealed class KillKiss : TogawasakikoCard, ISongCard
 
             if (upgradedPower == null)
             {
-                await PowerCmd.Apply<KillKissPlusPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+                await ModSupport.ApplyPower<KillKissPlusPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
             }
 
             return;
@@ -670,7 +670,7 @@ internal sealed class KillKiss : TogawasakikoCard, ISongCard
 
         if (normalPower == null)
         {
-            await PowerCmd.Apply<KillKissPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<KillKissPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
         }
     }
 }
@@ -737,8 +737,8 @@ internal sealed class TreasurePleasure : TogawasakikoCard, ISongCard
             return;
         }
 
-        await PowerCmd.Apply<PersonaDissociationPower>(Owner.Creature, 1m, Owner.Creature, this, false);
-        await PowerCmd.Apply<MagneticForceHellWargodPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<PersonaDissociationPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<MagneticForceHellWargodPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -909,7 +909,7 @@ internal sealed class MasqueradeRhapsodyRequest : TogawasakikoCard, ISongCard
             return;
         }
 
-        await ModSupport.ApplyPressure(cardPlay.Target, pressureToApply, Owner.Creature, this);
+        await ModSupport.ApplyPressure(choiceContext, cardPlay.Target, pressureToApply, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
@@ -955,8 +955,8 @@ internal sealed class STheWay : TogawasakikoCard, ISongCard
             DynamicVars.HpLoss.BaseValue,
             ValueProp.Unblockable | ValueProp.Unpowered | ValueProp.Move,
             this);
-        await PowerCmd.Apply<TheWayTemporaryDexterityLossPower>(Owner.Creature, 1m, Owner.Creature, this, false);
-        await PowerCmd.Apply<TheWayTemporaryDexterityLossPower>(target, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<TheWayTemporaryDexterityLossPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<TheWayTemporaryDexterityLossPower>(choiceContext, target, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -1064,9 +1064,9 @@ internal sealed class Sophie : TogawasakikoCard, ISongCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await PowerCmd.Apply<InferiorityPower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<InferiorityPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
         await ModSupport.TryGenerateInferiorityPressureCard(cardPlay.Target, Owner.Creature, this);
-        await PowerCmd.Apply<WeakPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<WeakPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()

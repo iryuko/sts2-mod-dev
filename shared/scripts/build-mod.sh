@@ -263,6 +263,8 @@ manifest = {
     "dependencies": source.get("dependencies", []),
     "affects_gameplay": source.get("affects_gameplay", True),
 }
+if source.get("min_game_version"):
+    manifest["min_game_version"] = source["min_game_version"]
 
 output_manifest.write_text(json.dumps(manifest, ensure_ascii=True, indent=2) + "\n")
 PY

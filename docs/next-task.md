@@ -1,75 +1,61 @@
 # 下一轮任务
 
-## 本轮任务
+记录日期：2026-07-26
 
-围绕“干净版” `CrossCharacterCard` 做奖励池路径验证：
+## 当前目标
 
-- 已安装新版 `CrossCharacterCard`
-- 确认游戏是否正常加载该 mod
-- 验证 `Silent` 正常战后奖励里是否会出现 `BodySlam`
-- 验证选择后是否能正常进入牌组、抽到并打出
-- 验证集中规则表写法是否保持与旧版同样的行为
+继续稳定：
 
-## 预期输出物
+- `mods/Togawasakiko_in_Slay_the_Spire`
 
-- 一条加载结论：
-  - `CrossCharacterCard` 是否被游戏识别
-  - 是否出现 mod initializer 异常
-- 一条功能结论：
-  - `Silent` 是否能正常开新 run
-  - 正常奖励里是否会出现 `BodySlam`
-- 一条可用性结论：
-  - 通过奖励拿到的 `BodySlam` 是否能正常抽到并打出
-- 一条结构结论：
-  - `CrossCharacterCard` 是否已经改成“集中规则表维护”的形态
-- 文档更新：
-  - `docs/current-status.md`
-  - `docs/next-task.md`
-  - `docs/thread-handoff.md`
+不要扩新卡、新机制或新的 UI 框架。
 
-## 新增支线
+## 优先级
 
-围绕 `SilentBonusRelic` 做第一轮 relic 注入验证：
+1. 让 Darv 回归原版流程
+   - 当前已经有合法 Ancient 卡 `Curseslander`。
+   - 对照 v0.107.1 原版 `Darv.GenerateInitialOptions()` 与 `DustyTome.SetupForPlayer()`。
+   - 若原版能够自然处理祥子卡池，应删除 `DarvPatches.cs`，不要继续复制原版选项表。
+2. 实机闭环 `UnattendedPiano` 同进程 SL
+   - 看完三张 Shadow。
+   - SL 后再次选择弹琴。
+   - 确认选项、发牌、事件结束和音乐 cleanup 全部正常。
+3. 用同一 release 做 Windows v0.107.1 回归
+   - 牌是否仍卡在屏幕中央。
+   - 压力兑换是否触发。
+   - 获取完整 `godot.log`、触发卡名和包 sha256。
+4. 验证 jukebox 当前生命周期
+   - 非战斗房选曲后依次进入 event、merchant、fire、combat。
+   - 自定义曲目应持续，原版 BGM 不叠声。
+   - 选择 `Off (null)` 和离开 run 后应恢复原版音乐。
+5. 做角色主流程回归
+   - 战斗奖励、商店、`Compose`。
+   - `KillKiss` 击杀最后敌人的结算。
+   - `Aroma of Chaos` 升级后离开事件。
+   - Teiji 与 Touch of Orobas。
 
-- 确认游戏是否正常加载该 mod
-- 用 `Silent` 开新 run
-- 进入 run 后立刻查看 relic 栏
-- 验证是否一开始就拥有：
-  - `SneckoSkull`
-  - `Shuriken`
-- 如果仍失败，优先判断：
-  - `RunStarted` 是否没命中
-  - 还是 `AddRelicInternal(..., silent: true)` 没有带来可见效果
+## 同轮静态修复候选
 
-围绕 `UnifiedSavePath` 做跨平台实现整理：
+只有在上述主流程不被阻塞时处理：
 
-- 确认当前源码版是否已具备：
-  - Windows 走 Harmony patch
-  - macOS / 非 Windows 走 flag-thread workaround
-- 如果后续有 Windows 实机条件，再单独验证 Windows 分支是否保持原版行为
+- 把 `MagneticForceHellWargodPower` 的共享 `HashSet<CardModel>` 改为每个 mutable power 独立状态。
+- 把卡牌库等私有 `FieldRefAccess` 改为惰性解析和 feature-local fail-closed，或改回原版公开流程。
 
-## 建议执行顺序
+## 证据要求
 
-1. 启动游戏并进入 `Silent` 单人新 run
-2. 正常推进到数场战斗奖励
-3. 观察 `BodySlam` 是否作为正常奖励出现
-4. 选择后确认它能正常进牌组、抽到并打出
-5. 读取日志，确认 `CrossCharacterCard` 初始化是否成功且无异常
-6. 单独观察 `SilentBonusRelic`：
-   - 新 run 一开始是否就拥有 `SneckoSkull` 和 `Shuriken`
-   - 是否出现新的异常日志
+每项必须区分：
 
-## 不要做的事情
+- 源码已改。
+- build 通过。
+- 已安装且哈希一致。
+- Mac 实机通过。
+- Win 实机通过。
 
-- 不要一开始就扩展到多张牌、多角色配置。
-- 不要引入 Harmony。
-- 不要重新引入运行时直接塞牌逻辑，除非再次需要做诊断。
-- 不要把“理论可行”写成“已实机确认”。
-- 不要把 `SilentBonusRelic` 的新实现直接写成“已经成功”，直到拿到实机结果。
+只有最后两项才能支持相应平台“已修复”的结论。
 
 ## 完成标准
 
-- 能明确回答：
-  - 首版 `CrossCharacterCard` 是否成功加载
-  - `BodySlam` 是否已经通过卡池扩展稳定进入 `Silent` 正常奖励池
-  - 该实现是否在不干扰开局流程的前提下可复用到更多跨角色卡
+- Darv 不再依赖复制原版流程的补丁。
+- `UnattendedPiano` SL 路线实机闭环。
+- Win 卡牌与 jukebox 两项都有同版本日志和明确结论。
+- 当前状态、角色状态和时间线同步更新。

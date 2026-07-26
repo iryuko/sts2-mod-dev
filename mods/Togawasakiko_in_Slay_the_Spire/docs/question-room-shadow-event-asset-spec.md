@@ -1,6 +1,8 @@
 # 普通问号房 Shadow 事件资产规格
 
-日期：2026-04-20
+初建日期：2026-04-20；现状校订：2026-07-26
+
+> 档案状态：本文件形成时事件尚处于资产规划阶段，现在 `UnattendedPiano`、两张事件主图、事件音乐、3 张 Shadow portrait 和升级面具均已进入 runtime。以下结构仍可用于理解资源来源；当前完成度见 [资产状态](asset-status.md)。
 
 ## 一 本文件定位
 
@@ -72,7 +74,7 @@
 - 普通事件可以拥有独立背景 scene。
 - 但对我们当前最小 `Shadow` 事件而言，这条目前只应记为“高概率可选项”，不是第一个阻塞项。
 
-## 三 当前对 Shadow 事件的资产需求分层
+## 三 Shadow 事件资产需求与当前落位
 
 ### 1. 第一优先级：最小可运行必需资产
 
@@ -80,11 +82,12 @@
 
 | 对象 | 建议内部名 | 建议正式路径 | 当前状态 | 备注 |
 | --- | --- | --- | --- | --- |
-| 普通事件主图 | `shadow_of_the_past_event` | `assets/events/question_room/shadow_of_the_past/shadow_of_the_past_event.png` | 待准备 | 高优先级；建议最终同步到 `pack/images/events/shadow_of_the_past_event.png` |
-| `Shadow I` 卡图 | `shadow_of_the_past_i.png` | `assets/cards/event_granted/shadow_of_the_past_i.png` | 当前仍为运行时占位 | 当前代码已经按 `event_granted` 卡图路径接线 |
-| `Shadow II` 卡图 | `shadow_of_the_past_ii.png` | `assets/cards/event_granted/shadow_of_the_past_ii.png` | 当前仍为运行时占位 | 同上 |
-| `Shadow III` 卡图 | `shadow_of_the_past_iii.png` | `assets/cards/event_granted/shadow_of_the_past_iii.png` | 当前仍为运行时占位 | 同上 |
-| `UpgradedDollMask` relic 图 | `upgraded_doll_mask.png` | `assets/relics/starter/upgraded_doll_mask.png` | 当前仍复用 `doll_mask` | `Shadow III` 奖励触发后需要视觉上可区分升级态 |
+| 初始事件主图 | `start.png` | `assets/events/question_room/shadow_of_the_past/start.png` | 已入库并接 runtime | runtime 为 `pack/images/events/unattended_piano.png` |
+| 弹琴事件主图 | `shadow_piano.png` | `assets/events/question_room/shadow_of_the_past/shadow_piano.png` | 已入库并接 runtime | runtime 为 `pack/images/events/unattended_piano_shadow.png` |
+| `Shadow I` 卡图 | `shadow_of_the_past_i.png` | `assets/cards/event_granted/shadow_of_the_past_i.png` | 已入库并接 runtime | 当前代码按 `event_granted` 路径接线 |
+| `Shadow II` 卡图 | `shadow_of_the_past_ii.png` | `assets/cards/event_granted/shadow_of_the_past_ii.png` | 已入库并接 runtime | 同上 |
+| `Shadow III` 卡图 | `shadow_of_the_past_iii.png` | `assets/cards/event_granted/shadow_of_the_past_iii.png` | 已入库并接 runtime | 同上 |
+| `UpgradedDollMask` relic 图 | `upgraded_doll_mask.png` | `assets/relics/starter/upgraded_doll_mask.png` | 已入库并接 runtime | 与基础面具分开落位 |
 
 ### 2. 第二优先级：建议准备，但不是第一轮阻塞
 

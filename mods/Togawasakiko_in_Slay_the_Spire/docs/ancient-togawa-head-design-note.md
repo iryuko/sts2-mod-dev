@@ -1,10 +1,12 @@
 # 丰川定治先古之民事件设计记录
 
-日期：2026-04-03
+初建日期：2026-04-03；实现状态校订：2026-07-26
 
-## 一 当前冻结结论
+> 档案状态：本文件保存丰川定治 Ancient 的设计来源和对白口径。事件、地图节点、头像、背景和奖励已经接入；当前技术债是 `DarvPatches.cs` 仍复制原版选项流程，与本事件是否存在无关。实现事实见 [当前状态](current-status.md)。
 
-当前项目新增的这位先古之民，设计前提固定为：
+## 一 初始设计结论（历史）
+
+2026-04-03 形成的初始设计前提为：
 
 - 名称：`丰川定治`
 - 定位：`丰川祥子专属先古之民`
@@ -13,11 +15,17 @@
   - 只有当前 run 选择角色为 `Togawasakiko` 时，才允许进入该先古之民遭遇池
   - 装载 mod 但未选择 `Togawasakiko` 时，不会偶遇该先古之民
 
-这条限制的目标很明确：
+这条限制当时的目标很明确：
 
 - 不为 `Ironclad / Silent / Defect / Necrobinder / Regent` 额外补角色回应文本
 - 只维护 `丰川祥子` 这一套对白
 - 降低“角色不匹配却进入事件”“缺回应文本”“事件分支缺字串”这类 bug 风险
+
+当前多人实现已取代上述单角色限制：
+
+- run 中至少存在一名 `Togawasakiko` 时，Teiji 才会进入 Act 3 Ancient 候选。
+- 混合多人队伍允许进入。
+- 祥子使用角色专属 dialogue；其他队友使用 agnostic dialogue。
 
 ## 二 副标题
 
@@ -130,9 +138,8 @@
   - 当前与 `incoming_assets/ancients/map_node/mapnode.png` 一致
   - 已从旧 `208x208` 稿扩到当前库存的 `416x416`
 - 地图节点 outline：
-  - 已以 `assets/ancients/map_nodes/ancient_map_node_prototype_outline.png` 形式入正式库存
-  - 当前与 `incoming_assets/ancients/map_node_outline/mapnode_outline.png` 一致
-  - 当前仍未接入 runtime
+  - 生产原型仍保存在 `assets/ancients/map_nodes/ancient_map_node_prototype_outline.png`
+  - 正式 Teiji 节点与 outline 已进入 `assets/` 和 `pack/`
 - 对话头像：
   - 已以 `assets/ancients/dialogue_icons/ancient_dialogue_icon_prototype.png` 形式入正式库存
   - 当前与 `incoming_assets/ancients/dialogue_icon/丰川定治.png` 一致
@@ -141,26 +148,23 @@
   - 当前正式库存来自 auto-generated outline
   - `incoming_assets/ancients/dialogue_icon_outline/丰川定治.png` 未与正式库存 outline 对齐，后续整理时不能直接视为最终版
 - 事件主图：
-  - `incoming_assets/ancients/event_main/丰川定治.png` 已存在
-  - 当前尺寸为 `2560x1244`
-  - 仍仅是来稿，尚未整理进 `assets/` 或 `pack/`
+  - 原始来稿仍保留在 `incoming_assets/`
+  - 正式图已整理为 `assets/ancients/event_main/togawa_teiji.png`
+  - runtime 为 `pack/images/events/togawa_teiji.png`
 
 当前结论：
 
 - `BestCompanion` 与 `BarkingBarkingBarking` 已不是“仅源码 stub”，而是已完成资源安装的对象
 - `BlackLimousine` 与 `PullmanCrash` 已完成源码接线，并已于 2026-04-04 用正式来稿替换到 `assets/` / `pack/`
-- 丰川定治作为先古之民的地图节点图与轮廓图，当前已从 `prototype` 库存复制出 runtime 占位对象
+- 丰川定治的地图节点、轮廓图、对话头像、事件主图和背景 scene 已进入 runtime
 - `TogawaTeiji : AncientEventModel` 已接入源码，当前三选项为：
   - `BestCompanion`
   - `BlackLimousine`
   - `继续演出吧`：获得 `1000 gold`
 - 当前源码侧已限制为：
-  - 仅注入 `Act 3` 的 ancient 候选池
-  - `Hook.ShouldAllowAncient(...)` 仍要求当前角色为 `Togawasakiko`
-- 因此当前冻结口径应写成：
+  - 仅注入 `Act 3` 的 Ancient 候选池
+  - `Hook.ShouldAllowAncient(...)` 要求 run 中至少存在一名 `Togawasakiko`
+- 因此当前口径应写成：
   - `丰川定治只会在 Act 3 出现`
-  - `且只有丰川祥子能够遇到`
-- 若后续冻结其稳定英文内部名，应优先做的是：
-  - `prototype` 资源转正命名
-  - event_main 主图规范化落库
-  - 再决定事件 scene / 节点接线
+  - `run 中必须有丰川祥子；混合多人队伍可以进入`
+- `prototype` 资源继续作为生产参考，不再代表 Teiji 尚未转正。

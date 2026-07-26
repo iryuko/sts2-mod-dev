@@ -1,52 +1,77 @@
 # 已定决策
 
-本文件只记录已经定下来的规则与方向，避免后续重复讨论。
+记录日期：2026-07-26
 
-## 仓库与路径
+本文件只记录当前仍有效、后续不应反复推翻的规则。
 
-- 本仓库是 STS2 mod 研究与开发工作区，不是游戏安装目录。
-- 游戏根路径以 `local/game-path.txt` 为准。
-- 不把 Steam 安装结构并入仓库。
-- 不直接在游戏目录里开发源码、实验文件或临时脚本。
+## 仓库边界
 
-## 与游戏目录交互
+- 本仓库是研究与开发工作区，不是游戏安装目录。
+- 游戏根路径只从 `local/game-path.txt` 读取。
+- Steam 目录只用于读取参考、安装成品和运行验证。
+- 游戏文件先复制到 `references/`，再分析。
+- 不把源码、实验脚本、文档或整个 mod 开发目录复制进游戏安装区。
 
-- 对游戏目录的读写优先通过 `shared/scripts/` 中的脚本完成。
-- 如需分析游戏文件，先复制到 `references/`，再在工作区中分析。
-- 安装目标只应是最小成品，不应把整个 mod 开发目录复制进游戏目录。
+## 当前安装模型
 
-## 文档与接班
-
-- 新线程默认先读：
-  - `AGENTS.md`
-  - `docs/current-status.md`
-  - `docs/next-task.md`
-  - `docs/thread-handoff.md`
-  - `docs/decisions.md`
-- 历史日志和旧研究记录默认不是新线程必读内容。
-- 只有当结论文档不足以支撑当前任务时，才去下钻旧文档或原始日志。
-
-## 当前研究主线
-
-- 当前主线是：
-  - manifest 实际位置
-  - mod 安装位置
-  - 加载 warning / consent 规则
-  - SmokeMod 最小闭环验证
-- 当前不把项目重心放在复杂 mod 功能开发上。
-
-## 已收敛的技术方向
-
-- 当前 macOS 本机应优先按 `SlayTheSpire2.app/Contents/MacOS/mods/` 作为安装根目录处理。
-- `v0.99.1` 起，当前最小安装产物模型应按以下三件处理：
+- macOS 安装根：
+  - `SlayTheSpire2.app/Contents/MacOS/mods/`
+- 当前原生 loader 成品是三件套：
   - `<ModId>.dll`
   - `<ModId>.pck`
   - 外部 `mod_manifest.json`
-- `v0.99.1` 的 loader 会先递归查找外部 `.json` manifest，再根据其中的 `id / has_dll / has_pck` 去加载同目录下的 DLL 与 PCK。
-- 因此，`mod_manifest.json` 不再只视为 PCK 内资源；当前应默认同时维护可供 loader 读取的外部 manifest。
+- 外部 manifest 不是可省略文件。
+- manifest 至少要与当前 loader schema 对齐；Togawasakiko 当前声明：
+  - `version: 0.2.1`
+  - `min_game_version: 0.107.1`
+  - `dependencies: []`
+- 构建脚本生成外部 manifest 时必须保留 `min_game_version`。
 
-## 当前不值得继续空转的旧思路
+## 版本纪律
 
-- 不再优先空转讨论 `<GameRoot>/mods/` 与其他候选目录谁更像官方路径。
-- 不再把“外部 `mod_manifest.json` 也必须安装”当作默认前提。
-- 不再在缺少证据时反复猜测 STS2 官方 API、入口类或 manifest 完整 schema。
+- 当前 API 事实源是 STS2 `v0.107.1` / `59260271`。
+- `references/pck-extract/sts2-main` 来自旧版 `v0.98.3`，只可用于未被新版证据推翻的资源结构研究。
+- 每份 API/scene 结论必须写明参考版本。
+- Windows 与 macOS 问题先比较游戏版本和 DLL，不先假定是操作系统差异。
+
+## 原版对齐
+
+- 原版存在可复用流程时，以当前版本原版实现为基础。
+- 修改前先反编译或反射同类原版卡、事件、relic、power 或 scene。
+- 不复制会随版本变化的原版选项表、状态机或私有字段，除非有不可替代的明确原因。
+- 自定义补丁应只补缺失接口，不重写整个原版流程。
+- 当前因此应重新审计并尽量删除 `DarvPatches.cs`。
+
+## Togawasakiko 行为
+
+- 压力是目标身上的共享 counter，不按祥子玩家分账。
+- 压力衍生牌是 token，不进入普通奖励、商店或 transform 池。
+- `Curseslander` 生成的两张压力牌仅新实例本场费用为 0，不改变 canonical 或其他来源的同名牌。
+- jukebox 当前目标是跨所有 room 持续播放，包括 combat。
+- jukebox 只在选择 `Off (null)` 或离开 run 时停止并恢复原版 BGM。
+- 能量计数器缺少两个 VFX 节点是当前明确接受的视觉缺陷，不作为稳定性修复项。
+
+## 构建与验证
+
+- 顺序固定为：
+  1. 同步当前参考。
+  2. 修改源码/资源/文档。
+  3. build。
+  4. install。
+  5. release/install 哈希比对。
+  6. 实机测试。
+- 不并行执行 build 与 install。
+- 不把旧 zip 文件名、旧日志或旧哈希当作当前安装证据。
+
+## 文档分层
+
+- `current-status.md`：当前事实。
+- `next-task.md`：下一轮执行顺序。
+- `thread-handoff.md`：压缩接班摘要。
+- `decisions.md`：稳定规则。
+- `project-timeline.md` / `development-timeline.md`：历史脉络。
+- `research/`：可复用研究。
+- `audits/`：有明确日期和证据边界的专项核查。
+- `archive/`：已被后续状态覆盖的过程记录。
+
+历史文档原文不因过时而删除；应归档并标明不再代表当前状态。

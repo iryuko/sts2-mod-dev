@@ -228,7 +228,7 @@ internal sealed class Unendurable : TogawasakikoCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await ModSupport.ApplyPressure(cardPlay.Target, DynamicVars["PressureAmount"].BaseValue, Owner.Creature, this);
+        await ModSupport.ApplyPressure(choiceContext, cardPlay.Target, DynamicVars["PressureAmount"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
@@ -433,10 +433,10 @@ internal sealed class PutOnYourMask : TogawasakikoCard
         }
 
         bool alreadyHasWeak = ModSupport.GetPower<WeakPower>(cardPlay.Target)?.Amount > 0;
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, DynamicVars["WeakAmount"].BaseValue, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<WeakPower>(choiceContext, cardPlay.Target, DynamicVars["WeakAmount"].BaseValue, Owner.Creature, this, false);
         if (alreadyHasWeak)
         {
-            await PowerCmd.Apply<FaceReactionPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<FaceReactionPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -535,11 +535,11 @@ internal sealed class AnswerMe : TogawasakikoCard
         {
             if (ModSupport.GetPressure(enemy) < 5)
             {
-                await ModSupport.ApplyPressure(enemy, 7m, Owner.Creature, this);
+                await ModSupport.ApplyPressure(choiceContext, enemy, 7m, Owner.Creature, this);
                 continue;
             }
 
-            await PowerCmd.Apply<StrengthPower>(enemy, -1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<StrengthPower>(choiceContext, enemy, -1m, Owner.Creature, this, false);
         }
     }
 
@@ -600,7 +600,7 @@ internal sealed class Completeness : TogawasakikoCard
 
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature))
         {
-            await ModSupport.ApplyPressure(enemy, pressureAmount, ownerCreature, this);
+            await ModSupport.ApplyPressure(choiceContext, enemy, pressureAmount, ownerCreature, this);
         }
     }
 
@@ -632,10 +632,10 @@ internal sealed class SheIsRadiant : TogawasakikoCard
                 continue;
             }
 
-            await PowerCmd.ModifyAmount(pressure, -pressure.Amount, Owner.Creature, this, true);
+            await ModSupport.ModifyPowerAmount(choiceContext, pressure, -pressure.Amount, Owner.Creature, this, true);
         }
 
-        await PowerCmd.Apply<StrengthPower>(Owner.Creature, 3m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<StrengthPower>(choiceContext, Owner.Creature, 3m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -669,8 +669,8 @@ internal sealed class Notebook : TogawasakikoCard
         }
 
         decimal convertedAmount = socialWithdrawal.Amount;
-        await PowerCmd.ModifyAmount(socialWithdrawal, -convertedAmount, Owner.Creature, this, true);
-        await ModSupport.ApplyPressure(cardPlay.Target, convertedAmount, Owner.Creature, this);
+        await ModSupport.ModifyPowerAmount(choiceContext, socialWithdrawal, -convertedAmount, Owner.Creature, this, true);
+        await ModSupport.ApplyPressure(choiceContext, cardPlay.Target, convertedAmount, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
@@ -710,14 +710,14 @@ internal sealed class LeaveItToMe : TogawasakikoCard
         if (pressure != null && pressure.Amount > 0)
         {
             decimal removedAmount = decimal.Min(7m, pressure.Amount);
-            await PowerCmd.ModifyAmount(pressure, -removedAmount, Owner.Creature, this, true);
+            await ModSupport.ModifyPowerAmount(choiceContext, pressure, -removedAmount, Owner.Creature, this, true);
         }
 
         await CreatureCmd.Heal(Owner.Creature, 5m, false);
 
         if (target.IsAlive && ModSupport.GetPressure(target) > 0)
         {
-            await PowerCmd.Apply<WeakPower>(target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<WeakPower>(choiceContext, target, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -768,7 +768,7 @@ internal sealed class DawnOfDespair : TogawasakikoCard
 
         if (target.IsAlive)
         {
-            await PowerCmd.Apply<SakikoDespairEchoPower>(target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<SakikoDespairEchoPower>(choiceContext, target, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -811,7 +811,7 @@ internal sealed class BarkingBarkingBarking : TogawasakikoCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<RegenPower>(Owner.Creature, DynamicVars["Regen"].BaseValue, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<RegenPower>(choiceContext, Owner.Creature, DynamicVars["Regen"].BaseValue, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -846,7 +846,7 @@ internal sealed class BailMoney : TogawasakikoCard
             .FromCard(this)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
-        await PowerCmd.Apply<DexterityPower>(cardPlay.Target, -1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<DexterityPower>(choiceContext, cardPlay.Target, -1m, Owner.Creature, this, false);
         await PlayerCmd.LoseGold(10m, Owner);
     }
 
@@ -884,8 +884,8 @@ internal sealed class WeightliftingChampion : TogawasakikoCard
         }
 
         await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue, DamageProps.cardHpLoss, this);
-        await PowerCmd.Apply<StrengthPower>(Owner.Creature, 1m, Owner.Creature, this, false);
-        await PowerCmd.Apply<DexterityPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<StrengthPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<DexterityPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -967,7 +967,7 @@ internal sealed class PullmanCrash : TogawasakikoCard
 
         if (ModSupport.GetPressure(cardPlay.Target) > 8)
         {
-            await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<VulnerablePower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -995,7 +995,7 @@ internal sealed class FinalCurtain : TogawasakikoCard
         }
 
         Creature ownerCreature = Owner.Creature;
-        CombatState? combatState = ownerCreature.CombatState;
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
         if (combatState == null)
         {
             return;
@@ -1009,7 +1009,7 @@ internal sealed class FinalCurtain : TogawasakikoCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(combatState)
+            .TargetingAllOpponentsCompat(combatState)
             .WithHitCount(hitCount)
             .Execute(choiceContext);
     }
@@ -1049,9 +1049,9 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
         Creature[] enemies = ModSupport.GetEnemyCreatures(ownerCreature).ToArray();
         foreach (Creature enemy in enemies)
         {
-            await PowerCmd.Apply<VulnerablePower>(enemy, 2m, ownerCreature, this, false);
-            await PowerCmd.Apply<WeakPower>(enemy, 2m, ownerCreature, this, false);
-            await PowerCmd.Apply<DexterityPower>(enemy, -1m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<VulnerablePower>(choiceContext, enemy, 2m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<WeakPower>(choiceContext, enemy, 2m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<DexterityPower>(choiceContext, enemy, -1m, ownerCreature, this, false);
         }
 
         if (enemies.Length == 0)
@@ -1059,9 +1059,15 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
             return;
         }
 
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
+        if (combatState == null)
+        {
+            return;
+        }
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(ownerCreature.CombatState!)
+            .TargetingAllOpponentsCompat(combatState)
             .Execute(choiceContext);
     }
 
@@ -1101,7 +1107,7 @@ internal sealed class Fragility : TogawasakikoCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await PowerCmd.Apply<FaceReactionPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<FaceReactionPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue, false);
     }
 
@@ -1250,7 +1256,7 @@ internal sealed class Innocence : TogawasakikoCard
             return;
         }
 
-        await PowerCmd.Apply<InnocencePower>(Owner.Creature, DynamicVars["SocialWithdrawalAmount"].BaseValue, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<InnocencePower>(choiceContext, Owner.Creature, DynamicVars["SocialWithdrawalAmount"].BaseValue, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -1295,7 +1301,7 @@ internal sealed class PersonaDissociation : GeneratedPressureCard
             return;
         }
 
-        await PowerCmd.Apply<PersonaDissociationPower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<PersonaDissociationPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
     }
 }
 
@@ -1317,7 +1323,7 @@ internal sealed class SocialWithdrawal : GeneratedPressureCard
             return;
         }
 
-        await PowerCmd.Apply<SocialWithdrawalPower>(cardPlay.Target, 3m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<SocialWithdrawalPower>(choiceContext, cardPlay.Target, 3m, Owner.Creature, this, false);
     }
 }
 

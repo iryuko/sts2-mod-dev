@@ -1,118 +1,71 @@
 # 线程接班摘要
 
-本项目最初在研究 STS2 macOS 的本地 mod 安装与加载链路，这条链路现在已经打通：
+记录日期：2026-07-26
 
-- 游戏会扫描：
-  - `SlayTheSpire2.app/Contents/MacOS/mods/`
-- `SmokeMod` 已经实机被识别和加载过
-- `UnifiedSavePath` 的 macOS 本地修正版也已经实机成功，说明当前工作区具备做可运行功能 mod 的基础条件
-- `UnifiedSavePath` 当前源码也已进一步整理成跨平台实现：
-  - Windows 走 Harmony patch 路线
-  - macOS / 非 Windows 走已验证成功的 flag-thread workaround
+## 一句话状态
 
-当前主线已经切到：
+当前唯一主项目是 Togawasakiko。它已经是完整可构建、可安装、可进局的角色 mod；当前工作是 v0.107.1 双端兼容与高风险流程回归，不是从零实现角色。
 
-- 做一个最小“跨角色加卡”功能 mod
-
-当前已确认的技术结论：
-
-- 当前 run 角色通过 `Player.get_Character()` 读取
-- 角色正常卡牌来源走：
-  - `CharacterModel.get_CardPool()`
-  - `CardCreationOptions.ForRoom(...)`
-  - `CardPoolModel.GetUnlockedCards(...)`
-- 当前最适合的最小干预点不是 patch 奖励逻辑，而是直接走原生扩展点：
-  - `ModHelper.AddModelToPool<TPoolType, TModelType>()`
-- 角色卡池的 epoch 过滤只会移除该角色自己 epoch 中尚未解锁的卡
-- 因此，mod 追加进去的外来卡默认有机会保留下来
-- 当前用户后续实机观察到：
-  - `BodySlam` 是作为正常卡牌奖励出现的
-  - 这与 `ModHelper.AddModelToPool<SilentCardPool, BodySlam>()` 完全一致
-- 我们后来加上的“运行时直接塞进当前牌组”只是诊断路径，不是必要实现
-- 这条诊断路径曾导致两类真实问题：
-  - 在过早时机写牌组会黑屏
-  - 在 `Neow` / `Ancient` 房改牌组会卡住流程
-- 因此当前已决定删掉这条路径，保持 mod 只做卡池扩展
-
-当前首个验证组合已经固定：
-
-- 来源角色：`Ironclad`
-- 目标角色：`Silent`
-- 目标卡牌：`BodySlam`
-
-当前工作区新增内容：
-
-- 分析文档：
-  - `docs/character-cardpool-analysis.md`
-  - `docs/cross-character-card-plan.md`
-- 新 mod：
-  - `mods/CrossCharacterCard/`
-  - `mods/SilentBonusRelic/`
-
-`CrossCharacterCard` 当前实现：
-
-- 使用 `ModInitializerAttribute("Initialize")`
-- 初始化时按集中规则表逐条注册
-- 当前规则表中已有：
-  - `BodySlam -> SilentCardPool`
-- 当前版本不再订阅 `RunStarted` / `RoomEntered`
-- 当前版本不再运行时修改 `Silent` 当前牌组
-- 当前 release 产物已重新构建成功：
-  - `mods/CrossCharacterCard/exports/release/CrossCharacterCard/CrossCharacterCard.dll`
-  - `mods/CrossCharacterCard/exports/release/CrossCharacterCard/CrossCharacterCard.pck`
-- 当前新版已经安装到：
-  - `.../Contents/MacOS/mods/CrossCharacterCard/`
-
-`SilentBonusRelic` 当前实现：
-
-- 使用 `ModInitializerAttribute("Initialize")`
-- 目标角色：
-  - `Silent`
-- 目标遗物：
-  - `SneckoSkull`
-- 当前已确认：
-  - `Silent::get_StartingRelics()` 默认只有 `RingOfTheSnake`
-  - `RelicCmd.Obtain<TRelic>(player)` 是游戏内现成加遗物命令
-  - `Player.AddRelicInternal(...)` 是更底层的真实落地入口
-- 进一步确认到：
-  - `Player.PopulateStartingRelics()` 在 `RunStarted` 之前就完成
-  - 当前没找到原生“扩展角色 StartingRelics 列表”的 mod helper
-- 当前版本已改为更接近“第二个起始 relic”的实现：
-  - `RunStarted` 触发时立刻检查当前玩家
-  - 如果是 `Silent`
-  - 则按集中规则表依次补发额外起始 relic
-  - 当前规则表中已有：
-    - `SneckoSkull`
-    - `Shuriken`
-  - 每个 relic 都会：
-    - `FloorAddedToDeck = 1`
-    - `SaveManager.MarkRelicAsSeen(...)`
-    - `Player.AddRelicInternal(..., silent: true)`
-- 当前 release 产物已构建并安装到：
-  - `.../Contents/MacOS/mods/SilentBonusRelic/`
-
-当前最关键的问题：
-
-- `BodySlam` 进入 `Silent` 正常奖励池的频率是否足够稳定，能否作为后续多卡迁移的可靠模式
-- `SilentBonusRelic` 改成 `RunStarted` 立即补发后，是否能稳定表现为 `Silent` 的第二个起始 relic
-- `SilentBonusRelic` 新增 `Shuriken` 后，是否能稳定表现为 `Silent` 的两件额外起始 relic
-
-下一步该做：
-
-1. 启动游戏，确认 mod 是否无异常加载
-2. 用 `Silent` 开新 run
-3. 正常推进几场战斗并观察奖励
-4. 确认 `BodySlam` 是否会作为正常奖励出现
-5. 选择后继续确认：
-   - `BodySlam` 能否正常进入牌组
-   - 能否正常抽到并打出
-6. 观察新 run 一开始是否就拥有 `SneckoSkull` 和 `Shuriken`
-7. 如果卡牌路径稳定成立，再考虑把同一模式扩展到更多卡牌与角色组合
-
-接手时先看：
+## 先读
 
 1. `AGENTS.md`
 2. `docs/current-status.md`
 3. `docs/next-task.md`
-4. `docs/thread-handoff.md`
-5. `docs/decisions.md`
+4. `docs/decisions.md`
+5. `mods/Togawasakiko_in_Slay_the_Spire/docs/current-status.md`
+6. `mods/Togawasakiko_in_Slay_the_Spire/docs/index.md`
+
+不要先读 T4/T5 长日志。它们已归档，只在追溯具体 bug 时下钻。
+
+## 当前版本
+
+- STS2：`v0.107.1` / `59260271`
+- mod manifest：`0.2.1`
+- 当前本机安装与 release 三件套哈希一致
+- 2026-07-26 Steam 启动：initializer 完成，主菜单无模组错误状态
+
+## 最重要的校正
+
+- jukebox 当前不是“进 combat 自动 Off”。
+  - 源码意图是跨所有 room 持续播放。
+  - 只在 `Off (null)` 或离开 run 时停止。
+- merchant 不是纯原版 Silent fallback，也不是正式祥子 Spine。
+  - 它是自定义兼容 scene，隐藏 Silent skeleton，显示静态祥子 portrait。
+- 战斗 Spine 正在独立制作，本轮 PR 继续保留静态战斗立绘基线。
+- Darv 目前还没有真正回归原版。
+  - `Curseslander` 已解决 Ancient 空池。
+  - 但 `DarvPatches.cs` 仍整体接管祥子选项生成，下一步应优先删除或证明必要性。
+- T2 的“50 张正常卡”是历史规划。
+  - 当前角色池共 50 张，其中 45 张是 Common/Uncommon/Rare。
+- 退出 Godot 时的资源泄漏 `ERROR` 不等于 mod loader 见红。
+
+## 当前断点
+
+1. `UnattendedPiano` SL 共享列表 bug 已改代码，待实机。
+2. Win 卡牌卡中间的已知 API 漂移已修，待同包 Win 回归。
+3. jukebox 换房保护已加，待 Win/Mac 生命周期回归。
+4. Darv patch 应回归原版。
+5. `MagneticForceHellWargodPower` 共享集合与 private `FieldRefAccess` 仍是静态风险。
+
+## 必须遵守
+
+- 先反编译当前版本原版对象，再改同类机制。
+- 原版能完成的流程不另造一套。
+- 不把 starter、token、event、Ancient 卡混进普通奖励。
+- `Slugify(type.Name)`、本地化 key、资源文件名必须一致。
+- 静态初始化不绑定高风险 private 反射。
+- build、install、hash 校验必须串行。
+- 不把“构建通过”写成“实机修复”。
+
+## 标准命令
+
+```bash
+./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release
+./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire
+./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire --apply --replace-target
+```
+
+完整历史见：
+
+- `docs/project-timeline.md`
+- `mods/Togawasakiko_in_Slay_the_Spire/docs/development-timeline.md`

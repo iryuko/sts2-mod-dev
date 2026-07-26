@@ -1,6 +1,8 @@
 # 资源目录说明
 
-日期：2026-04-04
+初建日期：2026-04-04；档案校订：2026-07-26
+
+> 档案状态：本文件定义目录职责，不负责判断资产是否已经接入。现行资产清点统一见 [资产状态](asset-status.md)。
 
 ## 一 目标
 
@@ -87,13 +89,15 @@ assets/
 
 - `dialogue_icons/`
   - 原创先古之民事件对话头像与 outline 的正式库存位
-  - 当前用于参考资产和原型验证，不等于已经接入 runtime
+  - `togawa_teiji.png` 与 outline 已有 runtime 对应物
+  - `prototype` 文件只保留为生产参考
 - `dialogue_icons/previews/`
   - 按原版 `ancient_dialogue_line.tscn` 叠放逻辑烘焙出的预览图
   - 用于看最终观感，不作为源图
 - `map_nodes/`
   - 原创先古之民地图节点主图与 outline 的正式库存位
-  - 当前用于参考资产和原型验证，不等于已经接入 runtime
+  - Teiji 正式节点和 outline 已有 runtime 对应物
+  - `prototype` 文件只保留为生产参考
 - `map_nodes/previews/`
   - 按原版 `ancient_map_point.tscn` 着色逻辑烘焙出的预览图
   - 用于看最终观感，不作为源图

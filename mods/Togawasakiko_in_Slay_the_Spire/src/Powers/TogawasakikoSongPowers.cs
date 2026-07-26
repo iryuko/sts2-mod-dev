@@ -137,7 +137,7 @@ internal sealed class FaceReactionPower : PowerModel
             return;
         }
 
-        await ModSupport.ApplyPressure(dealer, pressureAmount, Owner, cardSource);
+        await ModSupport.ApplyPressure(choiceContext, dealer, pressureAmount, Owner, cardSource);
     }
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
@@ -236,7 +236,7 @@ internal abstract class KillKissPowerBase : PowerModel
 
     public override LocString Description => new("powers", DescriptionKey);
 
-    public override async Task AfterSideTurnStart(CombatSide side, CombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
         if (Owner == null || side != CombatSide.Enemy || !Owner.IsAlive)
         {

@@ -9,6 +9,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -36,6 +37,17 @@ namespace Togawasakiko_in_Slay_the_Spire;
 
 internal static class ModSupport
 {
+    private static MethodInfo? _addGeneratedCardToCombatMethod;
+    private static bool _addGeneratedCardToCombatUsesCreator;
+    private static MethodInfo? _powerApplyCreatureMethod;
+    private static bool _powerApplyRequiresChoiceContext;
+    private static MethodInfo? _powerModifyAmountMethod;
+    private static bool _powerModifyAmountRequiresChoiceContext;
+    private static ConstructorInfo? _hookPlayerChoiceContextModelCtor;
+    private static PropertyInfo? _creatureCombatStateProperty;
+    private static MethodInfo? _attackTargetingAllOpponentsMethod;
+    private static bool _loggedUnexpectedCombatStateType;
+
     private static readonly HashSet<string> StarterDeckEntries = new(StringComparer.Ordinal)
     {
         "STRIKE_TOGAWASAKIKO",
@@ -74,9 +86,6 @@ internal static class ModSupport
     private static AudioStreamPlayer? _shadowEventMusicPlayer;
     private static readonly FieldInfo? CardEnergyCostLocalModifiersField =
         AccessTools.Field(typeof(CardEnergyCost), "_localModifiers");
-    private static readonly AccessTools.FieldRef<RunState, HashSet<ModelId>?> VisitedEventIdsRef =
-        AccessTools.FieldRefAccess<RunState, HashSet<ModelId>?>("_visitedEventIds");
-
     public static bool IsBaseGameCharacter(CharacterModel? character)
     {
         return character is Ironclad or Silent or Regent or Defect or Necrobinder or Deprived;
@@ -143,7 +152,12 @@ internal static class ModSupport
                 ["TOGAWASAKIKO.unlockText"] = "This character is currently injected by the mod at runtime.",
                 ["TOGAWASAKIKO.cardsModifierTitle"] = "Togawa Sakiko Cards",
                 ["TOGAWASAKIKO.cardsModifierDescription"] = "Uses Togawa Sakiko's starter deck and pressure cards.",
-                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "Not yet."
+                ["TOGAWASAKIKO.eventDeathPrevention"] = "I still have a performance to finish.",
+                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "Not yet.",
+                ["TOGAWASAKIKO.aromaPrinciple"] = "[sine][blue]Keep performing... no matter what it costs.[/blue][/sine]",
+                ["TOGAWASAKIKO.goldMonologue"] = "[sine]Money is only another stage prop...[/sine]",
+                ["TOGAWASAKIKO.banter.alive.endTurnPing"] = "Please... decide.",
+                ["TOGAWASAKIKO.banter.dead.endTurnPing"] = "..."
             },
             ["zhs"] = new Dictionary<string, string>
             {
@@ -157,7 +171,12 @@ internal static class ModSupport
                 ["TOGAWASAKIKO.unlockText"] = "该角色当前通过 mod 在运行时注入到选人界面。",
                 ["TOGAWASAKIKO.cardsModifierTitle"] = "丰川祥子卡池",
                 ["TOGAWASAKIKO.cardsModifierDescription"] = "使用丰川祥子的起始牌组与压力体系卡牌。",
-                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "还没到这一步。"
+                ["TOGAWASAKIKO.eventDeathPrevention"] = "演出还没有结束。",
+                ["TOGAWASAKIKO.eventDeathPreventionLine"] = "还没到这一步。",
+                ["TOGAWASAKIKO.aromaPrinciple"] = "[sine][blue]继续演出……无论代价为何。[/blue][/sine]",
+                ["TOGAWASAKIKO.goldMonologue"] = "[sine]金钱也不过是舞台上的道具……[/sine]",
+                ["TOGAWASAKIKO.banter.alive.endTurnPing"] = "请快点……决定。",
+                ["TOGAWASAKIKO.banter.dead.endTurnPing"] = "……"
             }
         };
 
@@ -523,6 +542,7 @@ internal static class ModSupport
                 ["PIANO_OF_MOM.title"] = "Piano of Mom",
                 ["PIANO_OF_MOM.description"] = "At the start of each combat, add 1 random upgraded Song card to your hand.",
                 ["PIANO_OF_MOM.flavor"] = "The first sound that taught her what silence costs.",
+                ["SEA_GLASS.TOGAWASAKIKO.title"] = "Togawa Sea Glass",
                 ["BEST_COMPANION.title"] = "Best Companion(?)",
                 ["BEST_COMPANION.description"] = "Upon pickup, add [gold]Barking Barking Barking[/gold] to your deck.",
                 ["BEST_COMPANION.flavor"] = "A relic stub for Togawa Teiji's future ancient event.",
@@ -541,6 +561,7 @@ internal static class ModSupport
                 ["PIANO_OF_MOM.title"] = "妈妈的钢琴",
                 ["PIANO_OF_MOM.description"] = "每场战斗开始时，随机将1张升级后的歌曲牌加入手牌。",
                 ["PIANO_OF_MOM.flavor"] = "最初教会她沉默代价的声音。",
+                ["SEA_GLASS.TOGAWASAKIKO.title"] = "丰川海玻璃",
                 ["BEST_COMPANION.title"] = "最好的伙伴(?",
                 ["BEST_COMPANION.description"] = "获得时，将[gold]大狗大狗叫叫叫[/gold]加入你的牌组。",
                 ["BEST_COMPANION.flavor"] = "用于丰川定治先古之民事件的 relic 占位实现。",
@@ -778,9 +799,45 @@ internal static class ModSupport
         }
     }
 
+    public static CombatState? GetCombatState(Creature? creature)
+    {
+        if (creature == null)
+        {
+            return null;
+        }
+
+        object? combatState = ResolveCreatureCombatStateProperty().GetValue(creature);
+        if (combatState is CombatState concreteState)
+        {
+            return concreteState;
+        }
+
+        if (combatState != null && !_loggedUnexpectedCombatStateType)
+        {
+            _loggedUnexpectedCombatStateType = true;
+            LogWarn("Creature.CombatState returned an unsupported runtime type: " + combatState.GetType().FullName);
+        }
+
+        return null;
+    }
+
+    private static PropertyInfo ResolveCreatureCombatStateProperty()
+    {
+        if (_creatureCombatStateProperty != null)
+        {
+            return _creatureCombatStateProperty;
+        }
+
+        _creatureCombatStateProperty = typeof(Creature).GetProperty(
+            "CombatState",
+            BindingFlags.Public | BindingFlags.Instance)
+            ?? throw new MissingMethodException("Could not find Creature.CombatState.");
+        return _creatureCombatStateProperty;
+    }
+
     public static IEnumerable<Creature> GetEnemyCreatures(Creature creature)
     {
-        CombatState? combatState = creature.CombatState;
+        CombatState? combatState = GetCombatState(creature);
         return combatState == null
             ? Enumerable.Empty<Creature>()
             : combatState.Creatures.Where(other => other.IsMonster && other.IsAlive);
@@ -818,12 +875,18 @@ internal static class ModSupport
         return GetPower<PressurePower>(creature)?.Amount ?? 0;
     }
 
+    public static async Task ApplyPressure(PlayerChoiceContext? choiceContext, Creature target, decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        await ApplyPower<PressurePower>(choiceContext, target, amount, applier, cardSource, false);
+    }
+
     public static async Task ApplyPressure(Creature target, decimal amount, Creature? applier, CardModel? cardSource)
     {
-        await PowerCmd.Apply<PressurePower>(target, amount, applier, cardSource, false);
+        await ApplyPressure(null, target, amount, applier, cardSource);
     }
 
     public static async Task<bool> TryConsumePressure(
+        PlayerChoiceContext? choiceContext,
         Creature target,
         int amount,
         Creature? applier,
@@ -835,20 +898,211 @@ internal static class ModSupport
             return false;
         }
 
-        await PowerCmd.ModifyAmount(pressure, -amount, applier, cardSource, true);
+        await ModifyPowerAmount(choiceContext, pressure, -amount, applier, cardSource, true);
+        return true;
+    }
+
+    public static async Task<bool> TryConsumePressure(
+        Creature target,
+        int amount,
+        Creature? applier,
+        CardModel? cardSource)
+    {
+        return await TryConsumePressure(null, target, amount, applier, cardSource);
+    }
+
+    public static async Task<T?> ApplyPower<T>(
+        PlayerChoiceContext? choiceContext,
+        Creature target,
+        decimal amount,
+        Creature? applier,
+        CardModel? cardSource,
+        bool silent = false)
+        where T : PowerModel
+    {
+        MethodInfo method = ResolvePowerApplyCreatureMethod().MakeGenericMethod(typeof(T));
+        object?[] args = _powerApplyRequiresChoiceContext
+            ? [ResolvePowerChoiceContext(choiceContext, target, applier, cardSource), target, amount, applier, cardSource, silent]
+            : [target, amount, applier, cardSource, silent];
+
+        if (method.Invoke(null, args) is not Task<T?> task)
+        {
+            throw new MissingMethodException("PowerCmd.Apply returned an unexpected result type.");
+        }
+
+        return await task;
+    }
+
+    public static async Task<T?> ApplyPower<T>(
+        Creature target,
+        decimal amount,
+        Creature? applier,
+        CardModel? cardSource,
+        bool silent = false)
+        where T : PowerModel
+    {
+        return await ApplyPower<T>(null, target, amount, applier, cardSource, silent);
+    }
+
+    public static async Task<int> ModifyPowerAmount(
+        PlayerChoiceContext? choiceContext,
+        PowerModel power,
+        decimal offset,
+        Creature? applier,
+        CardModel? cardSource,
+        bool silent = false)
+    {
+        MethodInfo method = ResolvePowerModifyAmountMethod();
+        object?[] args = _powerModifyAmountRequiresChoiceContext
+            ? [ResolvePowerChoiceContext(choiceContext, power.Owner, applier, cardSource, power), power, offset, applier, cardSource, silent]
+            : [power, offset, applier, cardSource, silent];
+
+        if (method.Invoke(null, args) is not Task<int> task)
+        {
+            throw new MissingMethodException("PowerCmd.ModifyAmount returned an unexpected result type.");
+        }
+
+        return await task;
+    }
+
+    public static async Task<int> ModifyPowerAmount(
+        PowerModel power,
+        decimal offset,
+        Creature? applier,
+        CardModel? cardSource,
+        bool silent = false)
+    {
+        return await ModifyPowerAmount(null, power, offset, applier, cardSource, silent);
+    }
+
+    private static PlayerChoiceContext ResolvePowerChoiceContext(
+        PlayerChoiceContext? choiceContext,
+        Creature target,
+        Creature? applier,
+        CardModel? cardSource,
+        PowerModel? powerSource = null)
+    {
+        if (choiceContext != null)
+        {
+            return choiceContext;
+        }
+
+        AbstractModel? source = cardSource != null ? cardSource : powerSource;
+        Player? preferredPlayer = cardSource?.Owner ?? applier?.Player ?? target.Player ?? powerSource?.Owner?.Player;
+        if (source != null)
+        {
+            PlayerChoiceContext? combatContext = CreateBestEffortCombatChoiceContext(source, preferredPlayer);
+            if (combatContext != null)
+            {
+                return combatContext;
+            }
+        }
+
+        return CreateDetachedChoiceContext(source);
+    }
+
+    private static MethodInfo ResolvePowerApplyCreatureMethod()
+    {
+        if (_powerApplyCreatureMethod != null)
+        {
+            return _powerApplyCreatureMethod;
+        }
+
+        MethodInfo? choiceContextMethod = FindPowerCmdMethod(
+            "Apply",
+            generic: true,
+            [typeof(PlayerChoiceContext), typeof(Creature), typeof(decimal), typeof(Creature), typeof(CardModel), typeof(bool)]);
+        if (choiceContextMethod != null)
+        {
+            _powerApplyRequiresChoiceContext = true;
+            _powerApplyCreatureMethod = choiceContextMethod;
+            return choiceContextMethod;
+        }
+
+        MethodInfo? oldMethod = FindPowerCmdMethod(
+            "Apply",
+            generic: true,
+            [typeof(Creature), typeof(decimal), typeof(Creature), typeof(CardModel), typeof(bool)]);
+        if (oldMethod != null)
+        {
+            _powerApplyRequiresChoiceContext = false;
+            _powerApplyCreatureMethod = oldMethod;
+            return oldMethod;
+        }
+
+        throw new MissingMethodException("Could not find a supported PowerCmd.Apply<T>(Creature, ...) signature.");
+    }
+
+    private static MethodInfo ResolvePowerModifyAmountMethod()
+    {
+        if (_powerModifyAmountMethod != null)
+        {
+            return _powerModifyAmountMethod;
+        }
+
+        MethodInfo? choiceContextMethod = FindPowerCmdMethod(
+            "ModifyAmount",
+            generic: false,
+            [typeof(PlayerChoiceContext), typeof(PowerModel), typeof(decimal), typeof(Creature), typeof(CardModel), typeof(bool)]);
+        if (choiceContextMethod != null)
+        {
+            _powerModifyAmountRequiresChoiceContext = true;
+            _powerModifyAmountMethod = choiceContextMethod;
+            return choiceContextMethod;
+        }
+
+        MethodInfo? oldMethod = FindPowerCmdMethod(
+            "ModifyAmount",
+            generic: false,
+            [typeof(PowerModel), typeof(decimal), typeof(Creature), typeof(CardModel), typeof(bool)]);
+        if (oldMethod != null)
+        {
+            _powerModifyAmountRequiresChoiceContext = false;
+            _powerModifyAmountMethod = oldMethod;
+            return oldMethod;
+        }
+
+        throw new MissingMethodException("Could not find a supported PowerCmd.ModifyAmount signature.");
+    }
+
+    private static MethodInfo? FindPowerCmdMethod(string name, bool generic, Type[] parameterTypes)
+    {
+        return typeof(PowerCmd)
+            .GetMethods(BindingFlags.Public | BindingFlags.Static)
+            .Where(method => method.Name == name && method.IsGenericMethodDefinition == generic)
+            .FirstOrDefault(method => HasParameterTypes(method, parameterTypes));
+    }
+
+    private static bool HasParameterTypes(MethodInfo method, Type[] parameterTypes)
+    {
+        ParameterInfo[] parameters = method.GetParameters();
+        if (parameters.Length != parameterTypes.Length)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < parameters.Length; i++)
+        {
+            if (parameters[i].ParameterType != parameterTypes[i])
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 
     public static async Task GiveGeneratedCardToPlayer<T>(Player recipient)
         where T : CardModel
     {
-        if (recipient.Creature?.CombatState == null)
+        CombatState? combatState = GetCombatState(recipient.Creature);
+        if (combatState == null)
         {
             return;
         }
 
-        CardModel card = recipient.Creature.CombatState.CreateCard<T>(recipient);
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+        CardModel card = combatState.CreateCard<T>(recipient);
+        await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient, CardPilePosition.Random);
     }
 
     public static async Task<CardModel?> AddSpecificCardToCombatPile<T>(
@@ -858,24 +1112,82 @@ internal static class ModSupport
         bool upgraded = false)
         where T : CardModel
     {
-        if (recipient.Creature?.CombatState == null)
+        CombatState? combatState = GetCombatState(recipient.Creature);
+        if (combatState == null)
         {
             return null;
         }
 
-        CardModel card = recipient.Creature.CombatState.CreateCard<T>(recipient);
+        CardModel card = combatState.CreateCard<T>(recipient);
         if (upgraded)
         {
             CardCmd.Upgrade(card, MegaCrit.Sts2.Core.Nodes.CommonUi.CardPreviewStyle.None);
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, pileType, true, CardPilePosition.Random);
+        await AddGeneratedCardToCombatCompat(card, pileType, recipient, CardPilePosition.Random);
         return card;
+    }
+
+    private static async Task<CardPileAddResult> AddGeneratedCardToCombatCompat(
+        CardModel card,
+        PileType pileType,
+        Player? creator,
+        CardPilePosition position = CardPilePosition.Bottom)
+    {
+        MethodInfo method = ResolveAddGeneratedCardToCombatMethod();
+        object?[] args = _addGeneratedCardToCombatUsesCreator
+            ? [card, pileType, creator, position]
+            : [card, pileType, creator != null, position];
+
+        if (method.Invoke(null, args) is not Task<CardPileAddResult> task)
+        {
+            throw new MissingMethodException("CardPileCmd.AddGeneratedCardToCombat returned an unexpected result type.");
+        }
+
+        return await task;
+    }
+
+    private static MethodInfo ResolveAddGeneratedCardToCombatMethod()
+    {
+        if (_addGeneratedCardToCombatMethod != null)
+        {
+            return _addGeneratedCardToCombatMethod;
+        }
+
+        MethodInfo? creatorMethod = typeof(CardPileCmd).GetMethod(
+            nameof(CardPileCmd.AddGeneratedCardToCombat),
+            BindingFlags.Public | BindingFlags.Static,
+            binder: null,
+            types: [typeof(CardModel), typeof(PileType), typeof(Player), typeof(CardPilePosition)],
+            modifiers: null);
+
+        if (creatorMethod != null)
+        {
+            _addGeneratedCardToCombatUsesCreator = true;
+            _addGeneratedCardToCombatMethod = creatorMethod;
+            return creatorMethod;
+        }
+
+        MethodInfo? addedByPlayerMethod = typeof(CardPileCmd).GetMethod(
+            nameof(CardPileCmd.AddGeneratedCardToCombat),
+            BindingFlags.Public | BindingFlags.Static,
+            binder: null,
+            types: [typeof(CardModel), typeof(PileType), typeof(bool), typeof(CardPilePosition)],
+            modifiers: null);
+
+        if (addedByPlayerMethod != null)
+        {
+            _addGeneratedCardToCombatUsesCreator = false;
+            _addGeneratedCardToCombatMethod = addedByPlayerMethod;
+            return addedByPlayerMethod;
+        }
+
+        throw new MissingMethodException("Could not find a supported CardPileCmd.AddGeneratedCardToCombat signature.");
     }
 
     public static async Task ShuffleDiscardPileIntoDrawPile(PlayerChoiceContext choiceContext, Player player, AbstractModel source)
     {
-        if (player.Creature?.CombatState == null)
+        if (GetCombatState(player.Creature) == null)
         {
             return;
         }
@@ -945,30 +1257,6 @@ internal static class ModSupport
         return card != null && StarterDeckEntries.Contains(card.Id.Entry);
     }
 
-    public static bool HasVisitedEvent(RunState runState, EventModel eventModel)
-    {
-        HashSet<ModelId>? visitedEventIds = VisitedEventIdsRef(runState);
-        if (visitedEventIds == null)
-        {
-            return false;
-        }
-
-        ModelId modelId = eventModel.CanonicalInstance?.Id ?? eventModel.Id;
-        return visitedEventIds.Contains(modelId);
-    }
-
-    public static void MarkEventVisited(RunState runState, EventModel eventModel)
-    {
-        HashSet<ModelId>? visitedEventIds = VisitedEventIdsRef(runState);
-        if (visitedEventIds == null)
-        {
-            return;
-        }
-
-        ModelId modelId = eventModel.CanonicalInstance?.Id ?? eventModel.Id;
-        visitedEventIds.Add(modelId);
-    }
-
     public static bool HasCardLocalization(CardModel? card)
     {
         if (card == null)
@@ -1001,7 +1289,7 @@ internal static class ModSupport
 
     public static PlayerChoiceContext? CreateHookChoiceContext(
         AbstractModel source,
-        CombatState combatState,
+        ICombatState combatState,
         Player? preferredPlayer = null,
         GameActionType gameActionType = GameActionType.Combat)
     {
@@ -1023,12 +1311,56 @@ internal static class ModSupport
             localPlayerId = fallbackPlayer.NetId;
         }
 
-        return new HookPlayerChoiceContext(source, localPlayerId.Value, combatState, gameActionType);
+        return CreateHookPlayerChoiceContext(source, localPlayerId.Value, combatState, gameActionType);
+    }
+
+    private static PlayerChoiceContext CreateHookPlayerChoiceContext(
+        AbstractModel source,
+        ulong localPlayerId,
+        ICombatState combatState,
+        GameActionType gameActionType)
+    {
+        ConstructorInfo constructor = ResolveHookPlayerChoiceContextModelConstructor(combatState);
+        object?[] args = [source, localPlayerId, combatState, gameActionType];
+        if (constructor.Invoke(args) is not PlayerChoiceContext context)
+        {
+            throw new MissingMethodException("HookPlayerChoiceContext constructor returned an unexpected result type.");
+        }
+
+        return context;
+    }
+
+    private static ConstructorInfo ResolveHookPlayerChoiceContextModelConstructor(ICombatState combatState)
+    {
+        if (_hookPlayerChoiceContextModelCtor != null)
+        {
+            return _hookPlayerChoiceContextModelCtor;
+        }
+
+        ConstructorInfo? constructor = typeof(HookPlayerChoiceContext)
+            .GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+            .FirstOrDefault(candidate =>
+            {
+                ParameterInfo[] parameters = candidate.GetParameters();
+                return parameters.Length == 4
+                    && parameters[0].ParameterType == typeof(AbstractModel)
+                    && parameters[1].ParameterType == typeof(ulong)
+                    && parameters[2].ParameterType.IsInstanceOfType(combatState)
+                    && parameters[3].ParameterType == typeof(GameActionType);
+            });
+
+        if (constructor == null)
+        {
+            throw new MissingMethodException("Could not find a supported HookPlayerChoiceContext source constructor.");
+        }
+
+        _hookPlayerChoiceContextModelCtor = constructor;
+        return constructor;
     }
 
     public static PlayerChoiceContext? CreateBestEffortCombatChoiceContext(AbstractModel source, Player? preferredPlayer)
     {
-        CombatState? combatState = preferredPlayer?.Creature?.CombatState;
+        CombatState? combatState = GetCombatState(preferredPlayer?.Creature);
         if (combatState == null)
         {
             return null;
@@ -1113,7 +1445,7 @@ internal static class ModSupport
 
     public static CardModel? CreateRandomCardFromCanonicalPool(Player recipient, IReadOnlyList<CardModel> canonicals)
     {
-        CombatState? combatState = recipient.Creature?.CombatState;
+        CombatState? combatState = GetCombatState(recipient.Creature);
         if (combatState == null || canonicals.Count == 0)
         {
             return null;
@@ -1134,7 +1466,7 @@ internal static class ModSupport
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+        await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient, CardPilePosition.Random);
         if (setCostToZeroThisCombat)
         {
             card.EnergyCost.SetThisCombat(0, true);
@@ -1152,7 +1484,7 @@ internal static class ModSupport
         }
 
         CardCmd.Upgrade(card, MegaCrit.Sts2.Core.Nodes.CommonUi.CardPreviewStyle.None);
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+        await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient, CardPilePosition.Random);
         return card;
     }
 
@@ -1164,13 +1496,13 @@ internal static class ModSupport
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+        await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient, CardPilePosition.Random);
         return card;
     }
 
     public static async Task<IReadOnlyList<CardModel>> GiveRandomZeroCostPressureGeneratedCardsToPlayer(Player recipient, int count)
     {
-        if (count <= 0 || recipient.Creature?.CombatState == null)
+        if (count <= 0 || GetCombatState(recipient.Creature) == null)
         {
             return Array.Empty<CardModel>();
         }
@@ -1192,7 +1524,7 @@ internal static class ModSupport
         {
             // Only the instances created by this effect are discounted; future same-name cards keep their normal costs.
             card.EnergyCost.SetThisCombat(0, true);
-            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true, CardPilePosition.Random);
+            await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient, CardPilePosition.Random);
         }
 
         return generatedCards;
@@ -1212,7 +1544,7 @@ internal static class ModSupport
             return null;
         }
 
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, true);
+        await AddGeneratedCardToCombatCompat(card, PileType.Hand, recipient);
         return card;
     }
 
@@ -1278,7 +1610,7 @@ internal static class ModSupport
 
     public static IReadOnlyList<CardModel> GetAllCombatCards(Player player)
     {
-        if (player.Creature?.CombatState == null)
+        if (GetCombatState(player.Creature) == null)
         {
             return Array.Empty<CardModel>();
         }
@@ -1351,7 +1683,7 @@ internal static class ModSupport
 
     public static Creature? GetRandomAutoplayTarget(CardModel card)
     {
-        if (card.Owner?.Creature?.CombatState == null)
+        if (GetCombatState(card.Owner?.Creature) == null)
         {
             return null;
         }
@@ -1382,7 +1714,7 @@ internal static class ModSupport
         replayTarget = null;
         CardModel? card = cardPlay.Card;
         Creature? ownerCreature = card?.Owner?.Creature;
-        if (card == null || ownerCreature?.CombatState == null)
+        if (card == null || GetCombatState(ownerCreature) == null)
         {
             return false;
         }
@@ -1413,7 +1745,7 @@ internal static class ModSupport
 
     public static Creature? GetRandomEnemy(Creature ownerCreature)
     {
-        CombatState? combatState = ownerCreature.CombatState;
+        CombatState? combatState = GetCombatState(ownerCreature);
         if (combatState == null)
         {
             return null;
@@ -1439,6 +1771,37 @@ internal static class ModSupport
         }
 
         return enemies[0];
+    }
+
+    public static AttackCommand TargetingAllOpponentsCompat(this AttackCommand command, CombatState combatState)
+    {
+        MethodInfo method = ResolveAttackTargetingAllOpponentsMethod(combatState);
+        if (method.Invoke(command, [combatState]) is not AttackCommand result)
+        {
+            throw new MissingMethodException("AttackCommand.TargetingAllOpponents returned an unexpected result type.");
+        }
+
+        return result;
+    }
+
+    private static MethodInfo ResolveAttackTargetingAllOpponentsMethod(CombatState combatState)
+    {
+        if (_attackTargetingAllOpponentsMethod != null)
+        {
+            return _attackTargetingAllOpponentsMethod;
+        }
+
+        _attackTargetingAllOpponentsMethod = typeof(AttackCommand)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            .Where(method => method.Name == "TargetingAllOpponents")
+            .FirstOrDefault(method =>
+            {
+                ParameterInfo[] parameters = method.GetParameters();
+                return parameters.Length == 1 && parameters[0].ParameterType.IsInstanceOfType(combatState);
+            })
+            ?? throw new MissingMethodException("Could not find a supported AttackCommand.TargetingAllOpponents signature.");
+
+        return _attackTargetingAllOpponentsMethod;
     }
 
     private sealed class DetachedPlayerChoiceContext : PlayerChoiceContext

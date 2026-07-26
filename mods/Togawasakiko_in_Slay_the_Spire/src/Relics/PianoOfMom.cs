@@ -21,9 +21,9 @@ internal sealed class PianoOfMom : RelicModel
 
     public override RelicRarity Rarity => RelicRarity.Starter;
 
-    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, CombatState combatState)
+    public override async Task BeforeHandDraw(Player player, PlayerChoiceContext choiceContext, ICombatState combatState)
     {
-        if (Owner != player || player.Creature?.CombatState == null || player.Creature.CombatState != combatState)
+        if (Owner != player || ModSupport.GetCombatState(player.Creature) != combatState)
         {
             return;
         }

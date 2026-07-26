@@ -1,6 +1,8 @@
 # Song 子集登记
 
-日期：2026-04-03
+初建日期：2026-04-03；现状校订：2026-07-26
+
+> 档案状态：本表按当前 `ISongCard` 实现校订。源码接口是 song 身份的最终事实源；本表用于资源和人工审计。
 
 ## 一 本文件定位
 
@@ -97,6 +99,8 @@ song 子集首版至少需要：
 | Entry | Display | Rarity | ArtPath | SongTag | ArtStatus | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | `AVE_MUJICA` | `Ave Mujica` | `Rare` | `assets/cards/normal/rare/ave_mujica.png` | `true` | `final` | 已入库并接 runtime |
+| `A_WONDERFUL_WORLD_YET_NOWHERE_TO_BE_FOUND` | `A Wonderful World Yet Nowhere to Be Found` | `Rare` | `assets/cards/normal/rare/a_wonderful_world_yet_nowhere_to_be_found.png` | `true` | `final` | 已入库并接 runtime |
+| `ANGLES` | `Angles` | `Uncommon` | `assets/cards/normal/uncommon/angles.png` | `true` | `final` | 已入库并接 runtime |
 | `ETHER` | `以太` | `Uncommon` | `assets/cards/normal/uncommon/ether.png` | `true` | `final` | 已入库并接 runtime |
 | `CRUCIFIX_X` | `十字架X` | `Uncommon` | `assets/cards/normal/uncommon/crucifix_x.png` | `true` | `final` | 已入库并接 runtime |
 | `FACE` | `颜` | `Common` | `assets/cards/normal/common/face.png` | `true` | `final` | 已入库并接 runtime |
@@ -127,6 +131,6 @@ song 子集首版至少需要：
 ## 六 当前结论
 
 - song 已被明确写入资源系统，不再是“以后再想”的隐含需求。
-- 当前已入源码并带 `song tag` 的条目共 `20` 张，且都已有稳定文件路径。
+- 当前已入源码并实现 `ISongCard` 的条目共 `22` 张，且都有稳定文件路径。
 - pressure 衍生牌池与 song 池已经明确分离。
 - `Compose` 与 `Ave Mujica` 这类“池生成”效果，后续实现时必须严格从冻结对象集合中取，不要做全池随机或自行补池。

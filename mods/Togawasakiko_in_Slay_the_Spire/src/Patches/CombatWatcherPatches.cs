@@ -29,7 +29,7 @@ internal static class CombatWatcherPatches
     private static void InstallForPlayer(CombatState state, Player player)
     {
         Creature? creature = player.Creature;
-        if (creature == null || creature.CombatState != state)
+        if (creature == null || ModSupport.GetCombatState(creature) != state)
         {
             ModSupport.LogWarn($"Skipped combat watcher install for player={player.NetId}: creature is not attached to this combat.");
             return;
