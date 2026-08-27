@@ -37,6 +37,7 @@ NON_DEATH_ANIMATIONS = (
 )
 RUNTIME_ACTIONS = (*NON_DEATH_ANIMATIONS, "die")
 PHASE_TIMES = (0.30, 0.42, 0.54, 0.68, 0.74, 0.82, 0.95)
+FOOT_CONTACT_SOURCE = (23.0, 911.5)
 
 
 def read_json(path: Path) -> dict:
@@ -91,6 +92,29 @@ def _fall_root_setup(anchors: dict) -> dict[str, float | str]:
         "scaleX": setup_scale,
         "scaleY": setup_scale,
     }
+
+
+def _foot_locked_translation_x(
+    fall_root: dict[str, float | str],
+    rotation_offset: float,
+) -> float:
+    local_x = FOOT_CONTACT_SOURCE[0] - 512.0
+    local_y = 768.0 - FOOT_CONTACT_SOURCE[1]
+    setup_rotation = float(fall_root["rotation"])
+    setup_scale = float(fall_root["scaleX"])
+
+    def rotated_x(rotation_degrees: float) -> float:
+        angle = math.radians(rotation_degrees)
+        return setup_scale * (
+            math.cos(angle) * local_x - math.sin(angle) * local_y
+        )
+
+    switch_foot_x = float(fall_root["x"]) + rotated_x(setup_rotation)
+    return (
+        switch_foot_x
+        - float(fall_root["x"])
+        - rotated_x(setup_rotation + rotation_offset)
+    )
 
 
 def _curve_1d(
@@ -183,14 +207,17 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
     }
 
     final_rotation = anchors["transform"]["rotation_degrees"]
+    x_at_042 = _foot_locked_translation_x(fall_root, -12.0)
+    x_at_054 = _foot_locked_translation_x(fall_root, -34.0)
+    grounded_x = _foot_locked_translation_x(fall_root, final_rotation)
     fall_translation_points = (
         (0.30, 0.0, 0.0),
-        (0.42, 30.0, -32.0),
-        (0.54, 90.0, -110.0),
-        (0.68, 220.0, -444.0),
-        (0.74, 224.0, -440.0),
-        (0.82, 228.0, -444.0),
-        (0.95, 228.0, -444.0),
+        (0.42, x_at_042, -32.0),
+        (0.54, x_at_054, -110.0),
+        (0.68, grounded_x, -444.0),
+        (0.74, grounded_x, -440.0),
+        (0.82, grounded_x, -444.0),
+        (0.95, grounded_x, -444.0),
     )
     fall_rotation_points = (
         (0.30, 0.0),
@@ -249,6 +276,11 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
         "rgba_crossfade": False,
         "fall_root_phase_times": list(PHASE_TIMES),
         "fall_root_setup": copy.deepcopy(fall_root),
+        "foot_contact_source": {
+            "x": FOOT_CONTACT_SOURCE[0],
+            "y": FOOT_CONTACT_SOURCE[1],
+        },
+        "grounded_fall_root_x": grounded_x,
         "runtime_actions": list(RUNTIME_ACTIONS),
         "atlas_pages": [
             {"path": "images/rig_sheet.png", "width": 3072, "height": 3072},
@@ -289,9 +321,9 @@ run/main_scene="res://preview_scene.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [display]
-window/size/viewport_width=768
+window/size/viewport_width=1280
 window/size/viewport_height=1024
-window/size/window_width_override=768
+window/size/window_width_override=1280
 window/size/window_height_override=1024
 
 [rendering]
@@ -310,7 +342,7 @@ def _preview_scene() -> str:
 script = ExtResource("1_script")
 
 [node name="Background" type="ColorRect" parent="."]
-offset_right = 768.0
+offset_right = 1280.0
 offset_bottom = 1024.0
 color = Color(0.025, 0.028, 0.04, 1)
 mouse_filter = 2
@@ -325,7 +357,7 @@ preview_animation = "die"
 [node name="Caption" type="Label" parent="."]
 offset_left = 24.0
 offset_top = 20.0
-offset_right = 744.0
+offset_right = 1256.0
 offset_bottom = 58.0
 theme_override_colors/font_color = Color(0.86, 0.78, 0.58, 1)
 theme_override_font_sizes/font_size = 24

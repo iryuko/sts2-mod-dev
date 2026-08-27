@@ -24,3 +24,30 @@ Candidate: `fall_prone_candidate_v1.png`
 ## Result
 
 All required visual acceptance fields pass. The asset is suitable as a single attachment that can serve both the forward-fall transition and the prone hold. No PNG regeneration was needed.
+
+## Runtime Motion Audit
+
+### Rejected V1
+
+`single_switch_death_v1_20260827.mp4` was rejected after runtime inspection.
+The fall-root X keys did not compensate for the attachment rotation, so the
+boot contact drifted left while the body rotated. The 768px preview also
+clipped both ends of the prone silhouette.
+
+### Grounded V2
+
+Evidence:
+
+- `single_switch_death_v2_grounded_20260827.mp4`
+- `single_switch_death_v2_grounded_contact_20260827.png`
+- `single_switch_death_v2_grounding_grid.png`
+
+| Field | Result | Evidence |
+| --- | --- | --- |
+| Forward-loss readability | PASS | The torso commits forward before the rapid rotation and descent. |
+| Acceleration | PASS | Vertical displacement increases through the `0.68s` contact key. |
+| Contact rebound | PASS | One restrained 4px rebound occurs at `0.74s`, followed by settlement. |
+| Prone grounding | PASS | The boot contact is solved from the attachment toe point and remains on the same X line through the rotation. Frames 40-56 hold the foreground left edge at `x=244px`; the standing left boot is approximately `x=260px`. |
+| Final framing | PASS | The preview is widened to 1280px without changing character scale; the final foreground spans `x=244..1150px`. |
+| Face, costume, proportions, palette, materials | PASS | The accepted attachment is rigidly transformed; no warp, nonuniform scale, or RGBA crossfade is used. |
+| Switch pop | PENDING USER ACCEPTANCE | The design intentionally uses one hard attachment switch at `0.30s`; normal-speed acceptance remains subjective. |

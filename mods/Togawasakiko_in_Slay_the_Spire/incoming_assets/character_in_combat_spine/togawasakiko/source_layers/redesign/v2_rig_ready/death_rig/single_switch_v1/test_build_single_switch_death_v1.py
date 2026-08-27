@@ -268,6 +268,51 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
                 value_without_curve_or_time(final),
             )
 
+    def test_prone_foot_contact_keeps_its_switch_x_coordinate(self) -> None:
+        skeleton, _ = build_single_switch_skeleton()
+        setup = next(
+            bone for bone in skeleton["bones"] if bone["name"] == "death_fall_root"
+        )
+        final = keyed_at(
+            skeleton["animations"]["die"]["bones"]["death_fall_root"][
+                "translate"
+            ],
+            0.82,
+        )
+        with Image.open(CANDIDATE) as image:
+            alpha = image.getchannel("A")
+            alpha_bounds = alpha.getbbox()
+        self.assertIsNotNone(alpha_bounds)
+        foot_contact_source_x = alpha_bounds[0]
+        foot_y_values = [
+            y
+            for y in range(alpha_bounds[1], alpha_bounds[3])
+            if alpha.getpixel((foot_contact_source_x, y)) > 32
+        ]
+        self.assertTrue(foot_y_values)
+        foot_contact_source_y = sum(foot_y_values) / len(foot_y_values)
+        local_foot_x = foot_contact_source_x - 512.0
+        local_foot_y = 768.0 - foot_contact_source_y
+
+        def rotated_foot_x(rotation_degrees: float) -> float:
+            angle = math.radians(rotation_degrees)
+            return setup["scaleX"] * (
+                math.cos(angle) * local_foot_x
+                - math.sin(angle) * local_foot_y
+            )
+
+        switch_foot_x = setup["x"] + rotated_foot_x(setup["rotation"])
+        final_rotation = keyed_at(
+            skeleton["animations"]["die"]["bones"]["death_fall_root"]["rotate"],
+            0.82,
+        )["value"]
+        final_foot_x = (
+            setup["x"]
+            + final["x"]
+            + rotated_foot_x(setup["rotation"] + final_rotation)
+        )
+        self.assertAlmostEqual(final_foot_x, switch_foot_x, delta=1.0)
+
     def test_die_has_no_rgba_crossfade_timeline(self) -> None:
         skeleton, _ = build_single_switch_skeleton()
         die = skeleton["animations"]["die"]
@@ -353,6 +398,13 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         self.assertIn("const DURATION_SECONDS := 0.95", driver)
         self.assertIn("elapsed >= DURATION_SECONDS", driver)
         self.assertEqual(driver.count("get_tree().quit(0)"), 1)
+
+    def test_preview_canvas_is_wide_enough_for_the_grounded_prone_pose(self) -> None:
+        project = (RUNTIME_ROOT / "project.godot").read_text()
+        scene = (RUNTIME_ROOT / "preview_scene.tscn").read_text()
+        self.assertIn("window/size/viewport_width=1280", project)
+        self.assertIn("window/size/window_width_override=1280", project)
+        self.assertIn("offset_right = 1280.0", scene)
 
     def test_runtime_inspector_declares_every_action(self) -> None:
         inspector = (RUNTIME_ROOT / "inspect_spine.gd").read_text()
