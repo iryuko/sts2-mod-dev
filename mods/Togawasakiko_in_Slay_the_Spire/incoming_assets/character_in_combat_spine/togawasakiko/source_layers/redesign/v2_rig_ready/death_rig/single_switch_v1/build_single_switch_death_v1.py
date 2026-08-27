@@ -24,7 +24,7 @@ EXPECTED_BASE_SHA256 = (
     "2752c01bc1592508c90d2ce2ae3b58a55763306008d0712cc720d406a0405537"
 )
 
-CANDIDATE = ROOT / "fall_prone_candidate_v1.png"
+CANDIDATE = ROOT / "fall_prone_candidate_v2_clean.png"
 ANCHORS = ROOT / "fall_prone_anchors.json"
 RUNTIME_ROOT = REPO_ROOT / "local/spine-proof-togawasakiko-death-single-switch-v1"
 
@@ -36,8 +36,10 @@ NON_DEATH_ANIMATIONS = (
     "relaxed_loop",
 )
 RUNTIME_ACTIONS = (*NON_DEATH_ANIMATIONS, "die")
-PHASE_TIMES = (0.30, 0.42, 0.54, 0.68, 0.74, 0.82, 0.95)
-FOOT_CONTACT_SOURCE = (23.0, 911.5)
+PHASE_TIMES = (0.075, 0.095, 0.125, 0.155, 0.21)
+FOOT_CONTACT_SOURCE = (11.0, 971.0)
+FOOT_ALIGNMENT_CORRECTION_X = -57.0
+GROUND_Y = -358.0
 
 
 def read_json(path: Path) -> dict:
@@ -142,7 +144,7 @@ def _translate_timeline(
         key = {"time": time, "x": x, "y": y}
         if index < len(points) - 1:
             next_time, next_x, next_y = points[index + 1]
-            controls = (0.08, 0.58) if time < 0.68 else (0.30, 0.82)
+            controls = (0.08, 0.58)
             key["curve"] = [
                 *_curve_1d((time, x), (next_time, next_x), controls),
                 *_curve_1d((time, y), (next_time, next_y), controls),
@@ -156,7 +158,7 @@ def _rotate_timeline(points: tuple[tuple[float, float], ...]) -> list[dict]:
     for index, (time, value) in enumerate(points):
         key = {"time": time, "value": value}
         if index < len(points) - 1:
-            controls = (0.08, 0.58) if time < 0.68 else (0.30, 0.82)
+            controls = (0.08, 0.58)
             key["curve"] = _curve_1d(
                 (time, value),
                 points[index + 1],
@@ -196,56 +198,53 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
         if slot.get("attachment") is not None
     ]
     die_slots = {
-        slot_name: {"attachment": [{"time": 0.30, "name": None}]}
+        slot_name: {"attachment": [{"time": 0.075, "name": None}]}
         for slot_name in standing_art_slots
     }
     die_slots["death_fall"] = {
         "attachment": [
             {"time": 0.0, "name": None},
-            {"time": 0.30, "name": "death_fall_prone"},
+            {"time": 0.075, "name": "death_fall_prone"},
         ]
     }
 
     final_rotation = anchors["transform"]["rotation_degrees"]
-    x_at_042 = _foot_locked_translation_x(fall_root, -12.0)
-    x_at_054 = _foot_locked_translation_x(fall_root, -34.0)
-    grounded_x = _foot_locked_translation_x(fall_root, final_rotation)
+    grounded_x = (
+        _foot_locked_translation_x(fall_root, final_rotation)
+        + FOOT_ALIGNMENT_CORRECTION_X
+    )
     fall_translation_points = (
-        (0.30, 0.0, 0.0),
-        (0.42, x_at_042, -32.0),
-        (0.54, x_at_054, -110.0),
-        (0.68, grounded_x, -444.0),
-        (0.74, grounded_x, -440.0),
-        (0.82, grounded_x, -444.0),
-        (0.95, grounded_x, -444.0),
+        (0.075, grounded_x, GROUND_Y + 8.0),
+        (0.095, grounded_x, GROUND_Y),
+        (0.125, grounded_x, GROUND_Y + 4.0),
+        (0.155, grounded_x, GROUND_Y),
+        (0.21, grounded_x, GROUND_Y),
     )
     fall_rotation_points = (
-        (0.30, 0.0),
-        (0.42, -12.0),
-        (0.54, -34.0),
-        (0.68, final_rotation),
-        (0.74, final_rotation),
-        (0.82, final_rotation),
-        (0.95, final_rotation),
+        (0.075, final_rotation),
+        (0.095, final_rotation),
+        (0.125, final_rotation),
+        (0.155, final_rotation),
+        (0.21, final_rotation),
     )
     die_bones = {
         "hips": {
             "translate": [
                 {"time": 0.0, "x": 0.0, "y": 0.0},
-                {"time": 0.12, "x": 2.0, "y": -3.0},
-                {"time": 0.30, "x": 12.0, "y": -18.0},
+                {"time": 0.035, "x": 2.0, "y": -3.0},
+                {"time": 0.075, "x": 5.0, "y": -10.0},
             ],
             "rotate": [
                 {"time": 0.0, "value": 0.0},
-                {"time": 0.12, "value": -2.0},
-                {"time": 0.30, "value": -8.0},
+                {"time": 0.035, "value": -2.0},
+                {"time": 0.075, "value": -6.0},
             ],
         },
         "torso": {
             "rotate": [
                 {"time": 0.0, "value": 0.0},
-                {"time": 0.12, "value": -4.0},
-                {"time": 0.30, "value": -20.0},
+                {"time": 0.035, "value": -4.0},
+                {"time": 0.075, "value": -12.0},
             ]
         },
         "death_fall_root": {
@@ -266,11 +265,11 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
         "alignment_probe_spine_sprite": copy.deepcopy(
             anchors["reference"]["probe_spine_sprite"]
         ),
-        "duration_seconds": 0.95,
-        "switch_time_seconds": 0.30,
-        "contact_time_seconds": 0.68,
-        "rebound_time_seconds": 0.74,
-        "hold_time_seconds": 0.82,
+        "duration_seconds": 0.21,
+        "switch_time_seconds": 0.075,
+        "contact_time_seconds": 0.095,
+        "rebound_time_seconds": 0.125,
+        "hold_time_seconds": 0.155,
         "attachment_switch_count": 1,
         "full_character_attachment_count": 1,
         "rgba_crossfade": False,
@@ -280,12 +279,14 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
             "x": FOOT_CONTACT_SOURCE[0],
             "y": FOOT_CONTACT_SOURCE[1],
         },
+        "foot_alignment_correction_x": FOOT_ALIGNMENT_CORRECTION_X,
+        "ground_y": GROUND_Y,
         "grounded_fall_root_x": grounded_x,
         "runtime_actions": list(RUNTIME_ACTIONS),
         "atlas_pages": [
             {"path": "images/rig_sheet.png", "width": 3072, "height": 3072},
             {
-                "path": "images/fall_prone_candidate_v1.png",
+                "path": "images/fall_prone_candidate_v2_clean.png",
                 "width": 1024,
                 "height": 1536,
                 "format": "RGBA8888",
@@ -296,7 +297,7 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
 
 
 def _combined_atlas() -> str:
-    fall_page = """images/fall_prone_candidate_v1.png
+    fall_page = """images/fall_prone_candidate_v2_clean.png
 size: 1024,1536
 format: RGBA8888
 filter: Linear,Linear
@@ -369,7 +370,7 @@ horizontal_alignment = 1
 def _preview_driver() -> str:
     return """extends Node2D
 
-const DURATION_SECONDS := 0.95
+const DURATION_SECONDS := 0.21
 
 @onready var visuals: Node = $Visuals
 
@@ -437,7 +438,7 @@ def build_runtime_project() -> Path:
     images.mkdir(parents=True)
     shutil.copytree(EXTENSION_SOURCE, RUNTIME_ROOT / "bin")
     shutil.copy2(BASE_RIG_SHEET, images / "rig_sheet.png")
-    shutil.copy2(CANDIDATE, images / "fall_prone_candidate_v1.png")
+    shutil.copy2(CANDIDATE, images / "fall_prone_candidate_v2_clean.png")
     shutil.copy2(
         BASE_SKELETON_RESOURCE,
         RUNTIME_ROOT / "animation/togawasakiko_v2_skel_data.tres",

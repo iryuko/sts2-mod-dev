@@ -9,6 +9,8 @@ from build_single_switch_death_v1 import (
     BASE_JSON,
     CANDIDATE,
     EXPECTED_BASE_SHA256,
+    FOOT_ALIGNMENT_CORRECTION_X,
+    GROUND_Y,
     REPO_ROOT,
     RUNTIME_ROOT,
     build_runtime_project,
@@ -25,7 +27,7 @@ NON_DEATH_ANIMATIONS = (
     "hurt",
     "relaxed_loop",
 )
-PHASE_TIMES = [0.30, 0.42, 0.54, 0.68, 0.74, 0.82, 0.95]
+PHASE_TIMES = [0.075, 0.095, 0.125, 0.155, 0.21]
 
 
 def keyed_at(timeline: list[dict], time: float) -> dict:
@@ -51,9 +53,11 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
     def test_die_uses_one_switch_and_no_v87_stage_slots(self) -> None:
         skeleton, manifest = build_single_switch_skeleton()
         die = skeleton["animations"]["die"]
-        self.assertEqual(manifest["duration_seconds"], 0.95)
-        self.assertEqual(manifest["switch_time_seconds"], 0.30)
-        self.assertEqual(manifest["hold_time_seconds"], 0.82)
+        self.assertEqual(manifest["duration_seconds"], 0.21)
+        self.assertEqual(manifest["switch_time_seconds"], 0.075)
+        self.assertEqual(manifest["contact_time_seconds"], 0.095)
+        self.assertEqual(manifest["rebound_time_seconds"], 0.125)
+        self.assertEqual(manifest["hold_time_seconds"], 0.155)
         self.assertEqual(manifest["attachment_switch_count"], 1)
         self.assertFalse(
             any(name.startswith("v87_kneel_") for name in die.get("slots", {}))
@@ -71,7 +75,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         ]
         self.assertEqual(
             shown_attachments,
-            [{"time": 0.30, "name": "death_fall_prone"}],
+            [{"time": 0.075, "name": "death_fall_prone"}],
         )
 
     def test_non_death_animations_are_unchanged(self) -> None:
@@ -161,14 +165,14 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         for slot_name in standing_slots:
             self.assertEqual(
                 die_slots[slot_name],
-                {"attachment": [{"time": 0.30, "name": None}]},
+                {"attachment": [{"time": 0.075, "name": None}]},
             )
         self.assertEqual(
             die_slots["death_fall"],
             {
                 "attachment": [
                     {"time": 0.0, "name": None},
-                    {"time": 0.30, "name": "death_fall_prone"},
+                    {"time": 0.075, "name": "death_fall_prone"},
                 ]
             },
         )
@@ -179,7 +183,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         early_translation = [
             key
             for key in root_timeline.get("translate", [])
-            if key["time"] < 0.30
+            if key["time"] < 0.075
         ]
         self.assertEqual(early_translation, [])
 
@@ -191,13 +195,13 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
             {
                 "translate": [
                     {"time": 0.0, "x": 0.0, "y": 0.0},
-                    {"time": 0.12, "x": 2.0, "y": -3.0},
-                    {"time": 0.30, "x": 12.0, "y": -18.0},
+                    {"time": 0.035, "x": 2.0, "y": -3.0},
+                    {"time": 0.075, "x": 5.0, "y": -10.0},
                 ],
                 "rotate": [
                     {"time": 0.0, "value": 0.0},
-                    {"time": 0.12, "value": -2.0},
-                    {"time": 0.30, "value": -8.0},
+                    {"time": 0.035, "value": -2.0},
+                    {"time": 0.075, "value": -6.0},
                 ],
             },
         )
@@ -206,8 +210,8 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
             {
                 "rotate": [
                     {"time": 0.0, "value": 0.0},
-                    {"time": 0.12, "value": -4.0},
-                    {"time": 0.30, "value": -20.0},
+                    {"time": 0.035, "value": -4.0},
+                    {"time": 0.075, "value": -12.0},
                 ]
             },
         )
@@ -225,26 +229,25 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
                     8 if timeline_name == "translate" else 4,
                 )
 
-    def test_downward_key_spacing_accelerates_through_contact(self) -> None:
+    def test_prone_attachment_is_already_grounded_at_switch(self) -> None:
         skeleton, _ = build_single_switch_skeleton()
-        timeline = skeleton["animations"]["die"]["bones"]["death_fall_root"][
-            "translate"
-        ]
-        fall_keys = [keyed_at(timeline, time) for time in PHASE_TIMES[:4]]
-        downward_displacements = [
-            previous["y"] - current["y"]
-            for previous, current in zip(fall_keys, fall_keys[1:])
-        ]
-        self.assertTrue(all(distance > 0 for distance in downward_displacements))
-        self.assertLess(downward_displacements[0], downward_displacements[1])
-        self.assertLess(downward_displacements[1], downward_displacements[2])
+        fall_root = skeleton["animations"]["die"]["bones"]["death_fall_root"]
+        translations = fall_root["translate"]
+        rotations = fall_root["rotate"]
+        self.assertEqual({key["x"] for key in translations}, {translations[0]["x"]})
+        self.assertEqual(
+            {key["value"] for key in rotations},
+            {rotations[0]["value"]},
+        )
+        self.assertLessEqual(abs(translations[0]["y"] - translations[1]["y"]), 8.0)
+        self.assertEqual(translations[1]["y"], GROUND_Y)
 
     def test_contact_has_exactly_one_small_rebound(self) -> None:
         skeleton, _ = build_single_switch_skeleton()
         timeline = skeleton["animations"]["die"]["bones"]["death_fall_root"][
             "translate"
         ]
-        contact_keys = [keyed_at(timeline, time) for time in PHASE_TIMES[3:]]
+        contact_keys = [keyed_at(timeline, time) for time in PHASE_TIMES[1:]]
         vertical_moves = [
             current["y"] - previous["y"]
             for previous, current in zip(contact_keys, contact_keys[1:])
@@ -252,7 +255,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         upward_moves = [distance for distance in vertical_moves if distance > 0]
         self.assertEqual(len(upward_moves), 1)
         self.assertGreaterEqual(upward_moves[0], 3.0)
-        self.assertLessEqual(upward_moves[0], 6.0)
+        self.assertLessEqual(upward_moves[0], 5.0)
         self.assertLess(vertical_moves[1], 0)
         self.assertEqual(vertical_moves[2], 0)
 
@@ -261,14 +264,14 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         fall_root = skeleton["animations"]["die"]["bones"]["death_fall_root"]
         for timeline_name in ("translate", "rotate"):
             timeline = fall_root[timeline_name]
-            hold = keyed_at(timeline, 0.82)
-            final = keyed_at(timeline, 0.95)
+            hold = keyed_at(timeline, 0.155)
+            final = keyed_at(timeline, 0.21)
             self.assertEqual(
                 value_without_curve_or_time(hold),
                 value_without_curve_or_time(final),
             )
 
-    def test_prone_foot_contact_keeps_its_switch_x_coordinate(self) -> None:
+    def test_prone_foot_contact_applies_the_measured_alignment_correction(self) -> None:
         skeleton, _ = build_single_switch_skeleton()
         setup = next(
             bone for bone in skeleton["bones"] if bone["name"] == "death_fall_root"
@@ -277,7 +280,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
             skeleton["animations"]["die"]["bones"]["death_fall_root"][
                 "translate"
             ],
-            0.82,
+            0.155,
         )
         with Image.open(CANDIDATE) as image:
             alpha = image.getchannel("A")
@@ -304,14 +307,18 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         switch_foot_x = setup["x"] + rotated_foot_x(setup["rotation"])
         final_rotation = keyed_at(
             skeleton["animations"]["die"]["bones"]["death_fall_root"]["rotate"],
-            0.82,
+            0.155,
         )["value"]
         final_foot_x = (
             setup["x"]
             + final["x"]
             + rotated_foot_x(setup["rotation"] + final_rotation)
         )
-        self.assertAlmostEqual(final_foot_x, switch_foot_x, delta=1.0)
+        self.assertAlmostEqual(
+            final_foot_x - switch_foot_x,
+            FOOT_ALIGNMENT_CORRECTION_X,
+            delta=1.0,
+        )
 
     def test_die_has_no_rgba_crossfade_timeline(self) -> None:
         skeleton, _ = build_single_switch_skeleton()
@@ -324,7 +331,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
 
     def test_runtime_project_writes_required_outputs(self) -> None:
         expected = [
-            "animation/images/fall_prone_candidate_v1.png",
+            "animation/images/fall_prone_candidate_v2_clean.png",
             "animation/images/rig_sheet.png",
             "animation/togawasakiko_v2.atlas",
             "animation/togawasakiko_v2.spine-json",
@@ -366,7 +373,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
 
     def test_runtime_copies_assets_and_extension(self) -> None:
-        runtime_candidate = RUNTIME_ROOT / "animation/images/fall_prone_candidate_v1.png"
+        runtime_candidate = RUNTIME_ROOT / "animation/images/fall_prone_candidate_v2_clean.png"
         self.assertEqual(sha256(runtime_candidate), sha256(CANDIDATE))
         with Image.open(runtime_candidate) as image:
             self.assertEqual(image.mode, "RGBA")
@@ -381,7 +388,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
 
     def test_atlas_has_a_correct_second_page_for_fall_attachment(self) -> None:
         atlas = (RUNTIME_ROOT / "animation/togawasakiko_v2.atlas").read_text()
-        second_page = atlas.split("\n\nimages/fall_prone_candidate_v1.png\n", 1)
+        second_page = atlas.split("\n\nimages/fall_prone_candidate_v2_clean.png\n", 1)
         self.assertEqual(len(second_page), 2)
         fall_page = second_page[1]
         self.assertIn("size: 1024,1536\n", fall_page)
@@ -392,10 +399,10 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         self.assertIn("  size: 1024, 1536\n", fall_page)
         self.assertIn("  orig: 1024, 1536\n", fall_page)
 
-    def test_preview_plays_die_once_and_quits_after_point_nine_five(self) -> None:
+    def test_preview_plays_die_once_and_quits_after_point_two_one(self) -> None:
         driver = (RUNTIME_ROOT / "preview_driver.gd").read_text()
         self.assertEqual(driver.count('set_animation", "die", false, 0'), 1)
-        self.assertIn("const DURATION_SECONDS := 0.95", driver)
+        self.assertIn("const DURATION_SECONDS := 0.21", driver)
         self.assertIn("elapsed >= DURATION_SECONDS", driver)
         self.assertEqual(driver.count("get_tree().quit(0)"), 1)
 
