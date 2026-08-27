@@ -1,4 +1,5 @@
 import math
+import subprocess
 import unittest
 
 from PIL import Image
@@ -8,6 +9,7 @@ from build_single_switch_death_v1 import (
     BASE_JSON,
     CANDIDATE,
     EXPECTED_BASE_SHA256,
+    REPO_ROOT,
     RUNTIME_ROOT,
     build_runtime_project,
     build_single_switch_skeleton,
@@ -303,6 +305,20 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
             built_manifest,
         )
         self.assertEqual(sha256(BASE_JSON), EXPECTED_BASE_SHA256)
+
+    def test_runtime_project_is_ignored_by_git(self) -> None:
+        result = subprocess.run(
+            [
+                "git",
+                "check-ignore",
+                "--quiet",
+                "--",
+                str(RUNTIME_ROOT / "project.godot"),
+            ],
+            cwd=REPO_ROOT,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0)
 
     def test_runtime_copies_assets_and_extension(self) -> None:
         runtime_candidate = RUNTIME_ROOT / "animation/images/fall_prone_candidate_v1.png"

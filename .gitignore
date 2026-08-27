@@ -3,6 +3,8 @@
 # Local machine tooling / transient analysis artifacts
 local/tools/
 local/tmp/
+local/spine-proof-togawasakiko-death-single-switch-v1/
+.worktrees/
 
 # C# / .NET
 **/bin/
