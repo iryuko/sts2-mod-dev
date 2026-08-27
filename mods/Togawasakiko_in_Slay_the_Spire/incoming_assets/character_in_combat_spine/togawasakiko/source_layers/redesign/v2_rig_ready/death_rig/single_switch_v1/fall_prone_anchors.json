@@ -1,0 +1,81 @@
+{
+  "standing_at_switch": {
+    "head_center": {
+      "x": 700.0,
+      "y": 335.0
+    },
+    "hip_center": {
+      "x": 548.0,
+      "y": 675.0
+    }
+  },
+  "fall_attachment": {
+    "head_center": {
+      "x": 845.0,
+      "y": 846.0
+    },
+    "hip_center": {
+      "x": 545.0,
+      "y": 856.0
+    }
+  },
+  "transform": {
+    "scale": 1.2407437531752015,
+    "rotation_degrees": -64.00339525837131,
+    "translation_x": -703.0086570477249,
+    "translation_y": 817.2597114317422
+  },
+  "reference": {
+    "canvas_width": 1024,
+    "canvas_height": 1536,
+    "canonical_v10_sha256": "2752c01bc1592508c90d2ce2ae3b58a55763306008d0712cc720d406a0405537",
+    "probe_animation": "task2_switch_probe",
+    "probe_time_seconds": 0.3,
+    "probe_spine_sprite": {
+      "position_x": 512.0,
+      "position_y": 686.666667,
+      "uniform_scale": 0.773333333
+    },
+    "probe_pose": {
+      "hips": {
+        "x": 12.0,
+        "y": -18.0,
+        "rotation_degrees": -8.0
+      },
+      "torso": {
+        "rotation_degrees": -20.0
+      }
+    },
+    "rendered_probe_sha256": "33ade0ed982b51ed5e2418d70f8b07518550d13902c48b2cff71a503b9713bca"
+  },
+  "qa": {
+    "standing_probe_content_bbox": [
+      222,
+      170,
+      788,
+      1258
+    ],
+    "transformed_candidate_content_bbox": [
+      276,
+      188,
+      871,
+      1292
+    ],
+    "transformed_landmarks": {
+      "head_center": {
+        "x": 700.0,
+        "y": 335.0
+      },
+      "hip_center": {
+        "x": 547.9999999999998,
+        "y": 675.0
+      }
+    },
+    "landmark_error_pixels": {
+      "head_center": 0.0,
+      "hip_center": 2.2737367544323206e-13
+    },
+    "max_landmark_error_pixels": 2.2737367544323206e-13,
+    "overlay_candidate_opacity": 0.5
+  }
+}
