@@ -331,7 +331,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
 
     def test_runtime_project_writes_required_outputs(self) -> None:
         expected = [
-            "animation/images/fall_prone_candidate_v2_clean.png",
+            "animation/images/fall_prone_candidate_v3_idle_locked.png",
             "animation/images/rig_sheet.png",
             "animation/togawasakiko_v2.atlas",
             "animation/togawasakiko_v2.spine-json",
@@ -373,7 +373,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
 
     def test_runtime_copies_assets_and_extension(self) -> None:
-        runtime_candidate = RUNTIME_ROOT / "animation/images/fall_prone_candidate_v2_clean.png"
+        runtime_candidate = RUNTIME_ROOT / "animation/images/fall_prone_candidate_v3_idle_locked.png"
         self.assertEqual(sha256(runtime_candidate), sha256(CANDIDATE))
         with Image.open(runtime_candidate) as image:
             self.assertEqual(image.mode, "RGBA")
@@ -388,7 +388,7 @@ class SingleSwitchDeathBuildTests(unittest.TestCase):
 
     def test_atlas_has_a_correct_second_page_for_fall_attachment(self) -> None:
         atlas = (RUNTIME_ROOT / "animation/togawasakiko_v2.atlas").read_text()
-        second_page = atlas.split("\n\nimages/fall_prone_candidate_v2_clean.png\n", 1)
+        second_page = atlas.split("\n\nimages/fall_prone_candidate_v3_idle_locked.png\n", 1)
         self.assertEqual(len(second_page), 2)
         fall_page = second_page[1]
         self.assertIn("size: 1024,1536\n", fall_page)

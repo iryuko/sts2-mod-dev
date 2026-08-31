@@ -7,23 +7,23 @@
 
 ## Candidate Inspection
 
-Candidate: `fall_prone_candidate_v2_clean.png`
+Candidate: `fall_prone_candidate_v3_idle_locked.png`
 
 | Field | Result | Evidence |
 | --- | --- | --- |
-| Face | PASS | The face is mostly hidden by the terminal face-down pose; the visible profile follows the locked idle construction instead of the degraded V1 face. |
-| Silver-blue hair | PASS | Cold silver-blue hair, tied rear hair, and trailing strands follow the locked reference's color family and rendering. |
+| Face | PASS | The accepted side-prone profile preserves the locked idle face construction, small head scale, and closed-eye terminal expression. |
+| Silver-blue hair | PASS | Cold silver-blue hair, tied rear hair, and the long grounded hair mass follow the locked reference's color family and rendering. |
 | Costume construction | PASS | Dark red puff sleeves, black corset, black-and-ivory layered skirt, restrained gold trim, black gloves, and boots are preserved from the locked idle design. |
 | Limb length | PASS | Both arms and legs read as continuous, proportionate limbs without added limbs or visible joint breaks. |
-| Right-facing orientation | PASS | Head, hands, and body read toward screen right; the face is directed down and away from camera. |
+| Right-facing orientation | PASS | Head and upper body remain directed toward screen right in the accepted side-prone pose. |
 | Halo | PASS | The restrained gold thorn halo remains present behind the head. |
-| Transparent edges | PASS | The image is true RGBA with alpha extrema `(0, 255)`. Its connected silhouette is bounded at `(11, 800, 1018, 1065)` with no isolated visible speckles. |
+| Transparent edges | PASS | The selected RGB render was converted to true RGBA with alpha extrema `(0, 255)`. Its single connected silhouette is bounded at `(26, 682, 996, 1078)` with no checkerboard remnants or detached visible speckles. |
 | Fall readability | PASS | The body is already fully prone; it is intentionally not used as a rotating in-between fall frame. |
-| Prone credibility | PASS | The near-horizontal, face-down silhouette rests coherently with forearms and body aligned for a prone hold. |
+| Prone credibility | PASS | The near-horizontal side-prone silhouette rests coherently on the ground with relaxed limbs, settled skirt layers, and grounded hair. |
 
 ## Result
 
-The V1 attachment was rejected for noisy rendering and style drift. V2 was redrawn from the locked idle reference, then converted from a neutral checkerboard RGB render to a clean single-component alpha silhouette. It is used only as the terminal prone attachment.
+The V1 attachment was rejected for noisy rendering and style drift. V2 fixed the extraction path but was superseded by the user-selected V3 art. V3 was generated directly from the locked idle reference, selected without further pose edits, then converted from a neutral checkerboard RGB render to a clean single-component alpha silhouette. It is used only as the terminal prone attachment.
 
 ## Runtime Motion Audit
 
@@ -68,3 +68,17 @@ Evidence:
 | Foot alignment | PASS | Measured preview coordinates are standing left boot `x=255` and prone left toe `x=256`, a 1px difference. |
 | Final framing | PASS | The final foreground ends at `y=982` on a 1024px-high preview, leaving a 42px safety margin. |
 | Asset noise | PASS | The V2 alpha contract requires one connected visible silhouette; 115 detached extraction fragments totaling 338 pixels were removed before runtime use. |
+
+### Idle-Locked V5 (`0.21s`)
+
+Evidence:
+
+- `single_switch_death_v5_idle_locked_021s_20260831.mp4`
+
+| Field | Result | Evidence |
+| --- | --- | --- |
+| Selected art | PASS | The user explicitly selected the side-prone V3 image; no later face-down variant is used. |
+| Total duration | PASS | Godot records 13 frames at 60 FPS, yielding `0.216667s`; authored duration remains `0.21s`. |
+| Foot alignment | PASS | Measured preview coordinates are standing left boot `x=252` and prone left toe `x=253`, a 1px difference. |
+| Final framing | PASS | The settled silhouette spans `x=253..1156` and ends at `y=995` on the `1280x1024` preview, leaving safe right and lower margins. |
+| Runtime loading | PASS | Godot 4.5.1 loads `idle_loop`, `attack`, `cast`, `hurt`, `relaxed_loop`, and `die` from the rebuilt isolated project. |

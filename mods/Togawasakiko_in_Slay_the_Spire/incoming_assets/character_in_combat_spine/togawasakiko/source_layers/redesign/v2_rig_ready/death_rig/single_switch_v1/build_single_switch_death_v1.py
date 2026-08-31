@@ -24,7 +24,7 @@ EXPECTED_BASE_SHA256 = (
     "2752c01bc1592508c90d2ce2ae3b58a55763306008d0712cc720d406a0405537"
 )
 
-CANDIDATE = ROOT / "fall_prone_candidate_v2_clean.png"
+CANDIDATE = ROOT / "fall_prone_candidate_v3_idle_locked.png"
 ANCHORS = ROOT / "fall_prone_anchors.json"
 RUNTIME_ROOT = REPO_ROOT / "local/spine-proof-togawasakiko-death-single-switch-v1"
 
@@ -37,7 +37,7 @@ NON_DEATH_ANIMATIONS = (
 )
 RUNTIME_ACTIONS = (*NON_DEATH_ANIMATIONS, "die")
 PHASE_TIMES = (0.075, 0.095, 0.125, 0.155, 0.21)
-FOOT_CONTACT_SOURCE = (11.0, 971.0)
+FOOT_CONTACT_SOURCE = (26.0, 961.0)
 FOOT_ALIGNMENT_CORRECTION_X = -57.0
 GROUND_Y = -358.0
 
@@ -286,7 +286,7 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
         "atlas_pages": [
             {"path": "images/rig_sheet.png", "width": 3072, "height": 3072},
             {
-                "path": "images/fall_prone_candidate_v2_clean.png",
+                "path": "images/fall_prone_candidate_v3_idle_locked.png",
                 "width": 1024,
                 "height": 1536,
                 "format": "RGBA8888",
@@ -297,7 +297,7 @@ def build_single_switch_skeleton() -> tuple[dict, dict]:
 
 
 def _combined_atlas() -> str:
-    fall_page = """images/fall_prone_candidate_v2_clean.png
+    fall_page = """images/fall_prone_candidate_v3_idle_locked.png
 size: 1024,1536
 format: RGBA8888
 filter: Linear,Linear
@@ -438,7 +438,7 @@ def build_runtime_project() -> Path:
     images.mkdir(parents=True)
     shutil.copytree(EXTENSION_SOURCE, RUNTIME_ROOT / "bin")
     shutil.copy2(BASE_RIG_SHEET, images / "rig_sheet.png")
-    shutil.copy2(CANDIDATE, images / "fall_prone_candidate_v2_clean.png")
+    shutil.copy2(CANDIDATE, images / "fall_prone_candidate_v3_idle_locked.png")
     shutil.copy2(
         BASE_SKELETON_RESOURCE,
         RUNTIME_ROOT / "animation/togawasakiko_v2_skel_data.tres",

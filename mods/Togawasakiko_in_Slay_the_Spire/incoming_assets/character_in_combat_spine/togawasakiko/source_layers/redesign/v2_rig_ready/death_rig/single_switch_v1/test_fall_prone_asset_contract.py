@@ -6,7 +6,7 @@ from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parent
-ASSET = ROOT / "fall_prone_candidate_v2_clean.png"
+ASSET = ROOT / "fall_prone_candidate_v3_idle_locked.png"
 
 
 class FallProneAssetContractTests(unittest.TestCase):
@@ -23,7 +23,7 @@ class FallProneAssetContractTests(unittest.TestCase):
         alpha = Image.open(ASSET).getchannel("A")
         left, top, right, bottom = alpha.getbbox()
         self.assertGreater(left, 0)
-        self.assertGreater(top, 700)
+        self.assertGreater(top, 650)
         self.assertLess(right, 1024)
         self.assertLess(bottom, 1100)
 
