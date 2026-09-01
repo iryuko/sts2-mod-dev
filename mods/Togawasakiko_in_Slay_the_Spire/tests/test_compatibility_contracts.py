@@ -133,3 +133,27 @@ class GameplayStateContracts(unittest.TestCase):
         self.assertEqual(2, relics.count("CardPileCmd.Add(card, PileType.Deck)"))
         self.assertEqual(2, relics.count("CardCmd.PreviewCardPileAdd"))
         self.assertNotIn("AddSpecificCardToDeck", relics)
+
+
+class PrivateReflectionContracts(unittest.TestCase):
+    def test_optional_ui_has_no_static_field_ref(self) -> None:
+        for relative in (
+            "src/Patches/CardLibraryPatches.cs",
+            "src/Patches/TogawaEventRoomPatches.cs",
+        ):
+            source = read_source(relative)
+            self.assertNotIn("FieldRefAccess", source, relative)
+            self.assertNotIn("AccessTools.FieldRef<", source, relative)
+
+    def test_teiji_does_not_mutate_run_state(self) -> None:
+        source = read_source("src/Patches/TogawaEventRoomPatches.cs")
+        self.assertNotIn("PlayerRunStateSetter", source)
+        self.assertNotIn("PropertySetter(typeof(Player)", source)
+        self.assertNotIn("RunStateRef(__instance) =", source)
+        self.assertNotIn("class TogawaEventRoomSetupPatch", source)
+
+    def test_event_fallback_uses_public_layout(self) -> None:
+        source = read_source("src/Patches/TogawaEventRoomPatches.cs")
+        self.assertIn("Lazy<FieldInfo?>", source)
+        self.assertIn("__instance.Layout", source)
+        self.assertIn("return true;", source)

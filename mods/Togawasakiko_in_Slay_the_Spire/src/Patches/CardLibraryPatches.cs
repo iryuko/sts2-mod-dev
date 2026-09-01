@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -53,14 +54,14 @@ internal static class CardLibraryTogawasakikoPoolPatch
     private const string TogawasakikoPoolNodeName = "TogawasakikoPool";
     private const string PoolToggleScenePath = "res://scenes/screens/card_library/library_pool_toggle.tscn";
 
-    private static readonly AccessTools.FieldRef<NCardLibrary, Dictionary<NCardPoolFilter, Func<CardModel, bool>>> PoolFiltersRef =
-        AccessTools.FieldRefAccess<NCardLibrary, Dictionary<NCardPoolFilter, Func<CardModel, bool>>>("_poolFilters");
+    private static readonly Lazy<FieldInfo?> PoolFiltersField =
+        new(() => ResolveOptionalField("_poolFilters"));
 
-    private static readonly AccessTools.FieldRef<NCardLibrary, Dictionary<CharacterModel, NCardPoolFilter>> CardPoolFiltersRef =
-        AccessTools.FieldRefAccess<NCardLibrary, Dictionary<CharacterModel, NCardPoolFilter>>("_cardPoolFilters");
+    private static readonly Lazy<FieldInfo?> CardPoolFiltersField =
+        new(() => ResolveOptionalField("_cardPoolFilters"));
 
-    private static readonly AccessTools.FieldRef<NCardLibrary, Control?> LastHoveredControlRef =
-        AccessTools.FieldRefAccess<NCardLibrary, Control?>("_lastHoveredControl");
+    private static readonly Lazy<FieldInfo?> LastHoveredControlField =
+        new(() => ResolveOptionalField("_lastHoveredControl"));
 
     [HarmonyPostfix]
     private static void AddTogawasakikoPoolFilter(NCardLibrary __instance)
@@ -77,8 +78,13 @@ internal static class CardLibraryTogawasakikoPoolPatch
 
     private static void AddTogawasakikoPoolFilterUnsafe(NCardLibrary cardLibrary)
     {
-        Dictionary<NCardPoolFilter, Func<CardModel, bool>> poolFilters = PoolFiltersRef(cardLibrary);
-        Dictionary<CharacterModel, NCardPoolFilter> cardPoolFilters = CardPoolFiltersRef(cardLibrary);
+        if (PoolFiltersField.Value?.GetValue(cardLibrary) is not Dictionary<NCardPoolFilter, Func<CardModel, bool>> poolFilters ||
+            CardPoolFiltersField.Value?.GetValue(cardLibrary) is not Dictionary<CharacterModel, NCardPoolFilter> cardPoolFilters)
+        {
+            return;
+        }
+
+        FieldInfo? lastHoveredControlField = LastHoveredControlField.Value;
         CharacterModel togawasakiko = ModelDb.Character<Togawasakiko>();
 
         if (cardPoolFilters.ContainsKey(togawasakiko))
@@ -89,7 +95,7 @@ internal static class CardLibraryTogawasakikoPoolPatch
         GridContainer poolFilterContainer = cardLibrary.GetNode<GridContainer>("Sidebar/MarginContainer/TopVBox/PoolFilters");
         if (poolFilterContainer.GetNodeOrNull(TogawasakikoPoolNodeName) is NCardPoolFilter existingFilter)
         {
-            RegisterFilter(cardLibrary, existingFilter, poolFilters, cardPoolFilters, togawasakiko);
+            RegisterFilter(cardLibrary, existingFilter, poolFilters, cardPoolFilters, togawasakiko, lastHoveredControlField);
             return;
         }
 
@@ -105,7 +111,7 @@ internal static class CardLibraryTogawasakikoPoolPatch
         togawaFilter.Loc = new LocString("card_library", "POOL_TOGAWASAKIKO_TIP");
         poolFilterContainer.AddChild(togawaFilter);
         ApplyIconTexture(togawaFilter, ModelDb.Character<Togawasakiko>().IconTexture);
-        RegisterFilter(cardLibrary, togawaFilter, poolFilters, cardPoolFilters, togawasakiko);
+        RegisterFilter(cardLibrary, togawaFilter, poolFilters, cardPoolFilters, togawasakiko, lastHoveredControlField);
     }
 
     private static void RegisterFilter(
@@ -113,7 +119,8 @@ internal static class CardLibraryTogawasakikoPoolPatch
         NCardPoolFilter togawaFilter,
         Dictionary<NCardPoolFilter, Func<CardModel, bool>> poolFilters,
         Dictionary<CharacterModel, NCardPoolFilter> cardPoolFilters,
-        CharacterModel togawasakiko)
+        CharacterModel togawasakiko,
+        FieldInfo? lastHoveredControlField)
     {
         poolFilters[togawaFilter] = card => card.Pool is TogawasakikoCardPool;
         cardPoolFilters[togawasakiko] = togawaFilter;
@@ -121,10 +128,25 @@ internal static class CardLibraryTogawasakikoPoolPatch
         {
             cardLibrary.Call(NCardLibrary.MethodName.UpdateCardPoolFilter, filter);
         }));
-        togawaFilter.Connect(Control.SignalName.FocusEntered, Callable.From(() =>
+        if (lastHoveredControlField != null)
         {
-            LastHoveredControlRef(cardLibrary) = togawaFilter;
-        }));
+            togawaFilter.Connect(Control.SignalName.FocusEntered, Callable.From(() =>
+            {
+                lastHoveredControlField.SetValue(cardLibrary, togawaFilter);
+            }));
+        }
+    }
+
+    private static FieldInfo? ResolveOptionalField(string fieldName)
+    {
+        FieldInfo? field = AccessTools.Field(typeof(NCardLibrary), fieldName);
+        if (field == null)
+        {
+            ModSupport.LogWarn(
+                $"Card library integration disabled: missing NCardLibrary.{fieldName}.");
+        }
+
+        return field;
     }
 
     private static void ApplyIconTexture(NCardPoolFilter togawaFilter, Texture2D iconTexture)
