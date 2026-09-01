@@ -38,3 +38,18 @@ class ReferenceConfigurationContracts(unittest.TestCase):
         self.assertIn("--mac-reference-dir", text)
         self.assertIn("--windows-reference-dir", text)
         self.assertIn("--no-incremental", text)
+
+
+class DarvOriginalFlowContracts(unittest.TestCase):
+    def test_mod_does_not_patch_darv(self) -> None:
+        self.assertFalse((SRC_ROOT / "Patches" / "DarvPatches.cs").exists())
+
+    def test_curseslander_is_ancient(self) -> None:
+        cards = read_source("src/Cards/TogawasakikoCards.cs")
+        character = read_source("src/Characters/Togawasakiko.cs")
+        start = cards.index("internal sealed class Curseslander")
+        end = cards.index("internal sealed class Unendurable", start)
+        block = cards[start:end]
+        self.assertIn("CardRarity.Ancient", block)
+        self.assertIn('GetAncientPortraitPath("curseslander.png")', block)
+        self.assertIn("ModelDb.Card<Curseslander>()", character)
