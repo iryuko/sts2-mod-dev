@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
@@ -24,12 +26,13 @@ internal sealed class BestCompanion : RelicModel
             return;
         }
 
-        if (ModSupport.AddSpecificCardToDeck<BarkingBarkingBarking>(Owner) != null)
-        {
-            Flash();
-        }
-
-        await Task.CompletedTask;
+        CardModel card = Owner.RunState.CreateCard(
+            ModelDb.Card<BarkingBarkingBarking>(),
+            Owner);
+        CardCmd.PreviewCardPileAdd(
+            await CardPileCmd.Add(card, PileType.Deck),
+            2f);
+        Flash();
     }
 }
 
@@ -52,11 +55,12 @@ internal sealed class BlackLimousine : RelicModel
             return;
         }
 
-        if (ModSupport.AddSpecificCardToDeck<PullmanCrash>(Owner) != null)
-        {
-            Flash();
-        }
-
-        await Task.CompletedTask;
+        CardModel card = Owner.RunState.CreateCard(
+            ModelDb.Card<PullmanCrash>(),
+            Owner);
+        CardCmd.PreviewCardPileAdd(
+            await CardPileCmd.Add(card, PileType.Deck),
+            2f);
+        Flash();
     }
 }

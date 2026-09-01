@@ -103,7 +103,16 @@ internal sealed class PersonaDissociationPower : PowerModel
 
 internal sealed class MagneticForceHellWargodPower : PowerModel
 {
-    private readonly HashSet<CardModel> _cardsQueuedForReplay = new();
+    private HashSet<CardModel>? _cardsQueuedForReplay;
+
+    private HashSet<CardModel> CardsQueuedForReplay
+    {
+        get
+        {
+            AssertMutable();
+            return _cardsQueuedForReplay ??= new HashSet<CardModel>();
+        }
+    }
 
     public override PowerType Type => PowerType.Buff;
 
@@ -121,7 +130,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
         }
 
         CardModel card = cardPlay.Card;
-        if (_cardsQueuedForReplay.Remove(card))
+        if (CardsQueuedForReplay.Remove(card))
         {
             return;
         }
@@ -131,7 +140,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
             return;
         }
 
-        _cardsQueuedForReplay.Add(card);
+        CardsQueuedForReplay.Add(card);
         try
         {
             await CardCmd.AutoPlay(
@@ -144,7 +153,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
         }
         finally
         {
-            _cardsQueuedForReplay.Remove(card);
+            CardsQueuedForReplay.Remove(card);
         }
     }
 
@@ -294,7 +303,7 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
         }
 
         Player? recipient = Owner?.Player;
-        if (recipient == null)
+        if (recipient == null || !IsPressureRedemptionOwner(recipient, applier, cardSource))
         {
             return;
         }
@@ -317,6 +326,26 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
             return;
         }
 
+    }
+
+    private static bool IsPressureRedemptionOwner(
+        Player watcherPlayer,
+        Creature? applier,
+        CardModel? cardSource)
+    {
+        if (cardSource?.Owner?.Character is Togawasakiko)
+        {
+            return cardSource.Owner == watcherPlayer;
+        }
+
+        if (applier?.Player?.Character is Togawasakiko)
+        {
+            return applier.Player == watcherPlayer;
+        }
+
+        return watcherPlayer.Creature?.CombatState?.Players
+            .FirstOrDefault(player =>
+                player.Character is Togawasakiko && player.Creature?.IsAlive == true) == watcherPlayer;
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

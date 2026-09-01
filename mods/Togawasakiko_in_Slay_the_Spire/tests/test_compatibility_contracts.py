@@ -104,3 +104,32 @@ class MultiplayerContextContracts(unittest.TestCase):
         self.assertIn("PowerCmd.ModifyAmount(choiceContext", support)
         self.assertIn("CardPileCmd.AddGeneratedCardToCombat(", support)
         self.assertIn("command.TargetingAllOpponents(combatState)", support)
+
+
+class GameplayStateContracts(unittest.TestCase):
+    def test_watcher_invalid_state_is_not_swallowed(self) -> None:
+        patch = read_source("src/Patches/CombatWatcherPatches.cs")
+        self.assertNotIn("catch (Exception ex)", patch)
+        self.assertIn("Expected exactly one combat watcher", patch)
+
+    def test_pressure_redemption_has_one_owner(self) -> None:
+        powers = read_source("src/Powers/TogawasakikoPowers.cs")
+        self.assertIn("IsPressureRedemptionOwner", powers)
+        self.assertIn("cardSource?.Owner?.Character is Togawasakiko", powers)
+        self.assertIn("applier?.Player?.Character is Togawasakiko", powers)
+
+    def test_replay_state_is_lazy_per_mutable_power(self) -> None:
+        powers = read_source("src/Powers/TogawasakikoPowers.cs")
+        self.assertIn("private HashSet<CardModel>? _cardsQueuedForReplay;", powers)
+        self.assertIn("_cardsQueuedForReplay ??= new HashSet<CardModel>()", powers)
+        self.assertNotIn(
+            "private readonly HashSet<CardModel> _cardsQueuedForReplay",
+            powers,
+        )
+
+    def test_relic_cards_use_original_command_chain(self) -> None:
+        relics = read_source("src/Relics/BestCompanion.cs")
+        self.assertEqual(2, relics.count("Owner.RunState.CreateCard("))
+        self.assertEqual(2, relics.count("CardPileCmd.Add(card, PileType.Deck)"))
+        self.assertEqual(2, relics.count("CardCmd.PreviewCardPileAdd"))
+        self.assertNotIn("AddSpecificCardToDeck", relics)
