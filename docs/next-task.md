@@ -1,6 +1,6 @@
 # 下一轮任务
 
-记录日期：2026-07-26
+记录日期：2026-09-01
 
 ## 当前目标
 
@@ -12,10 +12,10 @@
 
 ## 优先级
 
-1. 让 Darv 回归原版流程
-   - 当前已经有合法 Ancient 卡 `Curseslander`。
-   - 对照 v0.107.1 原版 `Darv.GenerateInitialOptions()` 与 `DustyTome.SetupForPlayer()`。
-   - 若原版能够自然处理祥子卡池，应删除 `DarvPatches.cs`，不要继续复制原版选项表。
+1. 在独立发布工作树集成兼容性分支
+   - 当前 active manifest 保持 `0.2.1`，不要在机制分支零散改版本。
+   - 发布工作树统一升级 `v0.2.2`，重新生成 DLL、PCK、manifest、ZIP 和 SHA-256。
+   - 运行 `scripts/validate-release-staging.py`，确认三份 manifest、ZIP 字节和四条哈希完全一致。
 2. 实机闭环 `UnattendedPiano` 同进程 SL
    - 看完三张 Shadow。
    - SL 后再次选择弹琴。
@@ -33,13 +33,20 @@
    - `KillKiss` 击杀最后敌人的结算。
    - `Aroma of Chaos` 升级后离开事件。
    - Teiji 与 Touch of Orobas。
+6. 做真实联机回归
+   - 双祥子共同施加 Weak、Vulnerable 和负 Strength，确认每次 Pressure 兑换只触发一次。
+   - `ImprisonedXii` 额外抽牌触发洗牌和选牌。
+   - Shadow/Two Moons 存档迁移、两件 Teiji 遗物入牌组。
+7. 检查人物动作 runtime
+   - PR #4 已包含动作更新，但本轮没有新增 Mac/Windows 实机证据。
+   - Spine 仍由独立工作继续，不能混入兼容性修复提交。
 
-## 同轮静态修复候选
+## 已完成的静态收口
 
-只有在上述主流程不被阻塞时处理：
-
-- 把 `MagneticForceHellWargodPower` 的共享 `HashSet<CardModel>` 改为每个 mutable power 独立状态。
-- 把卡牌库等私有 `FieldRefAccess` 改为惰性解析和 feature-local fail-closed，或改回原版公开流程。
+- Darv 已删除模组补丁并回归原版流程。
+- 联机迁移、hook task、Pressure watcher 所有权与 mutable replay 状态已收口。
+- Card Library 与 Teiji 的可选私有反射已改为惰性、feature-local 失败。
+- Mac/Windows `v0.107.1` 参考程序集构建均为 0 warning、0 error；真实双端和联机仍待验证。
 
 ## 证据要求
 
@@ -55,7 +62,8 @@
 
 ## 完成标准
 
-- Darv 不再依赖复制原版流程的补丁。
+- `v0.2.2` 发布包通过 release staging identity gate。
 - `UnattendedPiano` SL 路线实机闭环。
 - Win 卡牌与 jukebox 两项都有同版本日志和明确结论。
+- 联机关键路径有双玩家同版本日志和明确结论。
 - 当前状态、角色状态和时间线同步更新。

@@ -1,6 +1,6 @@
 # Togawasakiko 当前状态
 
-记录日期：2026-07-26
+记录日期：2026-09-01
 
 ## 事实源
 
@@ -18,9 +18,11 @@
 - mod version：`0.2.1`
 - `min_game_version`：`0.107.1`
 - STS2 reference：`v0.107.1` / `59260271`
+- 兼容性分支 active manifest 仍为 `0.2.1`；`v0.2.2` 在独立发布工作树统一升级。
+- 本分支未安装、打包或发布；同一份源码对 Mac/Windows 参考程序集均为 0 warning、0 error。
 - release 目录：
   - `exports/release/Togawasakiko_in_Slay_the_Spire/`
-- 当前本机安装与 release 三件套一致。
+- 2026-07-26 本机安装与 release 三件套一致；以下哈希不包含 2026-09-01 兼容性分支源码修复。
 
 SHA-256：
 
@@ -102,7 +104,7 @@ SHA-256：
 - 2026-07-23 已修 canonical/mutable event 共享 `_remainingShadows` 列表。
 - visited-event 交回原版 `ActModel.PullNextEvent` / `RoomSet`。
 - `OnEventFinished()` 负责音乐 cleanup。
-- 状态：代码、build、install、hash 完成；同进程 SL 实机待验证。
+- 状态：旧 release 的代码、build、install、hash 已完成；本分支没有新增实机证据，同进程 SL 仍待验证。
 
 ### `TogawaTeiji`
 
@@ -110,7 +112,10 @@ SHA-256：
 - `ModelDb.AllAncients` 全局注册；仅在 run 中存在祥子时加入对应 act 的 Ancient 池。
 - 支持 agnostic dialogue，混合多人队伍可参与奖励。
 - 奖励包括 `BestCompanion`、`BlackLimousine` 和继续演出分支。
+- 两件遗物已按原版 `RunState.CreateCard -> CardPileCmd.Add -> PreviewCardPileAdd` 添加奖励牌。
+- UI 描述补丁不再写回 `Player.RunState`；`_event` 字段改为功能首次使用时惰性解析，失败则继续原版流程。
 - 地图节点、对话头像、主图和背景 scene 已接入 runtime。
+- 状态：源码契约与双参考程序集构建通过，实机奖励/描述仍待验证。
 
 ### `Aroma of Chaos`
 
@@ -121,9 +126,18 @@ SHA-256：
 ### Darv
 
 - `Curseslander` 已使 `DustyTome.SetupForPlayer()` 有合法 Ancient 候选。
-- 当前仍存在 `DarvPatches.cs`，会对祥子整体接管 `GenerateInitialOptions()`。
-- 该 patch 是空池时期的过渡防护，现与原版优先准则冲突。
-- 状态：应对照 v0.107.1 原版后删除或证明仍不可替代。
+- 已删除空池时期的 `DarvPatches.cs`，由原版 `GenerateInitialOptions()` 与 `DustyTome` 生成奖励。
+- 状态：源码契约与 Mac/Windows 参考程序集构建通过，双端实机仍待验证。
+
+## 联机与初始化收口
+
+- Shadow 与 Two Moons 开局迁移按 `RunState.Players` 顺序覆盖所有玩家。
+- `ImprisonedXii` hook 抽牌任务通过 `AssignTaskAndWaitForPauseOrCompletion` 进入原版同步队列。
+- 多祥子共享 Pressure 时，卡牌 owner、施加者、玩家顺序共同决定唯一兑换 watcher。
+- `MagneticForceHellWargodPower` replay 集合只在 mutable power 实例上懒初始化。
+- Card Library 私有字段改为惰性解析；字段缺失只禁用祥子筛选按钮，不阻断模组初始化。
+- 当前自动化：21 项标准库契约/发布测试，Mac/Windows `v0.107.1` 双参考构建 0 warning、0 error。
+- 未证明：Mac 实机、Windows 实机及真实双玩家同步。
 
 ## jukebox
 
@@ -150,10 +164,9 @@ SHA-256：
 
 1. `UnattendedPiano` SL 修复未做实机闭环。
 2. v0.107.1 Win 卡牌卡中间与 jukebox 换房仍缺同包实机结果。
-3. `DarvPatches.cs` 复制原版流程，应该回收。
-4. `MagneticForceHellWargodPower._cardsQueuedForReplay` 可能在 mutable power 间共享。
-5. `CardLibraryPatches` 等静态 private `FieldRefAccess` 在版本漂移时可能拖死整个 feature 初始化。
-6. `KillKiss` 最后一击、奖励、商店和 `Compose` 仍需成体系回归。
+3. watcher 仍在 `CombatManager.SetUpCombat` 后使用 `ApplyInternal`；真实联机时序待验证。
+4. Teiji、Aroma、`KillKiss` 最后一击、奖励、商店和 `Compose` 仍需成体系回归。
+5. PR #4 人物动作更新尚无本轮 Mac/Windows runtime 证据；Spine 继续由独立工作处理。
 
 ## 当前不做
 
@@ -162,3 +175,4 @@ SHA-256：
 - 不重写角色框架。
 - 不修已接受的能量计数器 VFX 缺口。
 - 不把构建通过写成实机通过。
+- 不在兼容性分支改版本、PCK、动作、Spine 或其他视觉资产。
