@@ -344,7 +344,7 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature).Where(enemy => enemy.IsAlive))
         {
             await ModSupport.ApplyPower<InferiorityPower>(choiceContext, enemy, 1m, ownerCreature, this, false);
-            await ModSupport.TryGenerateInferiorityPressureCard(enemy, ownerCreature, this);
+            await ModSupport.TryGenerateInferiorityPressureCard(choiceContext, enemy, ownerCreature, this);
         }
 
         await ModSupport.ApplyPower<SymbolIIPower>(choiceContext, ownerCreature, 1m, ownerCreature, this, false);
@@ -837,13 +837,17 @@ internal sealed class ImprisonedXii : TogawasakikoCard, ISongCard
             return;
         }
 
-        PlayerChoiceContext? choiceContext = ModSupport.CreateBestEffortCombatChoiceContext(this, Owner);
-        if (choiceContext == null)
+        ICombatState? combatState = Owner.Creature.CombatState;
+        if (combatState == null)
         {
             return;
         }
 
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, false);
+        await ModSupport.RunCombatHookTask(
+            this,
+            combatState,
+            choiceContext => CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, false),
+            Owner);
     }
 
     protected override void OnUpgrade()
@@ -1065,7 +1069,7 @@ internal sealed class Sophie : TogawasakikoCard, ISongCard
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
         await ModSupport.ApplyPower<InferiorityPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
-        await ModSupport.TryGenerateInferiorityPressureCard(cardPlay.Target, Owner.Creature, this);
+        await ModSupport.TryGenerateInferiorityPressureCard(choiceContext, cardPlay.Target, Owner.Creature, this);
         await ModSupport.ApplyPower<WeakPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 

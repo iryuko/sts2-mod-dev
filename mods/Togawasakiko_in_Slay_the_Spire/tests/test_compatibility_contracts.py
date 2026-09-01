@@ -53,3 +53,54 @@ class DarvOriginalFlowContracts(unittest.TestCase):
         self.assertIn("CardRarity.Ancient", block)
         self.assertIn('GetAncientPortraitPath("curseslander.png")', block)
         self.assertIn("ModelDb.Card<Curseslander>()", character)
+
+
+class MultiplayerContextContracts(unittest.TestCase):
+    def test_run_migrations_cover_all_players(self) -> None:
+        entry = read_source("src/Entry.cs")
+        block = entry[
+            entry.index("private static void OnRunStarted"):
+            entry.index("private static ShadowOfThePastCard")
+        ]
+        self.assertIn("foreach (Player player in runState.Players)", block)
+        self.assertNotIn("GetLocalPlayer(runState)", block)
+
+    def test_hook_task_is_registered(self) -> None:
+        support = read_source("src/ModSupport.cs")
+        cards = read_source("src/Cards/TogawasakikoSongCards.cs")
+        self.assertIn("public static async Task RunCombatHookTask(", support)
+        self.assertIn("AssignTaskAndWaitForPauseOrCompletion(task)", support)
+        self.assertIn("await ModSupport.RunCombatHookTask(", cards)
+
+    def test_detached_gameplay_context_is_absent(self) -> None:
+        support = read_source("src/ModSupport.cs")
+        self.assertNotIn("CreateDetachedChoiceContext", support)
+        self.assertNotIn("CreateBestEffortCombatChoiceContext", support)
+        self.assertNotIn(
+            "public static async Task ApplyPressure(Creature target",
+            support,
+        )
+
+    def test_kill_kiss_uses_throwing_context(self) -> None:
+        powers = read_source("src/Powers/TogawasakikoSongPowers.cs")
+        self.assertIn(
+            "PlayerChoiceContext choiceContext = new ThrowingPlayerChoiceContext();",
+            powers,
+        )
+
+    def test_current_v0107_public_apis_are_called_directly(self) -> None:
+        support = read_source("src/ModSupport.cs")
+        for old_resolver in (
+            "ResolveCreatureCombatStateProperty",
+            "ResolvePowerApplyCreatureMethod",
+            "ResolvePowerModifyAmountMethod",
+            "ResolveAddGeneratedCardToCombatMethod",
+            "ResolveAttackTargetingAllOpponentsMethod",
+            "ResolveHookPlayerChoiceContextModelConstructor",
+        ):
+            self.assertNotIn(old_resolver, support)
+        self.assertIn("creature?.CombatState as CombatState", support)
+        self.assertIn("PowerCmd.Apply<T>(choiceContext", support)
+        self.assertIn("PowerCmd.ModifyAmount(choiceContext", support)
+        self.assertIn("CardPileCmd.AddGeneratedCardToCombat(", support)
+        self.assertIn("command.TargetingAllOpponents(combatState)", support)
