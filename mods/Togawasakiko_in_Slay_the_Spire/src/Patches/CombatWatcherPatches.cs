@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
@@ -13,16 +14,19 @@ internal static class CombatWatcherPatches
 {
     private static void Postfix(CombatState state)
     {
-        try
+        foreach (Player player in state.Players.Where(player => player.Character is Togawasakiko))
         {
-            foreach (Player player in state.Players.Where(player => player.Character is Togawasakiko))
-            {
-                InstallForPlayer(state, player);
-            }
+            InstallForPlayer(state, player);
         }
-        catch (Exception ex)
+
+        foreach (Player player in state.Players.Where(player => player.Character is Togawasakiko))
         {
-            ModSupport.LogError("Failed while installing combat watcher after combat setup: " + ex);
+            int watcherCount = player.Creature?.Powers.OfType<TogawasakikoCombatWatcherPower>().Count() ?? 0;
+            if (watcherCount != 1)
+            {
+                throw new InvalidOperationException(
+                    $"Expected exactly one combat watcher for player={player.NetId}, found {watcherCount}.");
+            }
         }
     }
 
@@ -31,14 +35,20 @@ internal static class CombatWatcherPatches
         Creature? creature = player.Creature;
         if (creature == null || ModSupport.GetCombatState(creature) != state)
         {
-            ModSupport.LogWarn($"Skipped combat watcher install for player={player.NetId}: creature is not attached to this combat.");
-            return;
+            throw new InvalidOperationException(
+                $"Cannot install combat watcher for player={player.NetId}: creature is not attached to this combat.");
         }
 
-        TogawasakikoCombatWatcherPower? watcher = creature.Powers
+        List<TogawasakikoCombatWatcherPower> watchers = creature.Powers
             .OfType<TogawasakikoCombatWatcherPower>()
-            .FirstOrDefault();
+            .ToList();
+        if (watchers.Count > 1)
+        {
+            throw new InvalidOperationException(
+                $"Expected exactly one combat watcher for player={player.NetId}, found {watchers.Count} before install.");
+        }
 
+        TogawasakikoCombatWatcherPower? watcher = watchers.SingleOrDefault();
         if (watcher == null)
         {
             watcher = (TogawasakikoCombatWatcherPower)ModelDb.Power<TogawasakikoCombatWatcherPower>().ToMutable();

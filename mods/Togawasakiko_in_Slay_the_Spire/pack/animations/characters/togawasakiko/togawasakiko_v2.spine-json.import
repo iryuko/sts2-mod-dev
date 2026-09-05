@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.json"
+type="SpineSkeletonFileResource"
+uid="uid://r46tky23npan"
+path="res://runtime_imports/togawasakiko_v2.spine-json-607d4be330847970523c8060f28f7272.spjson"
+
+[deps]
+
+source_file="res://animations/characters/togawasakiko/togawasakiko_v2.spine-json"
+dest_files=["res://runtime_imports/togawasakiko_v2.spine-json-607d4be330847970523c8060f28f7272.spjson"]
+
+[params]

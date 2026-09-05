@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_visuals"]
-[ext_resource type="Texture2D" path="res://mod_assets/character/in_combat_portrait_togawasakiko.png" id="2_portrait"]
+[ext_resource type="SpineSkeletonDataResource" path="res://animations/characters/togawasakiko/togawasakiko_v2_skel_data.tres" id="2_skeleton"]
 
 [node name="Togawasakiko" type="Node2D"]
 script = ExtResource("1_visuals")
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="SpineSprite" parent="."]
 unique_name_in_owner = true
 position = Vector2(5, -215)
 scale = Vector2(0.22, 0.22)
-
-[node name="Sprite" type="Sprite2D" parent="Visuals"]
-texture = ExtResource("2_portrait")
-centered = true
+skeleton_data_res = ExtResource("2_skeleton")
+preview_skin = "default"
+preview_animation = "idle_loop"
 
 [node name="Bounds" type="Control" parent="."]
 unique_name_in_owner = true

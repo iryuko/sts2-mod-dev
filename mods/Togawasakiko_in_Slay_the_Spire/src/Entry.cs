@@ -106,71 +106,73 @@ public static class TogawasakikoMod
     {
         _activeRun = runState;
         _shadowDeckSanitizedForActiveRun = false;
+        SanitizeShadowCards(runState);
 
-        Player? player = GetLocalPlayer(runState);
-        if (player?.Character == null)
+        foreach (Player player in runState.Players)
         {
-            ModSupport.LogWarn("RunStarted fired without a local player character.");
-            return;
+            ModSupport.ClearPersistedTwoMoonsCostModifiers(player);
+
+            if (player.Character == null)
+            {
+                ModSupport.LogWarn($"RunStarted player={player.NetId} has no character.");
+                continue;
+            }
+
+            string starterRelics = string.Join(
+                ", ",
+                player.Character.StartingRelics.Select(relic => $"{relic.Id.Entry}:{relic.GetType().Name}"));
+
+            ModSupport.LogInfo(
+                $"RunStarted player={player.NetId} character={player.Character.Id.Entry} type={player.Character.GetType().FullName} starterRelics=[{starterRelics}]");
         }
-
-        SanitizeShadowCards(runState, player);
-        ModSupport.ClearPersistedTwoMoonsCostModifiers(player);
-
-        string starterRelics = string.Join(
-            ", ",
-            player.Character.StartingRelics.Select(relic => $"{relic.Id.Entry}:{relic.GetType().Name}"));
-
-        ModSupport.LogInfo(
-            $"RunStarted character={player.Character.Id.Entry} type={player.Character.GetType().FullName} starterRelics=[{starterRelics}]");
-
     }
 
     private static void OnRoomEntered()
     {
         RunState? runState = _activeRun;
-        Player? player = GetLocalPlayer(runState);
-        if (runState != null && player != null && !_shadowDeckSanitizedForActiveRun)
+        if (runState != null && !_shadowDeckSanitizedForActiveRun)
         {
-            SanitizeShadowCards(runState, player);
+            SanitizeShadowCards(runState);
         }
 
         JukeboxRunInjector.HandleRoomEntered(runState?.CurrentRoom);
     }
 
-    private static void SanitizeShadowCards(RunState runState, Player player)
+    private static void SanitizeShadowCards(RunState runState)
     {
-        CardPile? deck = player.Deck;
-        if (deck == null)
-        {
-            _shadowDeckSanitizedForActiveRun = true;
-            return;
-        }
-
         int replaced = 0;
-        for (int index = 0; index < deck.Cards.Count; index++)
+        foreach (Player player in runState.Players)
         {
-            if (deck.Cards[index] is not ShadowOfThePastCard shadow)
+            CardPile? deck = player.Deck;
+            if (deck == null)
             {
                 continue;
             }
 
-            ShadowOfThePastCard freshShadow = CreateFreshShadowCard(runState, player, shadow);
-            if (ReferenceEquals(freshShadow, shadow))
+            for (int index = 0; index < deck.Cards.Count; index++)
             {
-                continue;
-            }
+                if (deck.Cards[index] is not ShadowOfThePastCard shadow)
+                {
+                    continue;
+                }
 
-            deck.RemoveInternal(shadow, silent: true);
-            runState.RemoveCard(shadow);
-            deck.AddInternal(freshShadow, index, silent: true);
-            replaced++;
+                ShadowOfThePastCard freshShadow = CreateFreshShadowCard(runState, player, shadow);
+                if (ReferenceEquals(freshShadow, shadow))
+                {
+                    continue;
+                }
+
+                deck.RemoveInternal(shadow, silent: true);
+                runState.RemoveCard(shadow);
+                deck.AddInternal(freshShadow, index, silent: true);
+                replaced++;
+            }
         }
 
         _shadowDeckSanitizedForActiveRun = true;
         if (replaced > 0)
         {
-            ModSupport.LogInfo($"Sanitized {replaced} Shadow card instance(s) in the active deck.");
+            ModSupport.LogInfo($"Sanitized {replaced} Shadow card instance(s) across all active decks.");
         }
     }
 

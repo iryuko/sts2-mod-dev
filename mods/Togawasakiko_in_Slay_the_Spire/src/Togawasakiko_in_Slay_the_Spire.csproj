@@ -8,17 +8,19 @@
     <LangVersion>latest</LangVersion>
     <Deterministic>true</Deterministic>
     <DebugType>portable</DebugType>
+    <Sts2ReferenceDir Condition="'$(Sts2ReferenceDir)' == ''">../../../references/game-dlls/sts2/arm64</Sts2ReferenceDir>
+    <HarmonyReferencePath Condition="'$(HarmonyReferencePath)' == ''">../../../references/game-dlls/shared/0Harmony.dll</HarmonyReferencePath>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="sts2">
-      <HintPath>../../../references/game-dlls/sts2/arm64/sts2.dll</HintPath>
+      <HintPath>$(Sts2ReferenceDir)/sts2.dll</HintPath>
     </Reference>
     <Reference Include="0Harmony">
-      <HintPath>../../../references/game-dlls/shared/0Harmony.dll</HintPath>
+      <HintPath>$(HarmonyReferencePath)</HintPath>
     </Reference>
     <Reference Include="GodotSharp">
-      <HintPath>../../../references/game-dlls/sts2/arm64/GodotSharp.dll</HintPath>
+      <HintPath>$(Sts2ReferenceDir)/GodotSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

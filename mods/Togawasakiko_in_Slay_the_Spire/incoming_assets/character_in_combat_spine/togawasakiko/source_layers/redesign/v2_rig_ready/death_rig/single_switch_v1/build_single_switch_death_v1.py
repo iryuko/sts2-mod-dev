@@ -171,6 +171,10 @@ def _rotate_timeline(points: tuple[tuple[float, float], ...]) -> list[dict]:
 def build_single_switch_skeleton() -> tuple[dict, dict]:
     anchors = _verify_inputs()
     base = read_json(BASE_JSON)
+    return apply_single_switch_death(base, anchors)
+
+
+def apply_single_switch_death(base: dict, anchors: dict) -> tuple[dict, dict]:
     skeleton = copy.deepcopy(base)
     missing_animations = [
         name

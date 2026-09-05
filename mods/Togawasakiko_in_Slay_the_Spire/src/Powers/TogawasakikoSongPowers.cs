@@ -243,11 +243,7 @@ internal abstract class KillKissPowerBase : PowerModel
             return;
         }
 
-        PlayerChoiceContext? choiceContext = ModSupport.CreateHookChoiceContext(this, combatState, Owner.Player);
-        if (choiceContext == null)
-        {
-            return;
-        }
+        PlayerChoiceContext choiceContext = new ThrowingPlayerChoiceContext();
 
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(Owner).ToList())
         {

@@ -206,6 +206,7 @@ internal sealed class Ether : TogawasakikoCard, ISongCard
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(target)
+                .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
                 .Execute(choiceContext);
         }
 
@@ -297,6 +298,7 @@ internal sealed class SymbolI : TogawasakikoCard, ISongCard
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(randomEnemy)
+                .WithSingleTargetThorns(randomEnemy, Owner.Character.AttackAnimDelay)
                 .Execute(choiceContext);
         }
 
@@ -330,6 +332,9 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
         }
 
         Creature ownerCreature = Owner.Creature;
+        Creature[] enemies = ModSupport.GetEnemyCreatures(ownerCreature)
+            .Where(enemy => enemy.IsAlive)
+            .ToArray();
         CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
         if (combatState == null)
         {
@@ -339,9 +344,10 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponentsCompat(combatState)
+            .WithTargetThorns(enemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
-        foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature).Where(enemy => enemy.IsAlive))
+        foreach (Creature enemy in enemies.Where(enemy => enemy.IsAlive))
         {
             await ModSupport.ApplyPower<InferiorityPower>(choiceContext, enemy, 1m, ownerCreature, this, false);
         }
@@ -508,6 +514,7 @@ internal sealed class CrucifixX : TogawasakikoCard, ISongCard
             .FromCard(this)
             .TargetingAllOpponentsCompat(combatState)
             .WithHitCount(totalHits)
+            .WithTargetThorns(livingEnemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -567,6 +574,7 @@ internal sealed class SakiMovePlz : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         if (!shouldApplyVulnerable || !cardPlay.Target.IsAlive || Owner?.Creature == null)
@@ -836,13 +844,17 @@ internal sealed class ImprisonedXii : TogawasakikoCard, ISongCard
             return;
         }
 
-        PlayerChoiceContext? choiceContext = ModSupport.CreateBestEffortCombatChoiceContext(this, Owner);
-        if (choiceContext == null)
+        ICombatState? combatState = Owner.Creature.CombatState;
+        if (combatState == null)
         {
             return;
         }
 
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, false);
+        await ModSupport.RunCombatHookTask(
+            this,
+            combatState,
+            choiceContext => CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, false),
+            Owner);
     }
 
     protected override void OnUpgrade()
@@ -940,6 +952,7 @@ internal sealed class STheWay : TogawasakikoCard, ISongCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(target)
+            .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         if (!target.IsAlive)
@@ -980,6 +993,7 @@ internal sealed class TwoMoonsDeepIntoTheForest : TogawasakikoCard, ISongCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 

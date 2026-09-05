@@ -30,11 +30,12 @@ internal sealed class Togawasakiko : CharacterModel
         "res://scenes/screens/char_select/char_select_bg_togawasakiko.tscn",
         "res://scenes/combat/energy_counters/togawasakiko_energy_counter.tscn",
         "res://scenes/creature_visuals/togawasakiko.tscn",
+        TogawasakikoCombatVfx.ThornScenePath,
         "res://scenes/merchant/characters/togawasakiko_merchant.tscn",
         "res://scenes/rest_site/characters/togawasakiko_rest_site.tscn"
     };
 
-    public override float AttackAnimDelay => 0.25f;
+    public override float AttackAnimDelay => 0.31f;
 
     public override CardPoolModel CardPool => ModelDb.CardPool<TogawasakikoCardPool>();
 

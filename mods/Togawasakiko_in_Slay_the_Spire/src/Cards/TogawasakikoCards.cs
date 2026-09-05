@@ -105,6 +105,7 @@ internal sealed class StrikeTogawasakiko : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -164,6 +165,7 @@ internal sealed class Slander : TogawasakikoCard
         await DamageCmd.Attack(totalDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -190,6 +192,7 @@ internal sealed class Curseslander : TogawasakikoCard
         await DamageCmd.Attack(totalDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         if (Owner == null)
@@ -470,6 +473,7 @@ internal sealed class SeverThePast : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         await ModSupport.ShuffleDiscardPileIntoDrawPile(choiceContext, Owner, this);
@@ -707,6 +711,7 @@ internal sealed class LeaveItToMe : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(target)
+            .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         PressurePower? pressure = ModSupport.GetPower<PressurePower>(target);
@@ -766,6 +771,7 @@ internal sealed class DawnOfDespair : TogawasakikoCard
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(target)
+                .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
                 .Execute(choiceContext);
         }
 
@@ -813,6 +819,7 @@ internal sealed class BarkingBarkingBarking : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
         await ModSupport.ApplyPower<RegenPower>(choiceContext, Owner.Creature, DynamicVars["Regen"].BaseValue, Owner.Creature, this, false);
     }
@@ -848,6 +855,7 @@ internal sealed class BailMoney : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
         await ModSupport.ApplyPower<DexterityPower>(choiceContext, cardPlay.Target, -1m, Owner.Creature, this, false);
         await PlayerCmd.LoseGold(10m, Owner);
@@ -966,6 +974,7 @@ internal sealed class PullmanCrash : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         if (ModSupport.GetPressure(cardPlay.Target) > 8)
@@ -1004,7 +1013,10 @@ internal sealed class FinalCurtain : TogawasakikoCard
             return;
         }
 
-        int hitCount = ModSupport.GetEnemyCreatures(ownerCreature).Count();
+        Creature[] enemies = ModSupport.GetEnemyCreatures(ownerCreature)
+            .Where(enemy => enemy.IsAlive)
+            .ToArray();
+        int hitCount = enemies.Length;
         if (hitCount <= 0)
         {
             return;
@@ -1014,6 +1026,7 @@ internal sealed class FinalCurtain : TogawasakikoCard
             .FromCard(this)
             .TargetingAllOpponentsCompat(combatState)
             .WithHitCount(hitCount)
+            .WithTargetThorns(enemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -1071,6 +1084,7 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .TargetingAllOpponentsCompat(combatState)
+            .WithTargetThorns(enemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -1346,6 +1360,7 @@ internal sealed class AllYouThinkAboutIsYourself : GeneratedPressureCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
         await CreatureCmd.Stun(cardPlay.Target, string.Empty);
     }
