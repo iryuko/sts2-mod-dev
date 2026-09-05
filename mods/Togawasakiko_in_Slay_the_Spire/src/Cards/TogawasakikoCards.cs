@@ -24,6 +24,9 @@ internal abstract class TogawasakikoCard : CardModel
 {
     private readonly string _portraitPath;
 
+    // Combat-only provenance; native cloning copies this along with the local cost modifiers.
+    internal ICombatState? BlueWorldFreeXCombat { get; set; }
+
     protected TogawasakikoCard(
         int energyCost,
         CardType type,

@@ -79,13 +79,23 @@ internal static class ModSupport
         "MASQUERADE_RHAPSODY_REQUEST",
         "S_THE_WAY",
         "TWO_MOONS_DEEP_INTO_THE_FOREST",
-        "SOPHIE"
+        "SOPHIE",
+        "OCTAGRAM_DANCE",
+        "DIVINE",
+        "IN_YOUR_BLUE_EYES",
+        "THE_WHOLE_BLUE_WORLD"
     };
 
     private static AudioStream? _shadowEventMusicStream;
     private static AudioStreamPlayer? _shadowEventMusicPlayer;
     private static readonly FieldInfo? CardEnergyCostLocalModifiersField =
         AccessTools.Field(typeof(CardEnergyCost), "_localModifiers");
+
+    internal static bool HasCombatZeroCostModifier(CardModel card) =>
+        CardEnergyCostLocalModifiersField?.GetValue(card.EnergyCost) is IEnumerable<LocalCostModifier> modifiers
+        && modifiers.Any(modifier => modifier.Type == LocalCostType.Absolute && modifier.Amount == 0
+            && modifier.Expiration == LocalCostModifierExpiration.EndOfCombat);
+
     public static bool IsBaseGameCharacter(CharacterModel? character)
     {
         return character is Ironclad or Silent or Regent or Defect or Necrobinder or Deprived;
@@ -196,6 +206,28 @@ internal static class ModSupport
                 ["UNENDURABLE.title"] = "Unendurable",
                 ["UNENDURABLE.description"] = "Gain {Block:diff()} [gold]Block[/gold]. Apply {PressureAmount:diff()} [b][gold]Pressure[/gold][/b].",
                 ["COMPOSE.title"] = "Compose",
+                ["UNFINISHED_SCORE.title"] = "Unfinished Score",
+                ["UNFINISHED_SCORE.description"] = "Gain {Block:diff()} [gold]Block[/gold]. Put [blue]1[/blue] [gold]Song[/gold] card from your discard pile on top of your draw pile.",
+                ["UNFINISHED_SCORE.selectionScreenPrompt"] = "Choose a Song to put on top of your draw pile.",
+                ["FOLLOWING_PHRASE.title"] = "Following Phrase",
+                ["FOLLOWING_PHRASE.description"] = "Gain {Block:diff()} [gold]Block[/gold]. If the previous card you played this turn was a [gold]Song[/gold], draw {Cards:diff()} card.",
+                ["UNMASK.title"] = "Unmask",
+                ["UNMASK.description"] = "Draw {Cards:diff()} card. If you have [gold]Face[/gold], remove all of it, draw {Cards:diff()} more card and apply {PressureAmount:diff()} [gold]Pressure[/gold].",
+                ["REHEARSAL_ORDER.title"] = "Rehearsal Order",
+                ["REHEARSAL_ORDER.description"] = "Choose [blue]1[/blue] Common or Uncommon [gold]Song[/gold] card from your draw pile and put it into your hand.",
+                ["REHEARSAL_ORDER.selectionScreenPrompt"] = "Choose a Common or Uncommon Song to put into your hand.",
+                ["BACKSTAGE_SUPPORT.title"] = "Backstage Support",
+                ["UNSPOKEN_WORDS.title"] = "Unspoken Words",
+                ["UNSPOKEN_WORDS.description"] = "[gold]Exhaust[/gold] any number of pressure-generated cards in your hand. Gain {Block:diff()} [gold]Block[/gold] for each card Exhausted.",
+                ["UNSPOKEN_WORDS.selectionScreenPrompt"] = "Choose any number of pressure-generated cards to Exhaust.",
+                ["LINGERING_RESONANCE.title"] = "Lingering Resonance",
+                ["LINGERING_RESONANCE.description"] = "Each turn, the first [blue]2[/blue] cards you [gold]Exhaust[/gold] while this is active each apply {Power:diff()} [gold]Pressure[/gold] to ALL enemies. Includes [gold]Ethereal[/gold].",
+                ["UNTIL_NEXT_ACT.title"] = "Until Next Act",
+                ["UNTIL_NEXT_ACT.description"] = "Choose {Cards:diff()} pressure-generated {Cards:plural:card|cards} in your hand. This combat, {Cards:plural:it loses|they lose} [gold]Ethereal[/gold] and {Cards:plural:gains|gain} [gold]Retain[/gold].",
+                ["UNTIL_NEXT_ACT.selectionScreenPrompt"] = "Choose pressure-generated cards to lose Ethereal and gain Retain.",
+                ["COMPOSED_RESPONSE.title"] = "Composed Response",
+                ["COMPOSED_RESPONSE.description"] = "Remove up to {PressureAmount:diff()} [gold]Pressure[/gold] from an enemy. Gain {Block:diff()} [gold]Block[/gold].",
+                ["BACKSTAGE_SUPPORT.description"] = "Each turn, the first [blue]2[/blue] pressure-generated cards you play while this is active each grant {Power:diff()} [gold]Block[/gold].",
                 ["COMPOSE.description"] = "[b]Exhaust.[/b] Add a random [b][gold]Song[/gold][/b] card to your hand. It costs [blue]0[/blue] this combat.",
                 ["I_HAVE_ASCENDED.title"] = "I Have Ascended",
                 ["I_HAVE_ASCENDED.description"] = "Add [blue]1[/blue] {IfUpgraded:show:upgraded |}Apotheosis to your {IfUpgraded:show:hand|discard pile}.",
@@ -285,11 +317,11 @@ internal static class ModSupport
                 ["PERSONA_DISSOCIATION.title"] = "Persona Dissociation",
                 ["PERSONA_DISSOCIATION.description"] = "Apply [blue]1[/blue] Persona Dissociation.",
                 ["SOCIAL_WITHDRAWAL.title"] = "Social Withdrawal",
-                ["SOCIAL_WITHDRAWAL.description"] = "Apply 3 Social Withdrawal. Exhaust.",
+                ["SOCIAL_WITHDRAWAL.description"] = "Apply 3 Social Withdrawal.",
                 ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.title"] = "All You Think About Is Yourself",
-                ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.description"] = "Deal 9 damage. Stun. Ethereal. Exhaust.",
+                ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.description"] = "Deal 9 damage. Stun.",
                 ["OVERWORK_ANXIETY.title"] = "Overwork Anxiety",
-                ["OVERWORK_ANXIETY.description"] = "Draw 1 card. Exhaust.",
+                ["OVERWORK_ANXIETY.description"] = "Draw 1 card.",
                 ["BLACK_BIRTHDAY.title"] = "Black Birthday",
                 ["BLACK_BIRTHDAY.description"] = "Gain {Energy:energyIcons()}. If the target has more than [blue]5[/blue] Pressure, gain {BonusEnergy:energyIcons()}.",
                 ["TREASURE_PLEASURE.title"] = "Treasure Pleasure",
@@ -309,6 +341,15 @@ internal static class ModSupport
                 ["TWO_MOONS_DEEP_INTO_THE_FOREST.title"] = "Two Moons Deep Into The Forest",
                 ["TWO_MOONS_DEEP_INTO_THE_FOREST.description"] = "Deal {Damage:diff()} damage. This combat, costs {Energy:energyIcons()} less for each [b][gold]Song[/gold][/b] you've played.",
                 ["SOPHIE.title"] = "Sophie",
+                ["OCTAGRAM_DANCE.title"] = "Octagram Dance",
+                ["OCTAGRAM_DANCE.description"] = "Your cards spend no Energy this turn. X uses your current Energy. After you play two consecutive cards of the same type, end your turn. This card starts the sequence as a Skill.",
+                ["DIVINE.title"] = "DIVINE",
+                ["DIVINE.description"] = "[gold]Exhaust[/gold] 1 pressure-generated card from your hand. If you do, gain {Energy:energyIcons()} and draw {Cards:diff()} cards.",
+                ["DIVINE.selectionScreenPrompt"] = "Choose a pressure-generated card to Exhaust.",
+                ["IN_YOUR_BLUE_EYES.title"] = "In Your Blue Eyes",
+                ["IN_YOUR_BLUE_EYES.description"] = "{IfUpgraded:show:Choose 1 random [gold]Song[/gold] from each of your Discard and Exhaust Piles. Play each twice.|Play 1 random [gold]Song[/gold] from your Exhaust Pile twice.}",
+                ["THE_WHOLE_BLUE_WORLD.title"] = "The Whole Blue World",
+                ["THE_WHOLE_BLUE_WORLD.description"] = "Lose {HpLoss:diff()} HP. Add {Cards:diff()} random [gold]Songs[/gold] to your hand. {IfUpgraded:show:They spend no Energy this combat. X uses your current Energy.|They cost 1 less this combat.}",
                 ["SOPHIE.description"] = "Gain {Block:diff()} [gold]Block[/gold]. Apply [blue]1[/blue] Inferiority. Gain [blue]1[/blue] [gold]Weak[/gold] this turn."
             },
             ["zhs"] = new Dictionary<string, string>
@@ -324,6 +365,28 @@ internal static class ModSupport
                 ["UNENDURABLE.title"] = "难熬",
                 ["UNENDURABLE.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。给予目标{PressureAmount:diff()}层[b][gold]压力[/gold][/b]。",
                 ["COMPOSE.title"] = "谱曲",
+                ["UNFINISHED_SCORE.title"] = "未完成的乐谱",
+                ["UNFINISHED_SCORE.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。从弃牌堆选择[blue]1[/blue]张[gold]歌曲牌[/gold]，置于抽牌堆顶。",
+                ["UNFINISHED_SCORE.selectionScreenPrompt"] = "选择1张歌曲牌，置于抽牌堆顶。",
+                ["FOLLOWING_PHRASE.title"] = "接续小节",
+                ["FOLLOWING_PHRASE.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。若本回合你上一张打出的牌是[gold]歌曲牌[/gold]，抽{Cards:diff()}张牌。",
+                ["UNMASK.title"] = "揭下面具",
+                ["UNMASK.description"] = "抽{Cards:diff()}张牌。若你拥有[gold]颜[/gold]，移除全部[gold]颜[/gold]，再抽{Cards:diff()}张牌并施加{PressureAmount:diff()}点[gold]压力[/gold]。",
+                ["REHEARSAL_ORDER.title"] = "排练顺序",
+                ["REHEARSAL_ORDER.description"] = "从抽牌堆选择[blue]1[/blue]张普通或非凡[gold]歌曲牌[/gold]，加入手牌。",
+                ["REHEARSAL_ORDER.selectionScreenPrompt"] = "选择1张普通或非凡歌曲牌，加入手牌。",
+                ["BACKSTAGE_SUPPORT.title"] = "幕后支撑",
+                ["UNSPOKEN_WORDS.title"] = "不必说出口",
+                ["UNSPOKEN_WORDS.description"] = "[gold]消耗[/gold]手牌中任意张压力衍生牌。每消耗1张，获得{Block:diff()}点[gold]格挡[/gold]。",
+                ["UNSPOKEN_WORDS.selectionScreenPrompt"] = "选择任意张压力衍生牌消耗。",
+                ["LINGERING_RESONANCE.title"] = "余音未散",
+                ["LINGERING_RESONANCE.description"] = "每回合，此能力生效期间你[gold]消耗[/gold]的前[blue]2[/blue]张牌各对所有敌人施加{Power:diff()}层[gold]压力[/gold]。包括[gold]虚无[/gold]消耗。",
+                ["UNTIL_NEXT_ACT.title"] = "留待下幕",
+                ["UNTIL_NEXT_ACT.description"] = "选择手牌中{Cards:diff()}张压力衍生牌。本场战斗中，它们失去[gold]虚无[/gold]，获得[gold]保留[/gold]。",
+                ["UNTIL_NEXT_ACT.selectionScreenPrompt"] = "选择压力衍生牌，移除虚无并获得保留。",
+                ["COMPOSED_RESPONSE.title"] = "从容应对",
+                ["COMPOSED_RESPONSE.description"] = "移除目标至多{PressureAmount:diff()}层[gold]压力[/gold]。获得{Block:diff()}点[gold]格挡[/gold]。",
+                ["BACKSTAGE_SUPPORT.description"] = "每回合，此能力生效期间你打出的前[blue]2[/blue]张压力衍生牌各给予{Power:diff()}点[gold]格挡[/gold]。",
                 ["COMPOSE.description"] = "[b]消耗。[/b]随机将1张[b][gold]歌曲[/gold][/b]牌加入手牌。该牌本场战斗费用变为[blue]0[/blue]。",
                 ["I_HAVE_ASCENDED.title"] = "我已成神",
                 ["I_HAVE_ASCENDED.description"] = "将[blue]1[/blue]张{IfUpgraded:show:升级后的|}【神化】加入{IfUpgraded:show:手牌|弃牌堆}。",
@@ -413,11 +476,11 @@ internal static class ModSupport
                 ["PERSONA_DISSOCIATION.title"] = "人格解离",
                 ["PERSONA_DISSOCIATION.description"] = "施加1层人格解离",
                 ["SOCIAL_WITHDRAWAL.title"] = "自闭",
-                ["SOCIAL_WITHDRAWAL.description"] = "施加3层自闭。消耗。",
+                ["SOCIAL_WITHDRAWAL.description"] = "施加3层自闭。",
                 ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.title"] = "满脑子都想着自己",
-                ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.description"] = "造成9点伤害。晕眩。虚无。消耗。",
+                ["ALL_YOU_THINK_ABOUT_IS_YOURSELF.description"] = "造成9点伤害。晕眩。",
                 ["OVERWORK_ANXIETY.title"] = "过劳焦虑",
-                ["OVERWORK_ANXIETY.description"] = "抽1张牌。消耗。",
+                ["OVERWORK_ANXIETY.description"] = "抽1张牌。",
                 ["BLACK_BIRTHDAY.title"] = "黑色生日",
                 ["BLACK_BIRTHDAY.description"] = "获得{Energy:energyIcons()}。若目标的压力层数大于[blue]5[/blue]，再获得{BonusEnergy:energyIcons()}。",
                 ["TREASURE_PLEASURE.title"] = "Treasure Pleasure",
@@ -437,6 +500,15 @@ internal static class ModSupport
                 ["TWO_MOONS_DEEP_INTO_THE_FOREST.title"] = "两轮月亮 深入森林之中",
                 ["TWO_MOONS_DEEP_INTO_THE_FOREST.description"] = "造成{Damage:diff()}点伤害。本场战斗中，你每打出[blue]1[/blue]张[b][gold]歌曲[/gold][/b]牌，此牌费用减少{Energy:energyIcons()}。",
                 ["SOPHIE.title"] = "Sophie",
+                ["OCTAGRAM_DANCE.title"] = "八芒星ダンス",
+                ["OCTAGRAM_DANCE.description"] = "本回合，你的牌不消耗能量，X取当前能量值。连续打出两张相同类型的牌后，结束你的回合。以此牌作为技能起点。",
+                ["DIVINE.title"] = "DIVINE",
+                ["DIVINE.description"] = "[gold]消耗[/gold]手牌中的1张压力衍生牌。若成功，获得{Energy:energyIcons()}，抽{Cards:diff()}张牌。",
+                ["DIVINE.selectionScreenPrompt"] = "选择1张要消耗的压力衍生牌。",
+                ["IN_YOUR_BLUE_EYES.title"] = "碧い瞳の中に",
+                ["IN_YOUR_BLUE_EYES.description"] = "{IfUpgraded:show:从你的弃牌堆和消耗堆各随机选择1张[gold]歌曲[/gold]牌，分别打出两次。|随机打出你消耗堆中的1张[gold]歌曲[/gold]牌两次。}",
+                ["THE_WHOLE_BLUE_WORLD.title"] = "The Whole Blue World",
+                ["THE_WHOLE_BLUE_WORLD.description"] = "失去{HpLoss:diff()}点生命。随机将{Cards:diff()}张[gold]歌曲[/gold]牌加入手牌。{IfUpgraded:show:本场战斗中，它们不消耗能量，X取当前能量值。|本场战斗中，它们的费用减少1。}",
                 ["SOPHIE.description"] = "获得{Block:diff()}点[gold]格挡[/gold]。使目标获得[blue]1[/blue]层自卑。你在本回合获得[blue]1[/blue]层[gold]虚弱[/gold]。"
             }
         };
@@ -447,7 +519,13 @@ internal static class ModSupport
             ["eng"] = new Dictionary<string, string>
             {
                 ["PRESSURE_POWER.title"] = "Pressure",
-                ["PRESSURE_POWER.description"] = "他们感觉喘不过气...",
+                ["BACKSTAGE_SUPPORT_POWER.title"] = "Backstage Support",
+                ["LINGERING_RESONANCE_POWER.title"] = "Lingering Resonance",
+                ["OCTAGRAM_DANCE_POWER.title"] = "Octagram Dance",
+                ["OCTAGRAM_DANCE_POWER.description"] = "Your cards spend no Energy this turn. X uses your current Energy. Playing two consecutive cards of the same type ends only your turn after the second card resolves.",
+                ["LINGERING_RESONANCE_POWER.description"] = "Each turn, the first [blue]2[/blue] cards you [gold]Exhaust[/gold] while this is active each apply {Amount} [gold]Pressure[/gold] to ALL enemies. Includes Ethereal. Stacking increases Pressure, not the trigger limit.",
+                ["BACKSTAGE_SUPPORT_POWER.description"] = "Each turn, the first [blue]2[/blue] pressure-generated cards you play while this is active each grant {Amount} [gold]Block[/gold]. Autoplay counts; exhausting an unplayed card does not.",
+                ["PRESSURE_POWER.description"] = "Shared by all players. Successful effects on this enemy spend Pressure to add a card to hand, if enough Pressure is available.\n[gold]Weak[/gold]: [blue]2[/blue] for Persona Dissociation.\n[gold]Vulnerable[/gold]: [blue]3[/blue] for All You Think About Is Yourself.\nLosing Strength or Dexterity: [blue]1[/blue] for Social Withdrawal.\n[gold]Inferiority[/gold]: [blue]1[/blue] for Overwork Anxiety.\nEach effect redeems once. Recipient: the Sakiko card owner, otherwise the Sakiko applier, otherwise the first living Sakiko in player order.",
                 ["SAKIKO_DESPAIR_ECHO_POWER.title"] = "Despair Echo",
                 ["SAKIKO_DESPAIR_ECHO_POWER.description"] = "This turn, whenever this creature takes damage, it gains [blue]3[/blue] Pressure per stack.",
                 ["PERSONA_DISSOCIATION_POWER.title"] = "Persona Dissociation",
@@ -488,7 +566,13 @@ internal static class ModSupport
             ["zhs"] = new Dictionary<string, string>
             {
                 ["PRESSURE_POWER.title"] = "压力",
-                ["PRESSURE_POWER.description"] = "他们感觉喘不过气...",
+                ["BACKSTAGE_SUPPORT_POWER.title"] = "幕后支撑",
+                ["LINGERING_RESONANCE_POWER.title"] = "余音未散",
+                ["OCTAGRAM_DANCE_POWER.title"] = "八芒星ダンス",
+                ["OCTAGRAM_DANCE_POWER.description"] = "本回合，你的牌不消耗能量，X取当前能量值。连续打出两张相同类型的牌，在第二张结算后结束你自己的回合。",
+                ["LINGERING_RESONANCE_POWER.description"] = "每回合，此能力生效期间你[gold]消耗[/gold]的前[blue]2[/blue]张牌各对所有敌人施加{Amount}层[gold]压力[/gold]。包括虚无消耗。叠加只增加压力数值，不增加触发次数。",
+                ["BACKSTAGE_SUPPORT_POWER.description"] = "每回合，此能力生效期间你打出的前[blue]2[/blue]张压力衍生牌各给予{Amount}点[gold]格挡[/gold]。自动打出计入；未打出而消耗不计入。",
+                ["PRESSURE_POWER.description"] = "所有玩家共享。对该敌人成功施加以下效果时，若压力足够，消耗压力并将1张对应牌加入手牌：\n[gold]虚弱[/gold]：[blue]2[/blue]层，获得人格解离。\n[gold]易伤[/gold]：[blue]3[/blue]层，获得满脑子都想着自己。\n失去力量或敏捷：[blue]1[/blue]层，获得自闭。\n[gold]自卑[/gold]：[blue]1[/blue]层，获得过劳焦虑。\n每次效果只兑换一次。优先给予来源卡牌的祥子持有者，其次是祥子施加者；否则给予玩家顺序中首位存活的祥子。",
                 ["SAKIKO_DESPAIR_ECHO_POWER.title"] = "绝望回响",
                 ["SAKIKO_DESPAIR_ECHO_POWER.description"] = "本回合内，每当该生物受到伤害时，都会按层数额外获得每层[blue]3[/blue]层压力。",
                 ["PERSONA_DISSOCIATION_POWER.title"] = "人格解离",

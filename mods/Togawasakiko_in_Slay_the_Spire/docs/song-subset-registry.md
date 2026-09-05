@@ -1,6 +1,6 @@
 # Song 子集登记
 
-初建日期：2026-04-03；现状校订：2026-07-26
+初建日期：2026-04-03；现状校订：2026-09-05
 
 > 档案状态：本表按当前 `ISongCard` 实现校订。源码接口是 song 身份的最终事实源；本表用于资源和人工审计。
 
@@ -120,6 +120,10 @@ song 子集首版至少需要：
 | `S_THE_WAY` | `'S/' The Way` | `Common` | `assets/cards/normal/common/s_the_way.png` | `true` | `final` | 已入库并接 runtime |
 | `TWO_MOONS_DEEP_INTO_THE_FOREST` | `Two Moons Deep Into The Forest` | `Uncommon` | `assets/cards/normal/uncommon/two_moons_deep_into_the_forest.png` | `true` | `final` | 已入库并接 runtime |
 | `SOPHIE` | `Sophie` | `Uncommon` | `assets/cards/normal/uncommon/sophie.png` | `true` | `final` | 已入库并接 runtime |
+| `OCTAGRAM_DANCE` | `八芒星ダンス` | `Uncommon` | `assets/cards/normal/uncommon/octagram_dance.png` | `true` | `final` | Completeness通常盘BRMM-10917官方封面，已接runtime并本机安装，卡框待实机 |
+| `DIVINE` | `DIVINE` | `Uncommon` | `assets/cards/normal/uncommon/divine.png` | `true` | `final` | Ave Música通常盘BRMM-11048官方封面，已接runtime并本机安装，卡框待实机 |
+| `IN_YOUR_BLUE_EYES` | `碧い瞳の中に` | `Uncommon` | `assets/cards/normal/uncommon/in_your_blue_eyes.png` | `true` | `final` | 同上，与DIVINE共用封面内容、独立路径 |
+| `THE_WHOLE_BLUE_WORLD` | `The Whole Blue World` | `Uncommon` | `assets/cards/normal/uncommon/the_whole_blue_world.png` | `true` | `final` | 同上，与DIVINE共用封面内容、独立路径 |
 
 当前明确不是 song 的条目：
 
@@ -131,6 +135,6 @@ song 子集首版至少需要：
 ## 六 当前结论
 
 - song 已被明确写入资源系统，不再是“以后再想”的隐含需求。
-- 当前已入源码并实现 `ISongCard` 的条目共 `22` 张，且都有稳定文件路径。
+- 当前已入源码并实现 `ISongCard` 的条目共 `26` 张；新增4张仍复用稳定占位图，未进入已安装成品。
 - pressure 衍生牌池与 song 池已经明确分离。
 - `Compose` 与 `Ave Mujica` 这类“池生成”效果，后续实现时必须严格从冻结对象集合中取，不要做全池随机或自行补池。

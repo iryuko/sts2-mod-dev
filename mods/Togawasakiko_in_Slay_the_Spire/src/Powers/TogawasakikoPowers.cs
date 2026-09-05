@@ -103,7 +103,7 @@ internal sealed class PersonaDissociationPower : PowerModel
 
 internal sealed class MagneticForceHellWargodPower : PowerModel
 {
-    private readonly HashSet<CardModel> _cardsQueuedForReplay = new();
+    private HashSet<CardModel>? _cardsQueuedForReplay;
 
     public override PowerType Type => PowerType.Buff;
 
@@ -113,6 +113,15 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
 
     public override LocString Description => new("powers", "MAGNETIC_FORCE_HELL_WARGOD_POWER.description");
 
+    private HashSet<CardModel> CardsQueuedForReplay
+    {
+        get
+        {
+            AssertMutable();
+            return _cardsQueuedForReplay ??= new HashSet<CardModel>();
+        }
+    }
+
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner?.Player == null || cardPlay.Card?.Owner != Owner.Player || cardPlay.Card.Type != CardType.Attack)
@@ -121,7 +130,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
         }
 
         CardModel card = cardPlay.Card;
-        if (_cardsQueuedForReplay.Remove(card))
+        if (CardsQueuedForReplay.Remove(card))
         {
             return;
         }
@@ -131,7 +140,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
             return;
         }
 
-        _cardsQueuedForReplay.Add(card);
+        CardsQueuedForReplay.Add(card);
         try
         {
             await CardCmd.AutoPlay(
@@ -144,7 +153,7 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
         }
         finally
         {
-            _cardsQueuedForReplay.Remove(card);
+            CardsQueuedForReplay.Remove(card);
         }
     }
 
@@ -288,13 +297,18 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
         Creature? applier,
         CardModel? cardSource)
     {
-        if (power.Owner == null || !power.Owner.IsMonster || !power.Owner.IsAlive || amount == 0)
+        if (power.Owner == null
+            || !power.Owner.IsMonster
+            || !power.Owner.IsAlive
+            || Owner == null
+            || !Owner.IsAlive
+            || amount == 0)
         {
             return;
         }
 
-        Player? recipient = Owner?.Player;
-        if (recipient == null)
+        Player? recipient = Owner.Player;
+        if (recipient == null || !IsPressureRedemptionOwner(recipient, applier, cardSource))
         {
             return;
         }
@@ -317,6 +331,30 @@ internal sealed class TogawasakikoCombatWatcherPower : PowerModel
             return;
         }
 
+        if (power is InferiorityPower && amount > 0 && await ModSupport.TryConsumePressure(choiceContext, power.Owner, 1, applier, cardSource))
+        {
+            await ModSupport.GiveGeneratedCardToPlayer<OverworkAnxiety>(recipient);
+        }
+    }
+
+    private bool IsPressureRedemptionOwner(Player watcherOwner, Creature? applier, CardModel? cardSource)
+    {
+        Player? recipient = null;
+        if (cardSource?.Owner?.Character is Togawasakiko)
+        {
+            recipient = cardSource.Owner;
+        }
+        else if (applier?.Player?.Character is Togawasakiko)
+        {
+            recipient = applier.Player;
+        }
+        else
+        {
+            recipient = Owner?.CombatState?.Players
+                .FirstOrDefault(player => player.Character is Togawasakiko && player.Creature.IsAlive);
+        }
+
+        return ReferenceEquals(recipient, watcherOwner);
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

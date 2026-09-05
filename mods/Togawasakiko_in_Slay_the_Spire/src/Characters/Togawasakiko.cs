@@ -343,7 +343,20 @@ internal sealed class TogawasakikoCardPool : CardPoolModel
             ModelDb.Card<MasqueradeRhapsodyRequest>(),
             ModelDb.Card<STheWay>(),
             ModelDb.Card<TwoMoonsDeepIntoTheForest>(),
-            ModelDb.Card<Sophie>()
+            ModelDb.Card<Sophie>(),
+            ModelDb.Card<UnfinishedScore>(),
+            ModelDb.Card<FollowingPhrase>(),
+            ModelDb.Card<Unmask>(),
+            ModelDb.Card<RehearsalOrder>(),
+            ModelDb.Card<BackstageSupport>(),
+            ModelDb.Card<UnspokenWords>(),
+            ModelDb.Card<LingeringResonance>(),
+            ModelDb.Card<UntilNextAct>(),
+            ModelDb.Card<ComposedResponse>(),
+            ModelDb.Card<OctagramDance>(),
+            ModelDb.Card<Divine>(),
+            ModelDb.Card<InYourBlueEyes>(),
+            ModelDb.Card<TheWholeBlueWorld>()
         };
     }
 }
@@ -423,10 +436,6 @@ internal sealed class TogawasakikoSpecialRelicPool : RelicPoolModel
 
     protected override IEnumerable<RelicModel> GenerateAllRelics()
     {
-        return new RelicModel[]
-        {
-            ModelDb.Relic<UpgradedDollMask>(),
-            ModelDb.Relic<PianoOfMom>()
-        };
+        return Array.Empty<RelicModel>();
     }
 }

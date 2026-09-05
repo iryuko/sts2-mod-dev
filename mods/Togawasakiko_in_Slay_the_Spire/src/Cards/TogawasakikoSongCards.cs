@@ -344,7 +344,6 @@ internal sealed class SymbolIi : TogawasakikoCard, ISongCard
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature).Where(enemy => enemy.IsAlive))
         {
             await ModSupport.ApplyPower<InferiorityPower>(choiceContext, enemy, 1m, ownerCreature, this, false);
-            await ModSupport.TryGenerateInferiorityPressureCard(enemy, ownerCreature, this);
         }
 
         await ModSupport.ApplyPower<SymbolIIPower>(choiceContext, ownerCreature, 1m, ownerCreature, this, false);
@@ -991,8 +990,6 @@ internal sealed class TwoMoonsDeepIntoTheForest : TogawasakikoCard, ISongCard
             return Task.CompletedTask;
         }
 
-        ModSupport.ClearLocalCostModifiers(this);
-
         if (IsClone)
         {
             return Task.CompletedTask;
@@ -1065,7 +1062,6 @@ internal sealed class Sophie : TogawasakikoCard, ISongCard
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
         await ModSupport.ApplyPower<InferiorityPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
-        await ModSupport.TryGenerateInferiorityPressureCard(cardPlay.Target, Owner.Creature, this);
         await ModSupport.ApplyPower<WeakPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
