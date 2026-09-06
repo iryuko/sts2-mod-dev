@@ -14,7 +14,14 @@ using Togawasakiko_in_Slay_the_Spire;
 
 internal static class BridgeCardRegression
 {
-    private static readonly string[] Names = ["UnfinishedScore", "FollowingPhrase", "Unmask", "RehearsalOrder", "BackstageSupport"];
+    private static readonly (string Name, string PortraitPath)[] Cards =
+    [
+        ("UnfinishedScore", "res://mod_assets/cards/normal/common/unfinished_score.png"),
+        ("FollowingPhrase", "res://mod_assets/cards/normal/common/following_phrase.png"),
+        ("Unmask", "res://mod_assets/cards/normal/uncommon/unmask.png"),
+        ("RehearsalOrder", "res://mod_assets/cards/normal/uncommon/rehearsal_order.png"),
+        ("BackstageSupport", "res://mod_assets/cards/normal/uncommon/backstage_support.png")
+    ];
     private static void Equal<T>(T expected, T actual)
     {
         if (!Equals(expected, actual)) throw new Exception($"expected {expected}, got {actual}");
@@ -31,13 +38,14 @@ internal static class BridgeCardRegression
             var generatedSongs = (IReadOnlyList<CardModel>)support.GetMethod("GetSongPoolCanonicals")!.Invoke(null, null)!;
             Type character = assemblyType.Assembly.GetType("Togawasakiko_in_Slay_the_Spire.Togawasakiko", true)!;
             var pool = CombatFixture.Canonical<CardPoolModel>("TogawasakikoCardPool").AllCards;
-            foreach (string name in Names)
+            foreach ((string name, string portraitPath) in Cards)
             {
                 CardModel card = CombatFixture.Canonical<CardModel>(name);
                 Equal(1, pool.Count(c => c.Id == card.Id));
                 Equal(false, songType.IsInstanceOfType(card));
                 Equal(false, generatedSongs.Any(song => song.Id == card.Id));
                 Equal(true, character.GetMethod("IsRewardEligibleCard", BindingFlags.Static | BindingFlags.NonPublic)!.Invoke(null, [card]));
+                Equal(portraitPath, card.PortraitPath);
                 Equal(true, File.Exists(Path.Combine(TestLocalization.RepoRoot, "mods/Togawasakiko_in_Slay_the_Spire/pack", card.PortraitPath[6..])));
             }
             return Task.CompletedTask;

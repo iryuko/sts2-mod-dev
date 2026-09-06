@@ -1,6 +1,6 @@
 # 线程接班摘要
 
-记录日期：2026-07-26
+记录日期：2026-09-06
 
 ## 一句话状态
 
@@ -20,8 +20,11 @@
 ## 当前版本
 
 - STS2：`v0.107.1` / `59260271`
-- mod manifest：`0.2.1`
-- 当前本机安装与 release 三件套哈希一致
+- mod manifest：`0.2.2`
+- 当前本地 post-release 热修安装与 release 三件套哈希一致
+- DLL：`53c6bce1e932df648b63ebfb65c2000f11bc47547ac1914c1f3630ffb48da709`
+- PCK：`829e3b68f10acf37b184aceb99382399efcc780c92eaf828b25fe79addbd4047`
+- manifest：`3d06dd0b6f26e0ecdf36196a275d8f8f6f969cb18174ab8c0fecef6fbf38f624`
 - 2026-07-26 Steam 启动：initializer 完成，主菜单无模组错误状态
 
 ## 最重要的校正
@@ -31,7 +34,9 @@
   - 只在 `Off (null)` 或离开 run 时停止。
 - merchant 不是纯原版 Silent fallback，也不是正式祥子 Spine。
   - 它是自定义兼容 scene，隐藏 Silent skeleton，显示静态祥子 portrait。
-- 战斗 Spine 正在独立制作，本轮 PR 继续保留静态战斗立绘基线。
+- `0.2.2` 已包含当前战斗 Spine runtime；2026-09-06 的 bridge 卡图热修没有修改该部分。
+- 五张 bridge 卡此前全部共用 `basic/unendurable.png`，不是只有“接续小节”错图。
+  2026-09-06 已在本地热修中改为五个独立 `1000x760` portrait，并进入安装 PCK；尚未启动游戏做视觉确认。
 - Darv 目前还没有真正回归原版。
   - `Curseslander` 已解决 Ancient 空池。
   - 但 `DarvPatches.cs` 仍整体接管祥子选项生成，下一步应优先删除或证明必要性。
@@ -41,11 +46,12 @@
 
 ## 当前断点
 
-1. `UnattendedPiano` SL 共享列表 bug 已改代码，待实机。
-2. Win 卡牌卡中间的已知 API 漂移已修，待同包 Win 回归。
-3. jukebox 换房保护已加，待 Win/Mac 生命周期回归。
-4. Darv patch 应回归原版。
-5. `MagneticForceHellWargodPower` 共享集合与 private `FieldRefAccess` 仍是静态风险。
+1. 五张 bridge 卡图已安装，待 Card Library 实机确认裁切和升级态。
+2. `UnattendedPiano` SL 共享列表 bug 已改代码，待实机。
+3. Win 卡牌卡中间的已知 API 漂移已修，待同包 Win 回归。
+4. jukebox 换房保护已加，待 Win/Mac 生命周期回归。
+5. Darv patch 应回归原版。
+6. `MagneticForceHellWargodPower` 共享集合与 private `FieldRefAccess` 仍是静态风险。
 
 ## 必须遵守
 

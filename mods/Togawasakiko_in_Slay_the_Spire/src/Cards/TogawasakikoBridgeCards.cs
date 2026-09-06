@@ -14,8 +14,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Togawasakiko_in_Slay_the_Spire;
 
-// Approved bridge cards are not Songs. Portraits remain explicit placeholders
-// until the five-card art batch is delivered.
+// Approved bridge cards are not Songs.
 internal sealed class UnfinishedScore : TogawasakikoCard
 {
     public override bool GainsBlock => true;
@@ -24,7 +23,8 @@ internal sealed class UnfinishedScore : TogawasakikoCard
         new[] { new BlockVar(5m, ValueProp.Move) };
 
     public UnfinishedScore()
-        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self, ModSupport.GetNormalSkillPlaceholderPortraitPath())
+        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self,
+            ModSupport.GetNormalCommonPortraitPath("unfinished_score.png"))
     {
     }
 
@@ -61,7 +61,8 @@ internal sealed class FollowingPhrase : TogawasakikoCard
     protected override bool ShouldGlowGoldInternal => FollowsSong();
 
     public FollowingPhrase()
-        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self, ModSupport.GetNormalSkillPlaceholderPortraitPath())
+        : base(1, CardType.Skill, CardRarity.Common, TargetType.Self,
+            ModSupport.GetNormalCommonPortraitPath("following_phrase.png"))
     {
     }
 
@@ -113,7 +114,8 @@ internal sealed class Unmask : TogawasakikoCard
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<FaceReactionPower>() };
 
     public Unmask()
-        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy, ModSupport.GetNormalSkillPlaceholderPortraitPath())
+        : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy,
+            ModSupport.GetNormalUncommonPortraitPath("unmask.png"))
     {
     }
 
@@ -152,7 +154,8 @@ internal sealed class RehearsalOrder : TogawasakikoCard
     public override IEnumerable<CardKeyword> CanonicalKeywords => new[] { CardKeyword.Exhaust };
 
     public RehearsalOrder()
-        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self, ModSupport.GetNormalSkillPlaceholderPortraitPath())
+        : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.Self,
+            ModSupport.GetNormalUncommonPortraitPath("rehearsal_order.png"))
     {
     }
 
@@ -194,7 +197,8 @@ internal sealed class BackstageSupport : TogawasakikoCard
     };
 
     public BackstageSupport()
-        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self, ModSupport.GetNormalSkillPlaceholderPortraitPath())
+        : base(1, CardType.Power, CardRarity.Uncommon, TargetType.Self,
+            ModSupport.GetNormalUncommonPortraitPath("backstage_support.png"))
     {
     }
 

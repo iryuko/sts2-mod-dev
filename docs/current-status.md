@@ -1,6 +1,6 @@
 # 当前状态
 
-记录日期：2026-07-26
+记录日期：2026-09-06
 
 ## 权威范围
 
@@ -26,14 +26,23 @@
 
 ## 当前构建与安装
 
-- manifest 版本：`0.2.1`
+- manifest 版本：`0.2.2`
 - `min_game_version`：`0.107.1`
 - 标准成品：DLL、PCK、外部 `mod_manifest.json`
-- 当前 release 展开目录与本机安装目录三件套逐字节一致
+- 当前本地 post-release 热修的 release 展开目录与本机安装目录三件套逐字节一致
 - 当前 SHA-256：
-  - DLL：`bb26e7872d3560d35fcafecbf436181e158072ec54ac8b9fc584c2eb3fa7f500`
-  - PCK：`4b92969d63a405f7c12c6aa1065cf206fe84bc8aac5373ae5b63a9fcb7d2ebac`
-  - manifest：`7f1166000fb9ce0e0a74197989e151d7cfbf9c582988168d557759076f4c9cd7`
+  - DLL：`53c6bce1e932df648b63ebfb65c2000f11bc47547ac1914c1f3630ffb48da709`
+  - PCK：`829e3b68f10acf37b184aceb99382399efcc780c92eaf828b25fe79addbd4047`
+  - manifest：`3d06dd0b6f26e0ecdf36196a275d8f8f6f969cb18174ab8c0fecef6fbf38f624`
+
+2026-09-06 bridge 卡图热修：
+
+- `Unfinished Score`、`Following Phrase`、`Unmask`、`Rehearsal Order`、`Backstage Support`
+  已从共用 `basic/unendurable.png` 改为五个独立 portrait。
+- 五张图均为 `1000x760`，已完成 headless Godot 导入、PCK 构建、标准脚本安装和哈希核对。
+- gameplay regression 为 `107 passed, 0 failed`。
+- 未启动 Steam 或游戏，实机卡框裁切与图鉴显示待确认。
+- 这是本地 post-release 热修；既有 GitHub `0.2.2` Release 尚未重新发布。
 
 2026-07-26 Steam 启动验证：
 
@@ -60,7 +69,7 @@
 - 1 个 Ancient 事件 `TogawaTeiji`。
 - 5 个 relic model。
 - 角色选择、静态战斗立绘、能量计数器、商店、火堆、Ancient 与音频资源。
-- 新战斗 Spine 正在独立制作，本轮 PR 不包含其场景、动画或导入资产。
+- `0.2.2` 已继承当前战斗 Spine 场景、动画与导入资产；本次卡图热修不修改该部分。
 - 23 首 jukebox runtime 曲目和 1 首事件音乐。
 
 历史 T2 的“50 张 Common/Uncommon/Rare 正常卡”是规划目标，不是当前代码事实。当前奖励可用的 Common/Uncommon/Rare 合计 45 张。

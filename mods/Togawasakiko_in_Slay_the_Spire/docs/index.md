@@ -1,6 +1,6 @@
 # Togawasakiko 文档索引
 
-校订日期：2026-07-26
+校订日期：2026-09-06
 
 本目录同时保存现行事实、设计基线、专项研究和历史过程。文件中的日期代表记录形成时间；判断当前实现时，不应把早期设计稿中的“当前”直接当作今天的事实。
 
@@ -33,6 +33,7 @@
 ## 资产与音频
 
 - [资产状态](asset-status.md)：资产是否存在、是否进入 runtime 的唯一现行清单。
+- [五张 Bridge 卡图安装审计](../../../docs/audits/bridge-card-art-install-2026-09-06.md)：来稿映射、固定路径、PCK 与安装哈希证据。
 - [资源目录](resource-layout.md)：目录职责和长期落位规范。
 - [资源规格与提交流程](resource-specs-and-submission-workflow.md)：素材尺寸、格式与提交流程。
 - [原版角色资产审计](original-character-asset-audit.md)：原版资源结构参考。

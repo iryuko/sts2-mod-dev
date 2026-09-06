@@ -1,6 +1,6 @@
 # Togawasakiko 当前状态
 
-记录日期：2026-07-26
+记录日期：2026-09-06
 
 ## 事实源
 
@@ -15,18 +15,18 @@
 ## 版本与成品
 
 - manifest id：`Togawasakiko_in_Slay_the_Spire`
-- mod version：`0.2.1`
+- mod version：`0.2.2`
 - `min_game_version`：`0.107.1`
 - STS2 reference：`v0.107.1` / `59260271`
 - release 目录：
   - `exports/release/Togawasakiko_in_Slay_the_Spire/`
-- 当前本机安装与 release 三件套一致。
+- 当前本地 post-release 热修安装与 release 三件套一致。
 
 SHA-256：
 
-- DLL：`bb26e7872d3560d35fcafecbf436181e158072ec54ac8b9fc584c2eb3fa7f500`
-- PCK：`4b92969d63a405f7c12c6aa1065cf206fe84bc8aac5373ae5b63a9fcb7d2ebac`
-- manifest：`7f1166000fb9ce0e0a74197989e151d7cfbf9c582988168d557759076f4c9cd7`
+- DLL：`53c6bce1e932df648b63ebfb65c2000f11bc47547ac1914c1f3630ffb48da709`
+- PCK：`829e3b68f10acf37b184aceb99382399efcc780c92eaf828b25fe79addbd4047`
+- manifest：`3d06dd0b6f26e0ecdf36196a275d8f8f6f969cb18174ab8c0fecef6fbf38f624`
 
 ## 角色底盘
 
@@ -139,12 +139,15 @@ SHA-256：
 
 ## 视觉与资产
 
-- 当前提交中的战斗角色 scene 继续使用静态 portrait。
-- 新 Spine runtime 正在独立制作，场景、动画与导入资产将在完成后单独提交。
+- 五张 bridge 卡已在 2026-09-06 从共用占位图切换为独立 portrait：
+  `unfinished_score.png`、`following_phrase.png`、`unmask.png`、`rehearsal_order.png`、`backstage_support.png`。
+- 五张图均为 `1000x760`，源码、`assets/`、`pack/`、Godot import、PCK 和安装路径已经闭环。
+- 当前 `0.2.2` 分支继承战斗 Spine runtime；本次热修没有修改其 scene、动画或拆件。
 - merchant/rest site 使用自定义兼容 scene 和静态 portrait。
 - merchant scene 内 Silent skeleton 仅用于满足原版节点契约，当前隐藏。
 - 能量计数器缺 `EnergyVfxBack` / `EnergyVfxFront` 是明确接受的视觉缺陷。
 - 全部当前卡牌 model 均有对应源 portrait；详见 `asset-status.md`。
+- 五张 bridge 卡尚缺游戏内卡框裁切和升级态视觉确认，不能仅凭 PCK 检查写成实机通过。
 
 ## 当前风险
 

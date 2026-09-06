@@ -1,6 +1,6 @@
 # 当前资产状态
 
-记录日期：2026-07-26
+记录日期：2026-09-06
 
 ## 权威边界
 
@@ -27,6 +27,19 @@
 
 T2 的“50 张 normal 卡图仍待补”已经不是当前文件事实。当前角色池共 50 张，其中 Common/Uncommon/Rare 为 45 张。
 
+2026-09-06 已纠正五张 bridge 卡的资源接线：
+
+| 卡牌 | runtime portrait | 状态 |
+| --- | --- | --- |
+| `UnfinishedScore` | `mod_assets/cards/normal/common/unfinished_score.png` | 独立正式图已入 PCK |
+| `FollowingPhrase` | `mod_assets/cards/normal/common/following_phrase.png` | 独立正式图已入 PCK |
+| `Unmask` | `mod_assets/cards/normal/uncommon/unmask.png` | 独立正式图已入 PCK |
+| `RehearsalOrder` | `mod_assets/cards/normal/uncommon/rehearsal_order.png` | 独立正式图已入 PCK |
+| `BackstageSupport` | `mod_assets/cards/normal/uncommon/backstage_support.png` | 独立正式图已入 PCK |
+
+此前五张卡的构造器都复用 `basic/unendurable.png`；该旧状态已由精确路径回归测试覆盖。
+当前仍缺游戏内卡框裁切验收，不把文件/PCK 验证写成最终视觉通过。
+
 ## 角色资源
 
 已存在并接入：
@@ -43,7 +56,7 @@ T2 的“50 张 normal 卡图仍待补”已经不是当前文件事实。当前
 
 当前表现边界：
 
-- 新战斗 Spine 正在独立制作，本轮提交不包含其场景、动画、拆件或导入资产。
+- 当前 `0.2.2` 分支已包含战斗 Spine runtime；本次 bridge 卡图热修不修改该部分。
 - merchant/rest site 当前主要显示静态 portrait，不是正式专属 Spine 动画。
 - 锁定图、top panel outline 等文件已存在；本轮未重新做视觉质量验收，不标成“最终完成”。
 - 能量计数器缺两个 VFX 节点是已接受缺陷。

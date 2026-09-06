@@ -15,3 +15,9 @@
 - Tests cover card costs, native upgrade/downgrade and descriptions, keywords, generation, Pressure, replay and per-player end-turn boundaries. They do not prove live multiplayer transport, room transitions, reward timing or in-game visuals.
 - Eight portraits and three power aliases are included. Five bridge-card portraits and the power aliases still reuse existing art.
 - Git source publication does not itself mean the binary Release has been published. The packaged animation baseline must be resolved independently; release title and body remain date and version only.
+
+## 2026-09-06 Local Post-release Art Hotfix
+
+- The five bridge cards above originally shared the `basic/unendurable.png` placeholder in the published `0.2.2` source state.
+- A local follow-up now assigns five dedicated `1000x760` portraits, rebuilds the PCK and installs matching DLL/PCK/manifest files.
+- This note does not mean the existing GitHub `0.2.2` Release artifact was republished. In-game visual framing remains unverified.
