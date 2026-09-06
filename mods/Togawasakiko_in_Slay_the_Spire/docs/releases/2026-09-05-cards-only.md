@@ -19,5 +19,5 @@
 ## 2026-09-06 Local Post-release Art Hotfix
 
 - The five bridge cards above originally shared the `basic/unendurable.png` placeholder in the published `0.2.2` source state.
-- A local follow-up now assigns five dedicated `1000x760` portraits, rebuilds the PCK and installs matching DLL/PCK/manifest files.
-- This note does not mean the existing GitHub `0.2.2` Release artifact was republished. In-game visual framing remains unverified.
+- The follow-up assigns five dedicated `1000x760` portraits and is promoted as the separate `0.2.3` release rather than replacing `0.2.2`.
+- In-game visual framing remains unverified.

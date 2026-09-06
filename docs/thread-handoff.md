@@ -20,11 +20,11 @@
 ## 当前版本
 
 - STS2：`v0.107.1` / `59260271`
-- mod manifest：`0.2.2`
-- 当前本地 post-release 热修安装与 release 三件套哈希一致
-- DLL：`53c6bce1e932df648b63ebfb65c2000f11bc47547ac1914c1f3630ffb48da709`
-- PCK：`829e3b68f10acf37b184aceb99382399efcc780c92eaf828b25fe79addbd4047`
-- manifest：`3d06dd0b6f26e0ecdf36196a275d8f8f6f969cb18174ab8c0fecef6fbf38f624`
+- mod manifest：`0.2.3`
+- 当前本地安装与 `0.2.3` release 三件套哈希一致
+- DLL：`42f223cad65812c3138b5bfb3b38a6ff7f32d1d92e2a00b491800fcc825aaad7`
+- PCK：`c820289c7da963d42d9e4e66d100c94cee2c1a40cd6f911401e44b0f2251e193`
+- manifest：`fc0c4410f295c5c749b86dcc03f7c6ac8679249b50543f207a9561feee9a0a26`
 - 2026-07-26 Steam 启动：initializer 完成，主菜单无模组错误状态
 
 ## 最重要的校正
@@ -34,9 +34,9 @@
   - 只在 `Off (null)` 或离开 run 时停止。
 - merchant 不是纯原版 Silent fallback，也不是正式祥子 Spine。
   - 它是自定义兼容 scene，隐藏 Silent skeleton，显示静态祥子 portrait。
-- `0.2.2` 已包含当前战斗 Spine runtime；2026-09-06 的 bridge 卡图热修没有修改该部分。
+- `0.2.3` 继承当前战斗 Spine runtime；2026-09-06 的 bridge 卡图修复没有修改该部分。
 - 五张 bridge 卡此前全部共用 `basic/unendurable.png`，不是只有“接续小节”错图。
-  2026-09-06 已在本地热修中改为五个独立 `1000x760` portrait，并进入安装 PCK；尚未启动游戏做视觉确认。
+  2026-09-06 已在 `0.2.3` 中改为五个独立 `1000x760` portrait，并进入安装 PCK；尚未启动游戏做视觉确认。
 - Darv 目前还没有真正回归原版。
   - `Curseslander` 已解决 Ancient 空池。
   - 但 `DarvPatches.cs` 仍整体接管祥子选项生成，下一步应优先删除或证明必要性。

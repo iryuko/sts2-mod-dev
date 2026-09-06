@@ -15,18 +15,18 @@
 ## 版本与成品
 
 - manifest id：`Togawasakiko_in_Slay_the_Spire`
-- mod version：`0.2.2`
+- mod version：`0.2.3`
 - `min_game_version`：`0.107.1`
 - STS2 reference：`v0.107.1` / `59260271`
 - release 目录：
   - `exports/release/Togawasakiko_in_Slay_the_Spire/`
-- 当前本地 post-release 热修安装与 release 三件套一致。
+- 当前本地安装与 `0.2.3` release 三件套一致。
 
 SHA-256：
 
-- DLL：`53c6bce1e932df648b63ebfb65c2000f11bc47547ac1914c1f3630ffb48da709`
-- PCK：`829e3b68f10acf37b184aceb99382399efcc780c92eaf828b25fe79addbd4047`
-- manifest：`3d06dd0b6f26e0ecdf36196a275d8f8f6f969cb18174ab8c0fecef6fbf38f624`
+- DLL：`42f223cad65812c3138b5bfb3b38a6ff7f32d1d92e2a00b491800fcc825aaad7`
+- PCK：`c820289c7da963d42d9e4e66d100c94cee2c1a40cd6f911401e44b0f2251e193`
+- manifest：`fc0c4410f295c5c749b86dcc03f7c6ac8679249b50543f207a9561feee9a0a26`
 
 ## 角色底盘
 
@@ -142,7 +142,7 @@ SHA-256：
 - 五张 bridge 卡已在 2026-09-06 从共用占位图切换为独立 portrait：
   `unfinished_score.png`、`following_phrase.png`、`unmask.png`、`rehearsal_order.png`、`backstage_support.png`。
 - 五张图均为 `1000x760`，源码、`assets/`、`pack/`、Godot import、PCK 和安装路径已经闭环。
-- 当前 `0.2.2` 分支继承战斗 Spine runtime；本次热修没有修改其 scene、动画或拆件。
+- 当前 `0.2.3` 分支继承战斗 Spine runtime；本次修复没有修改其 scene、动画或拆件。
 - merchant/rest site 使用自定义兼容 scene 和静态 portrait。
 - merchant scene 内 Silent skeleton 仅用于满足原版节点契约，当前隐藏。
 - 能量计数器缺 `EnergyVfxBack` / `EnergyVfxFront` 是明确接受的视觉缺陷。

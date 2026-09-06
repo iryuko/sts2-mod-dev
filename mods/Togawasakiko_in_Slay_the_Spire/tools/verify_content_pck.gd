@@ -3,7 +3,8 @@ extends SceneTree
 const ANIMATION_ROOT := "res://animations/characters/togawasakiko/"
 const ACTIONS := ["idle_loop", "attack", "cast", "hurt", "die", "relaxed_loop"]
 const CARDS := ["uncommon/unspoken_words", "uncommon/lingering_resonance", "uncommon/until_next_act", "common/composed_response",
-	"uncommon/octagram_dance", "uncommon/divine", "uncommon/in_your_blue_eyes", "uncommon/the_whole_blue_world"]
+	"uncommon/octagram_dance", "uncommon/divine", "uncommon/in_your_blue_eyes", "uncommon/the_whole_blue_world",
+	"common/unfinished_score", "common/following_phrase", "uncommon/unmask", "uncommon/rehearsal_order", "uncommon/backstage_support"]
 var _hit := false
 
 func _initialize() -> void:
@@ -24,7 +25,7 @@ func _run() -> void:
 		_fail("Old death timeline in PCK")
 		return
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://mod_manifest.json"))
-	if manifest.get("version") != "0.2.2":
+	if manifest.get("version") != "0.2.3":
 		_fail("Wrong embedded version")
 		return
 	var fall: Texture2D = load(ANIMATION_ROOT + "images/fall_prone_candidate_v3_idle_locked.png")

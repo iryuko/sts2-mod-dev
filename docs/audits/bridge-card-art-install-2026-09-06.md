@@ -49,3 +49,6 @@
 
 本次是 manifest 仍为 `0.2.2` 的本地 post-release 热修。GitHub 上既有 `0.2.2` Release
 不会因本地安装自动更新，若要公开分发必须另行发布新构建。
+
+后续发布整理已将该修复升版为 `0.2.3`，不覆盖原 `0.2.2`。最终 release 哈希与
+发布边界见 `mods/Togawasakiko_in_Slay_the_Spire/docs/releases/2026-09-06-0.2.3.md`。
