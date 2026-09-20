@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://cvmcjpw4m60w8"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c6tsmor4n8ker" path="res://animations/monsters/axe_ruby_raider/axe_ruby_raider.atlas" id="1_1bipm"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bvv57jeuj0l5j" path="res://animations/monsters/axe_ruby_raider/axe_ruby_raider.skel" id="2_u6jor"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_tnbho"]
+from = "idle_loop"
+to = "attack"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_swv2o"]
+from = "hurt"
+to = "idle_loop"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ntjd6"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6xbv7"]
+from = "attack"
+to = "hurt"
+
+[resource]
+atlas_res = ExtResource("1_1bipm")
+skeleton_file_res = ExtResource("2_u6jor")
+default_mix = 0.25
+animation_mixes = [SubResource("SpineAnimationMix_tnbho"), SubResource("SpineAnimationMix_swv2o"), SubResource("SpineAnimationMix_ntjd6"), SubResource("SpineAnimationMix_6xbv7")]

@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3r0riei06i3t"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://t3fckcb7ah43" path="res://animations/ui/combat/orbs/frost_orb_skel_data.tres" id="1_7ahjt"]
+[ext_resource type="Texture2D" uid="uid://bd7n2mtq6hdfw" path="res://images/vfx/orbs/frost_orb_particle.png" id="2_uspun"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_eb6dp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_eb6dp"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_eb6dp")
+
+[sub_resource type="Gradient" id="Gradient_k04ii"]
+offsets = PackedFloat32Array(0, 0.486034, 1)
+colors = PackedColorArray(0.163408, 0.163408, 0.163408, 1, 0.847474, 0.847474, 0.847474, 1, 0.234958, 0.234958, 0.234958, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0dlyu"]
+gradient = SubResource("Gradient_k04ii")
+
+[sub_resource type="Curve" id="Curve_8mj7q"]
+_data = [Vector2(0, 0.0115496), 0.0, 8.81026, 0, 0, Vector2(0.188172, 1), 0.0505919, 0.0505919, 0, 0, Vector2(0.655914, 0.221126), -1.79832, -1.79832, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vx2da"]
+curve = SubResource("Curve_8mj7q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eb6dp"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 17.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_vx2da")
+color_ramp = SubResource("GradientTexture1D_0dlyu")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_eb6dp")
+
+[node name="FrostOrb" type="Node2D"]
+
+[node name="SpineSkeleton" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_7ahjt")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.1, 0.1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+amount = 2
+texture = ExtResource("2_uspun")
+randomness = 0.46
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eb6dp")

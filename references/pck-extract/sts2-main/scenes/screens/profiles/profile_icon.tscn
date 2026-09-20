@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8sqyllpuk2kg"]
+
+[ext_resource type="Script" uid="uid://1wq0n4fqioxg" path="res://src/Core/Nodes/Screens/ProfileScreen/NProfileIcon.cs" id="1_j68u7"]
+[ext_resource type="Texture2D" uid="uid://dxp3y6jo2g2p8" path="res://images/ui/profile/profile_icon_1.png" id="2_8ysej"]
+[ext_resource type="Texture2D" uid="uid://dleyvutgfirdl" path="res://images/ui/profile/profile_icon_2.png" id="3_lmxmi"]
+[ext_resource type="Texture2D" uid="uid://cl8af7nvqbtnh" path="res://images/ui/profile/profile_icon_3.png" id="4_ik7da"]
+
+[node name="ProfileIcon" type="Control"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+script = ExtResource("1_j68u7")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_8ysej")
+expand_mode = 1

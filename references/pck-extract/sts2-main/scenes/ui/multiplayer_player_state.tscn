@@ -1,0 +1,330 @@
+[gd_scene load_steps=17 format=3 uid="uid://b2fsawjryxgqq"]
+
+[ext_resource type="Texture2D" uid="uid://x2neryjvbtwy" path="res://images/ui/top_panel/character_icon_ironclad.png" id="1_0gipw"]
+[ext_resource type="Script" uid="uid://5mqhpnjhhwua" path="res://src/Core/Nodes/Multiplayer/NMultiplayerPlayerState.cs" id="1_vnlb4"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="3_yhjj3"]
+[ext_resource type="Texture2D" uid="uid://csoo65671w1jn" path="res://images/ui/disconnected2.png" id="4_mam52"]
+[ext_resource type="Texture2D" uid="uid://cocaj7qjgglsd" path="res://images/packed/common_ui/network_problem_indicator.png" id="5_ku0hw"]
+[ext_resource type="PackedScene" uid="uid://i0agyocasfdy" path="res://scenes/combat/health_bar.tscn" id="5_xk48s"]
+[ext_resource type="Script" uid="uid://bmms4khdrykdc" path="res://src/Core/Nodes/Multiplayer/NMultiplayerNetworkProblemIndicator.cs" id="6_k77dw"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="7_ad2fc"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/card/energy_ironclad.tres" id="7_yhjj3"]
+[ext_resource type="Texture2D" uid="uid://wwlp2akfrqsp" path="res://images/ui/combat/energy_star.png" id="10_yhjj3"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="11_rago0"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_map.tres" id="11_yhjj3"]
+[ext_resource type="PackedScene" uid="uid://bqrwdpvdn5vr2" path="res://scenes/cards/tiny_card.tscn" id="12_i5r12"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="13_t5w83"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="13_yhjj3"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="14_m7bxi"]
+
+[node name="RemotePlayerState" type="Control"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1672.0
+offset_bottom = -1016.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vnlb4")
+
+[node name="CharacterIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 62.0
+offset_bottom = 58.0
+texture = ExtResource("1_0gipw")
+expand_mode = 1
+
+[node name="TurnEndIndicator" type="TextureRect" parent="CharacterIcon"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.498039, 1, 0, 1)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("3_yhjj3")
+expand_mode = 1
+
+[node name="DisconnectedIndicator" type="TextureRect" parent="CharacterIcon"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.999999, 0.207693, 0.250436, 1)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("4_mam52")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NetworkProblemIndicator" type="TextureRect" parent="CharacterIcon"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.999999, 0.207693, 0.250436, 1)
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("5_ku0hw")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("6_k77dw")
+
+[node name="TopInfoContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_left = 67.0
+offset_top = 6.0
+offset_right = 261.0
+offset_bottom = 38.0
+theme_override_constants/separation = 2
+
+[node name="NameplateLabel" type="Label" parent="TopInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.2, 0.1882353, 0.14901961, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("13_t5w83")
+theme_override_font_sizes/font_size = 19
+text = "Byrdlett"
+vertical_alignment = 1
+script = ExtResource("14_m7bxi")
+AutoSizeEnabled = false
+MinFontSize = 18
+MaxFontSize = 22
+
+[node name="Spacer1" type="Control" parent="TopInfoContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="EnergyCountContainer" type="Control" parent="TopInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="TopInfoContainer/EnergyCountContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_yhjj3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EnergyCount" type="Label" parent="TopInfoContainer/EnergyCountContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_colors/font_outline_color = Color(0.2, 0.19, 0.15, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("11_rago0")
+theme_override_font_sizes/font_size = 16
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_m7bxi")
+AutoSizeEnabled = false
+MinFontSize = 4
+MaxFontSize = 10
+
+[node name="StarCountContainer" type="Control" parent="TopInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="TopInfoContainer/StarCountContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_yhjj3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarCount" type="Label" parent="TopInfoContainer/StarCountContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.2, 0.188235, 0.14902, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("11_rago0")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_m7bxi")
+AutoSizeEnabled = false
+MinFontSize = 4
+MaxFontSize = 10
+
+[node name="CardCountContainer" type="Control" parent="TopInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+
+[node name="TinyCard" parent="TopInfoContainer/CardCountContainer" instance=ExtResource("12_i5r12")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = -1.0
+
+[node name="Portrait" parent="TopInfoContainer/CardCountContainer/TinyCard" index="4"]
+modulate = Color(0.434618, 0.398835, 0.140824, 1)
+
+[node name="CardCount" type="Label" parent="TopInfoContainer/CardCountContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.2, 0.188235, 0.14902, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("11_rago0")
+theme_override_font_sizes/font_size = 16
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("14_m7bxi")
+AutoSizeEnabled = false
+MinFontSize = 4
+MaxFontSize = 10
+
+[node name="Spacer2" type="Control" parent="TopInfoContainer"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+
+[node name="LocationContainer" type="Control" parent="TopInfoContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+
+[node name="LocationIcon" type="TextureRect" parent="TopInfoContainer/LocationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.87162
+offset_right = -1.87162
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 14)
+texture = ExtResource("11_yhjj3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HealthBar" parent="." instance=ExtResource("5_xk48s")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+offset_left = 63.0
+offset_top = 41.0
+offset_right = 7.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="HpBarContainer" parent="HealthBar" index="0"]
+layout_mode = 1
+offset_left = 0.0
+offset_right = 173.0
+offset_bottom = 15.0
+
+[node name="HpBackground" parent="HealthBar/HpBarContainer" index="0"]
+modulate = Color(0, 0.0666667, 0.2, 0.7529412)
+
+[node name="HpLabel" parent="HealthBar/HpBarContainer" index="3"]
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_font_sizes/font_size = 18
+
+[node name="InfinityTex" parent="HealthBar/HpBarContainer" index="4"]
+offset_left = -28.5
+offset_top = -12.5
+offset_right = 28.5
+offset_bottom = 12.5
+
+[node name="BlockContainer" parent="HealthBar" index="1"]
+visible = true
+layout_mode = 0
+offset_left = -22.0
+offset_top = -14.0
+offset_right = 22.0
+offset_bottom = 30.0
+
+[node name="BlockLabel" parent="HealthBar/BlockContainer" index="1"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1254902)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_font_sizes/font_size = 16
+MaxFontSize = 16
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 72.0
+focus_mode = 2
+script = ExtResource("13_yhjj3")
+
+[node name="SelectionReticle" parent="." instance=ExtResource("7_ad2fc")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 7.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(124, 32)
+
+[editable path="TopInfoContainer/CardCountContainer/TinyCard"]
+[editable path="HealthBar"]

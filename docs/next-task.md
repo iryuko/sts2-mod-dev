@@ -1,62 +1,66 @@
 # 下一轮任务
 
-## 本轮任务
+记录日期：2026-09-06
 
-下一轮不要扩新卡。
+## 当前目标
 
-下一轮应该继续服务：
+继续稳定：
 
 - `mods/Togawasakiko_in_Slay_the_Spire`
 
-优先做的是一次“稳定性回归轮”，确认前面已经落地的修复在实机中真正闭环。
+不要扩新卡、新机制或新的 UI 框架。
 
-## 最高优先级
+## 优先级
 
-1. 复测 `KillKiss` 击杀最后一只怪后的战斗收尾
-2. 复测全局文本能量 icon 尺寸
-3. 复测战斗奖励 / 商店 / `Compose` 是否仍有污染
-4. 判断 merchant 立绘是否要从回退版继续推进到正式 scene
-5. 同步更新文档结论，不让代码状态再次领先文档
+1. 实机确认五张 bridge 卡图
+   - 在 Card Library 分别检查 `Unfinished Score`、`Following Phrase`、`Unmask`、`Rehearsal Order`、`Backstage Support`。
+   - 确认五张不再显示 `Unendurable` 占位图，升级态仍使用同一正确 portrait。
+   - 检查卡框裁切后的脸部、关键手势与多人构图是否可读。
+2. 让 Darv 回归原版流程
+   - 当前已经有合法 Ancient 卡 `Curseslander`。
+   - 对照 v0.107.1 原版 `Darv.GenerateInitialOptions()` 与 `DustyTome.SetupForPlayer()`。
+   - 若原版能够自然处理祥子卡池，应删除 `DarvPatches.cs`，不要继续复制原版选项表。
+3. 实机闭环 `UnattendedPiano` 同进程 SL
+   - 看完三张 Shadow。
+   - SL 后再次选择弹琴。
+   - 确认选项、发牌、事件结束和音乐 cleanup 全部正常。
+4. 用同一 release 做 Windows v0.107.1 回归
+   - 牌是否仍卡在屏幕中央。
+   - 压力兑换是否触发。
+   - 获取完整 `godot.log`、触发卡名和包 sha256。
+5. 验证 jukebox 当前生命周期
+   - 非战斗房选曲后依次进入 event、merchant、fire、combat。
+   - 自定义曲目应持续，原版 BGM 不叠声。
+   - 选择 `Off (null)` 和离开 run 后应恢复原版音乐。
+6. 做角色主流程回归
+   - 战斗奖励、商店、`Compose`。
+   - `KillKiss` 击杀最后敌人的结算。
+   - `Aroma of Chaos` 升级后离开事件。
+   - Teiji 与 Touch of Orobas。
 
-## 预期输出物
+## 同轮静态修复候选
 
-- 一条 `KillKiss` 结论：
-  - 现在是否还会卡奖励生成
-- 一条文本 icon 结论：
-  - 对白 / hover / 事件文本中的能量 icon 是否已恢复正常比例
-- 一条奖励结论：
-  - 普通战斗奖励是否稳定为原版数量且不再出现坏牌 / starter 污染
-- 一条商店结论：
-  - 当前商店交互是否完全正常
-  - merchant 立绘是否仍只停留在回退方案
-- 一份文档更新：
-  - `docs/current-status.md`
-  - `docs/next-task.md`
-  - `docs/thread-handoff.md`
-  - 必要时更新角色目录下的 T4 状态文档
+只有在上述主流程不被阻塞时处理：
 
-## 建议执行顺序
+- 把 `MagneticForceHellWargodPower` 的共享 `HashSet<CardModel>` 改为每个 mutable power 独立状态。
+- 把卡牌库等私有 `FieldRefAccess` 改为惰性解析和 feature-local fail-closed，或改回原版公开流程。
 
-1. 启动游戏，先看最新 `godot.log`
-2. 直接复测 `KillKiss`
-3. 复测 `Black Birthday`、对白、hover 等文本 icon
-4. 复测普通房战斗奖励
-5. 复测 `Compose`
-6. 复测商店整间房间与离店流程
-7. 再决定是否继续推进正式 merchant 立绘 scene
+## 证据要求
 
-## 不要做的事
+每项必须区分：
 
-- 不要从零重写 T4
-- 不要因为当前基础 bug 收口了就立刻继续扩更多卡
-- 不要把“已安装”当作“已实机验证通过”
-- 不要把大 icon / 小 icon 两条资源链重新混回一条
-- 不要在 build 未结束时先 install
-- 不要把临时备份文件留在 `pack/` 里
+- 源码已改。
+- build 通过。
+- 已安装且哈希一致。
+- Mac 实机通过。
+- Win 实机通过。
+
+只有最后两项才能支持相应平台“已修复”的结论。
 
 ## 完成标准
 
-- 能明确回答 `KillKiss` 是否彻底闭环
-- 能明确回答文本 icon 是否恢复正常
-- 能明确回答奖励 / 商店 / `Compose` 是否稳定
-- 文档与真实代码状态保持一致
+- Darv 不再依赖复制原版流程的补丁。
+- 五张 bridge 卡在图鉴和卡牌详情中均显示各自正确卡图。
+- `UnattendedPiano` SL 路线实机闭环。
+- Win 卡牌与 jukebox 两项都有同版本日志和明确结论。
+- 当前状态、角色状态和时间线同步更新。

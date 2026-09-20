@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://djpww37nn0dxv"]
+
+[ext_resource type="Script" uid="uid://cjohse50usudh" path="res://src/Core/Nodes/Screens/TreasureRoomRelic/NHandImage.cs" id="1_ch4xp"]
+[ext_resource type="Texture2D" uid="uid://bwti6458avw3g" path="res://images/ui/hands/multiplayer_hand_defect_scissors.png" id="2_mtyod"]
+
+[node name="HandImage" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 971.0
+offset_top = 911.0
+offset_right = 971.0
+offset_bottom = 911.0
+mouse_filter = 2
+script = ExtResource("1_ch4xp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -163.0
+offset_top = -10.0
+offset_right = 220.0
+offset_bottom = 1062.0
+pivot_offset = Vector2(163, 10)
+mouse_filter = 2
+texture = ExtResource("2_mtyod")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GrabMarker" type="Marker2D" parent="."]
+position = Vector2(12, 212)

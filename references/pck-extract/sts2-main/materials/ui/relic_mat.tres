@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://r8p5qaa4eosw"]
+
+[ext_resource type="Shader" path="res://shaders/relic.gdshader" id="1_unfdn"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_unfdn")
+shader_parameter/pulse = 0.0
+shader_parameter/is_used = 0.0
+shader_parameter/is_wax = 0.0

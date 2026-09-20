@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://xub1ousdmt3e"]
+
+[ext_resource type="Shader" uid="uid://dks6ig1022egp" path="res://shaders/vfx/scream/vfx_scream_ring_polar_shader.gdshader" id="1_8io1k"]
+
+[sub_resource type="Curve" id="Curve_8io1k"]
+_data = [Vector2(0, 0), 0.0, 5.70854, 0, 0, Vector2(0.39599, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j8ec1"]
+curve = SubResource("Curve_8io1k")
+
+[resource]
+shader = ExtResource("1_8io1k")
+shader_parameter/tiling = Vector2(2, 0.725)
+shader_parameter/x_offsets = Vector2(0.4, -0.1)
+shader_parameter/offset_curve = SubResource("CurveTexture_j8ec1")

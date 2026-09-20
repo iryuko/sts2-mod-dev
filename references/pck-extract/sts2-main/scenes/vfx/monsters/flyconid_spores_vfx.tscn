@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=3 uid="uid://48smgby3sc82"]
+
+[ext_resource type="Texture2D" uid="uid://howycigcr525" path="res://images/vfx/monsters/spore_particle.png" id="1_vyw7q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rvm57"]
+
+[sub_resource type="Curve" id="Curve_y1rnv"]
+_data = [Vector2(0, 0.00619471), 0.0, 10.2186, 0, 0, Vector2(0.166836, 0.993805), 0.0, 0.0, 0, 0, Vector2(0.885125, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -15.8445, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_ubf4r"]
+offsets = PackedFloat32Array(0, 0.533981, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.921569, 1, 1, 1, 0.117647)
+
+[sub_resource type="Gradient" id="Gradient_0lxqo"]
+offsets = PackedFloat32Array(0.316498, 0.747475)
+colors = PackedColorArray(0.87, 0.2175, 0.2175, 1, 0.95, 0.532, 0.532, 1)
+
+[sub_resource type="Curve" id="Curve_gql13"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_s6qio"]
+offsets = PackedFloat32Array(0.356902, 0.673401)
+colors = PackedColorArray(0.54, 0.877333, 1, 1, 0.264, 0.603467, 0.8, 1)
+
+[node name="FlyconidSporesVfx" type="Node2D"]
+
+[node name="VulnerableSpores" type="CPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_rvm57")
+position = Vector2(-14.5658, 58.9785)
+amount = 500
+lifetime = 2.0
+explosiveness = 0.66
+lifetime_randomness = 0.51
+texture = ExtResource("1_vyw7q")
+emission_shape = 3
+emission_rect_extents = Vector2(50, 30)
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(-400, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 800.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+tangential_accel_min = -100.0
+tangential_accel_max = -100.0
+angle_min = -45.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_y1rnv")
+color_ramp = SubResource("Gradient_ubf4r")
+color_initial_ramp = SubResource("Gradient_0lxqo")
+hue_variation_curve = SubResource("Curve_gql13")
+
+[node name="FrailSpores" type="CPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_rvm57")
+position = Vector2(-14.5658, 58.9785)
+amount = 500
+lifetime = 2.0
+explosiveness = 0.66
+lifetime_randomness = 0.51
+texture = ExtResource("1_vyw7q")
+emission_shape = 3
+emission_rect_extents = Vector2(50, 30)
+direction = Vector2(-1, 0)
+spread = 15.0
+gravity = Vector2(-400, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 800.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+tangential_accel_min = -100.0
+tangential_accel_max = -100.0
+angle_min = -45.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_y1rnv")
+color_ramp = SubResource("Gradient_ubf4r")
+color_initial_ramp = SubResource("Gradient_s6qio")
+hue_variation_curve = SubResource("Curve_gql13")

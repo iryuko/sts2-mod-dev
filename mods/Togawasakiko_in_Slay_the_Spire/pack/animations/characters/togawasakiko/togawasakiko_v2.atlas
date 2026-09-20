@@ -1,0 +1,245 @@
+images/rig_sheet.png
+size: 3072,3072
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hair_back
+  rotate: false
+  xy: 0, 0
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+arm_l_mesh
+  rotate: false
+  xy: 1024, 0
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+hand_l_idle
+  rotate: false
+  xy: 2048, 0
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+body_core
+  rotate: false
+  xy: 0, 1536
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+hair_front
+  rotate: false
+  xy: 1024, 1536
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+hand_l_point
+  rotate: false
+  xy: 2048, 1536
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1
+
+images/death_formal_sheet.png
+size: 4096,8192
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+death_pose_release_pre
+  rotate: false
+  xy: 4, 4
+  size: 650, 1440
+  orig: 650, 1440
+  offset: 0, 0
+  index: -1
+death_pose_release_drop
+  rotate: false
+  xy: 658, 4
+  size: 672, 1467
+  orig: 672, 1467
+  offset: 0, 0
+  index: -1
+death_pose_descent_mid
+  rotate: false
+  xy: 1334, 4
+  size: 704, 1379
+  orig: 704, 1379
+  offset: 0, 0
+  index: -1
+death_pose_descent_low
+  rotate: false
+  xy: 2042, 4
+  size: 796, 1289
+  orig: 796, 1289
+  offset: 0, 0
+  index: -1
+death_pose_descent
+  rotate: false
+  xy: 2842, 4
+  size: 839, 1222
+  orig: 839, 1222
+  offset: 0, 0
+  index: -1
+death_pose_knee_approach
+  rotate: false
+  xy: 4, 1475
+  size: 858, 1173
+  orig: 858, 1173
+  offset: 0, 0
+  index: -1
+death_pose_pre_knee_contact
+  rotate: false
+  xy: 866, 1475
+  size: 860, 1055
+  orig: 860, 1055
+  offset: 0, 0
+  index: -1
+death_pose_kneel
+  rotate: false
+  xy: 1730, 1475
+  size: 870, 1057
+  orig: 870, 1057
+  offset: 0, 0
+  index: -1
+death_pose_reach_start
+  rotate: false
+  xy: 2604, 1475
+  size: 909, 978
+  orig: 909, 978
+  offset: 0, 0
+  index: -1
+death_pose_reach
+  rotate: false
+  xy: 4, 2652
+  size: 921, 819
+  orig: 921, 819
+  offset: 0, 0
+  index: -1
+death_pose_brace_compress
+  rotate: false
+  xy: 929, 2652
+  size: 959, 727
+  orig: 959, 727
+  offset: 0, 0
+  index: -1
+death_pose_brace
+  rotate: false
+  xy: 1892, 2652
+  size: 992, 600
+  orig: 992, 600
+  offset: 0, 0
+  index: -1
+death_pose_struggle_lift
+  rotate: false
+  xy: 2888, 2652
+  size: 979, 643
+  orig: 979, 643
+  offset: 0, 0
+  index: -1
+death_pose_arms_fail
+  rotate: false
+  xy: 4, 3475
+  size: 959, 501
+  orig: 959, 501
+  offset: 0, 0
+  index: -1
+death_pose_collapse_mid
+  rotate: false
+  xy: 967, 3475
+  size: 961, 463
+  orig: 961, 463
+  offset: 0, 0
+  index: -1
+death_pose_chest_contact
+  rotate: false
+  xy: 1932, 3475
+  size: 972, 470
+  orig: 972, 470
+  offset: 0, 0
+  index: -1
+death_pose_head_drop
+  rotate: false
+  xy: 2908, 3475
+  size: 950, 400
+  orig: 950, 400
+  offset: 0, 0
+  index: -1
+death_pose_prone
+  rotate: false
+  xy: 4, 3980
+  size: 958, 393
+  orig: 958, 393
+  offset: 0, 0
+  index: -1
+
+
+images/halo_soft_glow.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+halo_soft_glow
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+images/halo_attack_rays.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+halo_attack_rays
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+images/halo_attack_ring.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+halo_attack_ring
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+images/halo_hurt_fracture.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+halo_hurt_fracture
+  rotate: false
+  xy: 0, 0
+  size: 512, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+
+images/fall_prone_candidate_v3_idle_locked.png
+size: 1024,1536
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+death_fall_prone
+  rotate: false
+  xy: 0, 0
+  size: 1024, 1536
+  orig: 1024, 1536
+  offset: 0, 0
+  index: -1

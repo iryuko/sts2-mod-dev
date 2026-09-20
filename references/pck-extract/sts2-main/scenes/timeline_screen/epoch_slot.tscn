@@ -1,0 +1,203 @@
+[gd_scene load_steps=13 format=3 uid="uid://4reu0kq3pwf7"]
+
+[ext_resource type="Texture2D" uid="uid://dbuw4bu3r43n2" path="res://images/timeline/ui/slot_golden.png" id="1_dco6k"]
+[ext_resource type="Script" uid="uid://cy4lawphfy072" path="res://src/Core/Nodes/Screens/Timeline/NEpochSlot.cs" id="1_skqay"]
+[ext_resource type="Material" uid="uid://bndon6241wmcf" path="res://materials/vfx/hsv.tres" id="3_x1hep"]
+[ext_resource type="Texture2D" uid="uid://c4mds13m5buvv" path="res://images/timeline/ui/slot_outline.png" id="4_2ne8a"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="5_cxfmc"]
+[ext_resource type="Texture2D" uid="uid://bjyue0pdjk8v6" path="res://images/packed/timeline/epoch_slot_locked_small.png" id="5_rliaj"]
+[ext_resource type="Shader" uid="uid://cmylquha3cjx4" path="res://shaders/dark_blur.gdshader" id="6_4qrnp"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="10_gufj2"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="10_vc27h"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="12_w0cxx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5nxq"]
+resource_local_to_scene = true
+shader = ExtResource("5_cxfmc")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hs7p2"]
+resource_local_to_scene = true
+shader = ExtResource("6_4qrnp")
+shader_parameter/lod = 1.0
+shader_parameter/mix_percentage = 0.25
+
+[node name="EpochSlot" type="Control"]
+custom_minimum_size = Vector2(162, 100)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -798.0
+offset_bottom = -440.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(81, 50)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_skqay")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="SlotImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_dco6k")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VfxSpawnPosition" type="Control" parent="SlotImage"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Portrait" type="TextureRect" parent="SlotImage"]
+unique_name_in_owner = true
+visible = false
+material = ExtResource("3_x1hep")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Chains" type="TextureRect" parent="SlotImage/Portrait"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.52000004
+anchor_right = 0.5
+anchor_bottom = 0.52000004
+offset_left = -90.72002
+offset_top = -56.000004
+offset_right = 90.72002
+offset_bottom = 55.999996
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_rliaj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.94, 0.7849, 0.3196, 0)
+material = SubResource("ShaderMaterial_c5nxq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.06, 1.08)
+pivot_offset = Vector2(81, 50)
+mouse_filter = 2
+texture = ExtResource("4_2ne8a")
+expand_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = 1350.0
+offset_right = 81.0
+offset_bottom = 1450.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+size = Vector2i(162, 100)
+render_target_update_mode = 0
+
+[node name="BlurPortrait" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+material = ExtResource("3_x1hep")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Blur" type="ColorRect" parent="SubViewportContainer/SubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_hs7p2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DebugLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.7529412)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("10_vc27h")
+theme_override_font_sizes/font_size = 12
+text = "1"
+script = ExtResource("10_gufj2")
+AutoSizeEnabled = false
+MaxFontSize = 18
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="SelectionReticle" parent="." instance=ExtResource("12_w0cxx")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2

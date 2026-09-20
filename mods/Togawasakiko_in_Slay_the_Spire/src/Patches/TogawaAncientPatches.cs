@@ -26,6 +26,11 @@ internal static class TogawaAncientAct3AllAncientsPatch
     [HarmonyPostfix]
     private static IEnumerable<AncientEventModel> AppendTogawaTeiji(IEnumerable<AncientEventModel> __result)
     {
+        if (!TogawaAncientPatchHelpers.CurrentRunHasTogawasakiko())
+        {
+            return __result;
+        }
+
         return TogawaAncientPatchHelpers.AppendTogawaTeiji(__result);
     }
 }
@@ -36,6 +41,11 @@ internal static class TogawaAncientAct3UnlockedAncientsPatch
     [HarmonyPostfix]
     private static IEnumerable<AncientEventModel> AppendTogawaTeiji(IEnumerable<AncientEventModel> __result)
     {
+        if (!TogawaAncientPatchHelpers.CurrentRunHasTogawasakiko())
+        {
+            return __result;
+        }
+
         return TogawaAncientPatchHelpers.AppendTogawaTeiji(__result);
     }
 }
@@ -52,13 +62,30 @@ internal static class TogawaAncientAvailabilityPatch
     {
         if (ancient is TogawaTeiji)
         {
-            __result = __result && player?.Character is Togawasakiko;
+            __result = __result && TogawaAncientPatchHelpers.HasTogawasakiko(runState);
         }
     }
 }
 
 internal static class TogawaAncientPatchHelpers
 {
+    public static bool CurrentRunHasTogawasakiko()
+    {
+        RunManager? runManager = RunManager.Instance;
+        if (runManager == null)
+        {
+            return false;
+        }
+
+        IRunState? runState = AccessTools.Property(typeof(RunManager), "State")?.GetValue(runManager) as IRunState;
+        return HasTogawasakiko(runState);
+    }
+
+    public static bool HasTogawasakiko(IRunState? runState)
+    {
+        return runState?.Players?.Any(player => player?.Character is Togawasakiko) == true;
+    }
+
     public static IEnumerable<AncientEventModel> AppendTogawaTeiji(IEnumerable<AncientEventModel> ancients)
     {
         AncientEventModel togawaTeiji = ModelDb.AncientEvent<TogawaTeiji>();

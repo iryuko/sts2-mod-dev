@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://nkexmpmv3d78"]
+
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="1_08247"]
+[ext_resource type="Texture2D" uid="uid://ul1oevmcxsoj" path="res://images/vfx/miasma_cloud.png" id="2_qurue"]
+
+[sub_resource type="Curve" id="Curve_7n7e6"]
+_data = [Vector2(0, 0.0107101), 0.0, 0.0, 0, 0, Vector2(0.181556, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.16225, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_e0b85"]
+curve = SubResource("Curve_7n7e6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7j5m"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, -98, 0)
+damping_min = 19.786
+damping_max = 29.947
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_e0b85")
+
+[node name="vfx_kin_poof" type="Node2D"]
+position = Vector2(-6, -20)
+script = ExtResource("1_08247")
+_lifetime = 3.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(7, -69)
+emitting = false
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_j7j5m")
+texture = ExtResource("2_qurue")
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+randomness = 0.69

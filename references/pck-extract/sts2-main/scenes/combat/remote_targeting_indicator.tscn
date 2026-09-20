@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://duiwh5ifqrk1s"]
+
+[ext_resource type="Script" uid="uid://b1vnhbv2fbbaj" path="res://src/Core/Nodes/Combat/NRemoteTargetingIndicator.cs" id="1_6k557"]
+
+[sub_resource type="Gradient" id="Gradient_d4hxi"]
+offsets = PackedFloat32Array(0, 0.334615, 1)
+colors = PackedColorArray(1, 1, 1, 0.196078, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[node name="RemoteTargetingIndicator" type="Node2D"]
+script = ExtResource("1_6k557")
+
+[node name="LineBack" type="Line2D" parent="."]
+modulate = Color(1, 1, 1, 0.784314)
+width = 6.0
+gradient = SubResource("Gradient_d4hxi")
+joint_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 2
+antialiased = true
+
+[node name="Line" type="Line2D" parent="."]
+width = 5.0
+gradient = SubResource("Gradient_d4hxi")
+joint_mode = 1
+begin_cap_mode = 1
+end_cap_mode = 2
+antialiased = true

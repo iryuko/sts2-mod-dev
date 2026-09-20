@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://cyx0lxfonyla7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://byie3t7aosg2w" path="res://animations/monsters/punch_construct/punch_construct.atlas" id="1_n3bk2"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://sdep3ba11al2" path="res://animations/monsters/punch_construct/punch_construct.skel" id="2_wqf8e"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_baag8"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_n3bk2"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wqf8e"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_h7fim"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_n3bk2")
+skeleton_file_res = ExtResource("2_wqf8e")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_baag8"), SubResource("SpineAnimationMix_n3bk2"), SubResource("SpineAnimationMix_wqf8e"), SubResource("SpineAnimationMix_h7fim")]

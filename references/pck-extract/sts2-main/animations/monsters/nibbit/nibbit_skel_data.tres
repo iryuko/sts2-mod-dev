@@ -1,0 +1,33 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://nsykb6vjitkj"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://beoc5ksn1so8q" path="res://animations/monsters/nibbit/nibbit.atlas" id="1_hirho"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://coi4r5bv4daor" path="res://animations/monsters/nibbit/nibbit.skel" id="2_nesn6"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_fbivn"]
+from = "attack"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_neman"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jeikm"]
+from = "idle_loop"
+to = "attack"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_j1t7w"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_4uvv5"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_hirho")
+skeleton_file_res = ExtResource("2_nesn6")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_fbivn"), SubResource("SpineAnimationMix_neman"), SubResource("SpineAnimationMix_jeikm"), SubResource("SpineAnimationMix_j1t7w"), SubResource("SpineAnimationMix_4uvv5")]

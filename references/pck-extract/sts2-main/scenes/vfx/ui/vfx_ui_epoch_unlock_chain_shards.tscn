@@ -1,0 +1,75 @@
+[gd_scene load_steps=14 format=3 uid="uid://duh77nt8t6m4c"]
+
+[ext_resource type="Material" uid="uid://dhox8tex50vpe" path="res://materials/vfx/ui/vfx_ui_epoch_unlock_chain_shards.tres" id="1_nnpvc"]
+[ext_resource type="Texture2D" uid="uid://b1jrurqhkb00k" path="res://images/vfx/ui/epoch_unlock/ui_epoch_unlock_chain_shards.png" id="2_l28e4"]
+
+[sub_resource type="Curve" id="Curve_ip2g0"]
+_data = [Vector2(0.50391644, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.015533924), -3.67803, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cpw4t"]
+curve = SubResource("Curve_ip2g0")
+
+[sub_resource type="Curve" id="Curve_qx8ox"]
+_data = [Vector2(0, 1), 0.0, -1.9081503, 0, 0, Vector2(1, 0.2490291), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f1xeb"]
+curve = SubResource("Curve_qx8ox")
+
+[sub_resource type="Gradient" id="Gradient_0lh8d"]
+colors = PackedColorArray(0.6117647, 0.627451, 0.8392157, 1, 0.87769306, 0.8682848, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_41ud7"]
+gradient = SubResource("Gradient_0lh8d")
+
+[sub_resource type="Gradient" id="Gradient_nnpvc"]
+offsets = PackedFloat32Array(0, 0.35)
+colors = PackedColorArray(4.415934, 4.415934, 4.415934, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l28e4"]
+gradient = SubResource("Gradient_nnpvc")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_mbeit"]
+_data = [Vector2(0, 1), 0.0, -2.2379541, 0, 0, Vector2(1, 0.2490291), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e3nbb"]
+curve = SubResource("Curve_mbeit")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_06i4i"]
+lifetime_randomness = 0.75
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 180.0
+emission_ring_inner_radius = 90.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+angular_velocity_curve = SubResource("CurveTexture_f1xeb")
+radial_velocity_min = 199.99997
+radial_velocity_max = 449.99997
+radial_velocity_curve = SubResource("CurveTexture_e3nbb")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.39999998
+color_ramp = SubResource("GradientTexture1D_l28e4")
+color_initial_ramp = SubResource("GradientTexture1D_41ud7")
+alpha_curve = SubResource("CurveTexture_cpw4t")
+anim_offset_max = 1.0
+
+[node name="vfx_ui_epoch_unlock_chain_shards" type="GPUParticles2D"]
+material = ExtResource("1_nnpvc")
+emitting = false
+amount = 10
+texture = ExtResource("2_l28e4")
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_06i4i")

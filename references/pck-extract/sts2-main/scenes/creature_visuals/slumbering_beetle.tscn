@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://i5vsdb8a07pi"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_8ruga"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://br2xk0rpftxq7" path="res://animations/monsters/slumbering_beetle/slumbering_beetle_skel_data.tres" id="2_bsv0n"]
+
+[node name="SlumberingBeetle" type="Node2D"]
+script = ExtResource("1_8ruga")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_bsv0n")
+preview_skin = "Default"
+preview_animation = "sleep_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(54, -24)
+scale = Vector2(0.3, 0.3)
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "attack_target_bone"
+show_behind_parent = true
+position = Vector2(-14.2616, -4.75385)
+
+[node name="SleepVfxPos" type="Marker2D" parent="Visuals"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(-703.333, -416.667)
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -406.0
+offset_top = -368.0
+offset_right = 354.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(28, -177)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -395)

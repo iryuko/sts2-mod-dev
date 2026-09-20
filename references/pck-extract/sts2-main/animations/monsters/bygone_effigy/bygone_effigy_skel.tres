@@ -1,0 +1,18 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://jk5ahaso1c3y"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://d1vnnpw31d5ur" path="res://animations/monsters/bygone_effigy/bygone_effigy.atlas" id="1_uce4o"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://ud3g8otmaqor" path="res://animations/monsters/bygone_effigy/bygone_effigy.skel" id="2_dk1r1"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hm3c5"]
+from = "idle_loop"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_fca5v"]
+from = "attack"
+to = "hurt"
+
+[resource]
+atlas_res = ExtResource("1_uce4o")
+skeleton_file_res = ExtResource("2_dk1r1")
+default_mix = 0.25
+animation_mixes = [SubResource("SpineAnimationMix_hm3c5"), SubResource("SpineAnimationMix_fca5v")]

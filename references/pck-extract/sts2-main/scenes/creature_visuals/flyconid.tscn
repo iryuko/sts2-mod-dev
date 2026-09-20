@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://da7vjddmg21p0"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_bibwj"]
+[ext_resource type="Script" uid="uid://dxsxr7noe1oak" path="res://src/Core/Nodes/Vfx/NFlyconidSporesVfx.cs" id="3_hq2gv"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://celwh77tfpmka" path="res://animations/monsters/flying_mushrooms/flying_mushrooms_skel_data.tres" id="3_wfemc"]
+[ext_resource type="PackedScene" uid="uid://48smgby3sc82" path="res://scenes/vfx/monsters/flyconid_spores_vfx.tscn" id="5_1yqd4"]
+
+[node name="Flyconid" type="Node2D"]
+script = ExtResource("1_bibwj")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_wfemc")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(-9, 19)
+scale = Vector2(0.4, 0.4)
+
+[node name="SporesAttach" type="SpineBoneNode" parent="Visuals"]
+bone_name = "particle_attach"
+show_behind_parent = true
+position = Vector2(20.8287, -402.671)
+rotation = -0.0670942
+scale = Vector2(1, 1)
+
+[node name="FlyconidSporesVfx" parent="Visuals/SporesAttach" instance=ExtResource("5_1yqd4")]
+rotation = -0.112638
+scale = Vector2(2.40962, 1.93622)
+
+[node name="VfxController" type="Node" parent="Visuals"]
+unique_name_in_owner = true
+script = ExtResource("3_hq2gv")
+metadata/_custom_type_script = "uid://dxsxr7noe1oak"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -114.0
+offset_top = -309.0
+offset_right = 114.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -128)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -342)

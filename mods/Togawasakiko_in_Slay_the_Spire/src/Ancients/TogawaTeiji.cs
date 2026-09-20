@@ -27,6 +27,11 @@ internal sealed class TogawaTeiji : AncientEventModel
             VisitIndex = 0,
             IsRepeating = true
         };
+        AncientDialogue repeatedAgnosticDialogue = new(EmptyDialogueAudio)
+        {
+            VisitIndex = 0,
+            IsRepeating = true
+        };
         AncientDialogueSet dialogueSet = new()
         {
             FirstVisitEverDialogue = new AncientDialogue(EmptyDialogueAudio),
@@ -37,7 +42,10 @@ internal sealed class TogawaTeiji : AncientEventModel
                     repeatedCharacterDialogue
                 }
             },
-            AgnosticDialogues = Array.Empty<AncientDialogue>()
+            AgnosticDialogues = new AncientDialogue[]
+            {
+                repeatedAgnosticDialogue
+            }
         };
         dialogueSet.PopulateLocKeys(LocPrefix);
         return dialogueSet;

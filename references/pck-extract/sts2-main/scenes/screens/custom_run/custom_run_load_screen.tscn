@@ -1,0 +1,214 @@
+[gd_scene load_steps=16 format=3 uid="uid://dyqmwx0wm1445"]
+
+[ext_resource type="Script" uid="uid://bbcwbwhml1vd8" path="res://src/Core/Nodes/Screens/CustomRun/NCustomRunLoadScreen.cs" id="1_03w06"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_y0cxn"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_bgp7o"]
+[ext_resource type="PackedScene" uid="uid://yo7mkjn0r07a" path="res://scenes/screens/ascension_panel.tscn" id="4_03w06"]
+[ext_resource type="Script" uid="uid://dmpp1qcet6qvk" path="res://src/Core/Nodes/GodotExtensions/NMegaLineEdit.cs" id="7_kpsm6"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="9_fnbrg"]
+[ext_resource type="Script" uid="uid://cb70d28ckk11v" path="res://src/Core/Nodes/Multiplayer/NRemoteLoadLobbyPlayerContainer.cs" id="11_03w06"]
+[ext_resource type="Texture2D" uid="uid://q1y4ux" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="12_3pewd"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="13_kpsm6"]
+[ext_resource type="PackedScene" uid="uid://iq6wsnph1mun" path="res://scenes/screens/custom_run/modifiers_list.tscn" id="13_xp0mt"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="14_pgm5a"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="15_luhx0"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="16_k1cna"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="17_hxwst"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cykod"]
+resource_local_to_scene = true
+shader = ExtResource("13_kpsm6")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CustomRunLoadScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_03w06")
+
+[node name="LeftContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CustomModeTitle" type="Label" parent="LeftContainer"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 0
+offset_left = 264.0
+offset_top = 131.0
+offset_right = 851.0
+offset_bottom = 233.0
+theme_override_fonts/font = ExtResource("2_y0cxn")
+theme_override_font_sizes/font_size = 80
+text = "Custom Mode"
+script = ExtResource("3_bgp7o")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="RemotePlayerLoadContainer" type="Control" parent="LeftContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -310.0
+offset_right = 273.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_03w06")
+
+[node name="Container" type="FlowContainer" parent="LeftContainer/RemotePlayerLoadContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="AscensionPanel" parent="LeftContainer" instance=ExtResource("4_03w06")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="SeedContainer" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 538.0
+offset_right = 711.0
+offset_bottom = 614.0
+
+[node name="SeedLabel" type="Label" parent="LeftContainer/SeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("9_fnbrg")
+theme_override_font_sizes/font_size = 28
+text = "Seed: "
+script = ExtResource("3_bgp7o")
+AutoSizeEnabled = false
+
+[node name="SeedInput" type="LineEdit" parent="LeftContainer/SeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_y0cxn")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Random"
+script = ExtResource("7_kpsm6")
+
+[node name="RightContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ModifiersTitle" type="Label" parent="RightContainer"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 0
+offset_left = 52.0
+offset_top = 131.0
+offset_right = 271.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("2_y0cxn")
+theme_override_font_sizes/font_size = 40
+text = "Modifiers"
+script = ExtResource("3_bgp7o")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ModifiersList" parent="RightContainer" instance=ExtResource("13_xp0mt")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 60.0
+offset_top = 193.0
+offset_right = -216.0
+offset_bottom = -162.0
+
+[node name="ReadyAndWaitingPanel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_top = -664.0
+offset_right = 326.0
+offset_bottom = -542.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="ReadyAndWaitingPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_pgm5a")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="WaitingForReady" type="Label" parent="ReadyAndWaitingPanel"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("15_luhx0")
+theme_override_font_sizes/font_size = 50
+text = "Waiting for other players..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_bgp7o")
+AutoSizeEnabled = false
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="ConfirmButton" parent="." instance=ExtResource("16_k1cna")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("17_hxwst")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("17_hxwst")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("12_3pewd")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_cykod")
+
+[editable path="UnreadyButton"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://7gg8v113im58"]
+
+[ext_resource type="Texture2D" uid="uid://ch8i3pap3e6xl" path="res://images/ui/emote/thumb_down.png" id="1_q3y6g"]
+[ext_resource type="Script" uid="uid://cseei83yxqu7i" path="res://src/Core/Nodes/Reaction/NReaction.cs" id="2_og4t2"]
+
+[node name="Reaction" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = -1880.0
+offset_bottom = -1040.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(40, 40)
+mouse_filter = 2
+texture = ExtResource("1_q3y6g")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_og4t2")

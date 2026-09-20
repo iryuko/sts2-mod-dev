@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://co522kdh16tsk"]
+
+[ext_resource type="Script" uid="uid://bsb5qb015dft3" path="res://src/Core/Nodes/Vfx/NLiquidOverlayVfx.cs" id="1_gmspv"]
+
+[node name="vfx_liquid_overlay" type="Node2D"]
+script = ExtResource("1_gmspv")

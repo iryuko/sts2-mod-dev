@@ -1,0 +1,475 @@
+[gd_scene load_steps=28 format=3 uid="uid://cvhumg8yk2srd"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_dk646"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_exia0"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="12_1na0f"]
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="13_8mlmh"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dfb5g7rabma1w" path="res://animations/backgrounds/ceremonial_beast/bg_ceremonial_beast_bottom_skel_data.tres" id="13_ko78i"]
+[ext_resource type="Texture2D" uid="uid://cimv8cgwk7u5y" path="res://images/rooms/overgrowth_boss/overgrowth_06_ceremonial_beast.png" id="13_l4j25"]
+[ext_resource type="Texture2D" uid="uid://bp2itsyvh5pfs" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_1.png" id="14_myptn"]
+[ext_resource type="Script" uid="uid://b3vv07t1j02ry" path="res://src/Core/Nodes/Vfx/Backgrounds/NCeremonialBeastBgVfx.cs" id="14_n2elv"]
+[ext_resource type="Texture2D" uid="uid://36l7bw1rpnlc" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_2.png" id="15_3erj6"]
+[ext_resource type="Texture2D" uid="uid://c7a5a8o8khb0y" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_3.png" id="16_rfs0r"]
+[ext_resource type="Texture2D" uid="uid://cphfovvrkq80x" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_4.png" id="17_fs8jr"]
+[ext_resource type="Texture2D" uid="uid://b3ojfnfhdfi0t" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_5.png" id="18_dtd5o"]
+[ext_resource type="Texture2D" uid="uid://bkolnrxfve6hs" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_6.png" id="19_lfr4r"]
+[ext_resource type="Texture2D" uid="uid://dst7mpkxnerte" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_7.png" id="20_ggjrx"]
+[ext_resource type="Texture2D" uid="uid://cqloq38rnhw5q" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_8.png" id="21_t2t3u"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="22_iubs8"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://s270k2ms2r24" path="res://animations/backgrounds/ceremonial_beast/bg_ceremonial_beast_top_skel_data.tres" id="22_skgbm"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcth2"]
+shader = ExtResource("13_8mlmh")
+shader_parameter/speed = 0.8
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.05
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_st417"]
+shader = ExtResource("13_8mlmh")
+shader_parameter/speed = 0.5
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5h5u"]
+shader = ExtResource("13_8mlmh")
+shader_parameter/speed = 0.5
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.574
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vfg3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h8r2y"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_ppd71"]
+offsets = PackedFloat32Array(0, 0.22905, 0.873371, 0.992551)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_puaoj"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.988235, 29.0474), 27.7148, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_pdvwl"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_l053u"]
+offsets = PackedFloat32Array(0, 0.487896, 0.98324)
+colors = PackedColorArray(0.2757, 0.2757, 0.2757, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="CeremonialBeastBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_dk646")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+VisibleLayer = 1
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="Layer_04" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="beads_16" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 363.0
+offset_top = -328.0
+offset_right = 379.0
+offset_bottom = -182.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_17" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 55.0
+offset_top = -487.0
+offset_right = 71.0
+offset_bottom = -341.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_20" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -672.0
+offset_top = -351.0
+offset_right = -656.0
+offset_bottom = -205.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_1" type="TextureRect" parent="Layer_04"]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 452.0
+offset_top = -353.0
+offset_right = 468.0
+offset_bottom = -207.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_22" type="TextureRect" parent="."]
+show_behind_parent = true
+visibility_layer = 0
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 363.0
+offset_top = -328.0
+offset_right = 379.0
+offset_bottom = -182.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_10" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -169.0
+offset_top = -279.0
+offset_right = -153.0
+offset_bottom = -133.0
+rotation = 3.14159
+texture = ExtResource("14_myptn")
+expand_mode = 1
+
+[node name="beads_2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = 262.0
+offset_top = -365.0
+offset_right = 273.0
+offset_bottom = -308.0
+rotation = 3.14159
+texture = ExtResource("15_3erj6")
+expand_mode = 1
+
+[node name="beads_21" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = -502.0
+offset_top = -263.0
+offset_right = -491.0
+offset_bottom = -206.0
+rotation = 3.14159
+texture = ExtResource("15_3erj6")
+expand_mode = 1
+
+[node name="beads_13" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 841.0
+offset_top = -240.0
+offset_right = 852.0
+offset_bottom = -183.0
+rotation = 3.14159
+texture = ExtResource("15_3erj6")
+expand_mode = 1
+
+[node name="beads_14" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = -286.0
+offset_top = -206.0
+offset_right = -275.0
+offset_bottom = -149.0
+rotation = 3.14159
+texture = ExtResource("15_3erj6")
+expand_mode = 1
+
+[node name="beads_3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 247.0
+offset_top = -219.0
+offset_right = 264.0
+offset_bottom = -148.0
+rotation = 3.14159
+texture = ExtResource("16_rfs0r")
+expand_mode = 1
+
+[node name="beads_18" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = -566.0
+offset_top = -339.0
+offset_right = -549.0
+offset_bottom = -268.0
+rotation = 3.14159
+texture = ExtResource("16_rfs0r")
+expand_mode = 1
+
+[node name="beads_11" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -71.0
+offset_top = -421.0
+offset_right = -54.0
+offset_bottom = -350.0
+rotation = 3.14159
+texture = ExtResource("16_rfs0r")
+expand_mode = 1
+
+[node name="beads_4" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 134.0
+offset_top = -348.0
+offset_right = 145.0
+offset_bottom = -253.0
+rotation = 3.14159
+texture = ExtResource("17_fs8jr")
+expand_mode = 1
+
+[node name="beads_17" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = -791.0
+offset_top = -398.0
+offset_right = -780.0
+offset_bottom = -303.0
+rotation = 3.14159
+texture = ExtResource("17_fs8jr")
+expand_mode = 1
+
+[node name="beads_9" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 714.0
+offset_top = -306.0
+offset_right = 725.0
+offset_bottom = -211.0
+rotation = 3.14159
+texture = ExtResource("17_fs8jr")
+expand_mode = 1
+
+[node name="beads_5" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 303.0
+offset_top = -399.0
+offset_right = 315.0
+offset_bottom = -294.0
+rotation = 3.14159
+texture = ExtResource("18_dtd5o")
+expand_mode = 1
+
+[node name="beads_16" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -667.0
+offset_top = -192.0
+offset_right = -655.0
+offset_bottom = -87.0
+rotation = 3.14159
+texture = ExtResource("18_dtd5o")
+expand_mode = 1
+
+[node name="beads_6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 32.0
+offset_top = -278.0
+offset_right = 47.0
+offset_bottom = -204.0
+rotation = 3.14159
+texture = ExtResource("19_lfr4r")
+expand_mode = 1
+
+[node name="beads_12" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 562.0
+offset_top = -483.0
+offset_right = 577.0
+offset_bottom = -409.0
+rotation = 3.14159
+texture = ExtResource("19_lfr4r")
+expand_mode = 1
+
+[node name="beads_20" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -436.0
+offset_top = -381.0
+offset_right = -421.0
+offset_bottom = -307.0
+rotation = 3.14159
+texture = ExtResource("19_lfr4r")
+expand_mode = 1
+
+[node name="beads_7" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = 83.0
+offset_top = -402.0
+offset_right = 94.0
+offset_bottom = -304.0
+rotation = 3.14159
+texture = ExtResource("20_ggjrx")
+expand_mode = 1
+
+[node name="beads_19" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = -893.0
+offset_top = -234.0
+offset_right = -882.0
+offset_bottom = -136.0
+rotation = 3.14159
+texture = ExtResource("20_ggjrx")
+expand_mode = 1
+
+[node name="beads_15" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = 985.0
+offset_top = -306.0
+offset_right = 996.0
+offset_bottom = -208.0
+rotation = 3.14159
+texture = ExtResource("20_ggjrx")
+expand_mode = 1
+
+[node name="beads_8" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_x5h5u")
+layout_mode = 0
+offset_left = 373.0
+offset_top = -184.0
+offset_right = 385.0
+offset_bottom = -62.0
+rotation = 3.14159
+texture = ExtResource("21_t2t3u")
+expand_mode = 1
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("13_ko78i")
+additive_material = SubResource("CanvasItemMaterial_6vfg3")
+preview_skin = "default"
+preview_animation = "plants_spawn"
+preview_frame = true
+preview_time = 1.7
+position = Vector2(-1385, -652)
+scale = Vector2(0.45, 0.45)
+
+[node name="NCeremonialBeastBgVfx" type="Node" parent="SpineSprite"]
+script = ExtResource("14_n2elv")
+metadata/_custom_type_script = "uid://b3vv07t1j02ry"
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_exia0")
+
+[node name="cutter" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1452.0
+offset_top = 264.0
+offset_right = 1620.0
+offset_bottom = 650.0
+texture = ExtResource("13_l4j25")
+expand_mode = 1
+
+[node name="SpineSprite2" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("22_skgbm")
+additive_material = SubResource("CanvasItemMaterial_6vfg3")
+preview_skin = "default"
+preview_animation = "glow_and_skulls_idle"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-1454, -792)
+scale = Vector2(0.5, 0.5)
+
+[node name="NCeremonialBeastBgVfx" type="Node" parent="SpineSprite2"]
+script = ExtResource("14_n2elv")
+metadata/_custom_type_script = "uid://b3vv07t1j02ry"
+
+[node name="fog" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_h8r2y")
+position = Vector2(-1644, 511)
+texture = ExtResource("22_iubs8")
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+gravity = Vector2(1, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+color = Color(0.027451, 0.145098, 0.129412, 1)
+color_ramp = SubResource("Gradient_ppd71")
+anim_offset_max = 1.0
+
+[node name="fireflies" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(16, -275)
+scale = Vector2(0.469, 0.469)
+amount = 10
+texture = ExtResource("12_1na0f")
+lifetime = 10.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(3000, 500)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 188.95
+initial_velocity_max = 188.95
+orbit_velocity_max = 0.01
+radial_accel_max = 0.1
+damping_min = 3.797
+damping_max = 6.329
+damping_curve = SubResource("Curve_puaoj")
+scale_amount_min = 0.3
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_pdvwl")
+color = Color(0.0713491, 0.346958, 0.36071, 1)
+color_ramp = SubResource("Gradient_l053u")

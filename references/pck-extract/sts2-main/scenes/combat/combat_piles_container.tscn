@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://crom4irts1tj0"]
+
+[ext_resource type="Script" uid="uid://cyla4rfjp6h7m" path="res://src/Core/Nodes/Combat/NCombatPilesContainer.cs" id="1_l47o1"]
+[ext_resource type="PackedScene" uid="uid://bq18up18p2oor" path="res://scenes/combat/draw_pile.tscn" id="2_3pasj"]
+[ext_resource type="PackedScene" uid="uid://degxcg30ychsl" path="res://scenes/combat/discard_pile.tscn" id="3_smlow"]
+[ext_resource type="PackedScene" uid="uid://bsqfpx4tq1e2w" path="res://scenes/combat/exhaust_pile.tscn" id="4_qlcdn"]
+
+[node name="CombatPilesContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_l47o1")
+
+[node name="DrawPile" parent="." instance=ExtResource("2_3pasj")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -95.0
+offset_right = 95.0
+offset_bottom = -15.0
+grow_vertical = 0
+
+[node name="DiscardPile" parent="." instance=ExtResource("3_smlow")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -95.0
+offset_right = -14.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ExhaustPile" parent="." instance=ExtResource("4_qlcdn")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -280.0
+offset_right = -10.0
+offset_bottom = -200.0
+grow_horizontal = 0
+grow_vertical = 0

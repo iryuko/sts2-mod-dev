@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://drpa2hw2absps"]
+
+[ext_resource type="Script" uid="uid://dw2fq6yl8c6ws" path="res://src/Core/Nodes/Ftue/NMerchantFtue.cs" id="1_us4i2"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="2_lunkx"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_m1f11"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_qmqwe"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_as56q"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_13fhh"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_bfkxt"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_prhuj"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="8_8jdqo"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="10_y2nc8"]
+[ext_resource type="Texture2D" uid="uid://cscfaualt5exf" path="res://images/ftue/ftue_pointer_arrow.png" id="12_hcmpw"]
+
+[node name="MerchantFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_us4i2")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FtuePopup" type="TextureRect" parent="."]
+material = ExtResource("2_m1f11")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -703.0
+offset_top = -128.0
+offset_right = -124.0
+offset_bottom = 129.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lunkx")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Header" type="Label" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.33, 0.2475, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_qmqwe")
+theme_override_font_sizes/font_size = 26
+text = "Tip: 	Don't ignore the Merchant!"
+vertical_alignment = 1
+script = ExtResource("4_as56q")
+MaxFontSize = 26
+
+[node name="DescriptionContainer" type="MarginContainer" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 73.0
+offset_right = -35.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="Description" type="RichTextLabel" parent="FtuePopup/DescriptionContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("5_13fhh")
+theme_override_fonts/bold_font = ExtResource("6_bfkxt")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "Be sure to interact with the [blue]Merchant[/blue] before heading to the next room.
+
+“Hello! Spend your [gold]Gold[/gold] here!!”"
+scroll_active = false
+script = ExtResource("7_prhuj")
+MaxFontSize = 22
+
+[node name="FtueConfirmButton" parent="FtuePopup" instance=ExtResource("8_8jdqo")]
+layout_mode = 1
+offset_left = -132.5
+offset_top = 59.5
+offset_right = 142.5
+offset_bottom = 134.5
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 928.0
+offset_top = -852.0
+offset_right = 1172.0
+offset_bottom = -648.0
+grow_vertical = 0
+texture = ExtResource("12_hcmpw")
+flip_h = true
+
+[node name="SneakyHitbox" type="Control" parent="."]
+custom_minimum_size = Vector2(220, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 172.0
+offset_top = -112.0
+offset_right = 434.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_y2nc8")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://je8jdkm07p48"]
+
+[ext_resource type="Material" uid="uid://dcm24s61srgfe" path="res://materials/vfx/slash/vfx_slash_core.tres" id="1_gscas"]
+[ext_resource type="Texture2D" uid="uid://dodgqvos04dpi" path="res://images/vfx/slash/slash_flipbook.png" id="2_ckar7"]
+
+[sub_resource type="Curve" id="Curve_t38o2"]
+_data = [Vector2(0.501235, 1), 0.0, -4.27007, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yhrf2"]
+curve = SubResource("Curve_t38o2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vfqhl"]
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 1.5
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_yhrf2")
+
+[node name="vfx_slash_core" type="GPUParticles2D"]
+self_modulate = Color(0.638015, 0.5, 1, 1)
+material = ExtResource("1_gscas")
+rotation = 3.14159
+scale = Vector2(1, -1)
+skew = -0.785398
+emitting = false
+amount = 1
+texture = ExtResource("2_ckar7")
+lifetime = 0.3
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_vfqhl")

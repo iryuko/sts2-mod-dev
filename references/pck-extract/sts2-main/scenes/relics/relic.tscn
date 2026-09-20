@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://chhto1xfrbjbq"]
+
+[ext_resource type="Script" uid="uid://cv5nx3jo52u07" path="res://src/Core/Nodes/Relics/NRelic.cs" id="1_jsw7s"]
+[ext_resource type="Shader" uid="uid://bc7klpmhwkav3" path="res://shaders/relic.gdshader" id="2_typca"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v62ve"]
+resource_local_to_scene = true
+shader = ExtResource("2_typca")
+shader_parameter/pulse = 0.0
+shader_parameter/is_used = 0.0
+shader_parameter/is_wax = 0.0
+
+[node name="Relic" type="Control"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 68.0
+offset_bottom = 68.0
+pivot_offset = Vector2(34, 34)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_jsw7s")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_v62ve")
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Outline" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 4

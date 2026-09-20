@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://81hysd2g6b5q"]
+
+[ext_resource type="Shader" uid="uid://cj0ao6e0k3y7v" path="res://shaders/vfx/debug/debug_flipbook_shader.gdshader" id="1_lhfvt"]
+
+[resource]
+shader = ExtResource("1_lhfvt")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)

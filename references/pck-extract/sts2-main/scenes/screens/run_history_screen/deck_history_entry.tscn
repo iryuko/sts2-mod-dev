@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbo6rqw1124br"]
+
+[ext_resource type="Script" uid="uid://bgolyqlmiufac" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NDeckHistoryEntry.cs" id="1_6hu0b"]
+[ext_resource type="PackedScene" uid="uid://bqrwdpvdn5vr2" path="res://scenes/cards/tiny_card.tscn" id="2_qtleo"]
+[ext_resource type="Texture2D" uid="uid://cf8de3sr7i881" path="res://images/enchantments/sown.png" id="3_v2hhb"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="5_mim1i"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_ajulo"]
+
+[node name="DeckHistoryEntry" type="Control"]
+custom_minimum_size = Vector2(240, 32)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+focus_mode = 2
+mouse_default_cursor_shape = 16
+script = ExtResource("1_6hu0b")
+
+[node name="Card" parent="." instance=ExtResource("2_qtleo")]
+unique_name_in_owner = true
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+
+[node name="Enchantment" type="TextureRect" parent="Card"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 42.0
+offset_bottom = 36.0
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("3_v2hhb")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 42.0
+offset_top = -8.0
+offset_right = 238.0
+offset_bottom = 42.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.752941)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_mim1i")
+theme_override_font_sizes/font_size = 24
+text = "Howl from Beyond+"
+vertical_alignment = 1
+text_overrun_behavior = 3
+ellipsis_char = "⋯"
+script = ExtResource("6_ajulo")
+MinFontSize = 20
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"

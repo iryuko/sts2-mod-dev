@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cky87884qg7d6"]
+
+[ext_resource type="FontFile" uid="uid://c6c8ksp118km3" path="res://fonts/rus/FiraSansExtraCondensed-Italic.ttf" id="1_lxnuk"]
+
+[resource]
+base_font = ExtResource("1_lxnuk")

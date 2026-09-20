@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7wmaya71md7y"]
+
+[ext_resource type="Script" uid="uid://cnf2m3uk5dejn" path="res://src/Core/Nodes/Vfx/NDesaturateTransitionVfx.cs" id="1_mg4pc"]
+
+[node name="DesaturateTransitionVfx" type="Node"]
+script = ExtResource("1_mg4pc")

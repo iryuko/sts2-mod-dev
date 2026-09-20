@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://s74h2wfpvyg"]
+
+[ext_resource type="Script" uid="uid://c1dvc7gle78ta" path="res://src/Core/Nodes/NAncientNameBanner.cs" id="1_us2nh"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="2_7sjcp"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_wldb1"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="4_doij1"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_doij1"]
+
+[node name="AncientNameBanner" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("1_us2nh")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Epithet" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.13, 0.165, 0.2, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = ExtResource("2_7sjcp")
+theme_override_font_sizes/font_size = 22
+text = "The Banana"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_wldb1")
+AutoSizeEnabled = false
+MinFontSize = 22
+MaxFontSize = 22
+
+[node name="Title" type="RichTextLabel" parent="Epithet"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -42.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0.2, 0.173167, 0.13, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_outline_size = 12
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("4_doij1")
+theme_override_font_sizes/normal_font_size = 72
+bbcode_enabled = true
+text = "TEZCATARA"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_doij1")
+AutoSizeEnabled = false

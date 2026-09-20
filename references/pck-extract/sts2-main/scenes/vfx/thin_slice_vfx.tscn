@@ -1,0 +1,132 @@
+[gd_scene load_steps=21 format=3 uid="uid://bpceimkvewbf2"]
+
+[ext_resource type="Script" uid="uid://dboywp6dr8sm7" path="res://src/Core/Nodes/Vfx/NThinSliceVfx.cs" id="1_mgnyo"]
+[ext_resource type="Texture2D" uid="uid://hc68ao2oosto" path="res://images/packed/vfx/combat/slice_thin_vfx.png" id="2_8ejjb"]
+[ext_resource type="Texture2D" uid="uid://b2i5ldnfqap5e" path="res://images/packed/vfx/generic/sparkle_2.png" id="3_nq44r"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_xu8o6"]
+_data = [Vector2(0.00120482, 0.000711679), 0.0, 9.83964, 0, 0, Vector2(0.251807, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.00656326, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_n6hbk"]
+width = 64
+curve = SubResource("Curve_xu8o6")
+
+[sub_resource type="Curve" id="Curve_vsbvu"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j08rc"]
+curve = SubResource("Curve_vsbvu")
+
+[sub_resource type="Curve" id="Curve_yy6hl"]
+bake_resolution = 30
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.256626, 0.509609), 0.0, 0.0, 0, 0, Vector2(0.437349, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5100w"]
+bake_resolution = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_dwqs3"]
+bake_resolution = 2
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_12us0"]
+curve_x = SubResource("Curve_yy6hl")
+curve_y = SubResource("Curve_5100w")
+curve_z = SubResource("Curve_dwqs3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ysy4o"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 0.0
+initial_velocity_min = 8000.0
+initial_velocity_max = 8000.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+linear_accel_curve = SubResource("CurveTexture_j08rc")
+scale_min = 3.0
+scale_max = 3.0
+scale_curve = SubResource("CurveXYZTexture_12us0")
+color = Color(0.768627, 1, 0.901961, 1)
+alpha_curve = SubResource("CurveTexture_n6hbk")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+
+[sub_resource type="Curve" id="Curve_8emeh"]
+bake_resolution = 30
+_data = [Vector2(0, 0), 0.0, 8.2398, 0, 0, Vector2(0.36326, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.55361, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3wnqx"]
+width = 64
+curve = SubResource("Curve_8emeh")
+
+[sub_resource type="Curve" id="Curve_3r4qu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.494695, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.63668, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_qrht3"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.46817, 1.01386), 0.498044, 0.498044, 0, 0, Vector2(1, 4), 8.52942, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_6mtke"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bjcs6"]
+width = 64
+curve_x = SubResource("Curve_3r4qu")
+curve_y = SubResource("Curve_qrht3")
+curve_z = SubResource("Curve_6mtke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rfvxj"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(64, 64, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveXYZTexture_bjcs6")
+alpha_curve = SubResource("CurveTexture_3wnqx")
+
+[node name="ThinSliceVfx" type="Node2D"]
+script = ExtResource("1_mgnyo")
+
+[node name="Slash" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.752941)
+material = ExtResource("shared_additive_mat")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ysy4o")
+texture = ExtResource("2_8ejjb")
+lifetime = 0.18
+one_shot = true
+fixed_fps = 60
+
+[node name="Sparkle" type="GPUParticles2D" parent="Slash"]
+material = ExtResource("shared_additive_mat")
+emitting = false
+amount = 3
+process_material = SubResource("ParticleProcessMaterial_rfvxj")
+texture = ExtResource("3_nq44r")
+lifetime = 0.5
+one_shot = true
+speed_scale = 2.0
+randomness = 1.0
+fixed_fps = 60

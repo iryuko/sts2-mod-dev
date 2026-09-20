@@ -1,0 +1,104 @@
+[gd_scene load_steps=8 format=3 uid="uid://4x6d6tb0g5be"]
+
+[ext_resource type="Script" uid="uid://2lds1wignofr" path="res://src/Core/Nodes/Screens/PotionLab/NPotionLab.cs" id="1_vjcwd"]
+[ext_resource type="PackedScene" uid="uid://b0nilq2hmglik" path="res://scenes/screens/potion_lab/potion_category.tscn" id="2_o6dk3"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_g4iva"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="3_tskh1"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="5_lqa0m"]
+
+[sub_resource type="Gradient" id="Gradient_hvojf"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.05, 0.95, 1)
+colors = PackedColorArray(0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.9)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hvojf"]
+gradient = SubResource("Gradient_hvojf")
+width = 2
+height = 256
+fill_to = Vector2(0, 1)
+
+[node name="PotionLab" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vjcwd")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ScreenContents" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_tskh1")
+
+[node name="Content" type="MarginContainer" parent="ScreenContents"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="PotionsContainer" type="VBoxContainer" parent="ScreenContents/Content"]
+custom_minimum_size = Vector2(1020, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="Common" parent="ScreenContents/Content/PotionsContainer" instance=ExtResource("2_o6dk3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Uncommon" parent="ScreenContents/Content/PotionsContainer" instance=ExtResource("2_o6dk3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Rare" parent="ScreenContents/Content/PotionsContainer" instance=ExtResource("2_o6dk3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Special" parent="ScreenContents/Content/PotionsContainer" instance=ExtResource("2_o6dk3")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Scrollbar" parent="ScreenContents" instance=ExtResource("5_lqa0m")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 130.0
+offset_right = -50.0
+offset_bottom = -130.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BorderGradient" type="TextureRect" parent="ScreenContents"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.01)
+pivot_offset = Vector2(0, 540)
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_hvojf")
+expand_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("3_g4iva")]
+unique_name_in_owner = true
+layout_mode = 1

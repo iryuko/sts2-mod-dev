@@ -1,0 +1,42 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=10 format=3 uid="uid://b876dsthave87"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bx7m3iocic135" path="res://animations/monsters/phantasmal_gardener/phantasmal_gardener.atlas" id="1_knp1o"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://sd3oj85dbxyd" path="res://animations/monsters/phantasmal_gardener/phantasmal_gardener.skel" id="2_gbvyx"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_knp1o"]
+from = "buff"
+to = "idle_loop"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_676u3"]
+from = "hurt"
+to = "block_loop"
+mix = 0.01
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_gbvyx"]
+from = "block_loop"
+to = "die"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ckvei"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_odj1s"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_t0ol7"]
+from = "idle_loop"
+to = "hurt_extended"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_uxxfj"]
+from = "hurt_extended"
+to = "hurt_extended"
+
+[resource]
+atlas_res = ExtResource("1_knp1o")
+skeleton_file_res = ExtResource("2_gbvyx")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_knp1o"), SubResource("SpineAnimationMix_676u3"), SubResource("SpineAnimationMix_gbvyx"), SubResource("SpineAnimationMix_ckvei"), SubResource("SpineAnimationMix_odj1s"), SubResource("SpineAnimationMix_t0ol7"), SubResource("SpineAnimationMix_uxxfj")]

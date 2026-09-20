@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs1kp1rwfjqkx"]
+
+[ext_resource type="Script" uid="uid://dh8sdyekbde70" path="res://src/Core/Nodes/Screens/CardSelection/NCardRewardSelectionScreen.cs" id="1_gr563"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="2_4ntf5"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_cw5ej"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="4_cw5ej"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="5_7xeqy"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_ri2go"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_87emq"]
+resource_local_to_scene = true
+shader = ExtResource("3_cw5ej")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CardRewardSelectionScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gr563")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Banner" parent="UI" instance=ExtResource("2_4ntf5")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="CardRow" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 76.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RewardAlternatives" type="HBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 344.0
+offset_bottom = 417.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 75
+alignment = 1
+
+[node name="InspectPrompt" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+offset_bottom = -68.0
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(0, 32)
+
+[node name="ControllerIcon" type="TextureRect" parent="UI/InspectPrompt"]
+material = SubResource("ShaderMaterial_87emq")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_left = 9.333334
+offset_right = 57.333336
+offset_bottom = 64.0
+mouse_filter = 2
+texture = ExtResource("4_cw5ej")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="UI/InspectPrompt"]
+layout_mode = 0
+offset_left = 78.666664
+offset_top = 12.0
+offset_right = 206.66666
+offset_bottom = 51.375
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_7xeqy")
+theme_override_font_sizes/font_size = 27
+text = "To Inspect"
+vertical_alignment = 1
+script = ExtResource("6_ri2go")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b78ea5dgmfh7w"]
+
+[ext_resource type="Texture2D" uid="uid://pluoyq0c1u65" path="res://images/ancients/vakuu_placeholder.png" id="3_1kn3x"]
+
+[node name="Vakuu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -332.0
+offset_top = -41.0
+offset_right = 2250.0
+offset_bottom = 1180.0
+texture = ExtResource("3_1kn3x")
+expand_mode = 2

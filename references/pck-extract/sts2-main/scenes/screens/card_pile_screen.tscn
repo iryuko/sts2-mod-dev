@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckp0sryo527bq"]
+
+[ext_resource type="Script" uid="uid://c27rygcqeavff" path="res://src/Core/Nodes/Screens/NCardPileScreen.cs" id="1_v57px"]
+[ext_resource type="PackedScene" uid="uid://cso1enqajc0tc" path="res://scenes/cards/card_grid.tscn" id="2_en60i"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_s1rft"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="4_pul4q"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="5_3a0qu"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="6_yqm5e"]
+
+[node name="CardPileScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v57px")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="CardGrid" parent="." instance=ExtResource("2_en60i")]
+layout_mode = 1
+offset_top = 80.0
+
+[node name="BackButton" parent="." instance=ExtResource("3_s1rft")]
+layout_mode = 1
+
+[node name="BottomText" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -57.0
+offset_right = 62.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="BottomText"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomText"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="BottomLabel" type="RichTextLabel" parent="BottomText/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/line_separation = -3
+theme_override_fonts/normal_font = ExtResource("4_pul4q")
+theme_override_fonts/bold_font = ExtResource("5_3a0qu")
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "[center]Info text.[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("6_yqm5e")
+AutoSizeEnabled = false
+MinFontSize = 22
+MaxFontSize = 22

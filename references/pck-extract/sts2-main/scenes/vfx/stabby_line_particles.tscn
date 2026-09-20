@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://hqxqnsa8kg3b"]
+
+[ext_resource type="Texture2D" uid="uid://c0kl3so8v3h8w" path="res://images/vfx/shared_use/blur_diamond_vfx.png" id="1_fdj5i"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_hketf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.266265, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4v8w1"]
+width = 64
+curve = SubResource("Curve_hketf")
+
+[sub_resource type="Curve" id="Curve_hhwmp"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.658363), 0.0, 0.0, 0, 0, Vector2(1, 0.140213), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4cr32"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 2.4032), 0.0, 0.0, 0, 0, Vector2(1, 0.432384), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_nxod6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0l5eq"]
+width = 64
+curve_x = SubResource("Curve_hhwmp")
+curve_y = SubResource("Curve_4cr32")
+curve_z = SubResource("Curve_nxod6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7nheg"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = 90.0
+angle_max = 90.0
+spread = 0.0
+initial_velocity_min = -800.0
+initial_velocity_max = 800.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveXYZTexture_0l5eq")
+color = Color(1, 0.55, 0, 1)
+alpha_curve = SubResource("CurveTexture_4v8w1")
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+
+[node name="Particles" type="GPUParticles2D"]
+modulate = Color(1, 1, 1, 0.501961)
+material = ExtResource("shared_additive_mat")
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_7nheg")
+texture = ExtResource("1_fdj5i")
+lifetime = 0.5
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.9

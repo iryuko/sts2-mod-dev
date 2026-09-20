@@ -1,0 +1,15 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=4 format=3 uid="uid://cqxjf77etj57r"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bt56s3cjt6iiv" path="res://animations/monsters/louse_progenitor/louse_progenitor.atlas" id="1_5mr12"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cg84nu7n1xj0l" path="res://animations/monsters/louse_progenitor/louse_progenitor.skel" id="2_ee5ve"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_5mgx0"]
+from = "attack"
+to = "idle_loop"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_5mr12")
+skeleton_file_res = ExtResource("2_ee5ve")
+default_mix = 0.1
+animation_mixes = [SubResource("SpineAnimationMix_5mgx0")]

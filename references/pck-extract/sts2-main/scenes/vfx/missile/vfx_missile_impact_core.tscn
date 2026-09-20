@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwmedhmkd3wdu"]
+
+[ext_resource type="Material" uid="uid://caxf01o8cblss" path="res://materials/vfx/missile/vfx_missile_impact_core.tres" id="1_ilyug"]
+[ext_resource type="Texture2D" uid="uid://snfwbdm3o27c" path="res://images/vfx/missile/missile_impact_core.png" id="2_s5scv"]
+
+[sub_resource type="Curve" id="Curve_i4cs6"]
+_limits = [0.0, 0.33, 0.0, 1.0]
+_data = [Vector2(0, 0.33), 0.0, -0.871342, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_7lu0x"]
+_data = [Vector2(0, 1), 0.0, -2.81646, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_xebgd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_84qw1"]
+curve_x = SubResource("Curve_i4cs6")
+curve_y = SubResource("Curve_7lu0x")
+curve_z = SubResource("Curve_xebgd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ny88h"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 3.4
+scale_max = 3.4
+scale_curve = SubResource("CurveXYZTexture_84qw1")
+
+[node name="vfx_missile_impact_core" type="GPUParticles2D"]
+z_index = 5
+material = ExtResource("1_ilyug")
+emitting = false
+amount = 1
+texture = ExtResource("2_s5scv")
+lifetime = 0.1
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ny88h")

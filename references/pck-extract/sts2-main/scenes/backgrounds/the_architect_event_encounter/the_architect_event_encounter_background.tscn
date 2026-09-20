@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://nwr8ur5mc5mw"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_vy43x"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_dqxgc"]
+[ext_resource type="PackedScene" uid="uid://boe5m0pjpg2eo" path="res://scenes/backgrounds/the_architect_event_encounter/layers/architect_bg_00_a.tscn" id="3_l4j40"]
+[ext_resource type="PackedScene" uid="uid://tl73370sp4a3" path="res://scenes/backgrounds/glory/layers/glory_fg_a.tscn" id="4_3i5al"]
+[ext_resource type="PackedScene" uid="uid://b1gt4nmws2ss7" path="res://scenes/backgrounds/glory/layers/glory_fg_b.tscn" id="5_1vn6f"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="6_iqrrg"]
+
+[sub_resource type="Gradient" id="Gradient_wdlb1"]
+offsets = PackedFloat32Array(0, 0.6048565, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.9724062, 0.9724062, 0.9724062, 1, 1, 1, 1, 0)
+
+[node name="TheArchitectVictoryBackground" type="TextureRect"]
+offset_left = -11.0
+offset_top = -18.0
+offset_right = -11.0
+offset_bottom = -18.0
+script = ExtResource("1_vy43x")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_dqxgc")
+LayerA = ExtResource("3_l4j40")
+
+[node name="Foreground" type="Control" parent="Layer_00"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -4.0
+offset_top = -9.0
+offset_right = -4.0
+offset_bottom = -9.0
+script = ExtResource("2_dqxgc")
+LayerA = ExtResource("4_3i5al")
+LayerB = ExtResource("5_1vn6f")
+
+[node name="ash2" type="CPUParticles2D" parent="Layer_00/Foreground"]
+position = Vector2(-215, 743)
+amount = 40
+texture = ExtResource("6_iqrrg")
+lifetime = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(2500, 1)
+gravity = Vector2(5, -10)
+orbit_velocity_max = 0.01
+scale_amount_min = 0.03
+scale_amount_max = 0.07
+color = Color(0.09019608, 1, 1, 0.34117648)
+color_ramp = SubResource("Gradient_wdlb1")

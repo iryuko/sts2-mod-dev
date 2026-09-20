@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo5u41qqbhn2c"]
+
+[ext_resource type="Script" uid="uid://c4umdgrk3t7ck" path="res://src/Core/Nodes/Cards/Holders/NPreviewCardHolder.cs" id="1_cmb17"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="2_jeg8n"]
+
+[node name="PreviewCardHolder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 3.0
+offset_top = -4.0
+offset_right = 3.0
+offset_bottom = -4.0
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_cmb17")
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+pivot_offset = Vector2(150, 211)
+script = ExtResource("2_jeg8n")

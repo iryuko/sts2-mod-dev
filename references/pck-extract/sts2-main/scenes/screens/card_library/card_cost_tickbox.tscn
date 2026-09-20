@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://c34id7iyjsdqh"]
+
+[ext_resource type="Script" uid="uid://b5yyacfuwmu8l" path="res://src/Core/Nodes/Screens/CardLibrary/NCardCostTickbox.cs" id="1_ik1js"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_btdr2"]
+[ext_resource type="Texture2D" uid="uid://b6f02aqpuna85" path="res://images/packed/card_library/cost_tickbox.png" id="2_w58jo"]
+[ext_resource type="Texture2D" uid="uid://gd4juxqcx01a" path="res://images/packed/card_library/cost_tickbox_outline.png" id="3_8qc8s"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_uj13b"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_iskqu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iskqu"]
+resource_local_to_scene = true
+shader = ExtResource("2_btdr2")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.2
+
+[node name="CardCostTickbox" type="Control"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_ik1js")
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.333333, 0.580392, 0.647059, 1)
+material = SubResource("ShaderMaterial_iskqu")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 25)
+mouse_filter = 2
+texture = ExtResource("2_w58jo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="Image"]
+self_modulate = Color(0, 0, 0, 0.25098)
+show_behind_parent = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -22.0
+offset_right = 29.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(27, 27)
+mouse_filter = 2
+texture = ExtResource("2_w58jo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="Image"]
+unique_name_in_owner = true
+self_modulate = Color(0.937255, 0.784314, 0.317647, 1)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(25, 25)
+mouse_filter = 2
+texture = ExtResource("3_8qc8s")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Image"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -24.0
+offset_right = 25.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_uj13b")
+theme_override_font_sizes/font_size = 26
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_iskqu")
+AutoSizeEnabled = false

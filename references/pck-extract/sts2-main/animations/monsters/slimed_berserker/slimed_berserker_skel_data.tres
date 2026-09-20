@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bs807jqviimw5"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dlrkocj3y2xbg" path="res://animations/monsters/slimed_berserker/slimed_berserker.atlas" id="1_djkb6"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dym7geh1luur6" path="res://animations/monsters/slimed_berserker/slimed_berserker.skel" id="2_sd0l7"]
+
+[resource]
+atlas_res = ExtResource("1_djkb6")
+skeleton_file_res = ExtResource("2_sd0l7")
+default_mix = 0.05

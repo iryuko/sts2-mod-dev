@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c07dcmwx1j2fn"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://121ryy4e7g7o" path="res://animations/backgrounds/treasure_room/chest_room_act_2.atlas" id="1_d108r"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c8d7myapnr63o" path="res://animations/backgrounds/treasure_room/chest_room_act_2.skel" id="2_qn80i"]
+
+[resource]
+atlas_res = ExtResource("1_d108r")
+skeleton_file_res = ExtResource("2_qn80i")

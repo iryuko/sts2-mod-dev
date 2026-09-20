@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://0oo56knh1lve"]
+
+[ext_resource type="Script" uid="uid://bym2ubeoh8gix" path="res://src/GameInfo/NGameInfoUploader.cs" id="1_sibub"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_sibub")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 200.0
+scale = Vector2(2, 2)
+text = "Uploading "

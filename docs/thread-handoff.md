@@ -1,102 +1,77 @@
 # 线程接班摘要
 
-## 这条线程在做什么
+记录日期：2026-09-06
 
-当前接班对象不是加载链研究，也不是 `PrimalForceStrike`。
+## 一句话状态
 
-当前接班对象是：
+当前唯一主项目是 Togawasakiko。它已经是完整可构建、可安装、可进局的角色 mod；当前工作是 v0.107.1 双端兼容与高风险流程回归，不是从零实现角色。
 
-- `mods/Togawasakiko_in_Slay_the_Spire`
+## 先读
 
-线程目的不是重写角色，而是接着 T4 中断前的实现，把已经落仓的角色 mod 稳定下来。
+1. `AGENTS.md`
+2. `docs/current-status.md`
+3. `docs/next-task.md`
+4. `docs/decisions.md`
+5. `mods/Togawasakiko_in_Slay_the_Spire/docs/current-status.md`
+6. `mods/Togawasakiko_in_Slay_the_Spire/docs/index.md`
 
-## 当前主判断
+不要先读 T4/T5 长日志。它们已归档，只在追溯具体 bug 时下钻。
 
-- 角色已经不是“只有骨架”的状态
-- 角色已接入、可构建、可安装、能被游戏识别
-- 首批与第二批歌曲牌、压力体系、starter、商店/火堆/能量接线都已经有真实代码
-- 当前最重要的工作不是扩内容，而是稳定运行时闭环
+## 当前版本
 
-## 已经踩过且必须记住的坑
+- STS2：`v0.107.1` / `59260271`
+- mod manifest：`0.2.3`
+- 当前本地安装与 `0.2.3` release 三件套哈希一致
+- DLL：`42f223cad65812c3138b5bfb3b38a6ff7f32d1d92e2a00b491800fcc825aaad7`
+- PCK：`c820289c7da963d42d9e4e66d100c94cee2c1a40cd6f911401e44b0f2251e193`
+- manifest：`fc0c4410f295c5c749b86dcc03f7c6ac8679249b50543f207a9561feee9a0a26`
+- 2026-07-26 Steam 启动：initializer 完成，主菜单无模组错误状态
 
-### 1. 不要把 `Entry` 与本地化 key 写偏
+## 最重要的校正
 
-- `KillKiss` 的真实 `Entry` 是：
-  - `KILL_KISS`
-- 不是：
-  - `KILLKISS`
-- 一旦 key 偏了，坏掉的不只是单卡显示：
-  - 奖励
-  - 商店
-  - `Compose`
-  - 卡组遍历
-  都可能被污染
+- jukebox 当前不是“进 combat 自动 Off”。
+  - 源码意图是跨所有 room 持续播放。
+  - 只在 `Off (null)` 或离开 run 时停止。
+- merchant 不是纯原版 Silent fallback，也不是正式祥子 Spine。
+  - 它是自定义兼容 scene，隐藏 Silent skeleton，显示静态祥子 portrait。
+- `0.2.3` 继承当前战斗 Spine runtime；2026-09-06 的 bridge 卡图修复没有修改该部分。
+- 五张 bridge 卡此前全部共用 `basic/unendurable.png`，不是只有“接续小节”错图。
+  2026-09-06 已在 `0.2.3` 中改为五个独立 `1000x760` portrait，并进入安装 PCK；尚未启动游戏做视觉确认。
+- Darv 目前还没有真正回归原版。
+  - `Curseslander` 已解决 Ancient 空池。
+  - 但 `DarvPatches.cs` 仍整体接管祥子选项生成，下一步应优先删除或证明必要性。
+- T2 的“50 张正常卡”是历史规划。
+  - 当前角色池共 50 张，其中 45 张是 Common/Uncommon/Rare。
+- 退出 Godot 时的资源泄漏 `ERROR` 不等于 mod loader 见红。
 
-### 2. 不要在静态初始化里绑高风险反射
+## 当前断点
 
-- 这轮真实发生过：
-  - `LoseHpInternal` 反射失败
-  - 连带让 `EnsureLocalizationOverrides()` 整体提前失败
-- 后果是：
-  - 明明源码里写了本地化字典
-  - 运行时却根本没写进 `user://localization_override`
+1. 五张 bridge 卡图已安装，待 Card Library 实机确认裁切和升级态。
+2. `UnattendedPiano` SL 共享列表 bug 已改代码，待实机。
+3. Win 卡牌卡中间的已知 API 漂移已修，待同包 Win 回归。
+4. jukebox 换房保护已加，待 Win/Mac 生命周期回归。
+5. Darv patch 应回归原版。
+6. `MagneticForceHellWargodPower` 共享集合与 private `FieldRefAccess` 仍是静态风险。
 
-### 3. 不要把卡牌左上角大费用图和文本小 icon 混成一条链
+## 必须遵守
 
-- `CardPoolModel.EnergyIconPath`
-  - 是卡牌左上角用的大图
-- `EnergyIconHelper.GetPath(prefix)`
-  - 是对白 / hover / 事件 / 说明文本里的小 icon
-- 之前把 helper 也指向大图，直接把整段文本排版挤坏
+- 先反编译当前版本原版对象，再改同类机制。
+- 原版能完成的流程不另造一套。
+- 不把 starter、token、event、Ancient 卡混进普通奖励。
+- `Slugify(type.Name)`、本地化 key、资源文件名必须一致。
+- 静态初始化不绑定高风险 private 反射。
+- build、install、hash 校验必须串行。
+- 不把“构建通过”写成“实机修复”。
 
-### 4. 自定义角色会撞到原版只认内置角色的系统
+## 标准命令
 
-- 这轮 `KillKiss` 的最后残留 bug，不是伤害链本身没跑完
-- 真正根因是：
-  - `ProgressSaveManager.CheckFifteenElitesDefeatedEpoch`
-  - `ProgressSaveManager.CheckFifteenBossesDefeatedEpoch`
-  只认原版角色
-- 自定义角色走进去会抛：
-  - `ArgumentOutOfRangeException`
+```bash
+./shared/scripts/build-mod.sh Togawasakiko_in_Slay_the_Spire --configuration Release
+./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire
+./shared/scripts/install-mod.sh Togawasakiko_in_Slay_the_Spire --apply --replace-target
+```
 
-### 5. 商店 scene 是高脆弱资源
+完整历史见：
 
-- merchant 出问题时，不是“立绘不显示”这么简单
-- 它会连带：
-  - 商品位异常
-  - 交互失效
-  - 房间流程无法结束
-- 当前 merchant 先采用原版 `silent` scene 回退，是为了保交互稳定
-
-### 6. build / install / 校验必须串行
-
-- 先 `build`
-- 再 `install`
-- 再做 release/install 哈希比对
-- 不要并行开着赌时序
-
-## 当前最有价值的经验文档
-
-下一线程建议优先看：
-
-1. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-implementation-status.md`
-2. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-bugfix-round-2026-03-27.md`
-3. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-lessons-and-guardrails.md`
-4. `mods/Togawasakiko_in_Slay_the_Spire/docs/t4-asset-integration-status.md`
-
-## 当前真实断点
-
-- `KillKiss` 的代码侧兼容 patch 已落地
-- 文本小能量 icon 的全局分流与缩小版资源已落地
-- 奖励 / 商店 / `Compose` 污染问题已有成体系修补
-- 下一线程最值得做的是：
-  - 系统回归测试
-  - merchant 正式 scene 策略判断
-  - 文档继续追平实机状态
-
-## 这一轮明确不要做的事
-
-- 不要从零重写角色框架
-- 不要回到“只读文档不看代码”或“只看代码不更新文档”
-- 不要继续把未验证推测写成事实
-- 不要在当前稳定性回归结束前继续大规模扩新牌
+- `docs/project-timeline.md`
+- `mods/Togawasakiko_in_Slay_the_Spire/docs/development-timeline.md`

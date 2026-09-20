@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://g4xukmlh45lk"]
+
+[ext_resource type="Script" uid="uid://bbaiyavrjcv74" path="res://src/Core/Nodes/Screens/RunHistoryScreen/NRunHistoryArrowButton.cs" id="1_a4a26"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="2_r5hks"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_0yw7h"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="4_krrdl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jst0w"]
+resource_local_to_scene = true
+shader = ExtResource("3_0yw7h")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jii8o"]
+resource_local_to_scene = true
+shader = ExtResource("3_0yw7h")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="LeftArrow" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -64.0
+offset_right = 168.0
+offset_bottom = 64.0
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_a4a26")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_jst0w")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("2_r5hks")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_jii8o")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.0
+offset_top = -11.0
+offset_right = 103.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("4_krrdl")
+expand_mode = 1
+stretch_mode = 5

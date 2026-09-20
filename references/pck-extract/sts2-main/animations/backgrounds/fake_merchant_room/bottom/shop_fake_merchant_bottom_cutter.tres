@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://ds76ggixdairx"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://rp6hd07365nx" path="res://animations/backgrounds/fake_merchant_room/bottom/shop_fake_merchant_bottom_cutter.atlas" id="1_4105b"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://c1o5f7i0r5frl" path="res://animations/backgrounds/fake_merchant_room/bottom/shop_fake_merchant_bottom_cutter.skel" id="2_3mquh"]
+
+[resource]
+atlas_res = ExtResource("1_4105b")
+skeleton_file_res = ExtResource("2_3mquh")

@@ -1,0 +1,161 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmhdyvi48ylev"]
+
+[ext_resource type="Script" uid="uid://6k7plug4egyu" path="res://src/Core/Nodes/Screens/Settings/NLanguageButton.cs" id="1_27qfd"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="2_fphdq"]
+[ext_resource type="Texture2D" uid="uid://l307jii46k21" path="res://images/ui/settings_screen/flag_button_mask.png" id="2_uxsp2"]
+[ext_resource type="Texture2D" uid="uid://nbvl74i6ajfq" path="res://images/ui/settings_screen/flag_eng.png" id="3_4kk5y"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_njr3n"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="LanguageButton" type="Control"]
+custom_minimum_size = Vector2(212, 148)
+layout_mode = 3
+anchors_preset = 0
+focus_mode = 2
+script = ExtResource("1_27qfd")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ButtonImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.1488, 0.2172, 0.24, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(106, 74)
+mouse_filter = 2
+texture = ExtResource("2_uxsp2")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonImage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(122, 74)
+mouse_filter = 2
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="Control" type="Control" parent="ButtonImage/MarginContainer"]
+custom_minimum_size = Vector2(124, 82)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Shadow" type="TextureRect" parent="ButtonImage/MarginContainer/Control"]
+modulate = Color(0, 0, 0, 0.25098)
+custom_minimum_size = Vector2(108, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -31.0
+offset_right = 60.0
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_uxsp2")
+expand_mode = 1
+
+[node name="Mask" type="TextureRect" parent="ButtonImage/MarginContainer/Control"]
+clip_children = 1
+custom_minimum_size = Vector2(108, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -36.0
+offset_right = 54.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(54, 36)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_uxsp2")
+expand_mode = 1
+
+[node name="FlagImage" type="TextureRect" parent="ButtonImage/MarginContainer/Control/Mask"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+mouse_filter = 2
+texture = ExtResource("3_4kk5y")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="ButtonImage/MarginContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.964706, 0.886275, 1)
+custom_minimum_size = Vector2(184, 46)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_njr3n")
+theme_override_font_sizes/font_size = 26
+text = "日本語"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_fphdq")
+MaxFontSize = 26
+
+[node name="Shadow" type="TextureRect" parent="ButtonImage"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 8.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_uxsp2")
+expand_mode = 1
+
+[node name="Outline" type="TextureRect" parent="ButtonImage"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.06, 1.08)
+pivot_offset = Vector2(106, 74)
+mouse_filter = 2
+texture = ExtResource("2_uxsp2")
+expand_mode = 1

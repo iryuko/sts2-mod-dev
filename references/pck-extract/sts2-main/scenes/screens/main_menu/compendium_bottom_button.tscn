@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=3 uid="uid://c88a0p5i8jois"]
+
+[ext_resource type="Texture2D" uid="uid://cisgwvvru1ymn" path="res://images/packed/common_ui/submenu_compendium_button.png" id="1_0jfgc"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="1_obgp3"]
+[ext_resource type="Script" uid="uid://dbiqnx2l1xev7" path="res://src/Core/Nodes/Screens/MainMenu/NCompendiumBottomButton.cs" id="1_olqdr"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="2_0jfgc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_0jfgc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olqdr"]
+resource_local_to_scene = true
+shader = ExtResource("1_obgp3")
+shader_parameter/h = 0.7250000344375
+shader_parameter/s = 2.1870001038825
+shader_parameter/v = 1.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l7pjr"]
+
+[node name="CompendiumBottomButton" type="Control"]
+custom_minimum_size = Vector2(280, 200)
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(136, 96)
+script = ExtResource("1_olqdr")
+
+[node name="BgPanel" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_olqdr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("1_0jfgc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 35.0
+offset_right = 121.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1254902)
+theme_override_colors/font_outline_color = Color(0.2, 0.19215687, 0.15294118, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_0jfgc")
+theme_override_font_sizes/font_size = 28
+text = "Leaderboards"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_0jfgc")
+MinFontSize = 18
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.399994
+offset_top = 16.0
+offset_right = -22.399994
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_l7pjr")
+expand_mode = 1
+
+[node name="Lock" type="TextureRect" parent="Icon"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2

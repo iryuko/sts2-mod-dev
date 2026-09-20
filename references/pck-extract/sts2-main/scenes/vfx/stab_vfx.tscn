@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbiquxy18c5eq"]
+
+[ext_resource type="Script" uid="uid://c3mygm54aopj4" path="res://src/Core/Nodes/Vfx/NStabVfx.cs" id="1_3gi4h"]
+[ext_resource type="Texture2D" uid="uid://dmh3bilnwb17o" path="res://images/vfx/shared_use/motion_line.png" id="3_n2ujd"]
+[ext_resource type="Texture2D" uid="uid://hc68ao2oosto" path="res://images/packed/vfx/combat/slice_thin_vfx.png" id="4_tj26g"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="Stab" type="Node2D"]
+script = ExtResource("1_3gi4h")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Primary" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.752941)
+material = ExtResource("shared_additive_mat")
+rotation = -1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("3_n2ujd")
+offset = Vector2(0, -110)
+
+[node name="Secondary" type="Sprite2D" parent="Primary"]
+unique_name_in_owner = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -10)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_tj26g")
+offset = Vector2(0, -128)

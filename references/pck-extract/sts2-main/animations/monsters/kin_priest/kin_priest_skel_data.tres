@@ -1,0 +1,18 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=5 format=3 uid="uid://d1ctwl6ioccnc"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://ri7bwc8x7hoq" path="res://animations/monsters/kin_priest/kin_priest.atlas" id="1_44yfn"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d3ptouoimdwfl" path="res://animations/monsters/kin_priest/kin_priest.skel" id="2_tb2mo"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7hfgw"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_d40ta"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_44yfn")
+skeleton_file_res = ExtResource("2_tb2mo")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_7hfgw"), SubResource("SpineAnimationMix_d40ta")]

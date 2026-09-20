@@ -1,0 +1,186 @@
+[gd_scene load_steps=17 format=3 uid="uid://cjjq6tiv82bjh"]
+
+[ext_resource type="Script" uid="uid://hmbfgoghton" path="res://src/Core/Nodes/Screens/Timeline/UnlockScreens/NUnlockCharacterScreen.cs" id="1_t046r"]
+[ext_resource type="Texture2D" uid="uid://cske71hwcslh8" path="res://images/timeline/epoch_card_back.png" id="2_qi1np"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="3_2jwy2"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_kyocd"]
+[ext_resource type="PackedScene" uid="uid://wvmm62hrtps4" path="res://scenes/ui/unlock_confirm_button.tscn" id="5_ui0j0"]
+[ext_resource type="Texture2D" uid="uid://bwpxaleox0q83" path="res://images/packed/vfx/generic/glow_card_rare.png" id="6_4fu8s"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_juc2f"]
+
+[sub_resource type="Curve" id="Curve_ip6rm"]
+_data = [Vector2(0, 0), 0.0, 0.897281, 0, 0, Vector2(0.377586, 1), 0.0, 0.0, 0, 0, Vector2(0.763793, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -12.4602, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cmsac"]
+curve = SubResource("Curve_ip6rm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qkjbt"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.2
+color = Color(1, 0.372234, 0.715175, 1)
+alpha_curve = SubResource("CurveTexture_cmsac")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.1
+
+[sub_resource type="Curve" id="Curve_7b3b6"]
+_data = [Vector2(0, 0), 0.0, 0.220401, 0, 0, Vector2(0.205212, 0.557265), 3.28838, 3.28838, 0, 0, Vector2(0.498567, 1), 0.0, 0.0, 0, 0, Vector2(0.806189, 0.526916), -3.33054, -3.33054, 0, 0, Vector2(1, 0), -0.0327443, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_iry3t"]
+width = 64
+curve = SubResource("Curve_7b3b6")
+
+[sub_resource type="Curve" id="Curve_2ndid"]
+_limits = [0.99, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0180403, 0, 0, Vector2(1, 3), 2.00502e-06, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1rujn"]
+width = 64
+curve = SubResource("Curve_2ndid")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gft3r"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -3.00002
+angular_velocity_max = 2.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_curve = SubResource("CurveTexture_1rujn")
+color = Color(0.57248, 0.4984, 1.92523e-07, 1)
+alpha_curve = SubResource("CurveTexture_iry3t")
+hue_variation_min = -0.1
+hue_variation_max = 0.03
+
+[node name="UnlockCharacterScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t046r")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+material = SubResource("CanvasItemMaterial_juc2f")
+position = Vector2(960, 540)
+amount = 64
+texture = ExtResource("2_qi1np")
+lifetime = 2.0
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_qkjbt")
+
+[node name="TopLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -897.0
+offset_top = -435.0
+offset_right = 897.0
+offset_bottom = -262.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("3_2jwy2")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "The [green]Silent[/green] sneaks past the gatewards with ease and enters the Spire once more..."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_kyocd")
+MinFontSize = 24
+MaxFontSize = 28
+
+[node name="BottomLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = 147.0
+offset_right = 640.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("3_2jwy2")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "You can now play as the [green]Silent[/green]."
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_kyocd")
+MinFontSize = 24
+MaxFontSize = 28
+
+[node name="ConfirmButton" parent="." instance=ExtResource("5_ui0j0")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="RareGlow" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+material = ExtResource("shared_additive_mat")
+position = Vector2(950, 544)
+amount = 3
+texture = ExtResource("6_4fu8s")
+lifetime = 1.8
+preprocess = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gft3r")
+
+[node name="SpineAnchor" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 955.0
+offset_top = 697.0
+offset_right = 955.0
+offset_bottom = 697.0

@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4htkbw6u0spf"]
+
+[ext_resource type="Script" uid="uid://oqmn4nkodkgd" path="res://src/Core/Nodes/Screens/Timeline/NEraColumn.cs" id="1_h2fid"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="2_mfxwo"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_0k7rj"]
+
+[node name="EraColumn" type="VBoxContainer"]
+custom_minimum_size = Vector2(162, 0)
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 2
+script = ExtResource("1_h2fid")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="InfoContainer" type="Control" parent="."]
+custom_minimum_size = Vector2(162, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="InfoContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.8, 0.39999998, 0)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 24)
+expand_mode = 1
+
+[node name="Name" type="Label" parent="InfoContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0.9, 0.7872, 0.477, 0)
+custom_minimum_size = Vector2(162, 48)
+layout_mode = 0
+offset_top = 28.0
+offset_right = 162.0
+offset_bottom = 76.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_mfxwo")
+theme_override_font_sizes/font_size = 20
+text = "Rückgewinnung"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_0k7rj")
+AutoSizeEnabled = false
+
+[node name="Year" type="Label" parent="InfoContainer/Name"]
+unique_name_in_owner = true
+modulate = Color(0.5244, 0.807913, 0.92, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(162, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -24.0
+offset_right = 81.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_mfxwo")
+theme_override_font_sizes/font_size = 18
+text = "Year ~T,est"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_0k7rj")
+AutoSizeEnabled = false

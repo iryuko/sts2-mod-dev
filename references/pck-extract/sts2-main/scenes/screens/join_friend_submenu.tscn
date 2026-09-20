@@ -1,0 +1,216 @@
+[gd_scene load_steps=15 format=3 uid="uid://dvoth6wpxxj1"]
+
+[ext_resource type="Script" uid="uid://c01le6aguv8db" path="res://src/Core/Nodes/Screens/MainMenu/NJoinFriendScreen.cs" id="1_kslix"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="2_4w4l1"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="2_vv00p"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="3_hgnyc"]
+[ext_resource type="Script" uid="uid://h3j72b8cxbiv" path="res://src/Core/Nodes/Screens/MainMenu/NJoinFriendScreenButtonLayout.cs" id="3_o5ey5"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_gs22s"]
+[ext_resource type="PackedScene" uid="uid://cy0r6ow54kklb" path="res://scenes/screens/main_menu/loading_overlay.tscn" id="5_fbkbm"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_r7kt7"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="7_uu61g"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="8_v26sd"]
+[ext_resource type="Script" uid="uid://dkkh17b4mbxgb" path="res://src/Core/Nodes/Screens/MainMenu/NJoinFriendRefreshButton.cs" id="9_6euie"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="10_ojte7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v26sd"]
+resource_local_to_scene = true
+shader = ExtResource("7_uu61g")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhh0j"]
+resource_local_to_scene = true
+shader = ExtResource("7_uu61g")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="JoinFriendSubmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_kslix")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="TitleLabel" type="Label" parent="."]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 48.0
+offset_bottom = 232.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/font = ExtResource("3_hgnyc")
+theme_override_font_sizes/font_size = 70
+text = "Choose Friend to Join"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_gs22s")
+MinFontSize = 50
+MaxFontSize = 70
+
+[node name="Panel" type="NinePatchRect" parent="."]
+self_modulate = Color(0.20871, 0.20871, 0.20871, 0.705882)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -414.0
+offset_top = -336.0
+offset_right = 415.0
+offset_bottom = 340.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4w4l1")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ButtonContainer" type="Container" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_o5ey5")
+
+[node name="LoadingIndicator" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -374.5
+offset_top = -176.0
+offset_right = 374.5
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("3_hgnyc")
+theme_override_font_sizes/normal_font_size = 150
+bbcode_enabled = true
+text = "[thinky_dots]. . .[/thinky_dots]"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_r7kt7")
+AutoSizeEnabled = false
+IsVerticallyBound = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="NoFriendsText" type="Label" parent="Panel"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_hgnyc")
+theme_override_font_sizes/font_size = 70
+text = "No friends currently playing multiplayer."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("4_gs22s")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="RefreshButton" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0.430037, 0.544539, 0.572528, 1)
+material = SubResource("ShaderMaterial_v26sd")
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -157.5
+offset_top = -167.0
+offset_right = 157.5
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(157, 39)
+mouse_filter = 0
+texture = ExtResource("2_4w4l1")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+script = ExtResource("9_6euie")
+
+[node name="Label" type="Label" parent="RefreshButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("8_v26sd")
+theme_override_font_sizes/font_size = 40
+text = "Refresh"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_gs22s")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ControllerIcon" type="TextureRect" parent="RefreshButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dhh0j")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = -94.0
+offset_right = -48.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("10_ojte7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LoadingOverlay" parent="." instance=ExtResource("5_fbkbm")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("2_vv00p")]
+layout_mode = 1

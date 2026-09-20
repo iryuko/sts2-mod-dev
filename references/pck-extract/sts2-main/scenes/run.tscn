@@ -1,0 +1,267 @@
+[gd_scene load_steps=25 format=3 uid="uid://doumcbob70ooo"]
+
+[ext_resource type="PackedScene" uid="uid://ewa1gwt3sc0o" path="res://scenes/cards/card.tscn" id="1_card"]
+[ext_resource type="Script" uid="uid://rb04m6cr4e6e" path="res://src/Core/Nodes/NRun.cs" id="1_ktwek"]
+[ext_resource type="PackedScene" uid="uid://c86gcmr8cs6k7" path="res://scenes/scene_container.tscn" id="2_68224"]
+[ext_resource type="Script" uid="uid://x0jm48y6yijq" path="res://src/Core/Nodes/Debug/NDebugInfoLabelManager.cs" id="3_0mn38"]
+[ext_resource type="Script" uid="uid://co7fg5oomksd6" path="res://src/Core/Nodes/Audio/NRunMusicController.cs" id="3_oyx3v"]
+[ext_resource type="Script" uid="uid://ck14aturpbm6n" path="res://src/Core/Nodes/Screens/Overlays/NOverlayStack.cs" id="3_phj8u"]
+[ext_resource type="Script" uid="uid://drh62n7on2hni" path="res://src/Core/Nodes/CommonUi/NGlobalUi.cs" id="3_wg4w2"]
+[ext_resource type="PackedScene" uid="uid://b6yu4s7v72oey" path="res://scenes/ui/top_bar.tscn" id="4_dtiyw"]
+[ext_resource type="Script" uid="uid://cffybm82adccl" path="res://src/Core/Nodes/Screens/Capstones/NCapstoneContainer.cs" id="4_kcd15"]
+[ext_resource type="Script" uid="uid://do06xvv63hp6q" path="res://src/gdscript/music_controller_proxy.gd" id="4_ur6mw"]
+[ext_resource type="PackedScene" uid="uid://sm6dqs1oybao" path="res://scenes/screens/map/map_screen.tscn" id="6_toyvp"]
+[ext_resource type="Script" uid="uid://347pmq6k71y4" path="res://src/Core/Nodes/Relics/NRelicInventory.cs" id="9_46u6y"]
+[ext_resource type="PackedScene" uid="uid://ch7pe4wfil12o" path="res://scenes/screens/capstone_submenu_stack.tscn" id="10_by208"]
+[ext_resource type="PackedScene" uid="uid://dyajueylolau7" path="res://scenes/debug/fps_visualizer.tscn" id="10_fpsvis"]
+[ext_resource type="Script" uid="uid://buycb2f10n4g0" path="res://src/Core/Nodes/Multiplayer/NMultiplayerPlayerStateContainer.cs" id="11_3bnvf"]
+[ext_resource type="Script" uid="uid://b536tb4ekbwyp" path="res://src/Core/Nodes/CommonUi/NCardPreviewContainer.cs" id="11_u5q3x"]
+[ext_resource type="PackedScene" uid="uid://r2arys7ygxar" path="res://scenes/ui/multiplayer_timeout_overlay.tscn" id="12_i3hux"]
+[ext_resource type="Script" uid="uid://dljxijy12lds2" path="res://src/Core/Nodes/CommonUi/NMessyCardPreviewContainer.cs" id="13_0562v"]
+[ext_resource type="Script" uid="uid://c0epiv6yskyt8" path="res://src/Core/Nodes/CommonUi/NGridCardPreviewContainer.cs" id="14_xh8mu"]
+[ext_resource type="PackedScene" uid="uid://dqlc7cxyykfm0" path="res://scenes/debug/particle_counter.tscn" id="18_6v0ig"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="20_0mn38"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="21_0mn38"]
+[ext_resource type="PackedScene" uid="uid://cladbyco1h8tl" path="res://scenes/ui/target_manager.tscn" id="21_wj3qu"]
+[ext_resource type="FontFile" uid="uid://clypo64htko7l" path="res://fonts/kreon_regular.ttf" id="22_jt87d"]
+
+[node name="Run" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ktwek")
+_cardScene = ExtResource("1_card")
+metadata/_edit_vertical_guides_ = []
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="DebugInfoManager" type="Node" parent="."]
+script = ExtResource("3_0mn38")
+
+[node name="RunMusicController" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_oyx3v")
+
+[node name="Proxy" type="Node" parent="RunMusicController"]
+script = ExtResource("4_ur6mw")
+
+[node name="RoomContainer" parent="." instance=ExtResource("2_68224")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="GlobalUi" type="Control" parent="."]
+unique_name_in_owner = true
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_wg4w2")
+metadata/_edit_use_anchors_ = true
+
+[node name="OverlayScreensContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_phj8u")
+
+[node name="OverlayBackstop" type="ColorRect" parent="GlobalUi/OverlayScreensContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="MapScreen" parent="GlobalUi" instance=ExtResource("6_toyvp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="CapstoneScreenContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_kcd15")
+
+[node name="CapstoneBackstop" type="ColorRect" parent="GlobalUi/CapstoneScreenContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.85098)
+
+[node name="CapstoneSubmenuStack" parent="GlobalUi/CapstoneScreenContainer" instance=ExtResource("10_by208")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="MultiplayerPlayerContainer" type="VBoxContainer" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 18.0
+offset_top = 94.0
+offset_right = 407.0
+offset_bottom = 997.0
+mouse_filter = 2
+script = ExtResource("11_3bnvf")
+
+[node name="RelicInventory" type="HFlowContainer" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 82.0
+offset_right = -84.0
+offset_bottom = -478.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+script = ExtResource("9_46u6y")
+
+[node name="MultiplayerTimeoutOverlay" parent="GlobalUi" instance=ExtResource("12_i3hux")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="TopBar" parent="GlobalUi" instance=ExtResource("4_dtiyw")]
+unique_name_in_owner = true
+layout_mode = 1
+mouse_filter = 2
+
+[node name="AboveTopBarVfxContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardPreviewContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_u5q3x")
+
+[node name="GridCardPreviewContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_xh8mu")
+
+[node name="EventCardPreviewContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -931.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_xh8mu")
+
+[node name="MessyCardPreviewContainer" type="Control" parent="GlobalUi"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 263.0
+offset_top = 196.0
+offset_right = -302.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_0562v")
+
+[node name="FpsVisualizer" parent="GlobalUi" instance=ExtResource("10_fpsvis")]
+layout_mode = 1
+
+[node name="ParticleCounter" parent="GlobalUi" instance=ExtResource("18_6v0ig")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 40.0
+offset_right = 0.0
+offset_bottom = 64.0
+
+[node name="DebugInfo" type="VBoxContainer" parent="GlobalUi"]
+modulate = Color(1, 1, 1, 0.2509804)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -170.0
+offset_top = 93.0
+offset_right = -11.0
+offset_bottom = 168.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="ReleaseInfo" type="Label" parent="GlobalUi/DebugInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20_0mn38")
+theme_override_font_sizes/font_size = 16
+text = "[v.0.101.0] (2026-02-27)"
+horizontal_alignment = 2
+script = ExtResource("21_0mn38")
+AutoSizeEnabled = false
+
+[node name="DebugSeed" type="Label" parent="GlobalUi/DebugInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("22_jt87d")
+theme_override_font_sizes/font_size = 16
+text = "<seed>"
+horizontal_alignment = 2
+script = ExtResource("21_0mn38")
+AutoSizeEnabled = false
+
+[node name="ModdedWarning" type="Label" parent="GlobalUi/DebugInfo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("22_jt87d")
+theme_override_font_sizes/font_size = 16
+text = "MODDED (3)"
+horizontal_alignment = 2
+script = ExtResource("21_0mn38")
+AutoSizeEnabled = false
+
+[node name="TargetManager" parent="GlobalUi" instance=ExtResource("21_wj3qu")]

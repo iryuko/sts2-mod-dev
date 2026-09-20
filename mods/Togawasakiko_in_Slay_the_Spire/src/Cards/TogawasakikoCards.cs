@@ -15,6 +15,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Models.Powers;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Togawasakiko_in_Slay_the_Spire;
@@ -22,6 +23,9 @@ namespace Togawasakiko_in_Slay_the_Spire;
 internal abstract class TogawasakikoCard : CardModel
 {
     private readonly string _portraitPath;
+
+    // Combat-only provenance; native cloning copies this along with the local cost modifiers.
+    internal ICombatState? BlueWorldFreeXCombat { get; set; }
 
     protected TogawasakikoCard(
         int energyCost,
@@ -60,6 +64,7 @@ internal abstract class TogawasakikoCard : CardModel
     }
 
     protected virtual IEnumerable<IHoverTip> ManualExtraHoverTips => Array.Empty<IHoverTip>();
+
 }
 
 internal abstract class TogawasakikoEventGrantedCard : TogawasakikoCard
@@ -100,6 +105,7 @@ internal sealed class StrikeTogawasakiko : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -159,7 +165,42 @@ internal sealed class Slander : TogawasakikoCard
         await DamageCmd.Attack(totalDamage)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
+    }
+
+    protected override void OnUpgrade()
+    {
+        MockSetEnergyCost(new CardEnergyCost(this, 0, false));
+    }
+}
+
+internal sealed class Curseslander : TogawasakikoCard
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new DamageVar(4m, ValueProp.Move), new CardsVar(2) };
+
+    public Curseslander()
+        : base(1, CardType.Attack, CardRarity.Ancient, TargetType.AnyEnemy, ModSupport.GetAncientPortraitPath("curseslander.png"))
+    {
+    }
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target, nameof(cardPlay.Target));
+        decimal totalDamage = DynamicVars.Damage.BaseValue + (ModSupport.GetPressure(cardPlay.Target) * 2m);
+        await DamageCmd.Attack(totalDamage)
+            .FromCard(this)
+            .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
+            .Execute(choiceContext);
+
+        if (Owner == null)
+        {
+            return;
+        }
+
+        await ModSupport.GiveRandomZeroCostPressureGeneratedCardsToPlayer(Owner, DynamicVars.Cards.IntValue);
     }
 
     protected override void OnUpgrade()
@@ -173,7 +214,11 @@ internal sealed class Unendurable : TogawasakikoCard
     public override bool GainsBlock => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        new[] { new BlockVar(8m, ValueProp.Move) };
+        new DynamicVar[]
+        {
+            new BlockVar(8m, ValueProp.Move),
+            new("PressureAmount", 3m)
+        };
 
     public Unendurable()
         : base(2, CardType.Skill, CardRarity.Basic, TargetType.AnyEnemy, ModSupport.GetBasicPortraitPath("unendurable.png"))
@@ -189,12 +234,13 @@ internal sealed class Unendurable : TogawasakikoCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await ModSupport.ApplyPressure(cardPlay.Target, IsUpgraded ? 4m : 3m, Owner.Creature, this);
+        await ModSupport.ApplyPressure(choiceContext, cardPlay.Target, DynamicVars["PressureAmount"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Block.UpgradeValueBy(3m);
+        DynamicVars["PressureAmount"].UpgradeValueBy(1m);
     }
 }
 
@@ -204,7 +250,7 @@ internal sealed class IHaveAscended : TogawasakikoCard
         new[] { CardKeyword.Exhaust };
 
     public IHaveAscended()
-        : base(1, CardType.Skill, CardRarity.Rare, TargetType.None, ModSupport.GetNormalRarePortraitPath("i_have_ascended.png"))
+        : base(0, CardType.Skill, CardRarity.Rare, TargetType.None, ModSupport.GetNormalRarePortraitPath("i_have_ascended.png"))
     {
     }
 
@@ -216,18 +262,14 @@ internal sealed class IHaveAscended : TogawasakikoCard
         }
 
         PileType destinationPile = IsUpgraded ? PileType.Hand : PileType.Discard;
-        await ModSupport.AddSpecificCardToCombatPile<Apotheosis>(Owner, destinationPile, this);
+        await ModSupport.AddSpecificCardToCombatPile<Apotheosis>(Owner, destinationPile, this, IsUpgraded);
     }
 }
 
 internal sealed class Thrilled : TogawasakikoCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        new DynamicVar[]
-        {
-            new EnergyVar(2),
-            new EnergyVar("UpgradedEnergy", 3)
-        };
+        new DynamicVar[] { new EnergyVar(2) };
 
     public Thrilled()
         : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.None, ModSupport.GetNormalUncommonPortraitPath("thrilled.png"))
@@ -248,7 +290,7 @@ internal sealed class Thrilled : TogawasakikoCard
             return;
         }
 
-        await PlayerCmd.GainEnergy(IsUpgraded ? 3m : 2m, owner);
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, owner);
 
         List<CardModel> songCardsInHand = combatState.Hand.Cards
             .Where(ModSupport.IsSongCard)
@@ -271,10 +313,18 @@ internal sealed class Thrilled : TogawasakikoCard
             await CardCmd.Discard(choiceContext, cardsToDiscard);
         }
     }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Energy.UpgradeValueBy(1m);
+    }
 }
 
 internal sealed class PerkUp : TogawasakikoCard
 {
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new CardsVar(0) };
+
     public PerkUp()
         : base(0, CardType.Skill, CardRarity.Common, TargetType.None, ModSupport.GetNormalCommonPortraitPath("perk_up.png"))
     {
@@ -288,19 +338,22 @@ internal sealed class PerkUp : TogawasakikoCard
         }
 
         await ModSupport.GiveRandomColorlessCardToPlayer(Owner);
-        if (IsUpgraded)
+        if (DynamicVars.Cards.BaseValue > 0m)
         {
-            await CardPileCmd.Draw(choiceContext, 1m, Owner, false);
+            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner, false);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }
 
 internal sealed class Speak : TogawasakikoCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        IsUpgraded
-            ? new[] { CardKeyword.Exhaust, CardKeyword.Innate }
-            : new[] { CardKeyword.Exhaust };
+        new[] { CardKeyword.Exhaust };
 
     protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreateCardHoverTip<PersonaDissociation>() };
@@ -323,6 +376,7 @@ internal sealed class Speak : TogawasakikoCard
 
     protected override void OnUpgrade()
     {
+        CardCmd.ApplyKeyword(this, new[] { CardKeyword.Innate });
     }
 }
 
@@ -330,6 +384,9 @@ internal sealed class RestorationOfPower : TogawasakikoCard
 {
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         new[] { CardKeyword.Exhaust };
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new CardsVar(1) };
 
     public RestorationOfPower()
         : base(0, CardType.Skill, CardRarity.Common, TargetType.None, ModSupport.GetNormalCommonPortraitPath("restoration_of_power.png"))
@@ -343,11 +400,16 @@ internal sealed class RestorationOfPower : TogawasakikoCard
             return;
         }
 
-        int cardCount = IsUpgraded ? 2 : 1;
+        int cardCount = DynamicVars.Cards.IntValue;
         for (int i = 0; i < cardCount; i++)
         {
             await ModSupport.GiveRandomPressureGeneratedCardToPlayer(Owner);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars.Cards.UpgradeValueBy(1m);
     }
 }
 
@@ -359,6 +421,9 @@ internal sealed class PutOnYourMask : TogawasakikoCard
             ModSupport.CreatePowerHoverTip<WeakPower>(),
             ModSupport.CreatePowerHoverTip<FaceReactionPower>()
         };
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new("WeakAmount", 2m) };
 
     public PutOnYourMask()
         : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy, ModSupport.GetNormalCommonPortraitPath("put_on_your_mask.png"))
@@ -374,11 +439,16 @@ internal sealed class PutOnYourMask : TogawasakikoCard
         }
 
         bool alreadyHasWeak = ModSupport.GetPower<WeakPower>(cardPlay.Target)?.Amount > 0;
-        await PowerCmd.Apply<WeakPower>(cardPlay.Target, IsUpgraded ? 3m : 2m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<WeakPower>(choiceContext, cardPlay.Target, DynamicVars["WeakAmount"].BaseValue, Owner.Creature, this, false);
         if (alreadyHasWeak)
         {
-            await PowerCmd.Apply<FaceReactionPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<FaceReactionPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars["WeakAmount"].UpgradeValueBy(1m);
     }
 }
 
@@ -403,6 +473,7 @@ internal sealed class SeverThePast : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         await ModSupport.ShuffleDiscardPileIntoDrawPile(choiceContext, Owner, this);
@@ -471,11 +542,11 @@ internal sealed class AnswerMe : TogawasakikoCard
         {
             if (ModSupport.GetPressure(enemy) < 5)
             {
-                await ModSupport.ApplyPressure(enemy, 7m, Owner.Creature, this);
+                await ModSupport.ApplyPressure(choiceContext, enemy, 7m, Owner.Creature, this);
                 continue;
             }
 
-            await PowerCmd.Apply<StrengthPower>(enemy, -1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<StrengthPower>(choiceContext, enemy, -1m, Owner.Creature, this, false);
         }
     }
 
@@ -487,9 +558,6 @@ internal sealed class AnswerMe : TogawasakikoCard
 
 internal sealed class Completeness : TogawasakikoCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        IsUpgraded ? new[] { CardKeyword.Retain } : Array.Empty<CardKeyword>();
-
     public Completeness()
         : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.None, ModSupport.GetNormalUncommonPortraitPath("completeness.png"))
     {
@@ -539,8 +607,13 @@ internal sealed class Completeness : TogawasakikoCard
 
         foreach (Creature enemy in ModSupport.GetEnemyCreatures(ownerCreature))
         {
-            await ModSupport.ApplyPressure(enemy, pressureAmount, ownerCreature, this);
+            await ModSupport.ApplyPressure(choiceContext, enemy, pressureAmount, ownerCreature, this);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        AddKeyword(CardKeyword.Retain);
     }
 }
 
@@ -566,10 +639,10 @@ internal sealed class SheIsRadiant : TogawasakikoCard
                 continue;
             }
 
-            await PowerCmd.ModifyAmount(pressure, -pressure.Amount, Owner.Creature, this, true);
+            await ModSupport.ModifyPowerAmount(choiceContext, pressure, -pressure.Amount, Owner.Creature, this, true);
         }
 
-        await PowerCmd.Apply<StrengthPower>(Owner.Creature, 3m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<StrengthPower>(choiceContext, Owner.Creature, 3m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -580,9 +653,6 @@ internal sealed class SheIsRadiant : TogawasakikoCard
 
 internal sealed class Notebook : TogawasakikoCard
 {
-    public override IEnumerable<CardKeyword> CanonicalKeywords =>
-        IsUpgraded ? new[] { CardKeyword.Retain } : Array.Empty<CardKeyword>();
-
     protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SocialWithdrawalPower>() };
 
@@ -606,8 +676,13 @@ internal sealed class Notebook : TogawasakikoCard
         }
 
         decimal convertedAmount = socialWithdrawal.Amount;
-        await PowerCmd.ModifyAmount(socialWithdrawal, -convertedAmount, Owner.Creature, this, true);
-        await ModSupport.ApplyPressure(cardPlay.Target, convertedAmount, Owner.Creature, this);
+        await ModSupport.ModifyPowerAmount(choiceContext, socialWithdrawal, -convertedAmount, Owner.Creature, this, true);
+        await ModSupport.ApplyPressure(choiceContext, cardPlay.Target, convertedAmount, Owner.Creature, this);
+    }
+
+    protected override void OnUpgrade()
+    {
+        CardCmd.ApplyKeyword(this, new[] { CardKeyword.Retain });
     }
 }
 
@@ -636,20 +711,21 @@ internal sealed class LeaveItToMe : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(target)
+            .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         PressurePower? pressure = ModSupport.GetPower<PressurePower>(target);
         if (pressure != null && pressure.Amount > 0)
         {
             decimal removedAmount = decimal.Min(7m, pressure.Amount);
-            await PowerCmd.ModifyAmount(pressure, -removedAmount, Owner.Creature, this, true);
+            await ModSupport.ModifyPowerAmount(choiceContext, pressure, -removedAmount, Owner.Creature, this, true);
         }
 
         await CreatureCmd.Heal(Owner.Creature, 5m, false);
 
         if (target.IsAlive && ModSupport.GetPressure(target) > 0)
         {
-            await PowerCmd.Apply<WeakPower>(target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<WeakPower>(choiceContext, target, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -662,7 +738,11 @@ internal sealed class LeaveItToMe : TogawasakikoCard
 internal sealed class DawnOfDespair : TogawasakikoCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        new[] { new DamageVar(2m, ValueProp.Move) };
+        new DynamicVar[]
+        {
+            new DamageVar(2m, ValueProp.Move),
+            new("HitCount", 6m)
+        };
 
     protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<SakikoDespairEchoPower>() };
@@ -681,7 +761,7 @@ internal sealed class DawnOfDespair : TogawasakikoCard
         }
 
         Creature target = cardPlay.Target;
-        for (int i = 0; i < (IsUpgraded ? 7 : 6); i++)
+        for (int i = 0; i < DynamicVars["HitCount"].IntValue; i++)
         {
             if (!target.IsAlive)
             {
@@ -691,20 +771,30 @@ internal sealed class DawnOfDespair : TogawasakikoCard
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCard(this)
                 .Targeting(target)
+                .WithSingleTargetThorns(target, Owner.Character.AttackAnimDelay)
                 .Execute(choiceContext);
         }
 
         if (target.IsAlive)
         {
-            await PowerCmd.Apply<SakikoDespairEchoPower>(target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<SakikoDespairEchoPower>(choiceContext, target, 1m, Owner.Creature, this, false);
         }
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars["HitCount"].UpgradeValueBy(1m);
     }
 }
 
 internal sealed class BarkingBarkingBarking : TogawasakikoCard
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        new[] { new DamageVar(8m, ValueProp.Move) };
+        new DynamicVar[]
+        {
+            new DamageVar(8m, ValueProp.Move),
+            new("Regen", 3m)
+        };
 
     protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[] { ModSupport.CreatePowerHoverTip<RegenPower>() };
@@ -729,13 +819,15 @@ internal sealed class BarkingBarkingBarking : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
-        await PowerCmd.Apply<RegenPower>(Owner.Creature, IsUpgraded ? 4m : 3m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<RegenPower>(choiceContext, Owner.Creature, DynamicVars["Regen"].BaseValue, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
     {
         DynamicVars.Damage.UpgradeValueBy(3m);
+        DynamicVars["Regen"].UpgradeValueBy(1m);
     }
 }
 
@@ -763,8 +855,9 @@ internal sealed class BailMoney : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
-        await PowerCmd.Apply<DexterityPower>(cardPlay.Target, -1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<DexterityPower>(choiceContext, cardPlay.Target, -1m, Owner.Creature, this, false);
         await PlayerCmd.LoseGold(10m, Owner);
     }
 
@@ -801,9 +894,9 @@ internal sealed class WeightliftingChampion : TogawasakikoCard
             return;
         }
 
-        ModSupport.LoseHp(Owner.Creature, DynamicVars.HpLoss.BaseValue);
-        await PowerCmd.Apply<StrengthPower>(Owner.Creature, 1m, Owner.Creature, this, false);
-        await PowerCmd.Apply<DexterityPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await CreatureCmd.Damage(choiceContext, Owner.Creature, DynamicVars.HpLoss.BaseValue, DamageProps.cardHpLoss, this);
+        await ModSupport.ApplyPower<StrengthPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<DexterityPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
     }
 
     protected override void OnUpgrade()
@@ -832,17 +925,17 @@ internal sealed class Housewarming : TogawasakikoCard
             return;
         }
 
-        int copyCount = IsUpgraded ? 2 : 1;
-        for (int i = 0; i < copyCount; i++)
+        CardModel? createdCard = await ModSupport.AddSpecificCardToCombatPile<BarkingBarkingBarking>(
+            Owner,
+            PileType.Hand,
+            this,
+            IsUpgraded);
+        if (createdCard == null)
         {
-            CardModel? createdCard = await ModSupport.AddSpecificCardToCombatPile<BarkingBarkingBarking>(Owner, PileType.Hand, this);
-            if (createdCard == null)
-            {
-                continue;
-            }
-
-            CardCmd.ApplyKeyword(createdCard, new[] { CardKeyword.Ethereal, CardKeyword.Exhaust });
+            return;
         }
+
+        CardCmd.ApplyKeyword(createdCard, new[] { CardKeyword.Ethereal, CardKeyword.Exhaust });
     }
 
     protected override void OnUpgrade()
@@ -881,11 +974,12 @@ internal sealed class PullmanCrash : TogawasakikoCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
 
         if (ModSupport.GetPressure(cardPlay.Target) > 8)
         {
-            await PowerCmd.Apply<VulnerablePower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+            await ModSupport.ApplyPower<VulnerablePower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
         }
     }
 
@@ -913,13 +1007,16 @@ internal sealed class FinalCurtain : TogawasakikoCard
         }
 
         Creature ownerCreature = Owner.Creature;
-        CombatState? combatState = ownerCreature.CombatState;
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
         if (combatState == null)
         {
             return;
         }
 
-        int hitCount = ModSupport.GetEnemyCreatures(ownerCreature).Count();
+        Creature[] enemies = ModSupport.GetEnemyCreatures(ownerCreature)
+            .Where(enemy => enemy.IsAlive)
+            .ToArray();
+        int hitCount = enemies.Length;
         if (hitCount <= 0)
         {
             return;
@@ -927,8 +1024,9 @@ internal sealed class FinalCurtain : TogawasakikoCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(combatState)
+            .TargetingAllOpponentsCompat(combatState)
             .WithHitCount(hitCount)
+            .WithTargetThorns(enemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -967,9 +1065,9 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
         Creature[] enemies = ModSupport.GetEnemyCreatures(ownerCreature).ToArray();
         foreach (Creature enemy in enemies)
         {
-            await PowerCmd.Apply<VulnerablePower>(enemy, 2m, ownerCreature, this, false);
-            await PowerCmd.Apply<WeakPower>(enemy, 2m, ownerCreature, this, false);
-            await PowerCmd.Apply<DexterityPower>(enemy, -1m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<VulnerablePower>(choiceContext, enemy, 2m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<WeakPower>(choiceContext, enemy, 2m, ownerCreature, this, false);
+            await ModSupport.ApplyPower<DexterityPower>(choiceContext, enemy, -1m, ownerCreature, this, false);
         }
 
         if (enemies.Length == 0)
@@ -977,9 +1075,16 @@ internal sealed class BladeThroughTheHeart : TogawasakikoCard
             return;
         }
 
+        CombatState? combatState = ModSupport.GetCombatState(ownerCreature);
+        if (combatState == null)
+        {
+            return;
+        }
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
-            .TargetingAllOpponents(ownerCreature.CombatState!)
+            .TargetingAllOpponentsCompat(combatState)
+            .WithTargetThorns(enemies, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
     }
 
@@ -1019,7 +1124,7 @@ internal sealed class Fragility : TogawasakikoCard
         }
 
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, cardPlay, false);
-        await PowerCmd.Apply<FaceReactionPower>(Owner.Creature, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<FaceReactionPower>(choiceContext, Owner.Creature, 1m, Owner.Creature, this, false);
         await CreatureCmd.Heal(Owner.Creature, DynamicVars.Heal.BaseValue, false);
     }
 
@@ -1033,6 +1138,9 @@ internal sealed class Fragility : TogawasakikoCard
 internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 {
     private const int MaxCombats = 2;
+    private const string CombatsKey = "Combats";
+
+    private int _combatsSeen;
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
         new[] { CardKeyword.Unplayable };
@@ -1041,7 +1149,20 @@ internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 
     public override int MaxUpgradeLevel => 0;
 
-    public int CombatsSeen { get; set; }
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new(CombatsKey, MaxCombats) };
+
+    [SavedProperty]
+    public int CombatsSeen
+    {
+        get => _combatsSeen;
+        set
+        {
+            AssertMutable();
+            _combatsSeen = value;
+            DynamicVars[CombatsKey].BaseValue = Math.Max(0, MaxCombats - _combatsSeen);
+        }
+    }
 
     protected ShadowOfThePastCard(string portraitPath)
         : base(0, CardType.Curse, CardRarity.Event, TargetType.None, portraitPath)
@@ -1059,51 +1180,26 @@ internal abstract class ShadowOfThePastCard : TogawasakikoEventGrantedCard
 
     public override async Task AfterCombatEnd(MegaCrit.Sts2.Core.Rooms.CombatRoom room)
     {
-        if (Owner == null)
+        if (Owner == null || Pile?.Type != PileType.Deck)
         {
             return;
         }
 
-        ShadowOfThePastCard? trackedCard = ResolveTrackedDeckCard(Owner);
-        if (trackedCard == null)
-        {
-            ModSupport.LogWarn($"Shadow card {Id.Entry} could not find a matching deck instance after combat.");
-            return;
-        }
-
-        trackedCard.CombatsSeen++;
-        if (trackedCard.CombatsSeen < MaxCombats)
+        CombatsSeen++;
+        if (CombatsSeen < MaxCombats)
         {
             return;
         }
 
         try
         {
-            await trackedCard.ResolveShadowReward(Owner);
-            await CardPileCmd.RemoveFromDeck(trackedCard, false);
+            await ResolveShadowReward(Owner);
+            await CardPileCmd.RemoveFromDeck(this, false);
         }
         catch (Exception ex)
         {
             ModSupport.LogError($"Shadow reward resolution failed for {Id.Entry}: {ex}");
         }
-    }
-
-    private ShadowOfThePastCard? ResolveTrackedDeckCard(Player owner)
-    {
-        CardPile? deck = owner.Deck;
-        if (deck == null)
-        {
-            return null;
-        }
-
-        if (deck.Cards.OfType<ShadowOfThePastCard>().FirstOrDefault(card => ReferenceEquals(card, this)) is { } exactCard)
-        {
-            return exactCard;
-        }
-
-        return deck.Cards
-            .OfType<ShadowOfThePastCard>()
-            .FirstOrDefault(card => card.Id == Id);
     }
 
     protected abstract Task ResolveShadowReward(Player owner);
@@ -1155,6 +1251,9 @@ internal sealed class ShadowOfThePastIII : ShadowOfThePastCard
 
 internal sealed class Innocence : TogawasakikoCard
 {
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+        new DynamicVar[] { new("SocialWithdrawalAmount", 2m) };
+
     protected override IEnumerable<IHoverTip> ManualExtraHoverTips =>
         new IHoverTip[]
         {
@@ -1174,7 +1273,12 @@ internal sealed class Innocence : TogawasakikoCard
             return;
         }
 
-        await PowerCmd.Apply<InnocencePower>(Owner.Creature, IsUpgraded ? 3m : 2m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<InnocencePower>(choiceContext, Owner.Creature, DynamicVars["SocialWithdrawalAmount"].BaseValue, Owner.Creature, this, false);
+    }
+
+    protected override void OnUpgrade()
+    {
+        DynamicVars["SocialWithdrawalAmount"].UpgradeValueBy(1m);
     }
 }
 
@@ -1214,7 +1318,7 @@ internal sealed class PersonaDissociation : GeneratedPressureCard
             return;
         }
 
-        await PowerCmd.Apply<PersonaDissociationPower>(cardPlay.Target, 1m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<PersonaDissociationPower>(choiceContext, cardPlay.Target, 1m, Owner.Creature, this, false);
     }
 }
 
@@ -1236,7 +1340,7 @@ internal sealed class SocialWithdrawal : GeneratedPressureCard
             return;
         }
 
-        await PowerCmd.Apply<SocialWithdrawalPower>(cardPlay.Target, 3m, Owner.Creature, this, false);
+        await ModSupport.ApplyPower<SocialWithdrawalPower>(choiceContext, cardPlay.Target, 3m, Owner.Creature, this, false);
     }
 }
 
@@ -1256,6 +1360,7 @@ internal sealed class AllYouThinkAboutIsYourself : GeneratedPressureCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
             .Execute(choiceContext);
         await CreatureCmd.Stun(cardPlay.Target, string.Empty);
     }

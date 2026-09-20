@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b7xlk1e6w51gu"]
+
+[ext_resource type="Shader" uid="uid://bdms7bqfygvs0" path="res://shaders/texture_transition.gdshader" id="1_gcjia"]
+[ext_resource type="Texture2D" uid="uid://3btrsntcwm0n" path="res://images/ui/transitions/game_over_transition.png" id="2_x5018"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_gcjia")
+shader_parameter/transitionTex = ExtResource("2_x5018")
+shader_parameter/threshold = 0.0
+shader_parameter/additionalFade = 0.0
+shader_parameter/alpha = 0.9

@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6o41d4nt4jj8"]
+
+[ext_resource type="Script" uid="uid://b4e3rwvoaqn8" path="res://src/Core/Nodes/Screens/RelicCollection/NRelicCollectionCategory.cs" id="1_qib4m"]
+[ext_resource type="Texture2D" uid="uid://b2tghoxhxi8p8" path="res://images/ui/run_history/neow.png" id="2_fpsor"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_nuyj6"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_fpsor"]
+
+[node name="RelicCollectionSubcategory" type="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+mouse_filter = 2
+script = ExtResource("1_qib4m")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("2_fpsor")
+expand_mode = 1
+
+[node name="Header" type="RichTextLabel" parent="HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_nuyj6")
+theme_override_fonts/bold_font = ExtResource("2_nuyj6")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[gold][font_size=28][b]Common:[/b][/font_size][/gold] The most frequent relics found in the Spire."
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("3_fpsor")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 24
+
+[node name="RelicsContainer" type="GridContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 10
+
+[node name="Spacer" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+mouse_filter = 2

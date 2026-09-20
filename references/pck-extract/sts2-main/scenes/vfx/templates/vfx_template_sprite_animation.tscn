@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://b12lf20xhq7hi"]
+
+[ext_resource type="Script" uid="uid://dfliy3bq4j7re" path="res://src/Core/Nodes/Vfx/Utilities/NSpriteAnimator.cs" id="1_wp1ck"]
+[ext_resource type="Texture2D" uid="uid://c375qm46lcbvg" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_00.png" id="2_i27hs"]
+[ext_resource type="Texture2D" uid="uid://dl6h0qaccp84k" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_01.png" id="3_exujt"]
+[ext_resource type="Texture2D" uid="uid://c7ct8lsjvmu0y" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_02.png" id="4_6n1i0"]
+[ext_resource type="Texture2D" uid="uid://c443xj1rqssmj" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_03.png" id="5_fu25d"]
+
+[node name="VfxTemplateSpineAnimation" type="Sprite2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_wp1ck")
+_frames = Array[Texture2D]([ExtResource("2_i27hs"), ExtResource("3_exujt"), ExtResource("4_6n1i0"), ExtResource("5_fu25d")])
+_randomizeRotation = true
+_rotationRange = Vector2(0, 25)

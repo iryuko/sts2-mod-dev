@@ -1,0 +1,26 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://b7y7ntcj5tf07"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cb4xat70hqgo8" path="res://animations/monsters/chomper/chomper.atlas" id="1_aqsar"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dw1dfgxjm3be7" path="res://animations/monsters/chomper/chomper.skel" id="2_1o7aa"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2ohhw"]
+from = "idle_loop"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_kbb2d"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_s2kx4"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7unp3"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_aqsar")
+skeleton_file_res = ExtResource("2_1o7aa")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_2ohhw"), SubResource("SpineAnimationMix_kbb2d"), SubResource("SpineAnimationMix_s2kx4"), SubResource("SpineAnimationMix_7unp3")]

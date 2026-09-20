@@ -1,0 +1,324 @@
+[gd_scene load_steps=21 format=3 uid="uid://dgociq66jscru"]
+
+[ext_resource type="Script" uid="uid://wv5a80suh8ar" path="res://src/Core/Nodes/Rooms/NTreasureRoom.cs" id="1_ywu15"]
+[ext_resource type="Script" uid="uid://vdssesny8fij" path="res://src/Core/Nodes/TreasureRooms/NTreasureButton.cs" id="3_66tj7"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="5_2hmag"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="5_bgqql"]
+[ext_resource type="Script" uid="uid://ch6tljockspvh" path="res://src/Core/Nodes/Screens/TreasureRoomRelic/NTreasureRoomRelicCollection.cs" id="5_slpja"]
+[ext_resource type="PackedScene" uid="uid://bbjmuv5pii51o" path="res://scenes/ui/treasure_relic_holder.tscn" id="6_7qrnk"]
+[ext_resource type="Script" uid="uid://d1hk6a7skqrtm" path="res://src/Core/Nodes/Screens/TreasureRoomRelic/NHandImageCollection.cs" id="8_i6sm7"]
+[ext_resource type="FontVariation" uid="uid://wv64ujsu3e4w" path="res://themes/ancient_name_banner.tres" id="9_y0lmc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="10_y7qma"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="11_g04bm"]
+[ext_resource type="Texture2D" uid="uid://bukbniuqsck3i" path="res://images/packed/vfx/coin_flip_anim.png" id="13_gfpvi"]
+[ext_resource type="PackedScene" uid="uid://dk7qbpbg2o0ea" path="res://scenes/ui/proceed_button.tscn" id="42_byu4k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvtqx"]
+resource_local_to_scene = true
+shader = ExtResource("5_bgqql")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gfpvi"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_bbyxe"]
+_data = [Vector2(0, 0), 0.0, 6.4895, 0, 0, Vector2(0.210821, 0.94636), 0.929028, 0.929028, 0, 0, Vector2(0.636194, 0.823755), -1.21935, -1.21935, 0, 0, Vector2(1, 0), -0.133354, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qvk5y"]
+curve = SubResource("Curve_bbyxe")
+
+[sub_resource type="Gradient" id="Gradient_gfpvi"]
+offsets = PackedFloat32Array(0, 0.595745)
+colors = PackedColorArray(0.342581, 0.342581, 0.342581, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0okix"]
+gradient = SubResource("Gradient_gfpvi")
+width = 64
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y6pmb"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 150.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 40.0
+initial_velocity_min = 150.0
+initial_velocity_max = 600.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 800, 0)
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+color_ramp = SubResource("GradientTexture1D_0okix")
+alpha_curve = SubResource("CurveTexture_qvk5y")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+anim_speed_max = 0.56
+anim_offset_max = 1.0
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.75
+collision_use_scale = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fc3o3"]
+polygon = PackedVector2Array(982, 3, 925, 262, -988, 257, -1071, 1)
+
+[node name="TreasureRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_ywu15")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Chest" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -358.0
+offset_top = -173.0
+offset_right = 442.0
+offset_bottom = 327.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_66tj7")
+
+[node name="ChestVisual" type="SpineSprite" parent="Chest"]
+unique_name_in_owner = true
+position = Vector2(-604, -301)
+scale = Vector2(0.4, 0.4)
+
+[node name="ColorRect" type="ColorRect" parent="Chest"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.983334, 1, 0.25098)
+
+[node name="ProceedButton" parent="." instance=ExtResource("42_byu4k")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="RelicCollection" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(900, 580)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -290.0
+offset_right = 450.0
+offset_bottom = 290.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_slpja")
+
+[node name="Container" type="Control" parent="RelicCollection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SingleplayerRelicHolder" parent="RelicCollection/Container" instance=ExtResource("6_7qrnk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -102.0
+offset_top = -183.0
+offset_right = 102.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(102, 102)
+
+[node name="MultiplayerRelicHolder1" parent="RelicCollection/Container" instance=ExtResource("6_7qrnk")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -180.0
+offset_right = -12.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MultiplayerRelicHolder2" parent="RelicCollection/Container" instance=ExtResource("6_7qrnk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 44.0
+offset_right = 148.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MultiplayerRelicHolder3" parent="RelicCollection/Container" instance=ExtResource("6_7qrnk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -68.0
+offset_right = -252.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MultiplayerRelicHolder4" parent="RelicCollection/Container" instance=ExtResource("6_7qrnk")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 252.0
+offset_top = -68.0
+offset_right = 388.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Banner" parent="." instance=ExtResource("5_2hmag")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="HandsContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_i6sm7")
+
+[node name="FightBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="MegaLabel" type="Label" parent="FightBackstop"]
+layout_mode = 0
+offset_left = 796.0
+offset_top = 194.0
+offset_right = 1116.0
+offset_bottom = 331.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("9_y0lmc")
+theme_override_font_sizes/font_size = 77
+text = "FIGHT!!!"
+script = ExtResource("10_y7qma")
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gvtqx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -597.0
+offset_top = 207.0
+offset_right = -405.0
+offset_bottom = 399.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(96, 96)
+mouse_filter = 2
+texture = ExtResource("11_g04bm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldExplosion" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_gfpvi")
+position = Vector2(937, 512)
+emitting = false
+amount = 500
+texture = ExtResource("13_gfpvi")
+lifetime = 2.5
+one_shot = true
+speed_scale = 1.8
+explosiveness = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_y6pmb")
+
+[node name="GoldExplosionCollider" type="LightOccluder2D" parent="."]
+position = Vector2(997, 842)
+occluder = SubResource("OccluderPolygon2D_fc3o3")

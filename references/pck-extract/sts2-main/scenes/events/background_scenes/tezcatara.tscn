@@ -1,0 +1,5738 @@
+[gd_scene load_steps=41 format=3 uid="uid://5fs2hhvrrui4"]
+
+[ext_resource type="Script" uid="uid://d0pffb7ah4wau" path="res://src/Core/Nodes/Vfx/NRestSiteFireVfx.cs" id="4_n7hgk"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="5_larpj"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="6_2p68k"]
+[ext_resource type="Texture2D" uid="uid://b47r2blhe2i3" path="res://images/vfx/fire/cinder_particle.png" id="7_c6tqb"]
+[ext_resource type="Texture2D" uid="uid://c67idrcto5vwj" path="res://images/vfx/vfx_constant_fire/fire_texture_2.png" id="8_b2rhd"]
+[ext_resource type="Shader" uid="uid://dryvqo67omhm" path="res://shaders/vfx/vfx_stepped_shader_fire_flat.tres" id="9_sw1h1"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="10_l32tu"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="11_1et62"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="12_jipm1"]
+[ext_resource type="Script" uid="uid://b0oho7pjc1dtg" path="res://src/Core/Nodes/Animation/NSpineAutoPlayer.cs" id="13_gtv1v"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="13_lvsxl"]
+[ext_resource type="Texture2D" uid="uid://dppe2u2vje5i1" path="res://images/vfx/fire/fire_base_slim.png" id="14_cafwl"]
+[ext_resource type="Shader" uid="uid://cu7krqg4cighe" path="res://shaders/vfx/vfx_stepped_shader_fire_add.tres" id="15_r6sfr"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cph5l30veg23k" path="res://animations/backgrounds/tezcatara/tezcatara_skel_data_resource.tres" id="20_o8ldb"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6npf5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v2y3t"]
+
+[sub_resource type="Curve" id="Curve_tgpwg"]
+_data = [Vector2(0, 0.321019), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.36242), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fceag"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vmml"]
+shader = ExtResource("9_sw1h1")
+shader_parameter/OuterColor = Color(1, 0.620723, 0.47546, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.47)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0.696997, 0.180425, 0, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utckx"]
+shader = ExtResource("15_r6sfr")
+shader_parameter/OuterColor = Color(0.46017, 0.0934323, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.745, 0.995)
+shader_parameter/Noise2Strength = 1.005
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.4, 0.6)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 0.76
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(0.8, 0.7)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2.01)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.045)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.16
+shader_parameter/Distortion1Scale = Vector2(1, 0.7)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.46)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0, 0, 0, 1)
+shader_parameter/OuterStep = Vector2(0.9, 0.95)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2hr7g"]
+shader = ExtResource("15_r6sfr")
+shader_parameter/OuterColor = Color(0.249886, 0.0786963, 0.100351, 1)
+shader_parameter/InnerColorStep = Vector2(0.975, 0.99)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.3, 1)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1.2, 1.2)
+shader_parameter/Noise1Panning = Vector2(0.6, 0.8)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.255)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 1.2)
+shader_parameter/DistortionMaskOffset = Vector2(0, -0.12)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0, 0, 0, 1)
+shader_parameter/OuterStep = Vector2(0.6, 0.99)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_th6oj"]
+shader = ExtResource("9_sw1h1")
+shader_parameter/OuterColor = Color(0.76854, 0.634113, 0.373152, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.47)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0.143953, 0.23879, 0.0995942, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oadh3"]
+shader = ExtResource("9_sw1h1")
+shader_parameter/OuterColor = Color(0.3994, 0.387432, 0.155314, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.47)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0.441821, 0.397538, 0.106215, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yeu8t"]
+shader = ExtResource("9_sw1h1")
+shader_parameter/OuterColor = Color(0.73009, 0.37999, 0.389957, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("13_lvsxl")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("10_l32tu")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("12_jipm1")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("11_1et62")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("10_l32tu")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.47)
+shader_parameter/DistortionMask = ExtResource("12_jipm1")
+shader_parameter/InnerColor = Color(0.533201, 0.343534, 0.198007, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.22)
+
+[sub_resource type="Curve" id="Curve_vm55s"]
+_data = [Vector2(0, 0.531754), 0.0, 2.99665, 0, 0, Vector2(0.300248, 0.969194), 0.0, 0.0, 0, 0, Vector2(0.573201, 0.981517), 0.0, 0.0, 0, 0, Vector2(0.734491, 0.969194), 0.0, 0.0, 0, 0, Vector2(1, 0.0265403), -7.44881, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_rrahu"]
+curve = SubResource("Curve_vm55s")
+
+[sub_resource type="Curve" id="Curve_2vkhd"]
+_limits = [-0.5, 0.5, 0.0, 1.0]
+_data = [Vector2(0, -0.020853), 0.0, 0.0, 0, 0, Vector2(0.255583, 0.0194313), 0.0, 0.0, 0, 0, Vector2(0.50369, 0.0442505), 0.0, 0.0, 0, 0, Vector2(0.97048, 0.0320972), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_lu871"]
+curve = SubResource("Curve_2vkhd")
+
+[sub_resource type="Curve" id="Curve_vbwiw"]
+_data = [Vector2(0, 0.531754), 0.0, 5.89698, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.215881, 0.611848), 0.0, 0.0, 0, 0, Vector2(0.327543, 1), 0.0, 0.0, 0, 0, Vector2(0.48139, 0.605687), 0.0, 0.0, 0, 0, Vector2(0.600496, 1), 0.0, 0.0, 0, 0, Vector2(0.751861, 0.544076), -3.66529, -3.66529, 0, 0, Vector2(1, 0), -0.926037, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_813k6"]
+curve = SubResource("Curve_vbwiw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_umhl6"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(50, 50, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, -0.5, 0)
+spread = 16.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 3.0
+orbit_velocity_curve = SubResource("CurveTexture_lu871")
+gravity = Vector3(100, -20, 0)
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_813k6")
+color = Color(0.772549, 0.54902, 0.239216, 1)
+alpha_curve = SubResource("CurveTexture_rrahu")
+hue_variation_min = -0.03
+hue_variation_max = 0.04
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_skoqc"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 1)
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, -0.5, 0)
+spread = 16.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 3.0
+orbit_velocity_curve = SubResource("CurveTexture_lu871")
+gravity = Vector3(100, -20, 0)
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_813k6")
+color = Color(0.772549, 0.54902, 0.239216, 1)
+alpha_curve = SubResource("CurveTexture_rrahu")
+hue_variation_min = -0.03
+hue_variation_max = 0.04
+
+[sub_resource type="Curve" id="Curve_fuwyu"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6rt58"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nfr33"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ha37b"]
+_limits = [-0.3, 0.3, 0.0, 1.0]
+_data = [Vector2(0, -500), 0.0, 0.0, 0, 0, Vector2(1e-05, -0.3), 0.0, 0.0, 0, 0, Vector2(0.0522273, 0.294952), 0.0, 0.0, 0, 0, Vector2(0.231951, 0.3), 0.0, 0.0, 0, 0, Vector2(0.459293, -0.00893089), 0.0, 0.0, 0, 0, Vector2(1, -0.003883), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_n02am"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_j02mw"]
+_data = [Vector2(0.00840336, 0.00666296), 0.0, 1.93645, 0, 0, Vector2(0.277311, 0.975211), 0.374114, 0.374114, 0, 0, Vector2(0.61794, 0.340454), -1.9789, -1.9789, 0, 0, Vector2(0.930876, 0.0190266), -0.488375, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_m505y"]
+offsets = PackedFloat32Array(0, 0.514334, 0.662942)
+colors = PackedColorArray(0.537255, 0.537255, 0.537255, 1, 0.32549, 0.337255, 0.313726, 1, 0.210507, 0.210507, 0.210507, 0)
+
+[node name="Tezcatara" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("20_o8ldb")
+multiply_material = SubResource("CanvasItemMaterial_6npf5")
+screen_material = SubResource("CanvasItemMaterial_v2y3t")
+preview_skin = "Default"
+preview_animation = "animation"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-336.051, -6.640999)
+scale = Vector2(0.507, 0.507)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame1"
+show_behind_parent = true
+position = Vector2(3081.1636, 503.7109)
+rotation = -0.51939845
+
+[node name="SteppedFireTezcatara" type="Node2D" parent="SpineSprite/SpineBoneNode"]
+position = Vector2(0.314962, 4.25257)
+rotation = 0.671952
+scale = Vector2(0.542022, 0.542446)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode/SteppedFireTezcatara"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="light_small3" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode/SteppedFireTezcatara"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(35.0001, 69.2081)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.58722, 0.217799, 0.112845, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode/SteppedFireTezcatara"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode/SteppedFireTezcatara"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode/SteppedFireTezcatara"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode2" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame2"
+show_behind_parent = true
+position = Vector2(3333.3333, 903.2993)
+rotation = -0.51939845
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode2"]
+position = Vector2(-5.41804, 6.14785)
+rotation = 0.712094
+scale = Vector2(0.542022, 0.542446)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="light_small3" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-92.3036, -92.7989)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.58722, 0.217799, 0.112845, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode2/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode2/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode2/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode3" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame7"
+show_behind_parent = true
+position = Vector2(2275.3005, 97.853)
+rotation = -2.4397247
+scale = Vector2(0.9517662, 0.95322627)
+skew = -0.008634329
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode3"]
+position = Vector2(-5.41804, 6.14785)
+rotation = 2.33176
+scale = Vector2(0.542, 0.3)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode3/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode3/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode3/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode3/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode4" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame8"
+show_behind_parent = true
+position = Vector2(2911.2463, 218.59073)
+rotation = -1.4021442
+scale = Vector2(0.96276695, 0.9633526)
+skew = -0.00021314621
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode4"]
+position = Vector2(-5.41804, 6.14785)
+rotation = 1.54113
+scale = Vector2(0.542, 0.3)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode4/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode4/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode4/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode4/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode5" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame6"
+show_behind_parent = true
+position = Vector2(1921.739, 711.66583)
+rotation = 2.992537
+scale = Vector2(0.9999999, 1)
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode5"]
+position = Vector2(-0.823, 0.433)
+rotation = 3.4383
+scale = Vector2(0.3, 0.3)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode5/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.396315, 0.637895, 0, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode5/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_oadh3")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode5/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode5/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode6" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame3"
+show_behind_parent = true
+position = Vector2(3228.2732, 1135.4573)
+rotation = -0.14552443
+scale = Vector2(1.0000001, 1.0000001)
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode6"]
+position = Vector2(-0.823, 0.433)
+rotation = 0.315905
+scale = Vector2(0.3, 0.3)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode6/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.21078, 0.656908, 0.33384, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode6/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode6/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode6/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNode7" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "flame5"
+show_behind_parent = true
+position = Vector2(1774.0635, 1201.918)
+rotation = -2.7549014
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="SteppedFireTezcatara2" type="Node2D" parent="SpineSprite/SpineBoneNode7"]
+position = Vector2(-0.823, 0.433)
+rotation = 2.84489
+scale = Vector2(0.3, 0.3)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode7/SteppedFireTezcatara2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.788117, 0.42164, 0.569918, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="SpineSprite/SpineBoneNode7/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="SpineSprite/SpineBoneNode7/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="SpineSprite/SpineBoneNode7/SteppedFireTezcatara2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SpineBoneNodeEyeL" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "eye_l"
+show_behind_parent = true
+position = Vector2(2377.918, 663.4686)
+rotation = 1.5058026
+
+[node name="sparks big2" type="GPUParticles2D" parent="SpineSprite/SpineBoneNodeEyeL"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(7.89911, 2.17421)
+rotation = -2.21605
+scale = Vector2(0.95, 1)
+skew = 0.114031
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 10.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_umhl6")
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodeEyeL"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(9.15577, 2.08478)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 15.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.74902, 0.352941, 0.141176, 0.498039)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="SpineBoneNodeEyeR" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "eye_r"
+show_behind_parent = true
+position = Vector2(2588.0322, 647.6008)
+rotation = 1.5058026
+
+[node name="sparks big2" type="GPUParticles2D" parent="SpineSprite/SpineBoneNodeEyeR"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(7.89911, 2.17421)
+rotation = -2.21605
+scale = Vector2(0.95, 1)
+skew = 0.114031
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 10.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_umhl6")
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodeEyeR"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(9.15577, 2.08478)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 15.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.74902, 0.352941, 0.141176, 0.498039)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="SpineBoneNodehat" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "hat"
+show_behind_parent = true
+position = Vector2(2550.2036, 374.72308)
+rotation = -1.0733806
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodehat"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(266.805, 639.808)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 60.0
+scale_amount_max = 60.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.380392, 0.129412, 0, 1)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="light_small3" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodehat"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-127.325, -364.172)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 60.0
+scale_amount_max = 60.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.380392, 0.129412, 0, 1)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="light_small4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodehat"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(330.628, 14.9132)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 60.0
+scale_amount_max = 60.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.382149, 0.129631, 1.44392e-07, 1)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="SpineBoneNodeMouth" type="SpineBoneNode" parent="SpineSprite"]
+bone_name = "mouth"
+show_behind_parent = true
+position = Vector2(2507.071, 1016.149)
+rotation = 1.5058026
+
+[node name="sparks big2" type="GPUParticles2D" parent="SpineSprite/SpineBoneNodeMouth"]
+visible = false
+material = ExtResource("shared_additive_mat")
+position = Vector2(7.89911, 2.17421)
+rotation = -2.21605
+scale = Vector2(0.95, 1)
+skew = 0.114031
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 10.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_umhl6")
+
+[node name="light_small2" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodeMouth"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(9.15577, 2.08478)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.74902, 0.352941, 0.141176, 0.498039)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="light_small3" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodeMouth"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-88.7085, 93.2154)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.74902, 0.352941, 0.141176, 0.498039)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="light_small4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNodeMouth"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-108.17, -108.38)
+rotation = 2.48247
+scale = Vector2(0.3, 0.3)
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.74902, 0.352941, 0.141176, 0.498039)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+
+[node name="NSpineAutoPlayer" type="Node" parent="SpineSprite"]
+script = ExtResource("13_gtv1v")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"
+
+[node name="FireContainer" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -11.0
+offset_top = -40.0
+offset_right = -11.0
+offset_bottom = -40.0
+
+[node name="pink7" type="Node2D" parent="FireContainer"]
+position = Vector2(970.286, 1025.14)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink7"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink7"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink7"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink6" type="Node2D" parent="FireContainer"]
+position = Vector2(-238.857, 1020.57)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink6"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink6"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink6"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink5" type="Node2D" parent="FireContainer"]
+position = Vector2(368, 332.571)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink5"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink5"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink5"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink4" type="Node2D" parent="FireContainer"]
+position = Vector2(1540.57, 289.143)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink4"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink4"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink4"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink3" type="Node2D" parent="FireContainer"]
+position = Vector2(1883.43, 712)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink3"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink3"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink3"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink2" type="Node2D" parent="FireContainer"]
+position = Vector2(216, 829.714)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink2"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="pink1" type="Node2D" parent="FireContainer"]
+position = Vector2(-139.429, 385.143)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/pink1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.897747, 0.333822, 0.441914, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/pink1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/pink1"]
+material = SubResource("ShaderMaterial_yeu8t")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/pink1"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/pink1"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green12" type="Node2D" parent="FireContainer"]
+position = Vector2(333.714, 905.143)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green12"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green12"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green12"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green12"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green12"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green11" type="Node2D" parent="FireContainer"]
+position = Vector2(117.714, 466.286)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green11"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green11"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green11"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green11"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green11"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green10" type="Node2D" parent="FireContainer"]
+position = Vector2(306.286, 169.143)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green10"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green10"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green10"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green10"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green10"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green9" type="Node2D" parent="FireContainer"]
+position = Vector2(-194.286, 89.1429)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green9"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green9"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green9"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green9"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green9"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green8" type="Node2D" parent="FireContainer"]
+position = Vector2(725.714, 867.429)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green8"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green8"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green8"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green8"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green8"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green7" type="Node2D" parent="FireContainer"]
+position = Vector2(1489.14, 762.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green7"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green7"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green7"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green6" type="Node2D" parent="FireContainer"]
+position = Vector2(1756.57, 772.571)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green6"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green6"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green6"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green5" type="Node2D" parent="FireContainer"]
+position = Vector2(1571.43, 1082.29)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green5"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green5"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green5"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green4" type="Node2D" parent="FireContainer"]
+position = Vector2(1860.57, 389.714)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green4"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green4"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green4"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green3" type="Node2D" parent="FireContainer"]
+position = Vector2(2121.14, 69.7143)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green3"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green3"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green3"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green2" type="Node2D" parent="FireContainer"]
+position = Vector2(1819.43, 90.2857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green2"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="green1" type="Node2D" parent="FireContainer"]
+position = Vector2(1090.29, 926.857)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/green1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.576935, 0.583342, 0.142051, 0.721569)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/green1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/green1"]
+material = SubResource("ShaderMaterial_th6oj")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/green1"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/green1"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="yellow3" type="Node2D" parent="FireContainer"]
+position = Vector2(1417.14, 966.857)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/yellow3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.603922, 0.572549, 0.105882, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/yellow3"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/yellow3"]
+material = SubResource("ShaderMaterial_oadh3")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/yellow3"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/yellow3"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="yellow2" type="Node2D" parent="FireContainer"]
+position = Vector2(200, 633.143)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/yellow2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.603922, 0.572549, 0.105882, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/yellow2"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/yellow2"]
+material = SubResource("ShaderMaterial_oadh3")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/yellow2"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/yellow2"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="yellow1" type="Node2D" parent="FireContainer"]
+position = Vector2(2028.57, 222.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/yellow1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.604621, 0.572483, 0.104201, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/yellow1"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/yellow1"]
+material = SubResource("ShaderMaterial_oadh3")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/yellow1"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/yellow1"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara75" type="Node2D" parent="FireContainer"]
+position = Vector2(-294.857, 818.286)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara75"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara75"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara75"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara75"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara75"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara4" type="Node2D" parent="FireContainer"]
+position = Vector2(1645, 811)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara4"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara4"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara4"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara4"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara5" type="Node2D" parent="FireContainer"]
+position = Vector2(826.286, 1113.14)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara5"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara5"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara5"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara6" type="Node2D" parent="FireContainer"]
+position = Vector2(488, 1091.43)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara6"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara6"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara6"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara6"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara7" type="Node2D" parent="FireContainer"]
+position = Vector2(114.286, 893.714)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara7"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara7"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara7"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara7"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara9" type="Node2D" parent="FireContainer"]
+position = Vector2(182.857, 132.572)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara9"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara9"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara9"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara9"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara9"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara11" type="Node2D" parent="FireContainer"]
+position = Vector2(1736, 165.714)
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara11"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara11"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara11"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara11"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara11"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara12" type="Node2D" parent="FireContainer"]
+position = Vector2(1938.29, 125.714)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara12"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara12"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara12"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara12"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara12"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara13" type="Node2D" parent="FireContainer"]
+position = Vector2(1676.57, 595.429)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara13"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara13"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara13"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara13"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara13"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara14" type="Node2D" parent="FireContainer"]
+position = Vector2(2073.14, 546.286)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara14"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara14"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara14"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara14"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara14"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara15" type="Node2D" parent="FireContainer"]
+position = Vector2(1433.14, 845.714)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara15"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara15"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara15"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara15"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara15"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara17" type="Node2D" parent="FireContainer"]
+position = Vector2(2107.43, 177.143)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara17"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara17"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara17"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara17"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara17"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara18" type="Node2D" parent="FireContainer"]
+position = Vector2(292.571, 778.286)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara18"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara18"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara18"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara18"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara18"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara21" type="Node2D" parent="FireContainer"]
+position = Vector2(176, 1000)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara21"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara21"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara21"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara21"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara21"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara22" type="Node2D" parent="FireContainer"]
+position = Vector2(1130.29, 1042.29)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara22"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara22"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara22"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara22"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara22"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara24" type="Node2D" parent="FireContainer"]
+position = Vector2(1965.71, 846.857)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara24"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara24"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara24"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara24"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara24"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara25" type="Node2D" parent="FireContainer"]
+position = Vector2(-36.5714, 632)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara25"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara25"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara25"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara25"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara25"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara28" type="Node2D" parent="FireContainer"]
+position = Vector2(579.429, 413.714)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara28"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara28"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara28"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara28"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara28"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara29" type="Node2D" parent="FireContainer"]
+position = Vector2(324.571, 225.143)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara29"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara29"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara29"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara29"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara29"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara30" type="Node2D" parent="FireContainer"]
+position = Vector2(8, 137.143)
+scale = Vector2(0.15, 0.17)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara30"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara30"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara30"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara30"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara30"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara31" type="Node2D" parent="FireContainer"]
+position = Vector2(235.429, 430.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara31"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara31"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara31"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara31"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara31"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara32" type="Node2D" parent="FireContainer"]
+position = Vector2(437.714, 451.429)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara32"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara32"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara32"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara32"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara32"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara33" type="Node2D" parent="FireContainer"]
+position = Vector2(364.571, 250.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara33"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara33"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara33"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara33"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara33"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara35" type="Node2D" parent="FireContainer"]
+position = Vector2(260.571, 154.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara35"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara35"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara35"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara35"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara35"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara36" type="Node2D" parent="FireContainer"]
+position = Vector2(146.286, 78.8571)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara36"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara36"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara36"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara36"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara36"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara38" type="Node2D" parent="FireContainer"]
+position = Vector2(-283.429, 360)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara38"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara38"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara38"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara38"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara38"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara39" type="Node2D" parent="FireContainer"]
+position = Vector2(-5.71426, 462.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara39"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara39"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara39"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara39"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara39"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara41" type="Node2D" parent="FireContainer"]
+position = Vector2(25.1429, 776)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara41"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara41"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara41"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara41"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara41"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara42" type="Node2D" parent="FireContainer"]
+position = Vector2(-99.4286, 878.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara42"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara42"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara42"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara42"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara42"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara43" type="Node2D" parent="FireContainer"]
+position = Vector2(366.857, 835.429)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara43"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara43"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara43"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara43"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara43"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara44" type="Node2D" parent="FireContainer"]
+position = Vector2(453.714, 877.714)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara44"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara44"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara44"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara44"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara44"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara46" type="Node2D" parent="FireContainer"]
+position = Vector2(677.714, 897.143)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara46"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara46"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara46"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara46"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara46"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara47" type="Node2D" parent="FireContainer"]
+position = Vector2(802.286, 1000)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara47"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara47"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara47"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara47"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara47"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara48" type="Node2D" parent="FireContainer"]
+position = Vector2(1024, 947.428)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara48"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara48"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara48"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara48"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara48"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara49" type="Node2D" parent="FireContainer"]
+position = Vector2(1246.86, 818.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara49"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara49"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara49"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara49"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara49"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara51" type="Node2D" parent="FireContainer"]
+position = Vector2(1589.71, 726.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara51"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara51"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara51"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara51"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara51"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara52" type="Node2D" parent="FireContainer"]
+position = Vector2(1693.71, 837.714)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara52"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara52"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara52"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara52"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara52"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara55" type="Node2D" parent="FireContainer"]
+position = Vector2(2200, 606.857)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara55"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara55"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara55"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara55"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara55"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara56" type="Node2D" parent="FireContainer"]
+position = Vector2(1992, 442.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara56"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara56"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara56"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara56"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara56"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara62" type="Node2D" parent="FireContainer"]
+position = Vector2(1637.71, 178.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara62"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara62"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara62"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara62"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara62"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara63" type="Node2D" parent="FireContainer"]
+position = Vector2(1450.29, 346.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara63"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara63"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara63"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara63"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara63"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara64" type="Node2D" parent="FireContainer"]
+position = Vector2(1414.86, 386.286)
+scale = Vector2(0.15, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara64"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara64"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara64"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara64"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara64"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara65" type="Node2D" parent="FireContainer"]
+position = Vector2(1883.43, 72)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="light_small" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-97.4171, -296.492)
+rotation = -0.227129
+scale = Vector2(3.63587, 3.63332)
+skew = -0.000343204
+amount = 1
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.9
+scale_amount_max = 0.9
+scale_amount_curve = SubResource("Curve_fuwyu")
+color = Color(1, 0.231373, 0, 0.0431373)
+color_ramp = SubResource("Gradient_6rt58")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="smoke" type="Node2D" parent="FireContainer/SteppedFireTezcatara65"]
+modulate = Color(1, 1, 1, 0.0352941)
+position = Vector2(-62.7139, -114.328)
+rotation = -0.227129
+scale = Vector2(3.63587, 3.63332)
+skew = -0.000343204
+metadata/_edit_lock_ = true
+
+[node name="smoke_vfx_front_small" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara65/smoke"]
+visible = false
+material = SubResource("CanvasItemMaterial_nfr33")
+position = Vector2(18.0854, 14.35)
+rotation = 0.172017
+amount = 100
+texture = ExtResource("8_b2rhd")
+lifetime = 4.0
+preprocess = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(-0.1, -1)
+spread = 0.0
+gravity = Vector2(0, -20)
+initial_velocity_min = 50.0
+initial_velocity_max = 70.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+orbit_velocity_min = -0.2
+orbit_velocity_curve = SubResource("Curve_ha37b")
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+damping_min = 84.012
+damping_max = 98.256
+angle_max = 2.0
+angle_curve = SubResource("Curve_n02am")
+scale_amount_min = 0.15
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_j02mw")
+color = Color(1, 1, 1, 0.878431)
+color_ramp = SubResource("Gradient_m505y")
+anim_offset_max = 1.0
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara65"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara66" type="Node2D" parent="FireContainer"]
+position = Vector2(1920, 16)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara66"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara66"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara66"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara66"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara66"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara67" type="Node2D" parent="FireContainer"]
+position = Vector2(1774.86, 86.8571)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara67"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara67"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara67"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara67"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara67"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara68" type="Node2D" parent="FireContainer"]
+position = Vector2(478.857, 346.286)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara68"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara68"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara68"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara68"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara68"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara69" type="Node2D" parent="FireContainer"]
+position = Vector2(500, 334)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara69"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara69"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara69"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara69"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara69"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara70" type="Node2D" parent="FireContainer"]
+position = Vector2(152, 30.8571)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara70"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara70"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara70"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara70"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara70"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara71" type="Node2D" parent="FireContainer"]
+position = Vector2(421.714, 944)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara71"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara71"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara71"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara71"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara71"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireTezcatara72" type="Node2D" parent="FireContainer"]
+position = Vector2(246.857, 1035.43)
+scale = Vector2(0.07, 0.1)
+script = ExtResource("4_n7hgk")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="light_small2" type="CPUParticles2D" parent="FireContainer/SteppedFireTezcatara72"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.762537, -53.9823)
+rotation = -0.36242
+skew = -0.000518322
+amount = 2
+texture = ExtResource("5_larpj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_tgpwg")
+color = Color(0.847059, 0.423529, 0.0666667, 0.486275)
+color_ramp = SubResource("Gradient_fceag")
+script = ExtResource("6_2p68k")
+metadata/_edit_lock_ = true
+
+[node name="sparks big" type="GPUParticles2D" parent="FireContainer/SteppedFireTezcatara72"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(3.60885, -70.5912)
+rotation = -0.577988
+scale = Vector2(2.09704, 2.09781)
+skew = -0.000333786
+amount = 24
+texture = ExtResource("7_c6tqb")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_skoqc")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireMix" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara72"]
+material = SubResource("ShaderMaterial_1vmml")
+position = Vector2(4.55931, -148.785)
+scale = Vector2(0.6, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara72"]
+material = SubResource("ShaderMaterial_utckx")
+position = Vector2(8.00421, -141.195)
+rotation = -0.00125643
+scale = Vector2(0.5, 0.8)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="FireContainer/SteppedFireTezcatara72"]
+material = SubResource("ShaderMaterial_2hr7g")
+position = Vector2(9.81621, -107.109)
+rotation = -0.00125643
+scale = Vector2(0.4, 0.6)
+texture = ExtResource("14_cafwl")
+metadata/_edit_lock_ = true

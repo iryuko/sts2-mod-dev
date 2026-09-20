@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk5igr533ljcj"]
+
+[ext_resource type="Script" uid="uid://074aurqw4lf1" path="res://src/Core/Nodes/Cards/Holders/NSelectedHandCardHolder.cs" id="1_rlxo7"]
+[ext_resource type="Script" uid="uid://mpyf2phw1xgx" path="res://src/Core/Nodes/Cards/Holders/NCardHolderHitbox.cs" id="2_k2wow"]
+
+[node name="SelectedHandCardHolder" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 422.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_rlxo7")
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -150.0
+offset_top = -211.0
+offset_right = 150.0
+offset_bottom = 211.0
+pivot_offset = Vector2(150, 211)
+script = ExtResource("2_k2wow")

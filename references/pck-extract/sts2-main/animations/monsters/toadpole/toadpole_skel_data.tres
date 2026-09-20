@@ -1,0 +1,23 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=6 format=3 uid="uid://8cm0rb3ot4e2"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b43ufmrvh71is" path="res://animations/monsters/toadpole/toadpole.atlas" id="1_w4pnv"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bits3b007mj4n" path="res://animations/monsters/toadpole/toadpole.skel" id="2_4tc28"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_tcfl6"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_k22dl"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_oowxg"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_w4pnv")
+skeleton_file_res = ExtResource("2_4tc28")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_tcfl6"), SubResource("SpineAnimationMix_k22dl"), SubResource("SpineAnimationMix_oowxg")]

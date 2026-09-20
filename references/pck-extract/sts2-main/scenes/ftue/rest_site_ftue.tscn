@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://lnp70evwx3t3"]
+
+[ext_resource type="Script" uid="uid://dxuyqs6kpm76b" path="res://src/Core/Nodes/Ftue/NRestSiteFtue.cs" id="1_ll4wk"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_ll4wk"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="3_t0mtu"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="4_hdy6y"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="5_vnpio"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_m06bk"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="7_s2je3"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="8_rp7lt"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="9_6126j"]
+
+[node name="RestSiteFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ll4wk")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FtuePopup" type="TextureRect" parent="."]
+material = ExtResource("2_ll4wk")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = 103.0
+offset_right = 291.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_t0mtu")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="FtueConfirmButton" parent="FtuePopup" instance=ExtResource("4_hdy6y")]
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -137.5
+offset_top = -67.0
+offset_right = 137.5
+offset_bottom = 8.0
+grow_vertical = 0
+
+[node name="Header" type="Label" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.22, 0.192793, 0.1034, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_vnpio")
+theme_override_font_sizes/font_size = 26
+text = "Tip: 	Resting"
+vertical_alignment = 1
+script = ExtResource("6_m06bk")
+MaxFontSize = 26
+
+[node name="DescriptionContainer" type="MarginContainer" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 73.0
+offset_right = -35.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 0
+
+[node name="Description" type="RichTextLabel" parent="FtuePopup/DescriptionContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_s2je3")
+theme_override_fonts/bold_font = ExtResource("8_rp7lt")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "At a rest site, you can stop and take a breather.
+
+After selecting one of the options, you must move on, so choose wisely!"
+scroll_active = false
+script = ExtResource("9_6126j")
+MaxFontSize = 22

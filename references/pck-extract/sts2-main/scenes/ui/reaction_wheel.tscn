@@ -1,0 +1,493 @@
+[gd_scene load_steps=14 format=3 uid="uid://cx5drrrs5pc4n"]
+
+[ext_resource type="Script" uid="uid://bjfs80y2d5tdm" path="res://src/Core/Nodes/Reaction/NReactionWheel.cs" id="1_tit4w"]
+[ext_resource type="Texture2D" uid="uid://cq6lxd0d8axqj" path="res://images/ui/emote/wedge_2.png" id="2_fwywp"]
+[ext_resource type="Texture2D" uid="uid://ft7c6dms8rrf" path="res://images/ui/emote/exclaim.png" id="2_vk4v6"]
+[ext_resource type="Texture2D" uid="uid://cca5fuw18r7yv" path="res://images/ui/emote/skull.png" id="3_01x8y"]
+[ext_resource type="Texture2D" uid="uid://cwsjqpin06jwp" path="res://images/ui/emote/question.png" id="3_4sfeu"]
+[ext_resource type="Script" uid="uid://d1lhwl854egm1" path="res://src/Core/Nodes/Reaction/NReactionWheelWedge.cs" id="3_bh1dq"]
+[ext_resource type="Texture2D" uid="uid://ch8i3pap3e6xl" path="res://images/ui/emote/thumb_down.png" id="4_3il18"]
+[ext_resource type="Texture2D" uid="uid://bqdsxnj8vxlcd" path="res://images/ui/emote/heart.png" id="4_ua58l"]
+[ext_resource type="Texture2D" uid="uid://djua54u4ky1y5" path="res://images/ui/emote/slime_sad.png" id="5_0tylc"]
+[ext_resource type="Texture2D" uid="uid://j30u0j1mxme4" path="res://images/ui/emote/wedge_shadow.png" id="5_fnj2h"]
+[ext_resource type="Texture2D" uid="uid://dow58gbiwbuik" path="res://images/ui/emote/thumb_up.png" id="8_wc6xd"]
+[ext_resource type="Texture2D" uid="uid://d2xldvclojl2c" path="res://images/ui/emote/happy_cultist.png" id="9_xd1sd"]
+[ext_resource type="Texture2D" uid="uid://dhkkay27ygtmh" path="res://images/packed/map/icons/map_marker_ironclad.png" id="10_p1tn2"]
+
+[node name="ReactionWheel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -124.0
+offset_right = -1545.0
+offset_bottom = -704.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_tit4w")
+
+[node name="RightWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 79.3333
+offset_top = -94.0
+offset_right = 261.333
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="RightWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -35.5
+offset_right = 42.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vk4v6")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="RightWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.3332
+offset_top = -83.3333
+offset_right = 101.667
+offset_bottom = 104.667
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DownRightWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 122.0
+offset_top = -11.3333
+offset_right = 304.0
+offset_bottom = 176.667
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785398
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="DownRightWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.1802
+offset_top = 0.0452347
+offset_right = 24.8198
+offset_bottom = 81.0452
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.785398
+texture = ExtResource("3_01x8y")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="DownRightWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.9151
+offset_top = -94.0001
+offset_right = 106.085
+offset_bottom = 93.9998
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DownWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 92.6667
+offset_top = 78.0
+offset_right = 274.667
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="DownWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 40.0
+offset_right = 44.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5708
+texture = ExtResource("4_3il18")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="DownWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.3335
+offset_top = -104.667
+offset_right = 101.666
+offset_bottom = 83.3333
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DownLeftWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.66666
+offset_top = 120.667
+offset_right = 190.667
+offset_bottom = 308.667
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 2.35619
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="DownLeftWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 4.4594
+offset_top = 62.2706
+offset_right = 88.4594
+offset_bottom = 146.271
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -2.35619
+texture = ExtResource("5_0tylc")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="DownLeftWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0001
+offset_top = -109.085
+offset_right = 90.9996
+offset_bottom = 78.9151
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LeftWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.3333
+offset_top = 94.0
+offset_right = 98.6667
+offset_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.14159
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="LeftWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 42.0
+offset_top = 42.0
+offset_right = 126.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.14159
+texture = ExtResource("3_4sfeu")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="LeftWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.667
+offset_top = -104.667
+offset_right = 80.3336
+offset_bottom = 83.3336
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UpLeftWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.667
+offset_top = 12.6667
+offset_right = 57.3333
+offset_bottom = 200.667
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.92699
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="UpLeftWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 56.0782
+offset_top = -11.9756
+offset_right = 140.078
+offset_bottom = 59.0244
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.92699
+texture = ExtResource("4_ua58l")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="UpLeftWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.085
+offset_top = -94.0002
+offset_right = 75.9146
+offset_bottom = 93.9998
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UpWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.3333
+offset_top = -76.6667
+offset_right = 86.6667
+offset_bottom = 111.333
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 4.71239
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="UpWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -39.0
+offset_right = 120.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -4.71239
+texture = ExtResource("8_wc6xd")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="UpWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.667
+offset_top = -83.3332
+offset_right = 80.3331
+offset_bottom = 104.667
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UpRightWedge" type="TextureRect" parent="."]
+self_modulate = Color(0.878431, 0.976471, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -120.0
+offset_right = 172.0
+offset_bottom = 67.9999
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 5.49779
+texture = ExtResource("2_fwywp")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_bh1dq")
+
+[node name="TextureRect" type="TextureRect" parent="UpRightWedge"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.923874
+offset_top = -57.2304
+offset_right = 85.9239
+offset_bottom = 26.7696
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -5.49779
+texture = ExtResource("9_xd1sd")
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="UpRightWedge"]
+self_modulate = Color(0, 0, 0, 0.12549)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -78.915
+offset_right = 90.9998
+offset_bottom = 109.085
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fnj2h")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Marker" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 24)
+texture = ExtResource("10_p1tn2")
+expand_mode = 1
+stretch_mode = 5

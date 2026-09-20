@@ -1,0 +1,218 @@
+[gd_scene load_steps=19 format=3 uid="uid://dkx5af27qyri6"]
+
+[ext_resource type="PackedScene" uid="uid://ewa1gwt3sc0o" path="res://scenes/cards/card.tscn" id="1_h1q4a"]
+[ext_resource type="Script" uid="uid://j6rd1mtyvpv8" path="res://src/Core/Nodes/Multiplayer/NMultiplayerPlayerIntentHandler.cs" id="1_m7flx"]
+[ext_resource type="Shader" uid="uid://bikvsfwlbp43n" path="res://shaders/card_ripple.gdshader" id="2_s4a01"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_est2b"]
+[ext_resource type="PackedScene" uid="uid://chhto1xfrbjbq" path="res://scenes/relics/relic.tscn" id="4_ujjdv"]
+[ext_resource type="PackedScene" uid="uid://cfdvcvbtmi0gt" path="res://scenes/potions/potion.tscn" id="5_2cwtq"]
+[ext_resource type="Shader" uid="uid://wosdwn1rt2pn" path="res://shaders/overlay_blend.gdshader" id="5_u05nx"]
+[ext_resource type="Script" uid="uid://c345k2a15lfhv" path="res://src/Core/Nodes/Multiplayer/NMultiplayerCardIntent.cs" id="5_w6ue7"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="6_1q0wj"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_phu72"]
+[ext_resource type="PackedScene" uid="uid://duiwh5ifqrk1s" path="res://scenes/combat/remote_targeting_indicator.tscn" id="9_imxpu"]
+[ext_resource type="PackedScene" uid="uid://bdn2wg65fw7oa" path="res://scenes/combat/power.tscn" id="11_ojs1j"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_iitmm"]
+viewport_path = NodePath("CardIntent/CardSubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqj8u"]
+resource_local_to_scene = true
+shader = ExtResource("2_s4a01")
+shader_parameter/ease = 0.005
+shader_parameter/modulo_width = 0.02
+shader_parameter/width = 0.0
+shader_parameter/ripple_speed = 0.03
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpn34"]
+resource_local_to_scene = true
+shader = ExtResource("5_u05nx")
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tilo7"]
+resource_local_to_scene = true
+shader = ExtResource("3_est2b")
+shader_parameter/h = 0.55
+shader_parameter/s = 1.5
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp7co"]
+resource_local_to_scene = true
+shader = ExtResource("3_est2b")
+shader_parameter/h = 0.515
+shader_parameter/s = 1.727
+shader_parameter/v = 0.9
+
+[sub_resource type="FontVariation" id="FontVariation_vjp8c"]
+base_font = ExtResource("6_1q0wj")
+spacing_glyph = 2
+
+[node name="MultiplayerPlayerIntent" type="Control"]
+modulate = Color(1, 1, 1, 0.490196)
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_m7flx")
+
+[node name="CardIntent" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -58.0
+offset_right = 46.0
+offset_bottom = 54.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = SubResource("ViewportTexture_iitmm")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("5_w6ue7")
+
+[node name="CardSubViewport" type="SubViewport" parent="CardIntent"]
+transparent_bg = true
+gui_disable_input = true
+sdf_scale = 0
+size = Vector2i(180, 225)
+render_target_update_mode = 4
+
+[node name="Card" parent="CardIntent/CardSubViewport" instance=ExtResource("1_h1q4a")]
+unique_name_in_owner = true
+offset_left = 90.0
+offset_top = 112.5
+offset_right = 90.0
+offset_bottom = 112.5
+scale = Vector2(0.5, 0.5)
+
+[node name="Highlight" parent="CardIntent/CardSubViewport/Card/CardContainer" index="1"]
+material = SubResource("ShaderMaterial_nqj8u")
+
+[node name="AncientHighlight" parent="CardIntent/CardSubViewport/Card/CardContainer" index="3"]
+material = SubResource("ShaderMaterial_mpn34")
+
+[node name="Frame" parent="CardIntent/CardSubViewport/Card/CardContainer" index="7"]
+material = SubResource("ShaderMaterial_tilo7")
+
+[node name="PortraitBorder" parent="CardIntent/CardSubViewport/Card/CardContainer" index="10"]
+material = SubResource("ShaderMaterial_qp7co")
+
+[node name="TitleBanner" parent="CardIntent/CardSubViewport/Card/CardContainer" index="11"]
+material = SubResource("ShaderMaterial_qp7co")
+
+[node name="ThinkyDots" type="RichTextLabel" parent="CardIntent"]
+visible = false
+layout_mode = 0
+offset_left = 52.0
+offset_top = 48.0
+offset_right = 153.0
+offset_bottom = 176.0
+mouse_filter = 2
+theme_override_constants/outline_size = 15
+theme_override_fonts/normal_font = SubResource("FontVariation_vjp8c")
+theme_override_font_sizes/normal_font_size = 75
+bbcode_enabled = true
+text = "[thinky_dots]...[/thinky_dots]"
+fit_content = true
+scroll_active = false
+script = ExtResource("7_phu72")
+AutoSizeEnabled = false
+
+[node name="RelicIntent" parent="." instance=ExtResource("4_ujjdv")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ThinkyDots" type="RichTextLabel" parent="RelicIntent"]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 5.0
+offset_right = 119.0
+offset_bottom = 133.0
+mouse_filter = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = SubResource("FontVariation_vjp8c")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[thinky_dots]...[/thinky_dots]"
+fit_content = true
+scroll_active = false
+script = ExtResource("7_phu72")
+AutoSizeEnabled = false
+
+[node name="PotionIntent" parent="." instance=ExtResource("5_2cwtq")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.490196)
+layout_mode = 1
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="ThinkyDots" type="RichTextLabel" parent="PotionIntent"]
+visible = false
+layout_mode = 0
+offset_left = 10.0
+offset_top = -2.0
+offset_right = 111.0
+offset_bottom = 126.0
+mouse_filter = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = SubResource("FontVariation_vjp8c")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[thinky_dots]...[/thinky_dots]"
+fit_content = true
+scroll_active = false
+script = ExtResource("7_phu72")
+AutoSizeEnabled = false
+
+[node name="PowerIntent" parent="." instance=ExtResource("11_ojs1j")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 13.0
+offset_top = 16.0
+offset_right = 61.0
+offset_bottom = 56.0
+
+[node name="ThinkyDots" type="RichTextLabel" parent="PowerIntent"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = -16.0
+offset_right = 105.0
+offset_bottom = 112.0
+mouse_filter = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = SubResource("FontVariation_vjp8c")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[thinky_dots]...[/thinky_dots]"
+fit_content = true
+scroll_active = false
+script = ExtResource("7_phu72")
+AutoSizeEnabled = false
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TargetingIndicator" parent="." instance=ExtResource("9_imxpu")]
+unique_name_in_owner = true
+position = Vector2(34, 34)
+
+[editable path="CardIntent/CardSubViewport/Card"]

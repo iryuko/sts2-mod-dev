@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://corwahdkc7xww"]
+
+[ext_resource type="Script" uid="uid://bjjal2wcswang" path="res://src/Core/Debug/DebugActMap.cs" id="1_ekwjx"]
+[ext_resource type="PackedScene" uid="uid://sm6dqs1oybao" path="res://scenes/screens/map/map_screen.tscn" id="2_1bns4"]
+
+[node name="DebugActMap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekwjx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.109804, 0, 0, 1)
+
+[node name="MapScreen" parent="." instance=ExtResource("2_1bns4")]
+unique_name_in_owner = true
+layout_mode = 1

@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://coh0qq5nn0h7t"]
+
+[ext_resource type="Shader" uid="uid://b002u2hapobl3" path="res://shaders/vfx/vfx_noisy_dissolve_shader.tres" id="1_hh57r"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3xqhu"]
+noise_type = 4
+frequency = 0.063
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vqkc4"]
+noise = SubResource("FastNoiseLite_3xqhu")
+
+[resource]
+shader = ExtResource("1_hh57r")
+shader_parameter/step = -0.1
+shader_parameter/NoiseTexture = SubResource("NoiseTexture2D_vqkc4")

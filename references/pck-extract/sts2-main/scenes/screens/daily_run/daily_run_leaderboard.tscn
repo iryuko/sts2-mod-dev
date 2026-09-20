@@ -1,0 +1,367 @@
+[gd_scene load_steps=17 format=3 uid="uid://bdqspdbjjiqv5"]
+
+[ext_resource type="Script" uid="uid://y5lnyt4hgaxa" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunLeaderboard.cs" id="1_gvldw"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="2_s5div"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_s03yj"]
+[ext_resource type="PackedScene" uid="uid://c42e8hjphxta7" path="res://scenes/screens/paginator.tscn" id="4_n2cor"]
+[ext_resource type="Script" uid="uid://cnrlg713728c8" path="res://src/Core/Nodes/Screens/DailyRun/NLeaderboardDayPaginator.cs" id="5_72gue"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_k5d6d"]
+[ext_resource type="Script" uid="uid://c28gslq0j6r3b" path="res://src/Core/Nodes/Screens/DailyRun/NLeaderboardPageArrow.cs" id="7_qhwhs"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="8_e70m7"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="9_s5div"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="22_k4pmi"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="23_0ylc6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gsjt8"]
+resource_local_to_scene = true
+shader = ExtResource("6_k5d6d")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_32ft3"]
+resource_local_to_scene = true
+shader = ExtResource("6_k5d6d")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnipv"]
+resource_local_to_scene = true
+shader = ExtResource("6_k5d6d")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4npk"]
+resource_local_to_scene = true
+shader = ExtResource("6_k5d6d")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tkdq"]
+resource_local_to_scene = true
+shader = ExtResource("6_k5d6d")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="Leaderboards" type="Control"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gvldw")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -287.0
+offset_right = 256.0
+offset_bottom = 413.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreContainer" type="VBoxContainer" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="NoScoresIndicator" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("8_e70m7")
+theme_override_font_sizes/font_size = 28
+text = "No scores :("
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_s03yj")
+AutoSizeEnabled = false
+
+[node name="NoFriendsIndicator" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("8_e70m7")
+theme_override_font_sizes/font_size = 28
+text = "No friends oh no!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_s03yj")
+AutoSizeEnabled = false
+
+[node name="LoadingText" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.49803922, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.1625, 0.25, 0.075, 0.7529412)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("9_s5div")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "[thinky_dots]Fetching Scores...[/thinky_dots]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("22_k4pmi")
+AutoSizeEnabled = false
+MinFontSize = 72
+MaxFontSize = 72
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="VerticalSeparator1" type="ColorRect" parent="Panel"]
+visible = false
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_right = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5019608, 0.4862745, 0.44313726, 1)
+
+[node name="Shadow" type="ColorRect" parent="Panel/VerticalSeparator1"]
+show_behind_parent = true
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="VerticalSeparator2" type="ColorRect" parent="Panel"]
+visible = false
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 171.0
+offset_right = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5019608, 0.4862745, 0.44313726, 1)
+
+[node name="Shadow" type="ColorRect" parent="Panel/VerticalSeparator2"]
+show_behind_parent = true
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -540.0
+offset_bottom = -360.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_s5div")
+theme_override_font_sizes/font_size = 36
+text = "Leaderboards!?"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_s03yj")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Paginator" parent="." instance=ExtResource("4_n2cor")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -376.0
+offset_right = 190.0
+offset_bottom = -312.0
+grow_horizontal = 2
+scale = Vector2(0.85, 0.85)
+pivot_offset = Vector2(190, 32)
+script = ExtResource("5_72gue")
+
+[node name="LeftArrow" parent="Paginator" index="0"]
+material = SubResource("ShaderMaterial_gsjt8")
+script = ExtResource("7_qhwhs")
+
+[node name="Image" parent="Paginator/LeftArrow" index="0"]
+material = SubResource("ShaderMaterial_32ft3")
+
+[node name="LabelContainer" parent="Paginator" index="1"]
+offset_left = 0.0
+offset_right = 0.0
+
+[node name="Label" parent="Paginator/LabelContainer/Mask" index="0"]
+theme_override_colors/font_color = Color(0.521569, 0.807843, 0.921569, 1)
+text = "May 14, 2025"
+MinFontSize = 24
+
+[node name="VfxLabel" parent="Paginator/LabelContainer/Mask" index="1"]
+theme_override_colors/font_color = Color(0.521569, 0.807843, 0.921569, 1)
+MinFontSize = 24
+
+[node name="RightArrow" parent="Paginator" index="2"]
+script = ExtResource("7_qhwhs")
+
+[node name="Image" parent="Paginator/RightArrow" index="0"]
+material = SubResource("ShaderMaterial_nnipv")
+
+[node name="LeftArrow" type="Control" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gsjt8")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.0
+offset_top = -58.5
+offset_right = -310.0
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+script = ExtResource("7_qhwhs")
+
+[node name="Image" type="TextureRect" parent="LeftArrow"]
+material = SubResource("ShaderMaterial_n4npk")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("23_0ylc6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="Control" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_gsjt8")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 290.0
+offset_top = -52.0
+offset_right = 386.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+script = ExtResource("7_qhwhs")
+
+[node name="Image" type="TextureRect" parent="RightArrow"]
+material = SubResource("ShaderMaterial_5tkdq")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("23_0ylc6")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[editable path="Paginator"]

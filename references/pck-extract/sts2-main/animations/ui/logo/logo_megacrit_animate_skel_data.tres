@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bmmhh14hodcd3"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://d4fj07egu78og" path="res://animations/ui/logo/logo_megacrit_animate.atlas" id="1_x2xsu"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bwcvhbi4t0lvw" path="res://animations/ui/logo/logo_megacrit_animate.skel" id="2_exptv"]
+
+[resource]
+atlas_res = ExtResource("1_x2xsu")
+skeleton_file_res = ExtResource("2_exptv")

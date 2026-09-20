@@ -1,0 +1,23 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=6 format=3 uid="uid://bkvvfijt15dij"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://3h2c4t1nsylj" path="res://animations/monsters/frog_knight/frog_knight.atlas" id="1_owdfi"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnhy55sxl0k3" path="res://animations/monsters/frog_knight/frog_knight.skel" id="2_rpn5c"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_der31"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_4dk5h"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ff3va"]
+from = "attack_tongue"
+to = "idle_loop"
+mix = 0.02
+
+[resource]
+atlas_res = ExtResource("1_owdfi")
+skeleton_file_res = ExtResource("2_rpn5c")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_der31"), SubResource("SpineAnimationMix_4dk5h"), SubResource("SpineAnimationMix_ff3va")]

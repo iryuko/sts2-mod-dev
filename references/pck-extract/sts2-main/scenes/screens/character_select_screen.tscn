@@ -1,0 +1,469 @@
+[gd_scene load_steps=26 format=3 uid="uid://qqj6kxbjm3pp"]
+
+[ext_resource type="Script" uid="uid://dhli2e3d2aaoj" path="res://src/Core/Nodes/Screens/CharacterSelect/NCharacterSelectScreen.cs" id="1_oagra"]
+[ext_resource type="Script" uid="uid://bwr42v37ujq67" path="res://src/Core/Nodes/Screens/CharacterSelect/NCharacterSelectScreenBg.cs" id="3_l0m2m"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_36sm0"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="4_jv337"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="4_sclp6"]
+[ext_resource type="Texture2D" uid="uid://bi1dpaj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="6_4udyw"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="6_uvqac"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="7_41hqo"]
+[ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="8_4udyw"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="8_k30du"]
+[ext_resource type="Texture2D" uid="uid://pr1rqg2t44qx" path="res://images/debug/placeholder_64.png" id="11_gxq8b"]
+[ext_resource type="PackedScene" uid="uid://yo7mkjn0r07a" path="res://scenes/screens/ascension_panel.tscn" id="12_gxq8b"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="13_dxegn"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="15_r76k8"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="16_neaav"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="17_6exr3"]
+[ext_resource type="Texture2D" uid="uid://q1y4ux" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="19_g6e16"]
+[ext_resource type="PackedScene" uid="uid://i17vjyd5x6eg" path="res://scenes/screens/remote_player_container.tscn" id="20_3temk"]
+[ext_resource type="PackedScene" uid="uid://ieqi0igl308n" path="res://scenes/screens/char_select/char_select_act_dropdown.tscn" id="21_kym8p"]
+[ext_resource type="PackedScene" uid="uid://fmmmk2blulyg" path="res://scenes/screens/char_select/char_select_button.tscn" id="22_4mpcg"]
+
+[sub_resource type="FontVariation" id="FontVariation_3rwao"]
+base_font = ExtResource("8_k30du")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_ueawe"]
+base_font = ExtResource("6_uvqac")
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="FontVariation_3c48f"]
+base_font = ExtResource("8_k30du")
+spacing_glyph = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxegn"]
+resource_local_to_scene = true
+shader = ExtResource("15_r76k8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3temk"]
+resource_local_to_scene = true
+shader = ExtResource("15_r76k8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CharacterSelectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_oagra")
+_charSelectButtonScene = ExtResource("22_4mpcg")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="StaticBg" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1348.0
+offset_top = -620.0
+offset_right = 1212.0
+offset_bottom = 580.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(1280, 600)
+script = ExtResource("3_l0m2m")
+
+[node name="AnimatedBg" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -388.0
+offset_top = -80.0
+offset_right = 252.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(1280, 600)
+script = ExtResource("3_l0m2m")
+
+[node name="InfoPanel" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -664.0
+offset_top = -195.0
+offset_right = -138.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="InfoPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -24.0
+offset_right = 87.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_neaav")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoPanel"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -21.0
+offset_right = 562.0
+offset_bottom = 359.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Name" type="Label" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("4_jv337")
+theme_override_font_sizes/font_size = 80
+text = "The Ironclad"
+vertical_alignment = 1
+script = ExtResource("17_6exr3")
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="HpGoldSpacer" type="Control" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HpGold" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer"]
+layout_mode = 0
+offset_top = -26.0
+offset_right = 551.0
+offset_bottom = 14.0
+theme_override_constants/separation = 48
+
+[node name="Hp" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Hp"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_4udyw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Hp"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.392157, 0.392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_3rwao")
+theme_override_font_sizes/font_size = 28
+text = "80/80"
+script = ExtResource("17_6exr3")
+AutoSizeEnabled = false
+
+[node name="Gold" type="HBoxContainer" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Gold"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_4udyw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="InfoPanel/VBoxContainer/HpGoldSpacer/HpGold/Gold"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = SubResource("FontVariation_3rwao")
+theme_override_font_sizes/font_size = 28
+text = "99"
+script = ExtResource("17_6exr3")
+AutoSizeEnabled = false
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="InfoPanel/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_ueawe")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "The remaining soldier of the Ironclads.
+Sold his soul to harness demonic energies."
+fit_content = true
+scroll_active = false
+script = ExtResource("4_36sm0")
+AutoSizeEnabled = false
+MaxFontSize = 24
+
+[node name="Relic" type="Control" parent="InfoPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="InfoPanel/VBoxContainer/Relic"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 72.0
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("11_gxq8b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="InfoPanel/VBoxContainer/Relic/Icon"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_gxq8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Name" type="MarginContainer" parent="InfoPanel/VBoxContainer/Relic"]
+layout_mode = 1
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 492.0
+offset_bottom = 48.0
+theme_override_constants/margin_top = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InfoPanel/VBoxContainer/Relic/Name"]
+clip_contents = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = SubResource("FontVariation_3c48f")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Burning Blood"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_36sm0")
+MinFontSize = 16
+MaxFontSize = 24
+
+[node name="Description" type="RichTextLabel" parent="InfoPanel/VBoxContainer/Relic"]
+clip_contents = false
+layout_mode = 1
+offset_left = 72.0
+offset_top = 44.0
+offset_right = 492.0
+offset_bottom = 101.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0.0313726, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("6_uvqac")
+theme_override_fonts/bold_font = ExtResource("8_k30du")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "At the end of combat, heal [green]6[/green] HP."
+scroll_active = false
+script = ExtResource("4_36sm0")
+MinFontSize = 12
+MaxFontSize = 24
+
+[node name="AscensionPanel" parent="." instance=ExtResource("12_gxq8b")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -317.0
+offset_top = -342.0
+offset_right = 317.0
+offset_bottom = -225.0
+
+[node name="CharSelectButtons" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonContainer" type="HBoxContainer" parent="CharSelectButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -237.5
+offset_top = -189.0
+offset_right = 237.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ReadyAndWaitingPanel" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -368.0
+offset_top = -195.0
+offset_right = 368.0
+offset_bottom = -73.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="ReadyAndWaitingPanel"]
+modulate = Color(0, 0, 0, 0.5019608)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_neaav")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="WaitingForPlayers" type="RichTextLabel" parent="ReadyAndWaitingPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.498039, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("13_dxegn")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "[thinky_dots]Waiting for other players...[/thinky_dots]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_36sm0")
+MinFontSize = 32
+MaxFontSize = 32
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ConfirmButton" parent="." instance=ExtResource("7_41hqo")]
+layout_mode = 1
+
+[node name="ControllerIcon" parent="ConfirmButton/Image" index="1"]
+material = SubResource("ShaderMaterial_dxegn")
+
+[node name="RemotePlayerContainer" parent="." instance=ExtResource("20_3temk")]
+layout_mode = 1
+offset_bottom = 399.0
+
+[node name="ActLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -395.0
+offset_top = 34.0
+offset_right = -335.0
+offset_bottom = 64.0
+grow_horizontal = 0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_ueawe")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Act 1:"
+scroll_active = false
+script = ExtResource("4_36sm0")
+AutoSizeEnabled = false
+MaxFontSize = 24
+
+[node name="ActDropdown" parent="." instance=ExtResource("21_kym8p")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="CharacterUnlockAnimationBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.784314)
+
+[node name="BackButton" parent="." instance=ExtResource("4_sclp6")]
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("4_sclp6")]
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("19_g6e16")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_3temk")
+
+[editable path="ConfirmButton"]
+[editable path="UnreadyButton"]

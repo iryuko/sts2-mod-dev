@@ -1,0 +1,197 @@
+[gd_scene load_steps=6 format=3 uid="uid://dai58veh2tbba"]
+
+[ext_resource type="Script" uid="uid://bl2o387qlabwk" path="res://src/Core/Nodes/Multiplayer/NMultiplayerPlayerExpandedState.cs" id="1_1l2x8"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_xorpq"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_sxldq"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_fnfh0"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="16_35kqy"]
+
+[node name="RunHistory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1l2x8")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ScreenContents" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 250
+
+[node name="Container" type="VBoxContainer" parent="ScreenContents"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container"]
+layout_mode = 2
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 6
+
+[node name="PlayerNameLabel" type="RichTextLabel" parent="ScreenContents/Container/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(800, 64)
+layout_mode = 2
+mouse_filter = 1
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/line_separation = -3
+theme_override_fonts/normal_font = ExtResource("2_xorpq")
+theme_override_fonts/bold_font = ExtResource("3_sxldq")
+theme_override_font_sizes/bold_italics_font_size = 48
+theme_override_font_sizes/italics_font_size = 48
+theme_override_font_sizes/mono_font_size = 48
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 48
+bbcode_enabled = true
+text = "[center][blue]I_Have_A_Conspicuously_Long_Name[/blue] the [gold]Ironclad[/gold]"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_fnfh0")
+MinFontSize = 18
+MaxFontSize = 48
+
+[node name="Spacer" type="Control" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Relics" type="VBoxContainer" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="RelicsHeader" type="RichTextLabel" parent="ScreenContents/Container/Relics"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("2_xorpq")
+theme_override_fonts/bold_font = ExtResource("3_sxldq")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[gold]Relics (x)[/gold]:"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_fnfh0")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/Relics"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="RelicContainer" type="HFlowContainer" parent="ScreenContents/Container/Relics/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Potions" type="VBoxContainer" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="PotionsHeader" type="RichTextLabel" parent="ScreenContents/Container/Potions"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_fonts/normal_font = ExtResource("2_xorpq")
+theme_override_fonts/bold_font = ExtResource("3_sxldq")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[gold]Potions[/gold]:"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_fnfh0")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/Potions"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="PotionContainer" type="HFlowContainer" parent="ScreenContents/Container/Potions/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="Cards" type="VBoxContainer" parent="ScreenContents/Container"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CardsHeader" type="RichTextLabel" parent="ScreenContents/Container/Cards"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_fonts/normal_font = ExtResource("2_xorpq")
+theme_override_fonts/bold_font = ExtResource("3_sxldq")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[gold]Cards (30)[/gold]:"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_fnfh0")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContents/Container/Cards"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 24
+
+[node name="CardContainer" type="HFlowContainer" parent="ScreenContents/Container/Cards/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BackButton" parent="." instance=ExtResource("16_35kqy")]
+unique_name_in_owner = true
+layout_mode = 1

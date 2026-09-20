@@ -1,0 +1,1884 @@
+[gd_scene load_steps=44 format=3 uid="uid://magdoc62lhc7"]
+
+[ext_resource type="Texture2D" uid="uid://dgtoey1q52kw8" path="res://images/rooms/hive/hive_00.png" id="1_n8c7d"]
+[ext_resource type="Texture2D" uid="uid://c8g4ov5u44xti" path="res://images/vfx/monsters/the_insatiable/sand_vfx.png" id="1_xfncn"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="2_41j0v"]
+[ext_resource type="Texture2D" uid="uid://cuta8qwulfuvf" path="res://images/rooms/hive/hive_01_a.png" id="2_dj5ox"]
+[ext_resource type="Texture2D" uid="uid://byeyfc5f6qkcm" path="res://images/characters/the_insatiable_placeholder.png" id="2_o4nn6"]
+[ext_resource type="Texture2D" uid="uid://gvoysorwhaiq" path="res://images/vfx/monsters/the_insatiable/sand_cloud.png" id="3_7rq4l"]
+[ext_resource type="Texture2D" uid="uid://qsigroya0krm" path="res://images/rooms/hive/hive_02_a.png" id="3_p8gxs"]
+[ext_resource type="Texture2D" uid="uid://dp7d0vcxhq63s" path="res://images/rooms/hive/hive_03_a.png" id="4_56imk"]
+[ext_resource type="Texture2D" uid="uid://kqsnxw3p8hkl" path="res://images/rooms/hive/hive_04_a.png" id="5_jee6o"]
+[ext_resource type="Texture2D" uid="uid://bah470ft7vsxx" path="res://images/rooms/hive/the_insatiable/battlebg_hive_the_insatiable_floor.png" id="5_knabm"]
+[ext_resource type="Texture2D" uid="uid://cfyop1k62som5" path="res://images/rooms/hive/the_insatiable/sand_pillar_base.png" id="7_d8q3i"]
+[ext_resource type="Shader" uid="uid://bbpxvkxrnd5fg" path="res://shaders/vfx/the_insatiable_sand_fall_2.gdshader" id="8_dy556"]
+[ext_resource type="Texture2D" uid="uid://botag5my1vqf5" path="res://images/rooms/hive/the_insatiable/sand_pile.png" id="9_1wp6c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lcxva"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_dcpmd"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_5gcuk"]
+offsets = PackedFloat32Array(0, 0.0758853, 0.62226)
+colors = PackedColorArray(0.701961, 0.643137, 0.52549, 0, 0.729247, 0.567703, 0.420642, 0.694118, 0.701961, 0.643137, 0.52549, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_18npn"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_po1ev"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_20msj"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.95004), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lyfvg"]
+offsets = PackedFloat32Array(0.0084317, 0.283305, 0.527825, 0.733558, 1)
+colors = PackedColorArray(0.585032, 0.393428, 0.199981, 0, 0.835294, 0.686275, 0.552941, 0.470588, 0.898039, 0.796078, 0.568627, 0.462745, 0.807843, 0.682353, 0.407843, 0.498039, 0.68641, 0.509094, 0.163543, 0)
+
+[sub_resource type="Curve" id="Curve_4ykm3"]
+_data = [Vector2(0, 0.979808), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rclgr"]
+offsets = PackedFloat32Array(0, 0.258845, 0.556492)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="Curve" id="Curve_hjpvu"]
+_limits = [0.0, 86.57, 0.0, 1.0]
+_data = [Vector2(0, 0.735827), 0.0, 0.0, 0, 0, Vector2(1e-05, 1.82181), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_6qfam"]
+colors = PackedColorArray(0.704073, 0.592869, 0.427807, 0.278431, 0.521569, 0.427451, 0.286275, 0.0745098)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yel72"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qh3cx"]
+noise = SubResource("FastNoiseLite_yel72")
+seamless = true
+normalize = false
+seamless_blend_skirt = 0.293
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kf804"]
+shader = ExtResource("8_dy556")
+shader_parameter/noise = SubResource("NoiseTexture2D_qh3cx")
+shader_parameter/mask = ExtResource("7_d8q3i")
+shader_parameter/speed = 0.5
+shader_parameter/strength = 0.319
+shader_parameter/angle_degrees = 90.0
+
+[sub_resource type="Curve" id="Curve_afab3"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.9349), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_6hekv"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.0245776, 0.685348), 0.0, 0.0, 0, 0, Vector2(1, 1.74424), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_grbib"]
+_data = [Vector2(0.030722, 0.542325), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_d7ppx"]
+offsets = PackedFloat32Array(0.0084317, 0.202361, 0.413153, 0.74199, 1)
+colors = PackedColorArray(0.631373, 0.52549, 0.364706, 1, 0.852214, 0.756364, 0.614133, 0.592157, 0.808995, 0.670208, 0.462983, 0.533333, 0.696428, 0.619857, 0.482283, 0.533333, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_57c5c"]
+_data = [Vector2(0, 0.163733), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_lci87"]
+colors = PackedColorArray(0.85098, 0.752941, 0.611765, 0.0862745, 0.85098, 0.752941, 0.611765, 0)
+
+[sub_resource type="Curve" id="Curve_6n8fg"]
+_data = [Vector2(0, 0.555786), 0.0, 0.0, 0, 0, Vector2(0.795699, 0.515403), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_12kmu"]
+offsets = PackedFloat32Array(0, 0.0758853, 0.131535)
+colors = PackedColorArray(0.701961, 0.643137, 0.52549, 0, 0.835294, 0.686275, 0.552941, 0.694118, 0.701961, 0.643137, 0.52549, 0)
+
+[sub_resource type="Gradient" id="Gradient_puiw1"]
+offsets = PackedFloat32Array(0, 0.241147, 0.532884, 0.568297)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="Gradient" id="Gradient_kvu3e"]
+offsets = PackedFloat32Array(0.467116, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_76grx"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0.017344), 0.0, 0.0, 0, 0, Vector2(1, 1.72793), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_lfqkb"]
+offsets = PackedFloat32Array(0.0084317, 0.288364, 0.527825, 0.740304, 1)
+colors = PackedColorArray(0.585032, 0.393428, 0.199981, 0, 0.836882, 0.685529, 0.553818, 1, 0.898039, 0.796078, 0.568627, 1, 0.809019, 0.680522, 0.406356, 1, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_hr86g"]
+offsets = PackedFloat32Array(0.0084317, 0.202361, 0.41484, 0.74199, 1)
+colors = PackedColorArray(0.585032, 0.393428, 0.199981, 0, 0.532002, 0.43653, 0.320833, 0.65098, 0.690561, 0.653815, 0.542811, 0.537255, 0.487363, 0.42896, 0.331955, 0.533333, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_gvee5"]
+offsets = PackedFloat32Array(0, 0.258845, 1)
+colors = PackedColorArray(0.847059, 0.803922, 0.301961, 0, 1, 1, 1, 1, 0.780392, 0.65098, 0.403922, 0)
+
+[sub_resource type="Gradient" id="Gradient_0n1ko"]
+offsets = PackedFloat32Array(0, 0.0758853, 0.163575)
+colors = PackedColorArray(0.701961, 0.643137, 0.52549, 0, 0.835294, 0.686275, 0.552941, 0.694118, 0.701961, 0.643137, 0.52549, 0)
+
+[sub_resource type="Gradient" id="Gradient_rm8xp"]
+offsets = PackedFloat32Array(0.451939)
+colors = PackedColorArray(0.835294, 0.686275, 0.552941, 0.694118)
+
+[node name="TheInsatiableVfxTest" type="Node2D"]
+position = Vector2(324, 709)
+metadata/_edit_lock_ = true
+
+[node name="Hive00" type="Sprite2D" parent="."]
+position = Vector2(635, -152)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_n8c7d")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Hive00"]
+texture = ExtResource("2_dj5ox")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Hive00"]
+texture = ExtResource("3_p8gxs")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="Hive00"]
+visible = false
+texture = ExtResource("4_56imk")
+metadata/_edit_lock_ = true
+
+[node name="base sand clouds" type="CPUParticles2D" parent="Hive00"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(256, -242)
+scale = Vector2(3, 4)
+amount = 400
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 20.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(1250, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -5)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(0.878431, 0.878431, 0.878431, 0.235294)
+color_ramp = SubResource("Gradient_5gcuk")
+anim_offset_max = 1.0
+
+[node name="Sprite2D5" type="Sprite2D" parent="Hive00"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_knabm")
+metadata/_edit_lock_ = true
+
+[node name="ground sand" type="CPUParticles2D" parent="Hive00"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(1270, 486)
+scale = Vector2(2, 2)
+amount = 5
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_20msj")
+color = Color(1, 1, 1, 0.290196)
+color_ramp = SubResource("Gradient_lyfvg")
+anim_offset_max = 1.0
+
+[node name="ground sand 2" type="CPUParticles2D" parent="Hive00"]
+position = Vector2(1098, 438)
+scale = Vector2(1.99999, 1.99999)
+amount = 1500
+texture = ExtResource("2_41j0v")
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(3000, 300)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_rclgr")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="Hive00"]
+texture = ExtResource("5_jee6o")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall6" type="Node2D" parent="."]
+position = Vector2(1270, -1030)
+scale = Vector2(0.3, 1)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall6"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall6"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(97.0001, 395.625)
+scale = Vector2(3.64, 9.6325)
+texture = ExtResource("7_d8q3i")
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall6"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall6"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_afab3")
+split_scale = true
+scale_curve_x = SubResource("Curve_6hekv")
+scale_curve_y = SubResource("Curve_grbib")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall6"]
+modulate = Color(0.654902, 0.513726, 0.345098, 1)
+position = Vector2(96.6669, 902)
+scale = Vector2(1.18963, 0.314955)
+texture = ExtResource("9_1wp6c")
+metadata/_edit_lock_ = true
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall6"]
+visible = false
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(180, -104)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_57c5c")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_lci87")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall6"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall6"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall6"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall6"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall2" type="Node2D" parent="."]
+position = Vector2(1421, -923)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall2"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall2"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(97.0001, 395.625)
+scale = Vector2(3.64, 9.6325)
+texture = ExtResource("7_d8q3i")
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall2"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall2"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_afab3")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall2"]
+modulate = Color(0.654902, 0.513726, 0.345098, 1)
+position = Vector2(94, 889)
+scale = Vector2(1.18963, 0.501339)
+texture = ExtResource("9_1wp6c")
+metadata/_edit_lock_ = true
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall2"]
+visible = false
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(180, -104)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_57c5c")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_lci87")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall2"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall2"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall2"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall2"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall7" type="Node2D" parent="."]
+position = Vector2(-497, -1093)
+scale = Vector2(1.5, 1)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall7"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall7"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(97.0001, 395.625)
+scale = Vector2(3.64, 9.6325)
+texture = ExtResource("7_d8q3i")
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall7"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall7"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_curve = SubResource("Curve_afab3")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall7"]
+modulate = Color(0.654902, 0.513726, 0.345098, 1)
+position = Vector2(100, 888)
+scale = Vector2(1.00667, 0.501339)
+texture = ExtResource("9_1wp6c")
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall7"]
+visible = false
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(180, -104)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_57c5c")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_lci87")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall7"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall7"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall7"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall7"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall4" type="Node2D" parent="."]
+position = Vector2(90, -1017)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall4"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(137, 439)
+scale = Vector2(1.65, 9.6325)
+texture = ExtResource("7_d8q3i")
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 20.0
+lifetime_randomness = 0.1
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_afab3")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall4"]
+modulate = Color(0.654353, 0.515156, 0.346495, 1)
+position = Vector2(94, 889)
+scale = Vector2(1.18963, 0.501339)
+texture = ExtResource("9_1wp6c")
+metadata/_edit_lock_ = true
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(19, 97)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color = Color(0.807843, 0.658824, 0.470588, 0.168627)
+color_ramp = SubResource("Gradient_kvu3e")
+anim_offset_max = 1.0
+
+[node name="sand6" type="CPUParticles2D" parent="sand waterfall4"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="sand base4" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(-64, 37)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color = Color(0.807843, 0.658824, 0.470588, 0.168627)
+color_ramp = SubResource("Gradient_kvu3e")
+anim_offset_max = 1.0
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall4"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall4"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall5" type="Node2D" parent="."]
+position = Vector2(887, -1015)
+scale = Vector2(1.25, 1)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall5"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall5"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(72.8, 394)
+scale = Vector2(1.856, 9.6325)
+texture = ExtResource("7_d8q3i")
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall5"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall5"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95.0001, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_afab3")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall5"]
+modulate = Color(0.654902, 0.513726, 0.345098, 1)
+position = Vector2(94, 889)
+scale = Vector2(1.18963, 0.501339)
+texture = ExtResource("9_1wp6c")
+metadata/_edit_lock_ = true
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall5"]
+visible = false
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(180, -104)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_57c5c")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_lci87")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall5"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall5"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall5"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall5"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand base4" type="CPUParticles2D" parent="sand waterfall5"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(260.8, 90)
+amount = 500
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color = Color(0.807843, 0.658824, 0.470588, 0.223529)
+color_ramp = SubResource("Gradient_kvu3e")
+anim_offset_max = 1.0
+
+[node name="sand base4" type="CPUParticles2D" parent="sand waterfall5/sand base4"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(-77.6, -101)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+color = Color(0.807843, 0.658824, 0.470588, 0.168627)
+color_ramp = SubResource("Gradient_kvu3e")
+anim_offset_max = 1.0
+
+[node name="sand waterfall3" type="Node2D" parent="."]
+position = Vector2(476, -900)
+scale = Vector2(0.545, 0.8)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall3"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="water effect" type="Sprite2D" parent="sand waterfall3"]
+material = SubResource("ShaderMaterial_kf804")
+position = Vector2(97.0001, 395.625)
+scale = Vector2(3.64, 9.6325)
+texture = ExtResource("7_d8q3i")
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall3"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="sand waterfall3"]
+material = SubResource("CanvasItemMaterial_18npn")
+position = Vector2(95, 929)
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_afab3")
+color = Color(0.806786, 0.713419, 0.620494, 1)
+color_ramp = SubResource("Gradient_d7ppx")
+anim_offset_max = 1.0
+
+[node name="SandPile" type="Sprite2D" parent="sand waterfall3"]
+modulate = Color(0.654902, 0.513726, 0.345098, 1)
+position = Vector2(94, 889)
+scale = Vector2(1.18963, 0.501339)
+texture = ExtResource("9_1wp6c")
+metadata/_edit_lock_ = true
+
+[node name="sand base3" type="CPUParticles2D" parent="sand waterfall3"]
+visible = false
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(180, -104)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_57c5c")
+scale_curve_y = null
+color_ramp = SubResource("Gradient_lci87")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall3"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall3"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="sand waterfall3"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="sand waterfall3"]
+position = Vector2(95, 832)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 3.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(90, 3)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 50)
+radial_accel_min = 25.0
+radial_accel_max = 80.0
+scale_amount_min = 0.01
+scale_amount_max = 0.01
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.507527, 0.394962, 0.263811, 1)
+color_ramp = SubResource("Gradient_puiw1")
+metadata/_edit_lock_ = true
+
+[node name="TheInsatiable" type="Node2D" parent="."]
+position = Vector2(1209, 75)
+metadata/_edit_lock_ = true
+
+[node name="sand pit" type="CPUParticles2D" parent="TheInsatiable"]
+visible = false
+material = SubResource("CanvasItemMaterial_18npn")
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 7.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_76grx")
+color_ramp = SubResource("Gradient_lfqkb")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit3" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_18npn")
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 10.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_20msj")
+color_ramp = SubResource("Gradient_hr86g")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand pit2" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_18npn")
+amount = 15
+texture = ExtResource("1_xfncn")
+lifetime = 5.0
+preprocess = 8.0
+local_coords = true
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+angle_curve = SubResource("Curve_po1ev")
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_20msj")
+color_ramp = SubResource("Gradient_lfqkb")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand" type="CPUParticles2D" parent="TheInsatiable"]
+position = Vector2(-25, -8)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 5.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(650, 100)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_gvee5")
+metadata/_edit_lock_ = true
+
+[node name="sand2" type="CPUParticles2D" parent="TheInsatiable"]
+position = Vector2(-25, -8)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 3.0
+preprocess = 5.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(650, 125)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.576471, 0.376471, 0.258824, 0.607843)
+color_ramp = SubResource("Gradient_gvee5")
+metadata/_edit_lock_ = true
+
+[node name="sand clouds" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(-7, -45)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 5.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(250, 50)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.3
+color = Color(1, 1, 1, 0.278431)
+color_ramp = SubResource("Gradient_0n1ko")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TheInsatiable"]
+position = Vector2(-145, -368)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_o4nn6")
+metadata/_edit_lock_ = true
+
+[node name="sand clouds2" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(-7, 10)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 5.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(225, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.3
+color = Color(1, 1, 1, 0.498039)
+color_ramp = SubResource("Gradient_0n1ko")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand clouds3" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(3, 3)
+amount = 150
+texture = ExtResource("3_7rq4l")
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(175, 10)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(1, 1, 1, 0.388235)
+color_ramp = SubResource("Gradient_rm8xp")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand clouds4" type="CPUParticles2D" parent="TheInsatiable"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(3, 3)
+scale = Vector2(4, 0.5)
+amount = 150
+texture = ExtResource("3_7rq4l")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(1, 1, 1, 0.388235)
+color_ramp = SubResource("Gradient_rm8xp")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand3" type="CPUParticles2D" parent="TheInsatiable"]
+position = Vector2(182, -58)
+scale = Vector2(0.999997, 0.999997)
+amount = 100
+texture = ExtResource("2_41j0v")
+lifetime = 0.5
+preprocess = 5.0
+randomness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 123.49
+gravity = Vector2(0, 500)
+initial_velocity_max = 334.3
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_gvee5")
+metadata/_edit_lock_ = true
+
+[node name="sand4" type="CPUParticles2D" parent="TheInsatiable"]
+position = Vector2(-172, -19)
+scale = Vector2(0.999997, 0.999997)
+amount = 100
+texture = ExtResource("2_41j0v")
+lifetime = 0.5
+preprocess = 5.0
+randomness = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+spread = 123.49
+gravity = Vector2(0, 500)
+initial_velocity_max = 334.3
+linear_accel_min = 7.5
+linear_accel_max = 7.5
+radial_accel_min = 100.0
+radial_accel_max = 100.0
+scale_amount_min = 0.01
+scale_amount_max = 0.04
+scale_amount_curve = SubResource("Curve_4ykm3")
+color = Color(0.786178, 0.75185, 0.619903, 1)
+color_ramp = SubResource("Gradient_gvee5")
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall9" type="Node2D" parent="."]
+position = Vector2(-929, -997)
+scale = Vector2(3, 2)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall9"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.666667, 0.607843, 0.529412, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall9"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.665264, 0.60932, 0.529445, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall9"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.581408, 0.54423, 0.402774, 1)
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall9"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall8" type="Node2D" parent="."]
+position = Vector2(1504, -1016)
+scale = Vector2(1.5, 2)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall8"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.666667, 0.607843, 0.529412, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall8"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.666667, 0.607843, 0.529412, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall8"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.580392, 0.545098, 0.403922, 1)
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall8"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand waterfall10" type="Node2D" parent="."]
+position = Vector2(1964, -1196)
+scale = Vector2(1.5, 2)
+
+[node name="sand base" type="CPUParticles2D" parent="sand waterfall10"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.666667, 0.607843, 0.529412, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand base2" type="CPUParticles2D" parent="sand waterfall10"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(100, 27)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 4.0
+preprocess = 4.0
+local_coords = true
+direction = Vector2(0, 0)
+gravity = Vector2(0, 10)
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+split_scale = true
+scale_curve_x = SubResource("Curve_hjpvu")
+scale_curve_y = null
+color = Color(0.666667, 0.607843, 0.529412, 1)
+color_ramp = SubResource("Gradient_6qfam")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true
+
+[node name="sand5" type="CPUParticles2D" parent="sand waterfall10"]
+position = Vector2(107, -54)
+scale = Vector2(0.999997, 0.999997)
+amount = 500
+texture = ExtResource("2_41j0v")
+lifetime = 2.0
+preprocess = 2.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(100, 20)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 500)
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+scale_amount_curve = SubResource("Curve_6n8fg")
+color = Color(0.580392, 0.545098, 0.403922, 1)
+metadata/_edit_lock_ = true
+
+[node name="base sand cloud" type="CPUParticles2D" parent="sand waterfall10"]
+material = SubResource("CanvasItemMaterial_lcxva")
+position = Vector2(113, 870)
+amount = 150
+texture = ExtResource("3_7rq4l")
+lifetime = 20.0
+preprocess = 1.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(150, 1)
+direction = Vector2(0, 0)
+gravity = Vector2(0, -0.001)
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_dcpmd")
+scale_amount_min = 0.5
+scale_amount_max = 1.25
+color = Color(1, 1, 1, 0.0941176)
+color_ramp = SubResource("Gradient_12kmu")
+anim_offset_max = 1.0
+metadata/_edit_lock_ = true

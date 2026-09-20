@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cumaq3i"]
+
+[ext_resource type="Texture2D" path="res://images/atlases/compressed_0.png" id="1"]
+
+[resource]
+atlas = ExtResource("1")
+region = Rect2(1739, 700, 149, 216)
+margin = Rect2(56, 21, 107, 40)

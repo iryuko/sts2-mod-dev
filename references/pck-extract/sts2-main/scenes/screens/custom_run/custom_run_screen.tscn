@@ -1,0 +1,295 @@
+[gd_scene load_steps=21 format=3 uid="uid://d3nw6pgxsxtis"]
+
+[ext_resource type="Script" uid="uid://pjvpmq1gf4uu" path="res://src/Core/Nodes/Screens/CustomRun/NCustomRunScreen.cs" id="1_5nvxv"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_cbkga"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="2_u783x"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_wcg36"]
+[ext_resource type="PackedScene" uid="uid://yo7mkjn0r07a" path="res://scenes/screens/ascension_panel.tscn" id="4_0ng5x"]
+[ext_resource type="Script" uid="uid://dmpp1qcet6qvk" path="res://src/Core/Nodes/GodotExtensions/NMegaLineEdit.cs" id="6_fnl74"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="9_gqibv"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="10_qajol"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="12_cquyx"]
+[ext_resource type="PackedScene" uid="uid://i17vjyd5x6eg" path="res://scenes/screens/remote_player_container.tscn" id="12_pxqo1"]
+[ext_resource type="Texture2D" uid="uid://q1y4ux" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="12_wy4ys"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="13_fnl74"]
+[ext_resource type="PackedScene" uid="uid://iq6wsnph1mun" path="res://scenes/screens/custom_run/modifiers_list.tscn" id="13_ojakw"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="13_pxqo1"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="18_jnqea"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="20_6872w"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="21_b7q7g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u783x"]
+resource_local_to_scene = true
+shader = ExtResource("13_fnl74")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qajol"]
+resource_local_to_scene = true
+shader = ExtResource("13_fnl74")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0vsb"]
+resource_local_to_scene = true
+shader = ExtResource("13_fnl74")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CustomRunScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5nvxv")
+
+[node name="LeftContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CustomModeTitle" type="Label" parent="LeftContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 32.0
+offset_right = -32.0
+offset_bottom = 180.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_u783x")
+theme_override_font_sizes/font_size = 48
+text = "Custom Mode"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_wcg36")
+AutoSizeEnabled = false
+MinFontSize = 36
+MaxFontSize = 48
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="AscensionPanel" parent="LeftContainer" instance=ExtResource("4_0ng5x")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -294.0
+offset_top = -477.0
+offset_right = 340.0
+offset_bottom = -360.0
+
+[node name="CharSelectButtons" type="Control" parent="LeftContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = -175.0
+offset_right = 43.0
+offset_bottom = -135.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ButtonContainer" type="HBoxContainer" parent="LeftContainer/CharSelectButtons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -237.5
+offset_top = -189.0
+offset_right = 237.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SeedContainer" type="HBoxContainer" parent="LeftContainer"]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 538.0
+offset_right = 711.0
+offset_bottom = 614.0
+
+[node name="SeedLabel" type="Label" parent="LeftContainer/SeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("9_gqibv")
+theme_override_font_sizes/font_size = 28
+text = "Seed: "
+script = ExtResource("3_wcg36")
+AutoSizeEnabled = false
+
+[node name="SeedInput" type="LineEdit" parent="LeftContainer/SeedContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+theme_override_fonts/font = ExtResource("2_cbkga")
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Random"
+script = ExtResource("6_fnl74")
+
+[node name="RemotePlayerContainer" parent="LeftContainer" instance=ExtResource("12_pxqo1")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 263.0
+offset_top = 235.0
+offset_right = 888.0
+offset_bottom = 500.0
+
+[node name="Container" parent="LeftContainer/RemotePlayerContainer" index="0"]
+offset_top = 43.0
+
+[node name="Background" parent="LeftContainer/RemotePlayerContainer/Container/InviteButtonContainer/InviteButton" index="0"]
+material = SubResource("ShaderMaterial_u783x")
+
+[node name="RightContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightContainer"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_right = -91.0
+offset_bottom = 164.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="ModifiersTitle" type="Label" parent="RightContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("10_qajol")
+theme_override_font_sizes/font_size = 36
+text = "Modifiers"
+vertical_alignment = 2
+script = ExtResource("3_wcg36")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ModifiersHotkeyIcon" type="TextureRect" parent="RightContainer/HBoxContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_qajol")
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("18_jnqea")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ModifiersList" parent="RightContainer" instance=ExtResource("13_ojakw")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 32.0
+offset_top = 168.0
+offset_right = -242.0
+offset_bottom = -162.0
+
+[node name="ReadyAndWaitingPanel" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -410.0
+offset_top = -664.0
+offset_right = 326.0
+offset_bottom = -542.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="ReadyAndWaitingPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_cquyx")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="WaitingForReady" type="Label" parent="ReadyAndWaitingPanel"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("13_pxqo1")
+theme_override_font_sizes/font_size = 50
+text = "Waiting for other players..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_wcg36")
+AutoSizeEnabled = false
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="ConfirmButton" parent="." instance=ExtResource("20_6872w")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("21_b7q7g")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("21_b7q7g")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("12_wy4ys")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_l0vsb")
+
+[editable path="LeftContainer/RemotePlayerContainer"]
+[editable path="UnreadyButton"]

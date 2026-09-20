@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://ky4h68aw28dk"]
+
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/map/map_dot.tres" id="1_4ks8a"]
+
+[node name="PathDot" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -968.0
+offset_top = -548.0
+offset_right = -952.0
+offset_bottom = -532.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(8, 8)
+mouse_filter = 2
+texture = ExtResource("1_4ks8a")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true

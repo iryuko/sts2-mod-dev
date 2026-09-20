@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://c11tevxqfsdwa"]
+
+[ext_resource type="Script" uid="uid://b5vdi3i4bmapy" path="res://src/Core/Nodes/Vfx/NSpookyScreamVfx.cs" id="1_syock"]
+[ext_resource type="PackedScene" uid="uid://dy5f5xm1nxhio" path="res://scenes/vfx/scream/vfx_scream_squiggly_ring_polar.tscn" id="2_g0f4o"]
+[ext_resource type="PackedScene" uid="uid://cpqpa1quocan8" path="res://scenes/vfx/scream/vfx_scream_squiggly_streaks.tscn" id="3_1juxt"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/common/vfx_common_glow.tscn" id="4_jg12f"]
+[ext_resource type="PackedScene" uid="uid://bw4cyu81chaij" path="res://scenes/vfx/scream/vfx_scream_squiggly_distortion_polar.tscn" id="5_mf7ty"]
+
+[sub_resource type="Curve" id="Curve_3p5mi"]
+_data = [Vector2(0, 0.195298), 0.0, -0.724232, 0, 0, Vector2(0.754522, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r3r6c"]
+curve = SubResource("Curve_3p5mi")
+
+[sub_resource type="Curve" id="Curve_t2hxv"]
+_data = [Vector2(0, 0), 0.0, 11.5422, 0, 0, Vector2(0.203175, 0.842474), 0.0, 0.210613, 0, 0, Vector2(1, 1), 0.197691, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_myty7"]
+curve = SubResource("Curve_t2hxv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_warox"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_myty7")
+alpha_curve = SubResource("CurveTexture_r3r6c")
+
+[node name="vfx_spooky_scream" type="Node2D" node_paths=PackedStringArray("_continuousParticles", "_oneShotParticles")]
+script = ExtResource("1_syock")
+_continuousParticles = [NodePath("vfx_scream_squiggly_ring_polar"), NodePath("vfx_scream_squiggly_streaks")]
+_oneShotParticles = [NodePath("vfx_scream_squiggly_streaks_burst"), NodePath("vfx_common_glow"), NodePath("BackBufferCopy/vfx_scream_squiggly_distortion_polar")]
+
+[node name="vfx_scream_squiggly_ring_polar" parent="." instance=ExtResource("2_g0f4o")]
+position = Vector2(2, 0)
+
+[node name="vfx_scream_squiggly_streaks" parent="." instance=ExtResource("3_1juxt")]
+
+[node name="vfx_scream_squiggly_streaks_burst" parent="." instance=ExtResource("3_1juxt")]
+amount = 4
+one_shot = true
+explosiveness = 1.0
+
+[node name="vfx_common_glow" parent="." instance=ExtResource("4_jg12f")]
+z_index = 1
+process_material = SubResource("ParticleProcessMaterial_warox")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="vfx_scream_squiggly_distortion_polar" parent="BackBufferCopy" instance=ExtResource("5_mf7ty")]

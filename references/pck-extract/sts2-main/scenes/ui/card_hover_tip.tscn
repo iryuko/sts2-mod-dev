@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cioi2rmk38sny"]
+
+[ext_resource type="PackedScene" uid="uid://ewa1gwt3sc0o" path="res://scenes/cards/card.tscn" id="1_x1cnf"]
+
+[node name="CardHoverTip" type="Control"]
+custom_minimum_size = Vector2(239, 323)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 239.0
+offset_bottom = 323.0
+mouse_filter = 2
+
+[node name="Card" parent="." instance=ExtResource("1_x1cnf")]
+unique_name_in_owner = true
+offset_left = 115.0
+offset_top = 157.0
+offset_right = 115.0
+offset_bottom = 157.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.75, 0.75)

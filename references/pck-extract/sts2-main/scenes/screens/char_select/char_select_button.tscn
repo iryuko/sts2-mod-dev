@@ -1,0 +1,251 @@
+[gd_scene load_steps=14 format=3 uid="uid://fmmmk2blulyg"]
+
+[ext_resource type="Script" uid="uid://b62swm62gosow" path="res://src/Core/Nodes/Screens/CharacterSelect/NCharacterSelectButton.cs" id="1_pqep5"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_55hao"]
+[ext_resource type="Texture2D" uid="uid://01j3l63f4yqo" path="res://images/packed/character_select/char_select_outline.png" id="2_r7l2j"]
+[ext_resource type="Texture2D" uid="uid://cuj5pgow4qw0y" path="res://images/packed/character_select/char_select_button_mask.png" id="2_xr1kp"]
+[ext_resource type="Texture2D" uid="uid://tlpdt4b2r7sk" path="res://images/packed/character_select/char_select_ironclad.png" id="3_edrtx"]
+[ext_resource type="Texture2D" uid="uid://d1um26e63xyd7" path="res://images/packed/character_select/char_select_outline_remote.png" id="4_vvknp"]
+[ext_resource type="Texture2D" uid="uid://ce7b7u8onx64l" path="res://images/packed/character_select/char_select_lock3.png" id="6_jlyta"]
+[ext_resource type="Texture2D" uid="uid://dbwd23pi4r266" path="res://images/vfx/vfx_dramatic_stab/sparks.png" id="8_3fr0h"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_uvwor"]
+_data = [Vector2(0, 1), 0.0, 0.127708, 0, 0, Vector2(1, 0), -2.2809, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8qt5v"]
+curve = SubResource("Curve_uvwor")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d6jj4"]
+lifetime_randomness = 0.32
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 250.0
+emission_ring_inner_radius = 250.0
+emission_ring_cone_angle = 90.0
+spread = 0.0
+flatness = 0.2
+radial_velocity_min = -400.0
+radial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1600.0
+damping_max = 1600.0
+attractor_interaction_enabled = false
+scale_min = 0.1
+scale_max = 0.4
+scale_over_velocity_min = 0.1
+scale_over_velocity_max = 1.0
+alpha_curve = SubResource("CurveTexture_8qt5v")
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_noise_strength = 0.76
+turbulence_noise_scale = 2.586
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oc1nw"]
+resource_local_to_scene = true
+shader = ExtResource("2_55hao")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CharSelectButton" type="Control"]
+custom_minimum_size = Vector2(100, 148)
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(50, 74)
+focus_mode = 2
+script = ExtResource("1_pqep5")
+metadata/_edit_group_ = true
+
+[node name="UnlockChargeParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.907883, 0.869236, 0.0516902, 1)
+material = ExtResource("shared_additive_mat")
+position = Vector2(47, 75)
+scale = Vector2(0.6, 0.6)
+emitting = false
+amount = 12
+texture = ExtResource("8_3fr0h")
+lifetime = 0.4
+randomness = 0.1
+fixed_fps = 60
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_d6jj4")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 9
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 0.25)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 96.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("2_xr1kp")
+expand_mode = 1
+
+[node name="OutlineLocal" type="TextureRect" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.94, 0.706, 0.16, 0.85)
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.16, 1.06)
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("2_r7l2j")
+expand_mode = 1
+
+[node name="OutlineRemote" type="TextureRect" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.1088, 0.631147, 0.64, 0.85098)
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.16, 1.06)
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("2_r7l2j")
+expand_mode = 1
+
+[node name="OutlineMixed" type="TextureRect" parent="MarginContainer/Control"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0.85098)
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.16, 1.06)
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("4_vvknp")
+expand_mode = 1
+
+[node name="Mask" type="TextureRect" parent="MarginContainer"]
+clip_children = 1
+layout_mode = 2
+texture = ExtResource("2_xr1kp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/Mask"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_oc1nw")
+layout_mode = 0
+offset_top = 3.0
+offset_right = 88.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.01, 1.01)
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("3_edrtx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IconAdd" type="TextureRect" parent="MarginContainer/Mask"]
+unique_name_in_owner = true
+visible = false
+material = ExtResource("shared_additive_mat")
+layout_mode = 0
+offset_top = 3.0
+offset_right = 88.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.01, 1.01)
+pivot_offset = Vector2(44, 65)
+mouse_filter = 2
+texture = ExtResource("3_edrtx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lock" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -30.0
+offset_right = 50.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(50, 74)
+texture = ExtResource("6_jlyta")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="UnlockParticles" type="GPUParticles2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.907883, 0.869236, 0.0516902, 1)
+material = ExtResource("shared_additive_mat")
+position = Vector2(37, 68)
+scale = Vector2(0.6, 0.6)
+emitting = false
+texture = ExtResource("8_3fr0h")
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+randomness = 0.25
+fixed_fps = 60
+fract_delta = false
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_d6jj4")
+
+[node name="PlayerIconContainer" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 137.0
+offset_right = 97.0
+offset_bottom = 176.0
+theme_override_constants/separation = 0
+alignment = 1

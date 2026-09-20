@@ -1,0 +1,1756 @@
+[gd_scene load_steps=27 format=4 uid="uid://b000d7ddaqdl6"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_08fn7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bkao71dkw1we0" path="res://animations/monsters/decimillipede/decimillipede_back_skel_data.tres" id="2_l1ctf"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://d1owsa1fngmrf" path="res://animations/monsters/decimillipede/rockstone_skel_data.tres" id="3_fi1qw"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cmcqk216morxu" path="res://animations/monsters/decimillipede/decimillipede_front_skel_data.tres" id="3_ju8h7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://8vaaku8sw684" path="res://animations/monsters/decimillipede/decimillipede_middle_skel_data.tres" id="4_2jvj1"]
+[ext_resource type="Shader" uid="uid://dcoypfmn4ip2c" path="res://shaders/vfx/monsters/decimillipede_suck_shader.tres" id="9_364nw"]
+[ext_resource type="Texture2D" uid="uid://dl7n44l2pbefx" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_gradient.png" id="10_bvuno"]
+[ext_resource type="Texture2D" uid="uid://dsn1mf6qium2y" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_texture.png" id="11_pgxv3"]
+[ext_resource type="Texture2D" uid="uid://bqelc57e7htdg" path="res://images/vfx/monsters/decimillipede/decimillipede_suck_mask.png" id="12_rgx32"]
+[ext_resource type="Texture2D" uid="uid://c77td4all7ch6" path="res://images/vfx/monsters/decimillipede/decimillipede_flipflake.png" id="13_7jwaa"]
+[ext_resource type="Texture2D" uid="uid://cutvcqhym65fg" path="res://images/vfx/monsters/decimillipede/decimillipede_blue_flipflake.png" id="14_6aiu1"]
+
+[sub_resource type="GDScript" id="GDScript_mleul"]
+script/source = "extends Node2D
+
+
+
+var isKeyDown: bool = false
+
+var curShakes: float = 0
+var maxShakeT: float = 1.5
+var shakeDelayT: float = .5
+
+var shake_duration = 2.0  # The duration of the screen shake in seconds
+var shake_amplitude = 10.0  # The intensity of the shake
+
+
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+    pass
+
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+    if( Input.is_key_pressed(KEY_A)):
+        if(!isKeyDown):
+            attack()
+        isKeyDown = true;
+    else:
+        isKeyDown = false;
+    applyShake(_delta);
+
+
+
+
+func attack():
+    curShakes = maxShakeT + shakeDelayT;
+
+
+
+
+# this is a super jenk way to make the screen shake. It actually doesn't make the screen shake, so yeah...
+func applyShake(_delta):
+    curShakes -= _delta
+    if ( curShakes > 0 && curShakes < maxShakeT):
+        var x = randf_range(-10, 10)
+        var y = randf_range(-10, 10)
+        var newPos = Vector2(x, y)
+        position = newPos
+    else:
+        position = Vector2()
+
+
+
+            
+
+
+
+"
+
+[sub_resource type="GDScript" id="GDScript_6hcqp"]
+script/source = "extends SpineSprite
+
+
+#Vars-----------------------------
+
+
+@export var id: int
+@export var particleGravity: Vector2
+@export var particleSpeedScale: float
+@export var particleVelocityMinMax: Vector2
+#@export var myParticles: Array[String]
+@export var damageParticleNodes: Array[NodePath]
+#@export var splatParticleNodes: Array[NodePath]
+@export var sprayNodes: Array[NodePath]
+\\
+
+
+
+var IDLE_LOOP:  String = \"idle_loop\"
+var DEAD_LOOP: String = \"dead_loop\"
+var ATTACK: String = \"_ignore/attack\"
+var HURT: String  = \"hurt\"
+var SHRIVEL: String = \"wither\"
+var REGENERATE: String = \"regenerate\"
+var WRITHE_LOOP: String = \"_ignore/writhe_loop\"
+var isDead: bool = false
+var isKeyDown: bool = false
+var myDieKey: int    
+var myHurtKey: int
+var attackKey: int = KEY_A
+
+var animState:  SpineAnimationState
+
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+    if ( id == 1):
+        myDieKey = KEY_1
+        myHurtKey = KEY_4
+    if ( id == 2):
+        myDieKey = KEY_2
+        myHurtKey = KEY_5
+    if ( id == 3):
+        myDieKey = KEY_3
+        myHurtKey = KEY_6
+        
+    animState = get_animation_state() 
+    animation_event.connect(_animation_event)
+    playAnimation(WRITHE_LOOP, 0.0, 1)
+    playAnimation(IDLE_LOOP);
+
+    for ref in sprayNodes:
+        get_node(ref).visible = false;
+
+
+func _exit_tree():
+    animation_event.disconnect(_animation_event)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+    
+    if (Input.is_key_pressed(myDieKey)):
+        if(!isKeyDown):
+            isDead = !isDead
+            if (isDead):
+                shrivel()
+            else:
+                regenerate()
+            #print(\"isDead is now \", isDead)
+            isKeyDown = true
+
+
+    elif(Input.is_key_pressed(myHurtKey)):
+        if(!isKeyDown):
+            hurt()
+            isKeyDown = true
+            
+
+    
+    elif(Input.is_key_pressed(attackKey)):
+        if(!isKeyDown):
+            attack()
+
+    else:
+        isKeyDown = false;
+    
+
+
+
+func attack():
+    playAnimation(ATTACK, 0.4, 1)
+    queueAnimation(WRITHE_LOOP, 0.05, 1)
+
+
+
+
+func hurt():
+    playAnimation(HURT, .05, 0, false)
+    queueAnimation(IDLE_LOOP, 0.2)
+
+
+
+
+func shrivel():
+    playAnimation(SHRIVEL, .1, 0, false)
+    queueAnimation(DEAD_LOOP, .1)
+
+
+    
+
+
+func regenerate():
+    playAnimation(REGENERATE, .1, 0, false)
+    queueAnimation(IDLE_LOOP, .1);
+    for ref in sprayNodes:
+        get_node(ref).visible = true;
+        get_node(ref).material.set_shader_parameter(\"direction\", -1)
+        var endScale: Vector2 = get_node(ref).scale
+        get_node(ref).scale = Vector2()
+        var tw: Tween = create_tween()
+        tw.set_parallel(true)
+        var randTime = randf_range(0, .5) 
+        get_node(ref).material.set_shader_parameter(\"opacity\", .5)
+        tw.tween_property(get_node(ref), \"scale\", endScale, randTime + .5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+        #print(\"material ref \", get_node(ref).material.get_shader_parameter(\"opacity\"))
+        var mat: Material = get_node(ref).material
+        tw.tween_property(mat, \"shader_parameter/opacity\", .9, randTime).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+
+
+
+func playAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.set_animation(anim, loop, track)
+    te.set_mix_duration(blend)
+    return te
+    
+    
+    
+func queueAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.add_animation(anim, 0, loop, track)
+    te.set_mix_duration(blend)
+    return te
+
+
+
+
+func _animation_event(_spine_sprite: Object, _animation_state: Object, _track_entry: Object, _event: Object):
+    print(\"an event has landed \", _event.get_data().get_event_name())
+    if (_event.get_data().get_event_name() == \"explode\"):
+        for ref in damageParticleNodes:
+            #print(\"the damn thing is \", ref) \\
+            get_node(ref).gravity = particleGravity
+            get_node(ref).speed_scale = particleSpeedScale
+            get_node(ref).initial_velocity_min = particleVelocityMinMax.x
+            get_node(ref).initial_velocity_max = particleVelocityMinMax.y
+            get_node(ref).restart()
+
+        
+
+
+
+    elif  (_event.get_data().get_event_name() == \"pre-explode\"):
+        pass
+        # Don't need this any more #########
+        # print(\"PRE EXPLODE CALLED\")
+        # for ref in sprayNodes:
+        # 	var startScale: Vector2 = get_node(ref).scale
+        # 	var tw: Tween = create_tween()
+        # 	var randTime = randf_range(0, .35) + .4
+        # 	tw.tween_property(get_node(ref), \"scale\", Vector2(.01, .25), randTime).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+        # 	tw.tween_property(get_node(ref), \"visible\", false, 0)
+        # 	tw.tween_property(get_node(ref), \"scale\", startScale, 0)
+
+
+    elif  (_event.get_data().get_event_name() == \"suck_complete\"):
+        for ref in sprayNodes:
+            var startScale: Vector2 = get_node(ref).scale
+            var tw: Tween = create_tween()
+            var randTime = randf_range(0, .35) + .4
+            tw.tween_property(get_node(ref), \"scale\", Vector2(.01, .25), randTime).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+            tw.tween_property(get_node(ref), \"visible\", false, 0)
+            tw.tween_property(get_node(ref), \"scale\", startScale, 0)
+
+
+
+func hideSpray(spray: Node2D):
+    spray.visible = false
+
+    
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ek7wm"]
+shader = ExtResource("9_364nw")
+shader_parameter/direction = 1
+shader_parameter/suckPattern = ExtResource("11_pgxv3")
+shader_parameter/suckGradient = ExtResource("10_bvuno")
+shader_parameter/suckShape = ExtResource("12_rgx32")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tidgq"]
+_surfaces = [{
+"aabb": AABB(-500, -1000, 0, 1000, 1000, 1e-05),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAAAAAgD4AAIA/AACAPgAAAAAAAAA/AACAPwAAAD8AAAAAAABAPwAAgD8AAEA/AAAAAAAAgD8AAIA/AACAPwAAAAA="),
+"format": 34359738385,
+"primitive": 4,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AABIwwAAAAAAAAAAAAD6wwAAesQAAAAAAADIwgAAAAAAAAAAAAB6wwAAesQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAesQAAAAAAADIQgAAAAAAAAAAAAB6QwAAesQAAAAAAABIQwAAAAAAAAAAAAD6QwAAesQAAAAA")
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gcsml"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_jst0l"]
+_data = [Vector2(0.00483953, 1), 0.0, 0.0, 0, 0, Vector2(0.432756, 1), 0.0, 0.0, 0, 0, Vector2(0.726184, 0.813274), -1.30288, -1.30288, 0, 0, Vector2(1, 0.207965), -3.25931, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m5keu"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_c5j2w"]
+_data = [Vector2(0.00483953, 1), 0.0, 0.0, 0, 0, Vector2(0.432756, 1), 0.0, 0.0, 0, 0, Vector2(0.726184, 0.813274), -1.30288, -1.30288, 0, 0, Vector2(1, 0.207965), -3.25931, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qcoqo"]
+shader = ExtResource("9_364nw")
+shader_parameter/direction = 1
+shader_parameter/suckPattern = ExtResource("11_pgxv3")
+shader_parameter/suckGradient = ExtResource("10_bvuno")
+shader_parameter/suckShape = ExtResource("12_rgx32")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y8e62"]
+_surfaces = [{
+"aabb": AABB(-500, -1000, 0, 1000, 1000, 1e-05),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAAAAAgD4AAIA/AACAPgAAAAAAAAA/AACAPwAAAD8AAAAAAABAPwAAgD8AAEA/AAAAAAAAgD8AAIA/AACAPwAAAAA="),
+"format": 34359738385,
+"primitive": 4,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AABIwwAAAAAAAAAAAAD6wwAAesQAAAAAAADIwgAAAAAAAAAAAAB6wwAAesQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAesQAAAAAAADIQgAAAAAAAAAAAAB6QwAAesQAAAAAAABIQwAAAAAAAAAAAAD6QwAAesQAAAAA")
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu7bd"]
+shader = ExtResource("9_364nw")
+shader_parameter/direction = 1
+shader_parameter/suckPattern = ExtResource("11_pgxv3")
+shader_parameter/suckGradient = ExtResource("10_bvuno")
+shader_parameter/suckShape = ExtResource("12_rgx32")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wo5ye"]
+_surfaces = [{
+"aabb": AABB(-500, -1000, 0, 1000, 1000, 1e-05),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAAAAAAAAgD4AAIA/AACAPgAAAAAAAAA/AACAPwAAAD8AAAAAAABAPwAAgD8AAEA/AAAAAAAAgD8AAIA/AACAPwAAAAA="),
+"format": 34359738385,
+"primitive": 4,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AABIwwAAAAAAAAAAAAD6wwAAesQAAAAAAADIwgAAAAAAAAAAAAB6wwAAesQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAesQAAAAAAADIQgAAAAAAAAAAAAB6QwAAesQAAAAAAABIQwAAAAAAAAAAAAD6QwAAesQAAAAA")
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4cvr4"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_mw3p8"]
+_data = [Vector2(0.00483953, 1), 0.0, 0.0, 0, 0, Vector2(0.432756, 1), 0.0, 0.0, 0, 0, Vector2(0.726184, 0.813274), -1.30288, -1.30288, 0, 0, Vector2(1, 0.207965), -3.25931, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="GDScript" id="GDScript_yvbuj"]
+script/source = "extends SpineSprite
+
+
+var isKeyDown: bool = false
+
+var basePos: Vector2
+var animState: SpineAnimationState
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+    animState = get_animation_state()
+    playAnimation(\"idle_loop\", 0, 0, true)
+    basePos = position
+
+
+
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+    if( Input.is_key_pressed(KEY_A)):
+        if(!isKeyDown):
+            attack()
+        isKeyDown = true;
+    else:
+        isKeyDown = false;
+
+
+
+func attack():
+    var anim:String
+    var rand = randf_range(0, 4)
+    if ( rand < 1):
+        anim = \"fall1\"
+    elif (rand < 2):
+        anim = \"fall2\"
+    elif (rand < 3):
+        anim = \"fall3\"
+    else:
+        anim = \"fall4\"
+
+    playAnimation(anim, 0, 0, false)
+    queueAnimation(\"idle_loop\", 0, 0, true)
+    var xRand = randf_range(-200, 200)
+    position = Vector2(basePos.x + xRand, basePos.y)
+
+
+
+
+func playAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.set_animation(anim, loop, track)
+    te.set_mix_duration(blend)
+    return te
+    
+    
+    
+func queueAnimation(anim: String, blend: float = 0, track: int = 0, loop:bool = true) -> SpineTrackEntry:
+    var te: SpineTrackEntry = animState.add_animation(anim, 0, loop, track)
+    te.set_mix_duration(blend)
+    return te
+    
+"
+
+[node name="Decimillipede" type="Node2D"]
+script = ExtResource("1_08fn7")
+metadata/_edit_vertical_guides_ = [150.0]
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -59.0
+offset_top = -193.0
+offset_right = 92.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -71)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -299)
+
+[node name="ShakeNode" type="Node2D" parent="."]
+script = SubResource("GDScript_mleul")
+
+[node name="Visuals3" type="SpineSprite" parent="ShakeNode"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+skeleton_data_res = ExtResource("2_l1ctf")
+preview_skin = "default"
+preview_animation = "wither"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_6hcqp")
+id = 3
+particleGravity = Vector2(0, 300)
+particleSpeedScale = 2.0
+particleVelocityMinMax = Vector2(400, 600)
+damageParticleNodes = Array[NodePath]([NodePath("fxnode1/flakeparts1"), NodePath("fxnode1/blueflakeparts1"), NodePath("fxnode1/flakeparts2"), NodePath("fxnode1/blueflakeparts2"), NodePath("fxnode2/flakeparts1"), NodePath("fxnode2/blueflakeparts1"), NodePath("fxnode2/blueflakeparts2"), NodePath("fxnode3/flakeparts1"), NodePath("fxnode3/blueflakeparts1"), NodePath("fxnode4/flakeparts1"), NodePath("fxnode4/blueflakeparts1")])
+sprayNodes = Array[NodePath]([NodePath("fxnode1/spray"), NodePath("fxnode2back/spray"), NodePath("fxnode2back/spray2"), NodePath("fxnode2back/spray3"), NodePath("fxnode3/spray"), NodePath("fxnode4/spray")])
+
+[node name="fxnode1" type="SpineBoneNode" parent="ShakeNode/Visuals3"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(337.389, -198.082)
+rotation = 0.103172
+scale = Vector2(0.966176, 0.999667)
+skew = -0.00688565
+bone_name = "particle_attach_1"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode1"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(27.165, 22.2695)
+rotation = -4.05631
+scale = Vector2(0.42104, 0.487804)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode1"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(5.30426, 70.1203)
+emitting = false
+amount = 15
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode1"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(-21.0819, -76.45)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode1"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(122.461, 19.0319)
+emitting = false
+amount = 15
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode1"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(134.314, -205.907)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode2" type="SpineBoneNode" parent="ShakeNode/Visuals3"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(553.359, -363.571)
+rotation = 0.0262879
+scale = Vector2(0.966182, 0.999661)
+skew = -0.00173283
+bone_name = "particle_attach_2"
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode2"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(31.6942, 104.425)
+emitting = false
+amount = 15
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode2"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(30.3845, -97.138)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode2"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(194.286, -62.0533)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode2back" type="SpineBoneNode" parent="ShakeNode/Visuals3"]
+show_behind_parent = true
+z_index = -1
+position = Vector2(553.359, -363.571)
+rotation = 0.0262879
+scale = Vector2(0.966182, 0.999661)
+skew = -0.00173283
+bone_name = "particle_attach_2"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(194.058, -53.6772)
+rotation = 1.03924
+scale = Vector2(-0.442042, 0.425997)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="spray2" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode2back"]
+show_behind_parent = true
+z_index = -1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(-150.289, 61.0361)
+rotation = 5.01429
+scale = Vector2(0.42104, 0.487804)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="spray3" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode2back"]
+show_behind_parent = true
+z_index = -1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(2.41138, -59.6621)
+rotation = 5.93858
+scale = Vector2(0.42104, 0.487804)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="fxnode3" type="SpineBoneNode" parent="ShakeNode/Visuals3"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(795.109, -350.764)
+rotation = -0.0528381
+scale = Vector2(0.968274, 0.997635)
+skew = 0.00307477
+bone_name = "particle_attach_3"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode3"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(118.124, 25.2876)
+rotation = 2.4676
+scale = Vector2(0.460765, 0.562848)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode3"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(16.7362, 108.642)
+emitting = false
+amount = 15
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode3"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(132.66, -0.620529)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode4" type="SpineBoneNode" parent="ShakeNode/Visuals3"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(925.887, -146.849)
+rotation = -0.0270587
+scale = Vector2(0.96771, 0.998182)
+skew = 0.00162828
+bone_name = "particle_attach_4"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals3/fxnode4"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ek7wm")
+position = Vector2(-36.1538, -30.8062)
+rotation = -1.32498
+scale = Vector2(0.391867, 0.377873)
+mesh = SubResource("ArrayMesh_tidgq")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode4"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(-50.5647, 64.2878)
+emitting = false
+amount = 15
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals3/fxnode4"]
+material = SubResource("CanvasItemMaterial_gcsml")
+position = Vector2(77.6893, 30.8353)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_jst0l")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="Visuals2" type="SpineSprite" parent="ShakeNode"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+skeleton_data_res = ExtResource("3_ju8h7")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_6hcqp")
+id = 2
+particleGravity = Vector2(0, 300)
+particleSpeedScale = 2.0
+particleVelocityMinMax = Vector2(400, 600)
+damageParticleNodes = Array[NodePath]([NodePath("fxnode1/flakeparts1"), NodePath("fxnode1/blueflakeparts1"), NodePath("fxnode2/flakeparts1"), NodePath("fxnode2/blueflakeparts1"), NodePath("fxnode3/flakeparts1"), NodePath("fxnode3/blueflakeparts1"), NodePath("fxnode4/flakeparts1"), NodePath("fxnode4/blueflakeparts1"), NodePath("fxnode4/flakeparts2"), NodePath("fxnode4/blueflakeparts2")])
+sprayNodes = Array[NodePath]([NodePath("fxnode2back/spray"), NodePath("fxnode2back/spray2"), NodePath("fxnode2back/spray3"), NodePath("fxnode3/spray"), NodePath("fxnode4/spray")])
+
+[node name="fxnode1" type="SpineBoneNode" parent="ShakeNode/Visuals2"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(-349.55, -278.862)
+scale = Vector2(1, 1)
+bone_name = "particle_attach_1"
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode1"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(63.5499, 32.8621)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode1"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-3.76212, -79.7199)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="fxnode2" type="SpineBoneNode" parent="ShakeNode/Visuals2"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(-163.884, -422.09)
+scale = Vector2(1, 1)
+bone_name = "particle_attach_2"
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode2"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-49.4279, 51.5083)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode2"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-21.4278, -54.4916)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="fxnode2back" type="SpineBoneNode" parent="ShakeNode/Visuals2"]
+show_behind_parent = true
+z_index = -1
+position = Vector2(-163.884, -422.09)
+scale = Vector2(1, 1)
+bone_name = "particle_attach_2"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals2/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qcoqo")
+position = Vector2(-83.4277, -10.4918)
+rotation = -0.60599
+scale = Vector2(0.42104, 0.3713)
+mesh = SubResource("ArrayMesh_y8e62")
+
+[node name="spray2" type="MeshInstance2D" parent="ShakeNode/Visuals2/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qcoqo")
+position = Vector2(-156.116, 148.09)
+rotation = 2.57973
+scale = Vector2(-0.442042, 0.482132)
+mesh = SubResource("ArrayMesh_y8e62")
+
+[node name="spray3" type="MeshInstance2D" parent="ShakeNode/Visuals2/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qcoqo")
+position = Vector2(116.572, 59.5085)
+rotation = 0.938557
+scale = Vector2(0.442, 0.6)
+mesh = SubResource("ArrayMesh_y8e62")
+
+[node name="fxnode3" type="SpineBoneNode" parent="ShakeNode/Visuals2"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(-26.5017, -292.842)
+scale = Vector2(1, 1)
+bone_name = "particle_attach_3"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals2/fxnode3"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qcoqo")
+position = Vector2(-42.8105, 8.26053)
+rotation = 3.75172
+scale = Vector2(0.460765, 0.562848)
+mesh = SubResource("ArrayMesh_y8e62")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode3"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-70.8104, 28.2605)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode3"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-6.81041, -39.7395)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="fxnode4" type="SpineBoneNode" parent="ShakeNode/Visuals2"]
+show_behind_parent = true
+z_index = 1
+position = Vector2(102.206, -177.951)
+scale = Vector2(1, 1)
+bone_name = "particle_attach_4"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals2/fxnode4"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qcoqo")
+position = Vector2(-53.5183, -10.6313)
+rotation = 2.27687
+scale = Vector2(0.522577, 0.408457)
+mesh = SubResource("ArrayMesh_y8e62")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode4"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(63.7937, 85.9506)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode4"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(75.7937, -30.0494)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode4"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-88.2063, 19.9506)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals2/fxnode4"]
+material = SubResource("CanvasItemMaterial_m5keu")
+position = Vector2(-26.2063, -66.0494)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_c5j2w")
+anim_speed_min = 1.5
+anim_speed_max = 3.0
+anim_offset_max = 1.0
+
+[node name="Visuals" type="SpineSprite" parent="ShakeNode"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+skeleton_data_res = ExtResource("4_2jvj1")
+preview_skin = "default"
+preview_animation = "dead_loop"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_6hcqp")
+id = 1
+particleGravity = Vector2(0, 300)
+particleSpeedScale = 2.0
+particleVelocityMinMax = Vector2(400, 600)
+damageParticleNodes = Array[NodePath]([NodePath("fxnode1/flakeparts1"), NodePath("fxnode1/blueflakeparts1"), NodePath("fxnode1/flakeparts2"), NodePath("fxnode1/blueflakeparts2"), NodePath("fxnode2/flakeparts1"), NodePath("fxnode2/blueflakeparts1"), NodePath("fxnode3/flakeparts1"), NodePath("fxnode3/blueflakeparts1"), NodePath("fxnode4/flakeparts1"), NodePath("fxnode4/blueflakeparts1"), NodePath("fxnode4/flakeparts2"), NodePath("fxnode4/blueflakeparts2")])
+sprayNodes = Array[NodePath]([NodePath("fxnode1/spray"), NodePath("fxnode2/spray"), NodePath("fxnode2back/spray"), NodePath("fxnode2back/spray2"), NodePath("fxnode4/spray")])
+
+[node name="fxnode1" type="SpineBoneNode" parent="ShakeNode/Visuals"]
+visible = false
+show_behind_parent = true
+z_index = 1
+position = Vector2(-984.719, -217.979)
+bone_name = "particle_attach_1"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals/fxnode1"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fu7bd")
+position = Vector2(-53.2805, 13.9791)
+rotation = -1.87024
+scale = Vector2(0.59752, 0.505753)
+mesh = SubResource("ArrayMesh_wo5ye")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(50.7195, 127.979)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-65.2805, 105.979)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(60.7195, -82.0208)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode1"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-37.2804, -184.021)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode2" type="SpineBoneNode" parent="ShakeNode/Visuals"]
+visible = false
+show_behind_parent = true
+z_index = 1
+position = Vector2(-839.22, -479.113)
+bone_name = "particle_attach_2"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals/fxnode2"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fu7bd")
+position = Vector2(1.21973, -64.8866)
+rotation = 2.83256
+scale = Vector2(0.616991, 0.53887)
+mesh = SubResource("ArrayMesh_wo5ye")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode2"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(51.2196, 27.1134)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode2"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(21.2197, -104.887)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode2back" type="SpineBoneNode" parent="ShakeNode/Visuals"]
+visible = false
+show_behind_parent = true
+z_index = -1
+position = Vector2(-839.22, -479.113)
+bone_name = "particle_attach_2"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals/fxnode2back"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fu7bd")
+position = Vector2(141.22, -50.8866)
+rotation = 0.724694
+scale = Vector2(-0.442042, 0.421353)
+mesh = SubResource("ArrayMesh_wo5ye")
+
+[node name="spray2" type="MeshInstance2D" parent="ShakeNode/Visuals/fxnode2back"]
+show_behind_parent = true
+z_index = -1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fu7bd")
+position = Vector2(-50.7803, -28.8865)
+rotation = 5.13225
+scale = Vector2(0.648025, 0.487804)
+mesh = SubResource("ArrayMesh_wo5ye")
+
+[node name="fxnode3" type="SpineBoneNode" parent="ShakeNode/Visuals"]
+visible = false
+show_behind_parent = true
+z_index = 1
+position = Vector2(-597.996, -369.605)
+bone_name = "particle_attach_3"
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode3"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-54.0039, -24.3945)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 800.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode3"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-2.00391, -156.394)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="fxnode4" type="SpineBoneNode" parent="ShakeNode/Visuals"]
+visible = false
+show_behind_parent = true
+z_index = 1
+position = Vector2(-447.882, -135.975)
+bone_name = "particle_attach_4"
+
+[node name="spray" type="MeshInstance2D" parent="ShakeNode/Visuals/fxnode4"]
+show_behind_parent = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_fu7bd")
+position = Vector2(-32.1184, -82.0249)
+rotation = 0.798375
+scale = Vector2(0.528021, 0.614745)
+mesh = SubResource("ArrayMesh_wo5ye")
+
+[node name="flakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-22.1183, -10.0249)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.02
+scale_amount_max = 0.08
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts1" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-0.118286, -140.025)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="flakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-116.118, -106.025)
+emitting = false
+texture = ExtResource("13_7jwaa")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 1.0
+anim_speed_max = 2.5
+anim_offset_max = 1.0
+
+[node name="blueflakeparts2" type="CPUParticles2D" parent="ShakeNode/Visuals/fxnode4"]
+material = SubResource("CanvasItemMaterial_4cvr4")
+position = Vector2(-58.1184, -254.025)
+emitting = false
+amount = 15
+texture = ExtResource("14_6aiu1")
+lifetime = 1.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.75
+emission_shape = 1
+emission_sphere_radius = 99.23
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, 300)
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+angular_velocity_min = -108.83
+angular_velocity_max = 100.46
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_mw3p8")
+anim_speed_min = 0.5
+anim_speed_max = 1.5
+anim_offset_max = 1.0
+
+[node name="Rock4" type="SpineSprite" parent="ShakeNode"]
+position = Vector2(-303, -69)
+scale = Vector2(0.2, 0.2)
+skeleton_data_res = ExtResource("3_fi1qw")
+preview_skin = "Default"
+preview_animation = "fall1"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock5" type="SpineSprite" parent="ShakeNode"]
+position = Vector2(289, -68)
+scale = Vector2(0.2, 0.2)
+skeleton_data_res = ExtResource("3_fi1qw")
+preview_skin = "Default"
+preview_animation = "fall1"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock1" type="SpineSprite" parent="ShakeNode"]
+position = Vector2(-458, 12)
+scale = Vector2(0.2, 0.2)
+skeleton_data_res = ExtResource("3_fi1qw")
+preview_skin = "Default"
+preview_animation = "fall1"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock2" type="SpineSprite" parent="ShakeNode"]
+position = Vector2(1.00002, 12)
+scale = Vector2(0.2, 0.2)
+skeleton_data_res = ExtResource("3_fi1qw")
+preview_skin = "Default"
+preview_animation = "fall1"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_yvbuj")
+
+[node name="Rock3" type="SpineSprite" parent="ShakeNode"]
+position = Vector2(433, 4.99999)
+scale = Vector2(0.2, 0.2)
+skeleton_data_res = ExtResource("3_fi1qw")
+preview_skin = "Default"
+preview_animation = "fall1"
+preview_frame = false
+preview_time = 0.0
+script = SubResource("GDScript_yvbuj")
+
+[node name="Camera2D" type="Camera2D" parent="."]

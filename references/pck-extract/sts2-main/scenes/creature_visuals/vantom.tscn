@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=3 uid="uid://w0yrdy4dgut4"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_kh7mu"]
+[ext_resource type="Script" uid="uid://hwwc15tymo85" path="res://src/Core/Nodes/Vfx/NVantomVfx.cs" id="3_2yscr"]
+[ext_resource type="Material" uid="uid://coh0qq5nn0h7t" path="res://materials/vfx/monsters/vantom_tail_dissolve_mat.tres" id="4_co4p7"]
+[ext_resource type="Texture2D" uid="uid://bd5km7i5s3omr" path="res://images/vfx/monsters/vantom/vantom_basic_particle.png" id="5_bocni"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dny2x2y3vlkp6" path="res://animations/monsters/vantom/vantom_skel_data.tres" id="5_yibo5"]
+
+[sub_resource type="Curve" id="Curve_xf00a"]
+_data = [Vector2(0, 0.316176), 0.0, 3.23797, 0, 0, Vector2(0.248555, 1), 0.0, 0.0, 0, 0, Vector2(0.768786, 1), 0.0, 0.0, 0, 0, Vector2(0.99422, 0.0147059), -6.99631, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_ltjoa"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.308824), 0.0, 7.86364, 0, 0, Vector2(0.150289, 1.01471), 0.0, 0.0, 0, 0, Vector2(0.33815, 0.691177), -1.9455, -1.9455, 0, 0, Vector2(0.554913, 0.308824), -0.63603, -0.63603, 0, 0, Vector2(1, 0.0735295), -0.672032, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_kr4gb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_affi8"]
+curve_x = SubResource("Curve_xf00a")
+curve_y = SubResource("Curve_ltjoa")
+curve_z = SubResource("Curve_kr4gb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7v4xv"]
+lifetime_randomness = 0.26
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(-0.5, -1, 0)
+spread = 10.0
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveXYZTexture_affi8")
+
+[sub_resource type="Curve" id="Curve_m6jtg"]
+_data = [Vector2(0, 0.316176), 0.0, 3.23797, 0, 0, Vector2(0.248555, 1), 0.0, 0.0, 0, 0, Vector2(0.768786, 1), 0.0, 0.0, 0, 0, Vector2(0.99422, 0.0147059), -6.99631, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_he5yh"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.308824), 0.0, 7.86364, 0, 0, Vector2(0.127168, 1.66176), 0.0, 0.0, 0, 0, Vector2(0.32659, 0.867647), -4.50113, -4.50113, 0, 0, Vector2(0.540462, 0.367647), -1.13072, -1.13072, 0, 0, Vector2(1, 0.0735295), -0.672032, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_t1bby"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_8ersj"]
+curve_x = SubResource("Curve_m6jtg")
+curve_y = SubResource("Curve_he5yh")
+curve_z = SubResource("Curve_t1bby")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4cpie"]
+lifetime_randomness = 0.26
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(-0.5, -1, 0)
+spread = 20.0
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveXYZTexture_8ersj")
+
+[node name="Vantom" type="Node2D"]
+script = ExtResource("1_kh7mu")
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -26)
+scale = Vector2(0.25, 0.25)
+skeleton_data_res = ExtResource("5_yibo5")
+bones_color = Color(1, 1, 0, 0.945098)
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.45
+
+[node name="DeathSpraySlotNode" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-422.687, -1084.74)
+slot_name = "DeathSpraySlot"
+
+[node name="DeathSprayParticles" type="GPUParticles2D" parent="Visuals/DeathSpraySlotNode"]
+amount = 100
+texture = ExtResource("5_bocni")
+lifetime = 0.8
+speed_scale = 1.2
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_7v4xv")
+
+[node name="TailSlotNode" type="SpineSlotNode" parent="Visuals"]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(156.945, -573.737)
+rotation = -0.347351
+scale = Vector2(1, 1)
+slot_name = "tail"
+normal_material = ExtResource("4_co4p7")
+
+[node name="TailBladeSlotNode" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(678.277, -1894.32)
+rotation = 3.01496
+scale = Vector2(1, 1)
+slot_name = "tail_hook"
+normal_material = ExtResource("4_co4p7")
+
+[node name="MegabladeSlotNode" type="SpineSlotNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-4457.24, -2197.01)
+rotation = 1.46336
+scale = Vector2(1, 1)
+slot_name = "megablade"
+normal_material = ExtResource("4_co4p7")
+
+[node name="MegatailSlotNode" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-1284, -152)
+rotation = -0.171362
+bone_name = "tail_target_bone"
+bone_mode = 1
+
+[node name="SprayBoneNode" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-4188.3, -351.801)
+bone_name = "spray_particle_attach"
+
+[node name="SprayParticles" type="GPUParticles2D" parent="Visuals/SprayBoneNode"]
+amount = 160
+texture = ExtResource("5_bocni")
+lifetime = 0.8
+speed_scale = 1.2
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_4cpie")
+
+[node name="DeathSprayBoneNode" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-422.687, -1084.74)
+bone_name = "death_spray_attach"
+
+[node name="NVantomVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_2yscr")
+metadata/_custom_type_script = "uid://hwwc15tymo85"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -202.0
+offset_top = -440.0
+offset_right = 202.0
+offset_bottom = 1.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(22, -252)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -487)

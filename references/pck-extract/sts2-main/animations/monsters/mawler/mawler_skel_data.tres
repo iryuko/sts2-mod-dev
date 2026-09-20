@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://0pawwiy0uq7l"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b8rwx48do8ygo" path="res://animations/monsters/mawler/mawler.atlas" id="1_qxiwi"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://0p6pkoslnlmo" path="res://animations/monsters/mawler/mawler.skel" id="2_ed80p"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_0cgq3"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_803rf"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_85x3m"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_q73io"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_qxiwi")
+skeleton_file_res = ExtResource("2_ed80p")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_0cgq3"), SubResource("SpineAnimationMix_803rf"), SubResource("SpineAnimationMix_85x3m"), SubResource("SpineAnimationMix_q73io")]

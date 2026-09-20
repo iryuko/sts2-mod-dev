@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://6yrtyfg3wvcg"]
+
+[ext_resource type="Texture2D" uid="uid://baokptpw6pl30" path="res://images/rooms/overgrowth/overgrowth_03_a.png" id="1_3mcrf"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="2_cf8d3"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6o0hm"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_h6fnn"]
+offsets = PackedFloat32Array(0, 0.22905, 0.873371, 0.992551)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.4
+offset_top = -648.0
+offset_right = 1382.4
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3mcrf")
+expand_mode = 1
+
+[node name="fog2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_6o0hm")
+position = Vector2(-250.6, 409)
+amount = 4
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_cf8d3")
+gravity = Vector2(1, 0)
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+color = Color(0.027451, 0.145098, 0.129412, 1)
+color_ramp = SubResource("Gradient_h6fnn")
+anim_offset_max = 1.0

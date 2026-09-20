@@ -1,0 +1,13 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cx7x7fhpjdjdg"]
+
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="1_n5j6g"]
+
+[resource]
+font = ExtResource("1_n5j6g")
+font_size = 32
+font_color = Color(1, 0.333333, 0.333333, 1)
+outline_size = 12
+outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.12549)
+shadow_offset = Vector2(5, 4)

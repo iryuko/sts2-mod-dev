@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfdlyrlicf3ij"]
+
+[ext_resource type="Script" uid="uid://bn4ir4oc4p2fq" path="res://src/Core/Nodes/Vfx/NPotionFlashVfx.cs" id="1_3eo88"]
+[ext_resource type="Shader" uid="uid://b0jlo1dsq67w1" path="res://shaders/power_flash_vfx.gdshader" id="3_bubq1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_68wby"]
+shader = ExtResource("3_bubq1")
+shader_parameter/strength = 2.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_anc3v"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve" id="Curve_lnd77"]
+_limits = [0.99, 2.0, 0.0, 1.0]
+_data = [Vector2(0.00275482, 1), 0.0, 0.216286, 0, 0, Vector2(1, 1.77895), 0.301663, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5slhx"]
+offsets = PackedFloat32Array(0, 0.0572289, 0.533133, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0.947369, 1, 1, 1, 0)
+
+[node name="VfxPotionFlash" type="Node2D"]
+script = ExtResource("1_3eo88")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(60, 60)
+
+[node name="Flash" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_68wby")
+position = Vector2(30, 30)
+emitting = false
+amount = 1
+one_shot = true
+texture = SubResource("ViewportTexture_anc3v")
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_lnd77")
+color_ramp = SubResource("Gradient_5slhx")

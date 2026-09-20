@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqrwdpvdn5vr2"]
+
+[ext_resource type="Texture2D" uid="uid://d4gvnwovl1wlq" path="res://images/packed/run_history/card_back.png" id="1_a6n1g"]
+[ext_resource type="Texture2D" uid="uid://dournirj5alwq" path="res://images/packed/run_history/desc_box.png" id="2_d2yqb"]
+[ext_resource type="Texture2D" uid="uid://p8c71u4lfxar" path="res://images/packed/run_history/power_portrait_shadow.png" id="3_jtlex"]
+[ext_resource type="Texture2D" uid="uid://dedhldmxq26on" path="res://images/packed/run_history/power_portrait.png" id="4_c8t8s"]
+[ext_resource type="Script" uid="uid://csvhoifqs4v0j" path="res://src/Core/Nodes/Cards/NTinyCard.cs" id="5_ea7bw"]
+[ext_resource type="Texture2D" uid="uid://byt77y85awb26" path="res://images/packed/run_history/banner.png" id="5_fm38u"]
+[ext_resource type="Texture2D" uid="uid://ckaatgyiycq54" path="res://images/packed/run_history/banner_shadow.png" id="6_g0eyv"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="TinyCard" type="Control"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1888.0
+offset_bottom = -1048.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_ea7bw")
+
+[node name="RarityOutline" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(5.77569e-07, 0.887117, 0.888178, 1)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.08
+offset_top = -2.08
+offset_right = 5.92
+offset_bottom = -2.08
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.13, 1.13)
+pivot_offset = Vector2(16, 16)
+mouse_filter = 2
+texture = ExtResource("1_a6n1g")
+expand_mode = 2
+
+[node name="CardBack" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.141772, 0.277601, 0.413739, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_a6n1g")
+expand_mode = 2
+
+[node name="Description" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.25098)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_d2yqb")
+expand_mode = 2
+
+[node name="PortraitShadow" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_jtlex")
+expand_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.95, 0.920075, 0.6935, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_c8t8s")
+expand_mode = 2
+
+[node name="Banner" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.61, 0.61, 0.61, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_fm38u")
+expand_mode = 2
+
+[node name="Shadow" type="TextureRect" parent="Banner"]
+modulate = Color(0.392157, 1, 1, 1)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_g0eyv")
+expand_mode = 2

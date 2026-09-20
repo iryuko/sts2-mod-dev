@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://d0j3q6q5py8q7"]
+
+[ext_resource type="Material" uid="uid://cb3guesajfjhr" path="res://materials/vfx/poison/vfx_poison_skull.tres" id="1_0a3ei"]
+[ext_resource type="Texture2D" uid="uid://bhxsw86uncquo" path="res://images/vfx/poison/poison_skull.png" id="2_y076u"]
+
+[sub_resource type="Curve" id="Curve_5geno"]
+_data = [Vector2(0, 0), 0.0, 15.245632, 0, 0, Vector2(0.20365536, 1), 0.0, 0.0, 0, 0, Vector2(0.60313314, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_av4la"]
+curve = SubResource("Curve_5geno")
+
+[sub_resource type="Curve" id="Curve_3rtms"]
+
+[sub_resource type="Curve" id="Curve_dddgi"]
+_limits = [-1.0, 0.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 2.3736076, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gxvfc"]
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6ujvi"]
+curve_x = SubResource("Curve_3rtms")
+curve_y = SubResource("Curve_dddgi")
+curve_z = SubResource("Curve_gxvfc")
+
+[sub_resource type="Curve" id="Curve_6ujvi"]
+_data = [Vector2(0, 0.8043689), 0.0, 0.58791673, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5geno"]
+curve = SubResource("Curve_6ujvi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2gmb7"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+angle_min = -4.9999895
+angle_max = -4.9999895
+angular_velocity_min = -4.000016
+angular_velocity_max = -4.000016
+directional_velocity_min = 79.999985
+directional_velocity_max = 79.999985
+directional_velocity_curve = SubResource("CurveXYZTexture_6ujvi")
+scale_min = 0.65
+scale_max = 0.65
+scale_curve = SubResource("CurveTexture_5geno")
+alpha_curve = SubResource("CurveTexture_av4la")
+
+[node name="vfx_poison_skull" type="GPUParticles2D"]
+z_index = 2
+texture_repeat = 2
+material = ExtResource("1_0a3ei")
+emitting = false
+amount = 1
+texture = ExtResource("2_y076u")
+lifetime = 1.75
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_2gmb7")

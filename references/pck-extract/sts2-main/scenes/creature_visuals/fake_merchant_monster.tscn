@@ -1,0 +1,129 @@
+[gd_scene load_steps=16 format=3 uid="uid://bophn7a3y6gmn"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_v1ose"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://stqu06ccp8x6" path="res://animations/backgrounds/fake_merchant_room/top/fake_merchant_top.tres" id="2_v1ose"]
+[ext_resource type="Script" uid="uid://d3igaf0sabui3" path="res://src/Core/Nodes/Vfx/NFakeMerchantVfx.cs" id="4_c55ox"]
+[ext_resource type="Texture2D" uid="uid://cxxvj0bcw1mbg" path="res://images/vfx/monsters/fake_merchant/fake_merchant_coin_particle.png" id="5_07ojx"]
+
+[sub_resource type="Gradient" id="Gradient_ok78h"]
+colors = PackedColorArray(0.502857, 0.502857, 0.502857, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_agahg"]
+gradient = SubResource("Gradient_ok78h")
+
+[sub_resource type="Gradient" id="Gradient_c55ox"]
+offsets = PackedFloat32Array(0.0947867, 0.310427, 0.521327, 0.706161, 0.862559)
+colors = PackedColorArray(0.77, 0.77, 0.77, 1, 1, 1, 1, 1, 0.748815, 0.748815, 0.748815, 1, 1, 1, 1, 1, 0.748815, 0.748815, 0.748815, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_07ojx"]
+gradient = SubResource("Gradient_c55ox")
+
+[sub_resource type="Curve" id="Curve_07ojx"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.00497513, 0.0224719), 0.0, 22.7869, 0, 0, Vector2(0.122768, 0.978022), 0.0, 0.0, 0, 0, Vector2(0.216518, -0.043956), -23.9121, -23.9121, 0, 0, Vector2(0.310268, -1), 0.0, 0.0, 0, 0, Vector2(0.397321, -0.010989), 31.1795, 31.1795, 0, 0, Vector2(0.497768, 1), 0.0, 0.0, 0, 0, Vector2(0.600446, 0), -29.5384, -29.5384, 0, 0, Vector2(0.691964, -1), 0.0, 0.0, 0, 0, Vector2(0.772321, -0.010989), 35.6924, 35.6924, 0, 0, Vector2(0.857143, 1), 0.0, 0.0, 0, 0, Vector2(0.948661, 0.0109891), -32.4924, -32.4924, 0, 0, Vector2(1, -1), -0.58608, 0.0, 0, 0]
+point_count = 12
+
+[sub_resource type="Curve" id="Curve_ok78h"]
+_data = [Vector2(0, 0.0561798), 0.0, 14.9056, 0, 0, Vector2(0.174129, 1), 0.0, 0.0, 0, 0, Vector2(0.895522, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -23.337, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_agahg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_t0a0r"]
+curve_x = SubResource("Curve_07ojx")
+curve_y = SubResource("Curve_ok78h")
+curve_z = SubResource("Curve_agahg")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_c55ox"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_c55ox"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_c55ox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c55ox"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(1, 0.2, 0)
+spread = 5.0
+initial_velocity_min = 1800.0
+initial_velocity_max = 2400.0
+angular_velocity_min = -500.0
+angular_velocity_max = 500.0
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveXYZTexture_t0a0r")
+color_ramp = SubResource("GradientTexture1D_07ojx")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_c55ox")
+color_initial_ramp = SubResource("GradientTexture1D_agahg")
+
+[node name="FakeMerchantMonster" type="Node2D"]
+script = ExtResource("1_v1ose")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_v1ose")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(0, -21)
+scale = Vector2(0.25, 0.25)
+metadata/_edit_lock_ = true
+
+[node name="ParticlesSlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "particle_slot"
+show_behind_parent = true
+position = Vector2(1.94224, -634.47)
+rotation = -3.02948
+scale = Vector2(1, 1)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/ParticlesSlot"]
+amount = 50
+texture = ExtResource("5_07ojx")
+speed_scale = 1.2
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_c55ox")
+
+[node name="height_control_bone" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "height_adjuster"
+show_behind_parent = true
+position = Vector2(-1000, -61.4525)
+
+[node name="target_bone" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "targeting_bone"
+show_behind_parent = true
+position = Vector2(-2530.73, -798.883)
+
+[node name="NFakeMerchantVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_c55ox")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -350.0
+offset_right = 98.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -190)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(17, -416)

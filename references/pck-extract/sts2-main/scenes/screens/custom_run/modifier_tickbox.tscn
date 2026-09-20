@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://bos4pbli8rpc5"]
+
+[ext_resource type="Script" uid="uid://dceba6l8lwldw" path="res://src/Core/Nodes/Screens/CustomRun/NRunModifierTickbox.cs" id="1_1yf41"]
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="1_dj2yv"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_4jyyx"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_ehkgy"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="14_vrmbp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojakw"]
+resource_local_to_scene = true
+shader = ExtResource("3_ehkgy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="ModifierTickbox" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 56)
+offset_right = 938.0
+offset_bottom = 56.0
+focus_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("1_1yf41")
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+color = Color(1, 0.6392157, 0.44705883, 0.2509804)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TickboxVisuals" parent="HBoxContainer" instance=ExtResource("1_dj2yv")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ojakw")
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Ticked" parent="HBoxContainer/TickboxVisuals" index="0"]
+custom_minimum_size = Vector2(48, 48)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+pivot_offset = Vector2(24, 24)
+
+[node name="NotTicked" parent="HBoxContainer/TickboxVisuals" index="1"]
+custom_minimum_size = Vector2(48, 48)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+pivot_offset = Vector2(24, 24)
+
+[node name="Description" type="RichTextLabel" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_4jyyx")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[blue][Draft][/blue] Draft a custom starting deck of cards."
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("14_vrmbp")
+AutoSizeEnabled = false
+IsVerticallyBound = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[editable path="HBoxContainer/TickboxVisuals"]

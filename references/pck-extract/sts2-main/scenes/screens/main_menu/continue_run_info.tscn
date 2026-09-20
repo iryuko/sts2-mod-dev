@@ -1,0 +1,258 @@
+[gd_scene load_steps=9 format=3 uid="uid://doe0yfnapr68p"]
+
+[ext_resource type="Script" uid="uid://dlqinpha8vquj" path="res://src/Core/Nodes/Screens/MainMenu/NContinueRunInfo.cs" id="1_lbg4a"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="2_5bjh4"]
+[ext_resource type="Texture2D" uid="uid://bxngoh7qrw8fa" path="res://images/ui/tiny_nine_patch.png" id="2_payqi"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_e5idk"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_r3s8g"]
+[ext_resource type="Texture2D" uid="uid://x2neryjvbtwy" path="res://images/ui/top_panel/character_icon_ironclad.png" id="5_08lf7"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="6_a05h1"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="7_a05h1"]
+
+[node name="ContinueRunInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.0
+offset_top = 98.0
+offset_right = 367.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_lbg4a")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+modulate = Color(0, 0, 0, 0.501961)
+layout_mode = 2
+texture = ExtResource("2_payqi")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 14
+patch_margin_top = 14
+patch_margin_right = 13
+patch_margin_bottom = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 18
+
+[node name="RunInfoContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="DateLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/RunInfoContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "Last Saved:
+Long long ago... 3:14am"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/RunInfoContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="CharacterIcon" type="TextureRect" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_08lf7")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ProgressLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "ErrorLand - Floor E"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="AscensionLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/RunInfoContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Ascension 99"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/RunInfoContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="HeartIcon" type="TextureRect" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_a05h1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HealthLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(140, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "00/00"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="GoldIcon" type="TextureRect" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_a05h1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="GoldLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/RunInfoContainer/HBoxContainer2"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(100, 36)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "Error"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 28
+
+[node name="ErrorContainer" type="MarginContainer" parent="MarginContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 0
+
+[node name="ErrorLabel" type="RichTextLabel" parent="MarginContainer/MarginContainer/ErrorContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.333333, 0.333333, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/line_separation = -4
+theme_override_fonts/normal_font = ExtResource("2_5bjh4")
+theme_override_fonts/bold_font = ExtResource("3_e5idk")
+theme_override_font_sizes/bold_italics_font_size = 17
+theme_override_font_sizes/italics_font_size = 17
+theme_override_font_sizes/mono_font_size = 17
+theme_override_font_sizes/normal_font_size = 17
+theme_override_font_sizes/bold_font_size = 17
+bbcode_enabled = true
+text = "Save is unable to be loaded!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_r3s8g")
+MinFontSize = 18
+MaxFontSize = 24

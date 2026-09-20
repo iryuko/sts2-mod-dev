@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://qmoxh8teqbud"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c6eo3yd6vmcxf" path="res://animations/monsters/battleworn_dummy/battleworn_dummy.atlas" id="1_sul80"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dt7erdm7a1gky" path="res://animations/monsters/battleworn_dummy/battleworn_dummy.skel" id="2_ekokt"]
+
+[resource]
+atlas_res = ExtResource("1_sul80")
+skeleton_file_res = ExtResource("2_ekokt")
+default_mix = 0.01

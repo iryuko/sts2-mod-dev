@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://lnojwtr7mw70"]
+
+[ext_resource type="Script" uid="uid://daydsuch6gw4l" path="res://src/Core/Nodes/Screens/Shops/NMerchantPotion.cs" id="1_y8o1b"]
+[ext_resource type="Script" uid="uid://bry8aaeikvcb3" path="res://src/Core/Nodes/GodotExtensions/NClickableControl.cs" id="2_yacov"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="3_8hxua"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_2b8ru"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_6627i"]
+
+[node name="MerchantPotion" type="Control"]
+custom_minimum_size = Vector2(122, 112)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 122.0
+offset_bottom = 122.0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_y8o1b")
+
+[node name="PotionHolder" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -34.0
+offset_top = -40.0
+offset_right = 6.0
+scale = Vector2(1.5, 1.5)
+pivot_offset = Vector2(20, 20)
+focus_mode = 2
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -56.0
+offset_top = -56.0
+offset_right = 56.0
+offset_bottom = 56.0
+pivot_offset = Vector2(56, 56)
+script = ExtResource("2_yacov")
+
+[node name="Cost" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -147.692
+offset_top = 47.6923
+offset_right = 149.308
+offset_bottom = 101.692
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="Cost"]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+texture = ExtResource("3_8hxua")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_2b8ru")
+theme_override_font_sizes/font_size = 39
+text = "99"
+theme_override_constants/line_spacing = 0.0
+theme_override_constants/outline_size = 15
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/shadow_outline_size = 0
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+script = ExtResource("4_6627i")
+MinFontSize = 40

@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cio26uo7pr70s"]
+
+[ext_resource type="Shader" uid="uid://bebj5rx7mk646" path="res://shaders/vfx/common/vfx_common_particle_shader.gdshader" id="1_ivod2"]
+
+[sub_resource type="Curve" id="Curve_85n0p"]
+_data = [Vector2(0, 0), 0.0, 2.322517, 0, 0, Vector2(1, 1), 0.23159075, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y1j1c"]
+curve = SubResource("Curve_85n0p")
+
+[sub_resource type="Gradient" id="Gradient_ivod2"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.56302524)
+colors = PackedColorArray(0.35, 0.35, 0.35, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_85n0p"]
+gradient = SubResource("Gradient_ivod2")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_ivod2")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/lut = SubResource("GradientTexture1D_85n0p")
+shader_parameter/pivot_offset = Vector2(0, 0.25)
+shader_parameter/erosion_curve = SubResource("CurveTexture_y1j1c")
+shader_parameter/erosion_offset = 0.25

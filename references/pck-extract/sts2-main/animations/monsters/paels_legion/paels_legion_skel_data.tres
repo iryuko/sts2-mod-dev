@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c431frsfxkw1w"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cbfyfk8jh484o" path="res://animations/monsters/paels_legion/paels_legion.atlas" id="1_d2c0f"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bnvqig45e0mw6" path="res://animations/monsters/paels_legion/paels_legion.skel" id="2_ln3ag"]
+
+[resource]
+atlas_res = ExtResource("1_d2c0f")
+skeleton_file_res = ExtResource("2_ln3ag")
+default_mix = 0.02

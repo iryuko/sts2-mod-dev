@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bijk0xe60at0d"]
+
+[ext_resource type="Shader" uid="uid://wosdwn1rt2pn" path="res://shaders/overlay_blend.gdshader" id="1_7axb1"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_7axb1")
+shader_parameter/intensity = 1.0

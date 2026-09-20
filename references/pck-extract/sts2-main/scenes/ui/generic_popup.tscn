@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsi0gmewgwhwv"]
+
+[ext_resource type="Script" uid="uid://dikd0uc4eg6y8" path="res://src/Core/Nodes/Multiplayer/NGenericPopup.cs" id="1_s0y2x"]
+[ext_resource type="PackedScene" uid="uid://dqberqa21r6y8" path="res://scenes/ui/vertical_popup.tscn" id="2_b42vq"]
+
+[node name="GenericPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = -300.0
+offset_right = 261.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s0y2x")
+
+[node name="VerticalPopup" parent="." instance=ExtResource("2_b42vq")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -51.0
+offset_top = -59.0
+offset_right = 522.0
+offset_bottom = 600.0
+grow_horizontal = 1
+grow_vertical = 1

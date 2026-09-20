@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://coqfasetksang"]
+
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="1_sk3fb"]
+[ext_resource type="Texture2D" uid="uid://dc4lddkgvv4k8" path="res://images/vfx/vfx_bloody_impact/bloodyimpact_anim_all.png" id="2_dujpa"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eo0qg"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_lmmdu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.749646, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -10.616, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4aejq"]
+curve = SubResource("Curve_lmmdu")
+
+[sub_resource type="Curve" id="Curve_t5r8h"]
+_limits = [0.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0.0141443, 22.6006), 0.0, -25.7513, 0, 0, Vector2(1, 200), -185.416, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8f8io"]
+curve = SubResource("Curve_t5r8h")
+
+[sub_resource type="Gradient" id="Gradient_d4wex"]
+offsets = PackedFloat32Array(0, 0.0354391, 0.260401, 0.567026, 0.748844, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1, 1, 0.0416667, 0.0416667, 1, 0.184314, 0.0313726, 0.145098, 1, 0.00784314, 0.0313726, 0.145098, 0.32549, 0.27451, 0.0313726, 0.2, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7dx6q"]
+gradient = SubResource("Gradient_d4wex")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6abwv"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -45, 0)
+angular_velocity_min = -150.0
+angular_velocity_max = -15.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_7dx6q")
+alpha_curve = SubResource("CurveTexture_4aejq")
+anim_speed_min = 0.01
+anim_speed_max = 0.01
+anim_speed_curve = SubResource("CurveTexture_8f8io")
+turbulence_noise_strength = 11.5
+turbulence_noise_speed_random = 4.0
+
+[node name="vfx_bloody_impact" type="Node2D"]
+script = ExtResource("1_sk3fb")
+_lifetime = 3.0
+
+[node name="frames" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_eo0qg")
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_6abwv")
+texture = ExtResource("2_dujpa")
+lifetime = 0.5
+one_shot = true
+fixed_fps = 25

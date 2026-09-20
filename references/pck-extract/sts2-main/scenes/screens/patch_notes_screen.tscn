@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://c51qbkbks3pae"]
+
+[ext_resource type="Script" uid="uid://dgngu530sjiqv" path="res://src/Core/Nodes/Screens/MainMenu/NPatchNotesScreen.cs" id="1_acmb3"]
+[ext_resource type="PackedScene" uid="uid://dk0y4pcjbr73p" path="res://scenes/screens/main_menu/patch_notes_button.tscn" id="5_hfoj6"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="6_mv1ri"]
+[ext_resource type="Script" uid="uid://c0ukastwa6q7q" path="res://src/Core/Nodes/CommonUi/NGoldArrowButton.cs" id="9_4me54"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="10_u0ydn"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="21_o7hdj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urhyp"]
+resource_local_to_scene = true
+shader = ExtResource("10_u0ydn")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0ydn"]
+resource_local_to_scene = true
+shader = ExtResource("10_u0ydn")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="PatchNotesScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_acmb3")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="PrevButton" type="Control" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -720.0
+offset_top = -64.0
+offset_right = -592.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(72, 64)
+script = ExtResource("9_4me54")
+
+[node name="TextureRect" type="TextureRect" parent="PrevButton"]
+material = SubResource("ShaderMaterial_urhyp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("21_o7hdj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NextButton" type="Control" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 592.0
+offset_top = -64.0
+offset_right = 720.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("9_4me54")
+
+[node name="TextureRect" type="TextureRect" parent="NextButton"]
+material = SubResource("ShaderMaterial_u0ydn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(56, 64)
+mouse_filter = 2
+texture = ExtResource("21_o7hdj")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="BackButton" parent="." instance=ExtResource("6_mv1ri")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="PatchNotesToggle" parent="." instance=ExtResource("5_hfoj6")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -88.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = 80.0

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cjfc8jykddapo"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="merc" type="Marker2D" parent="."]
+position = Vector2(1298, 694)
+
+[node name="sneaky" type="Marker2D" parent="."]
+position = Vector2(1298, 695)
+
+[node name="fat" type="Marker2D" parent="."]
+position = Vector2(1563, 659)

@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5h4pu2vdm4xr"]
+
+[ext_resource type="Script" uid="uid://b7qrqkoans0a7" path="res://src/Core/Nodes/Screens/CardLibrary/NCardTypeTickbox.cs" id="1_bdw3h"]
+[ext_resource type="Texture2D" uid="uid://b72dbkp3psr3c" path="res://images/packed/card_library/type_sort_attack.png" id="2_ou47l"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_oxxxm"]
+[ext_resource type="Texture2D" uid="uid://dvit5jkivc88v" path="res://images/packed/card_library/type_sort_outline2.png" id="3_usamg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7082m"]
+resource_local_to_scene = true
+shader = ExtResource("2_oxxxm")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="CardTypeTickbox" type="Control"]
+custom_minimum_size = Vector2(48, 54)
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(24, 27)
+focus_mode = 2
+script = ExtResource("1_bdw3h")
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_7082m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 27)
+mouse_filter = 2
+texture = ExtResource("2_ou47l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="Image"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(24, 27)
+mouse_filter = 2
+texture = ExtResource("3_usamg")
+expand_mode = 1
+stretch_mode = 5

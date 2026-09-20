@@ -107,11 +107,37 @@ find_godot() {
   return 1
 }
 
+restore_pack_import_paths_for_godot() {
+  local pack_dir="$1"
+
+  python3 - "${pack_dir}" <<'PY'
+from pathlib import Path
+import sys
+
+pack_dir = Path(sys.argv[1])
+changed = 0
+
+for import_file in pack_dir.rglob("*.import"):
+    text = import_file.read_text()
+    updated = text.replace(
+        'res://runtime_imports/',
+        'res://.godot/imported/',
+    )
+    if updated == text:
+        continue
+    import_file.write_text(updated)
+    changed += 1
+
+print(f"Restored {changed} import files to Godot cache paths")
+PY
+}
+
 normalize_pack_imports() {
   local pack_dir="$1"
 
   python3 - "${pack_dir}" <<'PY'
 from pathlib import Path
+import json
 import shutil
 import sys
 
@@ -122,11 +148,59 @@ if runtime_imports_dir.exists():
     shutil.rmtree(runtime_imports_dir)
 
 changed = 0
+missing = []
+
+def materialize_import_output(
+    importer: str | None,
+    source_file: str | None,
+    target_path: Path,
+) -> bool:
+    if importer not in {"spine.atlas", "spine.json"} or not source_file:
+        return False
+
+    source_path = pack_dir / source_file.removeprefix("res://")
+    if not source_path.exists():
+        return False
+
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    if importer == "spine.json":
+        shutil.copy2(source_path, target_path)
+        return True
+
+    target_path.write_text(
+        json.dumps(
+            {
+                "atlas_data": source_path.read_text(),
+                "normal_texture_prefix": "n",
+                "source_path": source_file,
+                "specular_texture_prefix": "s",
+            },
+            ensure_ascii=True,
+            separators=(",", ":"),
+        )
+    )
+    return True
 
 for import_file in pack_dir.rglob("*.import"):
     text = import_file.read_text()
     lines = text.splitlines()
     updated = False
+    importer = next(
+        (
+            line.removeprefix('importer="').removesuffix('"')
+            for line in lines
+            if line.startswith('importer="') and line.endswith('"')
+        ),
+        None,
+    )
+    source_file = next(
+        (
+            line.removeprefix('source_file="').removesuffix('"')
+            for line in lines
+            if line.startswith('source_file="') and line.endswith('"')
+        ),
+        None,
+    )
 
     for idx, line in enumerate(lines):
         if (
@@ -139,13 +213,21 @@ for import_file in pack_dir.rglob("*.import"):
                 rel_name = line.removeprefix('path="res://runtime_imports/').removesuffix('"')
 
             source_path = pack_dir / ".godot" / "imported" / rel_name
+            materialize_import_output(importer, source_file, source_path)
             if not source_path.exists():
+                missing.append(source_path)
                 continue
 
             target_rel = Path("runtime_imports") / rel_name
             target_path = pack_dir / target_rel
             target_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source_path, target_path)
+            if target_path.suffix == ".spatlas" and source_file:
+                atlas_data = json.loads(target_path.read_text())
+                atlas_data["source_path"] = source_file
+                target_path.write_text(
+                    json.dumps(atlas_data, ensure_ascii=True, separators=(",", ":"))
+                )
             lines[idx] = f'path="res://{target_rel.as_posix()}"'
             updated = True
             continue
@@ -160,13 +242,21 @@ for import_file in pack_dir.rglob("*.import"):
                 rel_name = line.removeprefix('dest_files=["res://runtime_imports/').removesuffix('"]')
 
             source_path = pack_dir / ".godot" / "imported" / rel_name
+            materialize_import_output(importer, source_file, source_path)
             if not source_path.exists():
+                missing.append(source_path)
                 continue
 
             target_rel = Path("runtime_imports") / rel_name
             target_path = pack_dir / target_rel
             target_path.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(source_path, target_path)
+            if target_path.suffix == ".spatlas" and source_file:
+                atlas_data = json.loads(target_path.read_text())
+                atlas_data["source_path"] = source_file
+                target_path.write_text(
+                    json.dumps(atlas_data, ensure_ascii=True, separators=(",", ":"))
+                )
             lines[idx] = f'dest_files=["res://{target_rel.as_posix()}"]'
             updated = True
 
@@ -174,6 +264,13 @@ for import_file in pack_dir.rglob("*.import"):
         trailing_newline = "\n" if text.endswith("\n") else ""
         import_file.write_text("\n".join(lines) + trailing_newline)
         changed += 1
+
+if missing:
+    unique_missing = sorted({path.as_posix() for path in missing})
+    print("Missing Godot import outputs:", file=sys.stderr)
+    for path in unique_missing:
+        print(f"  {path}", file=sys.stderr)
+    raise SystemExit(1)
 
 print(f"Normalized {changed} import files into visible runtime_imports/")
 PY
@@ -263,6 +360,8 @@ manifest = {
     "dependencies": source.get("dependencies", []),
     "affects_gameplay": source.get("affects_gameplay", True),
 }
+if source.get("min_game_version"):
+    manifest["min_game_version"] = source["min_game_version"]
 
 output_manifest.write_text(json.dumps(manifest, ensure_ascii=True, indent=2) + "\n")
 PY
@@ -440,6 +539,7 @@ generate_loader_manifest "${MOD_DIR}" "${EXPORT_ROOT}" "${MOD_NAME}"
 
 if [[ -f "${PACK_SCRIPT_PATH}" ]]; then
   if GODOT_BIN="$(find_godot)"; then
+    restore_pack_import_paths_for_godot "${PACK_PROJECT_DIR}"
     "${GODOT_BIN}" --headless --path "${PACK_PROJECT_DIR}" --editor --quit >/dev/null
     normalize_pack_imports "${PACK_PROJECT_DIR}"
     rm -f "${PCK_OUTPUT_PATH}"

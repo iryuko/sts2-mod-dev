@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cupk336akjc68"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b1yt78v4q3ei1" path="res://animations/monsters/fogmog/fogmog.atlas" id="1_d6v68"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://le1swkwbdxri" path="res://animations/monsters/fogmog/fogmog.skel" id="2_3j51f"]
+
+[resource]
+atlas_res = ExtResource("1_d6v68")
+skeleton_file_res = ExtResource("2_3j51f")

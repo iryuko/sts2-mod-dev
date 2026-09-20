@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://2hl0xt05ql38"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_k4s8v"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_1m1c2"]
+[ext_resource type="PackedScene" uid="uid://62s52whrkexj" path="res://scenes/backgrounds/fake_merchant_event_encounter/layers/fake_merchant_bg_00_a.tscn" id="3_3g08h"]
+[ext_resource type="PackedScene" uid="uid://dcnjj3cew7ybt" path="res://scenes/backgrounds/fake_merchant_event_encounter/layers/fake_merchant_fg_a.tscn" id="4_si7lg"]
+
+[node name="FakeMerchantBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_k4s8v")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+script = ExtResource("2_1m1c2")
+LayerA = ExtResource("3_3g08h")
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+script = ExtResource("2_1m1c2")
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+script = ExtResource("2_1m1c2")
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+script = ExtResource("2_1m1c2")
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_top = 30.0
+offset_bottom = 30.0
+script = ExtResource("2_1m1c2")
+LayerA = ExtResource("4_si7lg")

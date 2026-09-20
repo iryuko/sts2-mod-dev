@@ -1,0 +1,124 @@
+[gd_scene load_steps=12 format=3 uid="uid://canjgquyeoak7"]
+
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="1_dik1n"]
+[ext_resource type="Script" uid="uid://b1ftew3lxqiv1" path="res://src/Core/Nodes/Events/NDivinationButton.cs" id="1_t7brm"]
+[ext_resource type="Texture2D" uid="uid://dal5psd35k7yq" path="res://images/events/crystal_sphere/divine_button.png" id="2_t7brm"]
+[ext_resource type="Texture2D" uid="uid://cmcog1fhacbvv" path="res://images/events/crystal_sphere/divine_button_outline.png" id="3_2upy3"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_2oett"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_2aan7"]
+[ext_resource type="Texture2D" uid="uid://b63aqrp7sgreb" path="res://images/events/crystal_sphere/small_divination_icon.png" id="6_81bdj"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="9_2oett"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8nrix"]
+resource_local_to_scene = true
+shader = ExtResource("1_dik1n")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.9
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2oett"]
+resource_local_to_scene = true
+shader = ExtResource("1_dik1n")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="DivinationButton" type="Control"]
+custom_minimum_size = Vector2(395, 128)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_t7brm")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ButtonImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8nrix")
+custom_minimum_size = Vector2(395, 154)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_t7brm")
+expand_mode = 1
+
+[node name="Outline" type="TextureRect" parent="ButtonImage"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 0.666667, 0, 1)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_2upy3")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 132.0
+offset_top = 30.0
+offset_right = -41.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.360784)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_2oett")
+theme_override_font_sizes/font_size = 24
+text = "Label Not Set"
+vertical_alignment = 1
+script = ExtResource("5_2aan7")
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="SizeIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(83, 83)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = -41.5
+offset_right = 123.0
+offset_bottom = 41.5
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_81bdj")
+expand_mode = 1
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_2oett")
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.5
+offset_top = -62.0
+offset_right = -167.5
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("9_2oett")
+expand_mode = 1
+stretch_mode = 5

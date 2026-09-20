@@ -1,0 +1,28 @@
+[gd_scene load_steps=0 format=3 uid="uid://dnixh8bn33me0"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="egg1" type="Marker2D" parent="."]
+position = Vector2(961, 678)
+
+[node name="egg2" type="Marker2D" parent="."]
+position = Vector2(1140, 697)
+
+[node name="egg3" type="Marker2D" parent="."]
+position = Vector2(1323, 654)
+
+[node name="egg4" type="Marker2D" parent="."]
+position = Vector2(1498, 705)
+
+[node name="egg5" type="Marker2D" parent="."]
+position = Vector2(1651, 665)
+
+[node name="ovicopter" type="Marker2D" parent="."]
+position = Vector2(1971, 699)

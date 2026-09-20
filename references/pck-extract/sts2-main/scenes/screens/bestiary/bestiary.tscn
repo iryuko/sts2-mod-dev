@@ -1,0 +1,265 @@
+[gd_scene load_steps=12 format=3 uid="uid://cij4nlmt4b1di"]
+
+[ext_resource type="Script" uid="uid://s3hkv8x1gcxt" path="res://src/Core/Nodes/Screens/Bestiary/NBestiary.cs" id="1_41s1u"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="2_he457"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="3_bmdvt"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_h1koc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_45oiu"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="5_bi3eu"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="5_ff2un"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="7_u4et4"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="8_45oiu"]
+[ext_resource type="Texture2D" uid="uid://c3lpg8jbaaamd" path="res://images/packed/main_menu/main_menu_button_highlight.png" id="8_bi3eu"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="8_w1gfe"]
+
+[node name="Bestiary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_41s1u")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="MonsterName" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 88.0
+offset_bottom = 152.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/normal_font = ExtResource("2_he457")
+theme_override_fonts/bold_font = ExtResource("3_bmdvt")
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 48
+theme_override_font_sizes/bold_italics_font_size = 48
+theme_override_font_sizes/italics_font_size = 48
+theme_override_font_sizes/mono_font_size = 48
+bbcode_enabled = true
+text = "Unknown"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_h1koc")
+AutoSizeEnabled = false
+MinFontSize = 48
+MaxFontSize = 48
+
+[node name="Epithet" type="Label" parent="MonsterName"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(600, 32)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -3.0
+offset_right = 300.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_bi3eu")
+theme_override_font_sizes/font_size = 24
+text = "Evil Creature"
+horizontal_alignment = 1
+script = ExtResource("5_45oiu")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 481.0
+offset_top = -186.0
+offset_right = -481.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.33333334, 0.33333334, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = ExtResource("5_bi3eu")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "A mercenary who was once a fencer, a common pursuit for those from the Capital."
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_h1koc")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+
+[node name="SelectionArrow" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.94, 0.78489995, 0.3196, 0)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_right = 30.0
+offset_bottom = 30.0
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+texture = ExtResource("8_bi3eu")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="MoveContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 250.0
+offset_top = -83.0
+offset_right = 429.0
+offset_bottom = 83.0
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_bottom = -4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MoveHeader" type="Label" parent="MoveContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("8_w1gfe")
+theme_override_font_sizes/font_size = 28
+text = "Actions"
+vertical_alignment = 2
+script = ExtResource("5_45oiu")
+AutoSizeEnabled = false
+MinFontSize = 32
+MaxFontSize = 32
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="MoveList" type="VBoxContainer" parent="MoveContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="MonsterVisuals" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -202.0
+offset_right = 250.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MonsterVisualsContainer" type="Control" parent="MonsterVisuals"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Sidebar" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("7_u4et4")
+
+[node name="Content" type="MarginContainer" parent="Sidebar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 120
+
+[node name="BestiaryList" type="VBoxContainer" parent="Sidebar/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+
+[node name="Scrollbar" parent="Sidebar" instance=ExtResource("8_45oiu")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = 130.0
+offset_right = -50.0
+offset_bottom = -130.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_behavior_recursive = 0
+mouse_behavior_recursive = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+
+[node name="BackButton" parent="." instance=ExtResource("5_ff2un")]
+unique_name_in_owner = true
+layout_mode = 1

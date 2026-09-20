@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=3 uid="uid://dqb6hlw31j7ab"]
+
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="1_eqdw7"]
+[ext_resource type="Texture2D" uid="uid://cklb5knl5u8w5" path="res://images/rooms/overgrowth/overgrowth_06_b_02.png" id="2_ajaqi"]
+[ext_resource type="Texture2D" uid="uid://c5w2l046ew1w7" path="res://images/rooms/overgrowth/overgrowth_06_b_03.png" id="3_t3g5c"]
+[ext_resource type="Texture2D" uid="uid://dfuour47cid5s" path="res://images/rooms/overgrowth/overgrowth_06_b_04.png" id="4_cngch"]
+[ext_resource type="Texture2D" uid="uid://drpqq4r5mmavo" path="res://images/rooms/overgrowth/overgrowth_06_b_05.png" id="5_im4au"]
+[ext_resource type="Texture2D" uid="uid://p8ftxb8sq82e" path="res://images/rooms/overgrowth/overgrowth_06_b_06.png" id="6_n4uhp"]
+[ext_resource type="Texture2D" uid="uid://dky8vbphqvue2" path="res://images/rooms/overgrowth/overgrowth_06_b_07.png" id="7_pdqoi"]
+[ext_resource type="Texture2D" uid="uid://ik1e8gyccm81" path="res://images/rooms/overgrowth/overgrowth_06_b.png" id="8_unohb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykfmo"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.32
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pm2w7"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.15
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6guoj"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.32
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pkr62"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 0.5
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5a4s"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.15
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1k578"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 3.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.15
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxcf6"]
+shader = ExtResource("1_eqdw7")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.32
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 5.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="B" type="TextureRect"]
+material = SubResource("ShaderMaterial_ykfmo")
+offset_left = -278.0
+offset_top = 1042.0
+offset_right = -278.0
+offset_bottom = 1042.0
+
+[node name="cutter_b_2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_pm2w7")
+layout_mode = 0
+offset_left = 297.0
+offset_top = -232.0
+offset_right = 630.45
+offset_bottom = 96.95
+texture = ExtResource("2_ajaqi")
+expand_mode = 1
+
+[node name="cutter_b_3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_6guoj")
+layout_mode = 0
+offset_left = 641.0
+offset_top = -15.0
+offset_right = 821.0
+offset_bottom = 84.9
+texture = ExtResource("3_t3g5c")
+expand_mode = 1
+
+[node name="cutter_b_4" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_pkr62")
+layout_mode = 0
+offset_left = 834.0
+offset_top = -185.0
+offset_right = 1359.15
+offset_bottom = 100.75
+texture = ExtResource("4_cngch")
+expand_mode = 1
+
+[node name="cutter_b_5" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_y5a4s")
+layout_mode = 0
+offset_left = 1360.0
+offset_top = -184.0
+offset_right = 1721.8
+offset_bottom = 105.35
+texture = ExtResource("5_im4au")
+expand_mode = 1
+
+[node name="cutter_b_6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1k578")
+layout_mode = 0
+offset_left = 1674.0
+offset_top = -150.0
+offset_right = 2308.05
+offset_bottom = 105.6
+texture = ExtResource("6_n4uhp")
+expand_mode = 1
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hxcf6")
+layout_mode = 0
+offset_left = 2284.0
+offset_top = -164.0
+offset_right = 2536.0
+offset_bottom = 120.4
+texture = ExtResource("7_pdqoi")
+expand_mode = 1
+
+[node name="B2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ykfmo")
+layout_mode = 0
+offset_left = -61.0
+offset_top = -290.0
+offset_right = 348.95
+offset_bottom = 126.08
+texture = ExtResource("8_unohb")
+expand_mode = 1

@@ -1,0 +1,597 @@
+[gd_scene load_steps=18 format=3 uid="uid://fsogeegcac6v"]
+
+[ext_resource type="Texture2D" uid="uid://bh3oisgfegdct" path="res://images/rooms/overgrowth/overgrowth_04_c.png" id="1_eylim"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="2_w2i6q"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="3_mncdg"]
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="4_q6u83"]
+[ext_resource type="Texture2D" uid="uid://conwpkl6yp208" path="res://images/rooms/overgrowth/overgrowth_04_c_01.png" id="5_u53r1"]
+[ext_resource type="Texture2D" uid="uid://dt46xq30iwfln" path="res://images/rooms/overgrowth/overgrowth_04_c_02.png" id="6_ljsjj"]
+[ext_resource type="Texture2D" uid="uid://crm5f7fl7vvo1" path="res://images/rooms/overgrowth/overgrowth_04_c_03.png" id="7_dtqt6"]
+[ext_resource type="Texture2D" uid="uid://bqfuv3dhu4d7t" path="res://images/rooms/overgrowth/overgrowth_04_c_04.png" id="8_jgu0a"]
+[ext_resource type="Texture2D" uid="uid://cgtubomk6bqh0" path="res://images/rooms/overgrowth/overgrowth_04_c_05.png" id="9_dh3u2"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_ywrkm"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ckblp"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hpg8n"]
+shader = ExtResource("4_q6u83")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 6.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eg3wf"]
+shader = ExtResource("4_q6u83")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.15
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bj5ua"]
+shader = ExtResource("4_q6u83")
+shader_parameter/speed = 1.5
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 7.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hwipe"]
+shader = ExtResource("4_q6u83")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.02
+shader_parameter/maxStrength = 0.08
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iae4f"]
+shader = ExtResource("4_q6u83")
+shader_parameter/speed = 1.0
+shader_parameter/minStrength = 0.05
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="C" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.4
+offset_top = -648.0
+offset_right = 1382.4
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_eylim")
+expand_mode = 1
+
+[node name="little_light_1" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1440.15, 598.421)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_2" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1319.26, 535.095)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_3" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1328.85, 485.202)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_4" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1410.41, 406.524)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_5" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1400.82, 364.306)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_6" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1411.37, 304.818)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_7" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1403.69, 286.587)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_8" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1411.37, 264.519)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_9" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1406.57, 231.897)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_10" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1377.79, 221.342)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_11" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1376.83, 264.519)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_12" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1379.71, 305.777)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_13" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1451.67, 257.803)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_14" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1448.79, 274.114)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_15" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1093.78, 563.88)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_16" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1082.27, 513.986)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_17" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(894.204, 461.214)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_18" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(890.366, 440.105)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_19" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(834.719, 359.509)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_20" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(836.636, 297.142)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_21" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(843.354, 228.059)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_22" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(837.594, 206.95)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_23" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(113.18, 326.886)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_24" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(126.617, 286.587)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_25" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2120.43, 604.178)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_26" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2250.92, 515.905)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_27" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2238.45, 493.837)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_28" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2132.91, 418.997)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_29" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2244.2, 300.02)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="little_light_30" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2256.68, 265.479)
+amount = 1
+texture = ExtResource("2_w2i6q")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_ywrkm")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_ckblp")
+script = ExtResource("3_mncdg")
+
+[node name="c_foliage_6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_hpg8n")
+layout_mode = 0
+offset_left = 574.4
+offset_top = 541.0
+offset_right = 708.95
+offset_bottom = 825.4
+rotation = 3.14159
+texture = ExtResource("5_u53r1")
+expand_mode = 1
+
+[node name="c_foliage_7" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_eg3wf")
+layout_mode = 0
+offset_left = 496.4
+offset_top = 305.0
+offset_right = 752.925
+offset_bottom = 660.5
+texture = ExtResource("6_ljsjj")
+expand_mode = 1
+
+[node name="c_foliage_8" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_bj5ua")
+layout_mode = 0
+offset_left = 712.4
+offset_top = 525.0
+offset_right = 829.4
+offset_bottom = 672.6
+texture = ExtResource("7_dtqt6")
+expand_mode = 1
+
+[node name="c_foliage_9" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_hwipe")
+layout_mode = 0
+offset_left = 1427.4
+offset_top = 542.0
+offset_right = 1517.44
+offset_bottom = 644.15
+texture = ExtResource("8_jgu0a")
+expand_mode = 1
+
+[node name="c_foliage_10" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_iae4f")
+layout_mode = 0
+offset_left = 2015.4
+offset_top = 602.0
+offset_right = 2105.4
+offset_bottom = 678.95
+texture = ExtResource("9_dh3u2")
+expand_mode = 1

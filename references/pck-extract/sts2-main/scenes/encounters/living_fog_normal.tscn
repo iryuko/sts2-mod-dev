@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ff0q7yoww6w0"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="bomb1" type="Marker2D" parent="."]
+position = Vector2(1085, 575)
+
+[node name="bomb2" type="Marker2D" parent="."]
+position = Vector2(1262, 361)
+
+[node name="bomb3" type="Marker2D" parent="."]
+position = Vector2(1491, 285)
+
+[node name="bomb4" type="Marker2D" parent="."]
+position = Vector2(1723, 372)
+
+[node name="livingFog" type="Marker2D" parent="."]
+position = Vector2(1481, 729)
+
+[node name="bomb5" type="Marker2D" parent="."]
+position = Vector2(1875, 581)

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dira5xl3vx0is"]
+
+[ext_resource type="Script" uid="uid://c65f657sap6wp" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunLeaderboardSeparator.cs" id="1_1oll4"]
+
+[node name="Separator" type="ColorRect"]
+self_modulate = Color(0.5019608, 0.4862745, 0.44313726, 1)
+custom_minimum_size = Vector2(0, 2)
+script = ExtResource("1_1oll4")
+
+[node name="Shadow" type="ColorRect" parent="."]
+self_modulate = Color(0, 0, 0, 0.2509804)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

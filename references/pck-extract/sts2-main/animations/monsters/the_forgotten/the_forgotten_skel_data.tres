@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://6ket7h48gph8"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://8xv1drftjqgg" path="res://animations/monsters/the_forgotten/the_forgotten.atlas" id="1_08dve"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cq21010mxe87t" path="res://animations/monsters/the_forgotten/the_forgotten.skel" id="2_6diuf"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_08dve"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_6diuf"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ygsjj"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_4wde7"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_08dve")
+skeleton_file_res = ExtResource("2_6diuf")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_08dve"), SubResource("SpineAnimationMix_6diuf"), SubResource("SpineAnimationMix_ygsjj"), SubResource("SpineAnimationMix_4wde7")]

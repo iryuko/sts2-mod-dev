@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://uvgo3xb66g3w"]
+
+[ext_resource type="Shader" uid="uid://c4d8y54parroc" path="res://shaders/map_drawing/line_erase.gdshader" id="1_3ltjp"]
+[ext_resource type="Texture2D" uid="uid://dlh7cfjsrcb6t" path="res://images/packed/vfx/trail3.png" id="2_j5uka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1v6d"]
+shader = ExtResource("1_3ltjp")
+
+[node name="map_line_erase" type="Line2D"]
+material = SubResource("ShaderMaterial_q1v6d")
+position = Vector2(464, 309)
+points = PackedVector2Array(17, 98, 457, 249, 390, 554, -248, 311, -584, 94, -297, -140, 758, -86, 1551, 174, 1351, -369, 369, -1803, 429, -1998)
+width = 12.0
+default_color = Color(1, 0, 0, 1)
+texture = ExtResource("2_j5uka")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 4.0

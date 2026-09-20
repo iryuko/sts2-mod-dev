@@ -1,0 +1,23 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=6 format=3 uid="uid://c7e8cwdb2dyxi"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dskl3bskwfkma" path="res://animations/monsters/two_tailed_rat/two_tailed_rat.atlas" id="1_jopg4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dyf1a1hd63iqj" path="res://animations/monsters/two_tailed_rat/two_tailed_rat.skel" id="2_2mcfr"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jopg4"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_2mcfr"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_eaua2"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_jopg4")
+skeleton_file_res = ExtResource("2_2mcfr")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_jopg4"), SubResource("SpineAnimationMix_2mcfr"), SubResource("SpineAnimationMix_eaua2")]

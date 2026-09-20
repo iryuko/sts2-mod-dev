@@ -1,0 +1,143 @@
+[gd_scene load_steps=11 format=3 uid="uid://dk7qbpbg2o0ea"]
+
+[ext_resource type="Script" uid="uid://cvqdf70l1hgkp" path="res://src/Core/Nodes/CommonUi/NProceedButton.cs" id="1_owcso"]
+[ext_resource type="Texture2D" uid="uid://b0jc80w" path="res://images/atlases/compressed.sprites/proceed_button_outline.tres" id="3_khr7c"]
+[ext_resource type="Texture2D" uid="uid://kbk0da" path="res://images/atlases/ui_atlas.sprites/proceed_button.tres" id="3_kri60"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="4_4tgtr"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_lar7x"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_tf41f"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="8_kri60"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kri60"]
+shader = ExtResource("4_4tgtr")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_18irs"]
+resource_local_to_scene = true
+shader = ExtResource("4_4tgtr")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="ProceedButton" type="Control"]
+custom_minimum_size = Vector2(269, 108)
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -337.0
+offset_top = -316.0
+offset_right = -68.0
+offset_bottom = -208.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(134, 54)
+script = ExtResource("1_owcso")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kri60")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -22.0
+offset_right = 16.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(148, 77)
+mouse_filter = 2
+texture = ExtResource("3_kri60")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="Image"]
+modulate = Color(0, 0, 0, 0.25098)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(148, 77)
+mouse_filter = 2
+texture = ExtResource("3_kri60")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="Image"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.8, 0, 0)
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(148, 77)
+mouse_filter = 2
+texture = ExtResource("3_khr7c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Image"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 57.0
+offset_top = 14.0
+offset_right = 236.0
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.34, 0.06154, 0.0306, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = ExtResource("4_lar7x")
+theme_override_font_sizes/font_size = 34
+text = "Tally-ho"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_tf41f")
+MinFontSize = 24
+MaxFontSize = 34
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_18irs")
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.5
+offset_top = -42.0
+offset_right = -68.5
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("8_kri60")
+expand_mode = 1
+stretch_mode = 5

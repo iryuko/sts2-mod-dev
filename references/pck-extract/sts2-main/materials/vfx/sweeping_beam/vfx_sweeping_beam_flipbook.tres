@@ -1,0 +1,38 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cheq5rgmjue4y"]
+
+[ext_resource type="Shader" uid="uid://bblwhswtw2i7o" path="res://shaders/vfx/sweeping_beam/vfx_sweeping_beam_flipbook_shader.gdshader" id="1_6mu1f"]
+
+[sub_resource type="Curve" id="Curve_0mgkb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.49873415, 0.4695121), 1.9834999, 1.9834999, 0, 0, Vector2(1, 1), 0.3141577, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yt3ml"]
+curve = SubResource("Curve_0mgkb")
+
+[sub_resource type="Gradient" id="Gradient_0mgkb"]
+offsets = PackedFloat32Array(0, 0.3417367, 1)
+colors = PackedColorArray(1, 0.7422639, 0.15802127, 1, 1.371967, 0.995524, 0.50887936, 1, 1.8247963, 1.2679471, 0.8518715, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yt3ml"]
+gradient = SubResource("Gradient_0mgkb")
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_yt3ml"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j1grl"]
+gradient = SubResource("Gradient_yt3ml")
+fill_from = Vector2(0, 0.33760685)
+fill_to = Vector2(0, 0.42307693)
+
+[resource]
+shader = ExtResource("1_6mu1f")
+shader_parameter/pivot_offset = Vector2(0.5, 0)
+shader_parameter/frame_count = 9.0
+shader_parameter/flipbook_size = Vector2(3, 3)
+shader_parameter/flipbook_curve = SubResource("CurveTexture_yt3ml")
+shader_parameter/lut = SubResource("GradientTexture1D_yt3ml")
+shader_parameter/mask_texture = SubResource("GradientTexture2D_j1grl")
+shader_parameter/fov = 90.0
+shader_parameter/rot_y_deg = 0.0
+shader_parameter/rot_x_deg = 67.00002028249997
+shader_parameter/inset = 0.0

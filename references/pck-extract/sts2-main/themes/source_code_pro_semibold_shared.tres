@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://db2l475v4scfm"]
+
+[ext_resource type="FontFile" uid="uid://cdgyppkncylhu" path="res://fonts/source_code_pro_semibold.ttf" id="1_shared"]
+
+[resource]
+base_font = ExtResource("1_shared")

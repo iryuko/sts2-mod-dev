@@ -1,0 +1,1063 @@
+[gd_scene load_steps=83 format=3 uid="uid://df83m3kvndxjy"]
+
+[ext_resource type="Texture2D" uid="uid://bcwc5oxpm8tls" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_bg.png" id="1_wtryt"]
+[ext_resource type="Texture2D" uid="uid://d3dbplfp8y4b" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_fire.png" id="4_6e1ra"]
+[ext_resource type="Texture2D" uid="uid://ccwknkn3wmhdf" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_1.png" id="5_u8aqj"]
+[ext_resource type="Script" uid="uid://cmn487dnqb5dw" path="res://src/Core/Nodes/RestSite/NParticleSystemUpscaler.cs" id="6_0xpni"]
+[ext_resource type="Texture2D" uid="uid://4fq6247348gb" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_2.png" id="6_gp5hj"]
+[ext_resource type="Texture2D" uid="uid://n80adxyiklqc" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_3.png" id="7_a8fg7"]
+[ext_resource type="Texture2D" uid="uid://de7g2gnhfhaeg" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_4.png" id="8_1fn3q"]
+[ext_resource type="Texture2D" uid="uid://oirgaaj7h0ja" path="res://images/rooms/rest_sites/rest_site_light_texture.png" id="8_uln0h"]
+[ext_resource type="Texture2D" uid="uid://21x13y2omkax" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_5.png" id="9_6w5kv"]
+[ext_resource type="Texture2D" uid="uid://dpg1dht0k68e7" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_6.png" id="10_7rioc"]
+[ext_resource type="Texture2D" uid="uid://mesk0xb54ply" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_wall_light_7.png" id="11_nwgt6"]
+[ext_resource type="Texture2D" uid="uid://bop0gm5jjxtf8" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_l_log_shadow.png" id="12_7tj6k"]
+[ext_resource type="Texture2D" uid="uid://bbpcs7f24jhht" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_l_log_highlight.png" id="13_kq4xl"]
+[ext_resource type="Texture2D" uid="uid://hoshejldjyf8" path="res://images/rooms/rest_sites/overgrowth/fire_light.png" id="14_f2xax"]
+[ext_resource type="Texture2D" uid="uid://b0faynywoc407" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_r_log_shadow.png" id="14_j1h71"]
+[ext_resource type="PackedScene" uid="uid://bb03ot8swe1ca" path="res://scenes/rest_site/rest_site_smoke_weak.tscn" id="20_2kb2y"]
+[ext_resource type="Script" uid="uid://d0pffb7ah4wau" path="res://src/Core/Nodes/Vfx/NRestSiteFireVfx.cs" id="20_3llod"]
+[ext_resource type="Texture2D" uid="uid://ckyt2r75a0q5m" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_r_log_highlight.png" id="20_oc2lr"]
+[ext_resource type="Shader" uid="uid://dryvqo67omhm" path="res://shaders/vfx/vfx_stepped_shader_fire_flat.tres" id="20_xm4nw"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="21_5iec7"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="22_jl1qo"]
+[ext_resource type="Texture2D" uid="uid://cae856idllqgb" path="res://images/rooms/rest_sites/vignette_2.png" id="23_mqc82"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="23_rcycu"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="24_bigs4"]
+[ext_resource type="Texture2D" uid="uid://c6m54w15s8vr7" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_cutter_1.png" id="24_hlq7n"]
+[ext_resource type="Texture2D" uid="uid://b1jy4135ovg7y" path="res://images/rooms/rest_sites/overgrowth/flower_1.png" id="25_npgii"]
+[ext_resource type="Texture2D" uid="uid://c8f57r6lb4ooy" path="res://images/vfx/fire/fire_base_campfire.png" id="25_qtnt5"]
+[ext_resource type="Texture2D" uid="uid://dp5ufe5ldmdu8" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_cutter_2.png" id="25_qygbj"]
+[ext_resource type="Shader" uid="uid://cu7krqg4cighe" path="res://shaders/vfx/vfx_stepped_shader_fire_add.tres" id="26_ggjhw"]
+[ext_resource type="Texture2D" uid="uid://c3p6a6bar1tah" path="res://images/rooms/rest_sites/overgrowth/flower_2.png" id="26_ih06d"]
+[ext_resource type="Texture2D" uid="uid://bgbescs3lpj0f" path="res://images/rooms/rest_sites/overgrowth/flower_3.png" id="27_ke0ay"]
+[ext_resource type="Texture2D" uid="uid://b47r2blhe2i3" path="res://images/vfx/fire/cinder_particle.png" id="28_4052i"]
+[ext_resource type="Texture2D" uid="uid://iwxdp7yx2i70" path="res://images/rooms/rest_sites/overgrowth/flower_4.png" id="28_we85m"]
+[ext_resource type="Texture2D" uid="uid://btyar3mdk008d" path="res://images/rooms/rest_sites/overgrowth/flower_5.png" id="29_fmwdr"]
+[ext_resource type="Shader" uid="uid://cmmplm8570cug" path="res://scenes/rest_site/rest_site_light_shader.gdshader" id="30_dkpcl"]
+[ext_resource type="Texture2D" uid="uid://b13cltfhpxx47" path="res://images/rooms/rest_sites/overgrowth/flower_6.png" id="30_lgel4"]
+[ext_resource type="Texture2D" uid="uid://b6abq63t47rn" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_l_log.png" id="32_2c1wp"]
+[ext_resource type="Texture2D" uid="uid://c3unb2vqvygft" path="res://scenes/rest_site/light_ramp_gradient.tres" id="32_sgk1s"]
+[ext_resource type="Texture2D" uid="uid://wvricu68mo6v" path="res://scenes/rest_site/light_noise_curve.tres" id="32_ypmwj"]
+[ext_resource type="Texture2D" uid="uid://dawjjay11xjab" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_r_log.png" id="37_ydtu4"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="38_8j4u3"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="39_aoqrg"]
+[ext_resource type="Texture2D" uid="uid://c8cducyphvfqi" path="res://images/packed/vfx/event/trial_stand_light.png" id="40_3se23"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_bokmj"]
+_limits = [0.99, 1.02, 0.0, 1.0]
+_data = [Vector2(0, 1.02), 0.0, 0.0, 0, 0, Vector2(0.0645161, 1.00021), 0.0, 0.0, 0, 0, Vector2(0.0768049, 1.01913), 0.0, 0.0, 0, 0, Vector2(0.141321, 1.00018), 0.0, 0.0, 0, 0, Vector2(0.178187, 1.02), 0.0, 0.0, 0, 0, Vector2(0.253456, 1), 0.0, 0.0, 0, 0, Vector2(0.317972, 1.02), 0.0, 0.0, 0, 0, Vector2(0.376344, 1), 0.0, 0.0, 0, 0, Vector2(0.466974, 1), 0.0, 0.0, 0, 0, Vector2(0.497696, 1.01966), 0.0, 0.0, 0, 0, Vector2(0.588326, 1), 0.0, 0.0, 0, 0, Vector2(0.603687, 1.02), 0.0, 0.0, 0, 0, Vector2(0.668203, 1.00028), 0.0, 0.0, 0, 0, Vector2(0.729647, 1.02), 0.0, 0.0, 0, 0, Vector2(0.763441, 1.00041), 0.0, 0.0, 0, 0, Vector2(0.855607, 1.02), 0.0, 0.0, 0, 0, Vector2(0.935484, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.02), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Curve" id="Curve_tw0nw"]
+_limits = [0.98, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.989972), 0.0, 0.0, 0, 0, Vector2(0.0353303, 1), 0.0, 0.0, 0, 0, Vector2(0.0721966, 0.990039), 0.0, 0.0, 0, 0, Vector2(0.178187, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.265745, 1), 0.0, 0.0, 0, 0, Vector2(0.304147, 0.989803), 0.0, 0.0, 0, 0, Vector2(0.344086, 1), 0.0, 0.0, 0, 0, Vector2(0.373272, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.423963, 1), 0.0, 0.0, 0, 0, Vector2(0.520737, 1), 0.00280191, 0.00280191, 0, 0, Vector2(0.551459, 0.989803), -0.00168523, -0.00168523, 0, 0, Vector2(0.6298, 1), 0.00818221, 0.00818221, 0, 0, Vector2(0.663594, 0.989467), 0.0, 0.0, 0, 0, Vector2(0.735791, 1), 0.0161925, 0.0161925, 0, 0, Vector2(0.800307, 0.989871), 0.000534719, 0.000534719, 0, 0, Vector2(0.872504, 1), 0.0, 0.0, 0, 0, Vector2(0.913978, 0.989972), -0.0114926, -0.0114926, 0, 0, Vector2(0.996928, 1), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Gradient" id="Gradient_i1ecu"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.176419, 0.176419, 0.176419, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypmwj"]
+shader = ExtResource("30_dkpcl")
+shader_parameter/pixel_offset = Vector2(1, 2)
+shader_parameter/noise_texture = ExtResource("32_ypmwj")
+shader_parameter/ramp_texture = ExtResource("32_sgk1s")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gumfc"]
+
+[sub_resource type="Curve" id="Curve_g8kll"]
+_data = [Vector2(0, 0.321019), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.36242), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_v5pvb"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="Curve" id="Curve_37m8i"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_hu4jf"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3ocq"]
+shader = ExtResource("20_xm4nw")
+shader_parameter/OuterColor = Color(0.387, 0.86, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.26, 0.75)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("24_bigs4")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(2, 2)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("21_5iec7")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("23_rcycu")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("22_jl1qo")
+shader_parameter/Distortion2Strength = 0.16
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("21_5iec7")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.47)
+shader_parameter/DistortionMask = ExtResource("23_rcycu")
+shader_parameter/InnerColor = Color(0.237667, 0.46, 0, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.22)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kffq6"]
+shader = ExtResource("26_ggjhw")
+shader_parameter/OuterColor = Color(0.148625, 0.29, 0.1015, 1)
+shader_parameter/InnerColorStep = Vector2(0.745, 0.995)
+shader_parameter/Noise2Strength = 1.005
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.4, 0.6)
+shader_parameter/Noise2Texture = ExtResource("24_bigs4")
+shader_parameter/Noise1Strength = 0.76
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(0.8, 0.7)
+shader_parameter/Noise1Texture = ExtResource("21_5iec7")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2.01)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.045)
+shader_parameter/NoiseMask = ExtResource("23_rcycu")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("22_jl1qo")
+shader_parameter/Distortion2Strength = 0.16
+shader_parameter/Distortion1Scale = Vector2(1, 0.7)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("21_5iec7")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 0.6)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.46)
+shader_parameter/DistortionMask = ExtResource("23_rcycu")
+shader_parameter/InnerColor = Color(0, 0, 0, 1)
+shader_parameter/OuterStep = Vector2(0.9, 0.95)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0byth"]
+shader = ExtResource("26_ggjhw")
+shader_parameter/OuterColor = Color(0.766167, 1, 0.39, 1)
+shader_parameter/InnerColorStep = Vector2(0.975, 0.99)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.3, 1)
+shader_parameter/Noise2Texture = ExtResource("24_bigs4")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1.2, 1.2)
+shader_parameter/Noise1Panning = Vector2(0.6, 0.8)
+shader_parameter/Noise1Texture = ExtResource("21_5iec7")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.255)
+shader_parameter/NoiseMask = ExtResource("23_rcycu")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 0.85)
+shader_parameter/Distortion2Texture = ExtResource("22_jl1qo")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.25, 1)
+shader_parameter/Distortion1Texture = ExtResource("21_5iec7")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 1.2)
+shader_parameter/DistortionMaskOffset = Vector2(0, -0.12)
+shader_parameter/DistortionMask = ExtResource("23_rcycu")
+shader_parameter/InnerColor = Color(0, 0, 0, 1)
+shader_parameter/OuterStep = Vector2(0.6, 0.99)
+
+[sub_resource type="Curve" id="Curve_uhrfl"]
+_data = [Vector2(0, 0.531754), 0.0, 2.99665, 0, 0, Vector2(0.300248, 0.969194), 0.0, 0.0, 0, 0, Vector2(0.573201, 0.981517), 0.0, 0.0, 0, 0, Vector2(0.734491, 0.969194), 0.0, 0.0, 0, 0, Vector2(1, 0.0265403), -7.44881, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_4g17m"]
+curve = SubResource("Curve_uhrfl")
+
+[sub_resource type="Curve" id="Curve_a6dbx"]
+_limits = [-0.5, 0.5, 0.0, 1.0]
+_data = [Vector2(0, -0.020853), 0.0, 0.0, 0, 0, Vector2(0.255583, 0.0194313), 0.0, 0.0, 0, 0, Vector2(0.66005, -0.0298578), 0.0, 0.0, 0, 0, Vector2(1, -0.020853), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vmhi7"]
+curve = SubResource("Curve_a6dbx")
+
+[sub_resource type="Curve" id="Curve_q55n8"]
+_data = [Vector2(0, 0.531754), 0.0, 5.89698, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.215881, 0.611848), 0.0, 0.0, 0, 0, Vector2(0.327543, 1), 0.0, 0.0, 0, 0, Vector2(0.48139, 0.605687), 0.0, 0.0, 0, 0, Vector2(0.600496, 1), 0.0, 0.0, 0, 0, Vector2(0.751861, 0.544076), -3.66529, -3.66529, 0, 0, Vector2(1, 0), -0.926037, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_j8jhm"]
+curve = SubResource("Curve_q55n8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qrw28"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 1)
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, -1, 0)
+spread = 16.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 3.0
+orbit_velocity_curve = SubResource("CurveTexture_vmhi7")
+gravity = Vector3(10, -20, 0)
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_j8jhm")
+color = Color(0.772, 1, 0.24, 1)
+alpha_curve = SubResource("CurveTexture_4g17m")
+hue_variation_min = -0.03
+hue_variation_max = 0.04
+
+[sub_resource type="Curve" id="Curve_76jsx"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Shader" id="Shader_uc8q7"]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = MODEL_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vf572"]
+shader = SubResource("Shader_uc8q7")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.25
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.639
+shader_parameter/offset = 150.0
+
+[sub_resource type="Shader" id="Shader_rfclg"]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = MODEL_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rkp2t"]
+shader = SubResource("Shader_rfclg")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.02
+shader_parameter/maxStrength = 0.5
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.639
+shader_parameter/offset = 200.0
+
+[sub_resource type="Shader" id="Shader_a1ivg"]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = MODEL_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nd0pj"]
+shader = SubResource("Shader_a1ivg")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.5
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.639
+shader_parameter/offset = 25.0
+
+[sub_resource type="Shader" id="Shader_oc7ic"]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = MODEL_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgb26"]
+shader = SubResource("Shader_oc7ic")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.5
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.639
+shader_parameter/offset = 150.0
+
+[sub_resource type="Shader" id="Shader_os641"]
+code = "// original wind shader from https://github.com/Maujoe/godot-simple-wind-shader-2d/tree/master/assets/maujoe.simple_wind_shader_2d
+// original script modified by HungryProton so that the assets are moving differently : https://pastebin.com/VL3AfV8D
+//
+// speed - The speed of the wind movement.
+// minStrength - The minimal strength of the wind movement.
+// maxStrength - The maximal strength of the wind movement.
+// strengthScale - Scalefactor for the wind strength.
+// interval - The time between minimal and maximal strength changes.
+// detail - The detail (number of waves) of the wind movement.
+// distortion - The strength of geometry distortion.
+// heightOffset - The height where the wind begins to move. By default 0.0.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+// Wind settings.
+uniform float speed = 1.0;
+uniform float minStrength : hint_range(0.0, 1.0) = 0.05;
+uniform float maxStrength : hint_range(0.0, 1.0) = 0.01;
+uniform float strengthScale = 100.0;
+uniform float interval = 3.5;
+uniform float detail = 1.0;
+uniform float distortion : hint_range(0.0, 1.0);
+uniform float heightOffset : hint_range(0.0, 1.0);
+
+// With the offset value, you can if you want different moves for each asset. Just put a random value (1, 2, 3) in the editor. Don't forget to mark the material as unique if you use this
+uniform float offset = 0; 
+
+
+float getWind(vec2 vertex, vec2 uv, float time){
+    float diff = pow(maxStrength - minStrength, 2.0);
+    float strength = clamp(minStrength + diff + sin(time / interval) * diff, minStrength, maxStrength) * strengthScale;
+    float wind = (sin(time) + cos(time * detail)) * strength * max(0.0, (1.0-uv.y) - heightOffset);
+    
+    return wind; 
+}
+
+void vertex() {
+    vec4 pos = MODEL_MATRIX * vec4(0.0, 0.0, 0.0, 1.0);
+    float time = TIME * speed + offset;
+    //float time = TIME * speed + pos.x * pos.y  ; not working when moving...
+    VERTEX.x += getWind(VERTEX.xy, UV, time);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bq6g"]
+shader = SubResource("Shader_os641")
+shader_parameter/speed = 2.0
+shader_parameter/minStrength = 0.01
+shader_parameter/maxStrength = 0.25
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 3.5
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.639
+shader_parameter/offset = 150.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jdnx4"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Curve" id="Curve_alpha_b2ere"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_b2ere"]
+curve = SubResource("Curve_alpha_b2ere")
+
+[sub_resource type="Gradient" id="Gradient_n4sm3"]
+offsets = PackedFloat32Array(0, 0.170306, 0.286026, 0.423581, 0.611354, 0.720524, 0.847162, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.513726, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.513726, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mdvfs"]
+gradient = SubResource("Gradient_n4sm3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b2ere"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(0, 0, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.577531, 0.646063, 0.441454, 1)
+color_ramp = SubResource("GradientTexture1D_mdvfs")
+alpha_curve = SubResource("CurveTexture_alpha_b2ere")
+
+[sub_resource type="Curve" id="Curve_6k5y7"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fu3bd"]
+offsets = PackedFloat32Array(0, 0.487896, 0.98324)
+colors = PackedColorArray(0.2757, 0.2757, 0.2757, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="OvergrowthRestSite" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="RestSiteBG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -444.0
+offset_top = -139.0
+offset_right = 2320.8
+offset_bottom = 1157.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wtryt")
+expand_mode = 1
+
+[node name="RestSiteLLog" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 519.0
+offset_top = 550.0
+offset_right = 829.5
+offset_bottom = 751.15
+texture = ExtResource("32_2c1wp")
+expand_mode = 1
+
+[node name="RestSiteRLog" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 554.0
+offset_right = 1347.85
+offset_bottom = 746.6
+texture = ExtResource("37_ydtu4")
+expand_mode = 1
+
+[node name="RestSiteFireLogs" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 844.0
+offset_top = 670.0
+offset_right = 1032.55
+offset_bottom = 794.65
+texture = ExtResource("4_6e1ra")
+expand_mode = 1
+
+[node name="RestSiteLighting" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -942.0
+offset_top = -507.0
+offset_right = -942.0
+offset_bottom = -507.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestSiteGroundLighting" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1861, 1264)
+amount = 1
+texture = ExtResource("8_uln0h")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.9
+scale_amount_max = 0.9
+split_scale = true
+scale_curve_x = SubResource("Curve_bokmj")
+scale_curve_y = SubResource("Curve_tw0nw")
+color = Color(0.124436, 0.135553, 0.022949, 1)
+color_ramp = SubResource("Gradient_i1ecu")
+script = ExtResource("6_0xpni")
+_originalResolution = Vector2(1510, 897)
+
+[node name="WallLight1" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1747, 710)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("5_u8aqj")
+metadata/_edit_lock_ = true
+
+[node name="WallLight2" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1301, 910)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_gp5hj")
+
+[node name="WallLight3" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1496, 749)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_a8fg7")
+
+[node name="WallLight4" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1978, 708)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("8_1fn3q")
+metadata/_edit_lock_ = true
+
+[node name="WallLight5" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(2194, 782)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("9_6w5kv")
+
+[node name="WallLight6" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(2417, 867)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("10_7rioc")
+
+[node name="WallLight7" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(2575, 1137)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("11_nwgt6")
+metadata/_edit_lock_ = true
+
+[node name="RestSiteLLogShadow2" type="CPUParticles2D" parent="RestSiteLighting"]
+material = SubResource("CanvasItemMaterial_gumfc")
+position = Vector2(1508, 1145)
+amount = 1
+texture = ExtResource("12_7tj6k")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+split_scale = true
+scale_curve_x = SubResource("Curve_bokmj")
+scale_curve_y = SubResource("Curve_tw0nw")
+color = Color(0.12549, 0.137255, 0.0235294, 0.235294)
+color_ramp = SubResource("Gradient_i1ecu")
+
+[node name="RestSiteLLog2" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 1460.0
+offset_top = 1054.0
+offset_right = 1770.5
+offset_bottom = 1255.15
+texture = ExtResource("32_2c1wp")
+expand_mode = 1
+
+[node name="RestSiteRLogShadow" type="CPUParticles2D" parent="RestSiteLighting"]
+material = SubResource("CanvasItemMaterial_gumfc")
+position = Vector2(2234, 1147)
+amount = 1
+texture = ExtResource("14_j1h71")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+split_scale = true
+scale_curve_x = SubResource("Curve_bokmj")
+scale_curve_y = SubResource("Curve_tw0nw")
+color = Color(0.12549, 0.137255, 0.0235294, 0.235294)
+color_ramp = SubResource("Gradient_i1ecu")
+
+[node name="RestSiteRLog2" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 1981.0
+offset_top = 1056.0
+offset_right = 2283.88
+offset_bottom = 1248.6
+texture = ExtResource("37_ydtu4")
+expand_mode = 1
+
+[node name="RestSiteFireLogs2" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 1782.0
+offset_top = 1174.0
+offset_right = 1970.55
+offset_bottom = 1298.65
+texture = ExtResource("4_6e1ra")
+expand_mode = 1
+
+[node name="FireLight" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.08235294)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1876, 1226)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("14_f2xax")
+metadata/_edit_lock_ = true
+
+[node name="light_small2" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1879, 1204)
+rotation = -0.135379
+scale = Vector2(1.02028, 0.935983)
+amount = 2
+texture = ExtResource("38_8j4u3")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_g8kll")
+color = Color(0.454047, 0.62, 0.1674, 0.576471)
+color_ramp = SubResource("Gradient_v5pvb")
+script = ExtResource("39_aoqrg")
+
+[node name="SteppedFire" type="Node2D" parent="RestSiteLighting"]
+position = Vector2(1881, 1213)
+rotation = -0.135379
+scale = Vector2(0.275026, 0.275241)
+script = ExtResource("20_3llod")
+_minSkew = -0.15
+_maxSkew = 0.15
+
+[node name="smoke" type="Node2D" parent="RestSiteLighting/SteppedFire"]
+modulate = Color(1, 1, 1, 0.0352941)
+position = Vector2(-80.0981, -139.238)
+rotation = -0.227129
+scale = Vector2(3.63587, 3.63332)
+skew = -0.000343204
+
+[node name="light_small" type="CPUParticles2D" parent="RestSiteLighting/SteppedFire/smoke"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2, -51)
+amount = 1
+texture = ExtResource("38_8j4u3")
+lifetime = 3.0
+gravity = Vector2(0, 0)
+scale_amount_min = 0.9
+scale_amount_max = 0.9
+scale_amount_curve = SubResource("Curve_37m8i")
+color = Color(1, 0.231373, 0, 0.0431373)
+color_ramp = SubResource("Gradient_hu4jf")
+script = ExtResource("39_aoqrg")
+metadata/_edit_lock_ = true
+
+[node name="smoke_vfx_weak" parent="RestSiteLighting/SteppedFire/smoke" instance=ExtResource("20_2kb2y")]
+position = Vector2(18.085331, 14.349986)
+rotation = -0.18610536
+
+[node name="SteppedFireMix" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+material = SubResource("ShaderMaterial_d3ocq")
+position = Vector2(-12.8249, -173.695)
+rotation = -0.00125643
+scale = Vector2(1.14924, 1.14924)
+texture = ExtResource("25_qtnt5")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+material = SubResource("ShaderMaterial_kffq6")
+position = Vector2(-0.500137, -149.62)
+rotation = -0.00125643
+scale = Vector2(1.07511, 1.03187)
+texture = ExtResource("25_qtnt5")
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+material = SubResource("ShaderMaterial_0byth")
+position = Vector2(14.7219, -107.999)
+rotation = -0.00125643
+scale = Vector2(0.576841, 0.756003)
+texture = ExtResource("25_qtnt5")
+
+[node name="sparks big" type="GPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1884, 1196)
+rotation = -0.351045
+scale = Vector2(0.576877, 0.57727)
+skew = 0.000381112
+amount = 24
+texture = ExtResource("28_4052i")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_qrw28")
+
+[node name="light_front" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1882, 1201)
+rotation = -0.135379
+scale = Vector2(0.386704, 0.354756)
+amount = 2
+texture = ExtResource("38_8j4u3")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_76jsx")
+color = Color(0.454047, 0.62, 0.1674, 0.52549)
+color_ramp = SubResource("Gradient_v5pvb")
+script = ExtResource("39_aoqrg")
+
+[node name="RLogHighlight" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.043137256)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(2113, 1162)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("20_oc2lr")
+
+[node name="LLogHighlight" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.19215687, 1, 0.24313726, 0.043137256)
+material = SubResource("ShaderMaterial_ypmwj")
+position = Vector2(1641, 1161)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("13_kq4xl")
+metadata/_edit_lock_ = true
+
+[node name="RestSiteForeground2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1454.0
+offset_top = -135.0
+offset_right = 1737.5
+offset_bottom = 1160.55
+texture = ExtResource("25_qygbj")
+expand_mode = 1
+
+[node name="RestSiteForeground1" type="TextureRect" parent="RestSiteForeground2"]
+clip_contents = true
+layout_mode = 0
+offset_left = -1372.0
+offset_top = -7.0
+offset_right = -1007.5
+offset_bottom = 1289.0
+texture = ExtResource("24_hlq7n")
+expand_mode = 1
+
+[node name="RestSiteForegroundDither" type="TextureRect" parent="."]
+modulate = Color(0.921569, 0.921569, 0.92549, 0.521569)
+layout_mode = 0
+offset_left = -437.0
+offset_top = -328.0
+offset_right = 2318.0
+offset_bottom = 2213.0
+scale = Vector2(1, 0.687)
+texture = ExtResource("23_mqc82")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Foliage1" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_vf572")
+layout_mode = 0
+offset_left = 711.0
+offset_top = -113.0
+offset_right = 879.75
+offset_bottom = 51.6999
+rotation = 1.60745
+texture = ExtResource("25_npgii")
+expand_mode = 1
+
+[node name="Foliage2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_rkp2t")
+layout_mode = 0
+offset_left = 572.0
+offset_top = 135.0
+offset_right = 646.7
+offset_bottom = 285.75
+rotation = 3.14159
+texture = ExtResource("26_ih06d")
+expand_mode = 1
+
+[node name="Foliage3" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nd0pj")
+layout_mode = 0
+offset_left = 466.0
+offset_top = -176.0
+offset_right = 606.85
+offset_bottom = -70.25
+rotation = 1.49749
+texture = ExtResource("27_ke0ay")
+expand_mode = 1
+
+[node name="b_foliage_3" type="TextureRect" parent="Foliage3"]
+material = SubResource("ShaderMaterial_nd0pj")
+layout_mode = 0
+offset_left = 78.7585
+offset_top = -799.379
+offset_right = 219.609
+offset_bottom = -693.629
+rotation = -0.619592
+texture = ExtResource("27_ke0ay")
+expand_mode = 1
+
+[node name="Foliage4" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_sgb26")
+layout_mode = 0
+offset_left = 1403.0
+offset_top = 158.0
+offset_right = 1552.4
+offset_bottom = 302.0
+rotation = 3.14159
+texture = ExtResource("28_we85m")
+expand_mode = 1
+
+[node name="b_foliage_4" type="TextureRect" parent="Foliage4"]
+material = SubResource("ShaderMaterial_sgb26")
+layout_mode = 0
+offset_left = 624.999
+offset_top = 242.002
+offset_right = 774.399
+offset_bottom = 386.002
+texture = ExtResource("28_we85m")
+expand_mode = 1
+
+[node name="b_foliage_5" type="TextureRect" parent="Foliage4"]
+material = SubResource("ShaderMaterial_sgb26")
+layout_mode = 0
+offset_left = 61.9992
+offset_top = 309.0
+offset_right = 211.399
+offset_bottom = 453.0
+rotation = -1.46608
+texture = ExtResource("28_we85m")
+expand_mode = 1
+
+[node name="b_foliage_4" type="TextureRect" parent="Foliage4/b_foliage_5"]
+material = SubResource("ShaderMaterial_sgb26")
+layout_mode = 0
+offset_left = 509.044
+offset_top = 901.731
+offset_right = 609.044
+offset_bottom = 1001.73
+texture = ExtResource("28_we85m")
+expand_mode = 1
+
+[node name="Foliage5" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_2bq6g")
+layout_mode = 0
+offset_left = 1081.0
+offset_top = -9.0
+offset_right = 1217.8
+offset_bottom = 130.05
+texture = ExtResource("29_fmwdr")
+expand_mode = 1
+
+[node name="Foliage6" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_vf572")
+layout_mode = 0
+offset_left = 1109.0
+offset_top = -25.0
+offset_right = 1178.75
+offset_bottom = 109.55
+rotation = 3.14159
+texture = ExtResource("30_lgel4")
+expand_mode = 1
+
+[node name="b_foliage_6" type="TextureRect" parent="Foliage6"]
+material = SubResource("ShaderMaterial_vf572")
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 4.00029
+offset_top = -131.0
+offset_right = 204.0
+offset_bottom = 69.0
+rotation = 0.0698132
+texture = ExtResource("30_lgel4")
+expand_mode = 1
+
+[node name="overlay_vfx" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="light_overlay" type="GPUParticles2D" parent="overlay_vfx"]
+material = SubResource("CanvasItemMaterial_jdnx4")
+position = Vector2(1405, 309)
+rotation = 0.275762
+scale = Vector2(0.5, 1)
+amount = 1
+texture = ExtResource("40_3se23")
+lifetime = 10.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_b2ere")
+
+[node name="light_overlay2" type="GPUParticles2D" parent="overlay_vfx"]
+material = SubResource("CanvasItemMaterial_jdnx4")
+position = Vector2(437, 134)
+rotation = 0.275762
+scale = Vector2(0.37, 0.92)
+amount = 1
+texture = ExtResource("40_3se23")
+lifetime = 10.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_b2ere")
+
+[node name="fireflies" type="CPUParticles2D" parent="overlay_vfx"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1009, 1112)
+scale = Vector2(0.469, 0.469)
+amount = 20
+texture = ExtResource("38_8j4u3")
+lifetime = 20.0
+preprocess = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1800, 1)
+gravity = Vector2(0, -25)
+orbit_velocity_max = 0.01
+radial_accel_max = 0.1
+damping_min = 3.797
+damping_max = 6.329
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_6k5y7")
+color = Color(0.145098, 0.231373, 0, 1)
+color_ramp = SubResource("Gradient_fu3bd")

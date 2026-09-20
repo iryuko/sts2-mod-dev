@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://drs6xrimu736s"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cr4meme2w6nnm" path="res://animations/monsters/phrog_parasite/phrog_parasite.atlas" id="1_1beqy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cv307ehs1pvec" path="res://animations/monsters/phrog_parasite/phrog_parasite.skel" id="2_x2o7a"]
+
+[resource]
+atlas_res = ExtResource("1_1beqy")
+skeleton_file_res = ExtResource("2_x2o7a")

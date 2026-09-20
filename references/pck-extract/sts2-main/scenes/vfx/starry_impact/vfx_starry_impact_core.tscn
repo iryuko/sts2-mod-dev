@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://diyky0w8p5t2w"]
+
+[ext_resource type="Material" uid="uid://cp1be0boy7yha" path="res://materials/vfx/starry_impact/vfx_starry_impact_core.tres" id="1_8o3lp"]
+[ext_resource type="Texture2D" uid="uid://bikc38pt2yjt7" path="res://images/vfx/starry_impact/starry_impact_core.png" id="2_g42c5"]
+
+[sub_resource type="Curve" id="Curve_21kn2"]
+_data = [Vector2(0.101587, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bskm1"]
+curve = SubResource("Curve_21kn2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_frh73"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_bskm1")
+
+[node name="vfx_starry_impact_core" type="GPUParticles2D"]
+z_index = 3
+material = ExtResource("1_8o3lp")
+emitting = false
+amount = 1
+texture = ExtResource("2_g42c5")
+lifetime = 0.25
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_frh73")

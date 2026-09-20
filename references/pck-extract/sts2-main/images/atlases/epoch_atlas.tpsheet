@@ -1,0 +1,873 @@
+{
+	"textures": [
+		{
+			"image": "epoch_atlas.png",
+			"size": {
+				"w": 1370,
+				"h": 2040
+			},
+			"sprites": [
+				{
+					"filename": "act2_b_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "act3_b_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 171,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless1_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 341,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless2_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 511,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless3_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 681,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless4_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 851,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "colorless5_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1021,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "custom_and_seeds_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1191,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "daily_run_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1361,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "darv_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1531,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect1_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1701,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect2_epoch.png",
+					"region": {
+						"x": 1,
+						"y": 1871,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect3_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect4_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 171,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect5_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 341,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect6_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 511,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "defect7_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 681,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "event1_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 851,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "event2_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1021,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "event3_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1191,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad2_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1361,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad3_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1531,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad4_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1701,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad5_epoch.png",
+					"region": {
+						"x": 275,
+						"y": 1871,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad6_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ironclad7_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 171,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder1_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 341,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder2_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 511,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder3_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 681,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder4_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 851,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder5_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1021,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder6_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1191,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "necrobinder7_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1361,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "neow_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1531,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "orobas_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1701,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion1_epoch.png",
+					"region": {
+						"x": 549,
+						"y": 1871,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "potion2_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent1_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 171,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent2_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 341,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent3_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 511,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent4_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 681,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent5_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 851,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent6_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1021,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "regent7_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1191,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "relic1_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1361,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "relic2_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1531,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "relic3_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1701,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "relic4_epoch.png",
+					"region": {
+						"x": 823,
+						"y": 1871,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "relic5_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 1,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent1_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 171,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent2_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 341,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent3_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 511,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent4_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 681,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent5_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 851,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent6_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 1021,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "silent7_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 1191,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "underdocks_epoch.png",
+					"region": {
+						"x": 1097,
+						"y": 1361,
+						"w": 272,
+						"h": 168
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:29b1a02615f62822636f0ef2fcb90625:377dfb320c22539c65e9d21ac874786d:ea6c220d70429cd7d91f20d189c1c801$"
+	}
+}

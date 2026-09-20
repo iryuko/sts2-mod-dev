@@ -1,0 +1,1698 @@
+{
+	"textures": [
+		{
+			"image": "controller_atlas.png",
+			"size": {
+				"w": 555,
+				"h": 555
+			},
+			"sprites": [
+				{
+					"filename": "ps4/a.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/b.png",
+					"region": {
+						"x": 1,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/back.png",
+					"region": {
+						"x": 1,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/down.png",
+					"region": {
+						"x": 1,
+						"y": 157,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/left.png",
+					"region": {
+						"x": 1,
+						"y": 209,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/ls.png",
+					"region": {
+						"x": 1,
+						"y": 261,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/ls_down.png",
+					"region": {
+						"x": 1,
+						"y": 313,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/ls_left.png",
+					"region": {
+						"x": 1,
+						"y": 365,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/ls_right.png",
+					"region": {
+						"x": 1,
+						"y": 417,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/ls_up.png",
+					"region": {
+						"x": 1,
+						"y": 469,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/lb.png",
+					"region": {
+						"x": 1,
+						"y": 521,
+						"w": 50,
+						"h": 33
+					},
+					"margin": {
+						"x": 0,
+						"y": 9,
+						"w": 0,
+						"h": 17
+					}
+				},
+				{
+					"filename": "ps4/right.png",
+					"region": {
+						"x": 53,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rs.png",
+					"region": {
+						"x": 105,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rs_down.png",
+					"region": {
+						"x": 157,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rs_left.png",
+					"region": {
+						"x": 209,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rs_right.png",
+					"region": {
+						"x": 261,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rs_up.png",
+					"region": {
+						"x": 313,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/start.png",
+					"region": {
+						"x": 365,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/up.png",
+					"region": {
+						"x": 417,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/x.png",
+					"region": {
+						"x": 469,
+						"y": 1,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/y.png",
+					"region": {
+						"x": 53,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/down.png",
+					"region": {
+						"x": 53,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/left.png",
+					"region": {
+						"x": 53,
+						"y": 157,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/right.png",
+					"region": {
+						"x": 53,
+						"y": 209,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/up.png",
+					"region": {
+						"x": 53,
+						"y": 261,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/a.png",
+					"region": {
+						"x": 53,
+						"y": 313,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/b.png",
+					"region": {
+						"x": 53,
+						"y": 365,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/down.png",
+					"region": {
+						"x": 53,
+						"y": 417,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/left.png",
+					"region": {
+						"x": 53,
+						"y": 469,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/rb.png",
+					"region": {
+						"x": 53,
+						"y": 521,
+						"w": 50,
+						"h": 33
+					},
+					"margin": {
+						"x": 0,
+						"y": 9,
+						"w": 0,
+						"h": 17
+					}
+				},
+				{
+					"filename": "switch/ls.png",
+					"region": {
+						"x": 105,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/right.png",
+					"region": {
+						"x": 157,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/rs.png",
+					"region": {
+						"x": 209,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/up.png",
+					"region": {
+						"x": 261,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/x.png",
+					"region": {
+						"x": 313,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/y.png",
+					"region": {
+						"x": 365,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/a.png",
+					"region": {
+						"x": 417,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/b.png",
+					"region": {
+						"x": 469,
+						"y": 53,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/down.png",
+					"region": {
+						"x": 105,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/left.png",
+					"region": {
+						"x": 105,
+						"y": 157,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/ls.png",
+					"region": {
+						"x": 105,
+						"y": 209,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/lt.png",
+					"region": {
+						"x": 105,
+						"y": 261,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/right.png",
+					"region": {
+						"x": 105,
+						"y": 313,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/rs.png",
+					"region": {
+						"x": 105,
+						"y": 365,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/rt.png",
+					"region": {
+						"x": 105,
+						"y": 417,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/up.png",
+					"region": {
+						"x": 105,
+						"y": 469,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/lb.png",
+					"region": {
+						"x": 105,
+						"y": 521,
+						"w": 50,
+						"h": 33
+					},
+					"margin": {
+						"x": 0,
+						"y": 9,
+						"w": 0,
+						"h": 17
+					}
+				},
+				{
+					"filename": "xbox_360/x.png",
+					"region": {
+						"x": 157,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/y.png",
+					"region": {
+						"x": 209,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/a.png",
+					"region": {
+						"x": 261,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/b.png",
+					"region": {
+						"x": 313,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/down.png",
+					"region": {
+						"x": 365,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/left.png",
+					"region": {
+						"x": 417,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/ls.png",
+					"region": {
+						"x": 469,
+						"y": 105,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/lt.png",
+					"region": {
+						"x": 157,
+						"y": 157,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/right.png",
+					"region": {
+						"x": 157,
+						"y": 209,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/rs.png",
+					"region": {
+						"x": 157,
+						"y": 261,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/rt.png",
+					"region": {
+						"x": 157,
+						"y": 313,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/up.png",
+					"region": {
+						"x": 157,
+						"y": 365,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/x.png",
+					"region": {
+						"x": 157,
+						"y": 417,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/y.png",
+					"region": {
+						"x": 157,
+						"y": 469,
+						"w": 50,
+						"h": 50
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/rb.png",
+					"region": {
+						"x": 157,
+						"y": 521,
+						"w": 50,
+						"h": 33
+					},
+					"margin": {
+						"x": 0,
+						"y": 9,
+						"w": 0,
+						"h": 17
+					}
+				},
+				{
+					"filename": "xbox_360/ls_left.png",
+					"region": {
+						"x": 209,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_360/ls_right.png",
+					"region": {
+						"x": 261,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_360/rs_left.png",
+					"region": {
+						"x": 313,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_360/rs_right.png",
+					"region": {
+						"x": 365,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_one/ls_left.png",
+					"region": {
+						"x": 417,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_one/ls_right.png",
+					"region": {
+						"x": 469,
+						"y": 157,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_one/rs_left.png",
+					"region": {
+						"x": 209,
+						"y": 207,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_one/rs_right.png",
+					"region": {
+						"x": 261,
+						"y": 207,
+						"w": 50,
+						"h": 48
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "switch/lt.png",
+					"region": {
+						"x": 313,
+						"y": 207,
+						"w": 50,
+						"h": 47
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 3
+					}
+				},
+				{
+					"filename": "switch/rt.png",
+					"region": {
+						"x": 365,
+						"y": 207,
+						"w": 50,
+						"h": 47
+					},
+					"margin": {
+						"x": 0,
+						"y": 1,
+						"w": 0,
+						"h": 3
+					}
+				},
+				{
+					"filename": "switch/ls_left.png",
+					"region": {
+						"x": 417,
+						"y": 207,
+						"w": 50,
+						"h": 46
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 4
+					}
+				},
+				{
+					"filename": "switch/ls_right.png",
+					"region": {
+						"x": 469,
+						"y": 207,
+						"w": 50,
+						"h": 46
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 4
+					}
+				},
+				{
+					"filename": "switch/rs_left.png",
+					"region": {
+						"x": 417,
+						"y": 255,
+						"w": 50,
+						"h": 46
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 4
+					}
+				},
+				{
+					"filename": "switch/rs_right.png",
+					"region": {
+						"x": 469,
+						"y": 255,
+						"w": 50,
+						"h": 46
+					},
+					"margin": {
+						"x": 0,
+						"y": 2,
+						"w": 0,
+						"h": 4
+					}
+				},
+				{
+					"filename": "ps4/lb.png",
+					"region": {
+						"x": 313,
+						"y": 256,
+						"w": 50,
+						"h": 38
+					},
+					"margin": {
+						"x": 0,
+						"y": 6,
+						"w": 0,
+						"h": 12
+					}
+				},
+				{
+					"filename": "ps4/rb.png",
+					"region": {
+						"x": 365,
+						"y": 256,
+						"w": 50,
+						"h": 38
+					},
+					"margin": {
+						"x": 0,
+						"y": 6,
+						"w": 0,
+						"h": 12
+					}
+				},
+				{
+					"filename": "ps4/touchpad.png",
+					"region": {
+						"x": 209,
+						"y": 257,
+						"w": 50,
+						"h": 38
+					},
+					"margin": {
+						"x": 0,
+						"y": 6,
+						"w": 0,
+						"h": 12
+					}
+				},
+				{
+					"filename": "xbox_360/back.png",
+					"region": {
+						"x": 261,
+						"y": 257,
+						"w": 50,
+						"h": 38
+					},
+					"margin": {
+						"x": 0,
+						"y": 4,
+						"w": 0,
+						"h": 12
+					}
+				},
+				{
+					"filename": "xbox_360/start.png",
+					"region": {
+						"x": 313,
+						"y": 296,
+						"w": 50,
+						"h": 38
+					},
+					"margin": {
+						"x": 0,
+						"y": 4,
+						"w": 0,
+						"h": 12
+					}
+				},
+				{
+					"filename": "steam/lb.png",
+					"region": {
+						"x": 365,
+						"y": 296,
+						"w": 50,
+						"h": 34
+					},
+					"margin": {
+						"x": 0,
+						"y": 8,
+						"w": 0,
+						"h": 16
+					}
+				},
+				{
+					"filename": "steam/rb.png",
+					"region": {
+						"x": 209,
+						"y": 297,
+						"w": 50,
+						"h": 34
+					},
+					"margin": {
+						"x": 0,
+						"y": 8,
+						"w": 0,
+						"h": 16
+					}
+				},
+				{
+					"filename": "xbox_360/ls_down.png",
+					"region": {
+						"x": 261,
+						"y": 297,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/ls_up.png",
+					"region": {
+						"x": 209,
+						"y": 333,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/rs_down.png",
+					"region": {
+						"x": 417,
+						"y": 303,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_360/rs_up.png",
+					"region": {
+						"x": 365,
+						"y": 332,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/ls_down.png",
+					"region": {
+						"x": 311,
+						"y": 336,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/ls_up.png",
+					"region": {
+						"x": 259,
+						"y": 349,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/rs_down.png",
+					"region": {
+						"x": 209,
+						"y": 385,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "xbox_one/rs_up.png",
+					"region": {
+						"x": 467,
+						"y": 303,
+						"w": 48,
+						"h": 50
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 2,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/lt.png",
+					"region": {
+						"x": 209,
+						"y": 437,
+						"w": 47,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 3,
+						"h": 0
+					}
+				},
+				{
+					"filename": "ps4/rt.png",
+					"region": {
+						"x": 209,
+						"y": 489,
+						"w": 47,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 3,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/ls_down.png",
+					"region": {
+						"x": 258,
+						"y": 437,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/back.png",
+					"region": {
+						"x": 259,
+						"y": 401,
+						"w": 48,
+						"h": 34
+					},
+					"margin": {
+						"x": 1,
+						"y": 8,
+						"w": 2,
+						"h": 16
+					}
+				},
+				{
+					"filename": "switch/ls_up.png",
+					"region": {
+						"x": 258,
+						"y": 489,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/rs_down.png",
+					"region": {
+						"x": 306,
+						"y": 437,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "switch/start.png",
+					"region": {
+						"x": 309,
+						"y": 388,
+						"w": 47,
+						"h": 47
+					},
+					"margin": {
+						"x": 2,
+						"y": 2,
+						"w": 3,
+						"h": 3
+					}
+				},
+				{
+					"filename": "switch/rs_up.png",
+					"region": {
+						"x": 306,
+						"y": 489,
+						"w": 46,
+						"h": 50
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "steam/ls.png",
+					"region": {
+						"x": 354,
+						"y": 437,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 2,
+						"h": 2
+					}
+				},
+				{
+					"filename": "switch/lb.png",
+					"region": {
+						"x": 358,
+						"y": 388,
+						"w": 48,
+						"h": 46
+					},
+					"margin": {
+						"x": 1,
+						"y": 2,
+						"w": 2,
+						"h": 4
+					}
+				},
+				{
+					"filename": "xbox_one/back.png",
+					"region": {
+						"x": 354,
+						"y": 487,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 2,
+						"h": 2
+					}
+				},
+				{
+					"filename": "xbox_one/start.png",
+					"region": {
+						"x": 404,
+						"y": 436,
+						"w": 48,
+						"h": 48
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 2,
+						"h": 2
+					}
+				},
+				{
+					"filename": "switch/rb.png",
+					"region": {
+						"x": 408,
+						"y": 384,
+						"w": 48,
+						"h": 46
+					},
+					"margin": {
+						"x": 1,
+						"y": 2,
+						"w": 2,
+						"h": 4
+					}
+				},
+				{
+					"filename": "switch/back.png",
+					"region": {
+						"x": 415,
+						"y": 355,
+						"w": 47,
+						"h": 24
+					},
+					"margin": {
+						"x": 2,
+						"y": 13,
+						"w": 3,
+						"h": 26
+					}
+				},
+				{
+					"filename": "steam/a.png",
+					"region": {
+						"x": 404,
+						"y": 486,
+						"w": 44,
+						"h": 44
+					},
+					"margin": {
+						"x": 3,
+						"y": 3,
+						"w": 6,
+						"h": 6
+					}
+				},
+				{
+					"filename": "steam/b.png",
+					"region": {
+						"x": 450,
+						"y": 486,
+						"w": 44,
+						"h": 44
+					},
+					"margin": {
+						"x": 3,
+						"y": 3,
+						"w": 6,
+						"h": 6
+					}
+				},
+				{
+					"filename": "steam/x.png",
+					"region": {
+						"x": 454,
+						"y": 432,
+						"w": 44,
+						"h": 44
+					},
+					"margin": {
+						"x": 3,
+						"y": 3,
+						"w": 6,
+						"h": 6
+					}
+				},
+				{
+					"filename": "steam/y.png",
+					"region": {
+						"x": 458,
+						"y": 381,
+						"w": 44,
+						"h": 44
+					},
+					"margin": {
+						"x": 3,
+						"y": 3,
+						"w": 6,
+						"h": 6
+					}
+				},
+				{
+					"filename": "steam/start.png",
+					"region": {
+						"x": 504,
+						"y": 355,
+						"w": 48,
+						"h": 34
+					},
+					"margin": {
+						"x": 1,
+						"y": 8,
+						"w": 2,
+						"h": 16
+					}
+				},
+				{
+					"filename": "steam/rt.png",
+					"region": {
+						"x": 504,
+						"y": 391,
+						"w": 43,
+						"h": 41
+					},
+					"margin": {
+						"x": 4,
+						"y": 5,
+						"w": 7,
+						"h": 9
+					}
+				},
+				{
+					"filename": "steam/lt.png",
+					"region": {
+						"x": 500,
+						"y": 434,
+						"w": 42,
+						"h": 41
+					},
+					"margin": {
+						"x": 4,
+						"y": 5,
+						"w": 8,
+						"h": 9
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:6f43b2dde45f46aa99d5b76fdbd88811:287c52f9581806d58e46430af023d6ac:2838718acf4f67d6bb9345de3dce8d28$"
+	}
+}

@@ -1,0 +1,1035 @@
+[gd_scene load_steps=112 format=3 uid="uid://bweau4fkhtssq"]
+
+[ext_resource type="Texture2D" uid="uid://bhikogo5xo556" path="res://images/rooms/rest_sites/hive/hive_rest_site_00.png" id="1_hg41w"]
+[ext_resource type="Texture2D" uid="uid://dnst8g768cq8i" path="res://images/rooms/rest_sites/hive/hive_rest_site_llog.png" id="2_sdyuw"]
+[ext_resource type="Texture2D" uid="uid://5lmkoxe7olhk" path="res://images/rooms/rest_sites/hive/hive_rest_site_rlog.png" id="3_prvxb"]
+[ext_resource type="Texture2D" uid="uid://cm0tod5ikr2wt" path="res://images/rooms/rest_sites/hive/hive_rest_site_fire.png" id="4_ha6mc"]
+[ext_resource type="Texture2D" uid="uid://oirgaaj7h0ja" path="res://images/rooms/rest_sites/rest_site_light_texture.png" id="5_1fvn3"]
+[ext_resource type="Script" uid="uid://cmn487dnqb5dw" path="res://src/Core/Nodes/RestSite/NParticleSystemUpscaler.cs" id="6_7jb6n"]
+[ext_resource type="Texture2D" uid="uid://c6w3ibqxgcb45" path="res://images/rooms/rest_sites/hive/hive_rest_site_fire_highlight.png" id="9_s2x60"]
+[ext_resource type="Texture2D" uid="uid://bop0gm5jjxtf8" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_l_log_shadow.png" id="10_tfptc"]
+[ext_resource type="PackedScene" uid="uid://cn1skpwlyers3" path="res://scenes/rest_site/rest_site_smoke_normal.tscn" id="11_36etk"]
+[ext_resource type="Texture2D" uid="uid://b0faynywoc407" path="res://images/rooms/rest_sites/overgrowth/overgrowth_rest_site_r_log_shadow.png" id="11_hwepe"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="13_7bmdu"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="14_f1aca"]
+[ext_resource type="Texture2D" uid="uid://c67idrcto5vwj" path="res://images/vfx/vfx_constant_fire/fire_texture_2.png" id="15_7lqkw"]
+[ext_resource type="Script" uid="uid://d0pffb7ah4wau" path="res://src/Core/Nodes/Vfx/NRestSiteFireVfx.cs" id="15_ctk1n"]
+[ext_resource type="Shader" uid="uid://dryvqo67omhm" path="res://shaders/vfx/vfx_stepped_shader_fire_flat.tres" id="15_hnbpx"]
+[ext_resource type="Texture2D" uid="uid://6ovoppb0vsbv" path="res://images/rooms/rest_sites/hive/hive_rest_site_roots.png" id="15_uip40"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="16_0f63s"]
+[ext_resource type="Texture2D" uid="uid://dkheb6mcbwlbv" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_1.png" id="16_6638l"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="17_7x807"]
+[ext_resource type="Texture2D" uid="uid://bjn7s5libve6e" path="res://images/rooms/rest_sites/hive/hive_rest_site_llog_highlight.png" id="17_jyos3"]
+[ext_resource type="Texture2D" uid="uid://b6r4lbgismyr2" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_2.png" id="17_m7mgu"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="18_a6hmv"]
+[ext_resource type="Texture2D" uid="uid://dr7uo4jvy8brp" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_3.png" id="18_httaq"]
+[ext_resource type="Texture2D" uid="uid://dlt1pn3yluhv5" path="res://images/rooms/rest_sites/hive/hive_rest_site_rlog_highlight.png" id="18_py6qc"]
+[ext_resource type="Texture2D" uid="uid://b6x0qjb6jtdop" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_4.png" id="19_7yq5a"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="19_wwvjx"]
+[ext_resource type="Texture2D" uid="uid://dyvlxld43fpom" path="res://images/vfx/fire/fire_base_branch_pile.png" id="20_c80r5"]
+[ext_resource type="Texture2D" uid="uid://cbug108ev47b7" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_5.png" id="20_khq0r"]
+[ext_resource type="Texture2D" uid="uid://b1uish25cqbsg" path="res://images/rooms/rest_sites/hive/hive_rest_site_cutter_left.png" id="20_qfo0p"]
+[ext_resource type="Texture2D" uid="uid://c3msmyyp5hrcy" path="res://images/rooms/rest_sites/hive/hive_rest_site_cutter_right.png" id="21_a8n3v"]
+[ext_resource type="Texture2D" uid="uid://cmg3jsfwudeyb" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_6.png" id="21_qqa7n"]
+[ext_resource type="Shader" uid="uid://cu7krqg4cighe" path="res://shaders/vfx/vfx_stepped_shader_fire_add.tres" id="21_vbyuw"]
+[ext_resource type="Texture2D" uid="uid://dw4iaqvbqt6os" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_7.png" id="22_8ila5"]
+[ext_resource type="Texture2D" uid="uid://b47r2blhe2i3" path="res://images/vfx/fire/cinder_particle.png" id="23_ed2m0"]
+[ext_resource type="Texture2D" uid="uid://dqug2plh7m60v" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_8.png" id="23_h5f7n"]
+[ext_resource type="Texture2D" uid="uid://bwoto75v058u8" path="res://images/rooms/rest_sites/hive/hive_rest_site_blob.png" id="23_s4nad"]
+[ext_resource type="Texture2D" uid="uid://2gedr07f7v8a" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_9.png" id="24_u1k0b"]
+[ext_resource type="Texture2D" uid="uid://d2lsi0vepkjy" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_10.png" id="25_82dpq"]
+[ext_resource type="Shader" uid="uid://cmmplm8570cug" path="res://scenes/rest_site/rest_site_light_shader.gdshader" id="25_e1p1c"]
+[ext_resource type="Texture2D" uid="uid://wvricu68mo6v" path="res://scenes/rest_site/light_noise_curve.tres" id="26_t1yme"]
+[ext_resource type="Texture2D" uid="uid://bpy1mbolqbmgn" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_11.png" id="26_ubifc"]
+[ext_resource type="Texture2D" uid="uid://bqddlvvhxux3i" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_12.png" id="27_5teyy"]
+[ext_resource type="Texture2D" uid="uid://c3unb2vqvygft" path="res://scenes/rest_site/light_ramp_gradient.tres" id="27_ju61x"]
+[ext_resource type="Texture2D" uid="uid://cn1t6nmph8jht" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_13.png" id="28_evbq5"]
+[ext_resource type="Texture2D" uid="uid://btia31vc3ge1i" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_14.png" id="29_fq73s"]
+[ext_resource type="Texture2D" uid="uid://07mip536tugs" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_15.png" id="30_3a48h"]
+[ext_resource type="Texture2D" uid="uid://ccy5w7wt72roc" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_16.png" id="31_vdqs7"]
+[ext_resource type="Texture2D" uid="uid://dfqfijdaw6n1c" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_17.png" id="32_eq368"]
+[ext_resource type="Texture2D" uid="uid://bxw55f4k5e1j8" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_18.png" id="33_d0jts"]
+[ext_resource type="Texture2D" uid="uid://yw86okdys5n" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_19.png" id="34_2ednr"]
+[ext_resource type="Texture2D" uid="uid://8880ime2wd35" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_20.png" id="35_owcr2"]
+[ext_resource type="Texture2D" uid="uid://qpiqcym11kwf" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_21.png" id="36_p2paw"]
+[ext_resource type="Texture2D" uid="uid://sgpk2meb3e3n" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_22.png" id="37_et3nl"]
+[ext_resource type="Texture2D" uid="uid://cae856idllqgb" path="res://images/rooms/rest_sites/vignette_2.png" id="37_mtb2o"]
+[ext_resource type="Texture2D" uid="uid://pi0eag00hib1" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_23.png" id="38_qknsk"]
+[ext_resource type="Texture2D" uid="uid://c711ner6kl8mw" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_24.png" id="39_y2mti"]
+[ext_resource type="Texture2D" uid="uid://c1rbb1urkke3g" path="res://images/rooms/rest_sites/hive/hive_rest_site_highlight_25.png" id="40_yfp4g"]
+[ext_resource type="Texture2D" uid="uid://qinrp8kdcart" path="res://images/vfx/tiny_glow_dot.png" id="54_36etk"]
+[ext_resource type="Texture2D" uid="uid://dydejju6qx4gr" path="res://images/packed/vfx/generic/square_speck.png" id="55_jxihj"]
+[ext_resource type="Texture2D" uid="uid://bh4h4ty5mcsj" path="res://images/packed/vfx/generic/twinkle_star.png" id="56_ippue"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_e87ow"]
+_limits = [0.99, 1.02, 0.0, 1.0]
+_data = [Vector2(0, 1.02), 0.0, 0.0, 0, 0, Vector2(0.0645161, 1.00021), 0.0, 0.0, 0, 0, Vector2(0.0768049, 1.01913), 0.0, 0.0, 0, 0, Vector2(0.141321, 1.00018), 0.0, 0.0, 0, 0, Vector2(0.178187, 1.02), 0.0, 0.0, 0, 0, Vector2(0.253456, 1), 0.0, 0.0, 0, 0, Vector2(0.317972, 1.02), 0.0, 0.0, 0, 0, Vector2(0.376344, 1), 0.0, 0.0, 0, 0, Vector2(0.466974, 1), 0.0, 0.0, 0, 0, Vector2(0.497696, 1.01966), 0.0, 0.0, 0, 0, Vector2(0.588326, 1), 0.0, 0.0, 0, 0, Vector2(0.603687, 1.02), 0.0, 0.0, 0, 0, Vector2(0.668203, 1.00028), 0.0, 0.0, 0, 0, Vector2(0.729647, 1.02), 0.0, 0.0, 0, 0, Vector2(0.763441, 1.00041), 0.0, 0.0, 0, 0, Vector2(0.855607, 1.02), 0.0, 0.0, 0, 0, Vector2(0.935484, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.02), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Curve" id="Curve_5jvln"]
+_limits = [0.98, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.989972), 0.0, 0.0, 0, 0, Vector2(0.0353303, 1), 0.0, 0.0, 0, 0, Vector2(0.0721966, 0.990039), 0.0, 0.0, 0, 0, Vector2(0.178187, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.265745, 1), 0.0, 0.0, 0, 0, Vector2(0.304147, 0.989803), 0.0, 0.0, 0, 0, Vector2(0.344086, 1), 0.0, 0.0, 0, 0, Vector2(0.373272, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.423963, 1), 0.0, 0.0, 0, 0, Vector2(0.520737, 1), 0.00280191, 0.00280191, 0, 0, Vector2(0.551459, 0.989803), -0.00168523, -0.00168523, 0, 0, Vector2(0.6298, 1), 0.00818221, 0.00818221, 0, 0, Vector2(0.663594, 0.989467), 0.0, 0.0, 0, 0, Vector2(0.735791, 1), 0.0161925, 0.0161925, 0, 0, Vector2(0.800307, 0.989871), 0.000534719, 0.000534719, 0, 0, Vector2(0.872504, 1), 0.0, 0.0, 0, 0, Vector2(0.913978, 0.989972), -0.0114926, -0.0114926, 0, 0, Vector2(0.996928, 1), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Gradient" id="Gradient_5m8bb"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.176419, 0.176419, 0.176419, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="Curve" id="Curve_b2gt8"]
+_limits = [0.99, 1.02, 0.0, 1.0]
+_data = [Vector2(0, 1.02), 0.0, 0.0, 0, 0, Vector2(0.0645161, 1.00021), 0.0, 0.0, 0, 0, Vector2(0.0768049, 1.01913), 0.0, 0.0, 0, 0, Vector2(0.141321, 1.00018), 0.0, 0.0, 0, 0, Vector2(0.178187, 1.02), 0.0, 0.0, 0, 0, Vector2(0.253456, 1), 0.0, 0.0, 0, 0, Vector2(0.317972, 1.02), 0.0, 0.0, 0, 0, Vector2(0.376344, 1), 0.0, 0.0, 0, 0, Vector2(0.466974, 1), 0.0, 0.0, 0, 0, Vector2(0.497696, 1.01966), 0.0, 0.0, 0, 0, Vector2(0.588326, 1), 0.0, 0.0, 0, 0, Vector2(0.603687, 1.02), 0.0, 0.0, 0, 0, Vector2(0.668203, 1.00028), 0.0, 0.0, 0, 0, Vector2(0.729647, 1.02), 0.0, 0.0, 0, 0, Vector2(0.763441, 1.00041), 0.0, 0.0, 0, 0, Vector2(0.855607, 1.02), 0.0, 0.0, 0, 0, Vector2(0.935484, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.02), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Curve" id="Curve_rc3dt"]
+_limits = [0.98, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.989972), 0.0, 0.0, 0, 0, Vector2(0.0353303, 1), 0.0, 0.0, 0, 0, Vector2(0.0721966, 0.990039), 0.0, 0.0, 0, 0, Vector2(0.178187, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.265745, 1), 0.0, 0.0, 0, 0, Vector2(0.304147, 0.989803), 0.0, 0.0, 0, 0, Vector2(0.344086, 1), 0.0, 0.0, 0, 0, Vector2(0.373272, 0.989871), 0.0, 0.0, 0, 0, Vector2(0.423963, 1), 0.0, 0.0, 0, 0, Vector2(0.520737, 1), 0.00280191, 0.00280191, 0, 0, Vector2(0.551459, 0.989803), -0.00168523, -0.00168523, 0, 0, Vector2(0.6298, 1), 0.00818221, 0.00818221, 0, 0, Vector2(0.663594, 0.989467), 0.0, 0.0, 0, 0, Vector2(0.735791, 1), 0.0161925, 0.0161925, 0, 0, Vector2(0.800307, 0.989871), 0.000534719, 0.000534719, 0, 0, Vector2(0.872504, 1), 0.0, 0.0, 0, 0, Vector2(0.913978, 0.989972), -0.0114926, -0.0114926, 0, 0, Vector2(0.996928, 1), 0.0, 0.0, 0, 0]
+point_count = 18
+
+[sub_resource type="Gradient" id="Gradient_c0b2v"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.176419, 0.176419, 0.176419, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e1p1c"]
+shader = ExtResource("25_e1p1c")
+shader_parameter/pixel_offset = Vector2(1, 2)
+shader_parameter/noise_texture = ExtResource("26_t1yme")
+shader_parameter/ramp_texture = ExtResource("27_ju61x")
+
+[sub_resource type="Curve" id="Curve_bo8eh"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_15chm"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f2kqq"]
+shader = ExtResource("15_hnbpx")
+shader_parameter/OuterColor = Color(1, 0.536, 0.04, 1)
+shader_parameter/InnerColorStep = Vector2(0.8, 0.86)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1, 1)
+shader_parameter/Noise2Panning = Vector2(-0.2, 0.9)
+shader_parameter/Noise2Texture = ExtResource("19_wwvjx")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1.5, 1.5)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("16_0f63s")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.4)
+shader_parameter/NoiseMaskOffset = Vector2(0, 0.235)
+shader_parameter/NoiseMask = ExtResource("18_a6hmv")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 1)
+shader_parameter/Distortion2Texture = ExtResource("17_7x807")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.23, 1)
+shader_parameter/Distortion1Texture = ExtResource("16_0f63s")
+shader_parameter/Distortion1Strength = 0.1
+shader_parameter/DistortionMaskScale = Vector2(1, 0.7)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.375)
+shader_parameter/DistortionMask = ExtResource("18_a6hmv")
+shader_parameter/InnerColor = Color(0.29, 0.202758, 0.0145, 1)
+shader_parameter/OuterStep = Vector2(0.55, 0.6)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_308xe"]
+shader = ExtResource("21_vbyuw")
+shader_parameter/OuterColor = Color(0.12, 0.10198, 0.0564, 1)
+shader_parameter/InnerColorStep = Vector2(0.96, 0.99)
+shader_parameter/Noise2Strength = 1.005
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.4, 0.6)
+shader_parameter/Noise2Texture = ExtResource("19_wwvjx")
+shader_parameter/Noise1Strength = 0.76
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(0.8, 0.7)
+shader_parameter/Noise1Texture = ExtResource("16_0f63s")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 1.93)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.165)
+shader_parameter/NoiseMask = ExtResource("18_a6hmv")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0, 1)
+shader_parameter/Distortion2Texture = ExtResource("17_7x807")
+shader_parameter/Distortion2Strength = 0.15
+shader_parameter/Distortion1Scale = Vector2(1, 0.7)
+shader_parameter/Distortion1Panning = Vector2(0.23, 1.2)
+shader_parameter/Distortion1Texture = ExtResource("16_0f63s")
+shader_parameter/Distortion1Strength = 0.08
+shader_parameter/DistortionMaskScale = Vector2(1, 1)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.13)
+shader_parameter/DistortionMask = ExtResource("18_a6hmv")
+shader_parameter/InnerColor = Color(0.37, 0.30895, 0.259, 1)
+shader_parameter/OuterStep = Vector2(0.6, 0.685)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bljq"]
+shader = ExtResource("21_vbyuw")
+shader_parameter/OuterColor = Color(0, 0, 0, 1)
+shader_parameter/InnerColorStep = Vector2(0.1, 0.2)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1.4, 1.4)
+shader_parameter/Noise2Panning = Vector2(0.4, 0.6)
+shader_parameter/Noise2Texture = ExtResource("19_wwvjx")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(1, 0.7)
+shader_parameter/Noise1Texture = ExtResource("16_0f63s")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.945)
+shader_parameter/NoiseMask = ExtResource("18_a6hmv")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0.045, 0.76)
+shader_parameter/Distortion2Texture = ExtResource("17_7x807")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.06, 0.6)
+shader_parameter/Distortion1Texture = ExtResource("16_0f63s")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 1.2)
+shader_parameter/DistortionMaskOffset = Vector2(0, -0.025)
+shader_parameter/DistortionMask = ExtResource("18_a6hmv")
+shader_parameter/InnerColor = Color(0.91, 0.84175, 0.2275, 1)
+shader_parameter/OuterStep = Vector2(0.37, 0.45)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lea8s"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_y67d1"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_2xee3"]
+_data = [Vector2(0.00996678, 0), 0.0, 0.0846041, 0, 0, Vector2(0.671096, 0.340454), 0.374114, 0.374114, 0, 0, Vector2(0.82392, 0), -3.41589, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6w2n4"]
+offsets = PackedFloat32Array(0.432234, 0.783883, 0.857143)
+colors = PackedColorArray(0.726585, 0.471905, 0.124916, 1, 0.63, 0.5964, 0.126, 0.337255, 1, 0.819608, 0.298039, 0)
+
+[sub_resource type="Curve" id="Curve_ewi5s"]
+_data = [Vector2(0.00996678, 0), 0.0, 0.0846041, 0, 0, Vector2(0.604651, 0.392523), 0.374114, 0.374114, 0, 0, Vector2(0.82392, 0), -3.41589, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ddtl6"]
+offsets = PackedFloat32Array(0.232775, 0.666667, 0.915751)
+colors = PackedColorArray(0.89, 0.60075, 0.1958, 1, 0.9, 0.60675, 0.135, 0.729412, 1, 0.819608, 0.298039, 0)
+
+[sub_resource type="Curve" id="Curve_wd2sw"]
+_data = [Vector2(0, 0), 0.0, 0.257009, 0, 0, Vector2(0.58804, 0.244993), 0.374114, 0.374114, 0, 0, Vector2(0.904202, 0), -0.488375, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_p87oe"]
+offsets = PackedFloat32Array(0.232775, 0.666667, 0.915751)
+colors = PackedColorArray(0.726585, 0.471905, 0.124916, 1, 0.3404, 0.37, 0.074, 0.866667, 1, 0.819608, 0.298039, 0)
+
+[sub_resource type="Curve" id="Curve_toaxo"]
+_data = [Vector2(0, 0.531754), 0.0, 2.99665, 0, 0, Vector2(0.300248, 0.969194), 0.0, 0.0, 0, 0, Vector2(0.573201, 0.981517), 0.0, 0.0, 0, 0, Vector2(0.734491, 0.969194), 0.0, 0.0, 0, 0, Vector2(1, 0.0265403), -7.44881, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_b4776"]
+curve = SubResource("Curve_toaxo")
+
+[sub_resource type="Curve" id="Curve_qgc70"]
+_limits = [-0.5, 0.5, 0.0, 1.0]
+_data = [Vector2(0, -0.020853), 0.0, 0.0, 0, 0, Vector2(0.255583, 0.0194313), 0.0, 0.0, 0, 0, Vector2(0.66005, -0.0298578), 0.0, 0.0, 0, 0, Vector2(1, -0.020853), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_7fdod"]
+curve = SubResource("Curve_qgc70")
+
+[sub_resource type="Curve" id="Curve_5r5as"]
+_data = [Vector2(0, 0.531754), 0.0, 5.89698, 0, 0, Vector2(0.0967742, 1), 0.0, 0.0, 0, 0, Vector2(0.215881, 0.611848), 0.0, 0.0, 0, 0, Vector2(0.327543, 1), 0.0, 0.0, 0, 0, Vector2(0.48139, 0.605687), 0.0, 0.0, 0, 0, Vector2(0.600496, 1), 0.0, 0.0, 0, 0, Vector2(0.751861, 0.544076), -3.66529, -3.66529, 0, 0, Vector2(1, 0), -0.926037, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="CurveTexture" id="CurveTexture_nh1c7"]
+curve = SubResource("Curve_5r5as")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mq32r"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 1)
+inherit_velocity_ratio = 1.0
+direction = Vector3(-1, -1, 0)
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 3.0
+orbit_velocity_curve = SubResource("CurveTexture_7fdod")
+gravity = Vector3(10, -50, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_nh1c7")
+color = Color(1, 0.835333, 0.24, 1)
+alpha_curve = SubResource("CurveTexture_b4776")
+hue_variation_min = -0.01
+hue_variation_max = 0.02
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fa421"]
+shader = ExtResource("25_e1p1c")
+shader_parameter/pixel_offset = Vector2(1, 2)
+shader_parameter/noise_texture = ExtResource("26_t1yme")
+shader_parameter/ramp_texture = ExtResource("27_ju61x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8x8r"]
+shader = ExtResource("25_e1p1c")
+shader_parameter/pixel_offset = Vector2(1, 2)
+shader_parameter/noise_texture = ExtResource("26_t1yme")
+shader_parameter/ramp_texture = ExtResource("27_ju61x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p2j1d"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 500, 0)
+angle_max = 61.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.2
+gravity = Vector3(0, -200, 0)
+scale_min = 0.39999998
+scale_max = 0.79999995
+color = Color(0.0235294, 0.0509804, 0.0196078, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m3brc"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+angle_max = 61.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = -0.1
+gravity = Vector3(0, -50, 0)
+scale_min = 0.39999998
+scale_max = 0.79999995
+color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tx08w"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 500, 0)
+angle_max = 61.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.2
+gravity = Vector3(0, -200, 0)
+scale_min = 0.39999998
+scale_max = 0.79999995
+color = Color(0.0235294, 0.0509804, 0.0196078, 1)
+
+[sub_resource type="Curve" id="Curve_yiy0o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.00121226, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_edl00"]
+curve = SubResource("Curve_yiy0o")
+
+[sub_resource type="Gradient" id="Gradient_oftuy"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c4cne"]
+gradient = SubResource("Gradient_oftuy")
+
+[sub_resource type="Curve" id="Curve_gpp74"]
+_data = [Vector2(0, 0), 0.0, 3.42211, 0, 0, Vector2(0.0678295, 0.354897), 0.0, 0.0, 0, 0, Vector2(0.143411, 0.0674747), 0.0, 0.0, 0, 0, Vector2(0.234496, 0.457091), 0.0, 0.0, 0, 0, Vector2(0.317829, 0.144121), 0.0, 0.0, 0, 0, Vector2(0.395349, 0.254831), 0.0, 0.0, 0, 0, Vector2(0.48062, 0.0930233), 0.0, 0.0, 0, 0, Vector2(0.532946, 0.363413), 0.0, 0.0, 0, 0, Vector2(0.606589, 0.0461842), 0.0, 0.0, 0, 0, Vector2(0.705426, 0.450704), 0.0, 0.0, 0, 0, Vector2(0.75969, 0.12283), 0.0, 0.0, 0, 0, Vector2(0.815892, 0.308058), 0.0, 0.0, 0, 0, Vector2(0.872093, 0.0696037), 0.0, 0.0, 0, 0, Vector2(0.947674, 0.21225), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.93645, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_nq5l8"]
+curve = SubResource("Curve_gpp74")
+
+[sub_resource type="Curve" id="Curve_jidk1"]
+_data = [Vector2(0, 0), 0.0, 1.68527, 0, 0, Vector2(1, 1), 2.0572, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_np1g6"]
+curve = SubResource("Curve_jidk1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g6mmb"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 0, 1)
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+angular_velocity_min = -160.0
+angular_velocity_max = 160.0
+gravity = Vector3(0, 130, 0)
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_nq5l8")
+color_ramp = SubResource("GradientTexture1D_c4cne")
+alpha_curve = SubResource("CurveTexture_edl00")
+turbulence_enabled = true
+turbulence_noise_scale = 8.636
+turbulence_noise_speed_random = 2.56
+turbulence_influence_min = 0.164
+turbulence_influence_max = 0.196
+turbulence_influence_over_life = SubResource("CurveTexture_np1g6")
+
+[sub_resource type="Curve" id="Curve_txux8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.00121226, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8plj5"]
+curve = SubResource("Curve_txux8")
+
+[sub_resource type="Gradient" id="Gradient_5kutj"]
+offsets = PackedFloat32Array(0, 0.14876, 0.367619, 0.4, 0.422857, 0.539048, 0.63619, 0.666667, 0.704762, 0.798095, 0.868571, 0.902857, 0.931429, 0.967619, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.0392157, 0.454902, 0.231373, 1, 0.0392157, 0.454902, 0.231373, 1, 0.360784, 0.992157, 1, 0, 0.0392157, 0.454902, 0.231373, 1, 0.0392157, 0.454902, 0.231373, 1, 0.0810844, 0.816359, 0.431011, 1, 0.560784, 0.996078, 1, 0, 0.0816773, 0.826144, 0.436358, 1, 0.94902, 1, 1, 1, 0.94902, 1, 1, 1, 0.94902, 1, 1, 0, 0.94902, 1, 1, 1, 0.94902, 1, 1, 1, 0.94902, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3mg6"]
+gradient = SubResource("Gradient_5kutj")
+
+[sub_resource type="Curve" id="Curve_t0hj3"]
+_data = [Vector2(0, 0), 0.0, 3.42211, 0, 0, Vector2(0.0678295, 0.354897), 0.0, 0.0, 0, 0, Vector2(0.143411, 0.0674747), 0.0, 0.0, 0, 0, Vector2(0.234496, 0.457091), 0.0, 0.0, 0, 0, Vector2(0.317829, 0.144121), 0.0, 0.0, 0, 0, Vector2(0.395349, 0.254831), 0.0, 0.0, 0, 0, Vector2(0.48062, 0.0930233), 0.0, 0.0, 0, 0, Vector2(0.532946, 0.363413), 0.0, 0.0, 0, 0, Vector2(0.606589, 0.0461842), 0.0, 0.0, 0, 0, Vector2(0.705426, 0.450704), 0.0, 0.0, 0, 0, Vector2(0.75969, 0.12283), 0.0, 0.0, 0, 0, Vector2(0.815892, 0.308058), 0.0, 0.0, 0, 0, Vector2(0.872093, 0.0696037), 0.0, 0.0, 0, 0, Vector2(0.947674, 0.21225), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.93645, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_n8c6y"]
+curve = SubResource("Curve_t0hj3")
+
+[sub_resource type="Curve" id="Curve_ky10x"]
+_data = [Vector2(0, 0), 0.0, 1.68527, 0, 0, Vector2(1, 1), 2.0572, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_miej7"]
+curve = SubResource("Curve_ky10x")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qpyee"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1500, 0, 1)
+emission_shape = 2
+emission_sphere_radius = 1.0
+direction = Vector3(0, 0, 0)
+angular_velocity_min = -160.0
+angular_velocity_max = 160.0
+gravity = Vector3(0, 120, 0)
+scale_min = 0.3
+scale_curve = SubResource("CurveTexture_n8c6y")
+color_ramp = SubResource("GradientTexture1D_o3mg6")
+alpha_curve = SubResource("CurveTexture_8plj5")
+turbulence_enabled = true
+turbulence_noise_speed_random = 2.56
+turbulence_influence_min = 0.164
+turbulence_influence_max = 0.196
+turbulence_influence_over_life = SubResource("CurveTexture_miej7")
+
+[node name="HiveRestSite" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="RestSiteBG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -444.0
+offset_top = -139.0
+offset_right = 2320.8
+offset_bottom = 1157.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hg41w")
+expand_mode = 1
+
+[node name="RestSiteLLog" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 508.68
+offset_top = 546.6
+offset_right = 827.021
+offset_bottom = 751.344
+texture = ExtResource("2_sdyuw")
+expand_mode = 1
+
+[node name="RestSiteRLog" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 980.68
+offset_top = 540.6
+offset_right = 1345.72
+offset_bottom = 732.772
+texture = ExtResource("3_prvxb")
+expand_mode = 1
+
+[node name="RestSiteFireLogs" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 802.68
+offset_top = 646.6
+offset_right = 1022.24
+offset_bottom = 815.873
+texture = ExtResource("4_ha6mc")
+expand_mode = 1
+
+[node name="RestSiteLighting" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -65.0
+offset_top = -65.0
+offset_right = -65.0
+offset_bottom = -65.0
+metadata/_edit_group_ = true
+
+[node name="RestSiteGroundLighting2" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(974, 827)
+amount = 1
+texture = ExtResource("5_1fvn3")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.9
+scale_amount_max = 0.9
+split_scale = true
+scale_curve_x = SubResource("Curve_e87ow")
+scale_curve_y = SubResource("Curve_5jvln")
+color = Color(0.223529, 0.239216, 0.0627451, 0.603922)
+color_ramp = SubResource("Gradient_5m8bb")
+script = ExtResource("6_7jb6n")
+_originalResolution = Vector2(1510, 897)
+
+[node name="roots" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 395.0
+offset_right = 1857.0
+offset_bottom = 1222.0
+texture = ExtResource("15_uip40")
+expand_mode = 1
+
+[node name="RestSiteLLogShadow2" type="CPUParticles2D" parent="RestSiteLighting"]
+position = Vector2(674, 692)
+amount = 1
+texture = ExtResource("10_tfptc")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+split_scale = true
+scale_curve_x = SubResource("Curve_b2gt8")
+scale_curve_y = SubResource("Curve_rc3dt")
+color = Color(0.12549, 0.137255, 0.0235294, 0.235294)
+color_ramp = SubResource("Gradient_c0b2v")
+
+[node name="RestSiteRLogShadow" type="CPUParticles2D" parent="RestSiteLighting"]
+position = Vector2(1285, 679)
+amount = 1
+texture = ExtResource("11_hwepe")
+lifetime = 2.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.45
+scale_amount_max = 0.45
+split_scale = true
+scale_curve_x = SubResource("Curve_b2gt8")
+scale_curve_y = SubResource("Curve_rc3dt")
+color = Color(0.12549, 0.137255, 0.0235294, 0.235294)
+color_ramp = SubResource("Gradient_c0b2v")
+
+[node name="RestSiteLLog2" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 574.0
+offset_top = 613.0
+offset_right = 892.341
+offset_bottom = 817.744
+texture = ExtResource("2_sdyuw")
+expand_mode = 1
+
+[node name="RestSiteRLog2" type="TextureRect" parent="RestSiteLighting"]
+layout_mode = 0
+offset_left = 1045.0
+offset_top = 605.0
+offset_right = 1410.05
+offset_bottom = 797.172
+texture = ExtResource("3_prvxb")
+expand_mode = 1
+
+[node name="FireLight" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.8901961, 0.8627451, 0, 0.08235294)
+material = SubResource("ShaderMaterial_e1p1c")
+position = Vector2(980.00006, 758)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("9_s2x60")
+
+[node name="smoke" type="Node2D" parent="RestSiteLighting"]
+modulate = Color(1, 1, 1, 0.0352941)
+position = Vector2(972, 739)
+rotation = 0.474986
+
+[node name="smoke_vfx_nromal" parent="RestSiteLighting/smoke" instance=ExtResource("11_36etk")]
+position = Vector2(2.1853104, -0.123802185)
+
+[node name="light_small2" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(981, 744)
+scale = Vector2(1.2, 1.1)
+amount = 2
+texture = ExtResource("13_7bmdu")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_bo8eh")
+color = Color(0.611765, 0.623529, 0.168627, 0.317647)
+color_ramp = SubResource("Gradient_15chm")
+script = ExtResource("14_f1aca")
+
+[node name="SteppedFire" type="Node2D" parent="RestSiteLighting" node_paths=PackedStringArray("_cpuGlowParticles", "_gpuSparkParticles")]
+position = Vector2(980, 746)
+scale = Vector2(-0.229498, 0.229498)
+script = ExtResource("15_ctk1n")
+_minSkew = -0.2
+_maxSkew = 0.2
+_cpuGlowParticles = [null, NodePath("../light_small2"), NodePath("../light_front"), NodePath("../fire_small/fire_vfx_back_small2"), NodePath("../fire_small/fire_vfx_back_small3"), NodePath("../fire_small/fire_vfx_back_small8")]
+_gpuSparkParticles = [NodePath("../FireSparks")]
+
+[node name="SteppedFireMix" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+material = SubResource("ShaderMaterial_f2kqq")
+position = Vector2(-55.9635, -137.139)
+rotation = -0.285307
+scale = Vector2(1.44011, 1.14924)
+texture = ExtResource("20_c80r5")
+
+[node name="SteppedFireAdd" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+material = SubResource("ShaderMaterial_308xe")
+position = Vector2(-55.0809, -128.711)
+rotation = -0.285307
+scale = Vector2(1.34401, 1.07664)
+texture = ExtResource("20_c80r5")
+
+[node name="SteppedFireAdd1" type="Sprite2D" parent="RestSiteLighting/SteppedFire"]
+visible = false
+material = SubResource("ShaderMaterial_0bljq")
+position = Vector2(-44.1715, -77.8016)
+rotation = -0.285307
+scale = Vector2(0.682595, 0.715765)
+texture = ExtResource("20_c80r5")
+
+[node name="fire_small" type="Control" parent="RestSiteLighting"]
+anchors_preset = 0
+offset_left = 991.0
+offset_top = 795.0
+offset_right = 991.0
+offset_bottom = 795.0
+scale = Vector2(1.2, 1.1)
+
+[node name="fire_vfx_back_small2" type="CPUParticles2D" parent="RestSiteLighting/fire_small"]
+material = SubResource("CanvasItemMaterial_lea8s")
+position = Vector2(-34.1666, -35.4546)
+rotation = 0.680254
+amount = 50
+texture = ExtResource("15_7lqkw")
+lifetime = 0.3
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+angular_velocity_min = 14.37
+angular_velocity_max = 32.0
+linear_accel_min = 44.9
+linear_accel_max = 44.9
+angle_max = 20.0
+angle_curve = SubResource("Curve_y67d1")
+scale_amount_min = 0.22
+scale_amount_max = 0.34
+scale_amount_curve = SubResource("Curve_2xee3")
+color = Color(1, 1, 1, 0.301961)
+color_ramp = SubResource("Gradient_6w2n4")
+anim_offset_max = 1.0
+
+[node name="fire_vfx_back_small3" type="CPUParticles2D" parent="RestSiteLighting/fire_small"]
+material = SubResource("CanvasItemMaterial_lea8s")
+position = Vector2(-18.3333, -22.7274)
+rotation = 0.270427
+amount = 50
+texture = ExtResource("15_7lqkw")
+lifetime = 0.5
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -500)
+angular_velocity_min = 14.37
+angular_velocity_max = 32.0
+linear_accel_min = 44.9
+linear_accel_max = 44.9
+angle_max = 20.0
+angle_curve = SubResource("Curve_y67d1")
+scale_amount_min = 0.22
+scale_amount_max = 0.34
+scale_amount_curve = SubResource("Curve_ewi5s")
+color = Color(1, 1, 1, 0.301961)
+color_ramp = SubResource("Gradient_ddtl6")
+anim_offset_max = 1.0
+
+[node name="fire_vfx_back_small8" type="CPUParticles2D" parent="RestSiteLighting/fire_small"]
+material = SubResource("CanvasItemMaterial_lea8s")
+position = Vector2(4.16672, -28.1819)
+rotation = 0.282346
+amount = 50
+texture = ExtResource("15_7lqkw")
+lifetime = 0.3
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+angular_velocity_min = 14.37
+angular_velocity_max = 32.0
+linear_accel_min = 44.9
+linear_accel_max = 44.9
+angle_max = 20.0
+angle_curve = SubResource("Curve_y67d1")
+scale_amount_min = 0.22
+scale_amount_max = 0.34
+scale_amount_curve = SubResource("Curve_wd2sw")
+color = Color(1, 1, 1, 0.301961)
+color_ramp = SubResource("Gradient_p87oe")
+anim_offset_max = 1.0
+
+[node name="light_front" type="CPUParticles2D" parent="RestSiteLighting"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(980, 743)
+scale = Vector2(0.339173, 0.310909)
+amount = 2
+texture = ExtResource("13_7bmdu")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_min = 4.49
+scale_amount_max = 4.49
+scale_amount_curve = SubResource("Curve_bo8eh")
+color = Color(0.611765, 0.623529, 0.168627, 0.317647)
+color_ramp = SubResource("Gradient_15chm")
+script = ExtResource("14_f1aca")
+
+[node name="FireSparks" type="GPUParticles2D" parent="RestSiteLighting"]
+position = Vector2(983, 733)
+rotation = 3.13938
+scale = Vector2(0.576793, -0.576793)
+amount = 24
+texture = ExtResource("23_ed2m0")
+lifetime = 7.0
+preprocess = 6.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_mq32r")
+
+[node name="LLogHighlight2" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.8901961, 0.85882354, 0.21176471, 0.10980392)
+material = SubResource("ShaderMaterial_fa421")
+position = Vector2(746.00006, 730)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("17_jyos3")
+
+[node name="LLogHighlight" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.8901961, 0.85882354, 0.21176471, 0.10980392)
+material = SubResource("ShaderMaterial_fa421")
+position = Vector2(1208, 722)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("18_py6qc")
+
+[node name="WallLight1" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(324, 456)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("16_6638l")
+
+[node name="WallLight2" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(464, 371)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("17_m7mgu")
+
+[node name="WallLight3" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(646.00006, 278.00003)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("18_httaq")
+
+[node name="WallLight4" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1052, 267)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("19_7yq5a")
+
+[node name="WallLight5" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1422.0001, 404)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("20_khq0r")
+
+[node name="WallLight6" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1606.0001, 437)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("21_qqa7n")
+
+[node name="WallLight7" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1494.4, 866.65)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("22_8ila5")
+
+[node name="WallLight9" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(2054.4, 912.65)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("24_u1k0b")
+
+[node name="WallLight10" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1116, 1041)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("25_82dpq")
+
+[node name="WallLight11" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(826.00006, 1133)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("26_ubifc")
+
+[node name="WallLight12" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(658, 1003)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("27_5teyy")
+
+[node name="WallLight8" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1495, 869)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("23_h5f7n")
+
+[node name="WallLight13" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(438.00003, 1070)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("28_evbq5")
+
+[node name="WallLight14" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(371.00003, 982.00006)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("29_fq73s")
+
+[node name="WallLight15" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(426, 846)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("30_3a48h")
+
+[node name="WallLight16" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(450, 680)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("31_vdqs7")
+
+[node name="WallLight17" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(589, 608)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("32_eq368")
+
+[node name="WallLight18" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(824, 567)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("33_d0jts")
+
+[node name="WallLight19" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(921, 601)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("34_2ednr")
+
+[node name="WallLight20" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1154, 489.00003)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("35_owcr2")
+
+[node name="WallLight21" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1071, 597)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("36_p2paw")
+
+[node name="WallLight22" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1263.0001, 535)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("37_et3nl")
+
+[node name="WallLight23" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1274, 623)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("38_qknsk")
+
+[node name="WallLight24" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1429.0001, 635.00006)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("39_y2mti")
+
+[node name="WallLight25" type="Sprite2D" parent="RestSiteLighting"]
+self_modulate = Color(0.9019608, 0.85882354, 0.09803922, 0.05490196)
+material = SubResource("ShaderMaterial_b8x8r")
+position = Vector2(1537.0001, 786)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("40_yfp4g")
+
+[node name="b_blob" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 382.0
+offset_top = -32.0
+offset_right = 1611.36
+offset_bottom = 414.306
+texture = ExtResource("23_s4nad")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="RestSiteForegroundDither" type="TextureRect" parent="."]
+modulate = Color(0.921569, 0.921569, 0.92549, 0.521569)
+layout_mode = 0
+offset_left = -438.0
+offset_top = -308.0
+offset_right = 2294.0
+offset_bottom = 1533.0
+texture = ExtResource("37_mtb2o")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="RestSiteForegroundLeft" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -443.0
+offset_top = -138.0
+offset_right = 522.363
+offset_bottom = 1155.12
+texture = ExtResource("20_qfo0p")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="RestSiteForegroundRight" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 1288.0
+offset_top = -138.0
+offset_right = 2319.0
+offset_bottom = 1156.0
+texture = ExtResource("21_a8n3v")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="overlay_vfx" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="bugs_3" type="GPUParticles2D" parent="overlay_vfx"]
+position = Vector2(2240.11, 756.701)
+scale = Vector2(0.449, 0.449)
+amount = 160
+texture = ExtResource("54_36etk")
+lifetime = 40.0
+preprocess = 40.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_p2j1d")
+
+[node name="bugs_2" type="GPUParticles2D" parent="overlay_vfx"]
+position = Vector2(-392, 518)
+scale = Vector2(0.449, 0.449)
+amount = 80
+texture = ExtResource("54_36etk")
+lifetime = 40.0
+preprocess = 40.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_m3brc")
+
+[node name="bugs_1" type="GPUParticles2D" parent="overlay_vfx"]
+position = Vector2(2285.01, 151)
+scale = Vector2(0.449, 0.449)
+amount = 160
+texture = ExtResource("54_36etk")
+lifetime = 40.0
+preprocess = 40.0
+fixed_fps = 0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_tx08w")
+
+[node name="square_specks" type="GPUParticles2D" parent="overlay_vfx"]
+position = Vector2(301, 69)
+amount = 30
+texture = ExtResource("55_jxihj")
+lifetime = 14.0
+preprocess = 15.0
+process_material = SubResource("ParticleProcessMaterial_g6mmb")
+
+[node name="square_specks2" type="GPUParticles2D" parent="overlay_vfx"]
+position = Vector2(1581, 67)
+amount = 30
+texture = ExtResource("55_jxihj")
+lifetime = 14.0
+preprocess = 15.0
+process_material = SubResource("ParticleProcessMaterial_g6mmb")
+
+[node name="twinkle_star_specks" type="GPUParticles2D" parent="overlay_vfx"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(855, 35)
+amount = 30
+texture = ExtResource("56_ippue")
+lifetime = 12.0
+preprocess = 18.0
+process_material = SubResource("ParticleProcessMaterial_qpyee")

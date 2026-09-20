@@ -30,11 +30,12 @@ internal sealed class Togawasakiko : CharacterModel
         "res://scenes/screens/char_select/char_select_bg_togawasakiko.tscn",
         "res://scenes/combat/energy_counters/togawasakiko_energy_counter.tscn",
         "res://scenes/creature_visuals/togawasakiko.tscn",
+        TogawasakikoCombatVfx.ThornScenePath,
         "res://scenes/merchant/characters/togawasakiko_merchant.tscn",
         "res://scenes/rest_site/characters/togawasakiko_rest_site.tscn"
     };
 
-    public override float AttackAnimDelay => 0.25f;
+    public override float AttackAnimDelay => 0.31f;
 
     public override CardPoolModel CardPool => ModelDb.CardPool<TogawasakikoCardPool>();
 
@@ -272,6 +273,7 @@ internal sealed class Togawasakiko : CharacterModel
         return card != null
             && card.ShouldShowInCardLibrary
             && card.Rarity != CardRarity.Basic
+            && card.Rarity != CardRarity.Ancient
             && !ModSupport.IsStarterDeckCard(card)
             && ModSupport.HasCardLocalization(card);
     }
@@ -296,6 +298,7 @@ internal sealed class TogawasakikoCardPool : CardPoolModel
             ModelDb.Card<StrikeTogawasakiko>(),
             ModelDb.Card<DefendTogawasakiko>(),
             ModelDb.Card<Slander>(),
+            ModelDb.Card<Curseslander>(),
             ModelDb.Card<Unendurable>(),
             ModelDb.Card<IHaveAscended>(),
             ModelDb.Card<Thrilled>(),
@@ -341,7 +344,20 @@ internal sealed class TogawasakikoCardPool : CardPoolModel
             ModelDb.Card<MasqueradeRhapsodyRequest>(),
             ModelDb.Card<STheWay>(),
             ModelDb.Card<TwoMoonsDeepIntoTheForest>(),
-            ModelDb.Card<Sophie>()
+            ModelDb.Card<Sophie>(),
+            ModelDb.Card<UnfinishedScore>(),
+            ModelDb.Card<FollowingPhrase>(),
+            ModelDb.Card<Unmask>(),
+            ModelDb.Card<RehearsalOrder>(),
+            ModelDb.Card<BackstageSupport>(),
+            ModelDb.Card<UnspokenWords>(),
+            ModelDb.Card<LingeringResonance>(),
+            ModelDb.Card<UntilNextAct>(),
+            ModelDb.Card<ComposedResponse>(),
+            ModelDb.Card<OctagramDance>(),
+            ModelDb.Card<Divine>(),
+            ModelDb.Card<InYourBlueEyes>(),
+            ModelDb.Card<TheWholeBlueWorld>()
         };
     }
 }
@@ -421,9 +437,6 @@ internal sealed class TogawasakikoSpecialRelicPool : RelicPoolModel
 
     protected override IEnumerable<RelicModel> GenerateAllRelics()
     {
-        return new RelicModel[]
-        {
-            ModelDb.Relic<UpgradedDollMask>()
-        };
+        return Array.Empty<RelicModel>();
     }
 }

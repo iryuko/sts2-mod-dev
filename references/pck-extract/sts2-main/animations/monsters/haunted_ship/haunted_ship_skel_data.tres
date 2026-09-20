@@ -1,0 +1,33 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://dp0nynvlhdgn8"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://oang040glaeq" path="res://animations/monsters/haunted_ship/haunted_ship.atlas" id="1_3pqtq"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://fhnuqhvm7a17" path="res://animations/monsters/haunted_ship/haunted_ship.skel" id="2_wkc1r"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_3pqtq"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wkc1r"]
+from = "idle_loop"
+to = "die"
+mix = 0.05
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_uqude"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hg1qy"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_uanld"]
+from = "idle_loop"
+to = "attack"
+mix = 0.05
+
+[resource]
+atlas_res = ExtResource("1_3pqtq")
+skeleton_file_res = ExtResource("2_wkc1r")
+default_mix = 0.1
+animation_mixes = [SubResource("SpineAnimationMix_3pqtq"), SubResource("SpineAnimationMix_wkc1r"), SubResource("SpineAnimationMix_uqude"), SubResource("SpineAnimationMix_hg1qy"), SubResource("SpineAnimationMix_uanld")]

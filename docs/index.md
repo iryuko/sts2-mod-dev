@@ -1,51 +1,61 @@
 # 文档导航
 
-本页用于降低新线程接手成本。默认先读少量结论文档，不要先通读整个 `docs/`。
+记录日期：2026-07-26
 
-## 必读
+## 当前事实源
 
 - `docs/current-status.md`
-  - 当前阶段、当前目标、已确认与阻塞。
+  - 项目主线、版本、构建安装、已收口问题与开放风险。
 - `docs/next-task.md`
-  - 下一轮最值得做的单一任务。
+  - 下一轮执行顺序和完成标准。
 - `docs/thread-handoff.md`
-  - 给下一位 Codex 的高压缩摘要。
+  - 上下文压缩后的最小接班摘要。
 - `docs/decisions.md`
-  - 已定规则与不再反复讨论的决策。
+  - 当前不应反复推翻的工程与产品规则。
+- `docs/project-timeline.md`
+  - 2026-03 至今的项目时间线与证据说明。
+- `mods/Togawasakiko_in_Slay_the_Spire/docs/current-status.md`
+  - 角色 mod 的实现级事实源。
 
-## 按需
+## 专项审计
 
-- `docs/findings.md`
-  - 较完整的实验记录与观察结果。
-- `docs/loading-clues.md`
-  - 与加载规则相关的证据整理。
-- `docs/log-and-userdata-hunt.md`
-  - 日志与用户数据路径追踪。
-- `docs/reference-example-mod.md`
-  - 外部示例项目吸收结论。
-- `docs/class-map.md`
-  - 类型名、命名空间与元数据线索。
-- `docs/dll-metadata-notes.md`
-  - DLL 与运行时元数据证据。
+- `docs/audits/document-reorganization-2026-07-26.md`
+  - 本轮档案边界、时间证据、目录重组和主要矛盾裁定。
+- `docs/audits/workspace-cleanup-and-mod-error-2026-07-26.md`
+  - 主菜单红字根因、manifest 修正和工作区清理边界。
 
-## 旧记录 / 档案
+## 研究资料
 
-- `docs/archive/`
-  - 归档区。默认不作为新线程必读内容。
-- 旧 checklist、早期 smoke 验证记录、已被新结论覆盖的过程文档
-  - 仅在需要追溯证据或核对历史变化时再读。
+`docs/research/` 保存可复用但不直接表达当前任务状态的研究：
 
-## 新线程推荐阅读顺序
+- 命名、本地化、console、资源命名。
+- 原版 Ancient 资产规格。
+- 原版角色卡池结构。
+- 角色选择与战斗场景渲染报告。
 
-1. `AGENTS.md`
-2. `docs/current-status.md`
-3. `docs/next-task.md`
-4. `docs/thread-handoff.md`
-5. `docs/decisions.md`
-6. 如仍有缺口，再读 `docs/findings.md` 或具体专题文件
+研究资料必须结合文档记录日期和游戏版本使用。
 
-## 使用原则
+## 模板
 
-- 历史日志和旧研究记录默认不作为新线程必读内容。
-- 新线程应优先读结论文档，而不是通读整个 `docs/`。
-- 只有当 `docs/current-status.md` 和 `docs/next-task.md` 无法支撑当前任务时，才去下钻旧文档、原始日志或引用资料。
+- `docs/templates/error-record.md`
+- `docs/templates/new-thread.md`
+
+## 历史档案
+
+- `docs/archive/loading-chain/`
+  - 2026-03-10 SmokeMod、loader、日志和最小包研究。
+- `docs/archive/side-projects/`
+  - UnifiedSavePath、CrossCharacterCard、PrimalForceStrike 等旁支。
+- `mods/Togawasakiko_in_Slay_the_Spire/docs/archive/phase-logs/`
+  - T2/T3/T4/T5 工作报告、bug 日志、旧资产清单和旧版本审计。
+
+档案文件用于追溯，不覆盖当前事实源。
+
+## 本机与生成报告
+
+- `local/game-path.txt`：当前机器游戏路径。
+- `local/game-layout.md`：当前 macOS 安装结构。
+- `local/install-notes.md`：当前安装操作说明。
+- `local/*.md`、`local/*.json` 中的导出报告：脚本生成物，不是项目状态源。
+
+`local/tools/`、`Tools/`、`references/pck-extract/` 中的第三方 README、LICENSE 和原版 patch notes 不纳入项目文档体系。

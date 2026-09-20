@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://clkxvbu8tv365"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://1pm6y4gt0n65" path="res://animations/vfx/vfx_kaiser_crab_boss_explosion/infested_boss_explosion.atlas" id="1_kohbr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://qgu0ocdifhqq" path="res://animations/vfx/vfx_kaiser_crab_boss_explosion/infested_boss_explosion.skel" id="2_t1hfo"]
+
+[resource]
+atlas_res = ExtResource("1_kohbr")
+skeleton_file_res = ExtResource("2_t1hfo")

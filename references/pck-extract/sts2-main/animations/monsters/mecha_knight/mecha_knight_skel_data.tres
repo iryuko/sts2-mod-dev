@@ -1,0 +1,36 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://1hrr77dfoq3w"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c22e2p7fy6x03" path="res://animations/monsters/mecha_knight/mecha_knight.atlas" id="1_f38lo"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://xt688uf5oghr" path="res://animations/monsters/mecha_knight/mecha_knight.skel" id="2_r7y28"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_pdpis"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_j15qa"]
+from = "hurt_wound"
+to = "hurt_wound"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ucq7n"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_afqgv"]
+from = "idle_loop_wound"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_idugx"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_k5po3"]
+from = "hurt_wound"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_f38lo")
+skeleton_file_res = ExtResource("2_r7y28")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_pdpis"), SubResource("SpineAnimationMix_j15qa"), SubResource("SpineAnimationMix_ucq7n"), SubResource("SpineAnimationMix_afqgv"), SubResource("SpineAnimationMix_idugx"), SubResource("SpineAnimationMix_k5po3")]

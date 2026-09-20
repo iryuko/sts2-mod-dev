@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://b0dx46agir4l7"]
+
+[ext_resource type="Shader" uid="uid://ccpucqj0imb6o" path="res://shaders/vfx/heavy_blunt/vfx_heavy_blunt_erosion_shader.gdshader" id="1_g7rxo"]
+
+[sub_resource type="Curve" id="Curve_iy4gq"]
+_data = [Vector2(0, 0), 0.0, 1.15798, 0, 0, Vector2(1, 0.650278), 0.156903, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dwkpx"]
+curve = SubResource("Curve_iy4gq")
+
+[sub_resource type="Gradient" id="Gradient_g7rxo"]
+offsets = PackedFloat32Array(0.703601, 1)
+colors = PackedColorArray(0.65, 0.65, 0.65, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n6jk5"]
+gradient = SubResource("Gradient_g7rxo")
+
+[resource]
+shader = ExtResource("1_g7rxo")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/erosion_curve = SubResource("CurveTexture_dwkpx")
+shader_parameter/erosion_offset = 0.25
+shader_parameter/lut = SubResource("GradientTexture1D_n6jk5")

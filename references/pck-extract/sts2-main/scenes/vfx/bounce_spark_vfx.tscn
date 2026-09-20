@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvjyrpy8s02kp"]
+
+[ext_resource type="Texture2D" uid="uid://bh5uyq56pg6ix" path="res://images/vfx/globby_spark.png" id="1_33xd2"]
+[ext_resource type="Script" uid="uid://chsa70r4x2hbw" path="res://src/Core/Nodes/Vfx/NBounceSparkVfx.cs" id="2_06g7n"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="BounceSparkVfx" type="Sprite2D"]
+material = ExtResource("shared_additive_mat")
+scale = Vector2(8, 8)
+texture = ExtResource("1_33xd2")
+script = ExtResource("2_06g7n")

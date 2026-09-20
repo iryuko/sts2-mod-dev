@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c86gcmr8cs6k7"]
+
+[ext_resource type="Script" uid="uid://mo77d81kid8t" path="res://src/Core/Nodes/NSceneContainer.cs" id="1_nhi1m"]
+
+[node name="SceneContainer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nhi1m")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true

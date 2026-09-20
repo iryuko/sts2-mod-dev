@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://l5s83i4cqwjh"]
+
+[ext_resource type="Texture2D" uid="uid://6bji14oc1fie" path="res://images/ui/transitions/necrobinder_transition.png" id="2_302bg"]
+
+[sub_resource type="Shader" id="Shader_2greq"]
+code = "shader_type canvas_item;
+
+uniform sampler2D transitionTex;
+uniform float threshold : hint_range(0,1);
+
+void fragment() {
+    float falloff = 1.0 - texture(transitionTex, UV).r;
+    
+    // helps with falloff artifacts issues towards the transition extremes
+    float remap  = mix(-0.1, 1.1, threshold);
+    falloff = step(falloff, remap);
+    COLOR.a = falloff;
+}
+"
+
+[resource]
+resource_local_to_scene = true
+shader = SubResource("Shader_2greq")
+shader_parameter/threshold = 0.332
+shader_parameter/transitionTex = ExtResource("2_302bg")

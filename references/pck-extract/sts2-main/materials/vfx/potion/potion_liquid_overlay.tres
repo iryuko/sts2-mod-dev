@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ci6ugu2cb88a8"]
+
+[ext_resource type="Shader" uid="uid://dmiatm5lme6v7" path="res://shaders/vfx/potion/vfx_potion_liquid_overlay_shader.gdshader" id="1_aomoo"]
+[ext_resource type="Texture2D" uid="uid://ccbmcmgy5tecn" path="res://images/vfx/potion/potion_liquid_overlay.png" id="2_micjm"]
+
+[sub_resource type="Gradient" id="Gradient_micjm"]
+offsets = PackedFloat32Array(0, 0.645429, 1)
+colors = PackedColorArray(0.43, 0.43, 0.43, 1, 0.64, 0.64, 0.64, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_taloh"]
+gradient = SubResource("Gradient_micjm")
+
+[resource]
+shader = ExtResource("1_aomoo")
+shader_parameter/overlay_texture = ExtResource("2_micjm")
+shader_parameter/overlay_influence = 1.0
+shader_parameter/distortion_panning_speed = Vector2(0, 0)
+shader_parameter/distortion_strength = 0.1
+shader_parameter/overlay_panning_speed = Vector2(0, -2)
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/lut = SubResource("GradientTexture1D_taloh")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cxctva6p2wwsi"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://i78d3m5vkjst" path="res://animations/monsters/turret_operator/turret_operator.atlas" id="1_ufcov"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b1a2c0sisnqq0" path="res://animations/monsters/turret_operator/turret_operator.skel" id="2_84xoi"]
+
+[resource]
+atlas_res = ExtResource("1_ufcov")
+skeleton_file_res = ExtResource("2_84xoi")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://pdh0fafi0plw"]
+
+[ext_resource type="Script" uid="uid://guw2luuhqxo7" path="res://src/Core/Nodes/Ftue/NAcceptTutorialsFtue.cs" id="1_sodi2"]
+[ext_resource type="PackedScene" uid="uid://dqberqa21r6y8" path="res://scenes/ui/vertical_popup.tscn" id="2_t1exf"]
+
+[node name="AcceptTutorialsFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sodi2")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="VerticalPopup" parent="." instance=ExtResource("2_t1exf")]
+layout_mode = 1

@@ -1,0 +1,133 @@
+[gd_scene load_steps=19 format=3 uid="uid://c0mp6vhkm7m66"]
+
+[ext_resource type="Script" uid="uid://vppm010jqq1c" path="res://src/Core/Nodes/Vfx/NCardEnchantVfx.cs" id="1_01ge3"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="4_wk107"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/card/card_enchant_s.tres" id="7_k2203"]
+[ext_resource type="Texture2D" uid="uid://bapstexgysxtc" path="res://images/enchantments/slither.png" id="7_ywqul"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="8_oycki"]
+[ext_resource type="PackedScene" uid="uid://cimeloj78lsfl" path="res://scenes/vfx/card_sparkles_vfx.tscn" id="9_oycki"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="10_ywqul"]
+
+[sub_resource type="Curve" id="Curve_01ge3"]
+_data = [Vector2(0, 0), 0.0, 0.0668794, 0, 0, Vector2(1, 1), 2.7707, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ots2x"]
+shader = ExtResource("4_wk107")
+shader_parameter/h = 0.25
+shader_parameter/s = 0.4
+shader_parameter/v = 1.0
+
+[sub_resource type="Curve" id="Curve_oycki"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.589385, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_01ge3"]
+width = 64
+curve = SubResource("Curve_oycki")
+
+[sub_resource type="Curve" id="Curve_dglpm"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sexls"]
+curve = SubResource("Curve_dglpm")
+
+[sub_resource type="Gradient" id="Gradient_aiif7"]
+offsets = PackedFloat32Array(0, 0.0984375, 0.264062, 0.33125, 0.396875, 0.457812, 0.496875, 0.539062, 0.582812, 0.63125, 0.682813, 0.753125, 0.807813, 0.8625, 0.904688, 0.951563, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0.25098, 1, 1, 1, 0.501961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rl0bv"]
+gradient = SubResource("Gradient_aiif7")
+width = 128
+
+[sub_resource type="Curve" id="Curve_spyyl"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0859599, 1), 0.0, 0.0, 0, 0, Vector2(0.196275, 0.520145), -0.369996, -0.369996, 0, 0, Vector2(1, 0.504463), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_qmofj"]
+width = 64
+curve = SubResource("Curve_spyyl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vbx61"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 10, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -4.99999
+angle_max = 5.00001
+angle_curve = SubResource("CurveTexture_sexls")
+initial_velocity_min = 40.0
+initial_velocity_max = 60.0
+gravity = Vector3(0, -100, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_qmofj")
+color = Color(1, 0.993333, 0.8, 1)
+color_ramp = SubResource("GradientTexture1D_rl0bv")
+alpha_curve = SubResource("CurveTexture_01ge3")
+hue_variation_min = -0.03
+hue_variation_max = 0.03
+
+[node name="VfxCardUpgrade" type="Node2D"]
+script = ExtResource("1_01ge3")
+EmbossCurve = SubResource("Curve_01ge3")
+
+[node name="EnchantmentViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+transparent_bg = true
+size = Vector2i(144, 108)
+
+[node name="EnchantmentInViewport" type="TextureRect" parent="EnchantmentViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ots2x")
+offset_left = 36.0
+offset_top = 27.0
+offset_right = 108.0
+offset_bottom = 81.0
+mouse_filter = 2
+texture = ExtResource("7_k2203")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="EnchantmentViewport/EnchantmentInViewport"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = 49.0
+offset_bottom = 44.0
+texture = ExtResource("7_ywqul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="EnchantmentViewport/EnchantmentInViewport"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 27.0
+offset_right = 66.0
+offset_bottom = 53.0
+pivot_offset = Vector2(20, 13)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.0341, 0.05687, 0.11, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("8_oycki")
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("10_ywqul")
+AutoSizeEnabled = false
+
+[node name="EnchantmentAppearSparkles" parent="." instance=ExtResource("9_oycki")]
+unique_name_in_owner = true
+position = Vector2(-158, -93)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 0.9
+randomness = 0.0
+process_material = SubResource("ParticleProcessMaterial_vbx61")

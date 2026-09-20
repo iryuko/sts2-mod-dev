@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://8yhjhexb68cr"]
+
+[ext_resource type="Texture2D" uid="uid://blsec616n2jly" path="res://images/rooms/overgrowth_boss/overgrowth_04_boss.png" id="1_tbhu2"]
+[ext_resource type="Texture2D" uid="uid://u7kfq1sdihmo" path="res://images/rooms/overgrowth_boss/overgrowth_bossflame_00.png" id="2_lv8m5"]
+
+[node name="C" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.4
+offset_top = -648.0
+offset_right = 1382.4
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tbhu2")
+expand_mode = 1
+
+[node name="Flame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2048.4
+offset_top = 294.0
+offset_right = 2283.3
+offset_bottom = 558.15
+texture = ExtResource("2_lv8m5")
+expand_mode = 1

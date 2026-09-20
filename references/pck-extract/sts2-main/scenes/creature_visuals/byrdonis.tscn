@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0sf47hbmwv6q"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_xjt7l"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dj1oxk5idenbt" path="res://animations/monsters/byrdonis/byrdonis_skel_data.tres" id="2_8fg37"]
+
+[node name="Byrdonis" type="Node2D"]
+script = ExtResource("1_xjt7l")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-26, -48)
+scale = Vector2(0.313509, 0.313509)
+skeleton_data_res = ExtResource("2_8fg37")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -321.0
+offset_top = -461.0
+offset_right = 319.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-13, -253)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-13, -440)

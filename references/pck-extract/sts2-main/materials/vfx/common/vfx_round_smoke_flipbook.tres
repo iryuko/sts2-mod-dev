@@ -1,0 +1,28 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bbwdntgmror35"]
+
+[ext_resource type="Shader" uid="uid://cslgj2sxqchem" path="res://shaders/vfx/common/vfx_round_smoke_shader.gdshader" id="1_xpylr"]
+
+[sub_resource type="Curve" id="Curve_qaehw"]
+_data = [Vector2(0, 0), 0.0, 1.80898, 0, 0, Vector2(1, 1), 0.312317, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lfchu"]
+curve = SubResource("Curve_qaehw")
+
+[sub_resource type="Gradient" id="Gradient_vb3go"]
+offsets = PackedFloat32Array(0, 0.519789, 1)
+colors = PackedColorArray(0.2, 0.2, 0.2, 1, 0.6, 0.6, 0.6, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_q87d3"]
+gradient = SubResource("Gradient_vb3go")
+
+[resource]
+shader = ExtResource("1_xpylr")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/lut = SubResource("GradientTexture1D_q87d3")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/distortion_panning_speed = Vector2(0.3, 0.4)
+shader_parameter/distortion_strength = 0.02
+shader_parameter/erosion_curve = SubResource("CurveTexture_lfchu")
+shader_parameter/erosion_offset = 0.2

@@ -1,0 +1,559 @@
+[gd_scene load_steps=30 format=3 uid="uid://bc1i6k0yppvpi"]
+
+[ext_resource type="Script" uid="uid://3llx5mppaxag" path="res://src/Core/Nodes/Screens/MainMenu/NMainMenu.cs" id="1_mf3d1"]
+[ext_resource type="PackedScene" uid="uid://b7h703c8cnsc1" path="res://scenes/backgrounds/main_menu_bg.tscn" id="2_5mogb"]
+[ext_resource type="Script" uid="uid://bxt64fx6ettse" path="res://src/Core/Nodes/Screens/MainMenu/NMainMenuContinueButton.cs" id="3_wgsbn"]
+[ext_resource type="Theme" uid="uid://biu7pa64omb7l" path="res://themes/main_menu_text_button.tres" id="4_r0svc"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="5_md4mt"]
+[ext_resource type="PackedScene" uid="uid://doe0yfnapr68p" path="res://scenes/screens/main_menu/continue_run_info.tscn" id="6_j2wvi"]
+[ext_resource type="Script" uid="uid://d1bnah2ixqgb3" path="res://src/Core/Nodes/Screens/MainMenu/NMainMenuTextButton.cs" id="7_3oph6"]
+[ext_resource type="Texture2D" uid="uid://c3lpg8jbaaamd" path="res://images/packed/main_menu/main_menu_button_highlight.png" id="8_c6nv5"]
+[ext_resource type="Texture2D" uid="uid://b7nkqwas01awp" path="res://images/packed/common_ui/notification_dot2.png" id="8_v5c7i"]
+[ext_resource type="Script" uid="uid://c3myexifvrosc" path="res://src/Core/Nodes/Screens/MainMenu/NOpenProfileScreenButton.cs" id="10_qrgvl"]
+[ext_resource type="PackedScene" uid="uid://b8sqyllpuk2kg" path="res://scenes/screens/profiles/profile_icon.tscn" id="11_fmvoh"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="14_6as8o"]
+[ext_resource type="PackedScene" uid="uid://dk0y4pcjbr73p" path="res://scenes/screens/main_menu/patch_notes_button.tscn" id="14_qrgvl"]
+[ext_resource type="FontVariation" uid="uid://db2l475v4scfm" path="res://themes/source_code_pro_semibold_shared.tres" id="15_flmdy"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="16_qrgvl"]
+[ext_resource type="Shader" uid="uid://cmylquha3cjx4" path="res://shaders/dark_blur.gdshader" id="17_v3pup"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="19_uop00"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="20_ommgf"]
+[ext_resource type="PackedScene" uid="uid://c51qbkbks3pae" path="res://scenes/screens/patch_notes_screen.tscn" id="21_858gm"]
+[ext_resource type="Script" uid="uid://dd5se1cp23f17" path="res://src/Core/Nodes/Screens/MainMenu/NMainMenuSubmenuStack.cs" id="24_qrgvl"]
+[ext_resource type="PackedScene" uid="uid://dws30qiqcim2u" path="res://scenes/screens/settings_screen.tscn" id="25_settings"]
+[ext_resource type="FontFile" uid="uid://clypo64htko7l" path="res://fonts/kreon_regular.ttf" id="26_fmvoh"]
+[ext_resource type="PackedScene" uid="uid://qqj6kxbjm3pp" path="res://scenes/screens/character_select_screen.tscn" id="26_pcknc"]
+[ext_resource type="Script" uid="uid://x0jm48y6yijq" path="res://src/Core/Nodes/Debug/NDebugInfoLabelManager.cs" id="26_qrgvl"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="28_6as8o"]
+[ext_resource type="PackedScene" uid="uid://dyajueylolau7" path="res://scenes/debug/fps_visualizer.tscn" id="47_mpnyt"]
+
+[sub_resource type="FontVariation" id="FontVariation_rpovl"]
+base_font = ExtResource("5_md4mt")
+spacing_glyph = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qrgvl"]
+resource_local_to_scene = true
+shader = ExtResource("14_6as8o")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dmwuq"]
+resource_local_to_scene = true
+shader = ExtResource("17_v3pup")
+shader_parameter/lod = 0.0
+shader_parameter/mix_percentage = 0.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mf3d1")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="MainMenuBg" parent="." instance=ExtResource("2_5mogb")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ButtonReticleLeft" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 636.0
+offset_top = 633.0
+offset_right = 676.0
+offset_bottom = 673.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("8_c6nv5")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ButtonReticleRight" type="TextureRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_left = 859.0
+offset_top = 618.0
+offset_right = 889.0
+offset_bottom = 648.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("8_c6nv5")
+expand_mode = 1
+stretch_mode = 4
+flip_h = true
+
+[node name="MainMenuTextButtons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = 69.0
+offset_right = -49.0
+offset_bottom = 519.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ContinueButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("3_wgsbn")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/ContinueButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -20.3335
+offset_right = 7.5
+offset_bottom = 20.3335
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="ContinueRunInfo" parent="MainMenuTextButtons/ContinueButton" instance=ExtResource("6_j2wvi")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 145.0
+offset_top = 5.0
+offset_right = 593.0
+offset_bottom = 205.0
+
+[node name="AbandonRunButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/AbandonRunButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.0
+offset_right = 7.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="SingleplayerButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/SingleplayerButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -20.3335
+offset_right = 7.5
+offset_bottom = 20.3335
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="MultiplayerButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/MultiplayerButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.0
+offset_right = 7.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="TimelineButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/TimelineButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -25.0
+offset_right = 7.5
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="TimelineNotificationDot" type="Control" parent="MainMenuTextButtons/TimelineButton/Label"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="MainMenuTextButtons/TimelineButton/Label/TimelineNotificationDot"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -35.0
+offset_right = 60.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_v5c7i")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SettingsButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/SettingsButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.0
+offset_right = 7.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="CompendiumButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/CompendiumButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.0
+offset_right = 7.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="QuitButton" type="Control" parent="MainMenuTextButtons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("7_3oph6")
+
+[node name="Label" type="Label" parent="MainMenuTextButtons/QuitButton"]
+self_modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.5
+offset_top = -22.0
+offset_right = 7.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_r0svc")
+theme_override_fonts/font = SubResource("FontVariation_rpovl")
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="ChangeProfileButton" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 190.0
+offset_bottom = 80.0
+pivot_offset = Vector2(86, 32)
+script = ExtResource("10_qrgvl")
+
+[node name="ProfileIcon" parent="ChangeProfileButton" instance=ExtResource("11_fmvoh")]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 56.0
+mouse_filter = 1
+
+[node name="Title" type="Label" parent="ChangeProfileButton"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 64.0
+offset_top = 5.0
+offset_right = 234.0
+offset_bottom = 40.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("20_ommgf")
+theme_override_font_sizes/font_size = 24
+text = "Profile 1"
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="Description" type="Label" parent="ChangeProfileButton"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 64.0
+offset_top = 33.375
+offset_right = 234.0
+offset_bottom = 59.625
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("19_uop00")
+theme_override_font_sizes/font_size = 18
+text = "Click to edit"
+vertical_alignment = 1
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="ControllerIcon" type="TextureRect" parent="ChangeProfileButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_qrgvl")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 18.0
+offset_top = -50.0
+offset_right = 178.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(80, 40)
+mouse_filter = 2
+texture = ExtResource("16_qrgvl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PatchNotesButton" parent="." instance=ExtResource("14_qrgvl")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -88.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = 80.0
+
+[node name="ModdedWarning" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0.794667, 0.23, 1)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -379.0
+offset_top = -33.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("15_flmdy")
+text = "Running Modded: Loaded 3 mods."
+horizontal_alignment = 2
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="BlurBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_dmwuq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PatchNotesScreen" parent="." instance=ExtResource("21_858gm")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="Submenus" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("24_qrgvl")
+_settingsScreenScene = ExtResource("25_settings")
+_characterSelectScreenScene = ExtResource("26_pcknc")
+
+[node name="Fps" parent="." instance=ExtResource("47_mpnyt")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 62.0
+offset_bottom = 24.0
+
+[node name="ReleaseInfo" type="Label" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0, 0, 0, 0.3019608)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -306.0
+offset_top = 18.0
+offset_right = -94.0
+offset_bottom = 63.0
+grow_horizontal = 0
+pivot_offset = Vector2(1, 0)
+theme_override_fonts/font = ExtResource("26_fmvoh")
+theme_override_font_sizes/font_size = 16
+text = "v0.92.1
+02-27-2026"
+horizontal_alignment = 2
+script = ExtResource("28_6as8o")
+AutoSizeEnabled = false
+
+[node name="DebugInfoManager" type="Node" parent="."]
+script = ExtResource("26_qrgvl")
+isMainMenu = true

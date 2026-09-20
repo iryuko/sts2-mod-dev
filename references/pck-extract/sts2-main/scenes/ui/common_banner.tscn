@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://7osm1qqwcp6e"]
+
+[ext_resource type="Texture2D" uid="uid://bkbggtnccf6pi" path="res://images/ui/reward_screen/reward_banner.png" id="1_4p3hx"]
+[ext_resource type="Script" uid="uid://dcj61s53noqxv" path="res://src/Core/Nodes/CommonUi/NCommonBanner.cs" id="2_7l24b"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_qgqtn"]
+[ext_resource type="FontVariation" uid="uid://bc8knt63hq4co" path="res://themes/kreon_bold_glyph_space_three.tres" id="3_xwcwq"]
+
+[node name="Banner" type="TextureRect"]
+custom_minimum_size = Vector2(654, 162)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -327.0
+offset_top = -334.0
+offset_right = 327.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_4p3hx")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_7l24b")
+
+[node name="MegaLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 104.0
+offset_top = 21.0
+offset_right = -100.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.290196, 0.235294, 0.164706, 0.752941)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("3_xwcwq")
+theme_override_font_sizes/font_size = 31
+text = "If you see this, this is a bug!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_qgqtn")
+MinFontSize = 20
+MaxFontSize = 40

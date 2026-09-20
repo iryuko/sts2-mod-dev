@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3 uid="uid://b5jmy3e73i7x7"]
+
+[ext_resource type="Script" uid="uid://cgv6fwxmmkr3h" path="res://src/Core/Nodes/Rooms/NCombatBackground.cs" id="1_hhn5n"]
+[ext_resource type="Script" uid="uid://dfvfrv5f1nhp5" path="res://src/Core/Debug/NBgLayerDebug.cs" id="2_xaqbt"]
+[ext_resource type="PackedScene" uid="uid://bb8t27u5nkt2o" path="res://scenes/creature_visuals/kaiser_crab_boss_setup.tscn" id="5_52aqi"]
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="11_j26a3"]
+[ext_resource type="Texture2D" uid="uid://bp2itsyvh5pfs" path="res://images/rooms/overgrowth_boss/overgrowth_ceremonial_beast_beads_1.png" id="12_jcl10"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcth2"]
+shader = ExtResource("11_j26a3")
+shader_parameter/speed = 0.8
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.05
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_st417"]
+shader = ExtResource("11_j26a3")
+shader_parameter/speed = 0.5
+shader_parameter/minStrength = 0.015
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 4.25
+shader_parameter/detail = 3.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 10.0
+
+[node name="KaiserCrabBossBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hhn5n")
+
+[node name="Layer_00" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")
+
+[node name="Layer_01" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")
+
+[node name="Layer_02" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")
+VisibleLayer = 1
+
+[node name="Layer_03" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")
+
+[node name="Layer_04" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")
+
+[node name="beads_16" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_mcth2")
+layout_mode = 0
+offset_left = 363.0
+offset_top = -328.0
+offset_right = 379.0
+offset_bottom = -182.0
+rotation = 3.14159
+texture = ExtResource("12_jcl10")
+expand_mode = 1
+
+[node name="beads_17" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = 55.0
+offset_top = -487.0
+offset_right = 71.0
+offset_bottom = -341.0
+rotation = 3.14159
+texture = ExtResource("12_jcl10")
+expand_mode = 1
+
+[node name="beads_20" type="TextureRect" parent="Layer_04"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_st417")
+layout_mode = 0
+offset_left = -672.0
+offset_top = -351.0
+offset_right = -656.0
+offset_bottom = -205.0
+rotation = 3.14159
+texture = ExtResource("12_jcl10")
+expand_mode = 1
+
+[node name="KaiserCrab" parent="." instance=ExtResource("5_52aqi")]
+unique_name_in_owner = true
+position = Vector2(-1029, -544)
+
+[node name="Foreground" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+script = ExtResource("2_xaqbt")

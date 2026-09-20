@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://ksbky20qnnf7"]
+
+[ext_resource type="Script" uid="uid://c3cs12scy4wm1" path="res://src/Core/Nodes/Debug/NCommandHistory.cs" id="1_dpbn8"]
+[ext_resource type="FontVariation" uid="uid://dviusgklt13ts" path="res://themes/source_code_pro_medium_shared.tres" id="2_k5oot"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct1al"]
+bg_color = Color(0, 0.0156863, 0.101961, 0.862745)
+
+[node name="CommandHistory" type="CanvasLayer"]
+layer = 11
+
+[node name="ConsoleScreen" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1641.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ct1al")
+script = ExtResource("1_dpbn8")
+
+[node name="OutputContainer" type="MarginContainer" parent="ConsoleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="OutputBuffer" type="RichTextLabel" parent="ConsoleScreen/OutputContainer"]
+layout_mode = 2
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = ExtResource("2_k5oot")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+scroll_following = true
+metadata/_edit_lock_ = true

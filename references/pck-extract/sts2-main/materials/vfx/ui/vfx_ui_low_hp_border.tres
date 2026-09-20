@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://tdwq8bsljkkn"]
+
+[ext_resource type="Shader" uid="uid://da8yt8jjrxakr" path="res://shaders/vfx/ui/vfx_ui_low_hp_border_shader.gdshader" id="1_wiwgr"]
+[ext_resource type="Texture2D" uid="uid://b1ejst3q0hxds" path="res://images/vfx/noise/vfx_noise_1.png" id="2_ok5yy"]
+
+[resource]
+shader = ExtResource("1_wiwgr")
+shader_parameter/alpha = 1.0
+shader_parameter/alpha_multiplier = 1.0
+shader_parameter/inner_radius = 0.5
+shader_parameter/outer_radius = 1.75
+shader_parameter/noise = ExtResource("2_ok5yy")
+shader_parameter/noise_tiling = Vector2(1, 3)
+shader_parameter/noise_panning = Vector2(-3, 0)
+shader_parameter/noise_initial_offset = Vector2(0, 0)
+shader_parameter/noise_additional_offset = 0.0
+shader_parameter/smoothstep_factors = Vector2(0.1, 0.8)
+shader_parameter/main_color = Color(0.32349485, 0.02558945, 0.02558945, 1)

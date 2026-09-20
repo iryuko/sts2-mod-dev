@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckcnug0f6qetm"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_1up56"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bpy4hwdrk82nf" path="res://animations/monsters/bowlbug/bowlbug_skel_data.tres" id="2_fxoaq"]
+
+[node name="BowlbugSilk" type="Node2D"]
+script = ExtResource("1_1up56")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(18, -22)
+scale = Vector2(0.275, 0.275)
+skeleton_data_res = ExtResource("2_fxoaq")
+preview_skin = "web"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(82.2308, -233.839)
+bone_name = "spit_target"
+bone_mode = 1
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -93.0
+offset_top = -150.0
+offset_right = 93.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -80)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -188)

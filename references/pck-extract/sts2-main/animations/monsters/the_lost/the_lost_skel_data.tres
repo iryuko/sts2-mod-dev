@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://cmitifm0th6va"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://mi130ipxuor8" path="res://animations/monsters/the_lost/the_lost.atlas" id="1_ftukk"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cl0pjgf8uu44d" path="res://animations/monsters/the_lost/the_lost.skel" id="2_ocdjq"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ftukk"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ocdjq"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_xeh5v"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vhwqo"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_ftukk")
+skeleton_file_res = ExtResource("2_ocdjq")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_ftukk"), SubResource("SpineAnimationMix_ocdjq"), SubResource("SpineAnimationMix_xeh5v"), SubResource("SpineAnimationMix_vhwqo")]

@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://pnyv51ejqiab"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://lyjbroj6t8lw" path="res://animations/map/queen_boss/queen_boss_node.atlas" id="1_aynhy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cxd5r640a7kvj" path="res://animations/map/queen_boss/queen_boss_node.skel" id="2_1fw12"]
+
+[resource]
+atlas_res = ExtResource("1_aynhy")
+skeleton_file_res = ExtResource("2_1fw12")

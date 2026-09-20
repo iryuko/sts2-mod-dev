@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://6qeq7e5tswqx"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_m14ab"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cgeaxe2ambgou" path="res://animations/monsters/noisebot/noisebot_skel_data.tres" id="2_24ljc"]
+
+[node name="Noisebot" type="Node2D"]
+script = ExtResource("1_m14ab")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(8, 121)
+scale = Vector2(0.15, 0.15)
+skeleton_data_res = ExtResource("2_24ljc")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="HeightControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-500, -59.9999)
+rotation = -0.000191215
+bone_name = "height_constrainer"
+bone_mode = 1
+
+[node name="FallControl" type="SpineBoneNode" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(-53.3333, 813.333)
+rotation = -0.00038243
+bone_name = "height_bone"
+bone_mode = 1
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -174.0
+offset_right = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -86)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -204)

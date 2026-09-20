@@ -1,0 +1,282 @@
+[gd_scene load_steps=13 format=3 uid="uid://c18reb7k0dvju"]
+
+[ext_resource type="Script" uid="uid://bxmder2dvlbbc" path="res://src/Core/Nodes/Screens/CardSelection/NDeckEnchantSelectScreen.cs" id="1_q5d1s"]
+[ext_resource type="PackedScene" uid="uid://cso1enqajc0tc" path="res://scenes/cards/card_grid.tscn" id="2_eoxog"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_8bq8h"]
+[ext_resource type="Texture2D" uid="uid://cwh6jyhd77m27" path="res://images/enchantments/sharp.png" id="3_ramy0"]
+[ext_resource type="PackedScene" uid="uid://cd5p5lrv6ukpq" path="res://scenes/cards/enchant_preview.tscn" id="4_wjy3w"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="5_ypjnq"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="6_fyg7n"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_njxc0"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="7_y30gg"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="8_xq2kb"]
+[ext_resource type="PackedScene" uid="uid://rxgwkwxf1dsr" path="res://scenes/combat/peek_button.tscn" id="12_jh4lx"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="21_vjnhn"]
+
+[node name="DeckEnchantSelectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q5d1s")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CardGrid" parent="." instance=ExtResource("2_eoxog")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_top = 80.0
+
+[node name="Close" parent="." instance=ExtResource("3_8bq8h")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Confirm" parent="." instance=ExtResource("5_ypjnq")]
+layout_mode = 1
+pivot_offset = Vector2(180, 55)
+
+[node name="EnchantMultiPreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="EnchantMultiPreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.85)
+
+[node name="Cards" type="HBoxContainer" parent="EnchantMultiPreviewContainer"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 400
+alignment = 1
+
+[node name="Cancel" parent="EnchantMultiPreviewContainer" instance=ExtResource("3_8bq8h")]
+layout_mode = 1
+
+[node name="Confirm" parent="EnchantMultiPreviewContainer" instance=ExtResource("5_ypjnq")]
+layout_mode = 1
+
+[node name="EnchantSinglePreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="EnchantSinglePreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.85)
+
+[node name="EnchantPreview" parent="EnchantSinglePreviewContainer" instance=ExtResource("4_wjy3w")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cancel" parent="EnchantSinglePreviewContainer" instance=ExtResource("3_8bq8h")]
+layout_mode = 1
+
+[node name="Confirm" parent="EnchantSinglePreviewContainer" instance=ExtResource("5_ypjnq")]
+layout_mode = 1
+
+[node name="PeekButton" parent="." instance=ExtResource("12_jh4lx")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 100.0
+offset_top = -64.0
+offset_right = 228.0
+offset_bottom = 64.0
+grow_horizontal = 1
+
+[node name="BottomText" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -57.0
+offset_right = 62.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="BottomText"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomText"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="BottomLabel" type="RichTextLabel" parent="BottomText/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_y30gg")
+theme_override_fonts/bold_font = ExtResource("8_xq2kb")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Info text."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("21_vjnhn")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+IsVerticallyBound = false
+
+[node name="EnchantmentDescriptionContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -497.0
+offset_top = -133.0
+offset_right = -97.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ColorRect" type="ColorRect" parent="EnchantmentDescriptionContainer"]
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="EnchantmentDescriptionContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnchantmentDescriptionContainer/MarginContainer"]
+custom_minimum_size = Vector2(344, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="EnchantmentIcon" type="TextureRect" parent="EnchantmentDescriptionContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_ramy0")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EnchantmentDescriptionContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -8
+
+[node name="EnchantmentTitle" type="Label" parent="EnchantmentDescriptionContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_fyg7n")
+theme_override_font_sizes/font_size = 26
+text = "Enchantment Name"
+autowrap_mode = 2
+script = ExtResource("7_njxc0")
+MinFontSize = 18
+MaxFontSize = 26
+
+[node name="EnchantmentDescription" type="RichTextLabel" parent="EnchantmentDescriptionContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 52)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_y30gg")
+theme_override_fonts/bold_font = ExtResource("8_xq2kb")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Gain 1 [gold]Exciting Enchantment[/gold] description. "
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+script = ExtResource("21_vjnhn")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24

@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=3 uid="uid://l5te741ppqjc"]
+
+[ext_resource type="Script" uid="uid://bihw0k838rwmr" path="res://src/Core/Nodes/Screens/Timeline/UnlockScreens/NUnlockRelicsScreen.cs" id="1_0c1gl"]
+[ext_resource type="Texture2D" uid="uid://cske71hwcslh8" path="res://images/timeline/epoch_card_back.png" id="2_uv8jp"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="2_v8v3u"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="3_rm0r6"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="4_ls37n"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="6_2hdpk"]
+[ext_resource type="PackedScene" uid="uid://wvmm62hrtps4" path="res://scenes/ui/unlock_confirm_button.tscn" id="7_5ni0e"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_juc2f"]
+
+[sub_resource type="Curve" id="Curve_4dppk"]
+_data = [Vector2(0, 0), 0.0, 0.897281, 0, 0, Vector2(0.377586, 1), 0.0, 0.0, 0, 0, Vector2(0.763793, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -12.4602, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_jr671"]
+curve = SubResource("Curve_4dppk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2efq"]
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 300.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.2
+color = Color(1, 0.875333, 0.56, 1)
+alpha_curve = SubResource("CurveTexture_jr671")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.1
+
+[node name="UnlockRelicsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0c1gl")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+material = SubResource("CanvasItemMaterial_juc2f")
+position = Vector2(960, 540)
+amount = 64
+texture = ExtResource("2_uv8jp")
+lifetime = 2.0
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2efq")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Banner" parent="UI" instance=ExtResource("2_v8v3u")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="RelicRow" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ExplanationText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -494.0
+offset_top = 232.0
+offset_right = 494.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = ExtResource("3_rm0r6")
+theme_override_fonts/bold_font = ExtResource("4_ls37n")
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[center]This is some text explaining what you have unlocked. It's soooo exciting.[/center]"
+scroll_active = false
+script = ExtResource("6_2hdpk")
+MaxFontSize = 28
+
+[node name="ConfirmButton" parent="." instance=ExtResource("7_5ni0e")]
+unique_name_in_owner = true
+layout_mode = 1

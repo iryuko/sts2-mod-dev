@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjqmvk64j2qoj"]
+
+[ext_resource type="Material" uid="uid://cio26uo7pr70s" path="res://materials/vfx/common/vfx_outward_streaks.tres" id="1_g5gh1"]
+[ext_resource type="Texture2D" uid="uid://dr3brebkqwcle" path="res://images/vfx/common/common_outward_streaks.png" id="2_5giyq"]
+
+[sub_resource type="Curve" id="Curve_rtb21"]
+_data = [Vector2(0, 1), 0.0, -2.2443476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6e1xg"]
+curve = SubResource("Curve_rtb21")
+
+[sub_resource type="Curve" id="Curve_opks4"]
+_data = [Vector2(0, 0.50145626), 0.0, 1.55378, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0skb2"]
+_data = [Vector2(0, 1), 0.0, -0.64453095, 0, 0, Vector2(1, 0.8043689), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gorpx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vnn21"]
+curve_x = SubResource("Curve_opks4")
+curve_y = SubResource("Curve_0skb2")
+curve_z = SubResource("Curve_gorpx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kta1j"]
+lifetime_randomness = 0.25
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 25.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = 499.99997
+radial_velocity_max = 1200.0
+radial_velocity_curve = SubResource("CurveTexture_6e1xg")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.75
+scale_max = 1.1999999
+scale_curve = SubResource("CurveXYZTexture_vnn21")
+anim_offset_max = 1.0
+
+[node name="vfx_common_outward_streaks" type="GPUParticles2D"]
+texture_repeat = 1
+material = ExtResource("1_g5gh1")
+emitting = false
+amount = 3
+texture = ExtResource("2_5giyq")
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 0.9
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kta1j")

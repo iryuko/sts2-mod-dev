@@ -1,0 +1,165 @@
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://c7v6xn7lpq6gn"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_pve1p"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_pve1p"]
+parameter_name = "ColorParameter"
+default_value_enabled = true
+default_value = Color(1, 0.682353, 0.0392157, 1)
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_pve1p"]
+parameter_name = "movingTex"
+texture_repeat = 1
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_fekg2"]
+parameter_name = "scrollSpeed"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_qym6w"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_qym6w"]
+parameter_name = "movingTexOffset"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_rquxs"]
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_ex80e"]
+parameter_name = "movingTexScale"
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_ia0yj"]
+function = 1
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_rquxs"]
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_kkllq"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_p8ltq"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_uvaaw"]
+output_port_for_preview = 0
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_cdfis"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_gpf5b"]
+parameter_name = "waterTex"
+texture_repeat = 1
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 ColorParameter : source_color = vec4(1.000000, 0.682353, 0.039216, 1.000000);
+uniform vec2 movingTexOffset;
+uniform vec2 movingTexScale;
+uniform vec2 scrollSpeed;
+uniform sampler2D movingTex : repeat_enable;
+uniform sampler2D waterTex : repeat_enable;
+
+
+
+void fragment() {
+// ColorParameter:16
+	vec4 n_out16p0 = ColorParameter;
+
+
+// Vector2Parameter:24
+	vec2 n_out24p0 = movingTexOffset;
+
+
+// UVFunc:29
+	vec2 n_in29p1 = vec2(1.00000, 1.00000);
+	vec2 n_out29p0 = n_out24p0 * n_in29p1 + UV;
+
+
+// Vector2Parameter:27
+	vec2 n_out27p0 = movingTexScale;
+
+
+// UVFunc:28
+	vec2 n_in28p2 = vec2(0.00000, 0.00000);
+	vec2 n_out28p0 = (n_out29p0 - n_in28p2) * n_out27p0 + n_in28p2;
+
+
+// Input:5
+	float n_out5p0 = TIME;
+
+
+// Vector2Parameter:22
+	vec2 n_out22p0 = scrollSpeed;
+
+
+// VectorOp:23
+	vec2 n_out23p0 = vec2(n_out5p0) * n_out22p0;
+
+
+// UVFunc:4
+	vec2 n_in4p1 = vec2(1.00000, 1.00000);
+	vec2 n_out4p0 = n_out23p0 * n_in4p1 + n_out28p0;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(movingTex, n_out4p0);
+
+
+// VectorOp:11
+	vec3 n_out11p0 = vec3(n_out16p0.xyz) * vec3(n_out3p0.xyz);
+
+
+	vec4 n_out8p0;
+// Texture2D:8
+	n_out8p0 = texture(waterTex, UV);
+	float n_out8p4 = n_out8p0.a;
+
+
+// VectorOp:26
+	vec3 n_out26p0 = n_out11p0 + vec3(n_out8p0.xyz);
+
+
+// Output:0
+	COLOR.rgb = n_out26p0;
+	COLOR.a = n_out8p4;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_pve1p")
+nodes/fragment/2/position = Vector2(-1840, 320)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_kkllq")
+nodes/fragment/3/position = Vector2(-1060, 260)
+nodes/fragment/4/node = SubResource("VisualShaderNodeUVFunc_p8ltq")
+nodes/fragment/4/position = Vector2(-1320, 20)
+nodes/fragment/5/node = SubResource("VisualShaderNodeInput_uvaaw")
+nodes/fragment/5/position = Vector2(-2500, -220)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_cdfis")
+nodes/fragment/8/position = Vector2(-660, 660)
+nodes/fragment/9/node = SubResource("VisualShaderNodeTexture2DParameter_gpf5b")
+nodes/fragment/9/position = Vector2(-1020, 720)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorOp_pve1p")
+nodes/fragment/11/position = Vector2(-300, 40)
+nodes/fragment/16/node = SubResource("VisualShaderNodeColorParameter_pve1p")
+nodes/fragment/16/position = Vector2(-840, -260)
+nodes/fragment/22/node = SubResource("VisualShaderNodeVec2Parameter_fekg2")
+nodes/fragment/22/position = Vector2(-2400, 180)
+nodes/fragment/23/node = SubResource("VisualShaderNodeVectorOp_qym6w")
+nodes/fragment/23/position = Vector2(-1860, -120)
+nodes/fragment/24/node = SubResource("VisualShaderNodeVec2Parameter_qym6w")
+nodes/fragment/24/position = Vector2(-2440, -760)
+nodes/fragment/26/node = SubResource("VisualShaderNodeVectorOp_rquxs")
+nodes/fragment/26/position = Vector2(-60, 160)
+nodes/fragment/27/node = SubResource("VisualShaderNodeVec2Parameter_ex80e")
+nodes/fragment/27/position = Vector2(-2260, -440)
+nodes/fragment/28/node = SubResource("VisualShaderNodeUVFunc_ia0yj")
+nodes/fragment/28/position = Vector2(-1620, -340)
+nodes/fragment/29/node = SubResource("VisualShaderNodeUVFunc_rquxs")
+nodes/fragment/29/position = Vector2(-1880, -680)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 0, 3, 0, 9, 0, 8, 2, 23, 0, 4, 2, 22, 0, 23, 1, 8, 4, 0, 1, 8, 0, 26, 1, 26, 0, 0, 0, 3, 0, 11, 1, 11, 0, 26, 0, 16, 0, 11, 0, 28, 0, 4, 0, 27, 0, 28, 1, 29, 0, 28, 0, 24, 0, 29, 2, 5, 0, 23, 0)

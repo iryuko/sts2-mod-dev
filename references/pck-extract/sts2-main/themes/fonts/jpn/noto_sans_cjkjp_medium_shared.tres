@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://c7kiei3ejbckl"]
+
+[ext_resource type="FontFile" uid="uid://qocm8ya3tt01" path="res://fonts/jpn/NotoSansCJKjp-Medium.otf" id="1_djgub"]
+
+[resource]
+base_font = ExtResource("1_djgub")

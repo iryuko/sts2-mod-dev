@@ -1,0 +1,404 @@
+[gd_scene load_steps=39 format=3 uid="uid://dtu37puc5eg0m"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_3dwrg"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c2mrbqct15cgx" path="res://animations/characters/regent/regent_skel_data.tres" id="3_jb1vq"]
+[ext_resource type="Texture2D" uid="uid://bbky6h6d3y3jc" path="res://images/vfx/characters/regent_sparkle.png" id="4_2hmwe"]
+[ext_resource type="Script" uid="uid://dsq50myoa0fc3" path="res://src/Core/Nodes/Vfx/NNecrobinderFlameVfx.cs" id="4_du134"]
+[ext_resource type="Script" uid="uid://cr0gibht34x4p" path="res://src/Core/Nodes/Vfx/NRegentVfx.cs" id="4_sn882"]
+[ext_resource type="Texture2D" path="res://images/vfx/characters/regent_emission_points.res" id="6_trks7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://tjpvqmcen4vb" path="res://animations/characters/regent/regent_weapon_skel_data.tres" id="7_howi0"]
+[ext_resource type="Texture2D" path="res://images/vfx/characters/regent_emission_color.png" id="7_xptcu"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_53uu0"]
+
+[sub_resource type="Curve" id="Curve_qhnhq"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.344536, 0, 0, Vector2(0.365155, 0.31641), -1.74295, -1.74295, 0, 0, Vector2(1, -0.0371714), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xb33k"]
+curve = SubResource("Curve_qhnhq")
+
+[sub_resource type="Curve" id="Curve_vxseg"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, -0.00362635), 0.0, 0.0, 0, 0, Vector2(0.272076, -0.00362635), 0.0, 0.0, 0, 0, Vector2(0.72315, 0.444243), 1.03965, 1.03965, 0, 0, Vector2(1, 0.208522), -2.27924, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_pw4in"]
+curve = SubResource("Curve_vxseg")
+
+[sub_resource type="Curve" id="Curve_t5ve8"]
+_data = [Vector2(0, 0.263373), 0.0, 18.7657, 0, 0, Vector2(0.0692124, 0.988214), 0.0, 0.0, 0, 0, Vector2(0.138425, 0.552131), 0.0, 0.0, 0, 0, Vector2(0.207637, 0.829102), 0.0, 0.0, 0, 0, Vector2(0.27685, 0.440163), 0.0, 0.0, 0, 0, Vector2(0.350835, 0.776065), 0.0, 0.0, 0, 0, Vector2(0.427208, 0.304624), 0.0, 0.0, 0, 0, Vector2(0.501193, 0.634633), 0.0, 0.0, 0, 0, Vector2(0.584725, 0.281052), 0.0, 0.0, 0, 0, Vector2(0.644391, 0.94107), 2.16053, 2.16053, 0, 0, Vector2(0.871122, 0.958749), -1.41096, -1.41096, 0, 0, Vector2(1, 0.210335), -10.494, 0.0, 0, 0]
+point_count = 12
+
+[sub_resource type="CurveTexture" id="CurveTexture_ik6a0"]
+curve = SubResource("Curve_t5ve8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b6rbv"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 4
+emission_point_texture = ExtResource("7_xptcu")
+emission_color_texture = ExtResource("6_trks7")
+emission_point_count = 116273
+direction = Vector3(0.5, -1, 0)
+spread = 60.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.5
+orbit_velocity_curve = SubResource("CurveTexture_pw4in")
+gravity = Vector3(0, -20, 0)
+linear_accel_min = 60.0
+linear_accel_max = 100.0
+linear_accel_curve = SubResource("CurveTexture_xb33k")
+radial_accel_max = 15.24
+damping_min = 36.39
+damping_max = 81.569
+attractor_interaction_enabled = false
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_ik6a0")
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(0, 1.625, 0)
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.01
+
+[sub_resource type="Curve" id="Curve_xqr8j"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.0119332, 0.161378), 0.0, 0.0, 0, 0, Vector2(0.379475, -0.970082), 0.0, 0.0, 0, 0, Vector2(0.720358, 0.171709), 0.0, 0.0, 0, 0, Vector2(1, 0.0199456), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_1rvqa"]
+curve = SubResource("Curve_xqr8j")
+
+[sub_resource type="Curve" id="Curve_fre77"]
+_data = [Vector2(0, 0.210335), 0.0, 13.4041, 0, 0, Vector2(0.114558, 0.982321), 0.0, 0.0, 0, 0, Vector2(0.164678, 0.62874), 0.0, 0.0, 0, 0, Vector2(0.21957, 1), 0.0, 0.0, 0, 0, Vector2(0.26969, 0.534451), 0.0, 0.0, 0, 0, Vector2(0.329356, 1), 0.0, 0.0, 0, 0, Vector2(0.403341, 0.616954), 0.0, 0.0, 0, 0, Vector2(0.441527, 1), 0.0, 0.0, 0, 0, Vector2(0.520286, 0.675884), 0.0, 0.0, 0, 0, Vector2(0.548926, 1), 0.0, 0.0, 0, 0, Vector2(0.615752, 0.699456), 0.0, 0.0, 0, 0, Vector2(0.670644, 1), 0.0, 0.0, 0, 0, Vector2(0.725537, 0.705349), 0.0, 0.0, 0, 0, Vector2(0.78043, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -11.3249, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_pjfog"]
+curve = SubResource("Curve_fre77")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t61rr"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100.81, 102.24, 0)
+direction = Vector3(-0.5, -0.2, 0)
+spread = 13.52
+initial_velocity_min = 450.0
+initial_velocity_max = 700.0
+orbit_velocity_min = 0.5
+orbit_velocity_max = 0.7
+orbit_velocity_curve = SubResource("CurveTexture_1rvqa")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.25
+scale_curve = SubResource("CurveTexture_pjfog")
+turbulence_noise_strength = 0.46
+turbulence_noise_scale = 8.62
+turbulence_noise_speed = Vector3(0, 0.5, 0)
+turbulence_noise_speed_random = 1.2
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+
+[sub_resource type="Curve" id="Curve_u7seg"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0670898), 0.0, 0.0, 0, 0, Vector2(0.453461, 1.15141), 0.0, 0.0, 0, 0, Vector2(0.99284, 0.0670898), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s6smq"]
+curve = SubResource("Curve_u7seg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m5irg"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+direction = Vector3(0.1, -0.07, 0)
+spread = 13.52
+initial_velocity_min = 450.0
+initial_velocity_max = 600.0
+orbit_velocity_min = 0.479
+orbit_velocity_max = 0.698
+orbit_velocity_curve = SubResource("CurveTexture_s6smq")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.22
+scale_curve = SubResource("CurveTexture_pjfog")
+turbulence_noise_strength = 0.46
+turbulence_noise_scale = 8.62
+turbulence_noise_speed = Vector3(0, 0.5, 0)
+turbulence_noise_speed_random = 1.2
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+
+[sub_resource type="Curve" id="Curve_egql6"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0670898), 0.0, 0.0, 0, 0, Vector2(0.412888, -0.710789), 0.0, 0.0, 0, 0, Vector2(0.99284, 0.0670898), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y7sec"]
+curve = SubResource("Curve_egql6")
+
+[sub_resource type="Curve" id="Curve_5w7lj"]
+_data = [Vector2(0, 0.210335), 0.0, 13.4041, 0, 0, Vector2(0.114558, 0.982321), 0.0, 0.0, 0, 0, Vector2(0.164678, 0.62874), 0.0, 0.0, 0, 0, Vector2(0.21957, 1), 0.0, 0.0, 0, 0, Vector2(0.26969, 0.534451), 0.0, 0.0, 0, 0, Vector2(0.329356, 1), 0.0, 0.0, 0, 0, Vector2(0.403341, 0.616954), 0.0, 0.0, 0, 0, Vector2(0.441527, 1), 0.0, 0.0, 0, 0, Vector2(0.520286, 0.675884), 0.0, 0.0, 0, 0, Vector2(0.548926, 1), 0.0, 0.0, 0, 0, Vector2(0.615752, 0.699456), 0.0, 0.0, 0, 0, Vector2(0.670644, 1), 0.0, 0.0, 0, 0, Vector2(0.725537, 0.705349), 0.0, 0.0, 0, 0, Vector2(0.78043, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -11.3249, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_k8fta"]
+curve = SubResource("Curve_5w7lj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f830s"]
+particle_flag_disable_z = true
+direction = Vector3(-0.2, -0.15, 0)
+spread = 13.52
+initial_velocity_min = 450.0
+initial_velocity_max = 600.0
+orbit_velocity_min = 0.479
+orbit_velocity_max = 0.698
+orbit_velocity_curve = SubResource("CurveTexture_y7sec")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.22
+scale_curve = SubResource("CurveTexture_k8fta")
+turbulence_noise_strength = 0.46
+turbulence_noise_scale = 8.62
+turbulence_noise_speed = Vector3(0, 0.5, 0)
+turbulence_noise_speed_random = 1.2
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+
+[sub_resource type="Curve" id="Curve_u4ram"]
+resource_local_to_scene = true
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.00238664, 0.0199456), 0.0, 0.0, 0, 0, Vector2(0.279236, -1.13509), 0.0, 0.0, 0, 0, Vector2(0.625298, -1.08794), 2.63378, 2.63378, 0, 0, Vector2(0.997613, -0.333636), 1.23459, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_h0bbh"]
+resource_local_to_scene = true
+curve = SubResource("Curve_u4ram")
+
+[sub_resource type="Curve" id="Curve_32u4y"]
+_data = [Vector2(0, 0.210335), 0.0, 13.4041, 0, 0, Vector2(0.114558, 0.982321), 0.0, 0.0, 0, 0, Vector2(0.164678, 0.62874), 0.0, 0.0, 0, 0, Vector2(0.21957, 1), 0.0, 0.0, 0, 0, Vector2(0.26969, 0.534451), 0.0, 0.0, 0, 0, Vector2(0.329356, 1), 0.0, 0.0, 0, 0, Vector2(0.403341, 0.616954), 0.0, 0.0, 0, 0, Vector2(0.441527, 1), 0.0, 0.0, 0, 0, Vector2(0.520286, 0.675884), 0.0, 0.0, 0, 0, Vector2(0.548926, 1), 0.0, 0.0, 0, 0, Vector2(0.615752, 0.699456), 0.0, 0.0, 0, 0, Vector2(0.670644, 1), 0.0, 0.0, 0, 0, Vector2(0.725537, 0.705349), 0.0, 0.0, 0, 0, Vector2(0.78043, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -11.3249, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="CurveTexture" id="CurveTexture_e22d8"]
+curve = SubResource("Curve_32u4y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ixmg"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+direction = Vector3(-0.5, 0.5, 0)
+spread = 13.52
+initial_velocity_min = 500.0
+initial_velocity_max = 700.0
+orbit_velocity_min = 0.479
+orbit_velocity_max = 0.698
+orbit_velocity_curve = SubResource("CurveTexture_h0bbh")
+gravity = Vector3(0, -50, 0)
+scale_min = 0.15
+scale_max = 0.22
+scale_curve = SubResource("CurveTexture_e22d8")
+turbulence_noise_strength = 0.46
+turbulence_noise_scale = 8.62
+turbulence_noise_speed = Vector3(0, 0.5, 0)
+turbulence_noise_speed_random = 1.2
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+
+[sub_resource type="Curve" id="Curve_r8782"]
+resource_local_to_scene = true
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.00238664, 0.0199456), 0.0, 0.0, 0, 0, Vector2(0.343675, -0.522212), 0.0, 0.0, 0, 0, Vector2(0.701671, 0.727108), 0.846576, 0.846576, 0, 0, Vector2(1, 0.0670898), -5.22884, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tibce"]
+resource_local_to_scene = true
+curve = SubResource("Curve_r8782")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4wq27"]
+lifetime_randomness = 0.18
+particle_flag_disable_z = true
+direction = Vector3(1, -0.8, 0)
+spread = 13.52
+initial_velocity_min = 500.0
+initial_velocity_max = 700.0
+orbit_velocity_min = 0.479
+orbit_velocity_max = 0.698
+orbit_velocity_curve = SubResource("CurveTexture_tibce")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.15
+scale_max = 0.22
+scale_curve = SubResource("CurveTexture_pjfog")
+turbulence_noise_strength = 0.46
+turbulence_noise_scale = 8.62
+turbulence_noise_speed = Vector3(0, 0.5, 0)
+turbulence_noise_speed_random = 1.2
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+
+[node name="Regent" type="Node2D"]
+script = ExtResource("1_3dwrg")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_jb1vq")
+multiply_material = SubResource("CanvasItemMaterial_53uu0")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(2, -20)
+scale = Vector2(0.29, 0.29)
+
+[node name="Weapons" type="SpineSlotNode" parent="Visuals"]
+slot_name = "shadow"
+show_behind_parent = true
+position = Vector2(-9.62426, -1.52483)
+scale = Vector2(1, 1)
+
+[node name="WeaponAnim1" type="SpineSprite" parent="Visuals/Weapons"]
+skeleton_data_res = ExtResource("7_howi0")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(-19.3117, -131.808)
+rotation = 0.00574124
+
+[node name="WeaponAnim2" type="SpineSprite" parent="Visuals/Weapons"]
+skeleton_data_res = ExtResource("7_howi0")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+show_behind_parent = true
+position = Vector2(-19.312, -131.808)
+rotation = 0.00523599
+
+[node name="NNecrobinderFlameVfx" type="Node" parent="Visuals/Weapons"]
+script = ExtResource("4_du134")
+metadata/_custom_type_script = "uid://dsq50myoa0fc3"
+
+[node name="Explosion" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(80, -906.667)
+rotation = 0.0408138
+amount = 800
+texture = ExtResource("4_2hmwe")
+lifetime = 2.5
+explosiveness = 1.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_b6rbv")
+
+[node name="SpineArmBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "arm_particle_attach"
+show_behind_parent = true
+position = Vector2(-38.4145, -657.145)
+scale = Vector2(1, 1)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/SpineArmBone"]
+material = ExtResource("shared_additive_mat")
+rotation = 0.01587
+scale = Vector2(0.977, 1)
+skew = 0.000362992
+amount = 80
+texture = ExtResource("4_2hmwe")
+lifetime = 2.0
+randomness = 0.35
+fixed_fps = 60
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_t61rr")
+
+[node name="SpineChestBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "chest_particle_attach"
+show_behind_parent = true
+position = Vector2(61.3185, -654.391)
+scale = Vector2(1, 1)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/SpineChestBone"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(24.117, 28.6381)
+rotation = -0.0113635
+scale = Vector2(0.951848, 0.925811)
+skew = -0.00064826
+amount = 200
+texture = ExtResource("4_2hmwe")
+lifetime = 2.0
+randomness = 0.35
+fixed_fps = 60
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_m5irg")
+
+[node name="ParticlesBack" type="GPUParticles2D" parent="Visuals/SpineChestBone"]
+z_index = -1
+material = ExtResource("shared_additive_mat")
+position = Vector2(-12.5496, 85.3047)
+rotation = -0.0113635
+scale = Vector2(0.951848, 0.925811)
+skew = -0.00064826
+amount = 140
+texture = ExtResource("4_2hmwe")
+lifetime = 1.5
+randomness = 0.35
+fixed_fps = 60
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_f830s")
+
+[node name="SpineLegBoneL" type="SpineBoneNode" parent="Visuals"]
+bone_name = "leg_particle_attach_l"
+show_behind_parent = true
+position = Vector2(221.75, -379.453)
+scale = Vector2(1, 1)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/SpineLegBoneL"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(4.95076, -7.28658)
+amount = 30
+texture = ExtResource("4_2hmwe")
+lifetime = 1.25
+randomness = 0.35
+fixed_fps = 60
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_7ixmg")
+
+[node name="SpineLegBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "leg_particle_attach"
+show_behind_parent = true
+position = Vector2(185.406, -432.452)
+scale = Vector2(1, 1)
+
+[node name="Particles" type="GPUParticles2D" parent="Visuals/SpineLegBone"]
+material = ExtResource("shared_additive_mat")
+amount = 80
+texture = ExtResource("4_2hmwe")
+lifetime = 2.0
+randomness = 0.35
+fixed_fps = 60
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_4wq27")
+
+[node name="NRegentVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_sn882")
+metadata/_custom_type_script = "uid://cr0gibht34x4p"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -115.0
+offset_top = -335.0
+offset_right = 115.0
+mouse_filter = 2
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(24, -414)
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+show_behind_parent = true
+position = Vector2(0, -178)
+scale = Vector2(0.999999, 0.999999)

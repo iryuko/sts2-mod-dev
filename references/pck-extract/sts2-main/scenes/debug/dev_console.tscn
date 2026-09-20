@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://fvbwaaovxb6y"]
+
+[ext_resource type="Script" uid="uid://cdx85rfi4i1r8" path="res://src/Core/Nodes/Debug/NDevConsole.cs" id="1_wriec"]
+[ext_resource type="FontVariation" uid="uid://dviusgklt13ts" path="res://themes/source_code_pro_medium_shared.tres" id="3_5ubb2"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_pe0fa"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_mw0g1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct1al"]
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+border_width_top = 2
+border_color = Color(0, 0.831, 1, 0.8)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yvmb7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5lhkp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yehfi"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 10
+
+[node name="ConsoleScreen" type="Panel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 470.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ct1al")
+script = ExtResource("1_wriec")
+metadata/_edit_lock_ = true
+
+[node name="OutputContainer" type="MarginContainer" parent="ConsoleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="OutputBuffer" type="RichTextLabel" parent="ConsoleScreen/OutputContainer"]
+layout_mode = 2
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = ExtResource("3_5ubb2")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_following = true
+script = ExtResource("3_pe0fa")
+AutoSizeEnabled = false
+MinFontSize = 16
+MaxFontSize = 16
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+metadata/_edit_lock_ = true
+
+[node name="TabBuffer" type="RichTextLabel" parent="ConsoleScreen/OutputContainer"]
+layout_mode = 2
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = ExtResource("3_5ubb2")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+scroll_following = true
+metadata/_edit_lock_ = true
+
+[node name="InputContainer" type="HBoxContainer" parent="ConsoleScreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 430.0
+offset_right = -12.0
+offset_bottom = 470.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+metadata/_edit_lock_ = true
+
+[node name="PromptLabel" type="Label" parent="ConsoleScreen/InputContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0.831, 1, 1)
+theme_override_fonts/font = ExtResource("3_5ubb2")
+theme_override_font_sizes/font_size = 18
+text = "➜"
+vertical_alignment = 1
+script = ExtResource("4_mw0g1")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+metadata/_edit_lock_ = true
+
+[node name="InputBufferContainer" type="Control" parent="ConsoleScreen/InputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InputBuffer" type="LineEdit" parent="ConsoleScreen/InputContainer/InputBufferContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/caret_color = Color(0, 0.831, 1, 1)
+theme_override_fonts/font = ExtResource("3_5ubb2")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yvmb7")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_5lhkp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yehfi")
+keep_editing_on_text_submit = true
+metadata/_edit_lock_ = true
+
+[node name="GhostText" type="Label" parent="ConsoleScreen/InputContainer/InputBufferContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_5ubb2")
+theme_override_font_sizes/font_size = 18
+vertical_alignment = 1
+metadata/_edit_lock_ = true

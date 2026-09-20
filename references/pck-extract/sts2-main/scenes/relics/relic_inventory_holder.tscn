@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://birman3vqcoro"]
+
+[ext_resource type="Script" uid="uid://ctl5qdogaikd" path="res://src/Core/Nodes/Relics/NRelicInventoryHolder.cs" id="1_mnyuh"]
+[ext_resource type="PackedScene" uid="uid://chhto1xfrbjbq" path="res://scenes/relics/relic.tscn" id="2_mnyuh"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_cr011"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_pepqq"]
+
+[node name="RelicInventoryHolder" type="Control"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 68.0
+offset_bottom = 68.0
+pivot_offset = Vector2(34, 34)
+focus_mode = 2
+mouse_filter = 1
+mouse_default_cursor_shape = 16
+script = ExtResource("1_mnyuh")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Relic" parent="." instance=ExtResource("2_mnyuh")]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="AmountLabel" type="Label" parent="Relic"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -36.0
+offset_top = -33.0
+offset_right = -4.0
+offset_bottom = -1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.188235)
+theme_override_colors/font_outline_color = Color(0.15, 0.1409, 0.111, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("4_pepqq")
+theme_override_font_sizes/font_size = 18
+text = "88"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("4_cr011")
+AutoSizeEnabled = false

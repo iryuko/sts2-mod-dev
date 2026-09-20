@@ -1,0 +1,502 @@
+[gd_scene load_steps=30 format=3 uid="uid://b6yu4s7v72oey"]
+
+[ext_resource type="Script" uid="uid://brhk5kdi4lbfk" path="res://src/Core/Nodes/CommonUi/NTopBar.cs" id="1_rt6xy"]
+[ext_resource type="Texture2D" uid="uid://4s166a" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar.tres" id="2_ycwpt"]
+[ext_resource type="Texture2D" uid="uid://ch3nihw" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_char_backdrop.tres" id="3_6ydrq"]
+[ext_resource type="Script" uid="uid://bncpbakm0owo4" path="res://src/Core/Nodes/TopBar/NTopBarPortraitTip.cs" id="4_im08b"]
+[ext_resource type="Script" uid="uid://sy8b6kyeh6s3" path="res://src/Core/Nodes/TopBar/NTopBarPortrait.cs" id="4_wqjad"]
+[ext_resource type="Script" uid="uid://sg144ltxwbnl" path="res://src/Core/Nodes/TopBar/NTopBarHp.cs" id="5_lgbh1"]
+[ext_resource type="Texture2D" uid="uid://b75ih21" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_ascension.tres" id="6_6ydrq"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="8_4e6sq"]
+[ext_resource type="Script" uid="uid://buqq6fvqxysma" path="res://src/Core/Nodes/Potions/NPotionContainer.cs" id="8_elcwb"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="8_kvgh5"]
+[ext_resource type="Script" uid="uid://rig6d4dowdqs" path="res://src/Core/Nodes/TopBar/NTopBarGold.cs" id="9_gebjd"]
+[ext_resource type="Texture2D" uid="uid://bi1dpaj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="10_6ydrq"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="12_u8xn7"]
+[ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="13_6ydrq"]
+[ext_resource type="Script" uid="uid://d26pfmw2yol68" path="res://src/Core/Nodes/TopBar/NTopBarRoomIcon.cs" id="14_xofb3"]
+[ext_resource type="Script" uid="uid://cqy8rmnux6wk3" path="res://src/Core/Nodes/TopBar/NRunTimer.cs" id="17_243u5"]
+[ext_resource type="Script" uid="uid://17rcc48u05uc" path="res://src/Core/Nodes/TopBar/NTopBarFloorIcon.cs" id="18_1x8f6"]
+[ext_resource type="PackedScene" uid="uid://cadil37qdruvq" path="res://scenes/potions/potion_shortcut_button.tscn" id="18_c7seg"]
+[ext_resource type="Texture2D" uid="uid://pr1rqg2t44qx" path="res://images/debug/placeholder_64.png" id="18_qe1rk"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="19_y37i3"]
+[ext_resource type="Script" uid="uid://dnovggmjlp5p1" path="res://src/Core/Nodes/TopBar/NTopBarBossIcon.cs" id="20_qe1rk"]
+[ext_resource type="Texture2D" uid="uid://bxj1tlj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_floor.tres" id="21_l17i6"]
+[ext_resource type="PackedScene" uid="uid://d1axwip20hnuo" path="res://scenes/ui/save_indicator.tscn" id="24_ycwpt"]
+[ext_resource type="PackedScene" uid="uid://cbrdx66bpl8r7" path="res://scenes/ui/top_bar/top_bar_map_button.tscn" id="25_7wbbb"]
+[ext_resource type="PackedScene" uid="uid://dby4dbrrpmjf6" path="res://scenes/ui/top_bar/top_bar_deck_button.tscn" id="27_47mi0"]
+[ext_resource type="PackedScene" uid="uid://bcgpmrcxsglwa" path="res://scenes/ui/top_bar/top_bar_settings_button.tscn" id="27_rexhe"]
+[ext_resource type="Texture2D" uid="uid://bfmmrno" path="res://images/atlases/ui_atlas.sprites/top_bar/timer_icon.tres" id="28_l17i6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe1rk"]
+resource_local_to_scene = true
+shader = ExtResource("12_u8xn7")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a730o"]
+shader = ExtResource("12_u8xn7")
+shader_parameter/h = 0.463
+shader_parameter/s = 3.918
+shader_parameter/v = 2.0
+
+[node name="TopBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rt6xy")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="BgImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.495833
+anchor_top = -0.000925926
+anchor_right = 0.495833
+anchor_bottom = -0.000925926
+offset_left = -1280.0
+offset_right = 1280.0
+offset_bottom = 100.0
+grow_horizontal = 2
+scale = Vector2(1.01, 1.01)
+texture = ExtResource("2_ycwpt")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TrailContainer" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+
+[node name="LeftAlignedStuff" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 1288.0
+offset_bottom = 80.0
+theme_override_constants/separation = 24
+
+[node name="PortraitContainer" type="MarginContainer" parent="LeftAlignedStuff"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TopBarPortraitTip" type="TextureRect" parent="LeftAlignedStuff/PortraitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 0
+texture = ExtResource("3_6ydrq")
+expand_mode = 1
+script = ExtResource("4_im08b")
+
+[node name="TopBarPortrait" type="Control" parent="LeftAlignedStuff/PortraitContainer/TopBarPortraitTip"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -27.0
+offset_right = 27.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_wqjad")
+
+[node name="AscensionIcon" type="TextureRect" parent="LeftAlignedStuff/PortraitContainer/TopBarPortraitTip"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_qe1rk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 43.0
+offset_top = 28.0
+offset_right = 13.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6ydrq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AscensionLabel" type="Label" parent="LeftAlignedStuff/PortraitContainer/TopBarPortraitTip/AscensionIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -3.0
+offset_right = -11.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.53, 0.16059, 0.0954, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("8_kvgh5")
+theme_override_font_sizes/font_size = 20
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+MinFontSize = 12
+MaxFontSize = 20
+
+[node name="TopBarHp" type="HBoxContainer" parent="LeftAlignedStuff"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+theme_override_constants/separation = 6
+script = ExtResource("5_lgbh1")
+
+[node name="HpIcon" type="TextureRect" parent="LeftAlignedStuff/TopBarHp"]
+custom_minimum_size = Vector2(53, 80)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("10_6ydrq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HpLabel" type="Label" parent="LeftAlignedStuff/TopBarHp"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.333333, 0.333333, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("19_y37i3")
+theme_override_font_sizes/font_size = 32
+text = "72/72"
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+AutoSizeEnabled = false
+
+[node name="TopBarGold" type="HBoxContainer" parent="LeftAlignedStuff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+focus_mode = 2
+script = ExtResource("9_gebjd")
+
+[node name="GoldIcon" type="TextureRect" parent="LeftAlignedStuff/TopBarGold"]
+custom_minimum_size = Vector2(54, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("13_6ydrq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GoldLabel" type="Label" parent="LeftAlignedStuff/TopBarGold"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("19_y37i3")
+theme_override_font_sizes/font_size = 32
+text = "8888"
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+AutoSizeEnabled = false
+
+[node name="PotionMarginifier" type="MarginContainer" parent="LeftAlignedStuff"]
+layout_mode = 2
+
+[node name="PotionContainer" type="MarginContainer" parent="LeftAlignedStuff/PotionMarginifier"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 8
+script = ExtResource("8_elcwb")
+
+[node name="PotionBg" type="NinePatchRect" parent="LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+layout_mode = 2
+texture = ExtResource("3_6ydrq")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="PotionErrorBg" type="NinePatchRect" parent="LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.552941)
+material = SubResource("ShaderMaterial_a730o")
+layout_mode = 2
+texture = ExtResource("3_6ydrq")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="MarginContainer" type="MarginContainer" parent="LeftAlignedStuff/PotionMarginifier/PotionContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 6
+
+[node name="PotionHolders" type="HBoxContainer" parent="LeftAlignedStuff/PotionMarginifier/PotionContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="PotionShortcutButton" parent="LeftAlignedStuff/PotionMarginifier/PotionContainer" instance=ExtResource("18_c7seg")]
+layout_mode = 2
+
+[node name="RoomIcons" type="HBoxContainer" parent="LeftAlignedStuff"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="RoomIconResizer" type="MarginContainer" parent="LeftAlignedStuff/RoomIcons"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = 3
+
+[node name="RoomIcon" type="Control" parent="LeftAlignedStuff/RoomIcons/RoomIconResizer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_mode = 2
+script = ExtResource("14_xofb3")
+
+[node name="Icon" type="TextureRect" parent="LeftAlignedStuff/RoomIcons/RoomIconResizer/RoomIcon"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.0
+offset_top = -44.0
+offset_right = 22.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("18_qe1rk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="LeftAlignedStuff/RoomIcons/RoomIconResizer/RoomIcon/Icon"]
+modulate = Color(0, 0, 0, 0.176471)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FloorIcon" type="HBoxContainer" parent="LeftAlignedStuff/RoomIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+theme_override_constants/separation = 6
+script = ExtResource("18_1x8f6")
+
+[node name="FloorIconPositioner" type="MarginContainer" parent="LeftAlignedStuff/RoomIcons/FloorIcon"]
+layout_mode = 2
+theme_override_constants/margin_left = -9
+theme_override_constants/margin_top = -3
+theme_override_constants/margin_right = -7
+
+[node name="FloorInfoIcon" type="TextureRect" parent="LeftAlignedStuff/RoomIcons/FloorIcon/FloorIconPositioner"]
+custom_minimum_size = Vector2(60, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("21_l17i6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FloorNumLabel" type="Label" parent="LeftAlignedStuff/RoomIcons/FloorIcon"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.772549, 0.854902, 0.807843, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0985053, 0.159454, 0.188565, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("19_y37i3")
+theme_override_font_sizes/font_size = 32
+text = "99"
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+AutoSizeEnabled = false
+
+[node name="BossIcon" type="MarginContainer" parent="LeftAlignedStuff/RoomIcons"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = -4
+theme_override_constants/margin_right = 4
+script = ExtResource("20_qe1rk")
+
+[node name="Icon" type="TextureRect" parent="LeftAlignedStuff/RoomIcons/BossIcon"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("18_qe1rk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="LeftAlignedStuff/RoomIcons/BossIcon/Icon"]
+modulate = Color(0, 0, 0, 0.176471)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Modifiers" type="HBoxContainer" parent="LeftAlignedStuff"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="RightAlignedStuff" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -492.0
+offset_right = -16.0
+offset_bottom = 80.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="SaveIndicator" parent="RightAlignedStuff" instance=ExtResource("24_ycwpt")]
+layout_mode = 2
+
+[node name="Padding" type="Control" parent="RightAlignedStuff"]
+custom_minimum_size = Vector2(36, 0)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TimerContainer" type="HBoxContainer" parent="RightAlignedStuff"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 4
+script = ExtResource("17_243u5")
+
+[node name="TimerIcon" type="TextureRect" parent="RightAlignedStuff/TimerContainer"]
+custom_minimum_size = Vector2(40, 80)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("28_l17i6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimerLabel" type="Label" parent="RightAlignedStuff/TimerContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("19_y37i3")
+theme_override_font_sizes/font_size = 32
+text = "00:00"
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+AutoSizeEnabled = false
+
+[node name="Map" parent="RightAlignedStuff" instance=ExtResource("25_7wbbb")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DeckContainer" type="MarginContainer" parent="RightAlignedStuff"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+mouse_filter = 0
+
+[node name="Deck" parent="RightAlignedStuff/DeckContainer" instance=ExtResource("27_47mi0")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PauseButton" parent="RightAlignedStuff" instance=ExtResource("27_rexhe")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GoldPopup" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 59.7)
+layout_mode = 0
+offset_left = 212.0
+offset_top = 26.0
+offset_right = 412.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("19_y37i3")
+theme_override_font_sizes/font_size = 32
+text = "+100"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("8_4e6sq")
+AutoSizeEnabled = false

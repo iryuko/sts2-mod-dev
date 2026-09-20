@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2g6uijp3w6c7"]
+
+[ext_resource type="Script" uid="uid://catq0mcmnlba" path="res://src/Core/Nodes/Vfx/NCardTransformVfx.cs" id="1_1v82h"]
+[ext_resource type="PackedScene" uid="uid://ewa1gwt3sc0o" path="res://scenes/cards/card.tscn" id="2_1bxhw"]
+[ext_resource type="Shader" uid="uid://bikvsfwlbp43n" path="res://shaders/card_ripple.gdshader" id="3_ku1vn"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="4_wrvpw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b1qly"]
+resource_local_to_scene = true
+shader = ExtResource("3_ku1vn")
+shader_parameter/ease = 0.005
+shader_parameter/modulo_width = 0.02
+shader_parameter/width = 0.0
+shader_parameter/ripple_speed = 0.03
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2nwh"]
+resource_local_to_scene = true
+shader = ExtResource("4_wrvpw")
+shader_parameter/h = 0.55
+shader_parameter/s = 1.5
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0k8on"]
+resource_local_to_scene = true
+shader = ExtResource("4_wrvpw")
+shader_parameter/h = 0.515
+shader_parameter/s = 1.727
+shader_parameter/v = 0.9
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t173l"]
+viewport_path = NodePath("SubViewport")
+
+[node name="CardIntent" type="Node2D"]
+script = ExtResource("1_1v82h")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_2d = 1
+gui_disable_input = true
+sdf_scale = 0
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Card" parent="SubViewport" instance=ExtResource("2_1bxhw")]
+unique_name_in_owner = true
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.5, 0.5)
+
+[node name="Highlight" parent="SubViewport/Card/CardContainer" index="3"]
+material = SubResource("ShaderMaterial_b1qly")
+
+[node name="Frame" parent="SubViewport/Card/CardContainer" index="5"]
+material = SubResource("ShaderMaterial_e2nwh")
+
+[node name="PortraitBorder" parent="SubViewport/Card/CardContainer" index="8"]
+material = SubResource("ShaderMaterial_0k8on")
+
+[node name="TitleBanner" parent="SubViewport/Card/CardContainer" index="9"]
+material = SubResource("ShaderMaterial_0k8on")
+
+[node name="TypePlaque_TODO_NINEPATCH" parent="SubViewport/Card/CardContainer" index="10"]
+material = SubResource("ShaderMaterial_0k8on")
+
+[node name="RenderTexture" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.490196)
+position = Vector2(0, -4)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("ViewportTexture_t173l")
+metadata/_edit_lock_ = true
+
+[editable path="SubViewport/Card"]

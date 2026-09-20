@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bc7twemk5iouv"]
+
+[ext_resource type="Shader" uid="uid://d1yk55ycs74vs" path="res://shaders/vfx/goopy_impact/vfx_goopy_impact_bits_shader.gdshader" id="1_wfvjf"]
+
+[sub_resource type="Curve" id="Curve_wfvjf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pvorg"]
+curve = SubResource("Curve_wfvjf")
+
+[sub_resource type="Gradient" id="Gradient_82vii"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3529412, 0.7)
+colors = PackedColorArray(0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1.8247963, 1.8247963, 1.8247963, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nyboi"]
+gradient = SubResource("Gradient_82vii")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_wfvjf")
+shader_parameter/lut = SubResource("GradientTexture1D_nyboi")
+shader_parameter/frame_count = 4.0
+shader_parameter/flipbook_size = Vector2(2, 2)
+shader_parameter/distortion_panning_speed = Vector2(0.2, 0.2)
+shader_parameter/distortion_strength = 0.075
+shader_parameter/erosion_curve = SubResource("CurveTexture_pvorg")
+shader_parameter/erosion_offset = 0.05

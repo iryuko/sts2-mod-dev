@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5ian6nu8cjb"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_a8dwl"]
+[ext_resource type="Texture2D" uid="uid://c4buvyse5bhjl" path="res://images/vfx/monsters/fuzzy_wurm_crawler/fuzzy_wurm_crawler_acid_part.png" id="3_nwbo7"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cwgncaf2jt588" path="res://animations/monsters/fuzzy_wurm_crawler/fuzzy_wurm_crawler_skel_data.tres" id="4_4vhfl"]
+[ext_resource type="Script" uid="uid://cf7justaghbw2" path="res://src/Core/Nodes/Vfx/NFuzzyWurmCrawlerSpitTrailVfx.cs" id="4_v3aj5"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wesy4"]
+
+[sub_resource type="Curve" id="Curve_rpu28"]
+_data = [Vector2(0, 0.941741), 0.0, 0.423699, 0, 0, Vector2(0.303571, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0245739), -4.08913, 0.0, 0, 0]
+point_count = 3
+
+[node name="FuzzyWurmCrawler" type="Node2D"]
+script = ExtResource("1_a8dwl")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("4_4vhfl")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(2, -28)
+scale = Vector2(0.35, 0.35)
+
+[node name="SpitParticlesBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "particle_attach"
+show_behind_parent = true
+position = Vector2(-156.927, -242.638)
+scale = Vector2(1, 1)
+
+[node name="TrailParticles" type="CPUParticles2D" parent="Visuals/SpitParticlesBone"]
+material = SubResource("CanvasItemMaterial_wesy4")
+amount = 100
+texture = ExtResource("3_nwbo7")
+lifetime = 0.4
+randomness = 1.0
+lifetime_randomness = 1.0
+fract_delta = false
+emission_shape = 3
+emission_rect_extents = Vector2(300, 40)
+spread = 36.99
+gravity = Vector2(0, 700)
+initial_velocity_min = 100.0
+initial_velocity_max = 500.0
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_rpu28")
+color = Color(0.109804, 0.552941, 0.6, 0.443137)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "aim_adjust"
+show_behind_parent = true
+position = Vector2(-14.2856, 105.714)
+
+[node name="NFuzzyWurmCrawlerSpitTrailVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_v3aj5")
+metadata/_custom_type_script = "uid://cf7justaghbw2"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -134.0
+offset_top = -166.0
+offset_right = 134.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -72)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -200)

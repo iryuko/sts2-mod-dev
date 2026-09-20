@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlo4ynkvta3jd"]
+
+[ext_resource type="Texture2D" uid="uid://dl6h0qaccp84k" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_01.png" id="1_h40d6"]
+[ext_resource type="Script" uid="uid://dfliy3bq4j7re" path="res://src/Core/Nodes/Vfx/Utilities/NSpriteAnimator.cs" id="1_h71hg"]
+[ext_resource type="Texture2D" uid="uid://c375qm46lcbvg" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_00.png" id="2_87cgl"]
+[ext_resource type="Texture2D" uid="uid://c7ct8lsjvmu0y" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_02.png" id="3_ms47n"]
+[ext_resource type="Texture2D" uid="uid://c443xj1rqssmj" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_03.png" id="4_wapxv"]
+
+[node name="VfxAttackSlash" type="Sprite2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_h71hg")
+_frames = Array[Texture2D]([ExtResource("2_87cgl"), ExtResource("1_h40d6"), ExtResource("3_ms47n"), ExtResource("4_wapxv")])
+_randomizeRotation = true
+_rotationRange = Vector2(0, 25)

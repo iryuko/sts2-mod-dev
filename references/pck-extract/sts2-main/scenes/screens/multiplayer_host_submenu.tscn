@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://rp1781ge1w2b"]
+
+[ext_resource type="Script" uid="uid://cqv5egaiceux4" path="res://src/Core/Nodes/Screens/MainMenu/NMultiplayerHostSubmenu.cs" id="1_giku3"]
+[ext_resource type="PackedScene" uid="uid://3aikvufhmv6o" path="res://scenes/ui/submenu_button.tscn" id="2_buk32"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_3fon1"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_4xnqx"]
+[ext_resource type="Texture2D" uid="uid://be5ka206p5qa1" path="res://images/ui/main_menu/submenu_daily.png" id="4_3fon1"]
+[ext_resource type="PackedScene" uid="uid://cy0r6ow54kklb" path="res://scenes/screens/main_menu/loading_overlay.tscn" id="4_buk32"]
+[ext_resource type="Texture2D" uid="uid://00e2a88qdfq7" path="res://images/ui/main_menu/submenu_custom.png" id="5_2dwag"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2dwag"]
+resource_local_to_scene = true
+shader = ExtResource("3_3fon1")
+shader_parameter/h = 0.0
+shader_parameter/s = 0.8
+shader_parameter/v = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3y5v7"]
+resource_local_to_scene = true
+shader = ExtResource("3_3fon1")
+shader_parameter/h = 0.4800000228
+shader_parameter/s = 0.8
+shader_parameter/v = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw6ae"]
+resource_local_to_scene = true
+shader = ExtResource("3_3fon1")
+shader_parameter/h = 0.930000044175
+shader_parameter/s = 1.200000057
+shader_parameter/v = 0.65
+
+[node name="MultiplayerHostSubmenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_giku3")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="StandardButton" parent="." instance=ExtResource("2_buk32")]
+layout_mode = 1
+offset_left = -565.0
+offset_right = -235.0
+
+[node name="BgPanel" parent="StandardButton" index="0"]
+material = SubResource("ShaderMaterial_2dwag")
+
+[node name="DailyButton" parent="." instance=ExtResource("2_buk32")]
+layout_mode = 1
+offset_left = -165.0
+offset_right = 165.0
+
+[node name="BgPanel" parent="DailyButton" index="0"]
+material = SubResource("ShaderMaterial_3y5v7")
+
+[node name="Icon" parent="DailyButton" index="1"]
+texture = ExtResource("4_3fon1")
+
+[node name="Title" parent="DailyButton" index="3"]
+text = "Daaaily"
+
+[node name="CustomRunButton" parent="." instance=ExtResource("2_buk32")]
+layout_mode = 1
+offset_left = 235.0
+offset_right = 565.0
+
+[node name="BgPanel" parent="CustomRunButton" index="0"]
+material = SubResource("ShaderMaterial_yw6ae")
+
+[node name="Icon" parent="CustomRunButton" index="1"]
+texture = ExtResource("5_2dwag")
+
+[node name="Title" parent="CustomRunButton" index="3"]
+text = "Cuuustom"
+
+[node name="BackButton" parent="." instance=ExtResource("3_4xnqx")]
+layout_mode = 1
+
+[node name="LoadingOverlay" parent="." instance=ExtResource("4_buk32")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[editable path="StandardButton"]
+[editable path="DailyButton"]
+[editable path="CustomRunButton"]

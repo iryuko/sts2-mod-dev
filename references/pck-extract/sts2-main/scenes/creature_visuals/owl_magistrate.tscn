@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://doctxhih4avrc"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_tocil"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://cir3u52dj1i4k" path="res://animations/monsters/owl_magistrate/owl_magistrate_skel_data.tres" id="2_pjdbo"]
+
+[node name="OwlMagistrate" type="Node2D"]
+script = ExtResource("1_tocil")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(12, -49)
+scale = Vector2(0.13, 0.13)
+skeleton_data_res = ExtResource("2_pjdbo")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -260.0
+offset_top = -368.0
+offset_right = 244.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-10, -214)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -404)
+
+[node name="IdleBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 504.0
+offset_bottom = 368.0
+
+[node name="Bounds" type="Control" parent="IdleBounds"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -260.0
+offset_top = -368.0
+offset_right = 244.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="IdleBounds"]
+position = Vector2(-10, -214)
+
+[node name="IntentPos" type="Marker2D" parent="IdleBounds"]
+position = Vector2(0, -404)
+
+[node name="FlyingBounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 538.0
+offset_bottom = 435.0
+
+[node name="Bounds" type="Control" parent="FlyingBounds"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -196.0
+offset_top = -435.0
+offset_right = 342.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="FlyingBounds"]
+position = Vector2(0, -308)
+
+[node name="IntentPos" type="Marker2D" parent="FlyingBounds"]
+position = Vector2(0, -468)

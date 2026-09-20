@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://wv64ujsu3e4w"]
+
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="1_shared"]
+
+[resource]
+base_font = ExtResource("1_shared")

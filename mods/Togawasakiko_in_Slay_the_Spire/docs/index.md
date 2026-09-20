@@ -1,82 +1,67 @@
-# 文档索引
+# Togawasakiko 文档索引
 
-日期：2026-04-04
+校订日期：2026-09-06
 
-## 当前用途
+本目录同时保存现行事实、设计基线、专项研究和历史过程。文件中的日期代表记录形成时间；判断当前实现时，不应把早期设计稿中的“当前”直接当作今天的事实。
 
-本目录用于沉淀 `Togawasakiko_in_Slay_the_Spire` 的长期设计与资源资料。
+## 接班必读
 
-当前重点覆盖：
+1. [当前状态](current-status.md)：版本、卡池、事件、jukebox、资产和风险的现行事实源。
+2. [开发时间线](development-timeline.md)：从 2026-03-24 到当前的阶段演进。
+3. [当前资产状态](asset-status.md)：源资产、runtime 资产和兼容方案的现行盘点。
+4. [未决问题](open-questions.md)：仍需设计决定或实机证据的问题。
+5. [项目级当前状态](../../../docs/current-status.md)：整个工作区的版本与发布基线。
 
-- 角色机制冻结边界
-- 压力体系与原创 debuff
-- starter relic 与起始牌
-- 正常卡池规划
-- 原版角色资产盘点
-- 本角色资产总表
-- 资源目录与命名落位
-- song 子标签规则与登记位
-- 丰川定治先古之民事件草案
-- 资源规格与素材提交流程
-- 音频资产库与轨道登记
-- 卡牌实现表格字段规范
-- 首批 song / 压力联动卡牌冻结规格
+## 机制与卡牌
 
-## 建议阅读顺序
+- [角色机制总览](mechanics-overview.md)：角色定位与机制边界；尾部 T2 状态是历史阶段总结。
+- [压力系统](pressure-system.md)：压力和 4 张压力衍生牌的规则。
+- [初始 Relic 与起始牌](starter-kit.md)：当前 starter 数值与起始牌组。
+- [原创状态与 Debuff](original-statuses-and-debuffs.md)：压力、人格解离、自闭和自卑的分层。
+- [卡池结构规划](cardpool-structure.md)：2026-03-24 的 50 张奖励卡扩展目标，不是当前实现统计。
+- [Song 子集登记](song-subset-registry.md)：song 标签和登记规则。
+- [卡牌实现表格规范](card-implementation-table-spec.md)：卡牌规格交付格式。
+- [命名与资源约定](naming-and-resource-conventions.md)：内部名、本地化和文件命名规则。
 
-1. `mechanics-overview.md`
-2. `pressure-system.md`
-3. `starter-kit.md`
-4. `original-statuses-and-debuffs.md`
-5. `cardpool-structure.md`
-6. `original-character-asset-audit.md`
-7. `asset-master-list.md`
-8. `asset-checklist.md`
-9. `resource-specs-and-submission-workflow.md`
-10. `resource-layout.md`
-11. `naming-and-resource-conventions.md`
-12. `song-subset-registry.md`
-13. `ancient-togawa-head-design-note.md`
-14. `card-batch-01-song-and-pressure.md`
-15. `card-implementation-table-spec.md`
-16. `audio-asset-library.md`
-17. `audio-track-registry.md`
-18. `t3-asset-handoff.md`
-19. `t4-implementation-status.md`
-20. `t4-asset-integration-status.md`
-21. `t4-bugfix-round-2026-03-27.md`
-22. `t4-lessons-and-guardrails.md`
-23. `t4-card-batch-02-workdraft-2026-03-29.md`
-24. `question-room-shadow-event-asset-spec.md`
-25. `question-room-shadow-event-design.md`
-25. `open-questions.md`
+## 事件与 Ancient
 
-## 文档分工
+- [丰川定治设计记录](ancient-togawa-head-design-note.md)：Teiji 的设计来源；实现状态以当前状态文档为准。
+- [无人问津的钢琴设计](question-room-shadow-event-design.md)：事件页面与奖励设计。
+- [无人问津的钢琴资产规格](question-room-shadow-event-asset-spec.md)：事件图片、音乐和 Shadow portrait 规格。
+- [上下文状态审计](context-state-audit-2026-07-23.md)：同进程 SL 卡死根因和同类风险。
 
-- `mechanics-overview.md`：角色总定位、整体设计边界与 T2 收尾状态。
-- `pressure-system.md`：压力与当前冻结工作版 `4` 张压力衍生牌说明。
-- `starter-kit.md`：starter relic、起始牌组与 `Basic` 子集说明。
-- `original-statuses-and-debuffs.md`：压力与原创 debuff 的分层记录。
-- `cardpool-structure.md`：`50` 张正常卡池的品质分布与原版对照。
-- `original-character-asset-audit.md`：原版角色固有资产与系统公用资源盘点。
-- `asset-master-list.md`：本角色完整资产总表。
-- `asset-checklist.md`：首版执行层清单，区分优先正式制作与可占位资产。
-- `resource-specs-and-submission-workflow.md`：资源规格、提交目录与后续整理工作流。
-- `resource-layout.md`：资源目录职责与长期落位规则。
-- `naming-and-resource-conventions.md`：命名主规则、资源文件名与本地化主轴。
-- `song-subset-registry.md`：song 子标签的登记位与逻辑规则。
-- `ancient-togawa-head-design-note.md`：丰川定治先古之民的触发限制、副标题工作版与对白草案。
-- `card-batch-01-song-and-pressure.md`：首批 `8` 张 song / 压力联动牌的冻结实现规格。
-- `card-implementation-table-spec.md`：后续交付卡牌实现表格时应使用的字段、列顺序与填写规范。
-- `audio-asset-library.md`：音频资产的来稿区、正式库存与 runtime staging 结构。
-- `audio-track-registry.md`：歌曲牌、角色选人音效与点歌系统所需 `track_id / cue_id` 登记位。
-- `t3-asset-handoff.md`：T2 收尾后的 T3 交接摘要。
-- `t4-implementation-status.md`：T4 当前实现进度、功能接入范围与已知风险。
-- `t4-asset-integration-status.md`：面向 T3 的“已接入 / 占位 / 待补交”资源状态表。
-- `t4-bugfix-round-2026-03-27.md`：本轮 bug 定位、修复状态与复测清单。
-- `t4-lessons-and-guardrails.md`：T4 已踩实的经验、接线护栏与回归检查清单，供后续线程直接复用。
-- `t4-card-batch-02-workdraft-2026-03-29.md`：2026-03-29 新增 `8` 张歌曲牌工作稿、命名修正与实现口径备注。
-- `question-room-shadow-event-asset-spec.md`：普通问号房 `Shadow` 事件的资产需求、正式目录和来稿区建议。
-- `question-room-shadow-event-design.md`：普通问号房 `无人问津的钢琴` 事件的页面流程、数值、主图切换和音乐接口。
-- `open-questions.md`：当前未冻结设计项。
-- `work-report-2026-03-23.md`：截至 `2026-03-24` 的工作报告与冻结状态记录。
+## 资产与音频
+
+- [资产状态](asset-status.md)：资产是否存在、是否进入 runtime 的唯一现行清单。
+- [五张 Bridge 卡图安装审计](../../../docs/audits/bridge-card-art-install-2026-09-06.md)：来稿映射、固定路径、PCK 与安装哈希证据。
+- [资源目录](resource-layout.md)：目录职责和长期落位规范。
+- [资源规格与提交流程](resource-specs-and-submission-workflow.md)：素材尺寸、格式与提交流程。
+- [原版角色资产审计](original-character-asset-audit.md)：原版资源结构参考。
+- [音频资产库](audio-asset-library.md)：音频目录和生命周期规范。
+- [音频轨道登记](audio-track-registry.md)：23 首 jukebox 曲目及 cue 登记。
+
+## 战斗立绘与 Spine
+
+- [Spine 资产接口](combat-spine-asset-spec.md)：原版 runtime 契约。
+- [原版攻击动画审计](combat-spine-original-attack-audit.md)：原版动作和附件参考。
+- [动作责任分类](combat-spine-motion-classification.md)：主动、次级、被动和 overlay 分类。
+- [重绘设计简报](combat-spine-redesign-brief.md)：美术与拆件目标。
+- [分层拆分方案](combat-spine-layer-split-plan.md)：slot、bone 和遮挡规则。
+- [蓝图分块方案](combat-spine-blueprint-block-plan.md)：主体、头发和左臂的生产分块。
+- [生产批次计划](combat-spine-production-batch-plan.md)：分批制作与验收。
+
+本组文件是历史研究依据和生产细则。新 Spine 正在独立制作，其当前工作稿和资产不纳入本轮提交，完成后再单独更新。
+
+`incoming_assets/**/README.md` 是与具体来稿同目录保存的生产记录，不是角色状态源。旧源包允许保留，但必须服从本索引的优先级。
+
+## 兼容性与护栏
+
+- [T4 经验与护栏](t4-lessons-and-guardrails.md)：原版优先、资源接线和回归经验。
+- [Windows 发布问题调查](win-release-bug-investigation-2026-06-24.md)：Win 卡牌卡中间与换房停歌的证据清单。
+
+## 历史归档
+
+- [角色阶段日志说明](archive/README.md)
+- `archive/phase-logs/`：T3/T4/T5 过程日志、旧卡牌规格、旧 bug 计划、旧资产清单和版本审计。
+
+归档文件用于回答“当时为什么这么做”，不能覆盖当前源码、[当前状态](current-status.md)或[资产状态](asset-status.md)。

@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://b3r0mmgnjkmfi"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://igxxfwk8ckta" path="res://animations/monsters/the_insatiable/the_insatiable.atlas" id="1_b75bs"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dbyu0fdcaqiqp" path="res://animations/monsters/the_insatiable/the_insatiable.skel" id="2_dktr6"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_hv36o"]
+from = "idle_loop"
+to = "die"
+mix = 0.08
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_tdacm"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lfwbl"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_w53ic"]
+from = "attack_bite"
+to = "attack_bite"
+
+[resource]
+atlas_res = ExtResource("1_b75bs")
+skeleton_file_res = ExtResource("2_dktr6")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_hv36o"), SubResource("SpineAnimationMix_tdacm"), SubResource("SpineAnimationMix_lfwbl"), SubResource("SpineAnimationMix_w53ic")]

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dksu61j1holvv"]
+
+[ext_resource type="Shader" uid="uid://c562dj03w4y0u" path="res://shaders/vfx/distortion/vfx_screen_distortion_outward_shader.gdshader" id="1_ejb5m"]
+
+[resource]
+shader = ExtResource("1_ejb5m")
+shader_parameter/distortion_base_intensity = 0.04

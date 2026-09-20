@@ -1,0 +1,413 @@
+[gd_scene load_steps=20 format=3 uid="uid://8qe726oh2cuq"]
+
+[ext_resource type="Texture2D" uid="uid://dkl8hnhyro3ob" path="res://images/ui/reward_screen/reward_panel.png" id="1_3vnnq"]
+[ext_resource type="Script" uid="uid://bvb1gfmkvh0jn" path="res://src/Core/Nodes/Screens/InspectScreens/NInspectRelicScreen.cs" id="1_27p38"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_kg3au"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="2_ppkpc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_wi6bh"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_o3ct2"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_yprpd"]
+[ext_resource type="Texture2D" uid="uid://f7yng0glmm0s" path="res://images/packed/inspect_relic_screen/relic_inspect_frame.png" id="6_ppkpc"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="7_ikfqb"]
+[ext_resource type="Texture2D" uid="uid://dg21w1q37pjaq" path="res://images/ui/noise_mask_for_lines.tres" id="7_nqbb3"]
+[ext_resource type="Script" uid="uid://c0ukastwa6q7q" path="res://src/Core/Nodes/CommonUi/NGoldArrowButton.cs" id="9_th5qa"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="10_7vhfp"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="11_gvhi8"]
+[ext_resource type="Texture2D" uid="uid://c7kumcmbdvuji" path="res://images/packed/common_ui/settings_tiny_right_arrow.png" id="12_nqbb3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_27p38"]
+resource_local_to_scene = true
+shader = ExtResource("11_gvhi8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="Gradient" id="Gradient_0wn0c"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x7afc"]
+gradient = SubResource("Gradient_0wn0c")
+height = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gvhi8"]
+shader = ExtResource("11_gvhi8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ppkpc"]
+shader = ExtResource("11_gvhi8")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="InspectRelicScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_27p38")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="HoverTipRect" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -356.0
+offset_top = -385.0
+offset_right = 350.0
+offset_bottom = 451.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Backstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(960, 540)
+script = ExtResource("2_ppkpc")
+
+[node name="Popup" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(864, 864)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -432.0
+offset_top = -400.0
+offset_right = 432.0
+offset_bottom = 464.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Bg" type="TextureRect" parent="Popup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_3vnnq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RelicName" type="Label" parent="Popup"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -385.0
+offset_top = -392.0
+offset_right = 385.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_kg3au")
+theme_override_font_sizes/font_size = 36
+text = "Stone Humidifer"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_wi6bh")
+MinFontSize = 24
+MaxFontSize = 36
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Rarity" type="Label" parent="Popup"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -330.0
+offset_right = 221.0
+offset_bottom = -193.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_o3ct2")
+theme_override_font_sizes/font_size = 24
+text = "Common Relic"
+horizontal_alignment = 1
+script = ExtResource("3_wi6bh")
+MinFontSize = 18
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="RelicFrame" type="Control" parent="Popup"]
+custom_minimum_size = Vector2(304, 304)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -265.0
+offset_right = 152.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FrameBg" type="TextureRect" parent="Popup/RelicFrame"]
+modulate = Color(0.0812, 0.28, 0.246867, 0.501961)
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_3vnnq")
+expand_mode = 1
+
+[node name="RelicImage" type="TextureRect" parent="Popup/RelicFrame"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 96.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Frame" type="TextureRect" parent="Popup/RelicFrame"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_27p38")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_ppkpc")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -261.0
+offset_top = 83.0
+offset_right = 261.0
+offset_bottom = 371.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RelicDescription" type="RichTextLabel" parent="Popup/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("5_o3ct2")
+theme_override_fonts/bold_font = ExtResource("2_kg3au")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "Whenever you defeat an [gold]Elite[/gold], the other [gold]Elites[/gold] in the act will gain [blue]3[/blue] [gold]Strength[/gold] at the start of combat."
+fit_content = true
+scroll_active = false
+script = ExtResource("5_yprpd")
+AutoSizeEnabled = false
+MinFontSize = 18
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Spacer" type="Control" parent="Popup/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="NoiseMask" type="TextureRect" parent="Popup/VBoxContainer/Spacer"]
+clip_children = 1
+clip_contents = true
+custom_minimum_size = Vector2(256, 3)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -2.0
+offset_right = 128.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_nqbb3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Gradient" type="TextureRect" parent="Popup/VBoxContainer/Spacer/NoiseMask"]
+modulate = Color(1, 0.965167, 0.89, 0.501961)
+custom_minimum_size = Vector2(256, 3)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_x7afc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 18
+
+[node name="FlavorText" type="RichTextLabel" parent="Popup/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(520, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.965167, 0.89, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("7_ikfqb")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "[center]It's made of stone and it's great at  humidifying. Really helps during dry months.[/center]"
+fit_content = true
+scroll_active = false
+script = ExtResource("5_yprpd")
+AutoSizeEnabled = false
+MinFontSize = 18
+MaxFontSize = 22
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="LeftArrow" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -488.0
+offset_top = -64.0
+offset_right = -360.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("9_th5qa")
+
+[node name="TextureRect" type="TextureRect" parent="LeftArrow"]
+material = SubResource("ShaderMaterial_gvhi8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("10_7vhfp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 360.0
+offset_top = -64.0
+offset_right = 488.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("9_th5qa")
+
+[node name="TextureRect" type="TextureRect" parent="RightArrow"]
+material = SubResource("ShaderMaterial_ppkpc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("12_nqbb3")
+expand_mode = 1
+stretch_mode = 5

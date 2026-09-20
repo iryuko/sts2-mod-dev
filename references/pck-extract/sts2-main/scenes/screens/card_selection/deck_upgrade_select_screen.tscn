@@ -1,0 +1,235 @@
+[gd_scene load_steps=16 format=3 uid="uid://du7iig3tueg8k"]
+
+[ext_resource type="Script" uid="uid://c52avyhn077ov" path="res://src/Core/Nodes/Screens/CardSelection/NDeckUpgradeSelectScreen.cs" id="1_nhg6v"]
+[ext_resource type="PackedScene" uid="uid://cso1enqajc0tc" path="res://scenes/cards/card_grid.tscn" id="2_8mtaf"]
+[ext_resource type="PackedScene" uid="uid://wjt3nn5ts5o3" path="res://scenes/cards/upgrade_preview.tscn" id="3_b1iyb"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="3_mpbui"]
+[ext_resource type="Script" uid="uid://h45v44q8fnkx" path="res://src/Core/Nodes/CommonUi/NTickbox.cs" id="5_fn10f"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="5_jpiyi"]
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="5_txkyp"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_2jwa2"]
+[ext_resource type="PackedScene" uid="uid://rxgwkwxf1dsr" path="res://scenes/combat/peek_button.tscn" id="6_8otl7"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="7_6oosl"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="8_pi2l3"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="12_f8hb1"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="13_ppnbn"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="14_cdb0a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tct5e"]
+resource_local_to_scene = true
+shader = ExtResource("6_2jwa2")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="DeckUpgradeSelectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nhg6v")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CardGrid" parent="." instance=ExtResource("2_8mtaf")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_top = 80.0
+
+[node name="Close" parent="." instance=ExtResource("3_mpbui")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="UpgradeMultiPreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="UpgradeMultiPreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.85)
+
+[node name="Cards" type="HBoxContainer" parent="UpgradeMultiPreviewContainer"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 400
+alignment = 1
+
+[node name="Cancel" parent="UpgradeMultiPreviewContainer" instance=ExtResource("3_mpbui")]
+layout_mode = 1
+
+[node name="Confirm" parent="UpgradeMultiPreviewContainer" instance=ExtResource("5_jpiyi")]
+layout_mode = 1
+
+[node name="UpgradeSinglePreviewContainer" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="UpgradeSinglePreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.780392)
+
+[node name="UpgradePreview" parent="UpgradeSinglePreviewContainer" instance=ExtResource("3_b1iyb")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Cancel" parent="UpgradeSinglePreviewContainer" instance=ExtResource("3_mpbui")]
+layout_mode = 1
+
+[node name="Confirm" parent="UpgradeSinglePreviewContainer" instance=ExtResource("5_jpiyi")]
+layout_mode = 1
+pivot_offset = Vector2(180, 55)
+
+[node name="PeekButton" parent="." instance=ExtResource("6_8otl7")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_right = 0.0
+offset_left = 100.0
+offset_top = -64.0
+offset_right = 228.0
+offset_bottom = 64.0
+grow_horizontal = 1
+
+[node name="BottomText" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -57.0
+offset_right = 62.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="ColorRect" type="ColorRect" parent="BottomText"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomText"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 6
+
+[node name="BottomLabel" type="RichTextLabel" parent="BottomText/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("12_f8hb1")
+theme_override_fonts/bold_font = ExtResource("13_ppnbn")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "Info text."
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("14_cdb0a")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+IsVerticallyBound = false
+
+[node name="ViewUpgrades" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -76.0
+offset_right = 278.0
+offset_bottom = -12.0
+grow_vertical = 0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(0, 32)
+
+[node name="MarginContainer" type="MarginContainer" parent="ViewUpgrades"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_right = 6
+
+[node name="Upgrades" type="HBoxContainer" parent="ViewUpgrades/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("5_fn10f")
+
+[node name="TickboxVisuals" parent="ViewUpgrades/MarginContainer/Upgrades" instance=ExtResource("5_txkyp")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_tct5e")
+layout_mode = 2
+
+[node name="ViewUpgradesLabel" type="Label" parent="ViewUpgrades/MarginContainer/Upgrades"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("7_6oosl")
+theme_override_font_sizes/font_size = 27
+text = "View Upgrades"
+vertical_alignment = 1
+script = ExtResource("8_pi2l3")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28

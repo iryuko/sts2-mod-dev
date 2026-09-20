@@ -1,0 +1,912 @@
+[gd_scene load_steps=95 format=3 uid="uid://ctywopv4rarho"]
+
+[ext_resource type="Script" uid="uid://dardvyoikxhk5" path="res://src/Core/Nodes/Screens/Timeline/NEpochInspectScreen.cs" id="1_mkwgv"]
+[ext_resource type="Texture2D" uid="uid://b4ffylh" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="3_kyw08"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="4_d6csw"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_0t5yc"]
+[ext_resource type="Texture2D" uid="uid://kjsi4o" path="res://images/atlases/ui_atlas.sprites/settings_tiny_right_arrow.tres" id="5_5mycd"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="6_06i4i"]
+[ext_resource type="Script" uid="uid://l6im14xehb24" path="res://src/Core/Nodes/Screens/Timeline/NCloseButton.cs" id="7_qx8ox"]
+[ext_resource type="Texture2D" uid="uid://cyruikkcbbm0f" path="res://images/ui/reward_screen/reward_skip_button.png" id="8_f1xeb"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="9_4ht80"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="9_ip2g0"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="10_cpw4t"]
+[ext_resource type="FontVariation" uid="uid://bg85h22rkxs6g" path="res://themes/kreon_bold_shared.tres" id="11_epfew"]
+[ext_resource type="Texture2D" uid="uid://dmycpvg5rp3qj" path="res://images/timeline/epoch_mask.png" id="13_4ht80"]
+[ext_resource type="PackedScene" uid="uid://dtpdvb087ptxc" path="res://scenes/timeline_screen/unlock_info.tscn" id="14_8c0j7"]
+[ext_resource type="Material" uid="uid://bph348ynugekr" path="res://materials/vfx/ui/vfx_ui_epoch_unlock_chains.tres" id="15_0t5yc"]
+[ext_resource type="Texture2D" uid="uid://dsddcrx3c10pb" path="res://images/vfx/common/common_square_small.png" id="15_2ggdr"]
+[ext_resource type="Texture2D" uid="uid://bnmpy5gtkv1g7" path="res://images/packed/timeline/epoch_slot_locked.png" id="15_4ht80"]
+[ext_resource type="Texture2D" uid="uid://csv07f8pgrh8r" path="res://images/timeline/epoch_portraits/ironclad2_epoch.png" id="15_nshkx"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="17_2edtb"]
+[ext_resource type="Script" uid="uid://bsxrdorksvdyd" path="res://src/Core/Nodes/Vfx/Ui/NEpochChains.cs" id="17_wvsjp"]
+[ext_resource type="Script" uid="uid://bnvount7gh30d" path="res://src/Core/Nodes/Screens/Timeline/NEpochPaginateButton.cs" id="18_2edtb"]
+[ext_resource type="PackedScene" uid="uid://bdhlybaik0yp8" path="res://scenes/vfx/common/vfx_common_ray.tscn" id="19_0wqby"]
+[ext_resource type="Script" uid="uid://bd46jtcut2h66" path="res://src/Core/Nodes/Vfx/Utilities/NParticlesContainer.cs" id="19_mbjeb"]
+[ext_resource type="PackedScene" uid="uid://cq0m6037hbecy" path="res://scenes/vfx/common/vfx_common_glow.tscn" id="20_6mb7u"]
+[ext_resource type="PackedScene" uid="uid://chqoe33c4gm6a" path="res://scenes/vfx/common/vfx_common_specks.tscn" id="20_mkwgv"]
+[ext_resource type="Texture2D" uid="uid://do6j88lc7qatt" path="res://images/vfx/common/common_ray_no_glow.png" id="21_w834a"]
+[ext_resource type="PackedScene" uid="uid://0vk581j1pecs" path="res://scenes/vfx/common/vfx_common_ring_polar_a.tscn" id="22_4konm"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="23_1yc5x"]
+[ext_resource type="PackedScene" uid="uid://duh77nt8t6m4c" path="res://scenes/vfx/ui/vfx_ui_epoch_unlock_chain_shards.tscn" id="25_kyw08"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_weh22"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ht80"]
+resource_local_to_scene = true
+shader = ExtResource("17_2edtb")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t5yc"]
+resource_local_to_scene = true
+shader = ExtResource("17_2edtb")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0000000475
+shader_parameter/v = 1.0
+
+[sub_resource type="Curve" id="Curve_2ggdr"]
+_limits = [-1.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0.28735632, -1), 0.0, 0.0, 0, 0, Vector2(0.30344826, 0.043423176), 0.0, 0.0, 0, 0, Vector2(0.8896552, 0.07630682), 0.0, 0.0, 0, 0, Vector2(0.8988506, 1.4574199), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_0wqby"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.40229884, 1), 0.50190777, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mbjeb"]
+_data = [Vector2(0.84137934, 0), 0.0, 0.0, 0, 0, Vector2(0.85287356, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_w834a"]
+_limits = [-0.1, 1.0, 0.0, 1.0]
+_data = [Vector2(0.85057473, -0.1), 0.0, 7.476566, 0, 0, Vector2(1, 1), 6.879236, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5mycd"]
+_data = [Vector2(0, 0), 0.0, 5.4330635, 0, 0, Vector2(0.2402089, 0.85485435), 0.0, 0.14217596, 0, 0, Vector2(1, 1), 0.11790196, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_06i4i"]
+curve = SubResource("Curve_5mycd")
+
+[sub_resource type="Curve" id="Curve_2gmb7"]
+_data = [Vector2(0, 0), 0.0, 11.5422, 0, 0, Vector2(0.203175, 0.842474), 0.0, 0.210613, 0, 0, Vector2(1, 1), 0.197691, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_21kn2"]
+curve = SubResource("Curve_2gmb7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qx8ox"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 7.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_21kn2")
+alpha_curve = SubResource("CurveTexture_06i4i")
+
+[sub_resource type="Curve" id="Curve_eeo8k"]
+_data = [Vector2(0, 0), 0.0, 4.30388, 0, 0, Vector2(0.501292, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.93081, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ey2nl"]
+curve = SubResource("Curve_eeo8k")
+
+[sub_resource type="Curve" id="Curve_xivqw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8868, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mxcp1"]
+curve = SubResource("Curve_xivqw")
+
+[sub_resource type="Curve" id="Curve_u74ic"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.59382, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hhyj2"]
+curve = SubResource("Curve_u74ic")
+
+[sub_resource type="Curve" id="Curve_yppx5"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.604607), -1.44846, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xohvn"]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 0.997601), 0.0, 0.0, 0, 0, Vector2(1, 3.25336), 6.03527, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_lhytt"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_by0yk"]
+curve_x = SubResource("Curve_yppx5")
+curve_y = SubResource("Curve_xohvn")
+curve_z = SubResource("Curve_lhytt")
+
+[sub_resource type="Curve" id="Curve_y1cen"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sy7ae"]
+curve = SubResource("Curve_y1cen")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6mb7u"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 3000.0
+radial_velocity_min = 150.0
+radial_velocity_max = 250.0
+radial_velocity_curve = SubResource("CurveTexture_mxcp1")
+gravity = Vector3(0, 0, 0)
+damping_min = 0.26
+damping_max = 0.26
+damping_curve = SubResource("CurveTexture_ey2nl")
+scale_min = 0.29
+scale_max = 0.31
+scale_curve = SubResource("CurveTexture_hhyj2")
+scale_over_velocity_max = 670.71
+scale_over_velocity_curve = SubResource("CurveXYZTexture_by0yk")
+turbulence_enabled = true
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 10.1
+turbulence_noise_speed = Vector3(0.1, 0.1, 0.1)
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.25
+turbulence_influence_max = 0.45000002
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+turbulence_influence_over_life = SubResource("CurveTexture_sy7ae")
+
+[sub_resource type="Curve" id="Curve_kyw08"]
+_data = [Vector2(0, 0.50776696), 0.0, 1.5468738, 0, 0, Vector2(0.74934727, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -9.769355, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d6csw"]
+curve = SubResource("Curve_kyw08")
+
+[sub_resource type="Gradient" id="Gradient_hnase"]
+colors = PackedColorArray(0.4, 0.4, 0.4, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7j8mf"]
+gradient = SubResource("Gradient_hnase")
+
+[sub_resource type="Curve" id="Curve_4konm"]
+_limits = [0.0, 0.25072813, 0.0, 1.0]
+_data = [Vector2(0, 0.04661596), 0.0, 0.20896809, 0, 0, Vector2(1, 0.11940014), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mkwgv"]
+_data = [Vector2(0, 0.29951453), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_6mb7u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_kyw08"]
+curve_x = SubResource("Curve_4konm")
+curve_y = SubResource("Curve_mkwgv")
+curve_z = SubResource("Curve_6mb7u")
+
+[sub_resource type="Curve" id="Curve_d6csw"]
+_limits = [0.0, 300.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 1858.0133, 0, 0, Vector2(0.40253165, 300), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5mycd"]
+curve = SubResource("Curve_d6csw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d6csw"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angular_velocity_min = -30.000015
+angular_velocity_max = 29.999983
+radial_velocity_min = 9.999977
+radial_velocity_max = 29.999977
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 8.0
+scale_curve = SubResource("CurveXYZTexture_kyw08")
+color_initial_ramp = SubResource("GradientTexture1D_7j8mf")
+alpha_curve = SubResource("CurveTexture_d6csw")
+anim_offset_min = 0.25
+anim_offset_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.1
+turbulence_noise_speed = Vector3(10, 10, 10)
+turbulence_noise_speed_random = 0.5
+turbulence_influence_min = 0.75000006
+turbulence_influence_max = 1.0
+turbulence_initial_displacement_min = -1.9999986
+turbulence_initial_displacement_max = 2.0000014
+turbulence_influence_over_life = SubResource("CurveTexture_5mycd")
+
+[sub_resource type="Curve" id="Curve_tqsfi"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, -8.75114, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6woda"]
+curve = SubResource("Curve_tqsfi")
+
+[sub_resource type="Curve" id="Curve_y0ba4"]
+_data = [Vector2(0, 0.245202), 0.0, 9.35466, 0, 0, Vector2(0.149871, 0.850288), 0.184002, 0.184002, 0, 0, Vector2(1, 1), 0.16094, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gj0ch"]
+curve = SubResource("Curve_y0ba4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkwgv"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 3.5
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_gj0ch")
+emission_curve = SubResource("CurveTexture_6woda")
+
+[sub_resource type="Curve" id="Curve_epfew"]
+_data = [Vector2(0, 1), 0.0, -2.1484356, 0, 0, Vector2(1, 0.103883505), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q0org"]
+curve = SubResource("Curve_epfew")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyw08"]
+lifetime_randomness = 0.75
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(100, 160, 1)
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+flatness = 1.0
+radial_velocity_min = 499.99997
+radial_velocity_max = 1500.0
+radial_velocity_curve = SubResource("CurveTexture_q0org")
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 30.000002
+damping_curve = SubResource("CurveTexture_ey2nl")
+scale_min = 0.29
+scale_max = 0.31
+scale_curve = SubResource("CurveTexture_hhyj2")
+scale_over_velocity_max = 670.71
+scale_over_velocity_curve = SubResource("CurveXYZTexture_by0yk")
+turbulence_enabled = true
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 10.1
+turbulence_noise_speed = Vector3(0.1, 0.1, 0.1)
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.25
+turbulence_influence_max = 0.45000002
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+turbulence_influence_over_life = SubResource("CurveTexture_sy7ae")
+
+[sub_resource type="Curve" id="Curve_ip2g0"]
+_data = [Vector2(0.50391644, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.015533924), -3.67803, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cpw4t"]
+curve = SubResource("Curve_ip2g0")
+
+[sub_resource type="Curve" id="Curve_qx8ox"]
+_data = [Vector2(0, 1), 0.0, -1.661681, 0, 0, Vector2(1, 0.45097083), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_f1xeb"]
+curve = SubResource("Curve_qx8ox")
+
+[sub_resource type="Gradient" id="Gradient_0lh8d"]
+colors = PackedColorArray(0.6117647, 0.627451, 0.8392157, 1, 0.87769306, 0.8682848, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_41ud7"]
+gradient = SubResource("Gradient_0lh8d")
+
+[sub_resource type="Gradient" id="Gradient_nnpvc"]
+offsets = PackedFloat32Array(0, 0.35)
+colors = PackedColorArray(4.415934, 4.415934, 4.415934, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kyw08"]
+gradient = SubResource("Gradient_nnpvc")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_mbeit"]
+_data = [Vector2(0, 1), 0.0, -2.2379541, 0, 0, Vector2(1, 0.2490291), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e3nbb"]
+curve = SubResource("Curve_mbeit")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5mycd"]
+lifetime_randomness = 0.75
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_scale = Vector3(1, 0.85, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 360.0
+emission_ring_inner_radius = 280.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+angular_velocity_min = -90.000015
+angular_velocity_max = 89.999985
+angular_velocity_curve = SubResource("CurveTexture_f1xeb")
+radial_velocity_min = 199.99997
+radial_velocity_max = 449.99997
+radial_velocity_curve = SubResource("CurveTexture_e3nbb")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.14999999
+scale_max = 0.39999998
+color_ramp = SubResource("GradientTexture1D_kyw08")
+color_initial_ramp = SubResource("GradientTexture1D_41ud7")
+alpha_curve = SubResource("CurveTexture_cpw4t")
+anim_offset_max = 1.0
+
+[sub_resource type="Curve" id="Curve_06i4i"]
+_data = [Vector2(0, 1), 0.0, -2.9809542, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qx8ox"]
+curve = SubResource("Curve_06i4i")
+
+[sub_resource type="Curve" id="Curve_f1xeb"]
+_data = [Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_ip2g0"]
+curve = SubResource("Curve_f1xeb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cpw4t"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_ip2g0")
+alpha_curve = SubResource("CurveTexture_qx8ox")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mo24b"]
+lifetime_randomness = 0.75
+particle_flag_align_y = true
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape = 3
+emission_box_extents = Vector3(200, 320, 1)
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+flatness = 1.0
+radial_velocity_min = 499.99997
+radial_velocity_max = 1500.0
+radial_velocity_curve = SubResource("CurveTexture_q0org")
+gravity = Vector3(0, 0, 0)
+damping_min = 20.0
+damping_max = 30.000002
+damping_curve = SubResource("CurveTexture_ey2nl")
+scale_min = 0.29
+scale_max = 0.31
+scale_curve = SubResource("CurveTexture_hhyj2")
+scale_over_velocity_max = 670.71
+scale_over_velocity_curve = SubResource("CurveXYZTexture_by0yk")
+turbulence_enabled = true
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 10.1
+turbulence_noise_speed = Vector3(0.1, 0.1, 0.1)
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.25
+turbulence_influence_max = 0.45000002
+turbulence_initial_displacement_min = 1.49012e-06
+turbulence_initial_displacement_max = 1.49012e-06
+turbulence_influence_over_life = SubResource("CurveTexture_sy7ae")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7mcwg"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_gj0ch")
+emission_curve = SubResource("CurveTexture_6woda")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nshkx"]
+resource_local_to_scene = true
+shader = ExtResource("17_2edtb")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2edtb"]
+resource_local_to_scene = true
+shader = ExtResource("17_2edtb")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="EpochInspectScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+script = ExtResource("1_mkwgv")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="StoryNav" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -435.0
+offset_bottom = -329.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Text" type="VBoxContainer" parent="StoryNav"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -42
+alignment = 1
+
+[node name="ChapterLabel" type="Label" parent="StoryNav/Text"]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_weh22")
+custom_minimum_size = Vector2(246, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("4_d6csw")
+theme_override_font_sizes/font_size = 32
+text = "Chapter 5 - Bugs"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_0t5yc")
+AutoSizeEnabled = false
+
+[node name="StoryLabel" type="Label" parent="StoryNav/Text"]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_weh22")
+custom_minimum_size = Vector2(246, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("6_06i4i")
+theme_override_font_sizes/font_size = 22
+text = "The Defect"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_0t5yc")
+AutoSizeEnabled = false
+
+[node name="Header" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -407.0
+offset_bottom = -407.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CloseButton" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -160.0
+offset_right = 130.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(130, 29)
+script = ExtResource("7_qx8ox")
+
+[node name="Image" type="TextureRect" parent="CloseButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(130, 29)
+mouse_filter = 2
+texture = ExtResource("8_f1xeb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CloseLabel" type="Label" parent="CloseButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.115875, 0.25976, 0.288407, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("9_ip2g0")
+theme_override_font_sizes/font_size = 28
+text = "Close"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_0t5yc")
+AutoSizeEnabled = false
+
+[node name="ControllerIcon" type="TextureRect" parent="CloseButton"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4ht80")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -94.0
+offset_right = -70.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 128)
+mouse_filter = 2
+texture = ExtResource("9_4ht80")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FancyText" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -475.0
+offset_top = 97.0
+offset_right = 475.0
+offset_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/line_separation = -1
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("10_cpw4t")
+theme_override_fonts/bold_font = ExtResource("11_epfew")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "Currency is invented by the original [blue]Merchant[/blue]. Desperate times call for desperate measures... and desperate measures cost [gold]Gold[/gold]!
+
+This precious metal fostered a monetary economy.  Anyone who came across [gold]Gold[/gold] could use it to acquire a morsel of food, the sharpest of daggers, or a fashionable hat. Buy something! Approach any [blue]blue clothed merchant[/blue] on a [green]green rug[/green] and you'll be treated to a fantastic shopping experience, we don't turn away anybody!
+
+(Disclaimer: This Epoch description was paid for by Merchant)"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters_behavior = 1
+script = ExtResource("23_1yc5x")
+MinFontSize = 18
+MaxFontSize = 24
+
+[node name="Mask" type="TextureRect" parent="."]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -324.0
+offset_top = -323.0
+offset_right = 324.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 200)
+mouse_filter = 2
+texture = ExtResource("13_4ht80")
+expand_mode = 1
+
+[node name="Portrait" type="TextureRect" parent="Mask"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_0t5yc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 200)
+mouse_filter = 2
+texture = ExtResource("15_nshkx")
+expand_mode = 1
+
+[node name="PlaceholderLabel" type="Label" parent="Mask/Portrait"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 149.0
+offset_top = 166.0
+offset_right = 302.16687
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.043004
+theme_override_colors/font_outline_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("10_cpw4t")
+text = "placeholder"
+horizontal_alignment = 2
+script = ExtResource("5_0t5yc")
+AutoSizeEnabled = false
+
+[node name="PortraitFlash" type="TextureRect" parent="Mask"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_0t5yc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(324, 200)
+mouse_filter = 2
+texture = ExtResource("15_2ggdr")
+expand_mode = 1
+
+[node name="Chains" type="TextureRect" parent="." node_paths=PackedStringArray("_particles", "_endParticles")]
+unique_name_in_owner = true
+visible = false
+material = ExtResource("15_0t5yc")
+custom_minimum_size = Vector2(648, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -361.0
+offset_top = -341.0
+offset_right = 361.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(361, 223)
+texture = ExtResource("15_4ht80")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("17_wvsjp")
+_duration = 1.0
+_particles = [NodePath("VfxPivot/ShineVfxContainer"), NodePath("VfxPivot/MidVfxContainer")]
+_endParticles = NodePath("VfxPivot/EndVfxContainer")
+_particlesCurve = SubResource("Curve_2ggdr")
+_brightEnabledCurve = SubResource("Curve_0wqby")
+_erosionEnabledCurve = SubResource("Curve_mbjeb")
+_erosionBaseCurve = SubResource("Curve_w834a")
+
+[node name="VfxPivot" type="Control" parent="Chains"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShineVfxContainer" type="Node2D" parent="Chains/VfxPivot" node_paths=PackedStringArray("_particles")]
+script = ExtResource("19_mbjeb")
+_particles = [NodePath("vfx_common_specks"), NodePath("vfx_common_ray"), NodePath("vfx_common_ring_polar_a"), NodePath("vfx_common_glow")]
+
+[node name="vfx_common_glow" parent="Chains/VfxPivot/ShineVfxContainer" instance=ExtResource("20_6mb7u")]
+self_modulate = Color(1, 1, 1, 0.2509804)
+lifetime = 0.75
+process_material = SubResource("ParticleProcessMaterial_qx8ox")
+
+[node name="vfx_common_specks" parent="Chains/VfxPivot/ShineVfxContainer" instance=ExtResource("20_mkwgv")]
+amount = 12
+lifetime = 1.0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_6mb7u")
+
+[node name="vfx_common_ray" parent="Chains/VfxPivot/ShineVfxContainer" instance=ExtResource("19_0wqby")]
+self_modulate = Color(1, 1, 1, 1)
+amount = 6
+texture = ExtResource("21_w834a")
+lifetime = 0.7
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_d6csw")
+
+[node name="vfx_common_ring_polar_a" parent="Chains/VfxPivot/ShineVfxContainer" instance=ExtResource("22_4konm")]
+self_modulate = Color(1, 1, 1, 0.5019608)
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_mkwgv")
+
+[node name="MidVfxContainer" type="Node2D" parent="Chains/VfxPivot" node_paths=PackedStringArray("_particles")]
+script = ExtResource("19_mbjeb")
+_particles = [NodePath("vfx_common_specks"), NodePath("vfx_ui_epoch_unlock_chain_shards")]
+
+[node name="vfx_common_specks" parent="Chains/VfxPivot/MidVfxContainer" instance=ExtResource("20_mkwgv")]
+amount = 20
+lifetime = 0.75
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_kyw08")
+
+[node name="vfx_ui_epoch_unlock_chain_shards" parent="Chains/VfxPivot/MidVfxContainer" instance=ExtResource("25_kyw08")]
+amount = 6
+lifetime = 0.5
+explosiveness = 0.9
+
+[node name="EndVfxContainer" type="Node2D" parent="Chains/VfxPivot" node_paths=PackedStringArray("_particles")]
+script = ExtResource("19_mbjeb")
+_particles = [NodePath("vfx_common_glow"), NodePath("vfx_common_specks"), NodePath("vfx_ui_epoch_unlock_chain_shards"), NodePath("vfx_common_ring_polar_a")]
+
+[node name="vfx_ui_epoch_unlock_chain_shards" parent="Chains/VfxPivot/EndVfxContainer" instance=ExtResource("25_kyw08")]
+amount = 6
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_5mycd")
+
+[node name="vfx_common_glow" parent="Chains/VfxPivot/EndVfxContainer" instance=ExtResource("20_6mb7u")]
+self_modulate = Color(1, 1, 1, 0.2509804)
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_cpw4t")
+
+[node name="vfx_common_specks" parent="Chains/VfxPivot/EndVfxContainer" instance=ExtResource("20_mkwgv")]
+amount = 40
+lifetime = 1.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_mo24b")
+
+[node name="vfx_common_ring_polar_a" parent="Chains/VfxPivot/EndVfxContainer" instance=ExtResource("22_4konm")]
+lifetime = 0.35000000000000003
+process_material = SubResource("ParticleProcessMaterial_7mcwg")
+
+[node name="UnlockInfo" parent="." instance=ExtResource("14_8c0j7")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -174.5
+offset_top = -68.0
+offset_right = 174.5
+
+[node name="NextChapterButton" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 372.0
+offset_top = -185.0
+offset_right = 500.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("18_2edtb")
+
+[node name="TextureRect" type="TextureRect" parent="NextChapterButton"]
+material = SubResource("ShaderMaterial_nshkx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(54, 64)
+mouse_filter = 2
+texture = ExtResource("5_5mycd")
+expand_mode = 1
+
+[node name="PrevChapterButton" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -185.0
+offset_right = -372.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_2edtb")
+
+[node name="TextureRect" type="TextureRect" parent="PrevChapterButton"]
+material = SubResource("ShaderMaterial_2edtb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(74, 64)
+mouse_filter = 2
+texture = ExtResource("3_kyw08")
+expand_mode = 1
+
+[node name="EraLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 80.0
+offset_top = -71.0
+offset_right = 170.0
+offset_bottom = -48.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.94, 0.7849, 0.3196, 0.752941)
+theme_override_fonts/font = ExtResource("6_06i4i")
+text = "Blight 2,700"
+script = ExtResource("5_0t5yc")
+AutoSizeEnabled = false

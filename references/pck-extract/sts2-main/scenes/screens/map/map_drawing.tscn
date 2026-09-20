@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://e5osvqc0dyky"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mnwkd"]
+blend_mode = 4
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ajfg6"]
+viewport_path = NodePath("DrawViewport")
+
+[sub_resource type="Environment" id="Environment_2twbd"]
+background_mode = 1
+background_color = Color(1, 1, 1, 0)
+
+[sub_resource type="World3D" id="World3D_sj3p4"]
+environment = SubResource("Environment_2twbd")
+
+[node name="MapDrawing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DrawViewportTextureRect" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_mnwkd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("ViewportTexture_ajfg6")
+expand_mode = 1
+
+[node name="DrawViewport" type="SubViewport" parent="."]
+disable_3d = true
+own_world_3d = true
+world_3d = SubResource("World3D_sj3p4")
+transparent_bg = true
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+size = Vector2i(960, 1620)

@@ -1,0 +1,251 @@
+[gd_scene load_steps=33 format=3 uid="uid://crf5sye3ph0hu"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_n6c87"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://c40rg54hlwxma" path="res://animations/monsters/gas_bomb/gas_bomb_skel_data.tres" id="2_8e65e"]
+[ext_resource type="Shader" uid="uid://bppboxgg87im7" path="res://shaders/scrolling_smoke.tres" id="3_d40cx"]
+[ext_resource type="Texture2D" uid="uid://b4dtcd7bwo3kd" path="res://images/vfx/monsters/lost_and_forgotten/lost_smoke_gradient.png" id="4_ii02p"]
+[ext_resource type="Texture2D" uid="uid://s3vvlu5rnh0r" path="res://images/vfx/monsters/living_smog/living_smog_smoke.png" id="5_uf46c"]
+[ext_resource type="Texture2D" uid="uid://btqpvklnyn4i4" path="res://images/vfx/shared_use/smoke_vfx.png" id="6_ce5xk"]
+[ext_resource type="Texture2D" uid="uid://b72mj3cao7go2" path="res://images/vfx/short_rice_no_glow_particle.png" id="7_ce5xk"]
+[ext_resource type="Script" uid="uid://nhagbkojqhmo" path="res://src/Core/Nodes/Vfx/NGasBombVfx.cs" id="9_lrylb"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m18be"]
+shader = ExtResource("3_d40cx")
+shader_parameter/Color = Color(0.45, 0.2745, 0.359325, 1)
+shader_parameter/ScrollSpeed = 0.14
+shader_parameter/timeOffset = 0.0
+shader_parameter/smokeTex = ExtResource("5_uf46c")
+shader_parameter/AlphaStep = Vector2(0.189, 0.19)
+shader_parameter/alphaGradient = ExtResource("4_ii02p")
+shader_parameter/Ovarall_Alpha = 0.5
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lyqm6"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_lrylb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.596059, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.93033, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_idjfi"]
+curve = SubResource("Curve_lrylb")
+
+[sub_resource type="Curve" id="Curve_5njnv"]
+_data = [Vector2(0, 0.359551), 0.0, 1.99579, 0, 0, Vector2(0.669951, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.651685), -2.2809, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6uib0"]
+curve = SubResource("Curve_5njnv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ccl8f"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = -60.0
+angular_velocity_max = 60.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.3
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_6uib0")
+color = Color(0.61, 0.5185, 0.57645, 0.380392)
+alpha_curve = SubResource("CurveTexture_idjfi")
+anim_offset_max = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_idjfi"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ccl8f"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.55414, 0.766374), -0.815096, -0.815096, 0, 0, Vector2(1, 0), -2.66582, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jtlk7"]
+curve = SubResource("Curve_ccl8f")
+
+[sub_resource type="Curve" id="Curve_cji4q"]
+_data = [Vector2(0.00636943, 0.506789), 0.0, 9.53662, 0, 0, Vector2(0.059448, 0.859824), 3.08319, 3.08319, 0, 0, Vector2(0.144374, 1), 0.0, 0.0, 0, 0, Vector2(0.564756, 0.787141), -1.25758, -1.25758, 0, 0, Vector2(1, 0.335463), -0.582212, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_01gp1"]
+curve = SubResource("Curve_cji4q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_egygv"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 200.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+angular_velocity_min = 30.0
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_01gp1")
+color = Color(0.61, 0.5185, 0.57645, 0.670588)
+alpha_curve = SubResource("CurveTexture_jtlk7")
+anim_offset_max = 1.0
+
+[sub_resource type="Curve" id="Curve_idjfi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.596059, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.93033, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5njnv"]
+curve = SubResource("Curve_idjfi")
+
+[sub_resource type="Curve" id="Curve_6uib0"]
+_data = [Vector2(0, 0.191011), 0.0, 14.1416, 0, 0, Vector2(0.133005, 0.910112), 0.45618, 0.45618, 0, 0, Vector2(0.866995, 0.876405), -0.469597, -0.469597, 0, 0, Vector2(1, 0.0786518), -13.6853, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ccl8f"]
+curve = SubResource("Curve_6uib0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jtlk7"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+radial_velocity_min = 9.99998
+radial_velocity_max = 14.0
+gravity = Vector3(0, 0, 0)
+scale_max = 1.6
+scale_curve = SubResource("CurveTexture_ccl8f")
+color = Color(0.8, 0.656, 0.8, 1)
+alpha_curve = SubResource("CurveTexture_5njnv")
+anim_offset_max = 1.0
+
+[sub_resource type="Gradient" id="Gradient_lrylb"]
+colors = PackedColorArray(0.811213, 0.5759, 0.736698, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_idjfi"]
+gradient = SubResource("Gradient_lrylb")
+
+[sub_resource type="Curve" id="Curve_jtlk7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.622081, 0.870208), -0.666897, -0.666897, 0, 0, Vector2(1, 0), -3.06746, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cji4q"]
+curve = SubResource("Curve_jtlk7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_01gp1"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 60.0
+initial_velocity_min = 400.0
+initial_velocity_max = 1300.0
+gravity = Vector3(0, 600, 0)
+scale_min = 0.1
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_cji4q")
+color_ramp = SubResource("GradientTexture1D_idjfi")
+
+[node name="GasBomb" type="Node2D"]
+script = ExtResource("1_n6c87")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_8e65e")
+preview_skin = "Default"
+preview_animation = "hurt"
+preview_frame = false
+preview_time = 0.0
+unique_name_in_owner = true
+position = Vector2(-5, 14)
+scale = Vector2(0.5, 0.5)
+metadata/_edit_lock_ = true
+
+[node name="SmokeTrailSlot" type="SpineSlotNode" parent="Visuals"]
+normal_material = SubResource("ShaderMaterial_m18be")
+slot_name = "smoke_tex1"
+show_behind_parent = true
+position = Vector2(59.742, -249.418)
+rotation = -0.663667
+scale = Vector2(0.69527, 0.690526)
+skew = -0.0318546
+
+[node name="SmokeBallSlot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "smoke_ball_attach"
+show_behind_parent = true
+position = Vector2(1.90544, -204.018)
+
+[node name="PuffParticles" type="GPUParticles2D" parent="Visuals/SmokeBallSlot"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_lyqm6")
+amount = 20
+texture = ExtResource("6_ce5xk")
+lifetime = 1.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ccl8f")
+
+[node name="ExplodePuffParticles" type="GPUParticles2D" parent="Visuals/SmokeBallSlot"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_idjfi")
+position = Vector2(0.0944824, -5.98206)
+amount = 20
+texture = ExtResource("6_ce5xk")
+lifetime = 0.7
+explosiveness = 0.9
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_egygv")
+
+[node name="DotParticles" type="GPUParticles2D" parent="Visuals/SmokeBallSlot"]
+show_behind_parent = true
+material = ExtResource("shared_additive_mat")
+position = Vector2(0.0944824, 0.0179443)
+amount = 2
+texture = ExtResource("7_ce5xk")
+lifetime = 0.2
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_jtlk7")
+
+[node name="BitParticles" type="GPUParticles2D" parent="Visuals/SmokeBallSlot"]
+position = Vector2(0.0944824, 66.0179)
+amount = 10
+texture = ExtResource("7_ce5xk")
+lifetime = 1.2
+preprocess = 0.1
+speed_scale = 1.2
+explosiveness = 0.95
+trail_enabled = true
+trail_lifetime = 0.02
+trail_sections = 4
+trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_01gp1")
+
+[node name="NGasBombVfx" type="Node" parent="Visuals"]
+script = ExtResource("9_lrylb")
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -77.0
+offset_top = -149.0
+offset_right = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(3, -67)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-2, -213)

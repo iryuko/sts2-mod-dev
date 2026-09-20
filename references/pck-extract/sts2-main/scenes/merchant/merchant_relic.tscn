@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://bro6sn3uqyhfr"]
+
+[ext_resource type="Script" uid="uid://cm6rsp7vhg2vp" path="res://src/Core/Nodes/Screens/Shops/NMerchantRelic.cs" id="1_jfeis"]
+[ext_resource type="Script" uid="uid://bry8aaeikvcb3" path="res://src/Core/Nodes/GodotExtensions/NClickableControl.cs" id="3_406wq"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="3_onwjv"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_wkakw"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_s5r5l"]
+
+[node name="MerchantRelic" type="Control"]
+custom_minimum_size = Vector2(122, 112)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 122.0
+offset_bottom = 122.0
+scale = Vector2(0.65, 0.65)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+mouse_filter = 2
+script = ExtResource("1_jfeis")
+
+[node name="RelicHolder" type="Control" parent="."]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -64.0
+offset_top = -80.0
+offset_right = -64.0
+offset_bottom = -80.0
+scale = Vector2(2, 2)
+mouse_filter = 2
+
+[node name="Hitbox" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -96.0
+offset_top = -102.0
+offset_right = 96.0
+offset_bottom = 90.0
+script = ExtResource("3_406wq")
+
+[node name="Cost" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -148.0
+offset_top = 52.0
+offset_right = 148.0
+offset_bottom = 106.0
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Cost"]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_onwjv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CostLabel" type="Label" parent="Cost"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_wkakw")
+theme_override_font_sizes/font_size = 39
+text = "99"
+theme_override_constants/line_spacing = 0.0
+theme_override_constants/outline_size = 15
+theme_override_colors/font_outline_color = Color(0.0666667, 0, 0, 0.431373)
+theme_override_constants/shadow_outline_size = 0
+theme_override_colors/font_shadow_color = Color(0.223529, 0.223529, 0.223529, 0)
+script = ExtResource("5_s5r5l")
+MinFontSize = 40

@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=3 uid="uid://3aikvufhmv6o"]
+
+[ext_resource type="Script" uid="uid://7dvirwubikdb" path="res://src/Core/Nodes/Screens/MainMenu/NSubmenuButton.cs" id="1_7kg81"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_pmv1o"]
+[ext_resource type="Texture2D" uid="uid://ba6grvsswxtug" path="res://images/packed/common_ui/submenu_panel.png" id="3_sf40g"]
+[ext_resource type="Texture2D" uid="uid://c2sq5nnyvttn3" path="res://images/ui/main_menu/submenu_standard.png" id="4_o3pff"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="5_72wmx"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="5_v0lay"]
+[ext_resource type="Texture2D" uid="uid://cipv0cjrdxslw" path="res://images/ui/main_menu/submenu_lock.png" id="5_w5r2n"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="6_7noii"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_58wgb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ola5m"]
+resource_local_to_scene = true
+shader = ExtResource("2_pmv1o")
+shader_parameter/h = 0.0
+shader_parameter/s = 0.8
+shader_parameter/v = 0.8
+
+[sub_resource type="FontVariation" id="FontVariation_tj481"]
+base_font = ExtResource("5_v0lay")
+spacing_glyph = 1
+
+[node name="StandardButton" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -532.0
+offset_top = -353.0
+offset_right = -202.0
+offset_bottom = 352.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 250)
+focus_mode = 2
+script = ExtResource("1_7kg81")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BgPanel" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ola5m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_right = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_sf40g")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -209.5
+offset_right = 142.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(142, 108)
+mouse_filter = 2
+texture = ExtResource("4_o3pff")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lock" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -209.5
+offset_right = 142.0
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(142, 108)
+mouse_filter = 2
+texture = ExtResource("5_w5r2n")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -284.5
+offset_right = 153.0
+offset_bottom = -223.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.24, 0.18624, 0.1248, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_72wmx")
+theme_override_font_sizes/font_size = 32
+text = "Standard"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_58wgb")
+MaxFontSize = 32
+
+[node name="Description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 359.0
+offset_right = 305.0
+offset_bottom = 643.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_tj481")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "It's video games, yay!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_7noii")
+MinFontSize = 18
+MaxFontSize = 24

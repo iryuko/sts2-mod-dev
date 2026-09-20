@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca1usw0jcwud4"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_6lnb3"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bpy4hwdrk82nf" path="res://animations/monsters/bowlbug/bowlbug_skel_data.tres" id="2_4tl5i"]
+
+[node name="BowlbugRock" type="Node2D"]
+script = ExtResource("1_6lnb3")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(18, -22)
+scale = Vector2(0.275, 0.275)
+skeleton_data_res = ExtResource("2_4tl5i")
+preview_skin = "rock"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.0
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -93.0
+offset_top = -150.0
+offset_right = 93.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -80)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -188)

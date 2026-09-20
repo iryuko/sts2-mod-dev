@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqncqppocgn3u"]
+
+[ext_resource type="Script" uid="uid://b17etpxgh7pro" path="res://src/Core/Nodes/Screens/CardLibrary/NCardLibraryStats.cs" id="1_c8d8v"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_3kgv1"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_hhs7j"]
+
+[sub_resource type="FontVariation" id="FontVariation_f1dif"]
+base_font = ExtResource("2_3kgv1")
+spacing_top = 2
+
+[node name="CardLibraryStats" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_c8d8v")
+
+[node name="Bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.64
+offset_left = -117.0
+offset_top = -138.0
+offset_right = 114.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.729412)
+
+[node name="Label" type="RichTextLabel" parent="Bg"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = SubResource("FontVariation_f1dif")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+bbcode_enabled = true
+text = "[gold]Victories:[/gold] 999"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_hhs7j")
+MinFontSize = 10
+MaxFontSize = 30

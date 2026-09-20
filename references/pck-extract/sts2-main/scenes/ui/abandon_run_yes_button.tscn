@@ -1,0 +1,127 @@
+[gd_scene load_steps=11 format=3 uid="uid://ce8s1or8wkljj"]
+
+[ext_resource type="Script" uid="uid://baaxo4sba5b7a" path="res://src/Core/Nodes/CommonUi/NPopupYesNoButton.cs" id="1_8jc4u"]
+[ext_resource type="Texture2D" uid="uid://bnlknhj" path="res://images/atlases/compressed.sprites/popup_confirm_button_outline.tres" id="2_8jc4u"]
+[ext_resource type="Texture2D" uid="uid://cp58l7v" path="res://images/atlases/ui_atlas.sprites/popup_confirm_button.tres" id="3_8jc4u"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_k3w4m"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_yme5y"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_n8rlg"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="7_rtlte"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yrmk6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ovnup"]
+resource_local_to_scene = true
+shader = ExtResource("6_n8rlg")
+shader_parameter/h = 0.75
+shader_parameter/s = 1.2
+shader_parameter/v = 1.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41r5t"]
+resource_local_to_scene = true
+shader = ExtResource("6_n8rlg")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="Button" type="Control"]
+custom_minimum_size = Vector2(180, 72)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 72.0
+script = ExtResource("1_8jc4u")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="Control" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(196, 96)
+layout_mode = 1
+anchors_preset = 0
+offset_left = -17.0
+offset_top = -8.0
+offset_right = 179.0
+offset_bottom = 88.0
+pivot_offset = Vector2(191, 50)
+mouse_filter = 2
+
+[node name="Outline" type="TextureRect" parent="Visuals"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+self_modulate = Color(0, 0, 0, 1)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_yrmk6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_8jc4u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Image" type="TextureRect" parent="Visuals"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ovnup")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_8jc4u")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Visuals"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(138, 68)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -3.0
+offset_right = -15.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.121333, 0.28, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("4_k3w4m")
+theme_override_font_sizes/font_size = 28
+text = "Yes"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_yme5y")
+MaxFontSize = 28
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_41r5t")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = 2.0
+offset_right = 134.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("7_rtlte")
+expand_mode = 1
+stretch_mode = 5

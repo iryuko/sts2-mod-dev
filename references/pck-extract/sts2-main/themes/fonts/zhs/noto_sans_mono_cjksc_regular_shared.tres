@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://dvswce4ivv0xj"]
+
+[ext_resource type="FontFile" uid="uid://bgo5h1rnqi6op" path="res://fonts/zhs/NotoSansMonoCJKsc-Regular.otf" id="1_cryh1"]
+
+[resource]
+base_font = ExtResource("1_cryh1")

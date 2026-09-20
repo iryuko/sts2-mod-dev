@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfcqxx8wkmljw"]
+
+[ext_resource type="Script" uid="uid://lu41scmrw6sh" path="res://src/Core/Nodes/Screens/Settings/NSettingsTab.cs" id="1_s1u26"]
+[ext_resource type="Texture2D" uid="uid://f1vqaa70gdsj" path="res://images/packed/common_ui/settings_tab_stroke.png" id="2_rchk3"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_y8wtc"]
+[ext_resource type="Texture2D" uid="uid://2vvmpd2pwp31" path="res://images/packed/common_ui/settings_tab_selected.png" id="4_0vdt3"]
+[ext_resource type="Theme" uid="uid://cvl0a1ooy6gtg" path="res://themes/settings_screen_tab.tres" id="5_hrs74"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="6_1sggs"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="7_2nwis"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wf8ka"]
+resource_local_to_scene = true
+shader = ExtResource("3_y8wtc")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="OptionsTab" type="Control"]
+custom_minimum_size = Vector2(256, 90)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -518.0
+offset_top = -447.0
+offset_right = -262.0
+offset_bottom = -357.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 45)
+script = ExtResource("1_s1u26")
+metadata/_edit_lock_ = true
+
+[node name="Outline" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.3648, 0.9104, 0.96, 0.752941)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rchk3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TabImage" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_wf8ka")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0vdt3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_hrs74")
+theme_override_fonts/font = ExtResource("6_1sggs")
+theme_override_font_sizes/font_size = 32
+text = "General"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_2nwis")
+MinFontSize = 18
+MaxFontSize = 32

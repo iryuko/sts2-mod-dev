@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c3rm3o20su8eo"]
+
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="1_ct8ni"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_ct8ni")
+shader_parameter/h = 0.85
+shader_parameter/s = 0.05
+shader_parameter/v = 0.55

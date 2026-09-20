@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1axwip20hnuo"]
+
+[ext_resource type="Script" uid="uid://wus48isisvek" path="res://src/Core/Nodes/CommonUi/NSaveIndicator.cs" id="1_7ghhm"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="2_esifr"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_oeqbi"]
+
+[node name="SaveIndicator" type="Control"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_7ghhm")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Label" type="RichTextLabel" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -21.0
+offset_right = 100.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.529412, 0.807843, 0.921569, 1)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_oeqbi")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[sine]Game Saved[/sine]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+visible_characters_behavior = 1
+script = ExtResource("2_esifr")
+AutoSizeEnabled = false
+MinFontSize = 32
+MaxFontSize = 32
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"

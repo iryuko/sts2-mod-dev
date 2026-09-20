@@ -1,0 +1,121 @@
+[gd_scene load_steps=9 format=3 uid="uid://bihrcmuxesstb"]
+
+[ext_resource type="Texture2D" uid="uid://cske71hwcslh8" path="res://images/timeline/epoch_card_back.png" id="1_5geyn"]
+[ext_resource type="Script" uid="uid://b7vfdufs22fwb" path="res://src/Core/Nodes/Vfx/NGainEpochVfx.cs" id="1_n3kic"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_mkslc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_mkslc"]
+[ext_resource type="Texture2D" uid="uid://csv07f8pgrh8r" path="res://images/timeline/epoch_portraits/ironclad2_epoch.png" id="3_tr3an"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="5_yp26g"]
+[ext_resource type="Texture2D" uid="uid://bjyue0pdjk8v6" path="res://images/packed/timeline/epoch_slot_locked_small.png" id="6_5075l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ku20d"]
+resource_local_to_scene = true
+shader = ExtResource("5_yp26g")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.0
+shader_parameter/v = 0.5
+
+[node name="GainEpochVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n3kic")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="EpochContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.0
+offset_right = -151.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="EpochContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(324, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -165.0
+offset_right = 164.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_outline_color = Color(0.1873124, 0.16847506, 0.087725975, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_mkslc")
+theme_override_font_sizes/font_size = 28
+text = "Epoch Discovered"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("3_mkslc")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Shadow" type="TextureRect" parent="EpochContainer"]
+modulate = Color(0, 0, 0, 0.25098)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.333
+offset_top = -89.3333
+offset_right = 172.667
+offset_bottom = 110.667
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_5geyn")
+expand_mode = 1
+
+[node name="Portrait" type="TextureRect" parent="EpochContainer"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ku20d")
+custom_minimum_size = Vector2(324, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -100.0
+offset_right = 162.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tr3an")
+expand_mode = 1
+
+[node name="Chains" type="TextureRect" parent="EpochContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -181.44
+offset_top = -109.33325
+offset_right = 181.44
+offset_bottom = 114.66675
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_5075l")
+expand_mode = 1
+stretch_mode = 5

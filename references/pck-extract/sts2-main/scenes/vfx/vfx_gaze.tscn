@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://8p6vvq2eaq1m"]
+
+[ext_resource type="Script" uid="uid://drep5x36bu257" path="res://src/Core/Nodes/Vfx/Utilities/NVfxSpine.cs" id="1_010ri"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dcqdf4d6okmvw" path="res://animations/vfx/vfx_gaze/vfx_gaze_data.tres" id="1_burya"]
+
+[node name="VfxGaze" type="Node2D"]
+script = ExtResource("1_010ri")
+_animation = "gaze"
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+show_behind_parent = true
+scale = Vector2(0.75, 0.75)
+skeleton_data_res = ExtResource("1_burya")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0

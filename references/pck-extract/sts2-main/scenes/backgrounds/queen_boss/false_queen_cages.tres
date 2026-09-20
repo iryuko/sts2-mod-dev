@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cc6bl0tmq45t5"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://cogu3r7u5628b" path="res://scenes/backgrounds/queen_boss/false_queen_cages.atlas" id="1_6hrw0"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dkktravb17sj8" path="res://scenes/backgrounds/queen_boss/false_queen_cages.skel" id="2_ij88h"]
+
+[resource]
+atlas_res = ExtResource("1_6hrw0")
+skeleton_file_res = ExtResource("2_ij88h")

@@ -1,0 +1,36 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://b3vsofkyw3hja"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://c4q2wm878wu06" path="res://animations/monsters/spiny_toad/spinytoad.atlas" id="1_wh4gy"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dw6k2yr8nvaac" path="res://animations/monsters/spiny_toad/spinytoad.skel" id="2_erra0"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_77v2n"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mxpu4"]
+from = "idle_naked_loop"
+to = "hurt_naked"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_b5d4n"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_eyvn3"]
+from = "hurt_naked"
+to = "hurt_naked"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_r0xhi"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_karff"]
+from = "hurt_naked"
+to = "die_naked"
+
+[resource]
+atlas_res = ExtResource("1_wh4gy")
+skeleton_file_res = ExtResource("2_erra0")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_77v2n"), SubResource("SpineAnimationMix_mxpu4"), SubResource("SpineAnimationMix_b5d4n"), SubResource("SpineAnimationMix_eyvn3"), SubResource("SpineAnimationMix_r0xhi"), SubResource("SpineAnimationMix_karff")]

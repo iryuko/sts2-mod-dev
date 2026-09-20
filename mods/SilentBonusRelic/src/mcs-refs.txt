@@ -1,0 +1,1 @@
+references/game-dlls/sts2/arm64/sts2.dll

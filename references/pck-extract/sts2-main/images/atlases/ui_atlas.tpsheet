@@ -1,0 +1,1557 @@
+{
+	"textures": [
+		{
+			"image": "ui_atlas_0.png",
+			"size": {
+				"w": 2048,
+				"h": 2048
+			},
+			"sprites": [
+				{
+					"filename": "top_bar/top_bar.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 2046,
+						"h": 80
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "popup_vertical.png",
+					"region": {
+						"x": 1,
+						"y": 83,
+						"w": 716,
+						"h": 816
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_frame_ancient_s.png",
+					"region": {
+						"x": 1,
+						"y": 901,
+						"w": 618,
+						"h": 862
+					},
+					"margin": {
+						"x": 29,
+						"y": 4,
+						"w": 55,
+						"h": 4
+					}
+				},
+				{
+					"filename": "card/card_frame_quest_s.png",
+					"region": {
+						"x": 719,
+						"y": 83,
+						"w": 599,
+						"h": 844
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_frame_attack_s.png",
+					"region": {
+						"x": 1320,
+						"y": 83,
+						"w": 598,
+						"h": 844
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_frame_power_s.png",
+					"region": {
+						"x": 621,
+						"y": 929,
+						"w": 598,
+						"h": 844
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_frame_skill_s.png",
+					"region": {
+						"x": 1221,
+						"y": 929,
+						"w": 598,
+						"h": 844
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "settings_tab_stroke.png",
+					"region": {
+						"x": 1,
+						"y": 1765,
+						"w": 515,
+						"h": 181
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/map_eraser_2.png",
+					"region": {
+						"x": 518,
+						"y": 1775,
+						"w": 272,
+						"h": 272
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/map_pencil_2.png",
+					"region": {
+						"x": 792,
+						"y": 1775,
+						"w": 272,
+						"h": 272
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "settings_tab_selected.png",
+					"region": {
+						"x": 1066,
+						"y": 1775,
+						"w": 505,
+						"h": 171
+					},
+					"margin": {
+						"x": 5,
+						"y": 5,
+						"w": 10,
+						"h": 10
+					}
+				},
+				{
+					"filename": "map/icons/map_node_background.png",
+					"region": {
+						"x": 1573,
+						"y": 1775,
+						"w": 256,
+						"h": 256
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/placeholder/waterfall_giant_boss_icon.png",
+					"region": {
+						"x": 1821,
+						"y": 929,
+						"w": 204,
+						"h": 211
+					},
+					"margin": {
+						"x": 58,
+						"y": 49,
+						"w": 96,
+						"h": 89
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_darv_outline.png",
+					"region": {
+						"x": 1821,
+						"y": 1142,
+						"w": 207,
+						"h": 208
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 1,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_pael_outline.png",
+					"region": {
+						"x": 1821,
+						"y": 1352,
+						"w": 202,
+						"h": 208
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 6,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_darv.png",
+					"region": {
+						"x": 1821,
+						"y": 1562,
+						"w": 203,
+						"h": 205
+					},
+					"margin": {
+						"x": 4,
+						"y": 1,
+						"w": 5,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_vakuu_outline.png",
+					"region": {
+						"x": 1831,
+						"y": 1769,
+						"w": 196,
+						"h": 208
+					},
+					"margin": {
+						"x": 4,
+						"y": 0,
+						"w": 12,
+						"h": 0
+					}
+				},
+				{
+					"filename": "popup_confirm_button.png",
+					"region": {
+						"x": 1,
+						"y": 1948,
+						"w": 194,
+						"h": 85
+					},
+					"margin": {
+						"x": 2,
+						"y": 3,
+						"w": 4,
+						"h": 11
+					}
+				},
+				{
+					"filename": "popup_cancel_button.png",
+					"region": {
+						"x": 1066,
+						"y": 1948,
+						"w": 191,
+						"h": 84
+					},
+					"margin": {
+						"x": 2,
+						"y": 3,
+						"w": 5,
+						"h": 12
+					}
+				},
+				{
+					"filename": "settings_tiny_left_arrow.png",
+					"region": {
+						"x": 1920,
+						"y": 83,
+						"w": 109,
+						"h": 120
+					},
+					"margin": {
+						"x": 8,
+						"y": 4,
+						"w": 19,
+						"h": 8
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_settings.png",
+					"region": {
+						"x": 1920,
+						"y": 205,
+						"w": 114,
+						"h": 110
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_map.png",
+					"region": {
+						"x": 1920,
+						"y": 317,
+						"w": 114,
+						"h": 104
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_deck.png",
+					"region": {
+						"x": 1920,
+						"y": 423,
+						"w": 114,
+						"h": 98
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_unplayable_icon.png",
+					"region": {
+						"x": 1920,
+						"y": 523,
+						"w": 102,
+						"h": 102
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 2,
+						"h": 2
+					}
+				},
+				{
+					"filename": "card/card_portrait_border_plaque_s.png",
+					"region": {
+						"x": 197,
+						"y": 1948,
+						"w": 123,
+						"h": 75
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_monster.png",
+					"region": {
+						"x": 1831,
+						"y": 1979,
+						"w": 66,
+						"h": 68
+					},
+					"margin": {
+						"x": 30,
+						"y": 29,
+						"w": 62,
+						"h": 60
+					}
+				},
+				{
+					"filename": "map/icons/map_unknown_monster.png",
+					"region": {
+						"x": 1899,
+						"y": 1979,
+						"w": 66,
+						"h": 68
+					},
+					"margin": {
+						"x": 30,
+						"y": 29,
+						"w": 62,
+						"h": 60
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_char_backdrop.png",
+					"region": {
+						"x": 1920,
+						"y": 627,
+						"w": 90,
+						"h": 85
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_heart.png",
+					"region": {
+						"x": 1259,
+						"y": 1948,
+						"w": 93,
+						"h": 77
+					},
+					"margin": {
+						"x": 7,
+						"y": 3,
+						"w": 7,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/icons/map_elite.png",
+					"region": {
+						"x": 322,
+						"y": 1948,
+						"w": 89,
+						"h": 70
+					},
+					"margin": {
+						"x": 19,
+						"y": 27,
+						"w": 39,
+						"h": 58
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_gold.png",
+					"region": {
+						"x": 1920,
+						"y": 714,
+						"w": 81,
+						"h": 75
+					},
+					"margin": {
+						"x": 8,
+						"y": 1,
+						"w": 9,
+						"h": 2
+					}
+				},
+				{
+					"filename": "map/icons/map_chest_boss.png",
+					"region": {
+						"x": 1354,
+						"y": 1948,
+						"w": 84,
+						"h": 71
+					},
+					"margin": {
+						"x": 23,
+						"y": 22,
+						"w": 44,
+						"h": 57
+					}
+				},
+				{
+					"filename": "sort_descending.png",
+					"region": {
+						"x": 413,
+						"y": 1948,
+						"w": 89,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_rest.png",
+					"region": {
+						"x": 1920,
+						"y": 791,
+						"w": 61,
+						"h": 90
+					},
+					"margin": {
+						"x": 33,
+						"y": 18,
+						"w": 67,
+						"h": 38
+					}
+				},
+				{
+					"filename": "checkbox_ticked.png",
+					"region": {
+						"x": 1983,
+						"y": 791,
+						"w": 64,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "checkbox_unticked.png",
+					"region": {
+						"x": 1983,
+						"y": 857,
+						"w": 64,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/energy_ironclad.png",
+					"region": {
+						"x": 1440,
+						"y": 1948,
+						"w": 74,
+						"h": 74
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "scrollbar_track_center.png",
+					"region": {
+						"x": 1967,
+						"y": 1979,
+						"w": 60,
+						"h": 64
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 4,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_marker_silent.png",
+					"region": {
+						"x": 1516,
+						"y": 1948,
+						"w": 43,
+						"h": 60
+					},
+					"margin": {
+						"x": 2,
+						"y": 0,
+						"w": 3,
+						"h": 0
+					}
+				},
+				{
+					"filename": "small_scrollbar_track_edge.png",
+					"region": {
+						"x": 1920,
+						"y": 883,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				}
+			]
+		},
+		{
+			"image": "ui_atlas_1.png",
+			"size": {
+				"w": 2048,
+				"h": 2048
+			},
+			"sprites": [
+				{
+					"filename": "card/ancient_banner.png",
+					"region": {
+						"x": 1,
+						"y": 1,
+						"w": 671,
+						"h": 182
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_banner.png",
+					"region": {
+						"x": 674,
+						"y": 1,
+						"w": 653,
+						"h": 145
+					},
+					"margin": {
+						"x": 1,
+						"y": 23,
+						"w": 2,
+						"h": 25
+					}
+				},
+				{
+					"filename": "card/card_portrait_border_attack_s.png",
+					"region": {
+						"x": 1329,
+						"y": 1,
+						"w": 551,
+						"h": 420
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "compendium.png",
+					"region": {
+						"x": 1882,
+						"y": 1,
+						"w": 140,
+						"h": 149
+					},
+					"margin": {
+						"x": 6,
+						"y": 0,
+						"w": 14,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_ping.png",
+					"region": {
+						"x": 1882,
+						"y": 152,
+						"w": 128,
+						"h": 128
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "small_scrollbar_track_center.png",
+					"region": {
+						"x": 2012,
+						"y": 152,
+						"w": 32,
+						"h": 32
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "small_scrollbar_train.png",
+					"region": {
+						"x": 2012,
+						"y": 186,
+						"w": 28,
+						"h": 52
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "settings_tiny_right_arrow.png",
+					"region": {
+						"x": 1882,
+						"y": 282,
+						"w": 109,
+						"h": 120
+					},
+					"margin": {
+						"x": 11,
+						"y": 4,
+						"w": 19,
+						"h": 8
+					}
+				},
+				{
+					"filename": "map/icons/map_marker_ironclad.png",
+					"region": {
+						"x": 1993,
+						"y": 282,
+						"w": 46,
+						"h": 52
+					},
+					"margin": {
+						"x": 0,
+						"y": 5,
+						"w": 0,
+						"h": 8
+					}
+				},
+				{
+					"filename": "map/icons/map_marker_defect.png",
+					"region": {
+						"x": 1993,
+						"y": 336,
+						"w": 43,
+						"h": 60
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 3,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_marker_necrobinder.png",
+					"region": {
+						"x": 1993,
+						"y": 398,
+						"w": 38,
+						"h": 60
+					},
+					"margin": {
+						"x": 5,
+						"y": 0,
+						"w": 8,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/card_enchant_s.png",
+					"region": {
+						"x": 1882,
+						"y": 404,
+						"w": 100,
+						"h": 76
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "cursor_eraser_tilted.png",
+					"region": {
+						"x": 1984,
+						"y": 460,
+						"w": 63,
+						"h": 57
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 1,
+						"h": 7
+					}
+				},
+				{
+					"filename": "card/card_portrait_border_power_s.png",
+					"region": {
+						"x": 674,
+						"y": 148,
+						"w": 551,
+						"h": 420
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_unknown_elite.png",
+					"region": {
+						"x": 1227,
+						"y": 148,
+						"w": 89,
+						"h": 70
+					},
+					"margin": {
+						"x": 19,
+						"y": 27,
+						"w": 39,
+						"h": 58
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_ascension.png",
+					"region": {
+						"x": 1227,
+						"y": 220,
+						"w": 88,
+						"h": 128
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_chest.png",
+					"region": {
+						"x": 1227,
+						"y": 350,
+						"w": 84,
+						"h": 59
+					},
+					"margin": {
+						"x": 23,
+						"y": 34,
+						"w": 44,
+						"h": 69
+					}
+				},
+				{
+					"filename": "map/icons/map_unknown_chest.png",
+					"region": {
+						"x": 1227,
+						"y": 411,
+						"w": 84,
+						"h": 59
+					},
+					"margin": {
+						"x": 23,
+						"y": 34,
+						"w": 44,
+						"h": 69
+					}
+				},
+				{
+					"filename": "card/card_portrait_border_skill_s.png",
+					"region": {
+						"x": 1313,
+						"y": 423,
+						"w": 551,
+						"h": 420
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/icons/map_burly_monster.png",
+					"region": {
+						"x": 1866,
+						"y": 519,
+						"w": 180,
+						"h": 185
+					},
+					"margin": {
+						"x": 37,
+						"y": 8,
+						"w": 76,
+						"h": 71
+					}
+				},
+				{
+					"filename": "top_bar/timer_icon.png",
+					"region": {
+						"x": 1227,
+						"y": 472,
+						"w": 80,
+						"h": 79
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "top_bar/top_bar_floor.png",
+					"region": {
+						"x": 1227,
+						"y": 553,
+						"w": 80,
+						"h": 75
+					},
+					"margin": {
+						"x": 16,
+						"y": 18,
+						"w": 26,
+						"h": 31
+					}
+				},
+				{
+					"filename": "peek_button.png",
+					"region": {
+						"x": 1866,
+						"y": 706,
+						"w": 166,
+						"h": 121
+					},
+					"margin": {
+						"x": 2,
+						"y": 22,
+						"w": 4,
+						"h": 49
+					}
+				},
+				{
+					"filename": "card/energy_quest.png",
+					"region": {
+						"x": 1866,
+						"y": 829,
+						"w": 74,
+						"h": 74
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/energy_regent.png",
+					"region": {
+						"x": 1942,
+						"y": 829,
+						"w": 74,
+						"h": 74
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "proceed_button.png",
+					"region": {
+						"x": 1,
+						"y": 185,
+						"w": 381,
+						"h": 178
+					},
+					"margin": {
+						"x": 6,
+						"y": 7,
+						"w": 12,
+						"h": 14
+					}
+				},
+				{
+					"filename": "map/placeholder/lagavulin_matriarch_boss_icon.png",
+					"region": {
+						"x": 384,
+						"y": 185,
+						"w": 288,
+						"h": 245
+					},
+					"margin": {
+						"x": 0,
+						"y": 27,
+						"w": 12,
+						"h": 55
+					}
+				},
+				{
+					"filename": "map/map_legend.png",
+					"region": {
+						"x": 1,
+						"y": 365,
+						"w": 368,
+						"h": 512
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/placeholder/the_kin_boss_icon.png",
+					"region": {
+						"x": 371,
+						"y": 432,
+						"w": 282,
+						"h": 259
+					},
+					"margin": {
+						"x": 8,
+						"y": 22,
+						"w": 18,
+						"h": 41
+					}
+				},
+				{
+					"filename": "map/placeholder/knowledge_demon_boss_icon.png",
+					"region": {
+						"x": 655,
+						"y": 570,
+						"w": 267,
+						"h": 229
+					},
+					"margin": {
+						"x": 18,
+						"y": 44,
+						"w": 33,
+						"h": 71
+					}
+				},
+				{
+					"filename": "confirm_button.png",
+					"region": {
+						"x": 371,
+						"y": 693,
+						"w": 257,
+						"h": 132
+					},
+					"margin": {
+						"x": 43,
+						"y": 25,
+						"w": 43,
+						"h": 70
+					}
+				},
+				{
+					"filename": "map/icons/map_spoils_map_marker.png",
+					"region": {
+						"x": 924,
+						"y": 570,
+						"w": 256,
+						"h": 256
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "back_button.png",
+					"region": {
+						"x": 630,
+						"y": 801,
+						"w": 256,
+						"h": 131
+					},
+					"margin": {
+						"x": 0,
+						"y": 26,
+						"w": 44,
+						"h": 71
+					}
+				},
+				{
+					"filename": "map/placeholder/test_subject_boss_icon.png",
+					"region": {
+						"x": 371,
+						"y": 827,
+						"w": 250,
+						"h": 229
+					},
+					"margin": {
+						"x": 35,
+						"y": 45,
+						"w": 50,
+						"h": 71
+					}
+				},
+				{
+					"filename": "card/energy_silent.png",
+					"region": {
+						"x": 1182,
+						"y": 630,
+						"w": 74,
+						"h": 74
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "card/energy_necrobinder.png",
+					"region": {
+						"x": 1182,
+						"y": 706,
+						"w": 74,
+						"h": 69
+					},
+					"margin": {
+						"x": 0,
+						"y": 3,
+						"w": 0,
+						"h": 5
+					}
+				},
+				{
+					"filename": "map/icons/map_unknown.png",
+					"region": {
+						"x": 1182,
+						"y": 777,
+						"w": 73,
+						"h": 72
+					},
+					"margin": {
+						"x": 27,
+						"y": 28,
+						"w": 55,
+						"h": 56
+					}
+				},
+				{
+					"filename": "map/placeholder/vantom_boss_icon.png",
+					"region": {
+						"x": 888,
+						"y": 828,
+						"w": 250,
+						"h": 114
+					},
+					"margin": {
+						"x": 2,
+						"y": 73,
+						"w": 6,
+						"h": 142
+					}
+				},
+				{
+					"filename": "map/placeholder/infested_boss_icon.png",
+					"region": {
+						"x": 623,
+						"y": 934,
+						"w": 234,
+						"h": 168
+					},
+					"margin": {
+						"x": 34,
+						"y": 66,
+						"w": 66,
+						"h": 132
+					}
+				},
+				{
+					"filename": "map/placeholder/soul_fysh_boss_icon.png",
+					"region": {
+						"x": 1,
+						"y": 879,
+						"w": 234,
+						"h": 168
+					},
+					"margin": {
+						"x": 34,
+						"y": 66,
+						"w": 66,
+						"h": 132
+					}
+				},
+				{
+					"filename": "card/energy_defect.png",
+					"region": {
+						"x": 237,
+						"y": 879,
+						"w": 71,
+						"h": 72
+					},
+					"margin": {
+						"x": 1,
+						"y": 1,
+						"w": 3,
+						"h": 2
+					}
+				},
+				{
+					"filename": "cursor_pencil.png",
+					"region": {
+						"x": 310,
+						"y": 879,
+						"w": 59,
+						"h": 64
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 5,
+						"h": 0
+					}
+				},
+				{
+					"filename": "scrollbar_train_large.png",
+					"region": {
+						"x": 310,
+						"y": 945,
+						"w": 58,
+						"h": 89
+					},
+					"margin": {
+						"x": 3,
+						"y": 3,
+						"w": 6,
+						"h": 6
+					}
+				},
+				{
+					"filename": "card/energy_colorless.png",
+					"region": {
+						"x": 237,
+						"y": 953,
+						"w": 71,
+						"h": 71
+					},
+					"margin": {
+						"x": 1,
+						"y": 2,
+						"w": 3,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/icons/map_shop.png",
+					"region": {
+						"x": 237,
+						"y": 1026,
+						"w": 69,
+						"h": 72
+					},
+					"margin": {
+						"x": 29,
+						"y": 30,
+						"w": 59,
+						"h": 56
+					}
+				},
+				{
+					"filename": "cursor_eraser.png",
+					"region": {
+						"x": 308,
+						"y": 1036,
+						"w": 60,
+						"h": 62
+					},
+					"margin": {
+						"x": 1,
+						"y": 0,
+						"w": 4,
+						"h": 2
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_tezcatara_outline.png",
+					"region": {
+						"x": 1,
+						"y": 1049,
+						"w": 208,
+						"h": 189
+					},
+					"margin": {
+						"x": 0,
+						"y": 13,
+						"w": 0,
+						"h": 19
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_neow_outline.png",
+					"region": {
+						"x": 370,
+						"y": 1058,
+						"w": 208,
+						"h": 172
+					},
+					"margin": {
+						"x": 0,
+						"y": 18,
+						"w": 0,
+						"h": 36
+					}
+				},
+				{
+					"filename": "map/icons/map_unknown_shop.png",
+					"region": {
+						"x": 211,
+						"y": 1100,
+						"w": 69,
+						"h": 72
+					},
+					"margin": {
+						"x": 29,
+						"y": 30,
+						"w": 59,
+						"h": 56
+					}
+				},
+				{
+					"filename": "cursor_pencil_tilted.png",
+					"region": {
+						"x": 282,
+						"y": 1100,
+						"w": 64,
+						"h": 62
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 2
+					}
+				},
+				{
+					"filename": "scrollbar_track_edge2.png",
+					"region": {
+						"x": 282,
+						"y": 1164,
+						"w": 60,
+						"h": 36
+					},
+					"margin": {
+						"x": 2,
+						"y": 28,
+						"w": 4,
+						"h": 28
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_neow.png",
+					"region": {
+						"x": 1257,
+						"y": 845,
+						"w": 204,
+						"h": 166
+					},
+					"margin": {
+						"x": 2,
+						"y": 21,
+						"w": 4,
+						"h": 42
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_tezcatara.png",
+					"region": {
+						"x": 859,
+						"y": 944,
+						"w": 203,
+						"h": 183
+					},
+					"margin": {
+						"x": 3,
+						"y": 16,
+						"w": 5,
+						"h": 25
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_vakuu.png",
+					"region": {
+						"x": 1064,
+						"y": 944,
+						"w": 190,
+						"h": 202
+					},
+					"margin": {
+						"x": 7,
+						"y": 3,
+						"w": 18,
+						"h": 6
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_tanx_outline.png",
+					"region": {
+						"x": 580,
+						"y": 1104,
+						"w": 202,
+						"h": 205
+					},
+					"margin": {
+						"x": 3,
+						"y": 0,
+						"w": 6,
+						"h": 3
+					}
+				},
+				{
+					"filename": "map/map_eraser_1.png",
+					"region": {
+						"x": 784,
+						"y": 1129,
+						"w": 202,
+						"h": 202
+					},
+					"margin": {
+						"x": 35,
+						"y": 35,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "map/map_pencil_1.png",
+					"region": {
+						"x": 211,
+						"y": 1232,
+						"w": 202,
+						"h": 202
+					},
+					"margin": {
+						"x": 35,
+						"y": 35,
+						"w": 70,
+						"h": 70
+					}
+				},
+				{
+					"filename": "map/map_clean_up.png",
+					"region": {
+						"x": 1,
+						"y": 1240,
+						"w": 200,
+						"h": 200
+					},
+					"margin": {
+						"x": 0,
+						"y": 0,
+						"w": 0,
+						"h": 0
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_pael.png",
+					"region": {
+						"x": 415,
+						"y": 1311,
+						"w": 196,
+						"h": 202
+					},
+					"margin": {
+						"x": 5,
+						"y": 3,
+						"w": 12,
+						"h": 6
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_tanx.png",
+					"region": {
+						"x": 203,
+						"y": 1436,
+						"w": 196,
+						"h": 200
+					},
+					"margin": {
+						"x": 6,
+						"y": 2,
+						"w": 12,
+						"h": 8
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_orobas_outline.png",
+					"region": {
+						"x": 1,
+						"y": 1442,
+						"w": 192,
+						"h": 201
+					},
+					"margin": {
+						"x": 4,
+						"y": 2,
+						"w": 16,
+						"h": 7
+					}
+				},
+				{
+					"filename": "map/ancients/ancient_node_orobas.png",
+					"region": {
+						"x": 1,
+						"y": 1645,
+						"w": 185,
+						"h": 194
+					},
+					"margin": {
+						"x": 7,
+						"y": 5,
+						"w": 23,
+						"h": 14
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:430ac67df3a9beeb6466dddc6563e623:d4fed7b8efeea56ab9163c377e467cda:0e8860db28aba0ea6b9f2fe5f306a18f$"
+	}
+}

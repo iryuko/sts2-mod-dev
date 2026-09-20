@@ -1,0 +1,205 @@
+[gd_scene load_steps=11 format=3 uid="uid://bfnqywlr4306e"]
+
+[ext_resource type="Script" uid="uid://jey7qn0rnfl0" path="res://src/Core/Nodes/Events/NAncientEventLayout.cs" id="1_nb4me"]
+[ext_resource type="Script" uid="uid://byg8e8nwmy7km" path="res://src/Core/Nodes/Screens/NAncientBgContainer.cs" id="2_xn3a5"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="5_ibxqn"]
+[ext_resource type="Script" uid="uid://dfls1sumgwb36" path="res://src/Core/Nodes/Events/NAncientDialogueHitbox.cs" id="5_spk35"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="6_m8isc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_ohlth"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_spk35"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="7_3wi56"]
+[ext_resource type="Texture2D" uid="uid://bn5v87murqe3o" path="res://images/packed/common_ui/little_arrow.png" id="9_3wi56"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f01r0"]
+resource_local_to_scene = true
+shader = ExtResource("6_spk35")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="AncientEventLayout" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nb4me")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="AncientBgContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_xn3a5")
+
+[node name="VfxContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -428.0
+offset_top = -356.0
+offset_right = 428.0
+offset_bottom = -221.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.247059)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("5_ibxqn")
+theme_override_font_sizes/font_size = 42
+text = "- Event Name -"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("6_ohlth")
+MinFontSize = 32
+MaxFontSize = 42
+
+[node name="ContentContainer" type="Control" parent="."]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -580.0
+offset_top = -760.0
+offset_right = 580.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Content" type="VBoxContainer" parent="ContentContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_right = 500.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 12
+alignment = 2
+metadata/_edit_group_ = true
+
+[node name="DialogueContainer" type="VBoxContainer" parent="ContentContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -4
+
+[node name="OptionsContainer" type="VBoxContainer" parent="ContentContainer/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -4
+
+[node name="DialogueHitbox" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_spk35")
+
+[node name="FakeNextButtonContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="FakeNextButton" type="HBoxContainer" parent="FakeNextButtonContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 268.0
+offset_top = -80.0
+offset_right = 663.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 2
+
+[node name="ControllerIcon" type="TextureRect" parent="FakeNextButtonContainer/FakeNextButton"]
+material = SubResource("ShaderMaterial_f01r0")
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("7_3wi56")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="FakeNextButtonContainer/FakeNextButton"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.752941)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_m8isc")
+theme_override_font_sizes/font_size = 24
+text = "Continue"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("6_ohlth")
+AutoSizeEnabled = false
+
+[node name="Control" type="Control" parent="FakeNextButtonContainer/FakeNextButton"]
+custom_minimum_size = Vector2(36, 48)
+layout_mode = 2
+
+[node name="Arrow" type="TextureRect" parent="FakeNextButtonContainer/FakeNextButton/Control"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+custom_minimum_size = Vector2(24, 48)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.45800003
+anchor_right = 0.5
+anchor_bottom = 0.45800003
+offset_left = -12.0
+offset_top = -23.984001
+offset_right = 12.0
+offset_bottom = 24.015999
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(12, 24)
+texture = ExtResource("9_3wi56")
+expand_mode = 1
+stretch_mode = 5

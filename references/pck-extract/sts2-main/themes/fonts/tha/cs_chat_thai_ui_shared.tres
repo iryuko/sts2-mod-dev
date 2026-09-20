@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://cnmdhax8j0fof"]
+
+[ext_resource type="FontFile" uid="uid://df44f5jlsgivq" path="res://fonts/tha/CSChatThaiUI.ttf" id="1_do0wj"]
+
+[resource]
+base_font = ExtResource("1_do0wj")

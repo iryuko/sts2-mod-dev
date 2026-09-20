@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://esy1uoiyjigf"]
+
+[ext_resource type="Script" uid="uid://bmho78cxrp2mm" path="res://src/Core/Nodes/Vfx/NEpochHighlightVfx.cs" id="1_dohjj"]
+[ext_resource type="Texture2D" uid="uid://c4mds13m5buvv" path="res://images/timeline/ui/slot_outline.png" id="2_swx7f"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_ksaqr"]
+_data = [Vector2(0.00786164, 0), 0.0, 9.38981, 0, 0, Vector2(0.265723, 1), 0.0, 0.0, 0, 0, Vector2(0.523585, 0.523051), -2.2174, -2.2174, 0, 0, Vector2(1, 0), -0.266626, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_vc27h"]
+curve = SubResource("Curve_ksaqr")
+
+[sub_resource type="Curve" id="Curve_5ymgg"]
+_limits = [0.0, 1.6, 0.0, 1.0]
+_data = [Vector2(0, 1.0042), 0.0, 0.0, 0, 0, Vector2(1, 1.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_65quv"]
+_limits = [0.0, 1.6, 0.0, 1.0]
+_data = [Vector2(0, 1.0042), 0.0, 0.0, 0, 0, Vector2(1, 1.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_s6d4o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_wyye5"]
+curve_x = SubResource("Curve_5ymgg")
+curve_y = SubResource("Curve_65quv")
+curve_z = SubResource("Curve_s6d4o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0qsve"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_wyye5")
+alpha_curve = SubResource("CurveTexture_vc27h")
+
+[node name="SuctionVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dohjj")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.9000001, 0.39999998, 1, 0.7529412)
+material = ExtResource("shared_additive_mat")
+scale = Vector2(0.5, 0.5)
+amount = 3
+texture = ExtResource("2_swx7f")
+lifetime = 2.2
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_0qsve")

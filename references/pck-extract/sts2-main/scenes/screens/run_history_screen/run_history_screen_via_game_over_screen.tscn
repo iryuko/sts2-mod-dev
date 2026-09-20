@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpj30qtec2eas"]
+
+[ext_resource type="PackedScene" uid="uid://bww2pmk6vp4lp" path="res://scenes/screens/run_history_screen/run_history.tscn" id="1_t3lga"]
+
+[node name="RunHistoryScreenViaGameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Backstop" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.27, 0.0675, 1)
+
+[node name="RunHistory" parent="." instance=ExtResource("1_t3lga")]
+layout_mode = 1

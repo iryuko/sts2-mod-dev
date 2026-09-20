@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://r2arys7ygxar"]
+
+[ext_resource type="Script" uid="uid://coh52ajl04nxt" path="res://src/Core/Nodes/Multiplayer/NMultiplayerTimeoutOverlay.cs" id="1_y4ktm"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_b85wt"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_b85wt"]
+[ext_resource type="Texture2D" uid="uid://cocaj7qjgglsd" path="res://images/packed/common_ui/network_problem_indicator.png" id="4_j1kc6"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_b85wt"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_l1s3y"]
+
+[node name="MultiplayerTimeoutOverlay" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y4ktm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -614.5
+offset_top = -314.0
+offset_right = 614.5
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_b85wt")
+theme_override_font_sizes/font_size = 72
+text = "Connection Interrupted"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_b85wt")
+MinFontSize = 48
+MaxFontSize = 72
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_j1kc6")
+
+[node name="Description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -708.0
+offset_top = 168.0
+offset_right = 708.0
+offset_bottom = 262.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("5_b85wt")
+theme_override_font_sizes/normal_font_size = 48
+theme_override_font_sizes/bold_font_size = 48
+theme_override_font_sizes/bold_italics_font_size = 48
+theme_override_font_sizes/italics_font_size = 48
+theme_override_font_sizes/mono_font_size = 48
+bbcode_enabled = true
+text = "[thinky_dots]Waiting for host to respond...[/thinky_dots]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_l1s3y")
+MinFontSize = 32
+MaxFontSize = 48
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"

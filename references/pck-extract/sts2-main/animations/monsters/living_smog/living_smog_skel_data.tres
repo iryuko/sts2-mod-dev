@@ -1,0 +1,38 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://bpul2ufvuhuon"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://ct4slamxe86om" path="res://animations/monsters/living_smog/living_smog.atlas" id="1_f5dq1"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dvglws6vsie6j" path="res://animations/monsters/living_smog/living_smog.skel" id="2_lvmau"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_dewun"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_f5dq1"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lvmau"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lt7iq"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_roj2m"]
+from = "attack"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_r5722"]
+from = "debuff"
+to = "idle_loop"
+mix = 0.06
+
+[resource]
+atlas_res = ExtResource("1_f5dq1")
+skeleton_file_res = ExtResource("2_lvmau")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_dewun"), SubResource("SpineAnimationMix_f5dq1"), SubResource("SpineAnimationMix_lvmau"), SubResource("SpineAnimationMix_lt7iq"), SubResource("SpineAnimationMix_roj2m"), SubResource("SpineAnimationMix_r5722")]

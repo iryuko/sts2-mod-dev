@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://cllrgkadmoo75"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://d211irxmyfyab" path="res://animations/monsters/seapunk/seapunk.atlas" id="1_rtpyf"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d367bf5r48pir" path="res://animations/monsters/seapunk/seapunk.skel" id="2_rok4l"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_rq51o"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qg8ao"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_np2i8"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qcw0o"]
+from = "attack"
+to = "attack"
+
+[resource]
+atlas_res = ExtResource("1_rtpyf")
+skeleton_file_res = ExtResource("2_rok4l")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_rq51o"), SubResource("SpineAnimationMix_qg8ao"), SubResource("SpineAnimationMix_np2i8"), SubResource("SpineAnimationMix_qcw0o")]

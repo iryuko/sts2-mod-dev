@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cf07xueehrjqk"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://2k4l3xobhc71" path="res://animations/backgrounds/merchant_room/hand/merchanthand.atlas" id="1_u1xje"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dmt5gfonj6po0" path="res://animations/backgrounds/merchant_room/hand/merchanthand.skel" id="2_ccouv"]
+
+[resource]
+atlas_res = ExtResource("1_u1xje")
+skeleton_file_res = ExtResource("2_ccouv")

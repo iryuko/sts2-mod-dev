@@ -18,12 +18,21 @@ internal sealed class UnattendedPiano : EventModel
     private const decimal LeaveHealAmount = 12m;
     private const decimal ContinueHpLoss = 6m;
 
-    private readonly List<CardModel> _remainingShadows =
-    [
-        ModelDb.Card<ShadowOfThePastI>(),
-        ModelDb.Card<ShadowOfThePastII>(),
-        ModelDb.Card<ShadowOfThePastIII>()
-    ];
+    private List<CardModel>? _remainingShadows;
+
+    private List<CardModel> RemainingShadows
+    {
+        get
+        {
+            AssertMutable();
+            return _remainingShadows ??=
+            [
+                ModelDb.Card<ShadowOfThePastI>(),
+                ModelDb.Card<ShadowOfThePastII>(),
+                ModelDb.Card<ShadowOfThePastIII>()
+            ];
+        }
+    }
 
     public override string LocTable => "events";
 
@@ -45,27 +54,7 @@ internal sealed class UnattendedPiano : EventModel
 
     public override bool IsAllowed(IRunState runState)
     {
-        if (runState is not RunState concreteRunState)
-        {
-            return false;
-        }
-
-        if (!concreteRunState.Players.Any(player => player.Character is Togawasakiko))
-        {
-            return false;
-        }
-
-        return !ModSupport.HasVisitedEvent(concreteRunState, this);
-    }
-
-    public override async Task AfterEventStarted()
-    {
-        if (Owner?.RunState is RunState runState)
-        {
-            ModSupport.MarkEventVisited(runState, this);
-        }
-
-        await Task.CompletedTask;
+        return runState.Players.All(player => player.Character is Togawasakiko);
     }
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
@@ -92,7 +81,6 @@ internal sealed class UnattendedPiano : EventModel
             await MegaCrit.Sts2.Core.Commands.CreatureCmd.Heal(Owner.Creature, LeaveHealAmount, false);
         }
 
-        ModSupport.StopShadowQuestionRoomEventMusic();
         SetEventFinished(Loc("pages.LEAVE.description"));
     }
 
@@ -116,21 +104,24 @@ internal sealed class UnattendedPiano : EventModel
 
     private Task StopPlaying()
     {
-        ModSupport.StopShadowQuestionRoomEventMusic();
         SetEventFinished(Loc("pages.STOP.description"));
         return Task.CompletedTask;
     }
 
     private Task FinalLeave()
     {
-        ModSupport.StopShadowQuestionRoomEventMusic();
         SetEventFinished(Loc("pages.FINAL_EXIT.description"));
         return Task.CompletedTask;
     }
 
+    protected override void OnEventFinished()
+    {
+        ModSupport.StopShadowQuestionRoomEventMusic();
+    }
+
     private async Task AdvancePlayingState(int stage)
     {
-        if (_remainingShadows.Count == 0)
+        if (RemainingShadows.Count == 0)
         {
             SetEventState(
                 Loc("pages.FINAL.description"),
@@ -166,7 +157,7 @@ internal sealed class UnattendedPiano : EventModel
 
     private int NextPlayingStage()
     {
-        return _remainingShadows.Count switch
+        return RemainingShadows.Count switch
         {
             2 => 2,
             1 => 3,
@@ -176,14 +167,14 @@ internal sealed class UnattendedPiano : EventModel
 
     private async Task GiveRandomRemainingShadow()
     {
-        if (Owner == null || _remainingShadows.Count == 0)
+        if (Owner == null || RemainingShadows.Count == 0)
         {
             return;
         }
 
-        int index = Owner.PlayerRng.Rewards.NextInt(_remainingShadows.Count);
-        CardModel selected = _remainingShadows[index];
-        _remainingShadows.RemoveAt(index);
+        int index = Owner.PlayerRng.Rewards.NextInt(RemainingShadows.Count);
+        CardModel selected = RemainingShadows[index];
+        RemainingShadows.RemoveAt(index);
         await CardPileCmd.AddCursesToDeck([selected], Owner);
     }
 

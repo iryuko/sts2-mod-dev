@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=3 uid="uid://dby4dbrrpmjf6"]
+
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="1_701sy"]
+[ext_resource type="Script" uid="uid://crgipmr2blob0" path="res://src/Core/Nodes/TopBar/NTopBarDeckButton.cs" id="2_ftxxx"]
+[ext_resource type="Texture2D" uid="uid://cnw38r1" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_deck.tres" id="3_n4y40"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="4_txuf5"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_oq2vo"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="6_oq2vo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6p27p"]
+shader = ExtResource("1_701sy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dobg"]
+shader = ExtResource("1_701sy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="FontVariation" id="FontVariation_culo4"]
+base_font = ExtResource("4_txuf5")
+spacing_glyph = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1sul"]
+resource_local_to_scene = true
+shader = ExtResource("1_701sy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="TopBarDeckButton" type="Control"]
+material = SubResource("ShaderMaterial_6p27p")
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_ftxxx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Control"]
+material = SubResource("ShaderMaterial_0dobg")
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(36, 34)
+mouse_filter = 2
+texture = ExtResource("3_n4y40")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="DeckCardCount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -36.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(14, 18)
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.0980392, 0.160784, 0.188235, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_culo4")
+theme_override_font_sizes/font_size = 28
+text = "99"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("5_oq2vo")
+AutoSizeEnabled = false
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_t1sul")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -3.0
+offset_right = 112.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("6_oq2vo")
+expand_mode = 1
+stretch_mode = 5

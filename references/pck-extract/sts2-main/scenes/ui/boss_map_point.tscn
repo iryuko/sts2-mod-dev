@@ -1,0 +1,210 @@
+[gd_scene load_steps=7 format=3 uid="uid://cey7a10wceevo"]
+
+[ext_resource type="Script" uid="uid://cj08xxox4ycxc" path="res://src/Core/Nodes/Screens/Map/NBossMapPoint.cs" id="1_hvxeu"]
+[ext_resource type="Shader" uid="uid://bglfjqm14x8k3" path="res://shaders/boss_map_point.gdshader" id="3_7qtlb"]
+[ext_resource type="PackedScene" uid="uid://bf5067m5nxvaw" path="res://scenes/ui/multiplayer_vote_container.tscn" id="5_spjb7"]
+[ext_resource type="Script" uid="uid://x0d65dc506fq" path="res://src/Core/Nodes/Combat/NSelectionReticle.cs" id="6_qihtq"]
+[ext_resource type="Texture2D" uid="uid://hm3yndjsncmt" path="res://images/ui/combat/combat_reticle.png" id="7_hp0x5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esg6y"]
+resource_local_to_scene = true
+shader = ExtResource("3_7qtlb")
+shader_parameter/map_color = Color(0.671, 0.58, 0.478, 1)
+shader_parameter/black_layer_color = Color(0, 0, 0, 1)
+
+[node name="BossMapPoint" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1147.0
+offset_top = -693.0
+offset_right = -773.0
+offset_bottom = -387.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(187, 153)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_hvxeu")
+_ignoreDragThreshold = 30.0
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="SpriteContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(187, 153)
+
+[node name="SpineSprite" type="SpineSprite" parent="SpriteContainer"]
+normal_material = SubResource("ShaderMaterial_esg6y")
+unique_name_in_owner = true
+position = Vector2(-187, -153)
+scale = Vector2(0.19, 0.19)
+
+[node name="PlaceholderImage" type="TextureRect" parent="SpriteContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(374, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -175.0
+offset_right = 187.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(187, 175)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlaceholderOutline" type="TextureRect" parent="SpriteContainer/PlaceholderImage"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(187, 175)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MapPointVoteContainer" parent="." instance=ExtResource("5_spjb7")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -32.0
+offset_right = 123.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionReticle" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(187, 153)
+mouse_filter = 2
+script = ExtResource("6_qihtq")
+
+[node name="Border" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Shadow" type="TextureRect" parent="SelectionReticle/Border"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 36.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Border2" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = 23.0
+offset_right = 6.0
+offset_bottom = 55.0
+grow_vertical = 0
+scale = Vector2(1, -1)
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Shadow2" type="TextureRect" parent="SelectionReticle/Border2"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 36.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Border3" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 25.0
+offset_top = -25.0
+offset_right = 57.0
+offset_bottom = 7.0
+grow_horizontal = 0
+scale = Vector2(-1, 1)
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Shadow3" type="TextureRect" parent="SelectionReticle/Border3"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = 3.0
+offset_right = 28.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Border4" type="TextureRect" parent="SelectionReticle"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 24.0
+offset_right = 57.0
+offset_bottom = 56.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(-1, -1)
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1
+
+[node name="Shadow4" type="TextureRect" parent="SelectionReticle/Border4"]
+self_modulate = Color(0, 0, 0, 0.501961)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 28.0
+offset_bottom = 29.0
+mouse_filter = 2
+texture = ExtResource("7_hp0x5")
+expand_mode = 1

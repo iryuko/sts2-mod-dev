@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://bauuoi3g0clup"]
+
+[ext_resource type="Texture2D" uid="uid://c0kl3so8v3h8w" path="res://images/vfx/shared_use/blur_diamond_vfx.png" id="1_2gdva"]
+[ext_resource type="Script" uid="uid://bkc3dje6ys0uo" path="res://src/Core/Nodes/Vfx/NLineBurstVfx.cs" id="2_qpvn7"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_cb7ww"]
+_data = [Vector2(0.0420475, 0), 0.0, 1.23348, 0, 0, Vector2(0.261426, 1), 0.0571727, 0.0, 0, 0, Vector2(0.771481, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -7.589, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_iofk2"]
+width = 64
+curve = SubResource("Curve_cb7ww")
+
+[sub_resource type="Curve" id="Curve_x8bwc"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.181846), 0.0, 0.127641, 0, 0, Vector2(0.748307, 1.04437), 1.12174, 1.12174, 0, 0, Vector2(1, 1.11325), 0.080293, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_1o20c"]
+_limits = [0.0, 1.5, 0.0, 1.0]
+_data = [Vector2(0, 0.310281), 0.0, 1.59668, 0, 0, Vector2(0.530165, 1.205), 0.849014, 0.849014, 0, 0, Vector2(1, 1.38862), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_nywjy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_g0hgd"]
+width = 128
+curve_x = SubResource("Curve_x8bwc")
+curve_y = SubResource("Curve_1o20c")
+curve_z = SubResource("Curve_nywjy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l2pvp"]
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 6000.0
+initial_velocity_max = 8000.0
+gravity = Vector3(0, 98, 0)
+scale_min = 10.0
+scale_max = 25.0
+scale_curve = SubResource("CurveXYZTexture_g0hgd")
+color = Color(0.74, 1, 0.956667, 1)
+alpha_curve = SubResource("CurveTexture_iofk2")
+hue_variation_min = -0.03
+hue_variation_max = 0.03
+
+[node name="LineBurstVfx" type="GPUParticles2D"]
+material = ExtResource("shared_additive_mat")
+emitting = false
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_l2pvp")
+texture = ExtResource("1_2gdva")
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+script = ExtResource("2_qpvn7")

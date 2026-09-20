@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://umgls2qd5ney"]
+
+[ext_resource type="Script" uid="uid://c3kydsvjj5sph" path="res://src/Core/Nodes/Vfx/NMapNodeSelectVfx.cs" id="1_2l14v"]
+[ext_resource type="Texture2D" uid="uid://1wc3p3n7fakr" path="res://images/vfx/brush_particle_2.png" id="3_uehl5"]
+
+[sub_resource type="Curve" id="Curve_vlbmx"]
+_data = [Vector2(0, 0), 0.0, 0.127708, 0, 0, Vector2(0.454365, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.595791, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8qt5v"]
+curve = SubResource("Curve_vlbmx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_56xya"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1.1, 1, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 32.0
+emission_ring_inner_radius = 32.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = 7.99998
+angular_velocity_max = 36.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+radial_velocity_min = 50.0
+radial_velocity_max = 150.0
+damping_min = 16.0
+damping_max = 64.0
+scale_min = 0.25
+scale_max = 1.25
+alpha_curve = SubResource("CurveTexture_8qt5v")
+turbulence_noise_strength = 0.76
+turbulence_noise_scale = 2.586
+turbulence_noise_speed_random = 1.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.2
+
+[node name="MapNodeSelectVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2l14v")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+modulate = Color(0.141176, 0.121569, 0.101961, 0.752941)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_56xya")
+texture = ExtResource("3_uehl5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.75
+randomness = 0.25
+fixed_fps = 60
+fract_delta = false
+local_coords = true

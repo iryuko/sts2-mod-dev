@@ -4,12 +4,13 @@
 
 ## 项目定位
 
-- 当前项目重心是：研究、验证、梳理 STS2 的本地 mod 安装与加载链路。
-- 当前主线聚焦：
+- 本仓库长期定位是：研究、验证、梳理 STS2 的本地 mod 安装与加载链路，并在此基础上开发与稳定本地 mod。
+- 加载链研究已经形成一批历史结论，主要聚焦：
   - manifest 实际位置与最低要求
   - mod 安装位置
   - 加载 gate / warning 同意状态
   - SmokeMod 最小闭环验证
+- 当前正在执行的具体主线，以 `docs/current-status.md` 与 `docs/thread-handoff.md` 的最新描述为准；不要只根据本节旧背景判断当前任务对象。
 - 不要无边界发散到大规模功能开发、未经验证的 API 封装或复杂框架设计。
 
 ## 工作区与游戏目录边界
@@ -45,11 +46,13 @@
 3. `docs/next-task.md`
 4. `docs/thread-handoff.md`
 5. `docs/decisions.md`
+6. `mods/Togawasakiko_in_Slay_the_Spire/docs/current-status.md`
 
 只有当这些文件不足以支撑当前任务时，才按需下钻：
 
 - `docs/index.md`
-- `docs/findings.md`
+- `docs/project-timeline.md`
+- `docs/archive/loading-chain/findings-2026-03-10.md`
 - 其他专题记录
 
 ## 历史日志使用原则

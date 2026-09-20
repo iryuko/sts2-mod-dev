@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bph348ynugekr"]
+
+[ext_resource type="Shader" uid="uid://bfo5hsnp1tplf" path="res://shaders/vfx/ui/vfx_ui_epoch_unlock_chains_shader.gdshader" id="1_2amuk"]
+[ext_resource type="Texture2D" uid="uid://6da033jv5283" path="res://images/vfx/ui/epoch_unlock/ui_epoch_unlock_erosion_exact.png" id="2_x120v"]
+
+[resource]
+shader = ExtResource("1_2amuk")
+shader_parameter/bright_color = Color(1, 1, 1, 1)
+shader_parameter/bright_energy = 1.0
+shader_parameter/bright_enabled = 0.0
+shader_parameter/erosion_texture = ExtResource("2_x120v")
+shader_parameter/erosion_enabled = 0.0
+shader_parameter/erosion_base = -0.10000000149012
+shader_parameter/erosion_offset = 0.05

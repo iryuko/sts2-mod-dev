@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqt7iuxvkoql5"]
+
+[ext_resource type="Texture2D" uid="uid://c1g2axpsoe7kl" path="res://images/vfx/vignette_cloud2.png" id="1_nukfo"]
+[ext_resource type="Script" uid="uid://duyjdxfva211h" path="res://src/Core/Nodes/Vfx/NSmokyVignetteVfx.cs" id="2_smq35"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="SmokyVignette" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 540)
+mouse_filter = 2
+texture = ExtResource("1_nukfo")
+expand_mode = 5
+stretch_mode = 6
+script = ExtResource("2_smq35")
+
+[node name="Highlights" type="TextureRect" parent="."]
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_nukfo")
+expand_mode = 5
+stretch_mode = 6
+flip_v = true

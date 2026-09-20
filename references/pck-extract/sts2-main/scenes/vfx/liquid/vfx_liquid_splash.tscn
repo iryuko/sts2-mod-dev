@@ -1,0 +1,64 @@
+[gd_scene load_steps=14 format=3 uid="uid://3r7e1dbr1dvk"]
+
+[ext_resource type="Material" uid="uid://dhtfl3vwg84xd" path="res://materials/vfx/potion/potion_splash.tres" id="1_fum2s"]
+[ext_resource type="Texture2D" uid="uid://d34u7tc7xm6pc" path="res://images/vfx/potion/potion_splash.png" id="2_783vq"]
+
+[sub_resource type="Gradient" id="Gradient_gj0ch"]
+offsets = PackedFloat32Array(0.243553, 0.504298)
+colors = PackedColorArray(1, 1, 1, 1, 0.7, 0.7, 0.7, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lthr7"]
+gradient = SubResource("Gradient_gj0ch")
+
+[sub_resource type="Curve" id="Curve_xookn"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.00191939), 0.0, -13.1052, 0, 0, Vector2(0.165375, -1), 7.19811, 7.19811, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_acegf"]
+curve_y = SubResource("Curve_xookn")
+
+[sub_resource type="Curve" id="Curve_vfqhl"]
+_data = [Vector2(0, 0.50096), 0.0, 1.58823, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ywtpc"]
+_data = [Vector2(0, 0.50096), 0.0, 2.5806, 0, 0, Vector2(0.503876, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00191939), -5.4635, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_js5px"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_l2fbj"]
+curve_x = SubResource("Curve_vfqhl")
+curve_y = SubResource("Curve_ywtpc")
+curve_z = SubResource("Curve_js5px")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_y0ba4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_y0ba4"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_y0ba4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y0ba4"]
+particle_flag_disable_z = true
+directional_velocity_min = 450.0
+directional_velocity_max = 450.0
+directional_velocity_curve = SubResource("CurveXYZTexture_acegf")
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_l2fbj")
+color_ramp = SubResource("GradientTexture1D_lthr7")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_y0ba4")
+
+[node name="vfx_liquid_splash" type="GPUParticles2D"]
+texture_repeat = 3
+material = ExtResource("1_fum2s")
+emitting = false
+amount = 1
+texture = ExtResource("2_783vq")
+lifetime = 0.45
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_y0ba4")

@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwww38iat6f65"]
+
+[ext_resource type="Script" uid="uid://ceay6gblsruu0" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunLeaderboardRow.cs" id="1_q3uif"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_b12kk"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="3_byfu6"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="4_rpb5o"]
+
+[node name="LeaderboardRow" type="Control"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 626.0
+offset_bottom = 40.0
+script = ExtResource("1_q3uif")
+
+[node name="Rank" type="Label" parent="."]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 84.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_rpb5o")
+theme_override_font_sizes/font_size = 28
+text = "123456"
+vertical_alignment = 1
+script = ExtResource("3_b12kk")
+AutoSizeEnabled = false
+
+[node name="Name" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = -1.0
+offset_right = 428.0
+offset_bottom = 39.0
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("4_rpb5o")
+theme_override_font_sizes/normal_font_size = 20
+text = "Chaosed0,beepoteepo,thebest,carpo"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+script = ExtResource("3_byfu6")
+MinFontSize = 16
+MaxFontSize = 28
+IsVerticallyBound = false
+IsHorizontallyBound = true
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -182.0
+offset_top = -20.3333
+offset_bottom = 20.3333
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_rpb5o")
+theme_override_font_sizes/font_size = 28
+text = "214732034840"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("3_b12kk")
+AutoSizeEnabled = false

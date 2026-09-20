@@ -1,0 +1,84 @@
+[gd_scene load_steps=15 format=3 uid="uid://b0gviidjq56ko"]
+
+[ext_resource type="Texture2D" uid="uid://7oloccuqi8de" path="res://images/vfx/potion/potion_droplet.png" id="1_i2a3u"]
+
+[sub_resource type="Gradient" id="Gradient_lthr7"]
+colors = PackedColorArray(0.7, 0.7, 0.7, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wefho"]
+gradient = SubResource("Gradient_lthr7")
+
+[sub_resource type="Curve" id="Curve_acegf"]
+_data = [Vector2(0, 0), 0.0, 2.86625, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vfqhl"]
+curve = SubResource("Curve_acegf")
+
+[sub_resource type="Curve" id="Curve_l2fbj"]
+_data = [Vector2(1, 1), 0.0, 0.0, 1, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_l02co"]
+curve_y = SubResource("Curve_l2fbj")
+
+[sub_resource type="Curve" id="Curve_ike7h"]
+_data = [Vector2(0, 1), 0.0, -4.82821, 0, 0, Vector2(0.250646, 0.25144), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vo6g6"]
+curve = SubResource("Curve_ike7h")
+
+[sub_resource type="Curve" id="Curve_n2edx"]
+_data = [Vector2(0.503876, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.70884, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8pyfw"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -6.145, 0, 0, Vector2(0.245478, 1.00192), 0.0, 0.0, 0, 0, Vector2(0.498708, 1.00192), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.12023, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_3o76e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vcpbd"]
+curve_x = SubResource("Curve_n2edx")
+curve_y = SubResource("Curve_8pyfw")
+curve_z = SubResource("Curve_3o76e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wefho"]
+lifetime_randomness = 0.75
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 0.5, 1)
+emission_shape = 2
+emission_sphere_radius = 100.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 200.0
+initial_velocity_max = 550.0
+directional_velocity_min = 100.0
+directional_velocity_max = 200.0
+directional_velocity_curve = SubResource("CurveXYZTexture_l02co")
+radial_velocity_min = 500.0
+radial_velocity_max = 500.0
+radial_velocity_curve = SubResource("CurveTexture_vo6g6")
+gravity = Vector3(0, 980, 0)
+damping_min = 0.535
+damping_max = 1.055
+damping_curve = SubResource("CurveTexture_vfqhl")
+scale_min = 0.2
+scale_max = 0.45
+scale_curve = SubResource("CurveXYZTexture_vcpbd")
+color_initial_ramp = SubResource("GradientTexture1D_wefho")
+
+[node name="vfx_liquid_droplets" type="GPUParticles2D"]
+emitting = false
+texture = ExtResource("1_i2a3u")
+lifetime = 0.65
+one_shot = true
+explosiveness = 1.0
+randomness = 0.56
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_wefho")

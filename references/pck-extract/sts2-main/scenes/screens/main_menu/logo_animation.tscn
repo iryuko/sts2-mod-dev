@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://47fw6jnbjtj8"]
+
+[ext_resource type="Script" uid="uid://b30x7j5fr1njw" path="res://src/Core/Nodes/Screens/MainMenu/NLogoAnimation.cs" id="1_etmpl"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bmmhh14hodcd3" path="res://animations/ui/logo/logo_megacrit_animate_skel_data.tres" id="1_rstwr"]
+[ext_resource type="Texture2D" uid="uid://cq7th3dfkh47p" path="res://animations/ui/logo/logo_megacrit_static.png" id="3_etmpl"]
+
+[node name="LogoAnimation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_etmpl")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Bg" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Shadow_TODO" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0, 0, 0, 0.2509804)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -251.0
+offset_right = 251.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_etmpl")
+expand_mode = 1
+
+[node name="Container" type="Control" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="SpineSprite" type="SpineSprite" parent="Container"]
+skeleton_data_res = ExtResource("1_rstwr")
+preview_skin = "default"
+preview_animation = "animation"
+preview_frame = true
+preview_time = 2.55
+unique_name_in_owner = true
+position = Vector2(-214, -190)
+scale = Vector2(0.25, 0.25)

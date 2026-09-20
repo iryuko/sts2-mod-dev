@@ -1,0 +1,31 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://l88yarj7pucn"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bh3sh85hs5s7i" path="res://animations/monsters/leaf_slime_s/leaf_slime_s.atlas" id="1_2kcgc"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dm2e1jivvt0is" path="res://animations/monsters/leaf_slime_s/leaf_slime_s.skel" id="2_epydc"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_sggjf"]
+from = "cast"
+to = "idle_loop"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_r15lw"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_630v7"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_i1mp8"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_trbcl"]
+from = "idle_loop"
+to = "cast"
+
+[resource]
+atlas_res = ExtResource("1_2kcgc")
+skeleton_file_res = ExtResource("2_epydc")
+default_mix = 0.02
+animation_mixes = [SubResource("SpineAnimationMix_sggjf"), SubResource("SpineAnimationMix_r15lw"), SubResource("SpineAnimationMix_630v7"), SubResource("SpineAnimationMix_i1mp8"), SubResource("SpineAnimationMix_trbcl")]

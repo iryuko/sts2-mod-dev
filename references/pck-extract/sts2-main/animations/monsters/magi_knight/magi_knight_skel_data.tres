@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c4mtxvythbly6"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bwhrl7bt5d8p6" path="res://animations/monsters/magi_knight/magi_knight.atlas" id="1_jhhw1"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dgye3dca6vpoe" path="res://animations/monsters/magi_knight/magi_knight.skel" id="2_r54w0"]
+
+[resource]
+atlas_res = ExtResource("1_jhhw1")
+skeleton_file_res = ExtResource("2_r54w0")
+default_mix = 0.05

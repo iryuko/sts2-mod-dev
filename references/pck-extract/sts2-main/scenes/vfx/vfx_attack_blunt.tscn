@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://bawvrm1vpk8m8"]
+
+[ext_resource type="Texture2D" uid="uid://c375qm46lcbvg" path="res://images/vfx/vfx_attack_slash/vfx_attack_slash_00.png" id="1_dousn"]
+[ext_resource type="Texture2D" uid="uid://dp3yg5eauwo4h" path="res://images/vfx/vfx_attack_blunt/vfx_attack_blunt_00.png" id="2_fvrov"]
+[ext_resource type="Texture2D" uid="uid://c16o0ifg7i7jg" path="res://images/vfx/vfx_attack_blunt/vfx_attack_blunt_01.png" id="3_lhotk"]
+[ext_resource type="Texture2D" uid="uid://cldisum2m1boo" path="res://images/vfx/vfx_attack_blunt/vfx_attack_blunt_02.png" id="4_67i4l"]
+[ext_resource type="Texture2D" uid="uid://db4qwo6fhrlsn" path="res://images/vfx/vfx_attack_blunt/vfx_attack_blunt_03.png" id="5_5426h"]
+
+[sub_resource type="Animation" id="Animation_o7vhe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_dousn")]
+}
+
+[sub_resource type="Animation" id="Animation_sn3nh"]
+resource_name = "vfx_attack_blunt"
+length = 0.33334
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_fvrov"), ExtResource("3_lhotk"), ExtResource("4_67i4l"), ExtResource("5_5426h"), null]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23xmb"]
+_data = {
+&"RESET": SubResource("Animation_o7vhe"),
+&"vfx_attack_blunt": SubResource("Animation_sn3nh")
+}
+
+[node name="VfxAttackBlunt" type="Node2D"]
+position = Vector2(953, 583)
+
+[node name="Animation" type="Sprite2D" parent="."]
+texture = ExtResource("1_dousn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_23xmb")
+}
+autoplay = "vfx_attack_blunt"

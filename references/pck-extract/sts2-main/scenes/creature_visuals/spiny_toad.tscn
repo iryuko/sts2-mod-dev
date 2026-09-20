@@ -1,0 +1,146 @@
+[gd_scene load_steps=16 format=3 uid="uid://bspdqpqtwfq4y"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_yyxko"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://b3vsofkyw3hja" path="res://animations/monsters/spiny_toad/spiny_toad_skel_data.tres" id="2_l1f8d"]
+[ext_resource type="Script" uid="uid://bs8ub40jy7ush" path="res://src/Core/Nodes/Vfx/NSpinyToadVfx.cs" id="3_2raak"]
+[ext_resource type="Texture2D" uid="uid://dxr4dgovog7c7" path="res://images/vfx/monsters/spiny_toad/spiny_toad_spike_particle.png" id="3_mtmr0"]
+[ext_resource type="Texture2D" uid="uid://bgs6ls5kyxlmh" path="res://images/vfx/long_rice_no__glow_particle.png" id="4_rs12i"]
+
+[sub_resource type="Curve" id="Curve_f08fj"]
+_data = [Vector2(0, 0.691177), 0.0, 0.0, 0, 0, Vector2(1, 0.441176), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_adlar"]
+_data = [Vector2(0, 0.808824), 0.0, 0.0, 0, 0, Vector2(0.99422, 0.301471), -1.16303, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gwosj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nuye1"]
+curve_x = SubResource("Curve_f08fj")
+curve_y = SubResource("Curve_adlar")
+curve_z = SubResource("Curve_gwosj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fmcji"]
+lifetime_randomness = 0.45
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 80.0
+emission_ring_inner_radius = 60.0
+emission_ring_cone_angle = 90.0
+angle_min = -41.5
+angle_max = 30.2
+radial_velocity_min = 2500.0
+radial_velocity_max = 5000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveXYZTexture_nuye1")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 6
+
+[sub_resource type="Curve" id="Curve_l2p86"]
+_data = [Vector2(0, 0.691177), 0.0, 0.0, 0, 0, Vector2(0.936416, 0.507353), 0.0, 0.0, 0, 0, Vector2(1, 0.0294118), -13.5686, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_e5ps6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.930636, 0.705882), 0.0, 0.0, 0, 0, Vector2(1, 0), -17.8088, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_e1fib"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fq148"]
+curve_x = SubResource("Curve_l2p86")
+curve_y = SubResource("Curve_e5ps6")
+curve_z = SubResource("Curve_e1fib")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m0b53"]
+lifetime_randomness = 0.52
+particle_flag_align_y = true
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 180.0
+initial_velocity_min = 3000.0
+initial_velocity_max = 6500.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 500, 0)
+scale_min = 0.4
+scale_max = 0.8
+scale_curve = SubResource("CurveXYZTexture_fq148")
+color = Color(1, 0.833333, 0, 1)
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[node name="SpinyToad" type="Node2D"]
+script = ExtResource("1_yyxko")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+unique_name_in_owner = true
+position = Vector2(-13, -44)
+scale = Vector2(0.275, 0.275)
+skeleton_data_res = ExtResource("2_l1f8d")
+preview_skin = "Default"
+preview_animation = "explode"
+preview_frame = false
+preview_time = 0.0
+
+[node name="BurstParticles" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(47.2729, -476.364)
+scale = Vector2(3.63636, 3.63636)
+amount = 30
+sub_emitter = NodePath("../BurstParticlesSub")
+texture = ExtResource("3_mtmr0")
+lifetime = 0.3
+explosiveness = 1.0
+fixed_fps = 0
+trail_lifetime = 0.12
+process_material = SubResource("ParticleProcessMaterial_fmcji")
+
+[node name="BurstParticlesSub" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+position = Vector2(47.2729, -585.454)
+scale = Vector2(3.63636, 3.63636)
+emitting = false
+amount = 200
+texture = ExtResource("4_rs12i")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 0
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_m0b53")
+
+[node name="NSpinyToadVfx" type="Node" parent="Visuals"]
+script = ExtResource("3_2raak")
+metadata/_custom_type_script = "uid://bs8ub40jy7ush"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -280.0
+offset_top = -414.0
+offset_right = 280.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -208)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -434)

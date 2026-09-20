@@ -1,0 +1,147 @@
+[gd_scene load_steps=17 format=3 uid="uid://mfp28efrjof2"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_1anb4"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://baeouw6f25rgu" path="res://animations/monsters/devoted_sculptor/devoted_sculptor_skel_data.tres" id="3_a7u5v"]
+[ext_resource type="Script" uid="uid://f6yyx01oktqa" path="res://src/Core/Nodes/Vfx/NDevotedSculptorVfx.cs" id="4_f56h4"]
+[ext_resource type="Texture2D" uid="uid://m24rbixx3ngd" path="res://images/vfx/monsters/devoted_sculptor/devoted_sculptor_voice_particle.png" id="4_lh4nd"]
+[ext_resource type="Texture2D" uid="uid://dyqarcewd7fps" path="res://images/vfx/monsters/devoted_sculptor/devoted_sculptor_spark_particle.png" id="5_0fws5"]
+
+[sub_resource type="Curve" id="Curve_nj6pg"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0.075, 0), 0.0, 0.0, 0, 0, Vector2(0.238636, 100), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jky36"]
+curve = SubResource("Curve_nj6pg")
+
+[sub_resource type="Curve" id="Curve_k3pd6"]
+_data = [Vector2(0, 0.258576), 0.0, 18.1509, 0, 0, Vector2(0.122727, 1), 0.0, 0.0, 0, 0, Vector2(0.297727, 0.788165), 0.0, 0.0, 0, 0, Vector2(0.427273, 0.955403), 0.0, 0.0, 0, 0, Vector2(0.563636, 0.704545), 0.0, 0.0, 0, 0, Vector2(0.675, 0.960978), 0.0, 0.0, 0, 0, Vector2(0.790909, 0.726844), 0.0, 0.0, 0, 0, Vector2(0.893182, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0634649), -21.5848, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_j46ds"]
+curve = SubResource("Curve_k3pd6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j60bc"]
+lifetime_randomness = 0.36
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(-1, -0.6, 0)
+spread = 30.0
+initial_velocity_min = 12000.0
+initial_velocity_max = 18000.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1350.0
+damping_max = 20000.0
+damping_curve = SubResource("CurveTexture_jky36")
+scale_min = 2.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_j46ds")
+color = Color(0.7448, 0.7644, 0.98, 1)
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g3f85"]
+
+[sub_resource type="Curve" id="Curve_18bwm"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0105872), 0.0, 0.163317, 0, 0, Vector2(0.403226, -0.0269487), 0.0, 0.0, 0, 0, Vector2(0.581989, 0.21078), 0.0, 0.0, 0, 0, Vector2(0.732527, -0.102021), 0.0, 0.0, 0, 0, Vector2(0.879032, 0.123196), 0.0, 0.0, 0, 0, Vector2(1, -0.0144367), -0.734919, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_eje64"]
+curve = SubResource("Curve_18bwm")
+
+[sub_resource type="Curve" id="Curve_7mnwj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0428298), -1.3128, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4jgrj"]
+curve = SubResource("Curve_7mnwj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3vxds"]
+lifetime_randomness = 0.8
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector3(-0.8, -1, 0)
+spread = 30.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1800.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+orbit_velocity_curve = SubResource("CurveTexture_eje64")
+gravity = Vector3(0, 2000, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_4jgrj")
+turbulence_noise_strength = 0.49
+turbulence_noise_speed = Vector3(0, 2, 0)
+turbulence_noise_speed_random = 0.44
+turbulence_influence_min = 0.01
+turbulence_influence_max = 0.03
+turbulence_initial_displacement_min = -100.0
+turbulence_initial_displacement_max = -100.0
+
+[node name="DevotedSculptor" type="Node2D"]
+script = ExtResource("1_1anb4")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_a7u5v")
+preview_skin = "Default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.56
+unique_name_in_owner = true
+position = Vector2(3, -30)
+scale = Vector2(0.25, 0.25)
+
+[node name="VoiceBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_name = "voice_attach"
+show_behind_parent = true
+position = Vector2(-883.431, -1243.66)
+
+[node name="VoiceParticles" type="GPUParticles2D" parent="Visuals/VoiceBoneNode"]
+show_behind_parent = true
+position = Vector2(23.4309, 47.657)
+amount = 19
+texture = ExtResource("4_lh4nd")
+explosiveness = 0.42
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_j60bc")
+
+[node name="AttackParticles" type="GPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_g3f85")
+position = Vector2(-996, -420)
+emitting = false
+amount = 25
+texture = ExtResource("5_0fws5")
+lifetime = 1.1
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_3vxds")
+
+[node name="NDevotedSculptorVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_f56h4")
+metadata/_custom_type_script = "uid://f6yyx01oktqa"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -145.0
+offset_top = -409.0
+offset_right = 145.0
+offset_bottom = -10.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-5, -192)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-15, -436)

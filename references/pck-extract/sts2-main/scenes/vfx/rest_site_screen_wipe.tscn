@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://unfvqi06dwaa"]
+
+[ext_resource type="Texture2D" uid="uid://bnk1afv6us6r" path="res://images/vfx/rest_site_cloud.png" id="2_n11kx"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p1v1n"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_38yas"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_77evc"]
+_data = [Vector2(0.00921659, 0.0796013), 0.0, 0.0, 0, 0, Vector2(0.3149, 0.979808), 0.0, 0.0, 0, 0, Vector2(0.615975, 0.720683), 0.0, 0.0, 0, 0, Vector2(0.950845, 0.549055), 0.0, 0.0, 0, 0, Vector2(0.980031, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_gea3q"]
+colors = PackedColorArray(0.00171313, 0.00172014, 0.00187569, 0.313726, 0, 0, 0, 1)
+
+[node name="RestSiteScreenWipe" type="Node2D"]
+
+[node name="rest_site_smoke_wipe" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_p1v1n")
+emitting = false
+amount = 400
+lifetime = 0.65
+one_shot = true
+randomness = 1.0
+local_coords = true
+texture = ExtResource("2_n11kx")
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5000.0
+initial_velocity_max = 5000.0
+angular_velocity_min = -424.28
+angular_velocity_max = -424.28
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+radial_accel_min = 1500.0
+radial_accel_max = 1500.0
+tangential_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_38yas")
+scale_amount_min = 10.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_77evc")
+color = Color(0, 0, 0, 1)
+color_ramp = SubResource("Gradient_gea3q")
+anim_offset_max = 1.0

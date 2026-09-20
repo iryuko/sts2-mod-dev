@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://m7515tj0omwh"]
+
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="1_vxqal"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_vxqal")
+shader_parameter/h = 0.965
+shader_parameter/s = 0.55
+shader_parameter/v = 1.2

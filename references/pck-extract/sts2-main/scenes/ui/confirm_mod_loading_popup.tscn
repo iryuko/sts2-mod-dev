@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj0xq1t0a88nh"]
+
+[ext_resource type="Script" uid="uid://cmrko5qhlytbr" path="res://src/Core/Nodes/Screens/ModdingScreen/NConfirmModLoadingPopup.cs" id="1_suwxk"]
+[ext_resource type="PackedScene" uid="uid://dqberqa21r6y8" path="res://scenes/ui/vertical_popup.tscn" id="2_ensrf"]
+
+[node name="ModLoadingPopup" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_suwxk")
+
+[node name="VerticalPopup" parent="." instance=ExtResource("2_ensrf")]
+layout_mode = 1
+offset_left = -286.5
+offset_top = -329.5
+offset_right = 286.5
+offset_bottom = 329.5

@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvpjo0ypdebw2"]
+
+[ext_resource type="Script" uid="uid://dig3ki4sekw63" path="res://src/Core/Nodes/Screens/NChooseARelicSelection.cs" id="1_eocc4"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="2_wx1b3"]
+[ext_resource type="PackedScene" uid="uid://ln43vtcwp04o" path="res://scenes/ui/choice_selection_skip_button.tscn" id="3_eocc4"]
+
+[node name="ChooseARelicSelection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eocc4")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Banner" parent="." instance=ExtResource("2_wx1b3")]
+layout_mode = 1
+
+[node name="RelicRow" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -5.0
+offset_right = -24.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkipButton" parent="." instance=ExtResource("3_eocc4")]
+layout_mode = 1

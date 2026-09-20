@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd8dt56rmwp62"]
+
+[ext_resource type="Texture2D" uid="uid://csxdh6muklwy1" path="res://images/card_overlays/afflictions/affliction_hexed.png" id="1_tuxtc"]
+
+[node name="Hexed" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(6, -9.99998)
+scale = Vector2(0.37709, 0.380752)
+texture = ExtResource("1_tuxtc")

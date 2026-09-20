@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt1yetdo6jwbm"]
+
+[ext_resource type="PackedScene" uid="uid://bc4sc4yqi0adm" path="res://scenes/vfx/vfx_power_up/vfx_power_up_3d_back.tscn" id="1_d00kf"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_smlhr"]
+viewport_path = NodePath("SubViewport")
+
+[node name="vfx_power_up_viewport_bg" type="Node2D"]
+position = Vector2(-124, -70)
+scale = Vector2(2, 2)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(0.211205, 0, 0.977442, 0, 1, 0, -0.977442, 0, 0.211205, 3.90801, 2.23542, 0.772661)
+
+[node name="vfx_power_up" parent="." instance=ExtResource("1_d00kf")]
+transform = Transform3D(-0.632989, 0, 0.774161, 0, 1, 0, -0.774161, 0, -0.632989, 0, 0, 0)
+
+[node name="Ironclad" type="Sprite2D" parent="."]
+position = Vector2(-101, -148)
+texture = SubResource("ViewportTexture_smlhr")

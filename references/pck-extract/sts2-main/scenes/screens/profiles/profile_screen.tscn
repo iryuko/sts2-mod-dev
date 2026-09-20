@@ -1,0 +1,130 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddw171ejsat3a"]
+
+[ext_resource type="Script" uid="uid://bbg2d8myi14hj" path="res://src/Core/Nodes/Screens/ProfileScreen/NProfileScreen.cs" id="1_osubx"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="1_ubjae"]
+[ext_resource type="PackedScene" uid="uid://brmp53lw4w0d8" path="res://scenes/screens/profiles/profile_button.tscn" id="2_f18oh"]
+[ext_resource type="PackedScene" uid="uid://cy0r6ow54kklb" path="res://scenes/screens/main_menu/loading_overlay.tscn" id="4_5243e"]
+[ext_resource type="PackedScene" uid="uid://b26m3acgqyhek" path="res://scenes/screens/profiles/profile_delete_button.tscn" id="4_w2tdb"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="6_df1oe"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="6_rvsrl"]
+
+[node name="ProfileScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_osubx")
+
+[node name="BackButton" parent="." instance=ExtResource("1_ubjae")]
+layout_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 560)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -664.0
+offset_top = -280.0
+offset_right = 664.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ProfileButton1" parent="HBoxContainer" instance=ExtResource("2_f18oh")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="ProfileButton2" parent="HBoxContainer" instance=ExtResource("2_f18oh")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="ProfileButton3" parent="HBoxContainer" instance=ExtResource("2_f18oh")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+
+[node name="DeleteProfileButton1" parent="." instance=ExtResource("4_w2tdb")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -504.0
+offset_top = -252.0
+offset_right = -424.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+
+[node name="DeleteProfileButton2" parent="." instance=ExtResource("4_w2tdb")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -252.0
+offset_right = 40.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+
+[node name="DeleteProfileButton3" parent="." instance=ExtResource("4_w2tdb")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 424.0
+offset_top = -252.0
+offset_right = 504.0
+offset_bottom = -172.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 2
+
+[node name="LoadingOverlay" parent="." instance=ExtResource("4_5243e")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ChooseProfileMessage" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -527.0
+offset_top = 125.0
+offset_right = 527.0
+offset_bottom = 222.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.5019608)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_rvsrl")
+theme_override_font_sizes/font_size = 36
+text = "Choose a save profile to play."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_df1oe")
+MinFontSize = 24
+MaxFontSize = 36
+metadata/_custom_type_script = "uid://dtfio45agppyj"

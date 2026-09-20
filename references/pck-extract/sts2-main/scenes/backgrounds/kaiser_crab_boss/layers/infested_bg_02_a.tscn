@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5d4q6bddimp6"]
+
+[ext_resource type="Texture2D" uid="uid://qsigroya0krm" path="res://images/rooms/hive/hive_02_a.png" id="1_s56oa"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="2_ylx01"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l5fxu"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_6l51j"]
+offsets = PackedFloat32Array(0, 0.387337, 0.670391, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1440.77
+offset_top = -675.366
+offset_right = 1440.77
+offset_bottom = 675.366
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_s56oa")
+expand_mode = 1
+
+[node name="fog6" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_l5fxu")
+position = Vector2(2922.77, 388.366)
+amount = 4
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("2_ylx01")
+gravity = Vector2(-0.5, 0)
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+color = Color(0, 0.32549, 0.0196078, 0.427451)
+color_ramp = SubResource("Gradient_6l51j")
+anim_offset_max = 1.0

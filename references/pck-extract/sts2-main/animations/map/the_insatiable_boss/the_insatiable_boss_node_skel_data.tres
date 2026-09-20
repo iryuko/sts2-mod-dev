@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cbsmrevmk2jyc"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://8s7vh26tcww" path="res://animations/map/the_insatiable_boss/the_insatiable_boss_node.atlas" id="1_dopty"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://d2k2fpuq413y0" path="res://animations/map/the_insatiable_boss/the_insatiable_boss_node.skel" id="2_8lwle"]
+
+[resource]
+atlas_res = ExtResource("1_dopty")
+skeleton_file_res = ExtResource("2_8lwle")

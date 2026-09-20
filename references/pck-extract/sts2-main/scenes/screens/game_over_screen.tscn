@@ -1,0 +1,1097 @@
+[gd_scene load_steps=45 format=3 uid="uid://boyt37q3f2aq0"]
+
+[ext_resource type="Script" uid="uid://cdyl6m160nbln" path="res://src/Core/Nodes/Screens/GameOverScreen/NGameOverScreen.cs" id="1_c0jfk"]
+[ext_resource type="Material" uid="uid://b7xlk1e6w51gu" path="res://materials/transitions/game_over_transition_mat.tres" id="2_wuwtc"]
+[ext_resource type="Script" uid="uid://brxgf6issim2h" path="res://src/Core/Nodes/Screens/GameOverScreen/NRunSummary.cs" id="3_ivboo"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_jjx2b"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_k470t"]
+[ext_resource type="PackedScene" uid="uid://7osm1qqwcp6e" path="res://scenes/ui/common_banner.tscn" id="4_xrmrt"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="5_dic48"]
+[ext_resource type="Texture2D" uid="uid://dg21w1q37pjaq" path="res://images/ui/noise_mask_for_lines.tres" id="6_injdd"]
+[ext_resource type="Script" uid="uid://b8sk1driniq0s" path="res://src/Core/Nodes/Screens/GameOverScreen/NDiscoveredItem.cs" id="8_p3uq0"]
+[ext_resource type="Texture2D" uid="uid://d1gumiitphnit" path="res://images/ui/game_over_screen/discovery_card.png" id="8_sd4j6"]
+[ext_resource type="Texture2D" uid="uid://boylmf6d6m4ys" path="res://images/ui/game_over_screen/discovery_potion.png" id="9_7y85p"]
+[ext_resource type="Texture2D" uid="uid://bkv3xa2ojn5jk" path="res://images/ui/game_over_screen/discovery_relic.png" id="9_cif5j"]
+[ext_resource type="Texture2D" uid="uid://dtffadxlvm32b" path="res://images/ui/game_over_screen/discovery_epoch.png" id="9_spbre"]
+[ext_resource type="Texture2D" uid="uid://cyjc8estywo0q" path="res://images/ui/game_over_screen/discovery_monster.png" id="11_tt1ub"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="13_k470t"]
+[ext_resource type="Script" uid="uid://y5lnyt4hgaxa" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunLeaderboard.cs" id="14_3p0uh"]
+[ext_resource type="Script" uid="uid://div8kyt02fmgk" path="res://src/Core/Nodes/Screens/GameOverScreen/NGameOverContinueButton.cs" id="14_u0wqb"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="15_8stjc"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="16_o0e6m"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="17_k470t"]
+[ext_resource type="Script" uid="uid://hq7dltwwj2ue" path="res://src/Core/Nodes/Screens/GameOverScreen/NViewRunButton.cs" id="17_x6j7y"]
+[ext_resource type="PackedScene" uid="uid://b075h3ucmd4a1" path="res://scenes/screens/game_over_screen/game_over_button.tscn" id="17_yfy86"]
+[ext_resource type="Script" uid="uid://b4eaix3d55se3" path="res://src/Core/Nodes/Screens/GameOverScreen/NReturnToMainMenuButton.cs" id="18_2i5l7"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="18_4krn0"]
+[ext_resource type="PackedScene" uid="uid://c42e8hjphxta7" path="res://scenes/screens/paginator.tscn" id="19_8cd7m"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="20_cjrdj"]
+[ext_resource type="Script" uid="uid://cnrlg713728c8" path="res://src/Core/Nodes/Screens/DailyRun/NLeaderboardDayPaginator.cs" id="20_lyd0q"]
+[ext_resource type="Script" uid="uid://c28gslq0j6r3b" path="res://src/Core/Nodes/Screens/DailyRun/NLeaderboardPageArrow.cs" id="22_31kb3"]
+[ext_resource type="Texture2D" uid="uid://cp6ed2au5l4cs" path="res://images/ui/game_over_screen/run_summary_merchant.png" id="22_hr6ft"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="23_kwk7x"]
+
+[sub_resource type="Gradient" id="Gradient_xomtg"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0.964706, 0.886275, 1, 1, 0.964706, 0.886275, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gvccd"]
+gradient = SubResource("Gradient_xomtg")
+width = 128
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k470t"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddehy"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0e547"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xq0jq"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpeer"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3uq0"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_anp0y"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7y85p"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0f6go"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3p0uh"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8stjc"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wwj7j"]
+resource_local_to_scene = true
+shader = ExtResource("20_cjrdj")
+shader_parameter/h = 0.5
+shader_parameter/s = 1.1
+shader_parameter/v = 0.9
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_mode = 2
+script = ExtResource("1_c0jfk")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FullBlackBackstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Backstop" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = ExtResource("2_wuwtc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.12, 0, 0.042, 1)
+
+[node name="ScreenshakeContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CreatureContainer" type="Control" parent="ScreenshakeContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SummaryBackstop" type="ColorRect" parent="ScreenshakeContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.115359, 0.0116219, 0, 0.878431)
+
+[node name="CenterContainer" type="CenterContainer" parent="ScreenshakeContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -301.0
+offset_right = 960.0
+offset_bottom = 515.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RunSummaryContainer" type="MarginContainer" parent="ScreenshakeContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_right = 250
+script = ExtResource("3_ivboo")
+
+[node name="Container" type="VBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+
+[node name="ScoreContainer" type="CenterContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="BadgeContainer" type="GridContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 160
+columns = 2
+
+[node name="ScoreBar" type="MarginContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="VfxAnchor" type="Control" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="UnlockText" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar/VfxAnchor"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -17.5
+offset_right = 350.0
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.498039, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.23921569, 0.21960784, 0.16862746, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "Epoch Unlocked!"
+horizontal_alignment = 2
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+MinFontSize = 28
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ScoreBg" type="ColorRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar"]
+custom_minimum_size = Vector2(700, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="ScoreProgress" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar/ScoreBg"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = 20.0
+offset_right = 704.0
+offset_bottom = 94.0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.23921569, 0.21960784, 0.16862746, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 24
+text = "[155/200]"
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="UnlocksRemaining" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar/ScoreBg"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -704.0
+offset_top = 20.0
+offset_bottom = 94.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0.23921569, 0.21960784, 0.16862746, 1)
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 24
+text = "Unlocks Remaining: 16"
+horizontal_alignment = 2
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="ScoreFg" type="ColorRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar/ScoreBg"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.937255, 0.784314, 0.317647, 1)
+
+[node name="Shadow" type="ColorRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar/ScoreBg/ScoreFg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.73, 0.542755, 0.1387, 1)
+
+[node name="Padder" type="Control" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/ScoreBar"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="DiscoveryContainer" type="VBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="DiscoveryHeader" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="NoiseMask" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveryHeader"]
+clip_children = 1
+custom_minimum_size = Vector2(200, 3)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_injdd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Gradient" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveryHeader/NoiseMask"]
+clip_children = 1
+custom_minimum_size = Vector2(200, 4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_gvccd")
+expand_mode = 1
+
+[node name="DiscoveryLabel" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveryHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "Found these delights!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="NoiseMask2" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveryHeader"]
+clip_children = 1
+custom_minimum_size = Vector2(200, 3)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_injdd")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Gradient" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveryHeader/NoiseMask2"]
+clip_children = 1
+custom_minimum_size = Vector2(200, 4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+texture = SubResource("GradientTexture1D_gvccd")
+expand_mode = 1
+flip_h = true
+
+[node name="DiscoveredContents" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="DiscoveredCards" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents"]
+custom_minimum_size = Vector2(120, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("8_p3uq0")
+
+[node name="DiscoveryIcon" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredCards"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("8_sd4j6")
+expand_mode = 1
+
+[node name="CardCount" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredCards"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "404"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="DiscoveredRelics" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents"]
+custom_minimum_size = Vector2(120, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("8_p3uq0")
+
+[node name="DiscoveryIcon" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredRelics"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_cif5j")
+expand_mode = 1
+
+[node name="RelicCount" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredRelics"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "404"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="DiscoveredPotions" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents"]
+custom_minimum_size = Vector2(120, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("8_p3uq0")
+
+[node name="DiscoveryIcon" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredPotions"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_7y85p")
+expand_mode = 1
+
+[node name="PotionCount" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredPotions"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "404"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="DiscoveredEnemies" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents"]
+custom_minimum_size = Vector2(120, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("8_p3uq0")
+
+[node name="DiscoveryIcon" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredEnemies"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("11_tt1ub")
+expand_mode = 1
+
+[node name="EnemyCount" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredEnemies"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "404"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="DiscoveredEpochs" type="HBoxContainer" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents"]
+custom_minimum_size = Vector2(120, 48)
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("8_p3uq0")
+
+[node name="DiscoveryIcon" type="TextureRect" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredEpochs"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("9_spbre")
+expand_mode = 1
+
+[node name="EpochCount" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container/DiscoveryContainer/DiscoveredContents/DiscoveredEpochs"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_jjx2b")
+theme_override_font_sizes/font_size = 28
+text = "404"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="TestModeLabel" type="Label" parent="ScreenshakeContainer/CenterContainer/RunSummaryContainer/Container"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_k470t")
+theme_override_font_sizes/font_size = 48
+text = "No Death Quote or Run Nodes are listed because the game was ran via Test Mode or Scene Bootstrapper."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="DailyRunLeaderboard" type="Control" parent="ScreenshakeContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -393.0
+offset_top = 272.0
+offset_right = -573.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_3p0uh")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Control" parent="ScreenshakeContainer/DailyRunLeaderboard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.0
+offset_top = -308.5
+offset_right = 263.0
+offset_bottom = 391.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LeaderboardScoreContainer" type="VBoxContainer" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="NoScoresIndicator" type="Label" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("15_8stjc")
+theme_override_font_sizes/font_size = 28
+text = "No scores :("
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="NoFriendsIndicator" type="Label" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -48.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("15_8stjc")
+theme_override_font_sizes/font_size = 28
+text = "No friends oh no!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+
+[node name="LoadingText" type="RichTextLabel" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.49803922, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.1625, 0.25, 0.075, 0.7529412)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("16_o0e6m")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "[thinky_dots]Fetching Scores...[/thinky_dots]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_dic48")
+AutoSizeEnabled = false
+MinFontSize = 72
+MaxFontSize = 72
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="VerticalSeparator1" type="ColorRect" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+visible = false
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_right = -175.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5019608, 0.4862745, 0.44313726, 1)
+
+[node name="Shadow" type="ColorRect" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel/VerticalSeparator1"]
+show_behind_parent = true
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="VerticalSeparator2" type="ColorRect" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel"]
+visible = false
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 171.0
+offset_right = 173.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5019608, 0.4862745, 0.44313726, 1)
+
+[node name="Shadow" type="ColorRect" parent="ScreenshakeContainer/DailyRunLeaderboard/Panel/VerticalSeparator2"]
+show_behind_parent = true
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2509804)
+
+[node name="Title" type="Label" parent="ScreenshakeContainer/DailyRunLeaderboard"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -540.0
+offset_bottom = -360.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("18_4krn0")
+theme_override_font_sizes/font_size = 36
+text = "Leaderboards!?"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_k470t")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Paginator" parent="ScreenshakeContainer/DailyRunLeaderboard" instance=ExtResource("19_8cd7m")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -372.50006
+offset_right = 190.0
+offset_bottom = -308.50006
+grow_horizontal = 2
+scale = Vector2(0.85, 0.85)
+pivot_offset = Vector2(190, 32)
+script = ExtResource("20_lyd0q")
+
+[node name="LeftArrow" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator" index="0"]
+material = SubResource("ShaderMaterial_k470t")
+script = ExtResource("22_31kb3")
+
+[node name="Image" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator/LeftArrow" index="0"]
+material = SubResource("ShaderMaterial_ddehy")
+
+[node name="LabelContainer" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator" index="1"]
+offset_left = 0.0
+offset_right = 0.0
+
+[node name="Label" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator/LabelContainer/Mask" index="0"]
+theme_override_colors/font_color = Color(0.521569, 0.807843, 0.921569, 1)
+text = "May 14, 2025"
+MinFontSize = 24
+
+[node name="VfxLabel" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator/LabelContainer/Mask" index="1"]
+theme_override_colors/font_color = Color(0.521569, 0.807843, 0.921569, 1)
+MinFontSize = 24
+
+[node name="RightArrow" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator" index="2"]
+script = ExtResource("22_31kb3")
+
+[node name="Image" parent="ScreenshakeContainer/DailyRunLeaderboard/Paginator/RightArrow" index="0"]
+material = SubResource("ShaderMaterial_0e547")
+
+[node name="LeftArrow" type="Control" parent="ScreenshakeContainer/DailyRunLeaderboard"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_k470t")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -410.0
+offset_top = -148.5
+offset_right = -293.0
+offset_bottom = -31.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+script = ExtResource("22_31kb3")
+
+[node name="Image" type="TextureRect" parent="ScreenshakeContainer/DailyRunLeaderboard/LeftArrow"]
+material = SubResource("ShaderMaterial_xq0jq")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("23_kwk7x")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="Control" parent="ScreenshakeContainer/DailyRunLeaderboard"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_k470t")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 341.0
+offset_top = -148.5
+offset_right = 458.0
+offset_bottom = -31.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+script = ExtResource("22_31kb3")
+
+[node name="Image" type="TextureRect" parent="ScreenshakeContainer/DailyRunLeaderboard/RightArrow"]
+material = SubResource("ShaderMaterial_vpeer")
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(48, 48)
+mouse_filter = 2
+texture = ExtResource("23_kwk7x")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Ui" type="Control" parent="ScreenshakeContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Banner" parent="ScreenshakeContainer/Ui" instance=ExtResource("4_xrmrt")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="DeathQuoteLabel" type="RichTextLabel" parent="ScreenshakeContainer/Ui/Banner"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 69.0
+offset_right = 192.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 0.392157, 0.392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("17_k470t")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "“Ironclad was killed by a Placeholder...”"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("5_dic48")
+AutoSizeEnabled = false
+MinFontSize = 22
+MaxFontSize = 22
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="VictoryDamageLabel" type="RichTextLabel" parent="ScreenshakeContainer/Ui"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_fonts/normal_font = ExtResource("17_k470t")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "If you see this, this is a bug!"
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+script = ExtResource("5_dic48")
+AutoSizeEnabled = false
+MinFontSize = 22
+MaxFontSize = 22
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="ContinueButton" parent="ScreenshakeContainer/Ui" instance=ExtResource("17_yfy86")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_p3uq0")
+layout_mode = 1
+script = ExtResource("14_u0wqb")
+
+[node name="Image" parent="ScreenshakeContainer/Ui/ContinueButton" index="0"]
+material = SubResource("ShaderMaterial_anp0y")
+
+[node name="ControllerIcon" parent="ScreenshakeContainer/Ui/ContinueButton" index="2"]
+material = SubResource("ShaderMaterial_7y85p")
+
+[node name="LeaderboardButton" parent="ScreenshakeContainer/Ui" instance=ExtResource("17_yfy86")]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_0f6go")
+layout_mode = 1
+script = ExtResource("14_u0wqb")
+
+[node name="Image" parent="ScreenshakeContainer/Ui/LeaderboardButton" index="0"]
+material = SubResource("ShaderMaterial_anp0y")
+
+[node name="Label" parent="ScreenshakeContainer/Ui/LeaderboardButton" index="1"]
+text = "Leaderboard"
+
+[node name="ControllerIcon" parent="ScreenshakeContainer/Ui/LeaderboardButton" index="2"]
+material = SubResource("ShaderMaterial_7y85p")
+
+[node name="ViewRunButton" parent="ScreenshakeContainer/Ui" instance=ExtResource("17_yfy86")]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_3p0uh")
+layout_mode = 1
+offset_left = -258.0
+offset_top = -171.0
+offset_right = 2.0
+offset_bottom = -113.0
+script = ExtResource("17_x6j7y")
+
+[node name="Image" parent="ScreenshakeContainer/Ui/ViewRunButton" index="0"]
+material = SubResource("ShaderMaterial_anp0y")
+
+[node name="Label" parent="ScreenshakeContainer/Ui/ViewRunButton" index="1"]
+text = "View Run"
+
+[node name="ControllerIcon" parent="ScreenshakeContainer/Ui/ViewRunButton" index="2"]
+material = SubResource("ShaderMaterial_7y85p")
+
+[node name="MainMenuButton" parent="ScreenshakeContainer/Ui" instance=ExtResource("17_yfy86")]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_8stjc")
+layout_mode = 1
+offset_left = -2.0
+offset_top = -171.0
+offset_right = 258.0
+offset_bottom = -113.0
+script = ExtResource("18_2i5l7")
+
+[node name="Image" parent="ScreenshakeContainer/Ui/MainMenuButton" index="0"]
+material = SubResource("ShaderMaterial_wwj7j")
+
+[node name="Label" parent="ScreenshakeContainer/Ui/MainMenuButton" index="1"]
+theme_override_colors/font_outline_color = Color(0.290196, 0.117647, 0.117647, 1)
+text = "Main Menu"
+
+[node name="ControllerIcon" parent="ScreenshakeContainer/Ui/MainMenuButton" index="2"]
+material = SubResource("ShaderMaterial_7y85p")
+
+[node name="RunMocker" type="TextureRect" parent="ScreenshakeContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -840.0
+offset_top = -350.0
+offset_right = -490.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("22_hr6ft")
+expand_mode = 1
+
+[editable path="ScreenshakeContainer/DailyRunLeaderboard/Paginator"]
+[editable path="ScreenshakeContainer/Ui/ContinueButton"]
+[editable path="ScreenshakeContainer/Ui/LeaderboardButton"]
+[editable path="ScreenshakeContainer/Ui/ViewRunButton"]
+[editable path="ScreenshakeContainer/Ui/MainMenuButton"]

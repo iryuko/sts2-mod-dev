@@ -1,0 +1,146 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxxtaxgeppabk"]
+
+[ext_resource type="Script" uid="uid://x4qao6v53r2h" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunCharacterContainer.cs" id="1_rmbib"]
+[ext_resource type="Texture2D" uid="uid://x2neryjvbtwy" path="res://images/ui/top_panel/character_icon_ironclad.png" id="2_j8k0u"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="3_l11io"]
+[ext_resource type="Texture2D" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_ascension.tres" id="3_rmbib"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_bgfi8"]
+[ext_resource type="Texture2D" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="6_l11io"]
+
+[node name="CharacterContainer" type="Control"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 239.0
+offset_top = 368.0
+offset_right = 523.0
+offset_bottom = 432.0
+script = ExtResource("1_rmbib")
+
+[node name="CharacterIconContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
+
+[node name="IroncladIcon" type="TextureRect" parent="CharacterIconContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("2_j8k0u")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AscensionIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 36.0
+offset_top = 19.0
+offset_right = 84.0
+offset_bottom = 67.0
+pivot_offset = Vector2(24, 4)
+texture = ExtResource("3_rmbib")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AscensionNumberLabel" type="Label" parent="AscensionIcon"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -30.958336
+offset_right = -9.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.53, 0.16059, 0.0954, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_l11io")
+theme_override_font_sizes/font_size = 21
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_bgfi8")
+MinFontSize = 18
+MaxFontSize = 24
+
+[node name="ReadyIndicator" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.498039, 1, 0, 1)
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 2)
+texture = ExtResource("6_l11io")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 3.0
+offset_right = 285.0
+offset_bottom = 63.0
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="PlayerNameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.9647059, 0.8862745, 1)
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_l11io")
+theme_override_font_sizes/font_size = 24
+text = "PlayerNameHere"
+vertical_alignment = 2
+script = ExtResource("4_bgfi8")
+AutoSizeEnabled = false
+
+[node name="CharacterNameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("3_l11io")
+theme_override_font_sizes/font_size = 24
+text = "The Ironclad"
+script = ExtResource("4_bgfi8")
+AutoSizeEnabled = false
+
+[node name="AscensionLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.592157, 0.807843, 0.921569, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_l11io")
+theme_override_font_sizes/font_size = 20
+text = "Ascension 1"
+vertical_alignment = 1
+script = ExtResource("4_bgfi8")
+AutoSizeEnabled = false

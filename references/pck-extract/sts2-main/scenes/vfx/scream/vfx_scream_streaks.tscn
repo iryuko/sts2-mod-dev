@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://bnmbf1v1ebk05"]
+
+[ext_resource type="Material" uid="uid://1y70vab4o87w" path="res://materials/vfx/scream/vfx_scream_streaks.tres" id="1_i3nxk"]
+[ext_resource type="Texture2D" uid="uid://cawbuwqahq57g" path="res://images/vfx/scream/scream_streak.png" id="2_41qbx"]
+
+[sub_resource type="Curve" id="Curve_oiudl"]
+_data = [Vector2(0, 0.50096), 0.0, -0.825879, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eh5cj"]
+curve = SubResource("Curve_oiudl")
+
+[sub_resource type="Gradient" id="Gradient_y3r7c"]
+colors = PackedColorArray(0.25, 0.25, 0.25, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fu2hu"]
+gradient = SubResource("Gradient_y3r7c")
+
+[sub_resource type="Curve" id="Curve_bskm1"]
+_data = [Vector2(0, 0.151632), 0.0, 0.0, 0, 0, Vector2(1, 0.0455854), -0.392995, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_c7m04"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ausm0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_syai8"]
+curve_x = SubResource("Curve_bskm1")
+curve_y = SubResource("Curve_c7m04")
+curve_z = SubResource("Curve_ausm0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ljjp2"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 500.0
+emission_ring_inner_radius = 300.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = 200.0
+radial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+scale_max = 5.0
+scale_curve = SubResource("CurveXYZTexture_syai8")
+color_initial_ramp = SubResource("GradientTexture1D_fu2hu")
+alpha_curve = SubResource("CurveTexture_eh5cj")
+
+[node name="vfx_scream_streaks" type="GPUParticles2D"]
+z_index = 1
+material = ExtResource("1_i3nxk")
+emitting = false
+amount = 20
+texture = ExtResource("2_41qbx")
+lifetime = 0.35
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_ljjp2")

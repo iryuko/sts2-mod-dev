@@ -1,0 +1,275 @@
+[gd_scene load_steps=31 format=3 uid="uid://cywpu6lxdjhuu"]
+
+[ext_resource type="Script" uid="uid://bwmdvdn8t74su" path="res://src/Core/Nodes/NGame.cs" id="1_17mmo"]
+[ext_resource type="Script" uid="uid://c8hc860ieuoqv" path="res://src/Core/Nodes/Vfx/Utilities/NScreenShake.cs" id="2_6syl0"]
+[ext_resource type="Script" uid="uid://bdwcbrbbryqt3" path="res://src/Core/Nodes/Audio/NAudioManager.cs" id="2_leyxa"]
+[ext_resource type="PackedScene" uid="uid://c86gcmr8cs6k7" path="res://scenes/scene_container.tscn" id="3_uqayl"]
+[ext_resource type="Script" uid="uid://c6blhu0io0iwp" path="res://src/gdscript/audio_manager_proxy.gd" id="3_xfu11"]
+[ext_resource type="Script" uid="uid://265peutm2ijl" path="res://src/Core/Audio/Debug/NDebugAudioManager.cs" id="4_u0665"]
+[ext_resource type="Script" uid="uid://bn34crb8d1nsc" path="res://src/Core/Nodes/CommonUi/NCursorManager.cs" id="5_14csm"]
+[ext_resource type="Script" uid="uid://dn0ydiokudeho" path="res://src/Core/Nodes/CommonUi/NControllerManager.cs" id="5_g1jgq"]
+[ext_resource type="Script" uid="uid://cgksse71uspi" path="res://src/Core/Nodes/Vfx/Utilities/NHitStop.cs" id="5_t0417"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_ld1u3"]
+[ext_resource type="Script" uid="uid://cnuel1eg8skdq" path="res://src/Core/Nodes/NTransition.cs" id="7_a2w36"]
+[ext_resource type="Script" uid="uid://clhc2ahvximw1" path="res://src/Core/Nodes/Screens/FeedbackScreen/NFeedbackScreenOpener.cs" id="7_ttb0s"]
+[ext_resource type="Material" uid="uid://ci0um5dvn65fr" path="res://materials/transitions/fight_transition_mat.tres" id="8_gs5rr"]
+[ext_resource type="Script" uid="uid://b4nvrtmyq26d" path="res://src/Core/Nodes/CommonUi/NModalContainer.cs" id="9_b3h4v"]
+[ext_resource type="Script" uid="uid://btkusimm387cd" path="res://src/Core/Nodes/CommonUi/NHotkeyManager.cs" id="10_5newe"]
+[ext_resource type="PackedScene" uid="uid://cx5drrrs5pc4n" path="res://scenes/ui/reaction_wheel.tscn" id="10_e5wmr"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="10_pl11u"]
+[ext_resource type="Script" uid="uid://do5u07g18kexo" path="res://src/Core/Nodes/Multiplayer/NRemoteMouseCursorContainer.cs" id="11_qnxr0"]
+[ext_resource type="Script" uid="uid://d2ydcv05jeaw2" path="res://src/Core/Nodes/CommonUi/NInputManager.cs" id="12_qnb83"]
+[ext_resource type="Script" uid="uid://kk8vu1uvjlxb" path="res://src/Core/Nodes/Reaction/NReactionContainer.cs" id="13_negux"]
+[ext_resource type="PackedScene" uid="uid://dq84rqqbmq64n" path="res://scenes/screens/feedback_screen/feedback_screen.tscn" id="17_5newe"]
+[ext_resource type="PackedScene" uid="uid://r2arys7ygxar" path="res://scenes/ui/multiplayer_timeout_overlay.tscn" id="19_1kice"]
+[ext_resource type="Script" uid="uid://dot08akfki0ew" path="res://src/Core/Nodes/NMuteInBackgroundHandler.cs" id="21_5newe"]
+[ext_resource type="Script" uid="uid://ct7lu05vrl4m3" path="res://src/Core/Nodes/NBackgroundModeHandler.cs" id="22_bgmode"]
+[ext_resource type="Image" uid="uid://byq6ow7a185ws" path="res://images/packed/common_ui/cursor_default.png" id="22_cursor_default"]
+[ext_resource type="Image" uid="uid://ceouejemr6l2v" path="res://images/packed/common_ui/cursor_tilted.png" id="23_cursor_tilted"]
+[ext_resource type="Image" uid="uid://bc1yvvdrgq2sf" path="res://images/packed/common_ui/cursor_inspect.png" id="24_cursor_inspect"]
+
+[sub_resource type="Gradient" id="Gradient_1kice"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5newe"]
+gradient = SubResource("Gradient_1kice")
+width = 1
+height = 128
+fill_from = Vector2(0.529915, 1)
+fill_to = Vector2(0.540598, 0.574786)
+
+[sub_resource type="Environment" id="Environment_smd41"]
+background_mode = 3
+ambient_light_source = 1
+ambient_light_color = Color(1, 0, 0.415686, 1)
+reflected_light_source = 1
+glow_enabled = true
+adjustment_enabled = true
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_17mmo")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://banks/desktop/Master.strings.bank", "res://banks/desktop/Master.bank", "res://banks/desktop/sfx.bank", "res://banks/desktop/temp_sfx.bank", "res://banks/desktop/ambience.bank"]
+
+[node name="AudioManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_leyxa")
+
+[node name="Proxy" type="Node" parent="AudioManager"]
+script = ExtResource("3_xfu11")
+
+[node name="FmodListener2D" type="FmodListener2D" parent="AudioManager"]
+
+[node name="DebugAudioManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_u0665")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="DebugAudioManager"]
+
+[node name="ScreenShake" type="Node" parent="."]
+script = ExtResource("2_6syl0")
+
+[node name="HitStop" type="Node" parent="."]
+script = ExtResource("5_t0417")
+
+[node name="FeedbackOpener" type="Node" parent="."]
+script = ExtResource("7_ttb0s")
+
+[node name="InputManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("12_qnb83")
+
+[node name="ControllerManager" type="Node" parent="InputManager"]
+unique_name_in_owner = true
+script = ExtResource("5_g1jgq")
+
+[node name="Label" type="Label" parent="InputManager/ControllerManager"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -133.0
+offset_top = -74.0
+offset_right = -41.0
+offset_bottom = -28.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.34902, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("6_ld1u3")
+theme_override_font_sizes/font_size = 36
+text = "Controller Detected"
+script = ExtResource("10_pl11u")
+AutoSizeEnabled = false
+
+[node name="HotkeyManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_5newe")
+
+[node name="CursorManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_14csm")
+_cursorTilted = ExtResource("23_cursor_tilted")
+_cursorNotTilted = ExtResource("22_cursor_default")
+_cursorInspect = ExtResource("24_cursor_inspect")
+
+[node name="RootSceneContainer" parent="." instance=ExtResource("3_uqayl")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="InspectionContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="RemoteCursorContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("11_qnxr0")
+
+[node name="ReactionWheel" parent="." instance=ExtResource("10_e5wmr")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="ReactionContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_negux")
+
+[node name="HoverTipsContainer" type="Control" parent="."]
+unique_name_in_owner = true
+z_as_relative = false
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="ModalContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("9_b3h4v")
+
+[node name="Backstop" type="ColorRect" parent="ModalContainer"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="FeedbackScreen" parent="." instance=ExtResource("17_5newe")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="GameTransitionRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_as_relative = false
+material = ExtResource("8_gs5rr")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -60.0
+offset_right = 320.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("7_a2w36")
+
+[node name="GradientTransition" type="TextureRect" parent="GameTransitionRect"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2564.0
+offset_bottom = -1364.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_5newe")
+
+[node name="SimpleTransition" type="ColorRect" parent="GameTransitionRect"]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MultiplayerTimeoutOverlay" parent="." instance=ExtResource("19_1kice")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_smd41")
+
+[node name="MuteInBackgroundHandler" type="Node" parent="."]
+script = ExtResource("21_5newe")
+
+[node name="BackgroundModeHandler" type="Node" parent="."]
+script = ExtResource("22_bgmode")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://iwujs2ken1t"]
+
+[ext_resource type="Texture2D" uid="uid://cr63ef4vtfp1t" path="res://images/packed/vfx/generic/glow_card_uncommon.png" id="1_sxk0r"]
+[ext_resource type="Script" uid="uid://3ap3bll707y0" path="res://src/Core/Nodes/Vfx/Cards/NCardUncommonGlow.cs" id="2_gh6xl"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_ftcb0"]
+_data = [Vector2(0, 0.00205994), 0.0, 2.26533, 0, 0, Vector2(0.2443, 0.812552), 1.57971, 1.57971, 0, 0, Vector2(0.5, 1), 9.50578e-07, 9.50578e-07, 0, 0, Vector2(0.763844, 0.783988), -1.6691, -1.6691, 0, 0, Vector2(1, 0), -1.19731, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_tba0f"]
+curve = SubResource("Curve_ftcb0")
+
+[sub_resource type="Curve" id="Curve_5f81f"]
+_data = [Vector2(0, 0.680445), 0.0, 0.0854123, 0, 0, Vector2(1, 1), 0.381261, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_25haa"]
+width = 128
+curve = SubResource("Curve_5f81f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eqidu"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -5.00002
+angular_velocity_max = 4.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_25haa")
+color = Color(0.68, 0.989333, 1, 0.25098)
+alpha_curve = SubResource("CurveTexture_tba0f")
+hue_variation_min = -0.03
+hue_variation_max = 0.05
+
+[node name="UncommonGlow" type="GPUParticles2D"]
+material = ExtResource("shared_additive_mat")
+scale = Vector2(1, 1.35)
+amount = 6
+texture = ExtResource("1_sxk0r")
+lifetime = 3.0
+preprocess = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eqidu")
+script = ExtResource("2_gh6xl")

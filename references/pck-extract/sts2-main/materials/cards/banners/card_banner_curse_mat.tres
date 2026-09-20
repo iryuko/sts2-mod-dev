@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://olrpom68bges"]
+
+[ext_resource type="Shader" path="res://shaders/hsv.gdshader" id="1_tyogp"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_tyogp")
+shader_parameter/h = 0.27
+shader_parameter/s = 1.1
+shader_parameter/v = 0.9

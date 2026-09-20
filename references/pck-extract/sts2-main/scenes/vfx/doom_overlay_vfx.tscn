@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://chwlw4sahu22h"]
+
+[ext_resource type="Shader" uid="uid://dv2lgnom0fcxf" path="res://shaders/doom_overlay.gdshader" id="1_4tgep"]
+[ext_resource type="Script" uid="uid://c3p4u6dbd2i78" path="res://src/Core/Nodes/Vfx/NDoomOverlayVfx.cs" id="2_ngd23"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlaly"]
+shader = ExtResource("1_4tgep")
+shader_parameter/s = 0.8
+shader_parameter/v = 0.8
+shader_parameter/gradient_color = Color(0.339997, 0.0778124, 0.517057, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4op8m"]
+shader = ExtResource("1_4tgep")
+shader_parameter/s = 0.7
+shader_parameter/v = 0.75
+shader_parameter/gradient_color = Color(0.186184, 3.60981e-06, 0.140278, 1)
+
+[node name="DoomOverlay" type="BackBufferCopy"]
+material = SubResource("ShaderMaterial_rlaly")
+rect = Rect2(0, 0, 0, 0)
+script = ExtResource("2_ngd23")
+
+[node name="Rect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4op8m")
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

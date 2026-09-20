@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ciku0j3lshb6e"]
+
+[ext_resource type="Shader" uid="uid://cbg015r3i0ver" path="res://shaders/vfx/common/vfx_ray_shader.gdshader" id="1_2jk5g"]
+
+[sub_resource type="Gradient" id="Gradient_2jk5g"]
+offsets = PackedFloat32Array(0.7507003, 1)
+colors = PackedColorArray(1, 1, 1, 1, 4.415934, 4.415934, 4.415934, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_73p0d"]
+gradient = SubResource("Gradient_2jk5g")
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_8tl0t"]
+offsets = PackedFloat32Array(0, 0.3837535)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mbw5r"]
+gradient = SubResource("Gradient_8tl0t")
+
+[resource]
+shader = ExtResource("1_2jk5g")
+shader_parameter/pivot_offset = Vector2(0, -0.5)
+shader_parameter/lut = SubResource("GradientTexture1D_73p0d")
+shader_parameter/vertical_alpha = SubResource("GradientTexture1D_mbw5r")

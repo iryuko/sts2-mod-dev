@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://iq6wsnph1mun"]
+
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="1_i77hy"]
+[ext_resource type="Script" uid="uid://bkws8qhy8raca" path="res://src/Core/Nodes/Screens/MainMenu/NCustomRunModifiersList.cs" id="1_uaivf"]
+[ext_resource type="PackedScene" uid="uid://bos4pbli8rpc5" path="res://scenes/screens/custom_run/modifier_tickbox.tscn" id="2_uaivf"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="3_4m32t"]
+
+[node name="ModifiersList" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 54.0
+offset_top = 200.0
+offset_right = -1162.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uaivf")
+
+[node name="ScrollContainer" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i77hy")
+
+[node name="Mask" type="ColorRect" parent="ScrollContainer"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="ScrollContainer/Mask"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.97900003
+offset_right = -0.21600342
+offset_bottom = 1040.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="ModifierCheckbox" parent="ScrollContainer/Mask/Content" instance=ExtResource("2_uaivf")]
+layout_mode = 2
+
+[node name="Scrollbar" parent="ScrollContainer" instance=ExtResource("3_4m32t")]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 50.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_behavior_recursive = 0
+mouse_behavior_recursive = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])

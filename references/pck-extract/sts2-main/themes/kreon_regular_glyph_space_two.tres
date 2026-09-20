@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://drc58pa03nghs"]
+
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="1_shared"]
+
+[resource]
+base_font = ExtResource("1_shared")
+spacing_glyph = 2

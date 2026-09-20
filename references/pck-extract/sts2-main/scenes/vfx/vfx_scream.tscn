@@ -1,0 +1,48 @@
+[gd_scene load_steps=11 format=3 uid="uid://fqnr4avs7jvc"]
+
+[ext_resource type="Script" uid="uid://d06am7h072or8" path="res://src/Core/Nodes/Vfx/NScreamVfx.cs" id="1_iexqj"]
+[ext_resource type="PackedScene" uid="uid://dxd6oltkhbeki" path="res://scenes/vfx/scream/vfx_scream_ring_polar.tscn" id="2_1p5l6"]
+[ext_resource type="PackedScene" uid="uid://bnmbf1v1ebk05" path="res://scenes/vfx/scream/vfx_scream_streaks.tscn" id="3_1vpyy"]
+[ext_resource type="PackedScene" path="res://scenes/vfx/common/vfx_common_glow.tscn" id="4_rwhlh"]
+[ext_resource type="PackedScene" uid="uid://c4t5ay054usmy" path="res://scenes/vfx/scream/vfx_scream_distortion_polar.tscn" id="5_ip7xp"]
+
+[sub_resource type="Curve" id="Curve_fu2hu"]
+_data = [Vector2(0, 0.353316), 0.0, -1.32186, 0, 0, Vector2(0.754522, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3p5mi"]
+curve = SubResource("Curve_fu2hu")
+
+[sub_resource type="Curve" id="Curve_r3r6c"]
+_data = [Vector2(0, 0), 0.0, 11.5422, 0, 0, Vector2(0.203175, 0.842474), 0.0, 0.210613, 0, 0, Vector2(1, 1), 0.197691, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t2hxv"]
+curve = SubResource("Curve_r3r6c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_myty7"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 15.0
+scale_max = 15.0
+scale_curve = SubResource("CurveTexture_t2hxv")
+alpha_curve = SubResource("CurveTexture_3p5mi")
+
+[node name="vfx_scream" type="Node2D" node_paths=PackedStringArray("_continuousParticles", "_oneShotParticles")]
+script = ExtResource("1_iexqj")
+_continuousParticles = [NodePath("vfx_scream_ring_polar"), NodePath("vfx_scream_streaks")]
+_oneShotParticles = [NodePath("vfx_common_glow"), NodePath("BackBufferCopy/vfx_scream_distortion_polar")]
+
+[node name="vfx_scream_ring_polar" parent="." instance=ExtResource("2_1p5l6")]
+position = Vector2(2, 0)
+
+[node name="vfx_scream_streaks" parent="." instance=ExtResource("3_1vpyy")]
+
+[node name="vfx_common_glow" parent="." instance=ExtResource("4_rwhlh")]
+z_index = 1
+process_material = SubResource("ParticleProcessMaterial_myty7")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="vfx_scream_distortion_polar" parent="BackBufferCopy" instance=ExtResource("5_ip7xp")]

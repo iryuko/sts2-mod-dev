@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cu63qsxkgrmo6"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://brypx1fl4prr2" path="res://animations/monsters/infested_purifier/infested_purifier.atlas" id="1_kpqpo"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://b3jtvhqxsv32i" path="res://animations/monsters/infested_purifier/infested_purifier.skel" id="2_rxau8"]
+
+[resource]
+atlas_res = ExtResource("1_kpqpo")
+skeleton_file_res = ExtResource("2_rxau8")
+default_mix = 0.05

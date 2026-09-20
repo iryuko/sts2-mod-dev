@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddwipaai0xuol"]
+
+[ext_resource type="Script" uid="uid://catq0mcmnlba" path="res://src/Core/Nodes/Vfx/NCardTransformVfx.cs" id="1_fxw23"]
+[ext_resource type="Shader" uid="uid://xcuul4uxcbkm" path="res://shaders/vfx/cards/vfx_card_transform.gdshader" id="2_t60xw"]
+[ext_resource type="Texture2D" uid="uid://ul1oevmcxsoj" path="res://images/vfx/miasma_cloud.png" id="4_jm4dg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eld2h"]
+resource_local_to_scene = true
+shader = ExtResource("2_t60xw")
+shader_parameter/brightness = 0.0
+shader_parameter/boing = Vector2(0, 0)
+shader_parameter/edgeClampPoint = Vector2(0.23, 1.14)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_t173l"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve" id="Curve_jxm85"]
+_data = [Vector2(0, 0.0242664), 0.0, 0.0, 0, 0, Vector2(0.0451713, 1), 0.0, 0.0, 0, 0, Vector2(0.431464, 1), 0.0, 0.0, 0, 0, Vector2(0.998442, 0.226016), -1.99815, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_8r66r"]
+offsets = PackedFloat32Array(0, 0.223127, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="VfxCardTransform" type="Node2D"]
+script = ExtResource("1_fxw23")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="RenderTexture" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_eld2h")
+position = Vector2(-1, 3)
+texture = SubResource("ViewportTexture_t173l")
+metadata/_edit_lock_ = true
+
+[node name="Particle" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 15
+texture = ExtResource("4_jm4dg")
+lifetime = 1.5
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.08
+fract_delta = false
+emission_shape = 3
+emission_rect_extents = Vector2(4, 4)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 800.0
+initial_velocity_max = 1500.0
+angular_velocity_min = -60.15
+angular_velocity_max = 50.95
+radial_accel_min = -10.0
+radial_accel_max = 10.0
+tangential_accel_max = 44.15
+damping_min = 2000.0
+damping_max = 3000.0
+scale_amount_min = 0.9
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_jxm85")
+color_ramp = SubResource("Gradient_8r66r")

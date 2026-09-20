@@ -1,0 +1,35 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=9 format=3 uid="uid://bnmu48daoyepk"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dfbaylm1kqgnl" path="res://animations/characters/necrobinder/necrobinder.atlas" id="1_pgu3l"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dqy0c2icbb1vf" path="res://animations/characters/necrobinder/necrobinder.skel" id="2_i3ut0"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_wfs5m"]
+from = "idle_loop"
+to = "attack"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ddbfc"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ejpfm"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_jx3o8"]
+from = "hurt"
+to = "cast"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_oqakj"]
+from = "cast"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_1wk87"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_pgu3l")
+skeleton_file_res = ExtResource("2_i3ut0")
+default_mix = 0.02
+animation_mixes = [SubResource("SpineAnimationMix_wfs5m"), SubResource("SpineAnimationMix_ddbfc"), SubResource("SpineAnimationMix_ejpfm"), SubResource("SpineAnimationMix_jx3o8"), SubResource("SpineAnimationMix_oqakj"), SubResource("SpineAnimationMix_1wk87")]

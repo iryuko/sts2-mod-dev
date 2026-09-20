@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cladbyco1h8tl"]
+
+[ext_resource type="Script" uid="uid://c2dlx2q6g23ow" path="res://src/Core/Nodes/Combat/NTargetManager.cs" id="1_u0twv"]
+[ext_resource type="PackedScene" uid="uid://emx5gidfc1ao" path="res://scenes/combat/targeting_arrow.tscn" id="2_21apc"]
+
+[node name="TargetManager" type="Node2D"]
+script = ExtResource("1_u0twv")
+
+[node name="TargetingArrow" parent="." instance=ExtResource("2_21apc")]

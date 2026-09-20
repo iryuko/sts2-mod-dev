@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgymww2gj2cbf"]
+
+[ext_resource type="Texture2D" uid="uid://cfgnkoiqio1q2" path="res://images/packed/map/icons/map_ping.png" id="1_wvg1a"]
+[ext_resource type="Script" uid="uid://vowsflbx8sya" path="res://src/Core/Nodes/Vfx/NMapPingVfx.cs" id="2_tkmu3"]
+
+[node name="MapPingVfx" type="TextureRect"]
+modulate = Color(0.8439, 0.95739, 0.97, 1)
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+texture = ExtResource("1_wvg1a")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_tkmu3")

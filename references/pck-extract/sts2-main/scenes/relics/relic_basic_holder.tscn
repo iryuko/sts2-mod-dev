@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjufnlirvimqs"]
+
+[ext_resource type="Script" uid="uid://d0juaobwhsvvn" path="res://src/Core/Nodes/Relics/NRelicBasicHolder.cs" id="1_5umxd"]
+[ext_resource type="PackedScene" uid="uid://chhto1xfrbjbq" path="res://scenes/relics/relic.tscn" id="2_8vbgl"]
+
+[node name="RelicBasicHolder" type="Control"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 68.0
+offset_bottom = 68.0
+pivot_offset = Vector2(34, 34)
+focus_mode = 2
+mouse_filter = 1
+script = ExtResource("1_5umxd")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Relic" parent="." instance=ExtResource("2_8vbgl")]
+unique_name_in_owner = true

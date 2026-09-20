@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://cuwf8qx36q3pj"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dhx3yykcklxx2" path="res://animations/monsters/eye_with_teeth/eye_with_teeth.atlas" id="1_ikc10"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dwvla3gidkw15" path="res://animations/monsters/eye_with_teeth/eye_with_teeth.skel" id="2_l07lj"]
+
+[resource]
+atlas_res = ExtResource("1_ikc10")
+skeleton_file_res = ExtResource("2_l07lj")

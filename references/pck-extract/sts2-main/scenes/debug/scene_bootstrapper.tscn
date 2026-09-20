@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tfbirp21tlva"]
+
+[ext_resource type="Script" uid="uid://bpk0r4dxglnio" path="res://src/Core/Nodes/Debug/NSceneBootstrapper.cs" id="1_ptpj5"]
+
+[node name="SceneBootstrapper" type="Node"]
+script = ExtResource("1_ptpj5")
+metadata/_edit_vertical_guides_ = [-1678.0]

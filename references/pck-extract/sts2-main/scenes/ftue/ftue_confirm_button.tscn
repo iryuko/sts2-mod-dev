@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyb6y23ajs5uo"]
+
+[ext_resource type="Texture2D" uid="uid://bge0uai3eqnq1" path="res://images/ftue/ftue_confirm_button.png" id="1_btn7n"]
+[ext_resource type="Script" uid="uid://dun8ku5mawif5" path="res://src/Core/Nodes/Ftue/NFtueConfirmButton.cs" id="2_n2uou"]
+[ext_resource type="Texture2D" uid="uid://b52383702y3s4" path="res://images/ftue/ftue_confirm_button_outline.png" id="3_ax2tx"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_grdn1"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_7fhub"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="6_tjruy"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="7_tjruy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjruy"]
+shader = ExtResource("6_tjruy")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="FtueConfirmButton" type="TextureRect"]
+material = SubResource("ShaderMaterial_tjruy")
+custom_minimum_size = Vector2(237, 75)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = 60.0
+offset_right = 119.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(137, 37)
+texture = ExtResource("1_btn7n")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("2_n2uou")
+
+[node name="Outline" type="TextureRect" parent="."]
+modulate = Color(0.94, 0.72615, 0.0846, 0)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_ax2tx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_right = -24.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.24, 0.09888, 0.0888, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 12
+theme_override_fonts/font = ExtResource("4_grdn1")
+theme_override_font_sizes/font_size = 24
+text = "Got it!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_7fhub")
+MaxFontSize = 24
+
+[node name="ControllerIcon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.5
+offset_top = -45.0
+offset_right = -52.5
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("7_tjruy")
+expand_mode = 1
+stretch_mode = 5

@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c6btfbi871lyk"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://b0uflool2t2ik" path="res://animations/monsters/tough_egg/eggbaby.atlas" id="1_7hywt"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://btw2iewqg24gk" path="res://animations/monsters/tough_egg/eggbaby.skel" id="2_rlptf"]
+
+[resource]
+atlas_res = ExtResource("1_7hywt")
+skeleton_file_res = ExtResource("2_rlptf")
+default_mix = 0.02

@@ -1,0 +1,114 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwjlvi22g5n5k"]
+
+[ext_resource type="Script" uid="uid://gnx3teyvtwpi" path="res://src/Core/Nodes/Vfx/Cards/NNightmareHandsVfx.cs" id="1_0s5sy"]
+[ext_resource type="Texture2D" uid="uid://du6by2kbkl21r" path="res://images/packed/vfx/combat/spooky_hand.png" id="2_dh5cr"]
+[ext_resource type="Script" uid="uid://bjuo2c54qy6qc" path="res://src/Core/Nodes/Vfx/Cards/NSpookyHandVfx.cs" id="3_2cbd3"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[node name="NightmareHandsVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0s5sy")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="SpookyHand1" type="TextureRect" parent="."]
+modulate = Color(0.833333, 0.5, 1, 0.376471)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = 397.0
+offset_right = 22.0
+offset_bottom = 653.0
+grow_vertical = 2
+rotation = -2.20551
+scale = Vector2(2, 2)
+pivot_offset = Vector2(194, 0)
+mouse_filter = 2
+texture = ExtResource("2_dh5cr")
+script = ExtResource("3_2cbd3")
+
+[node name="SpookyHand2" type="TextureRect" parent="."]
+modulate = Color(0.833333, 0.5, 1, 0.376471)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+offset_left = -90.0
+offset_top = 282.0
+offset_right = 166.0
+offset_bottom = 538.0
+rotation = -0.902219
+scale = Vector2(1.44, 1.44)
+pivot_offset = Vector2(62, 0)
+mouse_filter = 2
+texture = ExtResource("2_dh5cr")
+flip_h = true
+script = ExtResource("3_2cbd3")
+
+[node name="SpookyHand3" type="TextureRect" parent="."]
+modulate = Color(0.833333, 0.5, 1, 0.376471)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -332.0
+offset_top = -20.0
+offset_right = -76.0
+offset_bottom = 236.0
+grow_horizontal = 2
+rotation = 0.253705
+scale = Vector2(2.25, 2.25)
+pivot_offset = Vector2(62, 0)
+mouse_filter = 2
+texture = ExtResource("2_dh5cr")
+flip_h = true
+script = ExtResource("3_2cbd3")
+
+[node name="SpookyHand4" type="TextureRect" parent="."]
+modulate = Color(0.833333, 0.5, 1, 0.376471)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 314.0
+offset_top = -20.0
+offset_right = 570.0
+offset_bottom = 236.0
+grow_horizontal = 2
+rotation = 0.320793
+scale = Vector2(1.8, 1.8)
+pivot_offset = Vector2(194, 0)
+mouse_filter = 2
+texture = ExtResource("2_dh5cr")
+script = ExtResource("3_2cbd3")
+
+[node name="SpookyHand5" type="TextureRect" parent="."]
+modulate = Color(0.833333, 0.5, 1, 0.376471)
+material = ExtResource("shared_additive_mat")
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -138.0
+offset_right = 108.0
+offset_bottom = 118.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.708413
+scale = Vector2(2.25, 2.25)
+pivot_offset = Vector2(194, 0)
+mouse_filter = 2
+texture = ExtResource("2_dh5cr")
+script = ExtResource("3_2cbd3")

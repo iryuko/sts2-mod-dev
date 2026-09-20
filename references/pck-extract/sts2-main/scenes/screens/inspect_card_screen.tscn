@@ -1,0 +1,196 @@
+[gd_scene load_steps=17 format=3 uid="uid://cciqup5nyc2wd"]
+
+[ext_resource type="Script" uid="uid://tnvpr4oepjbe" path="res://src/Core/Nodes/Screens/NInspectCardScreen.cs" id="1_pye6e"]
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="2_jjew7"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="3_wsj00"]
+[ext_resource type="Script" uid="uid://cktduyaggev5n" path="res://src/Core/Nodes/Screens/InspectScreens/NUpgradePreviewTickbox.cs" id="4_064p0"]
+[ext_resource type="Script" uid="uid://c0ukastwa6q7q" path="res://src/Core/Nodes/CommonUi/NGoldArrowButton.cs" id="4_b3kw4"]
+[ext_resource type="Texture2D" uid="uid://c7kumcmbdvuji" path="res://images/packed/common_ui/settings_tiny_right_arrow.png" id="4_iuvk1"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="5_gchyw"]
+[ext_resource type="PackedScene" uid="uid://ewa1gwt3sc0o" path="res://scenes/cards/card.tscn" id="5_stsg6"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="6_064p0"]
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="9_0c4yn"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="9_mfta0"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="9_n4coc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d5r33"]
+resource_local_to_scene = true
+shader = ExtResource("5_gchyw")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8xf3"]
+resource_local_to_scene = true
+shader = ExtResource("5_gchyw")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_064p0"]
+shader = ExtResource("5_gchyw")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcg0g"]
+shader = ExtResource("5_gchyw")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="InspectCardScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pye6e")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Backstop" type="ColorRect" parent="."]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jjew7")
+
+[node name="HoverTipRect" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -353.0
+offset_top = -418.0
+offset_right = 353.0
+offset_bottom = 418.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Card" parent="." instance=ExtResource("5_stsg6")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+scale = Vector2(2, 2)
+
+[node name="Upgrade" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.5
+offset_top = 450.0
+offset_right = 122.5
+offset_bottom = 514.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(139, 32)
+theme_override_constants/separation = 8
+alignment = 1
+script = ExtResource("4_064p0")
+
+[node name="ControllerIcon" type="TextureRect" parent="Upgrade"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_d5r33")
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_064p0")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TickboxVisuals" parent="Upgrade" instance=ExtResource("9_0c4yn")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_p8xf3")
+layout_mode = 2
+
+[node name="ShowUpgradeLabel" type="Label" parent="Upgrade"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("9_n4coc")
+theme_override_font_sizes/font_size = 32
+text = "Show Upgrade"
+vertical_alignment = 1
+script = ExtResource("9_mfta0")
+AutoSizeEnabled = false
+MinFontSize = 32
+MaxFontSize = 32
+
+[node name="LeftArrow" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -488.0
+offset_top = -64.0
+offset_right = -360.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("4_b3kw4")
+
+[node name="TextureRect" type="TextureRect" parent="LeftArrow"]
+material = SubResource("ShaderMaterial_064p0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("3_wsj00")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightArrow" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 360.0
+offset_top = -64.0
+offset_right = 488.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+script = ExtResource("4_b3kw4")
+
+[node name="TextureRect" type="TextureRect" parent="RightArrow"]
+material = SubResource("ShaderMaterial_wcg0g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 64)
+mouse_filter = 2
+texture = ExtResource("4_iuvk1")
+expand_mode = 1
+stretch_mode = 5

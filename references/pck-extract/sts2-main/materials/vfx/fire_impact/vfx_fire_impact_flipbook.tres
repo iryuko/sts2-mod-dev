@@ -1,0 +1,49 @@
+[gd_resource type="ShaderMaterial" load_steps=11 format=3 uid="uid://uao7lob05d6y"]
+
+[ext_resource type="Shader" uid="uid://b74ju7rwrgwnc" path="res://shaders/vfx/common/vfx_flipbook_shader.gdshader" id="1_5svko"]
+[ext_resource type="Texture2D" uid="uid://ci7wbv16h6202" path="res://images/vfx/fire_impact/fire_impact_flipbook_erosion.png" id="2_5svko"]
+
+[sub_resource type="Curve" id="Curve_cn43k"]
+_limits = [-0.25, 1.0, 0.0, 1.0]
+_data = [Vector2(0.501199, -0.25), 0.0, 4.70479, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1r7ps"]
+curve = SubResource("Curve_cn43k")
+
+[sub_resource type="Curve" id="Curve_1r7ps"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 1]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_hr1ck"]
+curve = SubResource("Curve_1r7ps")
+
+[sub_resource type="Curve" id="Curve_5svko"]
+_limits = [-0.1, 0.1, 0.0, 1.0]
+_data = [Vector2(0, -0.1), 0.0, 0.0, 0, 0, Vector2(0.498801, 8.83415e-05), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cn43k"]
+curve = SubResource("Curve_5svko")
+
+[sub_resource type="Gradient" id="Gradient_1r7ps"]
+offsets = PackedFloat32Array(0.56691, 0.759124)
+colors = PackedColorArray(1, 1, 1, 1, 1.5, 1.5, 1.5, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hr1ck"]
+gradient = SubResource("Gradient_1r7ps")
+use_hdr = true
+
+[resource]
+shader = ExtResource("1_5svko")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/lut = SubResource("GradientTexture1D_hr1ck")
+shader_parameter/frame_count = 6.0
+shader_parameter/flipbook_size = Vector2(3, 2)
+shader_parameter/flipbook_curve = SubResource("CurveTexture_hr1ck")
+shader_parameter/use_erosion_texture = 1.0
+shader_parameter/erosion_texture = ExtResource("2_5svko")
+shader_parameter/erosion_curve = SubResource("CurveTexture_1r7ps")
+shader_parameter/erosion_offset = 0.25
+shader_parameter/use_hue_shift = 1.0
+shader_parameter/hue_shift_curve = SubResource("CurveTexture_cn43k")

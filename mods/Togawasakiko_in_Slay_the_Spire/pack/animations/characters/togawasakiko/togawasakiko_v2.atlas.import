@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dk32vv5duwy3w"
+path="res://runtime_imports/togawasakiko_v2.atlas-378c4a2084084d9e53ba77d3e5717c04.spatlas"
+
+[deps]
+
+source_file="res://animations/characters/togawasakiko/togawasakiko_v2.atlas"
+dest_files=["res://runtime_imports/togawasakiko_v2.atlas-378c4a2084084d9e53ba77d3e5717c04.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

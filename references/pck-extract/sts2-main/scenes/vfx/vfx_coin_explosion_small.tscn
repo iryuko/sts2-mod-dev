@@ -1,0 +1,172 @@
+[gd_scene load_steps=24 format=3 uid="uid://dcidg02qx0m10"]
+
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="1_ltg7f"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_donn7"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_q1xa1"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0.00617284, -11.25), 0.0, 9229.33, 0, 0, Vector2(1, 360), -19237.4, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sri45"]
+curve = SubResource("Curve_q1xa1")
+
+[sub_resource type="Gradient" id="Gradient_j1dl0"]
+offsets = PackedFloat32Array(0, 0.238606, 0.396794, 0.763527, 0.867735, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0.996078, 0.996078, 1, 1, 0.960784, 0.960784, 0, 1, 0.972549, 0.741176, 0, 0.678431, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0q8u5"]
+gradient = SubResource("Gradient_j1dl0")
+
+[sub_resource type="Curve" id="Curve_aekpw"]
+_data = [Vector2(0.00246913, 0.0416666), 0.0, 5.12277, 0, 0, Vector2(0.280247, 0.885417), 0.0, 0.0, 0, 0, Vector2(0.661728, 0.484375), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.8125, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_hby6d"]
+curve = SubResource("Curve_aekpw")
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_uovs8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_uovs8"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_uovs8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uovs8"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+angle_curve = SubResource("CurveTexture_sri45")
+direction = Vector3(0, 150, 0)
+spread = 50.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 250, 0)
+scale_min = 0.1
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_hby6d")
+color_ramp = SubResource("GradientTexture1D_0q8u5")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_uovs8")
+anim_offset_max = 1.0
+turbulence_noise_strength = 0.81
+turbulence_noise_scale = 4.18
+turbulence_noise_speed_random = 1.55
+
+[sub_resource type="Gradient" id="Gradient_hkyja"]
+offsets = PackedFloat32Array(0, 0.19437, 0.717158, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6asc7"]
+gradient = SubResource("Gradient_hkyja")
+
+[sub_resource type="Curve" id="Curve_e7bd6"]
+_data = [Vector2(0, 0), 0.0, 7.60882, 0, 0, Vector2(1, 0.505208), -0.755598, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_44kgs"]
+curve = SubResource("Curve_e7bd6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_upa78"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_44kgs")
+color_ramp = SubResource("GradientTexture1D_6asc7")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_uovs8")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_opus6"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_14te6"]
+offsets = PackedFloat32Array(0, 0.216433, 0.48497, 0.699399, 0.893788, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.894118, 0.298039, 1, 1, 0.462745, 0.0470588, 0.607843, 1, 0.392157, 0.235294, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vrggn"]
+gradient = SubResource("Gradient_14te6")
+
+[sub_resource type="Curve" id="Curve_1bbsa"]
+_data = [Vector2(0, 0.802083), 0.0, 1.4075, 0, 0, Vector2(1, 0.619792), -0.929751, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l6pnl"]
+curve = SubResource("Curve_1bbsa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jkwgt"]
+lifetime_randomness = 0.5
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -150, 0)
+spread = 15.0
+initial_velocity_min = 250.0
+initial_velocity_max = 500.0
+angular_velocity_max = 180.0
+gravity = Vector3(0, 500, 0)
+scale_min = 0.6
+scale_curve = SubResource("CurveTexture_l6pnl")
+color_ramp = SubResource("GradientTexture1D_vrggn")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_uovs8")
+anim_offset_max = 1.0
+turbulence_noise_strength = 0.0
+turbulence_noise_scale = 1.5
+collision_mode = 1
+collision_friction = 0.1
+collision_bounce = 0.6
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l6m0a"]
+polygon = PackedVector2Array(-42.6453, 1.67545, 53.3067, 1.93999, 53.0644, 3.7918, -42.403, 3.61544)
+
+[node name="vfx_coin_explosion_small" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_ltg7f")
+_lifetime = 3.0
+
+[node name="Sparks" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_donn7")
+position = Vector2(0, -130)
+rotation = -3.14159
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_uovs8")
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+collision_base_size = 0.0
+
+[node name="Flash" type="GPUParticles2D" parent="."]
+position = Vector2(-4, -57)
+emitting = false
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_upa78")
+lifetime = 0.5
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+
+[node name="Coins" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_opus6")
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_jkwgt")
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.5
+explosiveness = 1.0
+collision_base_size = 0.7
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Coins"]
+visibility_layer = 0
+position = Vector2(-3, 175)
+scale = Vector2(10.2871, 11.3403)
+occluder = SubResource("OccluderPolygon2D_l6m0a")

@@ -1,0 +1,83 @@
+[gd_scene load_steps=16 format=3 uid="uid://b64a5vvrv25qd"]
+
+[ext_resource type="Texture2D" uid="uid://dunhat805blce" path="res://images/ui/combat/energy_star_flash_glow.png" id="1_ndjf4"]
+[ext_resource type="Texture2D" uid="uid://bh4h4ty5mcsj" path="res://images/packed/vfx/generic/twinkle_star.png" id="2_1nscb"]
+[ext_resource type="Script" uid="uid://cx71ev3yexjaf" path="res://src/Core/Nodes/Vfx/Utilities/NVfxParticleSystem.cs" id="2_kdtlo"]
+
+[sub_resource type="Curve" id="Curve_iwc6u"]
+_data = [Vector2(0.151685, 1), 0.0, -3.16357, 0, 0, Vector2(0.99999, 0), 0.196272, 0.196272, 0, 0, Vector2(1, 0), -2.51066, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1nscb"]
+width = 64
+curve = SubResource("Curve_iwc6u")
+
+[sub_resource type="Curve" id="Curve_apfsy"]
+_limits = [0.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 326.461), 0.0, 0.0, 0, 0, Vector2(1, 303.241), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kdtlo"]
+width = 64
+curve = SubResource("Curve_apfsy")
+
+[sub_resource type="Curve" id="Curve_nj87b"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 2.45204), 0.0, 3.26562, 0, 0, Vector2(0.75, 4), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7id5n"]
+width = 128
+curve = SubResource("Curve_nj87b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r3va1"]
+particle_flag_disable_z = true
+angular_velocity_min = 0.999984
+angular_velocity_max = 0.999984
+angular_velocity_curve = SubResource("CurveTexture_kdtlo")
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_7id5n")
+color = Color(0.77, 0.931, 1, 1)
+alpha_curve = SubResource("CurveTexture_1nscb")
+
+[sub_resource type="Curve" id="Curve_ux7ty"]
+_data = [Vector2(0.202247, 1), 0.0, -2.46329, 0, 0, Vector2(0.99999, 0), -0.312973, -0.312973, 0, 0, Vector2(1, 0), -2.51066, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_arupd"]
+width = 64
+curve = SubResource("Curve_ux7ty")
+
+[sub_resource type="Curve" id="Curve_3otwq"]
+_data = [Vector2(0, 0.433848), 0.0, 0.759952, 0, 0, Vector2(1, 0.648842), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uioqm"]
+width = 128
+curve = SubResource("Curve_3otwq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_02q8t"]
+particle_flag_disable_z = true
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_uioqm")
+color = Color(0.77, 0.931, 1, 0.592157)
+alpha_curve = SubResource("CurveTexture_arupd")
+
+[node name="StarGainVfx" type="Node2D"]
+script = ExtResource("2_kdtlo")
+
+[node name="GlowStar" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("2_1nscb")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_r3va1")
+
+[node name="StarGainVfx" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = ExtResource("1_ndjf4")
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_02q8t")

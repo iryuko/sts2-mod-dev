@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://ikcwpfvpfnov"]
+
+[ext_resource type="Script" uid="uid://d13k30jb0a6y3" path="res://src/Core/Nodes/Ftue/NCombatRewardFtue.cs" id="1_y1psv"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_bnvsd"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="2_pminq"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_scm5i"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_qc36l"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="5_6o7ai"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="5_trcip"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_8narh"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="7_5y3ob"]
+[ext_resource type="Texture2D" uid="uid://cscfaualt5exf" path="res://images/ftue/ftue_pointer_arrow.png" id="12_n4mx7"]
+
+[node name="CombatRewardFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y1psv")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="FtuePopup" type="TextureRect" parent="."]
+material = ExtResource("2_bnvsd")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -682.0
+offset_top = -469.0
+offset_right = -103.0
+offset_bottom = -212.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_pminq")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Header" type="Label" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.33, 0.2475, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_scm5i")
+theme_override_font_sizes/font_size = 26
+text = "Tip: Don't forget your rewards!"
+vertical_alignment = 1
+script = ExtResource("4_qc36l")
+MaxFontSize = 26
+
+[node name="FtueConfirmButton" parent="FtuePopup" instance=ExtResource("5_6o7ai")]
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -137.5
+offset_top = -67.0
+offset_right = 137.5
+offset_bottom = 8.0
+grow_vertical = 0
+
+[node name="DescriptionContainer" type="MarginContainer" parent="FtuePopup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = 73.0
+offset_right = -35.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 32
+
+[node name="Description" type="RichTextLabel" parent="FtuePopup/DescriptionContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("5_trcip")
+theme_override_fonts/bold_font = ExtResource("6_8narh")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "After combat, be sure to pick up your Gold, Cards, and other items before moving on."
+scroll_active = false
+script = ExtResource("7_5y3ob")
+MaxFontSize = 22
+
+[node name="Arrow" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -697.0
+offset_right = -396.0
+offset_bottom = -493.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 1.0472
+pivot_offset = Vector2(122, 102)
+texture = ExtResource("12_n4mx7")

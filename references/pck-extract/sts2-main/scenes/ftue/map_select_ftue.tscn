@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://d17psmbjotule"]
+
+[ext_resource type="Script" uid="uid://xxigkiil0rqu" path="res://src/Core/Nodes/Ftue/NMapSelectFtue.cs" id="1_uq225"]
+[ext_resource type="Material" uid="uid://ceooshmx3gvaj" path="res://shaders/ftue_popup.tres" id="2_5fjn5"]
+[ext_resource type="Texture2D" uid="uid://ktxemomaxfuq" path="res://images/ftue/ftue_popup.png" id="2_q636c"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="3_5fjn5"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="4_v8pmx"]
+[ext_resource type="PackedScene" uid="uid://cyb6y23ajs5uo" path="res://scenes/ftue/ftue_confirm_button.tscn" id="5_jg5s5"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="6_a623x"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="7_hp5l1"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="8_tk1dp"]
+[ext_resource type="Texture2D" uid="uid://cscfaualt5exf" path="res://images/ftue/ftue_pointer_arrow.png" id="9_47d13"]
+
+[node name="MapSelectFtue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uq225")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Positioner" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FtuePopup" type="TextureRect" parent="Positioner"]
+material = ExtResource("2_5fjn5")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 125.0
+offset_top = -506.0
+offset_right = 704.0
+offset_bottom = -249.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_q636c")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Arrow" type="TextureRect" parent="Positioner/FtuePopup"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -792.0
+offset_top = -43.0
+offset_right = -548.0
+offset_bottom = 161.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.548695
+pivot_offset = Vector2(122, 102)
+texture = ExtResource("9_47d13")
+
+[node name="Header" type="Label" parent="Positioner/FtuePopup"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 82.0
+offset_top = 20.0
+offset_right = -36.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.33, 0.2475, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_5fjn5")
+theme_override_font_sizes/font_size = 26
+text = "Tip: Select a Room to travel to"
+vertical_alignment = 1
+script = ExtResource("4_v8pmx")
+MaxFontSize = 26
+
+[node name="FtueConfirmButton" parent="Positioner/FtuePopup" instance=ExtResource("5_jg5s5")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -137.5
+offset_top = -67.0
+offset_right = 137.5
+offset_bottom = 8.0
+grow_vertical = 0
+
+[node name="Description" type="RichTextLabel" parent="Positioner/FtuePopup"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 40.0
+offset_top = 75.0
+offset_right = 541.0
+offset_bottom = 196.0
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("6_a623x")
+theme_override_fonts/bold_font = ExtResource("7_hp5l1")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "To move up in the Spire, pick a room to enter. Once you complete the room, pick an adjacent room above to keep climbing."
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("8_tk1dp")
+MaxFontSize = 22

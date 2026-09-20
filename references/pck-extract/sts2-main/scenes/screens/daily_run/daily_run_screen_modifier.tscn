@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpjvhv2w2ln7m"]
+
+[ext_resource type="Script" uid="uid://bua6sshvgirtq" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunScreenModifier.cs" id="1_2p5qp"]
+[ext_resource type="Texture2D" uid="uid://pr1rqg2t44qx" path="res://images/debug/placeholder_64.png" id="2_2p5qp"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="2_ik0f7"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="14_k7awy"]
+
+[node name="ModifierContainer" type="HBoxContainer"]
+theme_override_constants/separation = 12
+script = ExtResource("1_2p5qp")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_2p5qp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Description" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_constants/line_separation = -4
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("2_ik0f7")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[green]Sealed Deck:[/green] Craft a deck from 30 random cards."
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("14_k7awy")
+AutoSizeEnabled = false
+IsVerticallyBound = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"

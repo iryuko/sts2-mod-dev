@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://duwmucaqvcces"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dmrpoog8pl2tr" path="res://animations/vfx/vfx_mecha_knight_shield/mecha_knight_shield.atlas" id="1_bmrp8"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bi8dmgwt8igiy" path="res://animations/vfx/vfx_mecha_knight_shield/mecha_knight_shield.skel" id="2_7sqex"]
+
+[resource]
+atlas_res = ExtResource("1_bmrp8")
+skeleton_file_res = ExtResource("2_7sqex")

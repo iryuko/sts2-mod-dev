@@ -1,0 +1,241 @@
+[gd_scene load_steps=12 format=3 uid="uid://barj7c7igm13k"]
+
+[ext_resource type="Script" uid="uid://cqo0ws30xidun" path="res://src/Core/Nodes/Events/NAncientDialogueLine.cs" id="1_8k2e5"]
+[ext_resource type="Texture2D" uid="uid://br2fpdsyykisi" path="res://images/ui/run_history/tezcatara_outline.png" id="2_6py2a"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="2_62wk8"]
+[ext_resource type="Texture2D" uid="uid://cn3q332vhijvg" path="res://images/ui/run_history/tezcatara.png" id="3_6cmq5"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="3_83b14"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="3_ial45"]
+[ext_resource type="Texture2D" uid="uid://dq7iib8cadxmf" path="res://images/ui/dialogue_nine_patch.png" id="3_rslvs"]
+[ext_resource type="Texture2D" uid="uid://ddwry85j3nb6" path="res://images/ui/top_panel/character_icon_regent.png" id="5_83b14"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="6_d2ebi"]
+[ext_resource type="Texture2D" uid="uid://br0nmhqx2ci7a" path="res://images/ui/top_panel/character_icon_regent_outline.png" id="11_6cmq5"]
+[ext_resource type="Texture2D" uid="uid://d311dbdeyx2lf" path="res://images/ui/dialogue_tail.png" id="19_i60ah"]
+
+[node name="AncientDialogueLine" type="HBoxContainer"]
+custom_minimum_size = Vector2(800, 68)
+offset_right = 800.0
+offset_bottom = 64.0
+script = ExtResource("1_8k2e5")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="AncientIcon" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="AncientIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_6cmq5")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="AncientIcon/Icon"]
+modulate = Color(0, 0, 0, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_6py2a")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DialogueContainer" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(672, 0)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = -12
+
+[node name="DialogueTailLeft" type="TextureRect" parent="DialogueContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.156863, 0.270588, 0.309804, 1)
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("19_i60ah")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="DialogueContainer/HBoxContainer/DialogueTailLeft"]
+self_modulate = Color(0, 0, 0, 0.25098)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_i60ah")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bubble" type="NinePatchRect" parent="DialogueContainer/HBoxContainer"]
+unique_name_in_owner = true
+self_modulate = Color(0.1581, 0.272025, 0.31, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_rslvs")
+region_rect = Rect2(0, 0, 116, 85)
+patch_margin_left = 27
+patch_margin_top = 28
+patch_margin_right = 27
+patch_margin_bottom = 28
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Shadow" type="NinePatchRect" parent="DialogueContainer/HBoxContainer/Bubble"]
+self_modulate = Color(0, 0, 0, 0.25098)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 5.0
+offset_right = 2.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-64, -196)
+size_flags_horizontal = 3
+texture = ExtResource("3_rslvs")
+region_rect = Rect2(0, 0, 116, 85)
+patch_margin_left = 27
+patch_margin_top = 28
+patch_margin_right = 27
+patch_margin_bottom = 28
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="DialogueTailRight" type="TextureRect" parent="DialogueContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.156863, 0.270588, 0.309804, 1)
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("19_i60ah")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="Shadow" type="TextureRect" parent="DialogueContainer/HBoxContainer/DialogueTailRight"]
+self_modulate = Color(0, 0, 0, 0.25098)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 3.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("19_i60ah")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="TextContainer" type="MarginContainer" parent="DialogueContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="Text" type="RichTextLabel" parent="DialogueContainer/TextContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(634, 34)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("3_ial45")
+theme_override_fonts/bold_font = ExtResource("3_83b14")
+theme_override_fonts/italics_font = ExtResource("6_d2ebi")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[i]The Regent inspects the tea carefully. Having no mouth with which to drink.[/i]"
+fit_content = true
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("2_62wk8")
+AutoSizeEnabled = false
+MinFontSize = 24
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="CharacterIcon" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="CharacterIcon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_83b14")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Outline" type="TextureRect" parent="CharacterIcon/Icon"]
+modulate = Color(0, 0, 0, 0.5019608)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_6cmq5")
+expand_mode = 1
+stretch_mode = 5

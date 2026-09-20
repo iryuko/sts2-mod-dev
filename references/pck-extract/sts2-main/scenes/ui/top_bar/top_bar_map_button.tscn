@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbrdx66bpl8r7"]
+
+[ext_resource type="Script" uid="uid://3s10bnxx3n7d" path="res://src/Core/Nodes/TopBar/NTopBarMapButton.cs" id="1_3e8nv"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_b12bo"]
+[ext_resource type="Texture2D" uid="uid://bqsbmj4" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_map.tres" id="3_36dok"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="4_36dok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu4dh"]
+shader = ExtResource("2_b12bo")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6h827"]
+resource_local_to_scene = true
+shader = ExtResource("2_b12bo")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="Map" type="MarginContainer"]
+custom_minimum_size = Vector2(80, 80)
+mouse_filter = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_3e8nv")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Control"]
+material = SubResource("ShaderMaterial_yu4dh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(42, 32)
+mouse_filter = 2
+texture = ExtResource("3_36dok")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ControllerIcon" type="TextureRect" parent="Control"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_6h827")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -3.0
+offset_right = 112.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_36dok")
+expand_mode = 1
+stretch_mode = 5

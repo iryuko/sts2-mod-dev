@@ -1,0 +1,300 @@
+[gd_scene load_steps=22 format=3 uid="uid://b4vajh8abu2w4"]
+
+[ext_resource type="Script" uid="uid://v255olek18af" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunScreen.cs" id="1_gsjt8"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="2_hw2l2"]
+[ext_resource type="FontVariation" uid="uid://b8ce4a71ref23" path="res://themes/spectral_bold_shared.tres" id="2_w3nvp"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_gvjr8"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="4_w3nvp"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="5_gvjr8"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="6_3babs"]
+[ext_resource type="PackedScene" uid="uid://i17vjyd5x6eg" path="res://scenes/screens/remote_player_container.tscn" id="6_ctsvr"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="6_w3nvp"]
+[ext_resource type="PackedScene" uid="uid://cpjvhv2w2ln7m" path="res://scenes/screens/daily_run/daily_run_screen_modifier.tscn" id="7_32ft3"]
+[ext_resource type="PackedScene" uid="uid://cxxtaxgeppabk" path="res://scenes/screens/daily_run/daily_run_character_container.tscn" id="7_nnipv"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="9_15d8j"]
+[ext_resource type="PackedScene" uid="uid://bl460ab2i4mkx" path="res://scenes/ui/confirm_button.tscn" id="10_15d8j"]
+[ext_resource type="PackedScene" uid="uid://bdqspdbjjiqv5" path="res://scenes/screens/daily_run/daily_run_leaderboard.tscn" id="11_5tkdq"]
+[ext_resource type="Texture2D" uid="uid://ft7c6dms8rrf" path="res://images/ui/emote/exclaim.png" id="11_54yx2"]
+[ext_resource type="Texture2D" uid="uid://btjc3p508sth1" path="res://images/ui/fuzzy_nine_patch_char_select.png" id="11_bcqc1"]
+[ext_resource type="FontVariation" uid="uid://c71uw4aqpsn1b" path="res://themes/spectral_glphy_space_two.tres" id="12_2c4ej"]
+[ext_resource type="Texture2D" uid="uid://q1y4ux" path="res://images/atlases/compressed.sprites/back_button_x.tres" id="17_5d2ug"]
+[ext_resource type="Script" uid="uid://drm4tcwtxrx7u" path="res://src/Core/Nodes/Screens/DailyRun/NDailyRunScoreWarning.cs" id="19_y2b5y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2b5y"]
+resource_local_to_scene = true
+shader = ExtResource("9_15d8j")
+shader_parameter/h = 0.171
+shader_parameter/s = 3.072
+shader_parameter/v = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w3nvp"]
+resource_local_to_scene = true
+shader = ExtResource("9_15d8j")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="DailyRunScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gsjt8")
+
+[node name="ChallengeContainer" type="Control" parent="."]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="ChallengeContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 181.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_w3nvp")
+theme_override_font_sizes/font_size = 48
+text = "Daily Challenge"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("2_hw2l2")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Date" type="RichTextLabel" parent="ChallengeContainer"]
+unique_name_in_owner = true
+modulate = Color(0.49803922, 1, 0, 1)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 172.0
+offset_bottom = 208.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("6_3babs")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[thinky_dots]Fetching Time...[/thinky_dots]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("4_gvjr8")
+AutoSizeEnabled = false
+MinFontSize = 36
+MaxFontSize = 36
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="TimeLeft" type="RichTextLabel" parent="ChallengeContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 0.964706, 0.886275, 1)
+layout_mode = 0
+offset_left = 219.0
+offset_top = 209.0
+offset_right = 684.0
+offset_bottom = 239.5
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("6_w3nvp")
+theme_override_fonts/bold_font = ExtResource("4_w3nvp")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+bbcode_enabled = true
+text = "[gold][b]Time Left:[/b][/gold] 00:33:12"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_gvjr8")
+AutoSizeEnabled = false
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="CenterContainer" type="CenterContainer" parent="ChallengeContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -422.0
+offset_top = -284.0
+offset_right = 422.0
+offset_bottom = 91.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ChallengeContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="CharacterContainer" parent="ChallengeContainer/CenterContainer/HBoxContainer" instance=ExtResource("7_nnipv")]
+unique_name_in_owner = false
+custom_minimum_size = Vector2(284, 64)
+layout_mode = 2
+
+[node name="RemotePlayerContainer" parent="ChallengeContainer/CenterContainer/HBoxContainer" instance=ExtResource("6_ctsvr")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(518, 258)
+layout_mode = 2
+
+[node name="ModifiersLabel" type="Label" parent="ChallengeContainer"]
+unique_name_in_owner = true
+modulate = Color(0.937255, 0.784314, 0.317647, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = 99.66669
+offset_right = -109.0
+offset_bottom = 140.33337
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_w3nvp")
+theme_override_font_sizes/font_size = 32
+text = "Modifiers"
+vertical_alignment = 1
+script = ExtResource("2_hw2l2")
+AutoSizeEnabled = false
+
+[node name="ModifiersContainer" type="VBoxContainer" parent="ChallengeContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = 156.00006
+offset_right = 336.0
+offset_bottom = 372.00006
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="ModifierContainer1" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("7_32ft3")]
+layout_mode = 2
+
+[node name="ModifierContainer2" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("7_32ft3")]
+layout_mode = 2
+
+[node name="ModifierContainer3" parent="ChallengeContainer/ModifiersContainer" instance=ExtResource("7_32ft3")]
+layout_mode = 2
+
+[node name="Leaderboards" parent="." instance=ExtResource("11_5tkdq")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="ReadyAndWaitingPanel" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = -214.0
+offset_right = 786.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Background" type="NinePatchRect" parent="ReadyAndWaitingPanel"]
+modulate = Color(0, 0, 0, 0.360784)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_bcqc1")
+patch_margin_left = 42
+patch_margin_top = 42
+patch_margin_right = 42
+patch_margin_bottom = 42
+
+[node name="WaitingForReady" type="Label" parent="ReadyAndWaitingPanel"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("12_2c4ej")
+theme_override_font_sizes/font_size = 50
+text = "Waiting for other players..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_hw2l2")
+AutoSizeEnabled = false
+MinFontSize = 48
+MaxFontSize = 80
+
+[node name="ScoreWarning" type="TextureRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_y2b5y")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -116.0
+offset_top = -448.0
+offset_right = -22.0
+offset_bottom = -369.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(47, 39)
+texture = ExtResource("11_54yx2")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("19_y2b5y")
+
+[node name="ConfirmButton" parent="." instance=ExtResource("10_15d8j")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="BackButton" parent="." instance=ExtResource("5_gvjr8")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="UnreadyButton" parent="." instance=ExtResource("5_gvjr8")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="Icon" parent="UnreadyButton/Image" index="0"]
+texture = ExtResource("17_5d2ug")
+
+[node name="ControllerIcon" parent="UnreadyButton" index="3"]
+material = SubResource("ShaderMaterial_w3nvp")
+
+[editable path="UnreadyButton"]

@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=3 uid="uid://cm2278sgnv4u0"]
+
+[ext_resource type="Script" uid="uid://butww03y05mm4" path="res://src/Core/Nodes/Screens/MainMenu/NShortSubmenuButton.cs" id="1_f3b56"]
+[ext_resource type="Texture2D" uid="uid://coqqow2y3hdvw" path="res://images/packed/common_ui/submenu_panel_short.png" id="1_s8esl"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_f3b56"]
+[ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="2_xyx3e"]
+[ext_resource type="FontVariation" uid="uid://cfurftqxyn4mn" path="res://themes/kreon_regular_glyph_space_one.tres" id="3_lijnw"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_xyx3e"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="4_newu6"]
+[ext_resource type="Texture2D" uid="uid://d4l6kr43g6mc4" path="res://images/ui/main_menu/submenu_card_library.png" id="8_f3b56"]
+[ext_resource type="Texture2D" uid="uid://cipv0cjrdxslw" path="res://images/ui/main_menu/submenu_lock.png" id="9_fqpfe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqpfe"]
+resource_local_to_scene = true
+shader = ExtResource("2_f3b56")
+shader_parameter/h = 0.4130000196175
+shader_parameter/s = 0.90000004275
+shader_parameter/v = 0.8
+
+[node name="SubmenuButtonShort" type="Control"]
+custom_minimum_size = Vector2(368, 490)
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(180, 240)
+script = ExtResource("1_f3b56")
+
+[node name="BgPanel" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_fqpfe")
+custom_minimum_size = Vector2(368, 490)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+texture = ExtResource("1_s8esl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -207.0
+offset_right = -34.0
+offset_bottom = -154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9372549, 0.78431374, 0.31764707, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1254902)
+theme_override_colors/font_outline_color = Color(0.2, 0.1908, 0.154, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 12
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xyx3e")
+theme_override_font_sizes/font_size = 28
+text = "Card Library"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_xyx3e")
+MaxFontSize = 28
+metadata/_custom_type_script = "uid://dtfio45agppyj"
+
+[node name="Description" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = 293.0
+offset_right = -49.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.9647059, 0.8862745, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/line_separation = -2
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("3_lijnw")
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "View all of the cards you have encountered throughout the Spire!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_newu6")
+MinFontSize = 18
+MaxFontSize = 24
+metadata/_custom_type_script = "uid://c2oywrx8xbqfx"
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48200002
+anchor_top = 0.367
+anchor_right = 0.48200002
+anchor_bottom = 0.367
+offset_left = -130.6481
+offset_top = -88.83
+offset_right = 130.89609
+offset_bottom = 109.17
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_f3b56")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Lock" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48200002
+anchor_top = 0.367
+anchor_right = 0.48200002
+anchor_bottom = 0.367
+offset_left = -130.6481
+offset_top = -88.83
+offset_right = 130.89609
+offset_bottom = 109.17
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_fqpfe")
+expand_mode = 1
+stretch_mode = 5

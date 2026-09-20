@@ -1,0 +1,56 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=13 format=3 uid="uid://ssd6f8xv7ub7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://3qtmqetypjkv" path="res://animations/monsters/soul_fysh/soul_fysh.atlas" id="1_ob8hs"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://do2b85qn22vh7" path="res://animations/monsters/soul_fysh/soul_fysh.skel" id="2_pd0jd"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_ob8hs"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_pd0jd"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_vj04e"]
+from = "intangible_loop"
+to = "hurt_intangible"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_sho5o"]
+from = "intangible_loop"
+to = "die_intangible"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_aqwj8"]
+from = "idle_loop"
+to = "intangible_start"
+mix = 0.2
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_7audk"]
+from = "intangible_loop"
+to = "intangible_end"
+mix = 0.2
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_fj1t7"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_u8pq2"]
+from = "hurt"
+to = "die"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mma2r"]
+from = "hurt_intangible"
+to = "hurt_intangible"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cc5pg"]
+from = "die_intangible"
+to = "die_intangible"
+
+[resource]
+atlas_res = ExtResource("1_ob8hs")
+skeleton_file_res = ExtResource("2_pd0jd")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_ob8hs"), SubResource("SpineAnimationMix_pd0jd"), SubResource("SpineAnimationMix_vj04e"), SubResource("SpineAnimationMix_sho5o"), SubResource("SpineAnimationMix_aqwj8"), SubResource("SpineAnimationMix_7audk"), SubResource("SpineAnimationMix_fj1t7"), SubResource("SpineAnimationMix_u8pq2"), SubResource("SpineAnimationMix_mma2r"), SubResource("SpineAnimationMix_cc5pg")]

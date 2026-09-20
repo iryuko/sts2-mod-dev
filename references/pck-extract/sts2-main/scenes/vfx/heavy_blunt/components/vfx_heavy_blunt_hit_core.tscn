@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddnrqskl423sy"]
+
+[ext_resource type="Material" uid="uid://catao7tx3ctv5" path="res://materials/vfx/heavy_blunt/heavy_blunt_hit_core.tres" id="1_e4vlv"]
+[ext_resource type="Texture2D" uid="uid://cw830kq3rkpv" path="res://images/vfx/vfx_heavy_blunt/heavy_blunt_hit_core_flat.png" id="2_pkjku"]
+
+[sub_resource type="Curve" id="Curve_hx3ww"]
+_data = [Vector2(0, 0.75048), 0.0, 0.639028, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3qx84"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1.50096), 0.0, -4.11292, 0, 0, Vector2(1, 0.253359), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_nf0nc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ljjp2"]
+curve_x = SubResource("Curve_hx3ww")
+curve_y = SubResource("Curve_3qx84")
+curve_z = SubResource("Curve_nf0nc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2o5cn"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 2.5
+scale_max = 2.5
+scale_curve = SubResource("CurveXYZTexture_ljjp2")
+
+[node name="vfx_heavy_blunt_hit_core" type="GPUParticles2D"]
+material = ExtResource("1_e4vlv")
+emitting = false
+amount = 1
+texture = ExtResource("2_pkjku")
+lifetime = 0.2
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_2o5cn")

@@ -1,0 +1,155 @@
+[gd_scene load_steps=19 format=3 uid="uid://bsemikoqepptv"]
+
+[ext_resource type="Script" uid="uid://d141kr6cqb30x" path="res://src/Core/Nodes/Vfx/NGroundFireVfx.cs" id="1_7obpm"]
+[ext_resource type="Texture2D" uid="uid://g0k33ues8gjd" path="res://images/vfx/shared_use/ash_particle.png" id="2_h3s0y"]
+[ext_resource type="Texture2D" uid="uid://cvm1y0roce1xc" path="res://images/vfx/environment/fire/fire_flame_sprites.png" id="3_eq4qx"]
+[ext_resource type="Texture2D" uid="uid://dk6clqxsl2v4q" path="res://images/vfx/environment/fire/flame_gradient_mask.png" id="4_r3n15"]
+[ext_resource type="PackedScene" uid="uid://clqwntx3bixrf" path="res://scenes/vfx/fires/vfx_additive_step_fire.tscn" id="5_5s6no"]
+
+[sub_resource type="Curve" id="Curve_xwqe2"]
+_data = [Vector2(0, 0), 0.0, 5.81838, 0, 0, Vector2(0.501047, 0.998105), -1.16168e-06, -1.16168e-06, 0, 0, Vector2(1, 0), -5.23103, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_11ec5"]
+width = 128
+curve = SubResource("Curve_xwqe2")
+
+[sub_resource type="Gradient" id="Gradient_t13li"]
+offsets = PackedFloat32Array(0.625, 0.71087)
+colors = PackedColorArray(0.05, 0.05, 0.05, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3agk"]
+gradient = SubResource("Gradient_t13li")
+
+[sub_resource type="Curve" id="Curve_mdnjv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.253902), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lgjq2"]
+width = 128
+curve = SubResource("Curve_mdnjv")
+
+[sub_resource type="Curve" id="Curve_toehp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0733236), -2.94131, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1a1ar"]
+curve = SubResource("Curve_toehp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlpnp"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(128, 128, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(1, -1, 0)
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 100.0
+angular_velocity_min = -10.0
+angular_velocity_max = 9.99998
+radial_velocity_min = -100.0
+radial_velocity_max = 100.0
+radial_velocity_curve = SubResource("CurveTexture_lgjq2")
+gravity = Vector3(0, -98, 0)
+scale_min = 0.35
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_1a1ar")
+color = Color(1, 0.766667, 0, 1)
+color_ramp = SubResource("GradientTexture1D_o3agk")
+alpha_curve = SubResource("CurveTexture_11ec5")
+hue_variation_min = -0.08
+hue_variation_max = 0.08
+turbulence_enabled = true
+turbulence_noise_strength = 10.0
+turbulence_influence_min = 0.0
+turbulence_initial_displacement_min = 0.100001
+turbulence_initial_displacement_max = 0.100001
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4roxq"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ncw1b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.803247, 0), -2.64426, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qg8fg"]
+width = 32
+curve = SubResource("Curve_ncw1b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c4qoe"]
+lifetime_randomness = 0.8
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 12, 0)
+emission_shape_scale = Vector3(192, 220, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, -300, 0)
+scale_max = 4.0
+color = Color(1, 0.693333, 0.08, 1)
+alpha_curve = SubResource("CurveTexture_qg8fg")
+hue_variation_min = -0.05
+hue_variation_max = 0.02
+anim_offset_max = 1.0
+
+[node name="GroundFireVfx" type="Node2D"]
+script = ExtResource("1_7obpm")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Ember" type="GPUParticles2D" parent="."]
+position = Vector2(-2, -162)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_qlpnp")
+texture = ExtResource("2_h3s0y")
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.5
+randomness = 0.8
+fixed_fps = 60
+
+[node name="FlameSprites" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_4roxq")
+position = Vector2(0, -201)
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_c4qoe")
+texture = ExtResource("3_eq4qx")
+lifetime = 0.3
+explosiveness = 0.5
+randomness = 0.5
+visibility_rect = Rect2(-256, -256, 512, 512)
+
+[node name="MainFire" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.752941)
+clip_children = 1
+position = Vector2(24, -15)
+scale = Vector2(4, 4)
+skew = -0.0872665
+texture = ExtResource("4_r3n15")
+offset = Vector2(3, -57.25)
+
+[node name="VfxAdditiveStepFire" parent="MainFire" instance=ExtResource("5_5s6no")]
+position = Vector2(-1, 24.75)
+scale = Vector2(0.3, 0.3)

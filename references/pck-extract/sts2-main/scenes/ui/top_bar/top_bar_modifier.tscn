@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bofqmmgqcaon2"]
+
+[ext_resource type="Script" uid="uid://mh1wot3jldfh" path="res://src/Core/Nodes/TopBar/NTopBarModifier.cs" id="1_5iq7h"]
+[ext_resource type="Texture2D" uid="uid://pr1rqg2t44qx" path="res://images/debug/placeholder_64.png" id="2_5iq7h"]
+
+[node name="TopBarModifier" type="Control"]
+custom_minimum_size = Vector2(56, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 80.0
+script = ExtResource("1_5iq7h")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -27.0
+offset_right = 24.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_5iq7h")
+expand_mode = 1
+stretch_mode = 5

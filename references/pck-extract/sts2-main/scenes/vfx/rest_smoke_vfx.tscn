@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://oasqc2kmtsc8"]
+
+[ext_resource type="Script" uid="uid://drxxyaqnmb1pw" path="res://src/Core/Nodes/Vfx/NRestSmokeVfx.cs" id="1_va7er"]
+[ext_resource type="Texture2D" uid="uid://btqpvklnyn4i4" path="res://images/vfx/shared_use/smoke_vfx.png" id="1_w6jfu"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n0ifb"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_qk0dp"]
+offsets = PackedFloat32Array(0, 0.120504, 0.523381, 0.762255, 1)
+colors = PackedColorArray(0.5, 0.5, 0.5, 0, 0.35, 0.35, 0.35, 1, 0.25, 0.25, 0.25, 0.501961, 0.1, 0.1, 0.1, 0.25098, 0.1, 0.1, 0.1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vpvrg"]
+gradient = SubResource("Gradient_qk0dp")
+width = 128
+
+[sub_resource type="Curve" id="Curve_y34lc"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.429003), 0.0, 6.79599, 0, 0, Vector2(0.162866, 1.03955), 0.0, 0.0, 0, 0, Vector2(0.483713, 0.850316), 0.0, 0.0, 0, 0, Vector2(1, 2), 4.20912, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_eigyg"]
+width = 128
+curve = SubResource("Curve_y34lc")
+
+[sub_resource type="Curve" id="Curve_alpha_0kosb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_0kosb"]
+curve = SubResource("Curve_alpha_0kosb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0kosb"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 260, 0)
+emission_shape_scale = Vector3(1280, 405, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -180.0
+angle_max = 180.0
+spread = 120.0
+initial_velocity_min = -250.0
+initial_velocity_max = 250.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+radial_velocity_min = 25.0
+radial_velocity_max = 75.0
+gravity = Vector3(0, -600, 0)
+attractor_interaction_enabled = false
+scale_min = 3.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_eigyg")
+color_ramp = SubResource("GradientTexture1D_vpvrg")
+alpha_curve = SubResource("CurveTexture_alpha_0kosb")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
+anim_offset_max = 1.0
+turbulence_noise_strength = 4.51
+turbulence_influence_min = 0.5
+turbulence_influence_max = 1.0
+
+[node name="RestSmokeVfx" type="Node2D"]
+script = ExtResource("1_va7er")
+
+[node name="Clouds" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_n0ifb")
+emitting = false
+amount = 144
+texture = ExtResource("1_w6jfu")
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.8
+fixed_fps = 60
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_0kosb")

@@ -1,0 +1,9 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://c6ht5grwe87m1"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://7d2tdop6gxn8" path="res://animations/vfx/vfx_sovereign_blade/sovereign_blade.atlas" id="1_nw4md"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cdnknfnxvn62h" path="res://animations/vfx/vfx_sovereign_blade/soveriegn_blade.skel" id="2_r0c74"]
+
+[resource]
+atlas_res = ExtResource("1_nw4md")
+skeleton_file_res = ExtResource("2_r0c74")
+default_mix = 0.01

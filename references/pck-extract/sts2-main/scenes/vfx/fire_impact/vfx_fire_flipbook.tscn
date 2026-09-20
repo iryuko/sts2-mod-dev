@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://b5yx8vni82dcj"]
+
+[ext_resource type="Material" uid="uid://uao7lob05d6y" path="res://materials/vfx/fire_impact/vfx_fire_impact_flipbook.tres" id="1_7hpis"]
+[ext_resource type="Texture2D" uid="uid://c4p6527j0cs3h" path="res://images/vfx/fire_impact/fire_impact_flipbook.png" id="2_u47hl"]
+
+[sub_resource type="Curve" id="Curve_alpha_ParticleProcessMaterial_l2fbj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_alpha_ParticleProcessMaterial_l2fbj"]
+curve = SubResource("Curve_alpha_ParticleProcessMaterial_l2fbj")
+
+[sub_resource type="Curve" id="Curve_foxwj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.697536), -0.562151, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_bleyy"]
+curve = SubResource("Curve_foxwj")
+
+[sub_resource type="Gradient" id="Gradient_8pyfw"]
+offsets = PackedFloat32Array(0.463215, 0.708447)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8mg5p"]
+gradient = SubResource("Gradient_8pyfw")
+
+[sub_resource type="Curve" id="Curve_2pmo6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.845803), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ikbjt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_km08i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_r3do5"]
+curve_x = SubResource("Curve_2pmo6")
+curve_y = SubResource("Curve_ikbjt")
+curve_z = SubResource("Curve_km08i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l2fbj"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.85
+scale_max = 0.85
+scale_curve = SubResource("CurveXYZTexture_r3do5")
+color_ramp = SubResource("GradientTexture1D_8mg5p")
+alpha_curve = SubResource("CurveTexture_alpha_ParticleProcessMaterial_l2fbj")
+anim_speed_min = 4.0
+anim_speed_max = 4.0
+anim_speed_curve = SubResource("CurveTexture_bleyy")
+anim_offset_max = 1.0
+
+[node name="vfx_fire_flipbook" type="GPUParticles2D"]
+self_modulate = Color(1, 0.54595, 0.342164, 1)
+z_index = 1
+material = ExtResource("1_7hpis")
+emitting = false
+amount = 1
+texture = ExtResource("2_u47hl")
+lifetime = 0.65
+one_shot = true
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_l2fbj")

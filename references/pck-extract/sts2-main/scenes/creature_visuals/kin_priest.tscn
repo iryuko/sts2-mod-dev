@@ -1,0 +1,185 @@
+[gd_scene load_steps=25 format=3 uid="uid://cf8wfub1pq43w"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_268fe"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://d1ctwl6ioccnc" path="res://animations/monsters/kin_priest/kin_priest_skel_data.tres" id="3_0k8tw"]
+[ext_resource type="Script" uid="uid://cyjjxaberl2dy" path="res://src/Core/Nodes/Vfx/NKinPriestVfx.cs" id="4_rvypn"]
+[ext_resource type="Shader" uid="uid://dryvqo67omhm" path="res://shaders/vfx/vfx_stepped_shader_fire_flat.tres" id="4_sel1g"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="5_fa1tp"]
+[ext_resource type="Texture2D" uid="uid://1epaordiol6u" path="res://images/vfx/fire/zigzag_fire_distortion.png" id="6_7idpp"]
+[ext_resource type="Texture2D" uid="uid://nabb7hx4fxat" path="res://images/vfx/fire/fire_bottom_mask.png" id="7_11x8x"]
+[ext_resource type="Texture2D" uid="uid://ihjpxxm3o87h" path="res://images/vfx/fire/basic_fire_noise.png" id="8_5htge"]
+[ext_resource type="Texture2D" uid="uid://b1cq8w6uwgvbm" path="res://images/vfx/fire/fire_base_pointy.png" id="9_odoe2"]
+[ext_resource type="Texture2D" uid="uid://dmj4cflbb7v45" path="res://images/packed/vfx/generic/round_glow.png" id="10_364dn"]
+[ext_resource type="Texture2D" uid="uid://b47r2blhe2i3" path="res://images/vfx/fire/cinder_particle.png" id="11_vqwlb"]
+[ext_resource type="PackedScene" uid="uid://bvdlr3a6k56n1" path="res://scenes/vfx/monsters/kin_priest_beam_vfx.tscn" id="13_18gio"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u31jq"]
+shader = ExtResource("4_sel1g")
+shader_parameter/OuterColor = Color(0.34902, 0.937255, 0.709804, 1)
+shader_parameter/InnerColorStep = Vector2(0.85, 0.995)
+shader_parameter/Noise2Strength = 0.825
+shader_parameter/Noise2Scaling = Vector2(1.2, 1.2)
+shader_parameter/Noise2Panning = Vector2(-0.1, 0.6)
+shader_parameter/Noise2Texture = ExtResource("8_5htge")
+shader_parameter/Noise1Strength = 1.035
+shader_parameter/Noise1Scaling = Vector2(0.8, 0.8)
+shader_parameter/Noise1Panning = Vector2(0.2, 0.85)
+shader_parameter/Noise1Texture = ExtResource("5_fa1tp")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.14)
+shader_parameter/NoiseMask = ExtResource("7_11x8x")
+shader_parameter/Distortion2Scale = Vector2(1, 0.8)
+shader_parameter/Distortion2Panning = Vector2(0, 1.3)
+shader_parameter/Distortion2Texture = ExtResource("6_7idpp")
+shader_parameter/Distortion2Strength = 0.25
+shader_parameter/Distortion1Scale = Vector2(0.8, 0.8)
+shader_parameter/Distortion1Panning = Vector2(0.205, 0.9)
+shader_parameter/Distortion1Texture = ExtResource("5_fa1tp")
+shader_parameter/Distortion1Strength = 0.21
+shader_parameter/DistortionMaskScale = Vector2(0.25, 0.25)
+shader_parameter/DistortionMaskOffset = Vector2(0, 0.74)
+shader_parameter/DistortionMask = ExtResource("7_11x8x")
+shader_parameter/InnerColor = Color(0.542667, 1, 0.44, 1)
+shader_parameter/OuterStep = Vector2(0.2, 0.3)
+
+[sub_resource type="Curve" id="Curve_noi03"]
+_limits = [0.0, 0.2, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.16054, 0, 0, Vector2(0.505859, 0.0570188), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.174819, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_q0045"]
+curve = SubResource("Curve_noi03")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kqh5v"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 8.0
+color = Color(0.34902, 0.937255, 0.709804, 1)
+alpha_curve = SubResource("CurveTexture_q0045")
+
+[sub_resource type="Curve" id="Curve_gdhf2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.517578, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.00759768), -5.75851, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_ihg6p"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.300781, 0.918234), 0.0, 0.0, 0, 0, Vector2(0.505859, 0.899421), -0.112005, -0.112005, 0, 0, Vector2(1, 0), -4.51309, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_kn4x8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ay67f"]
+curve_x = SubResource("Curve_gdhf2")
+curve_y = SubResource("Curve_ihg6p")
+curve_z = SubResource("Curve_kn4x8")
+
+[sub_resource type="Curve" id="Curve_5vpk7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.416031, 0.550776), -1.12092, -1.12092, 0, 0, Vector2(1, 0.27574), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxyhp"]
+curve = SubResource("Curve_5vpk7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fapj7"]
+lifetime_randomness = 0.84
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 99.0
+emission_ring_cone_angle = 90.0
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 180.0
+initial_velocity_min = 1900.0
+initial_velocity_max = 2000.0
+gravity = Vector3(0, -100, 0)
+scale_min = 0.3
+scale_max = 0.5
+scale_curve = SubResource("CurveXYZTexture_ay67f")
+color = Color(0.3478, 0.94, 0.79195, 1)
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(1, 5, 0)
+turbulence_influence_max = 0.273
+turbulence_influence_over_life = SubResource("CurveTexture_cxyhp")
+
+[node name="KinPriest" type="Node2D"]
+script = ExtResource("1_268fe")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_0k8tw")
+preview_skin = "Default"
+preview_animation = "attack_grenade"
+preview_frame = false
+preview_time = 0.87
+unique_name_in_owner = true
+position = Vector2(6, -20)
+scale = Vector2(0.3, 0.3)
+
+[node name="TorchFireBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "staff_fire_attach"
+show_behind_parent = true
+position = Vector2(-515.64777, -807.89325)
+
+[node name="SteppedFireMix" type="Sprite2D" parent="Visuals/TorchFireBone"]
+material = SubResource("ShaderMaterial_u31jq")
+position = Vector2(31.452, -83.0748)
+rotation = 0.320457
+scale = Vector2(0.681818, 0.681818)
+texture = ExtResource("9_odoe2")
+
+[node name="GlowParticles" type="GPUParticles2D" parent="Visuals/TorchFireBone"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(17.6092, -14.8573)
+amount = 3
+texture = ExtResource("10_364dn")
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_kqh5v")
+
+[node name="SparkParticles" type="GPUParticles2D" parent="Visuals/TorchFireBone"]
+material = ExtResource("shared_additive_mat")
+amount = 80
+texture = ExtResource("11_vqwlb")
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_fapj7")
+
+[node name="Beam" parent="Visuals" instance=ExtResource("13_18gio")]
+show_behind_parent = true
+position = Vector2(-109.091, -350)
+scale = Vector2(4.54545, 4.54545)
+
+[node name="SpineBoneNode" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "aim_adjust"
+show_behind_parent = true
+position = Vector2(-2316.6665, 236.66664)
+
+[node name="NKinPriestVfx" type="Node" parent="Visuals"]
+script = ExtResource("4_rvypn")
+metadata/_custom_type_script = "uid://cyjjxaberl2dy"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -228.0
+offset_top = -323.0
+offset_right = 204.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(7, -87)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -356)

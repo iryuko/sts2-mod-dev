@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://4656tw4g831q"]
+
+[ext_resource type="Shader" uid="uid://bdmk11babrgij" path="res://shaders/blur/canvas_group_mask_blur.gdshader" id="1_0gwt7"]
+[ext_resource type="Texture2D" uid="uid://cky8dlv" path="res://images/atlases/compressed.sprites/card_template/ancient_portrait_mask_large.tres" id="2_itotc"]
+
+[resource]
+shader = ExtResource("1_0gwt7")
+shader_parameter/mask_texture = ExtResource("2_itotc")
+shader_parameter/mask_region = Vector4(615, 1151, 600, 847)
+shader_parameter/mask_offset = Vector2(10, 8)
+shader_parameter/step = Vector2(0, 0)
+shader_parameter/radius = 32.0
+shader_parameter/mask = true
+shader_parameter/blur = false

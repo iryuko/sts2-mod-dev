@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=3 uid="uid://cjf3h2ey5poqo"]
+
+[ext_resource type="Script" uid="uid://cflxul0vhkobf" path="res://src/Core/Nodes/Combat/NIntent.cs" id="1_w2ny7"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="299_dbp1d"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="303_fx3eh"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_v2rqa"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 2.97945), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_jdmm3"]
+offsets = PackedFloat32Array(0, 0.0776398, 0.504658, 0.863354, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Intent" type="Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+script = ExtResource("1_w2ny7")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="IntentHolder" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+mouse_filter = 2
+
+[node name="Intent" type="Sprite2D" parent="IntentHolder"]
+unique_name_in_owner = true
+position = Vector2(30, 31)
+
+[node name="IntentParticle" type="CPUParticles2D" parent="IntentHolder"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.27451)
+material = ExtResource("shared_additive_mat")
+position = Vector2(32, 32)
+emitting = false
+amount = 4
+one_shot = true
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 0.5
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_v2rqa")
+color_ramp = SubResource("Gradient_jdmm3")
+
+[node name="Value" type="RichTextLabel" parent="IntentHolder"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 40.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("299_dbp1d")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "3[font_size=18]x4"
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("303_fx3eh")
+AutoSizeEnabled = false

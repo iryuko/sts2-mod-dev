@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtpdvb087ptxc"]
+
+[ext_resource type="Script" uid="uid://b7gp63ahs031l" path="res://src/Core/Nodes/Screens/Timeline/NUnlockInfo.cs" id="1_uo483"]
+[ext_resource type="Texture2D" uid="uid://co871bcyrmi4h" path="res://images/packed/unlock_icon.png" id="2_xhlb3"]
+[ext_resource type="FontVariation" uid="uid://bhyxo1pcdm73o" path="res://themes/bitter_medium_italic_glyph_space_one.tres" id="3_6m77f"]
+[ext_resource type="Script" uid="uid://c2oywrx8xbqfx" path="res://addons/mega_text/MegaRichTextLabel.cs" id="15_0rl47"]
+
+[node name="UnlockInfo" type="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.8)
+custom_minimum_size = Vector2(0, 68)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = ExtResource("1_uo483")
+
+[node name="Icon" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_xhlb3")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.91, 0.86359, 0.7462, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.501961)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/normal_font = ExtResource("3_6m77f")
+theme_override_font_sizes/normal_font_size = 22
+theme_override_font_sizes/bold_font_size = 22
+theme_override_font_sizes/bold_italics_font_size = 22
+theme_override_font_sizes/italics_font_size = 22
+theme_override_font_sizes/mono_font_size = 22
+bbcode_enabled = true
+text = "You may now play as the [blue]Defect.[/blue]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+script = ExtResource("15_0rl47")
+AutoSizeEnabled = false
+MinFontSize = 18
+MaxFontSize = 22

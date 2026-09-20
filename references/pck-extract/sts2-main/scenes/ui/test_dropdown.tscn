@@ -1,0 +1,512 @@
+[gd_scene load_steps=14 format=3 uid="uid://dm8h3rgq7jxwt"]
+
+[ext_resource type="Script" uid="uid://deak8m0w1rrex" path="res://src/Core/Nodes/GodotExtensions/NButton.cs" id="1_kyxyb"]
+[ext_resource type="Theme" uid="uid://brryqml7h0tef" path="res://themes/settings_screen_line_header.tres" id="2_jdb73"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_w1jgv"]
+[ext_resource type="Script" uid="uid://dwnobw73landl" path="res://src/Core/Nodes/GodotExtensions/NDropdown.cs" id="4_4y44x"]
+[ext_resource type="FontVariation" uid="uid://c6wnuvk3exmk5" path="res://themes/kreon_regular_shared.tres" id="4_smyrf"]
+[ext_resource type="Texture2D" uid="uid://cakri10dsey1d" path="res://images/packed/common_ui/settings_tiny_left_arrow.png" id="5_1ky60"]
+[ext_resource type="Script" uid="uid://d1ami1ihf5o73" path="res://src/Core/Nodes/CommonUi/NDropdownContainer.cs" id="8_fvmcg"]
+[ext_resource type="PackedScene" uid="uid://ijwyu8psajop" path="res://scenes/ui/dropdown_item.tscn" id="8_g2jry"]
+[ext_resource type="Script" uid="uid://bui13dym00l8v" path="res://src/Core/Nodes/CommonUi/NDropdownScrollbar.cs" id="8_jan5i"]
+[ext_resource type="Texture2D" uid="uid://djrebpfuvnktq" path="res://images/packed/common_ui/small_scrollbar_track_edge.png" id="9_3c5wn"]
+[ext_resource type="Script" uid="uid://cfjowsx3a65tq" path="res://src/Core/Nodes/CommonUi/NDropdownItem.cs" id="9_ej15j"]
+[ext_resource type="Texture2D" uid="uid://dvc7bnxa2ellj" path="res://images/packed/common_ui/small_scrollbar_track_center.png" id="10_4xf2o"]
+[ext_resource type="Texture2D" uid="uid://b711l3emin05d" path="res://images/packed/common_ui/small_scrollbar_train.png" id="11_q23pv"]
+
+[node name="Resolution" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -372.0
+offset_top = -331.0
+offset_right = 369.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Dismisser" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(3000, 2000)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1500.0
+offset_top = -1000.0
+offset_right = 1500.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kyxyb")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0269905
+anchor_top = -1.29508
+anchor_right = 0.0269906
+anchor_bottom = -1.29508
+offset_left = 4.00543e-05
+offset_top = 58.9999
+offset_right = 360.0
+offset_bottom = 159.0
+theme = ExtResource("2_jdb73")
+theme_override_fonts/font = ExtResource("4_smyrf")
+theme_override_font_sizes/font_size = 24
+text = "Resolution"
+vertical_alignment = 1
+script = ExtResource("3_w1jgv")
+MinFontSize = 18
+MaxFontSize = 24
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Dropdown" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = 38.5
+offset_right = -43.0
+offset_bottom = 82.5
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("4_4y44x")
+metadata/_edit_lock_ = true
+
+[node name="CurrentOption" type="Control" parent="Dropdown"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="Dropdown/CurrentOption"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.270588, 0.388235, 0.498039, 1)
+
+[node name="Label" type="Label" parent="Dropdown/CurrentOption"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.992157, 0.780392, 0.164706, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_smyrf")
+theme_override_font_sizes/font_size = 22
+text = "1920 x 1080"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_w1jgv")
+AutoSizeEnabled = false
+
+[node name="Arrow" type="TextureRect" parent="Dropdown"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -15.0
+offset_right = -11.0
+offset_bottom = 11.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(16, 13)
+mouse_filter = 2
+texture = ExtResource("5_1ky60")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="DropdownContainer" type="Control" parent="Dropdown"]
+unique_name_in_owner = true
+clip_contents = true
+anchors_preset = 0
+offset_top = 44.0
+offset_right = 300.0
+offset_bottom = 644.0
+script = ExtResource("8_fvmcg")
+
+[node name="ColorRect" type="ColorRect" parent="Dropdown/DropdownContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0705882, 0.129412, 0.160784, 1)
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Dropdown/DropdownContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+metadata/_edit_group_ = true
+
+[node name="DropdownItem" type="Control" parent="Dropdown/DropdownContainer/VBoxContainer"]
+custom_minimum_size = Vector2(288, 44)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("9_ej15j")
+
+[node name="Highlight" type="ColorRect" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.172549, 0.345098, 0.439216, 1)
+
+[node name="Label" type="Label" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_smyrf")
+theme_override_font_sizes/font_size = 22
+text = "OOONNEE"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_w1jgv")
+AutoSizeEnabled = false
+
+[node name="DropdownItem2" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem3" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem4" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem5" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem11" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem12" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem13" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem14" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem6" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem7" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem8" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem9" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem10" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem15" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem16" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem17" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem18" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem19" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem20" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem21" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem22" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem23" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem24" type="Control" parent="Dropdown/DropdownContainer/VBoxContainer"]
+custom_minimum_size = Vector2(288, 44)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("9_ej15j")
+
+[node name="Highlight" type="ColorRect" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem24"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.172549, 0.345098, 0.439216, 1)
+
+[node name="Label" type="Label" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem24"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_smyrf")
+theme_override_font_sizes/font_size = 22
+text = "TWENTYFROUR"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_w1jgv")
+AutoSizeEnabled = false
+
+[node name="DropdownItem25" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem26" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem27" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem28" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem29" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem30" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem31" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem32" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem33" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem34" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem35" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem36" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem37" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem38" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem39" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem40" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem41" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem42" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem43" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem44" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem45" parent="Dropdown/DropdownContainer/VBoxContainer" instance=ExtResource("8_g2jry")]
+layout_mode = 2
+
+[node name="DropdownItem46" type="Control" parent="Dropdown/DropdownContainer/VBoxContainer"]
+custom_minimum_size = Vector2(288, 44)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("9_ej15j")
+
+[node name="Highlight" type="ColorRect" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem46"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.172549, 0.345098, 0.439216, 1)
+
+[node name="Label" type="Label" parent="Dropdown/DropdownContainer/VBoxContainer/DropdownItem46"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("4_smyrf")
+theme_override_font_sizes/font_size = 22
+text = "FORTYSIXZ"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_w1jgv")
+AutoSizeEnabled = false
+
+[node name="Scrollbar" type="Control" parent="Dropdown/DropdownContainer"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -300.0
+offset_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("8_jan5i")
+metadata/_edit_lock_ = true
+
+[node name="Track" type="Control" parent="Dropdown/DropdownContainer/Scrollbar"]
+modulate = Color(0, 0, 0, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_group_ = true
+
+[node name="TrackTop" type="TextureRect" parent="Dropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -18.0
+offset_right = 14.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("9_3c5wn")
+expand_mode = 3
+
+[node name="TrackBody" type="TextureRect" parent="Dropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -268.0
+offset_right = 14.0
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_4xf2o")
+expand_mode = 1
+
+[node name="TrackBot" type="TextureRect" parent="Dropdown/DropdownContainer/Scrollbar/Track"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -41.0
+offset_right = 14.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("9_3c5wn")
+expand_mode = 3
+flip_v = true
+
+[node name="Train" type="NinePatchRect" parent="Dropdown/DropdownContainer/Scrollbar"]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 4.0
+offset_top = -291.0
+offset_right = -8.0
+offset_bottom = -203.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(14, 44)
+texture = ExtResource("11_q23pv")
+patch_margin_top = 20
+patch_margin_bottom = 20

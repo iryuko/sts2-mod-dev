@@ -1,0 +1,28 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://ch1fe2f7xs2b8"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://47kfdc7716qy" path="res://animations/monsters/scroll_of_biting/scroll_of_biting.atlas" id="1_mpnyq"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://djll22747y3nd" path="res://animations/monsters/scroll_of_biting/scroll_of_biting.skel" id="2_lliui"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_mpnyq"]
+from = "idle_loop"
+to = "hurt"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_lliui"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_h7pky"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_qoumg"]
+from = "hurt"
+to = "die"
+
+[resource]
+atlas_res = ExtResource("1_mpnyq")
+skeleton_file_res = ExtResource("2_lliui")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_mpnyq"), SubResource("SpineAnimationMix_lliui"), SubResource("SpineAnimationMix_h7pky"), SubResource("SpineAnimationMix_qoumg")]

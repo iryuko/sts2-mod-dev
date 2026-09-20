@@ -1,0 +1,26 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://d22spe5441htl"]
+
+[ext_resource type="Shader" uid="uid://8c6b2rpfph51" path="res://shaders/vfx/common/vfx_poof_shader.gdshader" id="1_vtjgs"]
+
+[sub_resource type="Curve" id="Curve_txncr"]
+_data = [Vector2(0, 0), 0.0, 1.4, 0, 0, Vector2(1, 1), 0.644422, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tr802"]
+curve = SubResource("Curve_txncr")
+
+[sub_resource type="Gradient" id="Gradient_vtjgs"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_txncr"]
+gradient = SubResource("Gradient_vtjgs")
+
+[resource]
+shader = ExtResource("1_vtjgs")
+shader_parameter/lut = SubResource("GradientTexture1D_txncr")
+shader_parameter/pivot_offset = Vector2(0, 0)
+shader_parameter/distortion_panning_speed = Vector2(0.25, 0.5)
+shader_parameter/distortion_strength = 0.075
+shader_parameter/erosion_curve = SubResource("CurveTexture_tr802")
+shader_parameter/erosion_offset = 0.1

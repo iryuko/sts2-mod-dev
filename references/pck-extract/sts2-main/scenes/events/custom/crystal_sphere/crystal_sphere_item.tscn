@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://bw0syjt5brsjt"]
+
+[ext_resource type="Script" uid="uid://dhqnaxdf385ds" path="res://src/Core/Nodes/Events/Custom/CrystalSphere/NCrystalSphereItem.cs" id="1_e8pif"]
+[ext_resource type="Shader" uid="uid://c3e7tuwt31s6q" path="res://shaders/crystal_sphere_item.gdshader" id="2_pl3tl"]
+[ext_resource type="Texture2D" uid="uid://qu3sfyvjmmxp" path="res://images/events/crystal_sphere/crystal_sphere_rare_potion.png" id="3_gy8oc"]
+[ext_resource type="Texture2D" uid="uid://dxxa4uprr1l3i" path="res://images/events/crystal_sphere/crystal_sphere_card_outline.png" id="4_xb8y0"]
+[ext_resource type="Texture2D" uid="uid://bqp38oatlhrcy" path="res://images/events/crystal_sphere/crystal_sphere_card_back.png" id="5_85mrl"]
+[ext_resource type="Texture2D" uid="uid://b4yqsyl6h5521" path="res://images/events/crystal_sphere/crystal_sphere_card_banner.png" id="6_so5is"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4k6mg"]
+resource_local_to_scene = true
+shader = ExtResource("2_pl3tl")
+shader_parameter/val = 0.0
+
+[node name="CrystalSphereItem" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 56.0
+offset_bottom = 56.0
+script = ExtResource("1_e8pif")
+
+[node name="Icon" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4k6mg")
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_gy8oc")
+expand_mode = 1
+
+[node name="Card" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CardShadow" type="TextureRect" parent="Card"]
+material = SubResource("ShaderMaterial_4k6mg")
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_xb8y0")
+expand_mode = 1
+
+[node name="CardFrame" type="TextureRect" parent="Card"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_85mrl")
+expand_mode = 1
+
+[node name="CardBanner" type="TextureRect" parent="Card"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4k6mg")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_so5is")
+expand_mode = 1

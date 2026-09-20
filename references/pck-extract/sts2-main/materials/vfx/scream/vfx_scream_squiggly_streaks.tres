@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b84bpemqfb8j1"]
+
+[ext_resource type="Shader" uid="uid://cknhj2dwbppbc" path="res://shaders/vfx/scream/vfx_scream_squiggly_streaks_shader.gdshader" id="1_3hidx"]
+
+[resource]
+shader = ExtResource("1_3hidx")
+shader_parameter/distortion_strength = 0.4
+shader_parameter/distortion_tiling = Vector2(0, 0.4)
+shader_parameter/distortion_offset_speed = Vector2(0, 0.65)

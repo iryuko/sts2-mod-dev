@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4bmc8s54bfe8"]
+
+[ext_resource type="Material" uid="uid://b2tsqjbtfnme0" path="res://materials/vfx/common/vfx_ring_polar.tres" id="1_8vsni"]
+[ext_resource type="Texture2D" uid="uid://dyvfnylyy1r14" path="res://images/vfx/common/common_ring_polar_b.png" id="2_ofkh4"]
+
+[sub_resource type="Curve" id="Curve_qani6"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, -8.75114, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tprk4"]
+curve = SubResource("Curve_qani6")
+
+[sub_resource type="Curve" id="Curve_24g6d"]
+_data = [Vector2(0, 0.245202), 0.0, 9.35466, 0, 0, Vector2(0.149871, 0.850288), 0.184002, 0.184002, 0, 0, Vector2(1, 1), 0.16094, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_frh73"]
+curve = SubResource("Curve_24g6d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0eseu"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_frh73")
+emission_curve = SubResource("CurveTexture_tprk4")
+
+[node name="vfx_common_ring_polar_b" type="GPUParticles2D"]
+texture_repeat = 2
+material = ExtResource("1_8vsni")
+emitting = false
+amount = 1
+texture = ExtResource("2_ofkh4")
+lifetime = 0.3
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_0eseu")

@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bxphqqry0qswt"]
+
+[ext_resource type="FontFile" uid="uid://wcoiw83db02h" path="res://fonts/zhs/SourceHanSerifSC-Bold.otf" id="1_hbd7y"]
+
+[resource]
+base_font = ExtResource("1_hbd7y")

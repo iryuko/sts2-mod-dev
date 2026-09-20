@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkgaj60x0ckc6"]
+
+[ext_resource type="Script" uid="uid://bohmbxc3t1jwi" path="res://src/Core/Nodes/Vfx/Cards/NFanOfKnivesVfx.cs" id="1_seph7"]
+[ext_resource type="Texture2D" uid="uid://si0fxo8xovft" path="res://images/packed/vfx/combat/shiv_particle.png" id="2_h2co5"]
+
+[node name="FanOfKnivesVfx" type="Node2D"]
+script = ExtResource("1_seph7")
+
+[node name="ShivFanParticle1" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle1"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle2" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle2"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle3" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle3"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle4" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle4"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle5" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle5"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle6" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle6"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle7" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle7"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle8" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle8"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="ShivFanParticle9" type="Sprite2D" parent="."]
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)
+
+[node name="Shadow" type="Sprite2D" parent="ShivFanParticle9"]
+modulate = Color(0, 0, 0, 0.188235)
+show_behind_parent = true
+position = Vector2(10, 10)
+texture = ExtResource("2_h2co5")
+offset = Vector2(0, -200)

@@ -1,0 +1,718 @@
+[gd_scene load_steps=48 format=3 uid="uid://bnfuvp2wuq644"]
+
+[ext_resource type="Script" uid="uid://cghtlla3sw0po" path="res://src/Core/Nodes/Combat/NCreatureVisuals.cs" id="1_lwuye"]
+[ext_resource type="Script" uid="uid://b8bw51ib3nsh3" path="res://src/Core/Nodes/Vfx/NAmalgamVfx.cs" id="3_a3knm"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://dsdsl8u50sj6r" path="res://animations/monsters/amalgam/amalgam_skel_data.tres" id="3_l6hw4"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="3_qrh38"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="4_8mjwy"]
+[ext_resource type="Texture2D" uid="uid://cb8ho4cssh01" path="res://images/vfx/monsters/amalgam/amalgam_death_particles.png" id="4_phv38"]
+[ext_resource type="Texture2D" uid="uid://c67idrcto5vwj" path="res://images/vfx/vfx_constant_fire/fire_texture_2.png" id="5_qycwo"]
+[ext_resource type="Texture2D" uid="uid://cdvuntnhy8ca8" path="res://images/vfx/vfx_constant_fire/fire_spark.png" id="6_1r7qa"]
+[ext_resource type="Texture2D" uid="uid://54aqwjijquem" path="res://images/vfx/monsters/amalgam/amalgam_spark_particles.png" id="9_prxbt"]
+[ext_resource type="Shader" uid="uid://w8px2vgxsa4x" path="res://shaders/vfx/monsters/amalgam_glare_shader.tres" id="10_7yqi0"]
+[ext_resource type="Texture2D" uid="uid://br85yq7mtu6sf" path="res://images/vfx/monsters/amalgam/amalgam_glare_particle.png" id="11_0louj"]
+[ext_resource type="Texture2D" uid="uid://r6owulkqusc3" path="res://images/vfx/monsters/amalgam/amalgam_hit_particle.png" id="12_j87ms"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="Curve" id="Curve_fpbss"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_jw0ok"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_68vih"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hlnqt"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_epv7f"]
+_data = [Vector2(0.00835655, 0.00875008), 0.0, 1.20008, 0, 0, Vector2(0.277311, 0.975211), 0.374114, 0.374114, 0, 0, Vector2(0.671309, 0.35975), -1.436, -1.436, 0, 0, Vector2(1, 0), -0.488375, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_8v441"]
+offsets = PackedFloat32Array(0.0710145, 0.297101, 0.478261, 0.734783)
+colors = PackedColorArray(0.2442, 0.66, 0.198, 1, 0.22066, 0.34, 0.1564, 0.858824, 0.31632, 0.48, 0.1824, 0.505882, 0.0874, 0.38, 0.155673, 0)
+
+[sub_resource type="Gradient" id="Gradient_rom07"]
+offsets = PackedFloat32Array(0, 0.143478, 0.528986, 0.778261, 0.886406)
+colors = PackedColorArray(0.37912, 0.56, 0.2408, 1, 0.170248, 0.259749, 7.21961e-08, 1, 0.0762, 0.205056, 0, 1, 0, 0, 0, 0.964706, 0, 0, 0, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_atiss"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hg5ro"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_hsetl"]
+_data = [Vector2(0.0139276, 0.0152501), 0.0, 7.96135, 0, 0, Vector2(0.270195, 1), 0.378403, 0.378403, 0, 0, Vector2(0.649025, 0.224214), -1.75738, -1.75738, 0, 0, Vector2(0.91922, 0), -0.488375, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_t10rs"]
+offsets = PackedFloat32Array(0, 0.273913, 0.523188, 0.689855)
+colors = PackedColorArray(0.6, 1, 0, 0.905882, 0.482353, 0.941176, 0.215686, 0.941176, 0.63, 0.63, 0, 0.568627, 0.2415, 0.63, 0, 0)
+
+[sub_resource type="Curve" id="Curve_pkr4j"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.0451126), 0.0, -2.49052, 0, 0, Vector2(0.172161, -0.150376), 0.464074, 0.464074, 0, 0, Vector2(0.586081, 0.240602), 0.0, 0.0, 0, 0, Vector2(1, -0.658647), -2.48294, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tn3f2"]
+curve = SubResource("Curve_pkr4j")
+
+[sub_resource type="Curve" id="Curve_yhqi7"]
+_data = [Vector2(0, 0), 0.0, 19.9105, 0, 0, Vector2(0.14652, 1), 0.0, 0.0, 0, 0, Vector2(0.318681, 0.452632), 0.0, 0.0, 0, 0, Vector2(0.512821, 1), 0.0, 0.0, 0, 0, Vector2(0.604396, 0.306015), 0.0, 0.0, 0, 0, Vector2(0.732601, 0.804511), 0.0, 0.0, 0, 0, Vector2(0.989011, 0.0323308), -5.21555, 0.0, 0, 0]
+point_count = 7
+
+[sub_resource type="CurveTexture" id="CurveTexture_4wim4"]
+curve = SubResource("Curve_yhqi7")
+
+[sub_resource type="Curve" id="Curve_rcbc7"]
+_data = [Vector2(0, 0.529331), 0.0, 0.0, 0, 0, Vector2(1, 0.0467461), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jxjoh"]
+curve = SubResource("Curve_rcbc7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ki5ft"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 100.0
+direction = Vector3(0.5, -1, 0)
+spread = 90.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveTexture_tn3f2")
+gravity = Vector3(20, -50, 0)
+scale_min = 0.25
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_4wim4")
+color = Color(0.924, 1, 0.24, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+turbulence_noise_speed = Vector3(1, 0, 0)
+turbulence_noise_speed_random = 0.1
+turbulence_influence_min = 0.0
+turbulence_influence_over_life = SubResource("CurveTexture_jxjoh")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tx60r"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_cdj68"]
+_limits = [-0.2, 0.2, 0.0, 1.0]
+_data = [Vector2(0, -0.0158033), 0.0, 0.0, 0, 0, Vector2(0.167053, 0.0412643), 0.0, 0.0, 0, 0, Vector2(0.417633, -0.0386304), 0.0, 0.0, 0, 0, Vector2(0.726218, 0.0869184), 0.0, 0.0, 0, 0, Vector2(0.99536, -0.095698), -1.05412, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_xc111"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -0.666374), 0.0, 27.0557, 0, 0, Vector2(0.139211, 0.977173), 0.144683, 0.144683, 0, 0, Vector2(0.201856, 0.554873), -21.3166, -21.3166, 0, 0, Vector2(0.259861, 0.0526779), 0.0, 0.0, 0, 0, Vector2(0.320186, 0.463565), 16.3974, 16.3974, 0, 0, Vector2(0.396752, 0.863038), 0.0, 0.0, 0, 0, Vector2(0.457077, 0.0640913), -44.2728, -44.2728, 0, 0, Vector2(0.515081, -0.81475), 0.0, 0.0, 0, 0, Vector2(0.591647, 0.0412643), 26.0016, 26.0016, 0, 0, Vector2(0.670534, 0.840211), 0.0, 0.0, 0, 0, Vector2(0.723898, 0.0298507), -49.1919, -49.1919, 0, 0, Vector2(0.763341, -0.700615), 0.0, 0.0, 0, 0, Vector2(0.825986, -0.0158033), 40.9935, 40.9935, 0, 0, Vector2(0.883991, 0.554873), 0.0, 0.0, 0, 0, Vector2(1, 0.0526779), -3.27949, 0.0, 0, 0]
+point_count = 15
+
+[sub_resource type="Gradient" id="Gradient_652aj"]
+offsets = PackedFloat32Array(0, 0.526055, 0.763636, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.721333, 1, 0.24, 1, 0.630713, 0.89, 0.2136, 1, 0.48776, 0.91, 0.0364, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2a33k"]
+shader = ExtResource("10_7yqi0")
+
+[sub_resource type="Curve" id="Curve_4fuh6"]
+_data = [Vector2(0, 0.00189567), 0.0, 0.0, 0, 0, Vector2(0.282878, 0.882938), 1.02239, 1.02239, 0, 0, Vector2(0.679901, 0.882938), -1.11079, -1.11079, 0, 0, Vector2(0.980149, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_t31y0"]
+curve = SubResource("Curve_4fuh6")
+
+[sub_resource type="Curve" id="Curve_2t545"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0.630332), 0.0, 0.0, 0, 0, Vector2(1, 0.371564), -0.827645, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jp5mf"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.65071), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qujvu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_uhxgb"]
+curve_x = SubResource("Curve_2t545")
+curve_y = SubResource("Curve_jp5mf")
+curve_z = SubResource("Curve_qujvu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2wmkm"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = -200.0
+initial_velocity_max = -200.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.4
+scale_max = 3.8
+scale_curve = SubResource("CurveXYZTexture_uhxgb")
+color = Color(0.65936, 0.78, 0.5304, 1)
+alpha_curve = SubResource("CurveTexture_t31y0")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vh7rt"]
+lifetime_randomness = 0.5
+particle_flag_align_y = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(150, 150, 1)
+direction = Vector3(-1, -0.25, 0)
+spread = 90.0
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveTexture_tn3f2")
+gravity = Vector3(20, -50, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_4wim4")
+color = Color(0.924, 1, 0.24, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
+turbulence_noise_strength = 0.5
+turbulence_noise_scale = 2.0
+turbulence_noise_speed = Vector3(1, 0, 0)
+turbulence_noise_speed_random = 0.1
+turbulence_influence_min = 0.0
+turbulence_influence_over_life = SubResource("CurveTexture_jxjoh")
+
+[sub_resource type="Curve" id="Curve_fbccu"]
+_data = [Vector2(0, 0.199052), 0.0, 4.53406, 0, 0, Vector2(0.401985, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.229858), -1.11732, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d7p30"]
+curve = SubResource("Curve_fbccu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7ktrd"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 1.5, 1)
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_d7p30")
+
+[node name="TorchHeadAmalgam" type="Node2D"]
+script = ExtResource("1_lwuye")
+metadata/_edit_group_ = true
+
+[node name="Visuals" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("3_l6hw4")
+preview_skin = "default"
+preview_animation = "idle_loop"
+preview_frame = false
+preview_time = 0.9
+unique_name_in_owner = true
+position = Vector2(22, -18)
+scale = Vector2(0.15, 0.15)
+
+[node name="torch2Slot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "torch_2_fire_slot"
+show_behind_parent = true
+position = Vector2(-858.30774, -849.9901)
+rotation = 0.5734026
+
+[node name="fire2_small_green" type="Node2D" parent="Visuals/torch2Slot"]
+position = Vector2(-18.6199, 107.972)
+rotation = 0.0455226
+scale = Vector2(3, 3)
+
+[node name="light_small" type="CPUParticles2D" parent="Visuals/torch2Slot/fire2_small_green"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2, -51)
+amount = 1
+texture = ExtResource("3_qrh38")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_fpbss")
+color = Color(0.479401, 0.622194, 0.17027, 1)
+color_ramp = SubResource("Gradient_jw0ok")
+script = ExtResource("4_8mjwy")
+
+[node name="fire_vfx_back_small" type="CPUParticles2D" parent="Visuals/torch2Slot/fire2_small_green"]
+material = SubResource("CanvasItemMaterial_68vih")
+position = Vector2(-1.08119, 2.2443)
+amount = 25
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.1
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_hlnqt")
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_8v441")
+anim_offset_max = 1.0
+
+[node name="fire_spark_small" type="CPUParticles2D" parent="Visuals/torch2Slot/fire2_small_green"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -18)
+emitting = false
+amount = 30
+texture = ExtResource("6_1r7qa")
+lifetime = 1.25
+preprocess = 1.25
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 54.06
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_rom07")
+
+[node name="fire_vfx_front_small" type="CPUParticles2D" parent="Visuals/torch2Slot/fire2_small_green"]
+material = SubResource("CanvasItemMaterial_atiss")
+position = Vector2(0.324208, -5.80864)
+amount = 20
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -300)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_hg5ro")
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_hsetl")
+color_ramp = SubResource("Gradient_t10rs")
+anim_offset_max = 1.0
+
+[node name="constantParticles" type="GPUParticles2D" parent="Visuals/torch2Slot"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-3.00381, -38.4867)
+amount = 10
+texture = ExtResource("9_prxbt")
+lifetime = 3.5
+preprocess = 2.0
+fixed_fps = 60
+trail_lifetime = 0.15
+trail_sections = 4
+trail_section_subdivisions = 42
+process_material = SubResource("ParticleProcessMaterial_ki5ft")
+
+[node name="torch3Slot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "torch_3_fire_slot"
+show_behind_parent = true
+position = Vector2(-214.69313, -1471.2247)
+rotation = 0.5734024
+
+[node name="fire3_small_green" type="Node2D" parent="Visuals/torch3Slot"]
+position = Vector2(14.3439, 114.258)
+rotation = -0.0313135
+scale = Vector2(3, 3)
+
+[node name="light_small" type="CPUParticles2D" parent="Visuals/torch3Slot/fire3_small_green"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2, -51)
+amount = 1
+texture = ExtResource("3_qrh38")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_fpbss")
+color = Color(0.479401, 0.622194, 0.17027, 1)
+color_ramp = SubResource("Gradient_jw0ok")
+script = ExtResource("4_8mjwy")
+
+[node name="fire_vfx_back_small" type="CPUParticles2D" parent="Visuals/torch3Slot/fire3_small_green"]
+material = SubResource("CanvasItemMaterial_68vih")
+position = Vector2(-1.08119, 2.2443)
+amount = 25
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.1
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_hlnqt")
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_8v441")
+anim_offset_max = 1.0
+
+[node name="fire_spark_small" type="CPUParticles2D" parent="Visuals/torch3Slot/fire3_small_green"]
+visible = false
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -18)
+amount = 30
+texture = ExtResource("6_1r7qa")
+lifetime = 1.25
+preprocess = 1.25
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 54.06
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_rom07")
+
+[node name="fire_vfx_front_small" type="CPUParticles2D" parent="Visuals/torch3Slot/fire3_small_green"]
+material = SubResource("CanvasItemMaterial_atiss")
+position = Vector2(0.324208, -5.80864)
+amount = 20
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -300)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_hg5ro")
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_hsetl")
+color_ramp = SubResource("Gradient_t10rs")
+anim_offset_max = 1.0
+
+[node name="constantParticles" type="GPUParticles2D" parent="Visuals/torch3Slot"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(4.34387, -25.7417)
+amount = 10
+texture = ExtResource("9_prxbt")
+lifetime = 3.5
+preprocess = 2.0
+fixed_fps = 60
+trail_lifetime = 0.15
+trail_sections = 4
+trail_section_subdivisions = 42
+process_material = SubResource("ParticleProcessMaterial_ki5ft")
+
+[node name="torch1Slot" type="SpineSlotNode" parent="Visuals"]
+slot_name = "torch_1_fire_slot"
+show_behind_parent = true
+position = Vector2(91.11427, -736.6594)
+rotation = 0.5734026
+
+[node name="fire1_small_green" type="Node2D" parent="Visuals/torch1Slot"]
+position = Vector2(-4.34019, 107.179)
+rotation = -0.00658292
+scale = Vector2(3.25, 3.25)
+
+[node name="light_small" type="CPUParticles2D" parent="Visuals/torch1Slot/fire1_small_green"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2, -51)
+amount = 1
+texture = ExtResource("3_qrh38")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_fpbss")
+color = Color(0.479401, 0.622194, 0.17027, 1)
+color_ramp = SubResource("Gradient_jw0ok")
+script = ExtResource("4_8mjwy")
+
+[node name="fire_vfx_back_small" type="CPUParticles2D" parent="Visuals/torch1Slot/fire1_small_green"]
+material = SubResource("CanvasItemMaterial_68vih")
+position = Vector2(-1.08119, 2.2443)
+amount = 25
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.1
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -500)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_hlnqt")
+scale_amount_min = 0.75
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_8v441")
+anim_offset_max = 1.0
+
+[node name="fire_spark_small" type="CPUParticles2D" parent="Visuals/torch1Slot/fire1_small_green"]
+visible = false
+material = ExtResource("shared_additive_mat")
+position = Vector2(0, -18)
+amount = 30
+texture = ExtResource("6_1r7qa")
+lifetime = 1.25
+preprocess = 1.25
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 54.06
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -200)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_epv7f")
+color_ramp = SubResource("Gradient_rom07")
+
+[node name="fire_vfx_front_small" type="CPUParticles2D" parent="Visuals/torch1Slot/fire1_small_green"]
+material = SubResource("CanvasItemMaterial_atiss")
+position = Vector2(0.324208, -5.80864)
+amount = 20
+texture = ExtResource("5_qycwo")
+preprocess = 1.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -300)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 32.0
+angular_velocity_max = 32.0
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_hg5ro")
+scale_amount_min = 0.5
+scale_amount_max = 0.7
+scale_amount_curve = SubResource("Curve_hsetl")
+color_ramp = SubResource("Gradient_t10rs")
+anim_offset_max = 1.0
+
+[node name="constantParticles" type="GPUParticles2D" parent="Visuals/torch1Slot"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-4.33973, 27.179)
+amount = 10
+texture = ExtResource("9_prxbt")
+lifetime = 3.5
+preprocess = 2.0
+fixed_fps = 60
+trail_lifetime = 0.15
+trail_sections = 4
+trail_section_subdivisions = 42
+process_material = SubResource("ParticleProcessMaterial_ki5ft")
+
+[node name="CPUDeathParticles" type="CPUParticles2D" parent="Visuals"]
+show_behind_parent = true
+texture_repeat = 1
+material = SubResource("CanvasItemMaterial_tx60r")
+position = Vector2(1042.2, -1657.73)
+scale = Vector2(40, 40)
+amount = 2000
+texture = ExtResource("4_phv38")
+lifetime = 2.0
+explosiveness = 0.97
+lifetime_randomness = 0.62
+fixed_fps = 60
+local_coords = true
+emission_shape = 4
+emission_points = PackedVector2Array(1, 35, 2, 34, 2, 35, 3, 34, 3, 35, 4, 34, 4, 35, 5, 34, 5, 35, 6, 33, 6, 34, 6, 35, 6, 36, 7, 32, 7, 33, 7, 34, 7, 35, 8, 30, 8, 31, 8, 32, 8, 33, 9, 28, 9, 29, 9, 30, 9, 31, 10, 26, 10, 27, 10, 28, 10, 29, 11, 18, 11, 25, 11, 26, 11, 27, 11, 28, 11, 29, 12, 17, 12, 18, 12, 19, 12, 26, 12, 27, 12, 28, 12, 29, 13, 16, 13, 17, 13, 19, 13, 20, 13, 26, 13, 27, 13, 28, 13, 29, 13, 30, 14, 16, 14, 20, 14, 21, 14, 26, 14, 27, 14, 28, 14, 29, 14, 30, 15, 15, 15, 16, 15, 20, 15, 21, 15, 26, 15, 27, 15, 28, 15, 29, 15, 30, 15, 31, 16, 15, 16, 21, 16, 22, 16, 27, 16, 28, 16, 29, 16, 30, 16, 31, 16, 32, 16, 44, 17, 14, 17, 15, 17, 21, 17, 22, 17, 28, 17, 29, 17, 30, 17, 31, 17, 32, 17, 33, 17, 43, 17, 44, 18, 14, 18, 22, 18, 28, 18, 29, 18, 30, 18, 31, 18, 32, 18, 33, 18, 34, 18, 43, 18, 44, 19, 14, 19, 22, 19, 23, 19, 28, 19, 29, 19, 30, 19, 31, 19, 32, 19, 33, 19, 34, 19, 35, 19, 39, 19, 40, 19, 41, 19, 43, 19, 44, 20, 14, 20, 15, 20, 22, 20, 23, 20, 31, 20, 32, 20, 33, 20, 34, 20, 35, 20, 36, 20, 39, 20, 40, 20, 41, 20, 42, 20, 43, 20, 44, 21, 13, 21, 14, 21, 15, 21, 16, 21, 17, 21, 18, 21, 22, 21, 32, 21, 33, 21, 34, 21, 35, 21, 36, 21, 37, 21, 40, 21, 41, 21, 42, 21, 43, 22, 13, 22, 14, 22, 15, 22, 16, 22, 17, 22, 18, 22, 19, 22, 20, 22, 31, 22, 32, 22, 33, 22, 34, 22, 35, 22, 36, 22, 37, 22, 41, 22, 42, 22, 43, 23, 13, 23, 14, 23, 15, 23, 16, 23, 17, 23, 18, 23, 19, 23, 20, 23, 30, 23, 31, 23, 32, 23, 33, 23, 34, 23, 35, 23, 36, 23, 37, 23, 42, 23, 43, 23, 44, 24, 12, 24, 13, 24, 14, 24, 15, 24, 16, 24, 17, 24, 18, 24, 19, 24, 20, 24, 21, 24, 22, 24, 28, 24, 29, 24, 30, 24, 31, 24, 32, 24, 33, 24, 34, 24, 35, 24, 36, 24, 37, 24, 38, 24, 43, 24, 44, 24, 45, 25, 12, 25, 13, 25, 14, 25, 15, 25, 16, 25, 17, 25, 18, 25, 19, 25, 20, 25, 21, 25, 22, 25, 23, 25, 27, 25, 28, 25, 29, 25, 30, 25, 31, 25, 32, 25, 33, 25, 34, 25, 35, 25, 36, 25, 37, 25, 38, 25, 44, 25, 45, 25, 46, 26, 12, 26, 13, 26, 14, 26, 15, 26, 16, 26, 17, 26, 18, 26, 19, 26, 20, 26, 21, 26, 22, 26, 23, 26, 24, 26, 25, 26, 26, 26, 27, 26, 28, 26, 29, 26, 30, 26, 31, 26, 32, 26, 33, 26, 34, 26, 35, 26, 36, 26, 37, 26, 38, 26, 41, 26, 44, 26, 45, 26, 46, 26, 47, 27, 4, 27, 5, 27, 12, 27, 13, 27, 14, 27, 15, 27, 16, 27, 17, 27, 18, 27, 19, 27, 20, 27, 21, 27, 22, 27, 23, 27, 24, 27, 25, 27, 26, 27, 27, 27, 28, 27, 29, 27, 30, 27, 31, 27, 32, 27, 33, 27, 34, 27, 35, 27, 36, 27, 37, 27, 38, 27, 39, 27, 40, 27, 41, 27, 42, 27, 43, 27, 44, 27, 45, 27, 46, 27, 47, 28, 3, 28, 12, 28, 13, 28, 14, 28, 15, 28, 16, 28, 17, 28, 18, 28, 19, 28, 20, 28, 21, 28, 22, 28, 23, 28, 24, 28, 25, 28, 26, 28, 27, 28, 28, 28, 29, 28, 30, 28, 31, 28, 32, 28, 33, 28, 34, 28, 35, 28, 36, 28, 37, 28, 38, 28, 39, 28, 40, 28, 41, 28, 42, 28, 43, 28, 44, 28, 45, 28, 46, 28, 47, 29, 2, 29, 3, 29, 9, 29, 11, 29, 12, 29, 13, 29, 14, 29, 15, 29, 16, 29, 17, 29, 18, 29, 19, 29, 20, 29, 21, 29, 22, 29, 23, 29, 24, 29, 25, 29, 26, 29, 27, 29, 28, 29, 29, 29, 30, 29, 31, 29, 32, 29, 33, 29, 34, 29, 35, 29, 36, 29, 37, 29, 38, 29, 39, 29, 40, 29, 41, 29, 42, 29, 43, 29, 44, 29, 45, 29, 46, 29, 47, 30, 1, 30, 2, 30, 9, 30, 10, 30, 11, 30, 12, 30, 13, 30, 14, 30, 15, 30, 16, 30, 17, 30, 18, 30, 19, 30, 20, 30, 21, 30, 22, 30, 23, 30, 24, 30, 25, 30, 26, 30, 27, 30, 28, 30, 29, 30, 30, 30, 31, 30, 32, 30, 33, 30, 34, 30, 35, 30, 36, 30, 37, 30, 38, 30, 39, 30, 40, 30, 41, 30, 42, 30, 43, 30, 44, 30, 45, 30, 46, 31, 1, 31, 8, 31, 9, 31, 10, 31, 11, 31, 12, 31, 13, 31, 14, 31, 15, 31, 16, 31, 17, 31, 18, 31, 19, 31, 20, 31, 21, 31, 22, 31, 23, 31, 24, 31, 25, 31, 26, 31, 27, 31, 28, 31, 29, 31, 30, 31, 31, 31, 32, 31, 33, 31, 34, 31, 35, 31, 36, 31, 37, 31, 38, 31, 39, 31, 40, 31, 41, 31, 42, 31, 43, 31, 44, 31, 45, 32, 1, 32, 7, 32, 8, 32, 9, 32, 10, 32, 11, 32, 12, 32, 13, 32, 14, 32, 15, 32, 16, 32, 17, 32, 18, 32, 19, 32, 20, 32, 21, 32, 22, 32, 23, 32, 24, 32, 25, 32, 26, 32, 27, 32, 28, 32, 29, 32, 30, 32, 31, 32, 32, 32, 33, 32, 34, 32, 35, 32, 36, 32, 38, 32, 39, 32, 40, 32, 41, 32, 42, 32, 43, 33, 0, 33, 1, 33, 7, 33, 8, 33, 9, 33, 10, 33, 11, 33, 12, 33, 13, 33, 14, 33, 15, 33, 16, 33, 17, 33, 18, 33, 19, 33, 20, 33, 21, 33, 22, 33, 23, 33, 24, 33, 25, 33, 26, 33, 27, 33, 28, 33, 29, 33, 30, 33, 31, 33, 32, 33, 33, 33, 34, 33, 35, 33, 36, 33, 39, 33, 40, 33, 41, 33, 42, 34, 0, 34, 1, 34, 7, 34, 8, 34, 9, 34, 10, 34, 11, 34, 12, 34, 13, 34, 14, 34, 15, 34, 16, 34, 17, 34, 18, 34, 19, 34, 20, 34, 21, 34, 22, 34, 23, 34, 24, 34, 25, 34, 26, 34, 27, 34, 28, 34, 29, 34, 30, 34, 31, 34, 32, 34, 33, 34, 34, 34, 35, 34, 36, 35, 0, 35, 7, 35, 8, 35, 9, 35, 10, 35, 11, 35, 12, 35, 13, 35, 14, 35, 15, 35, 16, 35, 17, 35, 18, 35, 19, 35, 20, 35, 21, 35, 22, 35, 23, 35, 24, 35, 25, 35, 26, 35, 27, 35, 28, 35, 29, 35, 30, 35, 31, 35, 32, 35, 33, 35, 34, 35, 35, 36, 0, 36, 1, 36, 7, 36, 8, 36, 9, 36, 10, 36, 11, 36, 12, 36, 13, 36, 14, 36, 15, 36, 16, 36, 17, 36, 18, 36, 19, 36, 20, 36, 21, 36, 22, 36, 23, 36, 24, 36, 25, 36, 26, 36, 27, 36, 28, 36, 29, 36, 30, 36, 31, 36, 32, 36, 33, 36, 34, 36, 35, 37, 1, 37, 2, 37, 7, 37, 8, 37, 9, 37, 10, 37, 11, 37, 13, 37, 14, 37, 15, 37, 16, 37, 17, 37, 18, 37, 19, 37, 20, 37, 21, 37, 22, 37, 23, 37, 24, 37, 25, 37, 26, 37, 27, 37, 28, 37, 29, 37, 30, 37, 31, 37, 32, 37, 33, 37, 34, 37, 35, 38, 2, 38, 3, 38, 4, 38, 5, 38, 6, 38, 7, 38, 8, 38, 9, 38, 10, 38, 11, 38, 14, 38, 15, 38, 16, 38, 17, 38, 18, 38, 19, 38, 20, 38, 21, 38, 22, 38, 23, 38, 24, 38, 25, 38, 26, 38, 27, 38, 28, 38, 29, 38, 30, 38, 31, 38, 32, 38, 33, 38, 34, 38, 35, 39, 4, 39, 5, 39, 6, 39, 7, 39, 8, 39, 11, 39, 13, 39, 14, 39, 15, 39, 16, 39, 17, 39, 18, 39, 19, 39, 20, 39, 21, 39, 22, 39, 23, 39, 24, 39, 25, 39, 26, 39, 27, 39, 28, 39, 29, 39, 30, 39, 31, 39, 32, 39, 33, 39, 34, 39, 35, 40, 6, 40, 7, 40, 8, 40, 13, 40, 14, 40, 17, 40, 18, 40, 19, 40, 20, 40, 21, 40, 22, 40, 23, 40, 24, 40, 25, 40, 26, 40, 27, 40, 28, 40, 29, 40, 30, 40, 31, 40, 32, 40, 33, 40, 34, 40, 35, 40, 39, 41, 12, 41, 13, 41, 18, 41, 19, 41, 20, 41, 21, 41, 22, 41, 23, 41, 24, 41, 25, 41, 26, 41, 27, 41, 29, 41, 30, 41, 31, 41, 32, 41, 33, 41, 34, 41, 35, 41, 37, 41, 38, 41, 39, 42, 12, 42, 20, 42, 21, 42, 28, 42, 29, 42, 30, 42, 31, 42, 32, 42, 33, 42, 34, 42, 35, 42, 36, 42, 37, 42, 38, 43, 11, 43, 12, 43, 28, 43, 29, 43, 30, 43, 31, 43, 32, 43, 33, 43, 34, 43, 35, 43, 36, 43, 37, 43, 38, 43, 40, 43, 43, 44, 11, 44, 12, 44, 28, 44, 29, 44, 30, 44, 31, 44, 32, 44, 33, 44, 34, 44, 35, 44, 36, 44, 37, 44, 38, 44, 39, 44, 40, 44, 41, 44, 42, 45, 11, 45, 12, 45, 28, 45, 29, 45, 30, 45, 31, 45, 32, 45, 33, 45, 34, 45, 35, 45, 36, 45, 37, 45, 38, 45, 39, 46, 12, 46, 27, 46, 28, 46, 29, 46, 30, 46, 31, 46, 32, 46, 33, 46, 34, 46, 35, 46, 36, 46, 37, 47, 12, 47, 13, 47, 27, 47, 28, 47, 29, 47, 30, 47, 31, 47, 32, 47, 33, 47, 34, 47, 35, 47, 36, 47, 37, 48, 13, 48, 27, 48, 28, 48, 29, 48, 30, 48, 31, 48, 32, 48, 33, 48, 34, 48, 35, 48, 36, 48, 37, 48, 38, 49, 13, 49, 25, 49, 36, 49, 37, 49, 38, 49, 39, 50, 13, 50, 14, 50, 23, 50, 24, 50, 25, 50, 38, 50, 39, 50, 40, 51, 14, 51, 15, 51, 16, 51, 20, 51, 21, 51, 22, 51, 38, 51, 39, 51, 40, 52, 16, 52, 17, 52, 18, 52, 19, 52, 20, 52, 39, 53, 38, 53, 39, 54, 38, 54, 39, 54, 40, 55, 39, 55, 40)
+emission_colors = PackedColorArray(0.576471, 0.603922, 0.466667, 0.85098, 0.65098, 0.670588, 0.490196, 0.74902, 0.52549, 0.54902, 0.392157, 1, 0.54902, 0.568627, 0.470588, 0.815686, 0.411765, 0.423529, 0.298039, 1, 0.458824, 0.470588, 0.380392, 0.541176, 0.372549, 0.392157, 0.298039, 1, 0.392157, 0.407843, 0.34902, 1, 0.419608, 0.447059, 0.337255, 1, 0.439216, 0.45098, 0.396078, 1, 0.372549, 0.388235, 0.352941, 1, 0.407843, 0.423529, 0.356863, 1, 0.388235, 0.4, 0.32549, 0.533333, 0.419608, 0.427451, 0.392157, 1, 0.388235, 0.403922, 0.356863, 1, 0.337255, 0.34902, 0.305882, 1, 0.435294, 0.45098, 0.396078, 0.937255, 0.411765, 0.431373, 0.388235, 0.717647, 0.392157, 0.4, 0.364706, 1, 0.352941, 0.364706, 0.329412, 1, 0.298039, 0.309804, 0.270588, 0.772549, 0.305882, 0.313726, 0.270588, 0.658824, 0.407843, 0.423529, 0.380392, 0.976471, 0.392157, 0.4, 0.364706, 1, 0.270588, 0.282353, 0.239216, 0.760784, 0.392157, 0.411765, 0.360784, 0.913725, 0.458824, 0.470588, 0.427451, 1, 0.443137, 0.458824, 0.419608, 1, 0.321569, 0.329412, 0.286275, 1, 0.447059, 0.466667, 0.403922, 0.831373, 0.541176, 0.560784, 0.521569, 0.827451, 0.509804, 0.52549, 0.490196, 1, 0.419608, 0.431373, 0.392157, 1, 0.34902, 0.360784, 0.321569, 1, 0.219608, 0.231373, 0.188235, 0.768627, 0.45098, 0.466667, 0.423529, 0.827451, 0.458824, 0.482353, 0.376471, 1, 0.619608, 0.65098, 0.545098, 1, 0.486275, 0.505882, 0.470588, 1, 0.447059, 0.462745, 0.423529, 1, 0.360784, 0.372549, 0.329412, 1, 0.266667, 0.278431, 0.239216, 1, 0.431373, 0.45098, 0.423529, 0.576471, 0.427451, 0.454902, 0.388235, 0.905882, 0.537255, 0.564706, 0.45098, 0.866667, 0.686275, 0.709804, 0.603922, 1, 0.435294, 0.454902, 0.411765, 0.945098, 0.439216, 0.454902, 0.419608, 1, 0.372549, 0.384314, 0.34902, 1, 0.309804, 0.321569, 0.282353, 1, 0.25098, 0.262745, 0.223529, 0.733333, 0.435294, 0.454902, 0.427451, 1, 0.560784, 0.588235, 0.447059, 1, 0.639216, 0.666667, 0.521569, 0.760784, 0.458824, 0.478431, 0.439216, 0.815686, 0.415686, 0.427451, 0.392157, 1, 0.407843, 0.415686, 0.380392, 1, 0.32549, 0.341176, 0.305882, 1, 0.266667, 0.282353, 0.247059, 1, 0.427451, 0.45098, 0.439216, 0.858824, 0.368627, 0.384314, 0.364706, 0.858824, 0.498039, 0.52549, 0.364706, 0.67451, 0.588235, 0.607843, 0.458824, 1, 0.482353, 0.505882, 0.470588, 0.568627, 0.447059, 0.466667, 0.431373, 1, 0.4, 0.407843, 0.376471, 1, 0.388235, 0.4, 0.372549, 1, 0.329412, 0.341176, 0.313726, 1, 0.254902, 0.270588, 0.235294, 0.843137, 0.384314, 0.407843, 0.396078, 1, 0.560784, 0.584314, 0.4, 1, 0.631373, 0.662745, 0.498039, 0.556863, 0.443137, 0.462745, 0.435294, 0.921569, 0.427451, 0.443137, 0.415686, 1, 0.392157, 0.4, 0.376471, 1, 0.396078, 0.407843, 0.384314, 1, 0.294118, 0.305882, 0.282353, 1, 0.215686, 0.227451, 0.2, 0.815686, 0.556863, 0.6, 0.407843, 0.839216, 0.443137, 0.466667, 0.462745, 1, 0.341176, 0.360784, 0.341176, 0.87451, 0.580392, 0.615686, 0.388235, 0.803922, 0.607843, 0.631373, 0.45098, 0.921569, 0.431373, 0.45098, 0.423529, 1, 0.427451, 0.447059, 0.423529, 1, 0.392157, 0.407843, 0.380392, 1, 0.396078, 0.407843, 0.388235, 1, 0.305882, 0.317647, 0.294118, 1, 0.215686, 0.227451, 0.2, 0.678431, 0.423529, 0.45098, 0.32549, 0.847059, 0.513726, 0.541176, 0.4, 0.729412, 0.411765, 0.431373, 0.423529, 1, 0.611765, 0.639216, 0.415686, 1, 0.470588, 0.490196, 0.466667, 0.796078, 0.466667, 0.482353, 0.466667, 1, 0.439216, 0.462745, 0.443137, 1, 0.423529, 0.439216, 0.423529, 1, 0.341176, 0.352941, 0.337255, 1, 0.254902, 0.270588, 0.247059, 1, 0.2, 0.203922, 0.192157, 0.717647, 0.352941, 0.376471, 0.282353, 0.843137, 0.47451, 0.501961, 0.380392, 0.741176, 0.403922, 0.423529, 0.415686, 1, 0.678431, 0.705882, 0.458824, 0.968627, 0.721569, 0.74902, 0.501961, 0.890196, 0.423529, 0.443137, 0.427451, 0.564706, 0.372549, 0.396078, 0.376471, 0.854902, 0.431373, 0.45098, 0.435294, 0.956863, 0.462745, 0.482353, 0.470588, 1, 0.392157, 0.407843, 0.396078, 1, 0.317647, 0.333333, 0.313726, 1, 0.254902, 0.27451, 0.25098, 1, 0.25098, 0.262745, 0.239216, 0.972549, 0.172549, 0.184314, 0.168627, 0.517647, 0.176471, 0.184314, 0.12549, 0.513726, 0.278431, 0.294118, 0.215686, 0.592157, 0.286275, 0.301961, 0.223529, 0.705882, 0.458824, 0.490196, 0.392157, 1, 0.4, 0.423529, 0.411765, 1, 0.376471, 0.396078, 0.384314, 0.505882, 0.682353, 0.713726, 0.462745, 1, 0.752941, 0.784314, 0.517647, 0.768627, 0.384314, 0.4, 0.392157, 0.803922, 0.490196, 0.509804, 0.498039, 1, 0.427451, 0.439216, 0.427451, 1, 0.305882, 0.317647, 0.301961, 1, 0.247059, 0.262745, 0.247059, 1, 0.266667, 0.278431, 0.254902, 1, 0.384314, 0.403922, 0.329412, 0.862745, 0.439216, 0.454902, 0.329412, 0.964706, 0.431373, 0.454902, 0.360784, 1, 0.329412, 0.352941, 0.309804, 1, 0.32549, 0.345098, 0.301961, 1, 0.384314, 0.415686, 0.364706, 0.729412, 0.4, 0.419608, 0.407843, 0.517647, 0.368627, 0.396078, 0.380392, 1, 0.258824, 0.270588, 0.258824, 0.764706, 0.0823529, 0.0823529, 0.0705882, 0.592157, 0.25098, 0.270588, 0.258824, 0.768627, 0.262745, 0.290196, 0.27451, 0.619608, 0.733333, 0.772549, 0.415686, 0.639216, 0.298039, 0.309804, 0.298039, 0.968627, 0.298039, 0.313726, 0.305882, 1, 0.34902, 0.356863, 0.352941, 1, 0.270588, 0.270588, 0.270588, 1, 0.266667, 0.286275, 0.270588, 1, 0.192157, 0.207843, 0.188235, 0.74902, 0.243137, 0.25098, 0.219608, 0.67451, 0.360784, 0.380392, 0.34902, 1, 0.34902, 0.376471, 0.345098, 1, 0.156863, 0.160784, 0.152941, 0.560784, 0.313726, 0.333333, 0.317647, 0.847059, 0.278431, 0.298039, 0.282353, 1, 0.423529, 0.443137, 0.439216, 1, 0.396078, 0.415686, 0.4, 1, 0.356863, 0.376471, 0.364706, 1, 0.345098, 0.368627, 0.356863, 1, 0.313726, 0.337255, 0.321569, 1, 0.254902, 0.27451, 0.341176, 0.552941, 0.243137, 0.258824, 0.25098, 0.564706, 0.192157, 0.211765, 0.2, 1, 0.211765, 0.231373, 0.219608, 1, 0.317647, 0.329412, 0.321569, 1, 0.372549, 0.380392, 0.376471, 1, 0.305882, 0.313726, 0.309804, 1, 0.207843, 0.219608, 0.207843, 0.839216, 0.223529, 0.239216, 0.223529, 0.741176, 0.345098, 0.372549, 0.352941, 1, 0.243137, 0.262745, 0.243137, 0.878431, 0.333333, 0.34902, 0.32549, 1, 0.192157, 0.188235, 0.172549, 1, 0.356863, 0.376471, 0.364706, 1, 0.454902, 0.478431, 0.470588, 1, 0.341176, 0.360784, 0.352941, 1, 0.313726, 0.329412, 0.317647, 1, 0.247059, 0.266667, 0.258824, 1, 0.227451, 0.243137, 0.243137, 0.988235, 0.188235, 0.211765, 0.203922, 0.529412, 0.254902, 0.270588, 0.262745, 1, 0.305882, 0.317647, 0.313726, 1, 0.301961, 0.313726, 0.309804, 1, 0.278431, 0.286275, 0.282353, 1, 0.34902, 0.360784, 0.352941, 1, 0.356863, 0.368627, 0.360784, 1, 0.317647, 0.321569, 0.321569, 1, 0.333333, 0.360784, 0.337255, 0.976471, 0.341176, 0.368627, 0.341176, 1, 0.317647, 0.34902, 0.313726, 0.862745, 0.447059, 0.470588, 0.454902, 0.596078, 0.282353, 0.294118, 0.266667, 1, 0.219608, 0.215686, 0.196078, 0.996078, 0.231373, 0.235294, 0.215686, 0.996078, 0.305882, 0.305882, 0.294118, 0.996078, 0.352941, 0.356863, 0.345098, 0.996078, 0.337255, 0.345098, 0.341176, 0.996078, 0.258824, 0.270588, 0.25098, 1, 0.270588, 0.286275, 0.247059, 1, 0.254902, 0.27451, 0.262745, 0.94902, 0.380392, 0.4, 0.490196, 0.619608, 0.345098, 0.34902, 0.34902, 0.572549, 0.184314, 0.203922, 0.2, 0.85098, 0.231373, 0.247059, 0.243137, 1, 0.32549, 0.333333, 0.329412, 1, 0.356863, 0.356863, 0.356863, 1, 0.317647, 0.321569, 0.321569, 1, 0.317647, 0.321569, 0.317647, 1, 0.317647, 0.321569, 0.317647, 1, 0.337255, 0.34902, 0.345098, 1, 0.329412, 0.341176, 0.337255, 1, 0.231373, 0.239216, 0.235294, 0.796078, 0.333333, 0.360784, 0.329412, 1, 0.368627, 0.392157, 0.368627, 1, 0.431373, 0.470588, 0.419608, 0.666667, 0.415686, 0.435294, 0.411765, 0.901961, 0.235294, 0.243137, 0.215686, 1, 0.239216, 0.239216, 0.215686, 0.996078, 0.27451, 0.278431, 0.254902, 0.996078, 0.32549, 0.329412, 0.313726, 0.996078, 0.368627, 0.368627, 0.364706, 0.996078, 0.290196, 0.305882, 0.282353, 0.996078, 0.301961, 0.317647, 0.278431, 1, 0.380392, 0.4, 0.388235, 0.996078, 0.427451, 0.45098, 0.447059, 1, 0.247059, 0.258824, 0.235294, 1, 0.278431, 0.290196, 0.364706, 0.72549, 0.313726, 0.309804, 0.364706, 0.67451, 0.141176, 0.14902, 0.145098, 1, 0.145098, 0.164706, 0.156863, 1, 0.337255, 0.345098, 0.333333, 1, 0.380392, 0.388235, 0.380392, 1, 0.305882, 0.313726, 0.313726, 1, 0.301961, 0.305882, 0.301961, 1, 0.32549, 0.329412, 0.32549, 1, 0.309804, 0.317647, 0.313726, 1, 0.329412, 0.341176, 0.333333, 1, 0.34902, 0.364706, 0.352941, 1, 0.203922, 0.211765, 0.203922, 0.847059, 0.352941, 0.384314, 0.34902, 1, 0.494118, 0.521569, 0.486275, 1, 0.435294, 0.454902, 0.431373, 0.72549, 0.419608, 0.443137, 0.423529, 1, 0.262745, 0.270588, 0.239216, 1, 0.239216, 0.239216, 0.207843, 0.996078, 0.247059, 0.254902, 0.231373, 0.996078, 0.313726, 0.317647, 0.301961, 0.996078, 0.309804, 0.317647, 0.305882, 0.996078, 0.352941, 0.364706, 0.333333, 0.996078, 0.329412, 0.34902, 0.329412, 0.996078, 0.368627, 0.392157, 0.384314, 1, 0.345098, 0.360784, 0.352941, 0.996078, 0.337255, 0.341176, 0.333333, 1, 0.223529, 0.239216, 0.207843, 1, 0.192157, 0.192157, 0.239216, 0.960784, 0.47451, 0.486275, 0.545098, 0.92549, 0.733333, 0.764706, 0.745098, 0.992157, 0.631373, 0.662745, 0.670588, 0.968627, 0.34902, 0.368627, 0.364706, 0.984314, 0.352941, 0.368627, 0.364706, 1, 0.321569, 0.329412, 0.317647, 1, 0.333333, 0.341176, 0.329412, 1, 0.278431, 0.290196, 0.290196, 1, 0.313726, 0.317647, 0.313726, 1, 0.32549, 0.329412, 0.32549, 1, 0.290196, 0.298039, 0.294118, 1, 0.333333, 0.356863, 0.341176, 1, 0.411765, 0.427451, 0.415686, 1, 0.180392, 0.188235, 0.180392, 0.843137, 0.0862745, 0.0941176, 0.0901961, 0.552941, 0.247059, 0.282353, 0.239216, 0.92549, 0.380392, 0.411765, 0.372549, 1, 0.501961, 0.533333, 0.482353, 1, 0.419608, 0.458824, 0.388235, 0.592157, 0.745098, 0.780392, 0.52549, 0.866667, 0.705882, 0.713726, 0.454902, 0.592157, 0.411765, 0.435294, 0.411765, 0.894118, 0.266667, 0.27451, 0.243137, 1, 0.239216, 0.235294, 0.207843, 0.996078, 0.258824, 0.262745, 0.235294, 0.996078, 0.301961, 0.305882, 0.286275, 0.996078, 0.313726, 0.321569, 0.301961, 0.996078, 0.32549, 0.333333, 0.317647, 0.996078, 0.305882, 0.321569, 0.309804, 0.996078, 0.388235, 0.407843, 0.396078, 1, 0.345098, 0.352941, 0.341176, 1, 0.309804, 0.321569, 0.313726, 0.996078, 0.196078, 0.203922, 0.196078, 1, 0.4, 0.407843, 0.396078, 1, 0.690196, 0.72549, 0.737255, 1, 0.666667, 0.690196, 0.701961, 1, 0.670588, 0.701961, 0.698039, 1, 0.564706, 0.615686, 0.67451, 1, 0.588235, 0.615686, 0.654902, 1, 0.564706, 0.588235, 0.584314, 1, 0.282353, 0.290196, 0.286275, 1, 0.27451, 0.286275, 0.282353, 1, 0.329412, 0.337255, 0.333333, 1, 0.32549, 0.333333, 0.32549, 1, 0.298039, 0.305882, 0.301961, 1, 0.34902, 0.360784, 0.34902, 1, 0.396078, 0.415686, 0.396078, 1, 0.235294, 0.25098, 0.235294, 0.952941, 0.192157, 0.207843, 0.192157, 0.901961, 0.239216, 0.270588, 0.239216, 1, 0.239216, 0.278431, 0.235294, 1, 0.282353, 0.32549, 0.27451, 1, 0.290196, 0.333333, 0.286275, 1, 0.282353, 0.321569, 0.27451, 1, 0.368627, 0.403922, 0.352941, 1, 0.462745, 0.486275, 0.447059, 1, 0.454902, 0.482353, 0.431373, 0.737255, 0.678431, 0.709804, 0.47451, 0.780392, 0.423529, 0.443137, 0.407843, 0.992157, 0.227451, 0.231373, 0.2, 1, 0.258824, 0.262745, 0.227451, 0.996078, 0.27451, 0.278431, 0.25098, 0.996078, 0.278431, 0.282353, 0.254902, 0.996078, 0.309804, 0.313726, 0.294118, 0.996078, 0.239216, 0.243137, 0.223529, 0.996078, 0.364706, 0.384314, 0.372549, 1, 0.380392, 0.396078, 0.388235, 1, 0.313726, 0.317647, 0.309804, 0.996078, 0.262745, 0.278431, 0.266667, 0.996078, 0.203922, 0.207843, 0.196078, 0.996078, 0.458824, 0.478431, 0.466667, 0.996078, 0.619608, 0.65098, 0.717647, 1, 0.588235, 0.611765, 0.658824, 1, 0.627451, 0.65098, 0.611765, 1, 0.658824, 0.729412, 0.384314, 1, 0.443137, 0.517647, 0.439216, 1, 0.737255, 0.760784, 0.827451, 1, 0.388235, 0.396078, 0.384314, 1, 0.243137, 0.25098, 0.247059, 1, 0.333333, 0.341176, 0.337255, 1, 0.329412, 0.333333, 0.333333, 1, 0.305882, 0.305882, 0.305882, 1, 0.333333, 0.345098, 0.337255, 1, 0.415686, 0.439216, 0.419608, 1, 0.396078, 0.407843, 0.396078, 1, 0.333333, 0.34902, 0.333333, 1, 0.25098, 0.27451, 0.243137, 1, 0.235294, 0.278431, 0.231373, 1, 0.266667, 0.305882, 0.258824, 1, 0.309804, 0.345098, 0.298039, 1, 0.34902, 0.388235, 0.337255, 1, 0.376471, 0.411765, 0.356863, 1, 0.501961, 0.521569, 0.482353, 1, 0.462745, 0.498039, 0.443137, 0.87451, 0.611765, 0.658824, 0.498039, 0.745098, 0.603922, 0.623529, 0.415686, 0.588235, 0.811765, 0.847059, 0.482353, 0.521569, 0.368627, 0.388235, 0.396078, 0.529412, 0.286275, 0.298039, 0.258824, 1, 0.184314, 0.196078, 0.160784, 0.996078, 0.258824, 0.266667, 0.231373, 0.996078, 0.270588, 0.27451, 0.243137, 0.996078, 0.258824, 0.262745, 0.239216, 0.996078, 0.215686, 0.215686, 0.184314, 0.996078, 0.345098, 0.360784, 0.345098, 1, 0.435294, 0.458824, 0.454902, 1, 0.345098, 0.34902, 0.329412, 1, 0.356863, 0.364706, 0.34902, 0.996078, 0.235294, 0.247059, 0.235294, 0.996078, 0.301961, 0.313726, 0.305882, 0.996078, 0.52549, 0.556863, 0.584314, 1, 0.54902, 0.627451, 0.403922, 1, 0.607843, 0.654902, 0.654902, 1, 0.584314, 0.611765, 0.690196, 1, 0.905882, 0.905882, 0.568627, 1, 0.929412, 0.952941, 0.419608, 1, 0.65098, 0.686275, 0.658824, 1, 0.388235, 0.403922, 0.466667, 1, 0.243137, 0.247059, 0.239216, 1, 0.321569, 0.333333, 0.329412, 1, 0.321569, 0.329412, 0.329412, 1, 0.294118, 0.298039, 0.298039, 1, 0.317647, 0.32549, 0.321569, 1, 0.45098, 0.47451, 0.458824, 1, 0.439216, 0.462745, 0.447059, 1, 0.423529, 0.439216, 0.419608, 1, 0.392157, 0.415686, 0.388235, 1, 0.337255, 0.364706, 0.32549, 1, 0.298039, 0.329412, 0.286275, 1, 0.352941, 0.388235, 0.337255, 1, 0.4, 0.435294, 0.384314, 1, 0.411765, 0.447059, 0.392157, 1, 0.494118, 0.52549, 0.47451, 1, 0.466667, 0.490196, 0.435294, 0.705882, 0.498039, 0.521569, 0.415686, 0.713726, 0.54902, 0.568627, 0.45098, 0.796078, 0.619608, 0.643137, 0.729412, 1, 0.658824, 0.682353, 0.745098, 0.721569, 0.435294, 0.462745, 0.396078, 0.631373, 0.192157, 0.203922, 0.164706, 1, 0.192157, 0.2, 0.152941, 1, 0.25098, 0.262745, 0.227451, 0.996078, 0.203922, 0.219608, 0.184314, 0.996078, 0.160784, 0.168627, 0.129412, 0.996078, 0.403922, 0.419608, 0.4, 1, 0.45098, 0.478431, 0.482353, 1, 0.329412, 0.341176, 0.32549, 1, 0.454902, 0.458824, 0.431373, 0.996078, 0.4, 0.407843, 0.384314, 0.996078, 0.168627, 0.176471, 0.168627, 1, 0.427451, 0.435294, 0.45098, 0.996078, 0.509804, 0.556863, 0.560784, 1, 0.701961, 0.768627, 0.368627, 1, 0.823529, 0.835294, 0.670588, 1, 0.541176, 0.596078, 0.713726, 1, 0.882353, 0.894118, 0.501961, 1, 0.996078, 0.988235, 0.462745, 1, 0.709804, 0.745098, 0.6, 1, 0.560784, 0.611765, 0.67451, 1, 0.231373, 0.235294, 0.231373, 1, 0.27451, 0.286275, 0.27451, 1, 0.321569, 0.333333, 0.32549, 1, 0.309804, 0.321569, 0.317647, 1, 0.313726, 0.32549, 0.321569, 1, 0.423529, 0.443137, 0.431373, 1, 0.431373, 0.458824, 0.435294, 1, 0.427451, 0.45098, 0.423529, 1, 0.443137, 0.466667, 0.435294, 1, 0.435294, 0.462745, 0.423529, 1, 0.427451, 0.454902, 0.411765, 1, 0.415686, 0.45098, 0.4, 1, 0.443137, 0.478431, 0.427451, 1, 0.545098, 0.560784, 0.52549, 1, 0.52549, 0.54902, 0.498039, 0.898039, 0.47451, 0.498039, 0.392157, 1, 0.627451, 0.67451, 0.666667, 0.992157, 0.615686, 0.643137, 0.717647, 1, 0.584314, 0.615686, 0.733333, 0.992157, 0.580392, 0.619608, 0.647059, 0.913725, 0.584314, 0.619608, 0.607843, 0.968627, 0.376471, 0.388235, 0.360784, 1, 0.0862745, 0.0901961, 0.0431373, 1, 0.2, 0.207843, 0.168627, 1, 0.419608, 0.443137, 0.427451, 1, 0.45098, 0.478431, 0.47451, 1, 0.25098, 0.258824, 0.239216, 1, 0.309804, 0.313726, 0.294118, 1, 0.431373, 0.443137, 0.435294, 0.996078, 0.282353, 0.298039, 0.298039, 0.996078, 0.203922, 0.211765, 0.207843, 0.996078, 0.372549, 0.372549, 0.372549, 0.996078, 0.580392, 0.615686, 0.67451, 1, 0.815686, 0.870588, 0.454902, 1, 1, 1, 0.458824, 1, 0.541176, 0.592157, 0.678431, 1, 0.658824, 0.690196, 0.611765, 1, 1, 1, 0.54902, 1, 0.709804, 0.8, 0.364706, 1, 0.537255, 0.6, 0.623529, 1, 0.611765, 0.635294, 0.65098, 1, 0.231373, 0.239216, 0.227451, 1, 0.207843, 0.211765, 0.207843, 1, 0.317647, 0.32549, 0.321569, 1, 0.219608, 0.231373, 0.227451, 0.972549, 0.384314, 0.4, 0.388235, 0.945098, 0.52549, 0.545098, 0.521569, 1, 0.505882, 0.521569, 0.501961, 1, 0.486275, 0.505882, 0.47451, 1, 0.458824, 0.486275, 0.447059, 1, 0.419608, 0.45098, 0.407843, 1, 0.486275, 0.517647, 0.466667, 1, 0.54902, 0.580392, 0.517647, 1, 0.443137, 0.482353, 0.419608, 0.921569, 0.54902, 0.568627, 0.443137, 1, 0.529412, 0.560784, 0.552941, 0.894118, 0.545098, 0.580392, 0.619608, 1, 0.694118, 0.709804, 0.580392, 1, 0.788235, 0.807843, 0.490196, 1, 0.662745, 0.709804, 0.709804, 1, 0.576471, 0.596078, 0.65098, 0.984314, 0.470588, 0.486275, 0.486275, 0.996078, 0.364706, 0.388235, 0.360784, 1, 0.431373, 0.454902, 0.443137, 1, 0.34902, 0.364706, 0.352941, 1, 0.223529, 0.227451, 0.2, 1, 0.286275, 0.282353, 0.262745, 1, 0.294118, 0.298039, 0.278431, 1, 0.227451, 0.235294, 0.219608, 0.996078, 0.345098, 0.356863, 0.32549, 1, 0.431373, 0.435294, 0.415686, 0.996078, 0.239216, 0.243137, 0.231373, 0.996078, 0.4, 0.411765, 0.462745, 1, 0.67451, 0.729412, 0.615686, 1, 0.960784, 0.988235, 0.47451, 1, 0.839216, 0.843137, 0.623529, 1, 0.556863, 0.592157, 0.705882, 1, 1, 1, 0.419608, 1, 0.427451, 0.505882, 0.203922, 1, 0.176471, 0.172549, 0.266667, 1, 0.615686, 0.643137, 0.639216, 1, 0.623529, 0.65098, 0.654902, 1, 0.443137, 0.458824, 0.458824, 1, 0.219608, 0.227451, 0.227451, 1, 0.203922, 0.211765, 0.207843, 0.815686, 0.545098, 0.572549, 0.541176, 1, 0.635294, 0.654902, 0.627451, 1, 0.607843, 0.623529, 0.603922, 1, 0.541176, 0.560784, 0.52549, 1, 0.584314, 0.615686, 0.556863, 1, 0.494118, 0.517647, 0.466667, 0.94902, 0.454902, 0.478431, 0.360784, 0.701961, 0.584314, 0.607843, 0.466667, 0.898039, 0.584314, 0.603922, 0.658824, 0.819608, 0.560784, 0.580392, 0.670588, 0.952941, 0.752941, 0.756863, 0.419608, 1, 1, 1, 0.47451, 1, 0.807843, 0.843137, 0.588235, 1, 0.631373, 0.678431, 0.705882, 1, 0.545098, 0.580392, 0.552941, 1, 0.443137, 0.45098, 0.45098, 1, 0.254902, 0.266667, 0.235294, 1, 0.207843, 0.207843, 0.168627, 0.996078, 0.262745, 0.266667, 0.243137, 0.996078, 0.258824, 0.262745, 0.239216, 1, 0.184314, 0.196078, 0.164706, 1, 0.266667, 0.278431, 0.258824, 1, 0.435294, 0.443137, 0.415686, 1, 0.376471, 0.388235, 0.364706, 1, 0.235294, 0.239216, 0.239216, 0.996078, 0.396078, 0.396078, 0.392157, 0.996078, 0.513726, 0.545098, 0.639216, 1, 0.564706, 0.647059, 0.317647, 1, 0.788235, 0.85098, 0.407843, 1, 0.654902, 0.690196, 0.776471, 1, 0.552941, 0.611765, 0.584314, 1, 0.215686, 0.235294, 0.235294, 1, 0.227451, 0.223529, 0.235294, 1, 0.145098, 0.152941, 0.14902, 1, 0.321569, 0.333333, 0.321569, 1, 0.623529, 0.654902, 0.65098, 1, 0.223529, 0.235294, 0.235294, 1, 0.254902, 0.258824, 0.258824, 0.85098, 0.356863, 0.376471, 0.34902, 0.780392, 0.521569, 0.54902, 0.509804, 1, 0.564706, 0.588235, 0.545098, 1, 0.34902, 0.364706, 0.32549, 0.6, 0.478431, 0.501961, 0.388235, 0.94902, 0.639216, 0.658824, 0.513726, 0.505882, 0.572549, 0.619608, 0.541176, 0.870588, 0.698039, 0.756863, 0.682353, 1, 0.854902, 0.886275, 0.501961, 1, 1, 1, 0.478431, 1, 0.87451, 0.898039, 0.505882, 1, 0.615686, 0.698039, 0.596078, 0.988235, 0.611765, 0.682353, 0.580392, 0.839216, 0.25098, 0.243137, 0.266667, 0.964706, 0.0980392, 0.0980392, 0.0431373, 1, 0.243137, 0.25098, 0.215686, 0.996078, 0.215686, 0.227451, 0.192157, 1, 0.152941, 0.172549, 0.14902, 1, 0.254902, 0.266667, 0.247059, 1, 0.368627, 0.372549, 0.360784, 1, 0.380392, 0.388235, 0.384314, 1, 0.227451, 0.239216, 0.231373, 1, 0.247059, 0.25098, 0.243137, 0.996078, 0.352941, 0.356863, 0.345098, 1, 0.560784, 0.572549, 0.576471, 1, 0.278431, 0.282353, 0.384314, 1, 0.219608, 0.25098, 0.262745, 0.996078, 0.768627, 0.803922, 0.772549, 1, 0.666667, 0.690196, 0.74902, 1, 0.278431, 0.278431, 0.298039, 1, 0.219608, 0.231373, 0.219608, 1, 0.223529, 0.239216, 0.223529, 1, 0.227451, 0.235294, 0.211765, 1, 0.337255, 0.352941, 0.333333, 1, 0.227451, 0.235294, 0.215686, 1, 0.32549, 0.337255, 0.333333, 0.627451, 0.509804, 0.537255, 0.419608, 0.894118, 0.654902, 0.72549, 0.439216, 1, 0.819608, 0.870588, 0.541176, 1, 0.698039, 0.741176, 0.615686, 1, 0.921569, 0.937255, 0.509804, 1, 0.858824, 0.870588, 0.541176, 1, 0.654902, 0.709804, 0.654902, 0.996078, 0.470588, 0.517647, 0.486275, 0.8, 0.486275, 0.505882, 0.517647, 0.941176, 0.356863, 0.372549, 0.34902, 1, 0.160784, 0.172549, 0.145098, 1, 0.215686, 0.231373, 0.207843, 1, 0.235294, 0.243137, 0.231373, 0.996078, 0.27451, 0.278431, 0.270588, 1, 0.309804, 0.317647, 0.301961, 1, 0.305882, 0.317647, 0.305882, 1, 0.203922, 0.211765, 0.2, 0.996078, 0.247059, 0.254902, 0.247059, 1, 0.321569, 0.329412, 0.321569, 1, 0.580392, 0.607843, 0.603922, 1, 0.333333, 0.341176, 0.337255, 0.996078, 0.247059, 0.243137, 0.25098, 1, 0.454902, 0.478431, 0.478431, 1, 0.678431, 0.721569, 0.717647, 1, 0.227451, 0.231373, 0.231373, 1, 0.2, 0.2, 0.2, 1, 0.317647, 0.32549, 0.309804, 1, 0.27451, 0.290196, 0.262745, 1, 0.235294, 0.243137, 0.196078, 1, 0.109804, 0.109804, 0.105882, 1, 0.509804, 0.537255, 0.423529, 0.803922, 0.678431, 0.701961, 0.572549, 0.596078, 0.611765, 0.65098, 0.615686, 0.780392, 0.639216, 0.717647, 0.47451, 1, 0.54902, 0.588235, 0.666667, 1, 0.952941, 0.952941, 0.47451, 1, 1, 1, 0.4, 0.984314, 0.631373, 0.690196, 0.611765, 0.980392, 0.541176, 0.576471, 0.666667, 0.976471, 0.321569, 0.337255, 0.305882, 0.972549, 0.52549, 0.545098, 0.54902, 1, 0.454902, 0.47451, 0.470588, 1, 0.25098, 0.258824, 0.235294, 1, 0.207843, 0.215686, 0.2, 0.996078, 0.215686, 0.219608, 0.207843, 0.996078, 0.278431, 0.282353, 0.270588, 1, 0.227451, 0.231373, 0.219608, 0.996078, 0.239216, 0.243137, 0.235294, 0.996078, 0.207843, 0.215686, 0.207843, 1, 0.482353, 0.501961, 0.501961, 1, 0.466667, 0.486275, 0.486275, 1, 0.278431, 0.282353, 0.278431, 0.996078, 0.321569, 0.32549, 0.321569, 1, 0.211765, 0.211765, 0.207843, 1, 0.45098, 0.466667, 0.470588, 1, 0.243137, 0.25098, 0.25098, 1, 0.266667, 0.27451, 0.266667, 1, 0.384314, 0.396078, 0.384314, 1, 0.313726, 0.321569, 0.270588, 1, 0.227451, 0.227451, 0.152941, 1, 0.321569, 0.337255, 0.32549, 0.741176, 0.603922, 0.623529, 0.529412, 1, 0.654902, 0.666667, 0.584314, 0.533333, 0.572549, 0.607843, 0.631373, 0.74902, 0.392157, 0.431373, 0.407843, 1, 0.654902, 0.686275, 0.701961, 1, 0.670588, 0.741176, 0.384314, 1, 0.596078, 0.694118, 0.333333, 0.941176, 0.611765, 0.635294, 0.67451, 0.772549, 0.682353, 0.705882, 0.694118, 1, 0.231373, 0.235294, 0.207843, 1, 0.619608, 0.65098, 0.654902, 1, 0.411765, 0.443137, 0.443137, 1, 0.172549, 0.172549, 0.152941, 1, 0.258824, 0.262745, 0.239216, 1, 0.207843, 0.215686, 0.2, 1, 0.223529, 0.231373, 0.211765, 0.996078, 0.239216, 0.243137, 0.231373, 0.996078, 0.231373, 0.235294, 0.235294, 1, 0.466667, 0.486275, 0.486275, 1, 0.380392, 0.403922, 0.396078, 1, 0.235294, 0.239216, 0.235294, 0.996078, 0.305882, 0.309804, 0.309804, 1, 0.247059, 0.254902, 0.247059, 1, 0.137255, 0.133333, 0.137255, 1, 0.227451, 0.239216, 0.235294, 1, 0.415686, 0.443137, 0.435294, 1, 0.407843, 0.423529, 0.407843, 1, 0.262745, 0.258824, 0.184314, 1, 0.462745, 0.490196, 0.396078, 1, 0.741176, 0.780392, 0.72549, 0.811765, 0.47451, 0.494118, 0.439216, 1, 0.486275, 0.509804, 0.447059, 1, 0.517647, 0.537255, 0.482353, 0.917647, 0.411765, 0.431373, 0.384314, 0.705882, 0.501961, 0.52549, 0.505882, 0.741176, 0.427451, 0.447059, 0.443137, 0.988235, 0.505882, 0.513726, 0.533333, 1, 0.678431, 0.701961, 0.701961, 0.721569, 0.278431, 0.321569, 0.380392, 0.623529, 0.258824, 0.258824, 0.380392, 1, 0.662745, 0.694118, 0.698039, 1, 0.513726, 0.541176, 0.529412, 1, 0.290196, 0.313726, 0.301961, 1, 0.262745, 0.270588, 0.25098, 0.996078, 0.219608, 0.219608, 0.196078, 0.996078, 0.223529, 0.231373, 0.211765, 1, 0.239216, 0.243137, 0.227451, 0.996078, 0.239216, 0.243137, 0.231373, 0.996078, 0.223529, 0.227451, 0.227451, 0.996078, 0.247059, 0.247059, 0.25098, 0.996078, 0.192157, 0.196078, 0.188235, 0.996078, 0.196078, 0.207843, 0.2, 0.996078, 0.223529, 0.231373, 0.231373, 0.996078, 0.215686, 0.219608, 0.219608, 1, 0.235294, 0.239216, 0.239216, 1, 0.156863, 0.160784, 0.156863, 1, 0.313726, 0.337255, 0.329412, 1, 0.498039, 0.517647, 0.513726, 1, 0.360784, 0.372549, 0.352941, 1, 0.262745, 0.258824, 0.160784, 0.929412, 0.564706, 0.611765, 0.505882, 1, 0.54902, 0.6, 0.552941, 0.521569, 0.396078, 0.415686, 0.407843, 0.882353, 0.384314, 0.4, 0.384314, 1, 0.482353, 0.498039, 0.494118, 1, 0.356863, 0.376471, 0.368627, 1, 0.670588, 0.698039, 0.698039, 1, 0.305882, 0.313726, 0.313726, 0.811765, 0.537255, 0.564706, 0.552941, 0.792157, 0.403922, 0.419608, 0.415686, 1, 0.352941, 0.376471, 0.364706, 0.92549, 0.180392, 0.188235, 0.164706, 0.972549, 0.188235, 0.188235, 0.164706, 1, 0.235294, 0.239216, 0.223529, 1, 0.247059, 0.25098, 0.239216, 0.996078, 0.243137, 0.247059, 0.239216, 0.996078, 0.235294, 0.239216, 0.239216, 0.996078, 0.239216, 0.239216, 0.235294, 0.996078, 0.211765, 0.223529, 0.211765, 1, 0.172549, 0.184314, 0.172549, 1, 0.192157, 0.2, 0.196078, 0.996078, 0.219608, 0.223529, 0.223529, 1, 0.192157, 0.2, 0.196078, 1, 0.211765, 0.211765, 0.215686, 1, 0.180392, 0.188235, 0.184314, 1, 0.439216, 0.458824, 0.45098, 1, 0.478431, 0.490196, 0.494118, 1, 0.34902, 0.360784, 0.341176, 1, 0.254902, 0.25098, 0.145098, 0.87451, 0.603922, 0.65098, 0.537255, 0.866667, 0.596078, 0.639216, 0.596078, 0.788235, 0.631373, 0.670588, 0.670588, 0.737255, 0.223529, 0.231373, 0.215686, 0.654902, 0.411765, 0.443137, 0.435294, 0.654902, 0.470588, 0.505882, 0.486275, 1, 0.321569, 0.345098, 0.337255, 0.552941, 0.27451, 0.286275, 0.270588, 0.733333, 0.211765, 0.215686, 0.203922, 1, 0.231373, 0.235294, 0.227451, 1, 0.231373, 0.239216, 0.231373, 0.996078, 0.2, 0.207843, 0.2, 0.996078, 0.188235, 0.2, 0.192157, 1, 0.192157, 0.2, 0.192157, 1, 0.227451, 0.231373, 0.227451, 1, 0.235294, 0.235294, 0.239216, 1, 0.176471, 0.180392, 0.180392, 1, 0.223529, 0.227451, 0.231373, 1, 0.188235, 0.188235, 0.192157, 0.976471, 0.368627, 0.388235, 0.380392, 0.980392, 0.47451, 0.494118, 0.486275, 1, 0.411765, 0.431373, 0.431373, 1, 0.345098, 0.34902, 0.345098, 1, 0.368627, 0.372549, 0.262745, 0.992157, 0.639216, 0.694118, 0.647059, 1, 0.231373, 0.239216, 0.352941, 0.776471, 0.698039, 0.729412, 0.72549, 0.886275, 0.513726, 0.521569, 0.529412, 0.866667, 0.34902, 0.364706, 0.360784, 0.847059, 0.27451, 0.286275, 0.27451, 0.54902, 0.192157, 0.203922, 0.196078, 0.988235, 0.145098, 0.156863, 0.145098, 1, 0.160784, 0.168627, 0.160784, 1, 0.219608, 0.227451, 0.219608, 1, 0.239216, 0.239216, 0.239216, 1, 0.239216, 0.243137, 0.243137, 0.964706, 0.211765, 0.219608, 0.215686, 0.764706, 0.219608, 0.227451, 0.223529, 0.784314, 0.211765, 0.219608, 0.215686, 0.607843, 0.458824, 0.478431, 0.47451, 0.976471, 0.411765, 0.435294, 0.427451, 1, 0.384314, 0.403922, 0.4, 1, 0.411765, 0.419608, 0.372549, 1, 0.52549, 0.564706, 0.615686, 1, 0.533333, 0.592157, 0.505882, 1, 0.447059, 0.564706, 0.164706, 0.796078, 0.792157, 0.811765, 0.819608, 0.694118, 0.882353, 0.909804, 0.94902, 1, 0.647059, 0.654902, 0.647059, 0.713726, 0.431373, 0.454902, 0.443137, 1, 0.223529, 0.227451, 0.223529, 0.670588, 0.270588, 0.278431, 0.278431, 0.72549, 0.364706, 0.380392, 0.372549, 0.596078, 0.458824, 0.47451, 0.470588, 1, 0.376471, 0.388235, 0.388235, 1, 0.462745, 0.486275, 0.45098, 1, 0.6, 0.658824, 0.635294, 1, 0.584314, 0.65098, 0.45098, 1, 0.819608, 0.85098, 0.498039, 1, 1, 1, 0.466667, 1, 0.886275, 0.92549, 0.517647, 1, 0.541176, 0.603922, 0.713726, 1, 0.721569, 0.741176, 0.796078, 0.980392, 0.541176, 0.564706, 0.556863, 0.894118, 0.388235, 0.403922, 0.4, 0.760784, 0.380392, 0.396078, 0.388235, 0.847059, 0.423529, 0.439216, 0.439216, 1, 0.384314, 0.403922, 0.4, 1, 0.596078, 0.619608, 0.580392, 1, 0.517647, 0.580392, 0.529412, 1, 0.803922, 0.85098, 0.447059, 1, 1, 1, 0.576471, 1, 0.890196, 0.894118, 0.690196, 1, 0.572549, 0.6, 0.670588, 1, 0.94902, 0.992157, 0.701961, 1, 0.435294, 0.501961, 0.211765, 0.545098, 0.207843, 0.211765, 0.211765, 0.560784, 0.509804, 0.541176, 0.482353, 0.623529, 0.498039, 0.517647, 0.509804, 1, 0.345098, 0.360784, 0.356863, 0.776471, 0.368627, 0.384314, 0.376471, 0.992157, 0.392157, 0.407843, 0.411765, 1, 0.4, 0.411765, 0.392157, 1, 0.505882, 0.521569, 0.541176, 1, 0.431373, 0.521569, 0.301961, 1, 0.917647, 0.984314, 0.521569, 1, 0.847059, 0.85098, 0.701961, 1, 0.54902, 0.596078, 0.658824, 1, 0.694118, 0.721569, 0.721569, 1, 1, 1, 0.533333, 1, 0.537255, 0.619608, 0.223529, 0.980392, 0.490196, 0.521569, 0.596078, 0.992157, 0.717647, 0.772549, 0.694118, 1, 0.592157, 0.639216, 0.576471, 0.941176, 0.764706, 0.811765, 0.729412, 1, 0.494118, 0.521569, 0.513726, 0.592157, 0.372549, 0.392157, 0.376471, 1, 0.4, 0.419608, 0.411765, 1, 0.415686, 0.439216, 0.435294, 1, 0.317647, 0.317647, 0.309804, 1, 0.380392, 0.392157, 0.34902, 1, 0.572549, 0.639216, 0.564706, 1, 0.666667, 0.709804, 0.458824, 1, 0.745098, 0.772549, 0.741176, 1, 0.729412, 0.756863, 0.780392, 1, 1, 1, 0.619608, 1, 0.823529, 0.858824, 0.478431, 1, 0.631373, 0.701961, 0.635294, 1, 0.415686, 0.447059, 0.415686, 0.517647, 0.462745, 0.482353, 0.47451, 1, 0.415686, 0.435294, 0.427451, 0.858824, 0.411765, 0.431373, 0.423529, 1, 0.419608, 0.439216, 0.435294, 1, 0.329412, 0.337255, 0.329412, 1, 0.388235, 0.415686, 0.380392, 1, 0.666667, 0.709804, 0.67451, 1, 0.556863, 0.592157, 0.619608, 1, 0.654902, 0.690196, 0.584314, 1, 0.952941, 0.968627, 0.501961, 1, 0.85098, 0.909804, 0.47451, 1, 0.690196, 0.756863, 0.607843, 1, 0.388235, 0.411765, 0.4, 0.788235, 0.47451, 0.494118, 0.486275, 0.988235, 0.517647, 0.541176, 0.529412, 1, 0.407843, 0.427451, 0.423529, 1, 0.407843, 0.427451, 0.411765, 1, 0.4, 0.423529, 0.439216, 1, 0.403922, 0.423529, 0.403922, 1, 0.682353, 0.721569, 0.580392, 1, 0.678431, 0.733333, 0.666667, 1, 0.560784, 0.619608, 0.580392, 1, 0.533333, 0.6, 0.415686, 1, 0.556863, 0.635294, 0.490196, 1, 0.552941, 0.588235, 0.576471, 0.972549, 0.407843, 0.427451, 0.419608, 1, 0.172549, 0.172549, 0.258824, 0.517647, 0.27451, 0.286275, 0.32549, 0.92549, 0.227451, 0.239216, 0.313726, 0.909804, 0.27451, 0.286275, 0.345098, 0.909804, 0.454902, 0.47451, 0.364706, 0.988235, 0.486275, 0.505882, 0.4, 0.968627, 0.388235, 0.411765, 0.411765, 1, 0.380392, 0.392157, 0.34902, 1, 0.486275, 0.501961, 0.517647, 1, 0.462745, 0.466667, 0.47451, 1, 0.298039, 0.301961, 0.231373, 1, 0.305882, 0.309804, 0.25098, 0.921569, 0.396078, 0.415686, 0.411765, 1, 0.921569, 0.945098, 0.478431, 0.529412, 0.231373, 0.235294, 0.207843, 0.741176, 0.294118, 0.298039, 0.282353, 1, 0.360784, 0.372549, 0.345098, 1, 0.329412, 0.337255, 0.309804, 0.937255, 0.352941, 0.376471, 0.368627, 0.741176, 0.470588, 0.490196, 0.478431, 0.933333, 0.658824, 0.705882, 0.513726, 0.509804, 0.741176, 0.772549, 0.454902, 0.717647, 0.721569, 0.741176, 0.435294, 0.580392, 0.337255, 0.341176, 0.301961, 1, 0.411765, 0.423529, 0.364706, 1, 0.227451, 0.231373, 0.203922, 0.666667, 0.435294, 0.458824, 0.447059, 0.870588, 0.435294, 0.454902, 0.439216, 1, 0.537255, 0.560784, 0.537255, 0.517647, 0.576471, 0.607843, 0.47451, 0.882353, 0.513726, 0.537255, 0.435294, 1, 0.564706, 0.596078, 0.411765, 0.678431, 0.356863, 0.364706, 0.290196, 0.556863, 0.458824, 0.47451, 0.376471, 1, 0.223529, 0.231373, 0.180392, 0.607843, 0.403922, 0.423529, 0.411765, 1, 0.427451, 0.443137, 0.427451, 1, 0.470588, 0.494118, 0.462745, 1, 0.45098, 0.470588, 0.439216, 0.913725, 0.415686, 0.439216, 0.392157, 0.596078, 0.392157, 0.4, 0.333333, 1, 0.415686, 0.431373, 0.356863, 1, 0.294118, 0.301961, 0.219608, 0.909804, 0.529412, 0.552941, 0.443137, 1, 0.431373, 0.447059, 0.32549, 1, 0.368627, 0.376471, 0.247059, 0.607843, 0.564706, 0.603922, 0.47451, 0.576471, 0.470588, 0.482353, 0.372549, 0.862745)
+direction = Vector2(2, 1)
+spread = 20.0
+gravity = Vector2(0, -17.5)
+initial_velocity_min = 20.0
+initial_velocity_max = 37.5
+orbit_velocity_min = -0.5
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("Curve_cdj68")
+angle_max = 360.0
+scale_amount_min = 0.03
+scale_amount_max = 0.06
+scale_amount_curve = SubResource("Curve_xc111")
+color_ramp = SubResource("Gradient_652aj")
+anim_offset_max = 1.0
+
+[node name="laserBaseBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "laser_base"
+show_behind_parent = true
+position = Vector2(-1413.2506, -800)
+rotation = -1.5707964
+
+[node name="laserBaseParticles" type="GPUParticles2D" parent="Visuals/laserBaseBone"]
+material = SubResource("ShaderMaterial_2a33k")
+amount = 20
+texture = ExtResource("11_0louj")
+lifetime = 0.5
+preprocess = 0.25
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_2wmkm")
+
+[node name="laserHitBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "laser_hit"
+show_behind_parent = true
+position = Vector2(-2900.0002, -800)
+rotation = 1.5707964
+
+[node name="torch1UnscaledBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "torch_1_unscaled"
+show_behind_parent = true
+position = Vector2(91.11427, -736.6594)
+
+[node name="hitParticles" type="GPUParticles2D" parent="Visuals/torch1UnscaledBone"]
+material = ExtResource("shared_additive_mat")
+scale = Vector2(1.8, 1.60001)
+amount = 100
+texture = ExtResource("9_prxbt")
+explosiveness = 1.0
+fixed_fps = 60
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_vh7rt")
+
+[node name="torch2UnscaledBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "torch_2_unscaled"
+show_behind_parent = true
+position = Vector2(-858.30774, -849.9901)
+
+[node name="hitParticles" type="GPUParticles2D" parent="Visuals/torch2UnscaledBone"]
+material = ExtResource("shared_additive_mat")
+scale = Vector2(1.8, 1.60001)
+amount = 100
+texture = ExtResource("9_prxbt")
+explosiveness = 1.0
+fixed_fps = 60
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_vh7rt")
+
+[node name="torch3UnscaledBone" type="SpineBoneNode" parent="Visuals"]
+bone_name = "torch_3_unscaled"
+show_behind_parent = true
+position = Vector2(-214.69313, -1471.2247)
+
+[node name="hitParticles" type="GPUParticles2D" parent="Visuals/torch3UnscaledBone"]
+material = ExtResource("shared_additive_mat")
+scale = Vector2(1.8, 1.60001)
+amount = 100
+texture = ExtResource("9_prxbt")
+explosiveness = 1.0
+fixed_fps = 60
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_vh7rt")
+
+[node name="LaserControlBone" type="SpineBoneNode" parent="Visuals"]
+bone_mode = 1
+bone_name = "beam_target_bone"
+show_behind_parent = true
+position = Vector2(0, 500)
+
+[node name="NAmalgamVfx" type="Node" parent="Visuals" node_paths=PackedStringArray("_hitFxParticles", "_hitBoneNode")]
+script = ExtResource("3_a3knm")
+_hitFxParticles = NodePath("../../laserHitParticles")
+_hitBoneNode = NodePath("../laserHitBone")
+metadata/_custom_type_script = "uid://b8bw51ib3nsh3"
+
+[node name="Bounds" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -175.0
+offset_top = -316.0
+offset_right = 175.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -160)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -378)
+
+[node name="laserHitParticles" type="GPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(-718, -256)
+amount = 20
+texture = ExtResource("12_j87ms")
+lifetime = 0.4
+preprocess = 0.5
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_7ktrd")

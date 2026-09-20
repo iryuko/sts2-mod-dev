@@ -1,0 +1,281 @@
+[gd_scene load_steps=19 format=3 uid="uid://c1chsoaeakleb"]
+
+[ext_resource type="Script" uid="uid://0fhtbmre0npn" path="res://src/Core/Nodes/Screens/StatsScreen/NStatsScreen.cs" id="1_3brhs"]
+[ext_resource type="PackedScene" uid="uid://cfcqxx8wkmljw" path="res://scenes/screens/settings_tab.tscn" id="2_geqrk"]
+[ext_resource type="Script" uid="uid://cv2mvg7qmvhjt" path="res://src/Core/Nodes/GodotExtensions/NScrollableContainer.cs" id="2_qy44f"]
+[ext_resource type="Script" uid="uid://dotnm780srum4" path="res://src/Core/Nodes/Screens/StatsScreen/NGeneralStatsGrid.cs" id="3_cqgdn"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="4_bpojc"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="5_mkllf"]
+[ext_resource type="PackedScene" uid="uid://cga165o6isk0q" path="res://scenes/ui/share_button.tscn" id="6_qy44f"]
+[ext_resource type="Script" uid="uid://bkvp2ktyewq10" path="res://src/Core/Nodes/Screens/StatsScreen/NShareStatsButton.cs" id="7_cqgdn"]
+[ext_resource type="Texture2D" uid="uid://o5lbua" path="res://images/atlases/ui_atlas.sprites/card/card_unplayable_icon.tres" id="8_murhp"]
+[ext_resource type="Script" uid="uid://co8qrg0wac6ti" path="res://src/Core/Nodes/Screens/StatsScreen/NStatsTabManager.cs" id="10_murhp"]
+[ext_resource type="Texture2D" uid="uid://b5x513mavmk5v" path="res://images/ui/placeholder_controller_icon.png" id="12_murhp"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="14_dxpwi"]
+[ext_resource type="Texture2D" uid="uid://f0poqno5vvia" path="res://images/packed/main_menu/submenu_lock.png" id="15_1p7td"]
+[ext_resource type="PackedScene" uid="uid://b6nko387cwp7n" path="res://scenes/ui/scrollbar.tscn" id="16_7s2c0"]
+[ext_resource type="PackedScene" uid="uid://bl4mbjqjfffa3" path="res://scenes/ui/back_button.tscn" id="16_qdxyq"]
+
+[sub_resource type="Gradient" id="Gradient_6yb5x"]
+offsets = PackedFloat32Array(0.125, 0.15, 0.975, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0.0862745, 0.0862745, 0.0862745, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v5cun"]
+gradient = SubResource("Gradient_6yb5x")
+width = 1
+height = 128
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktuam"]
+resource_local_to_scene = true
+shader = ExtResource("14_dxpwi")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 0.9
+
+[node name="StatsScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3brhs")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="StatsGrid" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_cqgdn")
+
+[node name="ScrollableContent" type="Control" parent="StatsGrid"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_qy44f")
+
+[node name="Mask" type="TextureRect" parent="StatsGrid/ScrollableContent"]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_v5cun")
+
+[node name="Content" type="MarginContainer" parent="StatsGrid/ScrollableContent/Mask"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 370
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 100
+
+[node name="StatsScrollableContainer" type="VBoxContainer" parent="StatsGrid/ScrollableContent/Mask/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OverallStatsHeader" type="Label" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.3, 0.23, 0.132, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_bpojc")
+theme_override_font_sizes/font_size = 36
+text = "Overall Stats"
+vertical_alignment = 1
+script = ExtResource("5_mkllf")
+AutoSizeEnabled = false
+
+[node name="OverallStats" type="MarginContainer" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer"]
+custom_minimum_size = Vector2(1096, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer/OverallStats"]
+layout_mode = 2
+color = Color(0.1159, 0.16777, 0.19, 0.501961)
+
+[node name="OverallStatsDetails" type="MarginContainer" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer/OverallStats"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GridContainer" type="GridContainer" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer/OverallStats/OverallStatsDetails"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 56
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="Spacer" type="Control" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="CharacterStatsHeader" type="Label" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.937255, 0.784314, 0.317647, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.25098)
+theme_override_colors/font_outline_color = Color(0.3, 0.23, 0.132, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("4_bpojc")
+theme_override_font_sizes/font_size = 36
+text = "Character Stats"
+vertical_alignment = 1
+script = ExtResource("5_mkllf")
+AutoSizeEnabled = false
+
+[node name="CharacterStats" type="MarginContainer" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+
+[node name="CharacterStatsContainer" type="GridContainer" parent="StatsGrid/ScrollableContent/Mask/Content/StatsScrollableContainer/CharacterStats"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="Scrollbar" parent="StatsGrid/ScrollableContent" instance=ExtResource("16_7s2c0")]
+custom_minimum_size = Vector2(48, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 567.0
+offset_top = -323.0
+offset_right = 615.0
+offset_bottom = 477.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_behavior_recursive = 0
+mouse_behavior_recursive = 0
+accessibility_name = ""
+accessibility_description = ""
+accessibility_live = 0
+accessibility_controls_nodes = Array[NodePath]([])
+accessibility_described_by_nodes = Array[NodePath]([])
+accessibility_labeled_by_nodes = Array[NodePath]([])
+accessibility_flow_to_nodes = Array[NodePath]([])
+
+[node name="ShareButton" parent="StatsGrid" instance=ExtResource("6_qy44f")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -112.0
+offset_right = -48.0
+offset_bottom = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("7_cqgdn")
+
+[node name="TextureRect" type="TextureRect" parent="StatsGrid/ShareButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_murhp")
+expand_mode = 1
+stretch_mode = 3
+
+[node name="Tabs" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -518.0
+offset_top = -499.5
+offset_right = 518.0
+offset_bottom = -409.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 1
+script = ExtResource("10_murhp")
+
+[node name="LeftTriggerIcon" type="TextureRect" parent="Tabs"]
+layout_mode = 2
+texture = ExtResource("12_murhp")
+stretch_mode = 5
+
+[node name="TabContainer" type="HBoxContainer" parent="Tabs"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StatsTab" parent="Tabs/TabContainer" instance=ExtResource("2_geqrk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Achievements" parent="Tabs/TabContainer" instance=ExtResource("2_geqrk")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TabImage" parent="Tabs/TabContainer/Achievements" index="1"]
+material = SubResource("ShaderMaterial_ktuam")
+
+[node name="Label" parent="Tabs/TabContainer/Achievements" index="2"]
+modulate = Color(0.61, 0.61, 0.61, 1)
+
+[node name="Lock" type="TextureRect" parent="Tabs/TabContainer/Achievements"]
+layout_mode = 0
+offset_left = 73.0
+offset_top = -5.5
+offset_right = 182.0
+offset_bottom = 103.5
+texture = ExtResource("15_1p7td")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RightTriggerIcon" type="TextureRect" parent="Tabs"]
+layout_mode = 2
+texture = ExtResource("12_murhp")
+stretch_mode = 5
+
+[node name="BackButton" parent="." instance=ExtResource("16_qdxyq")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[editable path="Tabs/TabContainer/Achievements"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://wpohrc6cwmpr"]
+
+[ext_resource type="Script" uid="uid://bi1w5xler7oql" path="res://src/Core/Nodes/Vfx/NItemThrowVfx.cs" id="1_y45rl"]
+[ext_resource type="Texture2D" uid="uid://xut0h5godj6w" path="res://images/potions/weak_potion.png" id="2_w1160"]
+
+[sub_resource type="Curve" id="Curve_vcpbd"]
+_data = [Vector2(0, 0), 0.0, 2.73591, 0, 0, Vector2(0.496583, 0.549666), 0.450627, 0.450627, 0, 0, Vector2(1, 1), 2.39805, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_o6cpj"]
+_data = [Vector2(0, 0), 0.0, 9.60083, 0, 0, Vector2(0.298405, 1), 0.0, 0.0, 0, 0, Vector2(0.753986, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -9.60083, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_2gmb7"]
+_data = [Vector2(0.00227791, 0.994574), 0.0, -3.81546, 0, 0, Vector2(0.501139, 0.196995), 0.0, 0.0, 0, 0, Vector2(1, 0.647329), 1.92383, 0.0, 0, 0]
+point_count = 3
+
+[node name="vfx_item_throw" type="Node2D" node_paths=PackedStringArray("_itemSprite")]
+script = ExtResource("1_y45rl")
+_itemSprite = NodePath("item_sprite")
+_flightTime = 0.55
+_heightMultiplier = 350.0
+_horizontalCurve = SubResource("Curve_vcpbd")
+_verticalCurve = SubResource("Curve_o6cpj")
+_rotationMultiplier = -2880.0
+_rotationInfluenceCurve = SubResource("Curve_2gmb7")
+
+[node name="item_sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_w1160")

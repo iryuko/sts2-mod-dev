@@ -1,0 +1,32 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=8 format=3 uid="uid://cwgncaf2jt588"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://br7qvdotg4inp" path="res://animations/monsters/fuzzy_wurm_crawler/fuzzy_wurm_crawler.atlas" id="1_hb6j3"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dbl686h5m8y4q" path="res://animations/monsters/fuzzy_wurm_crawler/fuzzy_wurm_crawler.skel" id="2_w3dt5"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_3r8p6"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_e4g47"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_byje8"]
+from = "hurt_puffed"
+to = "hurt_puffed"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_4d5en"]
+from = "hurt_puffed"
+to = "idle_loop_puffed"
+mix = 0.1
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_byxb2"]
+from = "inhale"
+to = "idle_loop_puffed"
+mix = 0.1
+
+[resource]
+atlas_res = ExtResource("1_hb6j3")
+skeleton_file_res = ExtResource("2_w3dt5")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_3r8p6"), SubResource("SpineAnimationMix_e4g47"), SubResource("SpineAnimationMix_byje8"), SubResource("SpineAnimationMix_4d5en"), SubResource("SpineAnimationMix_byxb2")]

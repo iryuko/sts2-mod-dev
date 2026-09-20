@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://dc5pb8vqley2k"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://bfxilu07unv8y" path="res://animations/vfx/vfx_vine_shamber_vines/vine_shambler_vines_back.atlas" id="1_ryxh4"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cdsn37g3dbfwf" path="res://animations/vfx/vfx_vine_shamber_vines/vine_shambler_vines_back.skel" id="2_cueeg"]
+
+[resource]
+atlas_res = ExtResource("1_ryxh4")
+skeleton_file_res = ExtResource("2_cueeg")

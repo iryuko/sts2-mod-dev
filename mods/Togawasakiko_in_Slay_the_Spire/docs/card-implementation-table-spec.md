@@ -2,6 +2,8 @@
 
 日期：2026-03-27
 
+> 档案状态：这是卡牌设计交付格式，不是当前卡牌数据表。当前实现必须从源码和本地化读取。
+
 ## 一 目的
 
 本文件用于规定“卡牌实现表格”应包含哪些列，以及每一列应如何填写。
@@ -468,7 +470,7 @@
 | LeaveItToMe | LEAVE_IT_TO_ME | leave_it_to_me | 交给我吧 | Leave It to Me | Attack | Uncommon | 2 | AnyEnemy | 否 | 是 | 否 | 造成 `11` 点伤害；移除目标至多 `7` 层压力；回复 `5` 点生命；若仍有压力，施加 `1` 层 Weak | 伤害 `11 -> 15` | 无 | Damage=11; PressureRemove=7; Heal=5; Weak=1 | 消耗目标压力但不要求足额 | 无 | 回复生命无条件触发，Weak 按移除后剩余压力判定 | 正式图已接 |
 | BailMoney | BAIL_MONEY | bail_money | 保释金 | Bail Money | Attack | Uncommon | 0 | AnyEnemy | 否 | 是 | 否 | 造成 `8` 点伤害；使目标失去 `1` 点敏捷；然后你失去 `10` Gold | 伤害 `8 -> 12` | 无 | Damage=8; DexterityLoss=1; GoldLoss=10 | 无直接消耗压力 | 无 | 当前 Gold 不足时仍可打出，扣款下限交由原版 `LoseGold` 链处理 | 正式图已接 |
 | Innocence | INNOCENCE | innocence | 天真 | Innocence | Power | Uncommon | 1 | Self | 否 | 是 | 否 | 每回合开始时，使所有敌人获得 `2` 层自闭 | 自闭 `2 -> 3` | 无 | SocialWithdrawalPerTurn=2 | 与自闭体系直接联动 | 无 | 通过独立 `InnocencePower` 持续实现 | 正式图已接 |
-| Housewarming | HOUSEWARMING | housewarming | 乔迁 | Housewarming | Skill | Uncommon | 0 | None | 否 | 是 | 否 | 将 `1` 张带有 `Ethereal + Exhaust` 的【大狗大狗叫叫叫】加入手牌 | 获得 `Innate` | 无 | GeneratedBarking=1 | 无 | 无 | 生成的是临时修饰版本，不改原始 `Barking Barking Barking` 定义 | 正式图已接 |
+| Housewarming | HOUSEWARMING | housewarming | 乔迁 | Housewarming | Skill | Uncommon | 0 | None | 否 | 是 | 否 | 将 `1` 张带有 `Ethereal + Exhaust` 的【大狗大狗叫叫叫】加入手牌 | 生成的【大狗大狗叫叫叫】改为升级版 | 无 | GeneratedBarking=1 | 无 | 无 | 生成的是临时修饰版本；升级版会同步触发 `BarkingBarkingBarking` 自身升级逻辑 | 正式图已接 |
 | FinalCurtain | FINAL_CURTAIN | final_curtain | 谢幕 | Final Curtain | Attack | Rare | 1 | AllEnemies | 否 | 是 | 否 | 对所有敌人造成 `5` 点伤害，重复次数等于当前敌人总数 | 每段伤害 `5 -> 7` | 无 | Damage=5; HitCount=LivingEnemyCount | 无 | 无 | 按 AOE 多次结算，不折算成单次乘区伤害 | 正式图已接 |
 | BladeThroughTheHeart | BLADE_THROUGH_THE_HEART | final_curtain (runtime placeholder path) | 利刃穿心 | Blade Through the Heart | Attack | Rare | 2 | AllEnemies | 否 | 是 | 否 | 先使所有敌人获得 `2` 层 Vulnerable、`2` 层 Weak、`-1 Dexterity`，再造成 `12` 点伤害 | 伤害 `12 -> 20` | 无 | Damage=12; Vulnerable=2; Weak=2; DexterityLoss=1 | 无直接消耗压力 | 无 | debuff 全部先施加，再统一结算 AOE 伤害 | 运行时先复用现有图片路径 |
 | Fragility | FRAGILITY | face (runtime placeholder path) | 脆弱 | Fragility | Skill | Uncommon | 3 | Self | 否 | 是 | 否 | 获得 `17` 点格挡，获得 `1` 层【颜】，回复 `8` 点生命 | 格挡 `17 -> 21`；回复 `8 -> 11` | Exhaust | Block=17; Heal=8; FaceStacks=1 | 通过【颜】与压力体系形成反击联动 | 无 | 本轮按当前修正版【颜】Power 接线 | 运行时先复用现有图片路径 |

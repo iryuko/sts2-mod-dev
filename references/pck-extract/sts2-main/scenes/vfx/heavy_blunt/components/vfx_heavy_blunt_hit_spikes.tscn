@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://chny0n14vlayc"]
+
+[ext_resource type="Material" uid="uid://b0dx46agir4l7" path="res://materials/vfx/heavy_blunt/heavy_blunt_hit_spikes.tres" id="1_q12nn"]
+[ext_resource type="Texture2D" uid="uid://gd4nnei15soc" path="res://images/vfx/vfx_heavy_blunt/heavy_blunt_hit_spikes.png" id="2_f0eh6"]
+
+[sub_resource type="Curve" id="Curve_ywtpc"]
+_data = [Vector2(0, 0.50096), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.47961, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_js5px"]
+curve = SubResource("Curve_ywtpc")
+
+[sub_resource type="Curve" id="Curve_l2fbj"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0.452975), 0.0, 8.31526, 0, 0, Vector2(0.149871, 1.00192), 0.0, 0.395597, 0, 0, Vector2(1, 1.15163), 0.342647, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_l02co"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_ike7h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_vo6g6"]
+curve_x = SubResource("Curve_l2fbj")
+curve_y = SubResource("Curve_l02co")
+curve_z = SubResource("Curve_ike7h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_evy5u"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 2.5
+scale_max = 2.5
+scale_curve = SubResource("CurveXYZTexture_vo6g6")
+alpha_curve = SubResource("CurveTexture_js5px")
+
+[node name="vfx_heavy_blunt_hit_spikes" type="GPUParticles2D"]
+material = ExtResource("1_q12nn")
+emitting = false
+amount = 1
+texture = ExtResource("2_f0eh6")
+lifetime = 0.35
+one_shot = true
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_evy5u")

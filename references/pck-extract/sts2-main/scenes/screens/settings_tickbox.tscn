@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqq1trtsn7j7r"]
+
+[ext_resource type="PackedScene" uid="uid://bw8f1jtcj62xv" path="res://scenes/ui/tickbox.tscn" id="2_mcm2e"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="3_uylct"]
+[ext_resource type="PackedScene" uid="uid://bgy88bk44xxvk" path="res://scenes/ui/selection_reticle.tscn" id="3_wrri8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4q37q"]
+resource_local_to_scene = true
+shader = ExtResource("3_uylct")
+shader_parameter/h = 1.0
+shader_parameter/s = 1.0
+shader_parameter/v = 1.0
+
+[node name="SettingsTickbox" type="Control"]
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 8
+focus_mode = 2
+mouse_filter = 1
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="TickboxVisuals" parent="." instance=ExtResource("2_mcm2e")]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_4q37q")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectionReticle" parent="." instance=ExtResource("3_wrri8")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 131.0
+offset_top = 4.0
+offset_right = -129.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(30, 30)

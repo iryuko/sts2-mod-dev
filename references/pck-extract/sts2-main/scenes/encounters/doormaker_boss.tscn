@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b1pnfvdsqbya4"]
+
+[node name="Encounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="doormaker" type="Marker2D" parent="."]
+position = Vector2(1417, 739)
+
+[node name="door" type="Marker2D" parent="."]
+position = Vector2(1417, 739)

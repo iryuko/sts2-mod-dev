@@ -1,0 +1,92 @@
+[gd_scene load_steps=35 format=3 uid="uid://rhup5hqaj6ss"]
+
+[ext_resource type="Texture2D" uid="uid://itg1qp8qflvr" path="res://images/card_overlays/infection/infectiona.png" id="1_l6hu8"]
+[ext_resource type="Texture2D" uid="uid://hg4dufeouglt" path="res://images/card_overlays/infection/infection_00.png" id="3_cfpfh"]
+[ext_resource type="Texture2D" uid="uid://bge8p4kfy0bk" path="res://images/card_overlays/infection/infection_02.png" id="4_27gcq"]
+[ext_resource type="Texture2D" uid="uid://tjbvmc3amtfg" path="res://images/card_overlays/infection/infection_01.png" id="5_my0ku"]
+[ext_resource type="Texture2D" uid="uid://berjp5g1tqel" path="res://images/card_overlays/infection/infection_03.png" id="6_jft5l"]
+[ext_resource type="Texture2D" uid="uid://d3h5ng6ipfvel" path="res://images/card_overlays/infection/infection_04.png" id="7_nm6rk"]
+[ext_resource type="Texture2D" uid="uid://d0jk5212enhxe" path="res://images/card_overlays/infection/infection_05.png" id="8_lo1a5"]
+[ext_resource type="Texture2D" uid="uid://b7myaenv8b36u" path="res://images/card_overlays/infection/infection_06.png" id="9_bkapj"]
+[ext_resource type="Texture2D" uid="uid://bjxajb3jm1q85" path="res://images/card_overlays/infection/infection_07.png" id="10_270oy"]
+[ext_resource type="Texture2D" uid="uid://ljlyi2oaa7yr" path="res://images/card_overlays/infection/infection_08.png" id="11_bgipj"]
+[ext_resource type="Texture2D" uid="uid://djoqcek0w3opc" path="res://images/card_overlays/infection/infection_09.png" id="12_6bv0k"]
+[ext_resource type="Texture2D" uid="uid://bmli6m4b8obre" path="res://images/card_overlays/infection/infection_10.png" id="13_odcrq"]
+[ext_resource type="Texture2D" uid="uid://dwlpum6x3mm3m" path="res://images/card_overlays/infection/infection_11.png" id="14_7uwpr"]
+[ext_resource type="Texture2D" uid="uid://dp8petrqpsyo8" path="res://images/card_overlays/infection/infection_12.png" id="15_d1oa7"]
+[ext_resource type="Texture2D" uid="uid://da8hch2jctgwo" path="res://images/card_overlays/infection/infection_13.png" id="16_c3cxl"]
+[ext_resource type="Texture2D" uid="uid://ogb2t7aigln6" path="res://images/card_overlays/infection/infection_14.png" id="17_mmmsb"]
+[ext_resource type="Texture2D" uid="uid://c8xahpcfk8dy1" path="res://images/card_overlays/infection/infection_15.png" id="18_whkim"]
+[ext_resource type="Texture2D" uid="uid://r0qwa7fpljyl" path="res://images/card_overlays/infection/infection_16.png" id="19_84xcy"]
+[ext_resource type="Texture2D" uid="uid://c47axdxu1q8e2" path="res://images/card_overlays/infection/infection_17.png" id="20_oull2"]
+[ext_resource type="Texture2D" uid="uid://b883yvletq6ga" path="res://images/card_overlays/infection/infection_18.png" id="21_wfjle"]
+[ext_resource type="Texture2D" uid="uid://qgwwgpj1sn6q" path="res://images/card_overlays/infection/infection_19.png" id="22_1ihnw"]
+[ext_resource type="Texture2D" uid="uid://dfrm3ug4yy4xp" path="res://images/card_overlays/infection/infection_20.png" id="23_hvfao"]
+[ext_resource type="Texture2D" uid="uid://dy3f4xdbcajsx" path="res://images/card_overlays/infection/infection_21.png" id="24_tbfpl"]
+[ext_resource type="Texture2D" uid="uid://bwi3otixytul0" path="res://images/card_overlays/infection/infection_22.png" id="25_h6i5a"]
+[ext_resource type="Texture2D" uid="uid://d1obl62o7fjfa" path="res://images/card_overlays/infection/infection_23.png" id="26_rierk"]
+[ext_resource type="Texture2D" uid="uid://l21sgshls1x" path="res://images/card_overlays/infection/infection_24.png" id="27_bcra8"]
+[ext_resource type="Texture2D" uid="uid://drcv4aav0huij" path="res://images/card_overlays/infection/infection_25.png" id="28_wsf8m"]
+[ext_resource type="Texture2D" uid="uid://bvh7v2df02rtc" path="res://images/card_overlays/infection/infection_26.png" id="29_k3pep"]
+[ext_resource type="Texture2D" uid="uid://bb120pk0gyi0s" path="res://images/card_overlays/infection/infection_27.png" id="30_78awy"]
+[ext_resource type="Texture2D" uid="uid://bny7l4jpvmlyp" path="res://images/card_overlays/infection/infection_28.png" id="31_4s8i6"]
+[ext_resource type="Texture2D" uid="uid://7dxpxph0trvo" path="res://images/card_overlays/infection/infection_29.png" id="32_ow8u6"]
+
+[sub_resource type="Animation" id="Animation_cgmjf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_cfpfh")]
+}
+
+[sub_resource type="Animation" id="Animation_bo5jy"]
+resource_name = "infection"
+length = 2.00001
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.0667667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8, 0.866667, 0.933333, 1, 1.06667, 1.13333, 1.2, 1.26667, 1.33333, 1.4, 1.46667, 1.53333, 1.6, 1.66667, 1.73333, 1.8, 1.86667, 1.93333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_cfpfh"), ExtResource("4_27gcq"), ExtResource("5_my0ku"), ExtResource("4_27gcq"), ExtResource("6_jft5l"), ExtResource("7_nm6rk"), ExtResource("8_lo1a5"), ExtResource("9_bkapj"), ExtResource("10_270oy"), ExtResource("11_bgipj"), ExtResource("12_6bv0k"), ExtResource("13_odcrq"), ExtResource("14_7uwpr"), ExtResource("15_d1oa7"), ExtResource("16_c3cxl"), ExtResource("17_mmmsb"), ExtResource("18_whkim"), ExtResource("19_84xcy"), ExtResource("20_oull2"), ExtResource("21_wfjle"), ExtResource("22_1ihnw"), ExtResource("23_hvfao"), ExtResource("24_tbfpl"), ExtResource("25_h6i5a"), ExtResource("26_rierk"), ExtResource("27_bcra8"), ExtResource("28_wsf8m"), ExtResource("29_k3pep"), ExtResource("30_78awy"), ExtResource("31_4s8i6"), ExtResource("32_ow8u6")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l4v47"]
+_data = {
+&"RESET": SubResource("Animation_cgmjf"),
+&"infection": SubResource("Animation_bo5jy")
+}
+
+[node name="Infection" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="VisualLayer1" type="Sprite2D" parent="."]
+position = Vector2(-2.5, -7.99999)
+scale = Vector2(0.473862, 0.47199)
+texture = ExtResource("1_l6hu8")
+
+[node name="VisualLayer2" type="Sprite2D" parent="."]
+position = Vector2(-0.499993, -7.50001)
+scale = Vector2(0.510736, 0.520501)
+texture = ExtResource("3_cfpfh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualLayer2"]
+libraries = {
+&"": SubResource("AnimationLibrary_l4v47")
+}
+autoplay = "infection"

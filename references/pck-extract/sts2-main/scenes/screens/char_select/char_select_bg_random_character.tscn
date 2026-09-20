@@ -1,0 +1,123 @@
+[gd_scene load_steps=15 format=3 uid="uid://cebklf2mbdx5p"]
+
+[ext_resource type="Shader" uid="uid://cke5p12p315c6" path="res://shaders/vfx/vfx_water_reflection.gdshader" id="1_8kdol"]
+[ext_resource type="Texture2D" uid="uid://dlkwp7hpcsm6n" path="res://images/rooms/underdocks/underdocks_00.png" id="2_clcnl"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="6_q12t3"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="11_q38lb"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="12_qfq7c"]
+[ext_resource type="Texture2D" uid="uid://d2srbops1xqm0" path="res://images/vfx/dot.png" id="13_xou3d"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3lbej"]
+noise_type = 0
+frequency = 0.0259
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ro3e1"]
+width = 10
+height = 5
+noise = SubResource("FastNoiseLite_3lbej")
+seamless = true
+seamless_blend_skirt = 0.093
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4op7v"]
+shader = ExtResource("1_8kdol")
+shader_parameter/noise = SubResource("NoiseTexture2D_ro3e1")
+shader_parameter/mask = ExtResource("2_clcnl")
+shader_parameter/speed = 0.023
+shader_parameter/strength = 0.1
+
+[sub_resource type="Gradient" id="Gradient_l56lu"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.08571429, 0.13469388, 0.27755103, 0.5153846, 0.8489796, 1)
+colors = PackedColorArray(0.6242459, 2.201982e-06, 4.3317675e-07, 1, 0.6, 0.3844, 0.011999989, 1, 0.49593604, 0.4959361, 0, 1, 0.049807727, 0.35422614, 2.4065375e-07, 1, 0, 0.119194426, 0.13549566, 1, 0, 0.29013586, 0.58434695, 1, 0.2106319, 1.0973811e-05, 0.86632496, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g7x0c"]
+gradient = SubResource("Gradient_l56lu")
+fill_from = Vector2(0, 0.74700856)
+fill_to = Vector2(0.9948718, 0.23418804)
+
+[sub_resource type="Curve" id="Curve_a3cof"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_ajvnn"]
+offsets = PackedFloat32Array(0, 0.607407, 0.994413)
+colors = PackedColorArray(0.427493, 0.427493, 0.427493, 1, 1, 1, 1, 1, 0.427451, 0.427451, 0.427451, 1)
+
+[sub_resource type="Gradient" id="Gradient_8v4pi"]
+offsets = PackedFloat32Array(0, 0.178337)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[node name="RandomBg" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -521.0
+offset_right = 1600.0
+offset_bottom = 679.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1280, 600)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_4op7v")
+layout_mode = 0
+offset_left = -437.0
+offset_top = -107.0
+offset_right = 2197.0
+offset_bottom = 1129.0
+texture = SubResource("GradientTexture2D_g7x0c")
+expand_mode = 2
+
+[node name="light_small2" type="CPUParticles2D" parent="."]
+material = ExtResource("11_q38lb")
+position = Vector2(1111, -83)
+rotation = 3.1032
+amount = 1
+texture = ExtResource("6_q12t3")
+lifetime = 3.0
+local_coords = true
+gravity = Vector2(0, 0)
+scale_amount_min = 20.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_a3cof")
+color = Color(0.670657, 0.444708, 5.77569e-07, 0.4)
+color_ramp = SubResource("Gradient_ajvnn")
+script = ExtResource("12_qfq7c")
+
+[node name="ash2" type="CPUParticles2D" parent="."]
+position = Vector2(-107, 1361)
+amount = 20
+texture = ExtResource("13_xou3d")
+lifetime = 15.0
+preprocess = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(800, 500)
+gravity = Vector2(20, -10)
+orbit_velocity_max = 0.03
+radial_accel_max = 1.0
+angle_max = 353.6
+color = Color(0.501961, 0.701961, 0.270588, 0.137255)
+color_ramp = SubResource("Gradient_8v4pi")
+
+[node name="ash3" type="CPUParticles2D" parent="."]
+position = Vector2(-107, 1361)
+amount = 20
+texture = ExtResource("13_xou3d")
+lifetime = 15.0
+preprocess = 15.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(800, 500)
+gravity = Vector2(20, -10)
+orbit_velocity_max = 0.03
+radial_accel_max = 1.0
+angle_max = 353.6
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color = Color(0.501961, 0.701961, 0.270588, 0.431373)
+color_ramp = SubResource("Gradient_8v4pi")

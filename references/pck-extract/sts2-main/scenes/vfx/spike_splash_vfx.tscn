@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://yef20ttbhy0g"]
+
+[ext_resource type="Script" uid="uid://dvl8kr4k1ryln" path="res://src/Core/Nodes/Vfx/Cards/NSpikeSplashVfx.cs" id="1_vynsn"]
+
+[node name="SpikeSplashVfx" type="Node2D"]
+script = ExtResource("1_vynsn")

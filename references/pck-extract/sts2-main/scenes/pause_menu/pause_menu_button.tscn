@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://dk5mc73hacc7"]
+
+[ext_resource type="Script" uid="uid://cdp0cwtpdvjsh" path="res://src/Core/Nodes/Screens/PauseMenu/NPauseMenuButton.cs" id="1_026qd"]
+[ext_resource type="Texture2D" uid="uid://cl2heluxpg3p1" path="res://images/ui/reward_screen/reward_item_button.png" id="1_ye4xp"]
+[ext_resource type="FontVariation" uid="uid://ux4d708e7mk6" path="res://themes/kreon_bold_glyph_space_one.tres" id="2_a8afy"]
+[ext_resource type="Shader" uid="uid://c66gb6g7tup3n" path="res://shaders/hsv.gdshader" id="2_y7gcp"]
+[ext_resource type="Script" uid="uid://dtfio45agppyj" path="res://addons/mega_text/MegaLabel.cs" id="3_dgitk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uccm6"]
+resource_local_to_scene = true
+shader = ExtResource("2_y7gcp")
+shader_parameter/h = 1.0
+shader_parameter/s = 0.8
+shader_parameter/v = 0.9
+
+[node name="PauseMenuButton" type="Control"]
+custom_minimum_size = Vector2(372, 80)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_026qd")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="ButtonImage" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_uccm6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9, 0.9)
+pivot_offset = Vector2(186, 40)
+texture = ExtResource("1_ye4xp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_right = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.964706, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.12549)
+theme_override_colors/font_outline_color = Color(0.144, 0.3312, 0.36, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("2_a8afy")
+theme_override_font_sizes/font_size = 32
+text = "Resume"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_dgitk")
+MinFontSize = 24
+MaxFontSize = 32

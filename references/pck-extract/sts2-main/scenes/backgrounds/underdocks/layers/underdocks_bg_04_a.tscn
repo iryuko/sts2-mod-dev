@@ -1,0 +1,274 @@
+[gd_scene load_steps=14 format=3 uid="uid://b7fnrikypwmoo"]
+
+[ext_resource type="Texture2D" uid="uid://del54pxobtgf8" path="res://images/rooms/underdocks/underdocks_04_a.png" id="1_wu2xb"]
+[ext_resource type="Texture2D" uid="uid://dtg6dk6vf3p5j" path="res://images/vfx/shared_use/underdocks_pole_light_mask.png" id="2_txxo3"]
+[ext_resource type="Shader" uid="uid://cu7krqg4cighe" path="res://shaders/vfx/vfx_stepped_shader_fire_add.tres" id="3_3dn61"]
+[ext_resource type="Texture2D" uid="uid://c65hcljas0pyo" path="res://images/vfx/fire/triangle_noise_tile.png" id="4_fxuwt"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="5_njsaj"]
+[ext_resource type="Texture2D" uid="uid://8u0ij0tgmrfb" path="res://images/vfx/tileable_noise_2.png" id="6_g3r27"]
+[ext_resource type="Texture2D" uid="uid://c3diahrtdfoqb" path="res://images/vfx/water_texture.png" id="7_pm774"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="8_skf5a"]
+[ext_resource type="Material" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v6opx"]
+blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dmh6e"]
+shader = ExtResource("3_3dn61")
+shader_parameter/OuterColor = Color(7.52043e-09, 0.0752904, 0.0590097, 0.858824)
+shader_parameter/InnerColorStep = Vector2(0.975, 0.99)
+shader_parameter/Noise2Strength = 1.0
+shader_parameter/Noise2Scaling = Vector2(1, 1)
+shader_parameter/Noise2Panning = Vector2(0.05, 0.05)
+shader_parameter/Noise2Texture = ExtResource("7_pm774")
+shader_parameter/Noise1Strength = 1.0
+shader_parameter/Noise1Scaling = Vector2(1, 1)
+shader_parameter/Noise1Panning = Vector2(0.1, 0.1)
+shader_parameter/Noise1Texture = ExtResource("7_pm774")
+shader_parameter/InvertNoiseMask = true
+shader_parameter/NoiseMaskScale = Vector2(1, 2)
+shader_parameter/NoiseMaskOffset = Vector2(0, -0.63)
+shader_parameter/NoiseMask = ExtResource("5_njsaj")
+shader_parameter/Distortion2Scale = Vector2(1, 1)
+shader_parameter/Distortion2Panning = Vector2(0.045, 0.05)
+shader_parameter/Distortion2Texture = ExtResource("5_njsaj")
+shader_parameter/Distortion2Strength = 0.1
+shader_parameter/Distortion1Scale = Vector2(1, 1)
+shader_parameter/Distortion1Panning = Vector2(0.06, 0.05)
+shader_parameter/Distortion1Texture = ExtResource("4_fxuwt")
+shader_parameter/Distortion1Strength = 0.095
+shader_parameter/DistortionMaskScale = Vector2(1, 1.2)
+shader_parameter/DistortionMaskOffset = Vector2(0, -0.025)
+shader_parameter/DistortionMask = ExtResource("6_g3r27")
+shader_parameter/InnerColor = Color(0, 0, 0, 1)
+shader_parameter/OuterStep = Vector2(0.285, 0.99)
+
+[sub_resource type="Curve" id="Curve_87ur7"]
+_data = [Vector2(0, 0.321019), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.36242), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_shwea"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.0
+offset_top = -648.0
+offset_right = 1382.8
+offset_bottom = 176.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 450.0
+offset_right = 2764.8
+offset_bottom = 1274.0
+texture = ExtResource("1_wu2xb")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_v6opx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1054.4
+offset_top = 664.0
+offset_right = -1024.4
+offset_bottom = 694.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.61458, 1.99551)
+texture = ExtResource("2_txxo3")
+expand_mode = 1
+
+[node name="water_reflection4" type="Sprite2D" parent="TextureRect"]
+material = SubResource("ShaderMaterial_dmh6e")
+position = Vector2(18.3586, 55.1237)
+texture = ExtResource("5_njsaj")
+
+[node name="light4" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(362, 1107.02)
+scale = Vector2(5.22916, 5)
+skew = -0.000679374
+amount = 2
+texture = ExtResource("5_njsaj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_87ur7")
+color = Color(0.435294, 0.427451, 0.968627, 0.105882)
+color_ramp = SubResource("Gradient_shwea")
+script = ExtResource("8_skf5a")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_v6opx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -572.4
+offset_top = 665.0
+offset_right = -542.4
+offset_bottom = 695.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.61458, 1.99551)
+texture = ExtResource("2_txxo3")
+expand_mode = 1
+
+[node name="water_reflection4" type="Sprite2D" parent="TextureRect2"]
+material = SubResource("ShaderMaterial_dmh6e")
+position = Vector2(18.3586, 55.1237)
+texture = ExtResource("5_njsaj")
+
+[node name="light5" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(844, 1108.02)
+scale = Vector2(5.22916, 5)
+skew = -0.000679374
+amount = 2
+texture = ExtResource("5_njsaj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_87ur7")
+color = Color(0.435294, 0.427451, 0.968627, 0.105882)
+color_ramp = SubResource("Gradient_shwea")
+script = ExtResource("8_skf5a")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_v6opx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -53.400024
+offset_top = 666.0
+offset_right = -23.400024
+offset_bottom = 697.5709
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.61458, 1.99551)
+texture = ExtResource("2_txxo3")
+expand_mode = 1
+
+[node name="water_reflection4" type="Sprite2D" parent="TextureRect3"]
+material = SubResource("ShaderMaterial_dmh6e")
+position = Vector2(18.3586, 55.1237)
+texture = ExtResource("5_njsaj")
+
+[node name="light6" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1363, 1109.02)
+scale = Vector2(5.22916, 5)
+skew = -0.000679374
+amount = 2
+texture = ExtResource("5_njsaj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_87ur7")
+color = Color(0.435294, 0.427451, 0.968627, 0.105882)
+color_ramp = SubResource("Gradient_shwea")
+script = ExtResource("8_skf5a")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_v6opx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 489.6
+offset_top = 668.0
+offset_right = 519.6
+offset_bottom = 698.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.61458, 1.99551)
+texture = ExtResource("2_txxo3")
+expand_mode = 1
+
+[node name="water_reflection4" type="Sprite2D" parent="TextureRect4"]
+material = SubResource("ShaderMaterial_dmh6e")
+position = Vector2(18.3586, 55.1237)
+texture = ExtResource("5_njsaj")
+
+[node name="light7" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1906, 1111.02)
+scale = Vector2(5.22916, 5)
+skew = -0.000679374
+amount = 2
+texture = ExtResource("5_njsaj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_87ur7")
+color = Color(0.435294, 0.427451, 0.968627, 0.105882)
+color_ramp = SubResource("Gradient_shwea")
+script = ExtResource("8_skf5a")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+clip_children = 2
+material = SubResource("CanvasItemMaterial_v6opx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1018.6
+offset_top = 664.0
+offset_right = 1048.6
+offset_bottom = 694.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.61458, 1.99551)
+texture = ExtResource("2_txxo3")
+expand_mode = 1
+
+[node name="water_reflection4" type="Sprite2D" parent="TextureRect5"]
+material = SubResource("ShaderMaterial_dmh6e")
+position = Vector2(18.3586, 55.1237)
+texture = ExtResource("5_njsaj")
+
+[node name="light8" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2435, 1107.02)
+scale = Vector2(5.22916, 5)
+skew = -0.000679374
+amount = 2
+texture = ExtResource("5_njsaj")
+lifetime = 3.0
+local_coords = true
+spread = 20.21
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("Curve_87ur7")
+color = Color(0.435294, 0.427451, 0.968627, 0.105882)
+color_ramp = SubResource("Gradient_shwea")
+script = ExtResource("8_skf5a")

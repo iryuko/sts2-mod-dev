@@ -1,0 +1,372 @@
+[gd_scene load_steps=35 format=3 uid="uid://7gyrn15tad5w"]
+
+[ext_resource type="Texture2D" uid="uid://76omfg8j04iv" path="res://images/rooms/glory/glory_03_a.png" id="1_f8o50"]
+[ext_resource type="Texture2D" uid="uid://b6rjdqqi0nvb3" path="res://images/rooms/glory/glory_03_a_pools.png" id="2_7dae8"]
+[ext_resource type="Shader" uid="uid://cke5p12p315c6" path="res://shaders/vfx/vfx_water_reflection.gdshader" id="2_8vu3l"]
+[ext_resource type="Texture2D" uid="uid://qn78bhhjniba" path="res://images/vfx/fog_sheet_1.png" id="4_htcxe"]
+[ext_resource type="Texture2D" uid="uid://d17a3ra061i1j" path="res://images/vfx/uplight.png" id="5_kv1ok"]
+[ext_resource type="Texture2D" uid="uid://bxa6vlqeby20" path="res://images/vfx/light.png" id="6_k18nw"]
+[ext_resource type="Script" uid="uid://8tp7h0nkic6u" path="res://scenes/backgrounds/little_light_script.gd" id="7_nqv8u"]
+[ext_resource type="Texture2D" uid="uid://bah3p37uf7o0o" path="res://images/rooms/glory/glory_03_torch.png" id="8_a80fn"]
+[ext_resource type="Texture2D" uid="uid://c67idrcto5vwj" path="res://images/vfx/vfx_constant_fire/fire_texture_2.png" id="8_l8gvq"]
+[ext_resource type="Texture2D" uid="uid://cdvuntnhy8ca8" path="res://images/vfx/vfx_constant_fire/fire_spark.png" id="9_yy7a6"]
+[ext_resource type="Shader" uid="uid://b4exc5e3f7ghx" path="res://shaders/vfx/wind_sway.gdshader" id="11_k2n7t"]
+[ext_resource type="Texture2D" uid="uid://cjsobsa7vxbud" path="res://images/rooms/glory/glory_03_a_flag_1.png" id="12_bs0dl"]
+[ext_resource type="Texture2D" uid="uid://c6mikjadg0pyy" path="res://images/rooms/glory/glory_03_a_flag_2.png" id="13_3s424"]
+[ext_resource type="Texture2D" uid="uid://bia541rfnkf4f" path="res://images/rooms/glory/glory_03_a_flag_post.png" id="14_hor48"]
+[ext_resource type="CanvasItemMaterial" uid="uid://c4ycqv0gdxvmr" path="res://themes/canvas_item_material_additive_shared.tres" id="shared_additive_mat"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4pq5v"]
+noise_type = 0
+frequency = 0.0259
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_48kis"]
+seamless = true
+seamless_blend_skirt = 0.093
+noise = SubResource("FastNoiseLite_4pq5v")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rxe5v"]
+shader = ExtResource("2_8vu3l")
+shader_parameter/noise = SubResource("NoiseTexture2D_48kis")
+shader_parameter/mask = ExtResource("2_7dae8")
+shader_parameter/speed = 0.017
+shader_parameter/strength = 0.006
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_88m5v"]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 3
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_eqtq5"]
+_data = [Vector2(0.0621849, 0.478452), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_h15hk"]
+offsets = PackedFloat32Array(0, 0.361266, 0.553073, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 0.982343, 0.982342, 0.982342, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ulq4u"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_skk1k"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.272269, -0.918579), 0.0, 0.0, 0, 0, Vector2(0.998319, 12.3505), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_bfjq1"]
+_data = [Vector2(0.00840336, 0.00666296), 0.0, 1.93645, 0, 0, Vector2(0.277311, 0.975211), 0.374114, 0.374114, 0, 0, Vector2(0.904202, 0), -0.488375, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_6uwu0"]
+offsets = PackedFloat32Array(0.232775, 0.493333, 0.623333)
+colors = PackedColorArray(0.984314, 0.72549, 0.329412, 1, 0.984314, 0.862745, 0.329412, 1, 1, 1, 0, 0.0392157)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7413b"]
+
+[sub_resource type="Gradient" id="Gradient_igeda"]
+offsets = PackedFloat32Array(0, 0.143389, 0.530726, 0.776536, 0.886406)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 0, 1, 1, 0.627451, 0, 1, 0, 0, 0, 0.964706, 0, 0, 0, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2fi2j"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_6aavb"]
+_data = [Vector2(0.00840336, 0.00666296), 0.0, 1.93645, 0, 0, Vector2(0.277311, 0.975211), 0.374114, 0.374114, 0, 0, Vector2(0.494413, 0), -0.488375, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fw15i"]
+offsets = PackedFloat32Array(0.116667, 0.296667, 0.463333)
+colors = PackedColorArray(0.984314, 0.917647, 0.329412, 1, 0.984314, 0.862745, 0.329412, 1, 1, 1, 0, 0.0392157)
+
+[sub_resource type="Curve" id="Curve_r2s1o"]
+_data = [Vector2(0, 0.417635), 0.0, 0.0, 0, 0, Vector2(0.502521, 0.507939), 0.0, 0.0, 0, 0, Vector2(1, 0.423164), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_dugwt"]
+offsets = PackedFloat32Array(0, 0.411546, 0.994413)
+colors = PackedColorArray(0.34902, 0.34902, 0.34902, 1, 1, 1, 1, 1, 0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igt7p"]
+shader = ExtResource("11_k2n7t")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.1
+shader_parameter/maxStrength = 0.1
+shader_parameter/strengthScale = 100.0
+shader_parameter/interval = 6.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_67mck"]
+shader = ExtResource("11_k2n7t")
+shader_parameter/speed = 1.25
+shader_parameter/minStrength = 0.1
+shader_parameter/maxStrength = 0.2
+shader_parameter/strengthScale = -100.0
+shader_parameter/interval = 10.0
+shader_parameter/detail = 1.0
+shader_parameter/distortion = 0.0
+shader_parameter/heightOffset = 0.0
+shader_parameter/offset = 0.0
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1440.77
+offset_top = -675.36
+offset_right = 1440.77
+offset_bottom = 675.36
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_f8o50")
+expand_mode = 1
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_rxe5v")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7dae8")
+expand_mode = 1
+
+[node name="fog2" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_88m5v")
+position = Vector2(-749.233, 587.36)
+scale = Vector2(0.999997, 0.999997)
+amount = 4
+lifetime = 120.0
+preprocess = 100.0
+local_coords = true
+texture = ExtResource("4_htcxe")
+gravity = Vector2(1, 0)
+scale_amount_min = 0.6
+scale_amount_max = 0.6
+color = Color(0.835294, 0.764706, 0.705882, 0.160784)
+anim_offset_max = 1.0
+
+[node name="water_light" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1272.77, 569.36)
+amount = 1
+lifetime = 8.0
+local_coords = true
+texture = ExtResource("5_kv1ok")
+gravity = Vector2(0, 0)
+scale_amount_min = 2.81
+scale_amount_max = 2.81
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_eqtq5")
+color = Color(0.168627, 0.635294, 0.729412, 0.380392)
+color_ramp = SubResource("Gradient_h15hk")
+
+[node name="water_light2" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(801.767, 569.36)
+amount = 1
+lifetime = 8.0
+local_coords = true
+texture = ExtResource("5_kv1ok")
+gravity = Vector2(0, 0)
+scale_amount_min = 2.81
+scale_amount_max = 2.81
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_eqtq5")
+color = Color(0.168627, 0.635294, 0.729412, 0.380392)
+color_ramp = SubResource("Gradient_h15hk")
+
+[node name="water_light3" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(140.768, 593.36)
+amount = 1
+lifetime = 8.0
+local_coords = true
+texture = ExtResource("5_kv1ok")
+gravity = Vector2(0, 0)
+scale_amount_min = 2.81
+scale_amount_max = 2.81
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_eqtq5")
+color = Color(0.168627, 0.635294, 0.729412, 0.380392)
+color_ramp = SubResource("Gradient_h15hk")
+
+[node name="water_light4" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(1985.77, 576.36)
+amount = 1
+lifetime = 8.0
+local_coords = true
+texture = ExtResource("5_kv1ok")
+gravity = Vector2(0, 0)
+scale_amount_min = 2.81
+scale_amount_max = 2.81
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_eqtq5")
+color = Color(0.168627, 0.635294, 0.729412, 0.380392)
+color_ramp = SubResource("Gradient_h15hk")
+
+[node name="water_light5" type="CPUParticles2D" parent="."]
+material = ExtResource("shared_additive_mat")
+position = Vector2(2651.77, 564.36)
+amount = 1
+lifetime = 8.0
+local_coords = true
+texture = ExtResource("5_kv1ok")
+gravity = Vector2(0, 0)
+scale_amount_min = 2.81
+scale_amount_max = 2.81
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_eqtq5")
+color = Color(0.168627, 0.635294, 0.729412, 0.380392)
+color_ramp = SubResource("Gradient_h15hk")
+
+[node name="torch5" type="Node2D" parent="."]
+position = Vector2(1281.77, 425.36)
+
+[node name="fire_vfx_back_small3" type="CPUParticles2D" parent="torch5"]
+material = SubResource("CanvasItemMaterial_ulq4u")
+position = Vector2(2.99998, -30.9997)
+amount = 25
+preprocess = 1.0
+local_coords = true
+texture = ExtResource("8_l8gvq")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -2)
+spread = 10.0
+gravity = Vector2(0, -93.8)
+initial_velocity_min = 70.35
+initial_velocity_max = 70.35
+angular_velocity_min = 15.01
+angular_velocity_max = 15.01
+linear_accel_min = 46.9
+linear_accel_max = 46.9
+angle_max = 20.0
+angle_curve = SubResource("Curve_skk1k")
+scale_amount_min = 0.09
+scale_amount_max = 0.28
+scale_amount_curve = SubResource("Curve_bfjq1")
+color_ramp = SubResource("Gradient_6uwu0")
+
+[node name="fire_spark_small" type="CPUParticles2D" parent="torch5"]
+material = SubResource("CanvasItemMaterial_7413b")
+position = Vector2(2.99998, -49.9997)
+amount = 10
+lifetime = 1.25
+preprocess = 1.25
+local_coords = true
+texture = ExtResource("9_yy7a6")
+emission_shape = 1
+emission_sphere_radius = 54.06
+direction = Vector2(0, -1)
+spread = 30.0
+gravity = Vector2(0, -70.35)
+initial_velocity_min = 46.9
+initial_velocity_max = 46.9
+linear_accel_min = 46.9
+linear_accel_max = 46.9
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.03
+scale_amount_max = 0.05
+scale_amount_curve = SubResource("Curve_bfjq1")
+color_ramp = SubResource("Gradient_igeda")
+
+[node name="fire_vfx_back_small2" type="CPUParticles2D" parent="torch5"]
+material = SubResource("CanvasItemMaterial_2fi2j")
+position = Vector2(2.99998, -30.9997)
+amount = 25
+preprocess = 1.0
+local_coords = true
+texture = ExtResource("8_l8gvq")
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, -187.6)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+angular_velocity_min = 15.01
+angular_velocity_max = 15.01
+linear_accel_min = 46.9
+linear_accel_max = 46.9
+angle_max = 20.0
+angle_curve = SubResource("Curve_skk1k")
+scale_amount_min = 0.09
+scale_amount_max = 0.19
+scale_amount_curve = SubResource("Curve_6aavb")
+color_ramp = SubResource("Gradient_fw15i")
+
+[node name="Sprite2D2" type="TextureRect" parent="torch5"]
+offset_left = -19.0
+offset_top = -70.9999
+offset_right = 25.555
+offset_bottom = 92.6811
+texture = ExtResource("8_a80fn")
+expand_mode = 1
+
+[node name="light_small" type="CPUParticles2D" parent="torch5"]
+material = ExtResource("shared_additive_mat")
+position = Vector2(4.99998, -82.9999)
+amount = 1
+lifetime = 3.0
+local_coords = true
+texture = ExtResource("6_k18nw")
+gravity = Vector2(0, 0)
+scale_amount_min = 0.94
+scale_amount_max = 1.88
+scale_amount_curve = SubResource("Curve_r2s1o")
+color = Color(0.984314, 0.72549, 0.329412, 0.462745)
+color_ramp = SubResource("Gradient_dugwt")
+script = ExtResource("7_nqv8u")
+
+[node name="flag_1" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_igt7p")
+layout_mode = 0
+offset_left = 957.76
+offset_top = 413.425
+offset_right = 1116.75
+offset_bottom = 828.49
+rotation = 3.14159
+texture = ExtResource("12_bs0dl")
+expand_mode = 1
+
+[node name="flag_2" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_67mck")
+layout_mode = 0
+offset_left = 2341.77
+offset_top = 462.36
+offset_right = 2500.76
+offset_bottom = 877.425
+rotation = -1.91987
+texture = ExtResource("13_3s424")
+expand_mode = 1
+
+[node name="flag_pole" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 2611.77
+offset_top = 63.36
+offset_right = 2770.76
+offset_bottom = 478.425
+texture = ExtResource("14_hor48")
+expand_mode = 1

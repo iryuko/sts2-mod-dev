@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcnjj3cew7ybt"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://ds76ggixdairx" path="res://animations/backgrounds/fake_merchant_room/bottom/shop_fake_merchant_bottom_cutter.tres" id="4_7kc8n"]
+[ext_resource type="Script" uid="uid://b0oho7pjc1dtg" path="res://src/Core/Nodes/Animation/NSpineAutoPlayer.cs" id="5_gor0b"]
+
+[node name="A" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2119.68
+offset_top = -675.36
+offset_right = 2119.68
+offset_bottom = 675.36
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="SceneContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -770.32
+offset_top = -497.64
+offset_right = -770.32
+offset_bottom = -497.64
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpineSprite" type="SpineSprite" parent="SceneContainer"]
+skeleton_data_res = ExtResource("4_7kc8n")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(1931.68, 647.36)
+scale = Vector2(0.505, 0.505)
+
+[node name="NSpineAutoPlayer" type="Node" parent="SceneContainer/SpineSprite"]
+script = ExtResource("5_gor0b")
+metadata/_custom_type_script = "uid://b0oho7pjc1dtg"

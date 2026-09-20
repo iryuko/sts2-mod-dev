@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqv565sgwubkx"]
+
+[ext_resource type="Texture2D" uid="uid://bafxs2jffpbo0" path="res://images/vfx/vfx_lightning/vfx_lightning_02_crop.png" id="7_vkjdu"]
+[ext_resource type="Texture2D" uid="uid://bgmr4eveoj4p8" path="res://images/vfx/vfx_lightning/vfx_lightning_00_crop.png" id="8_fqj7t"]
+[ext_resource type="Texture2D" uid="uid://dlapw6i21rd3h" path="res://images/vfx/vfx_lightning/vfx_lightning_01b_crop.png" id="9_xec00"]
+[ext_resource type="Texture2D" uid="uid://b1daiq3gbbed" path="res://images/vfx/vfx_lightning/vfx_lightning_03_crop.png" id="10_ako2d"]
+[ext_resource type="Texture2D" uid="uid://c66t21cgwx40v" path="res://images/vfx/vfx_lightning/vfx_lightning_04_crop.png" id="11_7o2lk"]
+
+[sub_resource type="Animation" id="Animation_ddkyt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_fqj7t")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animation:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-21, -733)]
+}
+
+[sub_resource type="Animation" id="Animation_0ttqw"]
+resource_name = "vfx_attack_lightning"
+step = 0.0666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.20000002, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_fqj7t"), ExtResource("9_xec00"), ExtResource("10_ako2d"), ExtResource("11_7o2lk"), ExtResource("7_vkjdu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animation:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.20000002, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-21, -733), Vector2(-7, -429), Vector2(-21, -311), Vector2(-4, -243), Vector2(1, -83)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.33333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axi03"]
+_data = {
+&"RESET": SubResource("Animation_ddkyt"),
+&"vfx_attack_lightning": SubResource("Animation_0ttqw")
+}
+
+[node name="VfxAttackLightning" type="Node2D"]
+position = Vector2(1, -2)
+
+[node name="Animation" type="Sprite2D" parent="."]
+position = Vector2(-21, -733)
+texture = ExtResource("8_fqj7t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_axi03")
+}
+autoplay = "vfx_attack_lightning"

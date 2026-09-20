@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://v30het0iwpsx"]
+
+[ext_resource type="Script" uid="uid://dwhcorfgaowwu" path="res://src/Core/Nodes/Vfx/NMapCircleVfx.cs" id="1_onrni"]
+
+[node name="MapCircleVfx" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset = Vector2(100, 100)
+mouse_filter = 2
+script = ExtResource("1_onrni")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.141176, 0.121569, 0.101961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 2
+stretch_mode = 5

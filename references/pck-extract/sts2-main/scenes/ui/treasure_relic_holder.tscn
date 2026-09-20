@@ -1,0 +1,98 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbjmuv5pii51o"]
+
+[ext_resource type="Script" uid="uid://cgp6rfdhwavbl" path="res://src/Core/Nodes/Screens/TreasureRoomRelic/NTreasureRoomRelicHolder.cs" id="1_ym8pg"]
+[ext_resource type="PackedScene" uid="uid://iwujs2ken1t" path="res://scenes/vfx/uncommon_glow_vfx.tscn" id="2_8age3"]
+[ext_resource type="PackedScene" uid="uid://chhto1xfrbjbq" path="res://scenes/relics/relic.tscn" id="2_gtnmw"]
+[ext_resource type="PackedScene" uid="uid://bf5067m5nxvaw" path="res://scenes/ui/multiplayer_vote_container.tscn" id="3_bvd0u"]
+[ext_resource type="PackedScene" uid="uid://ijv788d5yk4f" path="res://scenes/vfx/relic_rare_glow_vfx.tscn" id="3_h17lp"]
+
+[sub_resource type="Curve" id="Curve_ftcb0"]
+_data = [Vector2(0, 0.00205994), 0.0, 2.26533, 0, 0, Vector2(0.2443, 0.812552), 1.57971, 1.57971, 0, 0, Vector2(0.5, 1), 9.50578e-07, 9.50578e-07, 0, 0, Vector2(0.763844, 0.783988), -1.6691, -1.6691, 0, 0, Vector2(1, 0), -1.19731, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_tba0f"]
+curve = SubResource("Curve_ftcb0")
+
+[sub_resource type="Curve" id="Curve_5f81f"]
+_data = [Vector2(0, 0.680445), 0.0, 0.0854123, 0, 0, Vector2(1, 1), 0.381261, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_25haa"]
+width = 128
+curve = SubResource("Curve_5f81f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_segvh"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -5.00002
+angular_velocity_max = 4.99998
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_25haa")
+color = Color(0.68, 0.989333, 1, 0.25098)
+alpha_curve = SubResource("CurveTexture_tba0f")
+hue_variation_min = -0.03
+hue_variation_max = 0.05
+
+[node name="TreasureRelicHolder" type="Control"]
+custom_minimum_size = Vector2(136, 136)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 136.0
+offset_bottom = 136.0
+rotation = -0.0020377
+pivot_offset = Vector2(68, 68)
+focus_mode = 2
+script = ExtResource("1_ym8pg")
+
+[node name="Relic" parent="." instance=ExtResource("2_gtnmw")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -34.0
+offset_right = 34.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="UncommonGlow" parent="Relic" instance=ExtResource("2_8age3")]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+position = Vector2(34, 34)
+scale = Vector2(0.6, 0.6)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_segvh")
+
+[node name="RareGlow" parent="Relic" instance=ExtResource("3_h17lp")]
+unique_name_in_owner = true
+visible = false
+show_behind_parent = true
+position = Vector2(34, 34)
+scale = Vector2(0.2, 0.2)
+
+[node name="MultiplayerVoteContainer" parent="." instance=ExtResource("3_bvd0u")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -135.0
+offset_top = -25.0
+offset_right = 114.0
+offset_bottom = 5.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[editable path="Relic/UncommonGlow"]

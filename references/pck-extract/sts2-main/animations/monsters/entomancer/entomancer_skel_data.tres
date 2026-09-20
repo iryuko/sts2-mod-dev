@@ -1,0 +1,27 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=7 format=3 uid="uid://td55t4kpjmma"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dv6r6gwlrmq2k" path="res://animations/monsters/entomancer/entomancer.atlas" id="1_sjupi"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://dwr5toh7erusf" path="res://animations/monsters/entomancer/entomancer.skel" id="2_h6ixv"]
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_y3u7p"]
+from = "idle_loop"
+to = "die"
+mix = 0.02
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_e0ie2"]
+from = "attack"
+to = "attack"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_cj2oy"]
+from = "hurt"
+to = "hurt"
+
+[sub_resource type="SpineAnimationMix" id="SpineAnimationMix_dwqrc"]
+from = "hurt"
+to = "hurt"
+
+[resource]
+atlas_res = ExtResource("1_sjupi")
+skeleton_file_res = ExtResource("2_h6ixv")
+default_mix = 0.05
+animation_mixes = [SubResource("SpineAnimationMix_y3u7p"), SubResource("SpineAnimationMix_e0ie2"), SubResource("SpineAnimationMix_cj2oy"), SubResource("SpineAnimationMix_dwqrc")]

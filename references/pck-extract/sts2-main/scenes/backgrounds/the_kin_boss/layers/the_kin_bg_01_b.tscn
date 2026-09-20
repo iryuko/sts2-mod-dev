@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6ra4k6yw067x"]
+
+[ext_resource type="Texture2D" uid="uid://ctffm7xcsamsw" path="res://images/rooms/overgrowth/overgrowth_01_b.png" id="1_cbf8t"]
+
+[node name="B" type="TextureRect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1382.4
+offset_top = -648.0
+offset_right = 1382.4
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cbf8t")
+expand_mode = 1
