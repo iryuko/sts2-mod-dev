@@ -81,6 +81,17 @@ select { display:block; width:100%; height:32px; margin-top:3px; padding:3px 5px
 .badge { font-size:11px; font-weight:500; color:#397970; margin:6px 0; }.badge.negative { color:var(--negative); }
 .empty { color:var(--muted); padding:18px 14px; font-size:12px; }
 #error { padding:18px; color:#a7353f; }
+.relation-legend { display:flex; flex-wrap:wrap; justify-content:center; gap:4px 12px; padding:0 14px 14px; }
+.legend-button { display:inline-flex; align-items:center; gap:8px; border:0; border-bottom:2px solid transparent; background:transparent; font-size:11px; min-height:32px; padding:4px; }
+.legend-button[aria-pressed="true"] { border-bottom-color:var(--ink); background:#eaf2ef; }
+.relation-sample { display:inline-block; position:relative; width:28px; height:12px; flex:0 0 28px; color:var(--edge-color); }
+.relation-sample::before { content:""; position:absolute; top:5px; left:0; width:24px; border-top:2px var(--edge-line) var(--edge-color); }
+.relation-sample::after { content:""; position:absolute; right:0; top:2px; width:8px; height:8px; background:var(--edge-color); }
+.shape-triangle::after { clip-path:polygon(0 0,100% 50%,0 100%); }
+.shape-diamond::after { transform:rotate(45deg); width:7px; height:7px; }
+.shape-vee::after { background:transparent; border-top:2px solid; border-right:2px solid; transform:rotate(45deg); }
+.shape-circle::after { border-radius:50%; }
+.shape-tee::after { width:2px; height:12px; top:0; }
 button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible { outline:2px solid #267f77; outline-offset:2px; }
 @media(max-width:1150px) { .workspace { grid-template-columns:198px minmax(290px,1fr) 272px; } .graph-toolbar { gap:7px; } .graph-toolbar label { font-size:11px; } .graph-toolbar select { max-width:100px; } #detail-content { padding:14px; } .portrait { width:70px; height:54px; } }
 @media(max-width:900px) { .workspace { grid-template-columns:190px minmax(0,1fr); } .detail { grid-column:1/-1; max-height:none; border-top:1px solid var(--line); border-left:0; } .detail-heading { max-width:520px; } #detail-content { max-width:850px; margin:auto; } .card-list { max-height:540px; } #graph { height:540px; min-height:400px; } .baseline { max-width:210px; } }

@@ -27,9 +27,8 @@
       {selector:"node.proposal",style:{"background-opacity":0.2,"border-width":2,"border-style":"dashed","border-color":"#737672"}},
       {selector:"node.overview",style:{"label":""}},
       {selector:"node.overview.selected, node.overview.hovered",style:{"label":"data(label)"}},
-      {selector:"edge",style:{"width":1.1,"line-color":"#91aaa4","target-arrow-color":"#91aaa4","target-arrow-shape":"triangle","arrow-scale":0.8,"curve-style":"bezier","opacity":0.5}},
-      {selector:"edge.negative",style:{"line-color":"#bd6971","target-arrow-color":"#bd6971","opacity":0.65}},
-      {selector:"edge.proposal",style:{"line-style":"dashed","line-color":"#7d817b","target-arrow-color":"#7d817b"}},
+      {selector:"edge",style:{"width":1.6,"line-color":"data(color)","target-arrow-color":"data(color)","target-arrow-shape":"data(arrowShape)","line-style":"data(lineStyle)","line-dash-pattern":e=>e.data('dashPattern'),"arrow-scale":1,"curve-style":"bezier","opacity":0.68}},
+      {selector:"edge.proposal",style:{"opacity":0.45}},
       {selector:"edge.highlight",style:{"width":3,"opacity":1,"z-index":10}},
       {selector:".dim",style:{"opacity":0.15}}
     ]});
@@ -51,7 +50,7 @@
     cy.batch(() => {
       cy.elements().remove();
       cy.add(shown.map(n=>({group:"nodes",data:{id:n.id,label:label(n),color:colors[n.type]||"#737672"},classes:[n.id===state.selected?"selected":"",n.status==="proposal"?"proposal":"",state.mode==="global"?"overview":""].join(" ")})));
-      cy.add(visibleEdges.filter(e=>ids.has(e.source)&&ids.has(e.target)).map(e=>({group:"edges",data:{id:e.id,source:e.source,target:e.target},classes:[negative(e)?"negative":"",e.status==="proposal"?"proposal":""].join(" ")})));
+      cy.add(visibleEdges.filter(e=>ids.has(e.source)&&ids.has(e.target)).map(e=>({group:"edges",data:{id:e.id,source:e.source,target:e.target,kind:e.kind,...RelationStyle.styles(e.kind)},classes:[negative(e)?"negative":"",e.status==="proposal"?"proposal":""].join(" ")})));
     });
     layout=cy.layout(state.mode==="focus"
       ? {name:"concentric",animate:false,fit:true,padding:32,nodeDimensionsIncludeLabels:true,avoidOverlap:true,minNodeSpacing:18,concentric:node=>node.id()===state.selected?2:1,levelWidth:()=>1}
@@ -62,6 +61,7 @@
     $("focus-mode").setAttribute("aria-pressed",state.mode==="focus");
     $("global-mode").setAttribute("aria-pressed",state.mode==="global");
     $("direction-filter").disabled=state.mode==="global";
+    document.querySelectorAll('#relation-legend button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.kind===state.kind));
     renderDetail();
   }
   function renderList() {
@@ -98,7 +98,7 @@
     const heading2=el("div","relations-heading");heading2.append(el("h3","","条件关系"),el("span","",`${edges.length} 条`));box.append(heading2);
     edges.forEach(edge=>{
       const outgoing=edge.source===node.id,other=nodes.get(outgoing?edge.target:edge.source),button=el("button",`relation-row ${negative(edge)?"negative":""}`);button.type="button";
-      const row=el("span","relation-title");row.append(el("span","sign",outgoing?"→":"←"),el("span","",other.name));
+      const row=el("span","relation-title");row.append(RelationStyle.sample(edge.kind),el("span","sign",outgoing?"→":"←"),el("span","",other.name));
       button.append(row,el("span","relation-type",`${kindNames[edge.kind]} · ${edge.mechanism}${edge.status==="proposal"?" · 提案":""}`));button.onclick=()=>selectEdge(edge);box.append(button);
     });
     if(!edges.length)box.append(el("p","empty","该筛选下无已记录的直接关系。"));
@@ -111,8 +111,9 @@
     state.edge=edge.id;
     cy.elements().removeClass("highlight dim");
     const selected=cy.getElementById(edge.id);selected.addClass("highlight");
+    cy.elements().not(selected.union(selected.connectedNodes())).addClass('dim');
     const box=$("detail-content");box.replaceChildren();
-    const back=el("button","back-button","返回卡牌");back.type="button";back.onclick=()=>{state.edge=null;cy.edges().removeClass("highlight");renderDetail();};box.append(back);
+    const back=el("button","back-button","返回卡牌");back.type="button";back.onclick=()=>{state.edge=null;cy.elements().removeClass("highlight dim");renderDetail();};box.append(back);
     const heading=el("h2","edge-heading");
     [edge.source,edge.target].forEach((id,i)=>{if(i)heading.append(el("span",""," → "));const button=el("button","",nodes.get(id).name);button.type="button";button.onclick=()=>selectNode(id);heading.append(button);});
     box.append(heading,el("p",`badge ${negative(edge)?"negative":""}`,`${kindNames[edge.kind]} · ${edge.mechanism}`));
@@ -143,6 +144,12 @@
   };
   new ResizeObserver(()=>{cy.resize();}).observe($("graph"));
   $("version").textContent=`v${graph.meta.release}`;
+  RelationStyle.legend().forEach(s=>{
+    const button=el('button','legend-button');button.type='button';button.dataset.kind=s.kind;
+    button.append(RelationStyle.sample(s.kind),document.createTextNode(s.label));
+    button.onclick=()=>{state.kind=state.kind===s.kind?'all':s.kind; $('relation-filter').value=state.kind;renderGraph();};
+    $('relation-legend').append(button);
+  });
   $("total-count").textContent=`${graph.counts.implemented} 已实现 · ${graph.counts.proposals} 提案`;
   renderList();renderGraph();icons();
 })();
