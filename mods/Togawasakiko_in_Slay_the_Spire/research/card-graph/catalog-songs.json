@@ -1,0 +1,478 @@
+{
+  "cards": [
+    {
+      "id": "AveMujica",
+      "name": "Ave Mujica",
+      "base": "3费能力。获得1层Ave Mujica：自己的回合开始后段，每层随机生成1张压力衍生牌到手牌，然后处理抽牌堆顶1张牌；可打出则自动打出，否则抽入手牌。",
+      "upgrade": "费用3降至2。",
+      "tags": ["song", "power", "token_generate", "autoplay", "draw"],
+      "notes": ["本目录事实基线为release worktree的057b6396（0.2.3），仅静态源码核对，未执行新运行时验证。", "能力可叠层；抽牌堆为空时跳过堆顶处理，不因此取消衍生牌生成。", "生成的衍生牌不是Song；自动打出的堆顶也不限定Song。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "AWonderfulWorldYetNowhereToBeFound",
+      "name": "A Wonderful World, Yet Nowhere to Be Found",
+      "base": "3费能力。获得镜花水月：从生效到自己下次回合开始、此后每个自身回合周期，累计生命损失上限为20；超过剩余额度的部分被截断。",
+      "upgrade": "生命损失上限20降至17。",
+      "tags": ["song", "power", "hp_loss"],
+      "notes": ["上限是整个周期累计值，不是每次受伤上限；包含自身失血，不是治疗或格挡。", "同上限重复施加不叠加；不同上限会移除旧能力再施加。", "能力通过ModifyHpLostAfterOsty限额，AfterDamageReceived累计UnblockedDamage，自己的回合开始前段清零。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "Angles",
+      "name": "Angles",
+      "base": "1费技能。若所有存活且有意图的敌人都包含攻击意图，对所有存活敌人施加1自卑；否则施加1易伤。",
+      "upgrade": "费用1降至0。",
+      "tags": ["song", "skill", "inferiority", "vulnerable", "pressure_spend", "token_generate"],
+      "notes": ["没有存活敌人或没有任何有意图敌人时直接返回，不施加易伤。", "自卑成功增加且目标压力>=1时，消耗1压力生成过劳焦虑；易伤成功增加且压力>=3时，消耗3压力生成满脑子都想着自己。", "赎回按成功的能力变化事件一次，不按层数；被阻止的施加不赎回。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "Ether",
+      "name": "以太",
+      "base": "1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。",
+      "upgrade": "攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+      "tags": ["song", "attack", "pressure_gain"],
+      "notes": ["压力在所有攻击段之后施加，不能为这些攻击段中的赎回预付压力。", "目标死亡时停止后续攻击段，且不再施加压力。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "GeorgetteMeGeorgetteYou",
+      "name": "Georgette Me, Georgette You",
+      "base": "1费技能。自身当前HP>=目标当前HP时施加7压力；否则对目标造成7直接伤害。",
+      "upgrade": "压力7增至9，伤害7增至9。",
+      "tags": ["song", "skill", "pressure_gain"],
+      "notes": ["比较当前HP绝对值，不是比例、最大HP或已损失HP；两个分支互斥。", "虽然可以造成伤害，类型仍是Skill，不触发仅Attack的重放。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "SymbolI",
+      "name": "Symbol I",
+      "base": "1费攻击。造成3伤害3次，每段独立随机选敌；之后获得1层本回合Symbol I。",
+      "upgrade": "每段伤害3增至4。",
+      "tags": ["song", "attack", "symbol", "temporary"],
+      "notes": ["回合结束按不同Symbol种类计数：>=2种获得5格挡，>=3种另对随机敌人造成13伤害，4种另对所有敌人施加10压力。", "同种重复层数不增加种类；I、II、III在结算后全部移除，IV保留。", "三段不保证命中同一敌人。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "SymbolIi",
+      "name": "Symbol II",
+      "base": "2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。",
+      "upgrade": "群体伤害6增至9。",
+      "tags": ["song", "attack", "symbol", "inferiority", "pressure_spend", "token_generate", "temporary"],
+      "notes": ["先伤害后施加自卑，新施加的自卑不追溯本次伤害。", "自卑成功增加且目标压力>=1时消耗1压力生成过劳焦虑；自卑生效后每次正伤害事件使目标失去1力量，另可按1压力赎回自闭。", "自卑多层延长存续，不将每次减力量乘以层数；同种Symbol多层不增加种类。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "SymbolIii",
+      "name": "Symbol III",
+      "base": "0费技能。获得初始3加已有成长值的格挡；之后此牌永久成长+1格挡，并获得1层本回合Symbol III。",
+      "upgrade": "初始格挡3增至7；每次成长仍为+1。",
+      "tags": ["song", "skill", "block", "symbol", "temporary"],
+      "notes": ["每次实际打出都会成长，当前实例及存在的DeckVersion同步增加；不是旧文档中的每次+3。", "战斗临时生成的实例没有DeckVersion，不凭空创建永久牌组牌。", "Symbol标记仅本回合，格挡基础成长是另一种持久状态。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "SymbolIv",
+      "name": "Symbol IV",
+      "base": "2费能力。获得1层持久Symbol IV；自己的回合开始后段每层额外抽1张牌。",
+      "upgrade": "费用2降至1。",
+      "tags": ["song", "power", "symbol", "draw"],
+      "notes": ["可叠层增加抽牌，但回合结束无论多少层只算1种Symbol。", "与Symbol I、II、III不同，不在Symbol回合末结算后移除。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "CrucifixX",
+      "name": "十字架X",
+      "base": "X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。",
+      "upgrade": "每段伤害6增至7。",
+      "tags": ["song", "attack", "pressure_payoff", "cost"],
+      "notes": ["压力条件在本次效果开始时检查一次；不直接消耗压力，X=0仍可有条件地攻击2次。", "八芒星能力或升级蓝世界生成实例的专门规则允许不耗能量且X取当前能量；不能推广到任意0费修改。", "自卑造成的逐段压力赎回可影响后续牌或下一次重放的阈值，不追溯撤销本次已确定的段数。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "Face",
+      "name": "颜",
+      "base": "1费技能。获得8格挡及1层颜；直到自己的下回合开始，每次受到怪物来源的正TotalDamage事件时，对该怪物施加每层颜3压力。",
+      "upgrade": "格挡8增至12。",
+      "tags": ["song", "skill", "block", "face", "pressure_gain", "temporary"],
+      "notes": ["完全格挡的命中仍可触发；要求dealer是怪物，自己的失血不是触发来源。", "颜可叠层，自己下回合开始前段全部移除。", "没有消费颜的操作时，反应触发不扣颜层数。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "MusicOfTheCelestialSphere",
+      "name": "天穹之乐",
+      "base": "2费技能。每个敌人按其当前压力计算，失去floor(压力/5)力量。",
+      "upgrade": "除数5降至4。",
+      "tags": ["song", "skill", "pressure_payoff", "strength_down", "pressure_spend", "token_generate"],
+      "notes": ["没有足够压力产生至少1点减力量时跳过该目标。", "成功的负力量变化可消耗1压力生成1张自闭；是每个目标的变化事件一次，不是每失去1力量一次。", "因此本牌不是严格无消耗的压力阈值读取器。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "KillKiss",
+      "name": "KillKiss",
+      "base": "1费能力。敌方回合开始时，对压力严格大于其当前HP一半的每个存活敌人造成25直接伤害。",
+      "upgrade": "条件伤害由25改为目标最大HP。",
+      "tags": ["song", "power", "pressure_payoff"],
+      "notes": ["判断为压力>当前HP/2，不是>=；在敌方回合开始重新读取，不锁定出牌时状态。", "不直接消耗压力；重复施加不叠加，升级能力取代普通能力。", "升级效果仍是伤害，不是无条件移除敌人；伤害可参与其他受伤触发链。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "BlackBirthday",
+      "name": "黑色生日",
+      "base": "1费技能，消耗。获得1能量；若选定敌人压力>5，再获得2能量。",
+      "upgrade": "费用1降至0，保留消耗。",
+      "tags": ["song", "skill", "energy", "pressure_payoff", "exhaust"],
+      "notes": ["条件是至少6压力，不是5；只读取、不消费压力。", "未升级手动打出净能量为0或+2，升级为+1或+3；免费自动打出不扣其原本1费。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "TreasurePleasure",
+      "name": "Treasure Pleasure",
+      "base": "0费技能，消耗。自身获得1人格解离，并获得本回合的攻击重放能力；每次自己的攻击牌打出后，尝试额外自动打出同一实例。",
+      "upgrade": "移除消耗，其他效果不变。",
+      "tags": ["song", "skill", "autoplay", "exhaust", "temporary"],
+      "notes": ["exhaust标签描述基础态，升级后不再自带消耗。", "重放能力不叠加，并有同实例递归保护；重放整个攻击效果而非只复制伤害。", "自身人格解离可累积，在正受伤事件后减1层；不会随本回合重放能力一起移除。不能直接断言Unpowered自身失血会被翻倍。", "原目标存活则优先复用，否则尝试合法替代；自动重放会参与八芒星类型序列。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "ChoirSChoir",
+      "name": "Choir 'S' Choir",
+      "base": "3费技能。若还有手牌则选择弃1张；随后快照消耗堆，对快照中的每张牌设置打出前费用为0并尝试自动打出。",
+      "upgrade": "费用3降至2。",
+      "tags": ["song", "skill", "discard", "autoplay", "cost"],
+      "notes": ["自身没有消耗关键词；目标不限Song，包含压力衍生牌。", "不是递归清空消耗堆：快照后新加入的牌不自动加入本次列表；弃掉的牌也不因此进入消耗快照。", "需要可安全解析的目标；设置0费不等于解除Unplayable或其他原生限制。", "结算后去向遵循被打出牌自身规则，八芒星可阻止尚未开始的自动打出。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "ImprisonedXii",
+      "name": "被囚禁的12",
+      "base": "标称0费技能，无法打出。每次从非手牌堆进入手牌时抽1张牌。",
+      "upgrade": "进入手牌时抽牌1增至2。",
+      "tags": ["song", "skill", "draw", "unplayable"],
+      "notes": ["OnPlay为空；抽牌效果来自换堆钩子，不要求通过常规抽牌进入手牌。", "无法打出在升级后保留；免费、Song身份都不解除它，InYourBlueEyes明确排除它。", "仅进入手牌不会增加Song打出计数；手牌内操作不重复触发。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "GodYouFool",
+      "name": "神明，笨蛋",
+      "base": "0费技能。失去3HP，然后抽2张牌。",
+      "upgrade": "自身失血3降至1；仍抽2张。",
+      "tags": ["song", "skill", "hp_loss", "draw"],
+      "notes": ["自身伤害使用Unblockable、Unpowered、Move；格挡不抵扣，实际生命损失仍可受生命损失上限影响。", "不自带消耗；不能触发要求怪物来源的颜。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "MasqueradeRhapsodyRequest",
+      "name": "Mas?uerade Rhapsody Re?uest",
+      "base": "2费技能，消耗。对一个敌人施加floor((自身最大HP-当前HP)/2)压力。",
+      "upgrade": "移除消耗，费用及压力公式不变。",
+      "tags": ["song", "skill", "pressure_gain", "exhaust"],
+      "notes": ["exhaust标签仅描述基础态；升级后不再自然进入消耗堆。", "使用结算时累计缺失HP，不是本回合失血量；满血或只缺1HP时不施加压力。", "本牌本身不造成自身失血。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "STheWay",
+      "name": "'S/' The Way",
+      "base": "0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。",
+      "upgrade": "伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+      "tags": ["song", "attack", "hp_loss", "draw", "dexterity_down", "pressure_spend", "token_generate", "temporary"],
+      "notes": ["击杀分支与失血/减敏捷分支互斥；重复打出每次重新判断。", "目标成功失去敏捷且压力>=1时可消耗1压力生成自闭，自身减敏捷不兑换敌人压力。", "自身失血为Unblockable、Unpowered；临时减敏捷通过隐藏TemporaryDexterity子类实现，不应把其记账变化重复计算为赎回。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "TwoMoonsDeepIntoTheForest",
+      "name": "两轮月亮 深入森林之中",
+      "base": "初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。",
+      "upgrade": "伤害20增至30；初始费用及折扣规则不变。",
+      "tags": ["song", "attack", "cost"],
+      "notes": ["重复打出的Song也计数，其他玩家的Song与非Song不计数。", "晚进入战斗的非克隆实例从已完成打出历史补折扣；克隆保留原费用修改，不重复回溯。", "生成、抽入、丢弃或单纯消耗Song不是打出；其自身实际打出也可增加后续折扣。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "Sophie",
+      "name": "Sophie",
+      "base": "2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。",
+      "upgrade": "格挡7增至12；其他效果不变。",
+      "tags": ["song", "skill", "block", "inferiority", "weak", "pressure_spend", "token_generate"],
+      "notes": ["weak标签指自身虚弱，不是给敌人虚弱；不能据此建立敌方虚弱赎回人格解离的供给边。", "目标成功获得自卑且有足够压力可兑换过劳焦虑；自卑后的伤害还可引起减力量赎回。", "自身虚弱会削弱后续攻击，需与多段自卑收益同时评估。"],
+      "source": "src/Cards/TogawasakikoSongCards.cs"
+    },
+    {
+      "id": "OctagramDance",
+      "name": "八芒星ダンス",
+      "base": "4费技能，消耗。本回合自己的牌不消耗能量，X保留当前能量值；以Skill开始新序列，连续打出同类型牌时，在违规牌结算后结束自己的回合。",
+      "upgrade": "费用4降至3；保留消耗。",
+      "tags": ["song", "skill", "cost", "exhaust", "temporary"],
+      "notes": ["能力在本牌效果内才施加，不自行免除本牌首次启动费用；已有能力时不重新施加或重置序列。", "按CardType而非Song分类，Attack、Skill、Power均参与，自动打出和重复打出也参与。", "只免能量，不承诺免除其他资源；结束后拦截后续自动打出及尚未开始的原生重复，已开始的违规效果仍结算。"],
+      "source": "src/Cards/TogawasakikoSongExpansionCards.cs"
+    },
+    {
+      "id": "Divine",
+      "name": "DIVINE",
+      "base": "0费技能，消耗。选择并消耗自己手牌中的1张压力衍生牌；成功后获得1能量并抽2张牌。",
+      "upgrade": "抽牌2增至3；仍需消耗1张衍生牌，自身仍消耗。",
+      "tags": ["song", "skill", "energy", "draw", "exhaust"],
+      "notes": ["需要GeneratedPressureCard实例、属于自己且仍在手牌；无合法目标不获得能量和抽牌。", "重复结算每次重新支付一张衍生牌，不能重复使用首次已消耗实例。", "支付是Exhaust而非Play，不执行衍生牌效果、不触发其打出奖励；死亡或战斗结束可中止收益。"],
+      "source": "src/Cards/TogawasakikoSongExpansionCards.cs"
+    },
+    {
+      "id": "InYourBlueEyes",
+      "name": "碧い瞳の中に",
+      "base": "2费技能。从自己的消耗堆随机选择1张可选Song，自动打出该原实例两次。",
+      "upgrade": "额外从弃牌堆随机选择1张Song也打出两次；先消耗堆来源，后弃牌堆来源。",
+      "tags": ["song", "skill", "autoplay", "deck_control"],
+      "notes": ["两处候选在重放前一并快照；之后实例因抽牌或洗牌移动不一定失效，但移除、转移所有者或进入Play等会跳过。", "排除Unplayable、本实例和正在执行的同类实例；不是创建副本，也不为目标永久减费。", "自身没有消耗关键词；基础态没有弃牌堆来源，升级不改变2费。", "目标的原有消耗/能力离场规则保留；八芒星可截断后续重复或第二来源。"],
+      "source": "src/Cards/TogawasakikoSongExpansionCards.cs"
+    },
+    {
+      "id": "TheWholeBlueWorld",
+      "name": "The Whole Blue World",
+      "base": "1费技能。失去5HP，然后随机生成2张Song加入手牌；这些新实例本场费用减1。",
+      "upgrade": "生成实例改为本场能量费用0；其中X牌不消耗能量且X取当前能量。5HP与2张数量不变。",
+      "tags": ["song", "skill", "hp_loss", "generation", "cost"],
+      "notes": ["自身没有消耗；生成来源为维护的Song卡池，不要求可手动打出，因此可能得到被囚禁的12。", "不升级生成牌、不修改其他同名实例或永久牌组；普通态是相对减费，不冻结后续费用变化。", "失血为Unblockable、Unpowered；失血后死亡或战斗结束不继续生成。", "生成本身不是打出；升级免费X规则跟随该战斗的生成实例来源及零费修改。"],
+      "source": "src/Cards/TogawasakikoSongExpansionCards.cs"
+    }
+  ],
+  "relations": [
+    {
+      "source": "SymbolIv", "target": "SymbolI", "kind": "payoff",
+      "mechanism": "持久Symbol补足第二种",
+      "condition": "已有正层数Symbol IV，本回合实际打出Symbol I，且自身存活至本方回合末。",
+      "reason": "IV与I是两个不同种类，达到至少2种的5格挡门槛；重复IV或I本身不能代替缺失种类。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower", "src/ModSupport.cs#ModSupport", "src/Cards/TogawasakikoSongCards.cs#SymbolIv", "src/Cards/TogawasakikoSongCards.cs#SymbolI"]
+    },
+    {
+      "source": "SymbolI", "target": "SymbolIii", "kind": "payoff",
+      "mechanism": "不同Symbol累计结算",
+      "condition": "I与III标记在同一回合末同时存在；若另有IV则达到3种。",
+      "reason": "I加III至少产生5格挡结算；已有IV时另触发13随机伤害。III的永久格挡成长与Symbol种类结算独立。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#SymbolIii", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "SymbolIii", "target": "SymbolIi", "kind": "payoff",
+      "mechanism": "补齐四种Symbol",
+      "condition": "本回合已拥有I、III以及持久IV，之后获得缺失的II，存活到回合末。",
+      "reason": "补齐不同种类而不是叠层，累计结算5格挡、13随机伤害及10群体压力；不是仅III和II就获得10压力。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#SymbolIi", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "SymbolIi", "target": "KillKiss", "kind": "sequence",
+      "mechanism": "回合末集齐Symbol后接敌方回合阈值",
+      "condition": "II补齐I/II/III/IV，KillKiss已生效；回合末结算后目标存活，且敌方回合开始时压力>当前HP/2。",
+      "reason": "Symbol先有13随机伤害、再有10群体压力，可同时降低HP门槛并补充压力；仅持有II不构成这条组合。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower", "src/Powers/TogawasakikoSongPowers.cs#KillKissPowerBase"]
+    },
+    {
+      "source": "Angles", "target": "Ether", "kind": "payoff",
+      "mechanism": "自卑按多段受伤减力量并赎回",
+      "condition": "Angles走自卑分支且成功施加，再对该存活目标使用Ether；每段需产生正TotalDamage，赎回另需至少1压力。",
+      "reason": "Ether的2/3个伤害事件可分别减1力量，并各自尝试花1压力生成自闭；末尾2/3压力在这些事件之后才补入。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Angles", "src/Cards/TogawasakikoSongCards.cs#Ether", "src/Powers/TogawasakikoPowers.cs#InferiorityPower", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "SymbolIi", "target": "SymbolI", "kind": "payoff",
+      "mechanism": "群体自卑承接随机三段攻击",
+      "condition": "II先给存活敌人施加自卑，I的随机攻击命中仍带自卑的目标并造成正TotalDamage。",
+      "reason": "I每段分别触发减力量及有压力时的自闭赎回；同时获得第二种Symbol，但不保证三段落在同一目标。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#SymbolIi", "src/Cards/TogawasakikoSongCards.cs#SymbolI", "src/Powers/TogawasakikoPowers.cs#InferiorityPower"]
+    },
+    {
+      "source": "Sophie", "target": "CrucifixX", "kind": "tradeoff",
+      "mechanism": "自卑多段收益对抗自身虚弱及压力下降",
+      "condition": "先打Sophie，目标成功获得自卑，自身虚弱仍生效，再打CrucifixX。",
+      "reason": "群攻可触发目标减力量/赎回，但自身虚弱削弱攻击伤害，施加自卑还可能预先消耗1压力使全员4压力门槛失效。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Sophie", "src/Cards/TogawasakikoSongCards.cs#CrucifixX", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "MusicOfTheCelestialSphere", "target": "BlackBirthday", "kind": "conflict",
+      "mechanism": "减力量赎回消耗阈值储备",
+      "condition": "目标原有6压力；Music成功减力量并兑换自闭，随后以该目标打出BlackBirthday，期间未补压力。",
+      "reason": "一次负力量变化花1压力使6变5，BlackBirthday要求严格>5，因此失去额外2能量；多点减力量仍只赎回一次。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere", "src/Cards/TogawasakikoSongCards.cs#BlackBirthday", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "Angles", "target": "CrucifixX", "kind": "conflict",
+      "mechanism": "成功减益兑换压低全员压力门槛",
+      "condition": "至少一名目标刚好4压力；Angles成功施加自卑或易伤并赎回，未补压力就打CrucifixX。",
+      "reason": "自卑花1压力或易伤花3压力均使该敌人低于4，破坏全员条件；减益收益不能被图谱误标为纯增益。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Angles", "src/Cards/TogawasakikoSongCards.cs#CrucifixX", "src/Powers/TogawasakikoPowers.cs#TogawasakikoCombatWatcherPower"]
+    },
+    {
+      "source": "Ether", "target": "KillKiss", "kind": "payoff",
+      "mechanism": "先削当前HP再给存活目标压力",
+      "condition": "目标在Ether伤害后仍存活，KillKiss已生效，后续消耗与其他效果后在敌方回合开始仍满足压力>当前HP/2。",
+      "reason": "同一张牌同时降低KillKiss比较的当前HP并增加2/3压力，比单纯共享pressure_gain标签更具体；不保证必达阈值。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Ether", "src/Powers/TogawasakikoSongPowers.cs#KillKissPowerBase"]
+    },
+    {
+      "source": "GodYouFool", "target": "MasqueradeRhapsodyRequest", "kind": "supply",
+      "mechanism": "实际失血转为缺失HP压力",
+      "condition": "GodYouFool造成实际生命损失后存活，再打Masquerade，期间没有完全补回血量。",
+      "reason": "3/1失血可提高floor(缺失HP/2)，抽2还增加找到后续牌的机会；受取整影响，不保证每次都多1压力。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#GodYouFool", "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"]
+    },
+    {
+      "source": "STheWay", "target": "MasqueradeRhapsodyRequest", "kind": "supply",
+      "mechanism": "未击杀分支的缺失HP",
+      "condition": "STheWay没有击杀目标，自身实际损失4HP且存活，之后打Masquerade且未治疗该缺口。",
+      "reason": "完整4HP损失令缺失HP压力公式增加2；击杀只抽牌且不自伤，不能计入此供给边。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#STheWay", "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"]
+    },
+    {
+      "source": "TheWholeBlueWorld", "target": "MasqueradeRhapsodyRequest", "kind": "supply",
+      "mechanism": "失血同时提供随机Song访问",
+      "condition": "蓝世界实际失血后存活，再打出已有或随机生成的Masquerade；生成并不保证命中该牌。",
+      "reason": "5HP代价可提高缺失HP压力，生成来源还可能带来减费Masquerade；应区分确定的失血资源与随机获得牌。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld", "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"]
+    },
+    {
+      "source": "GodYouFool", "target": "GeorgetteMeGeorgetteYou", "kind": "tradeoff",
+      "mechanism": "降低自身当前HP改变分支",
+      "condition": "自身失血后当前HP从>=目标当前HP变成<目标当前HP，随后对同一目标使用Georgette。",
+      "reason": "原本7/9压力变成7/9直接伤害；低血既可支撑Masquerade，也会妨碍Georgette的压力生产。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#GodYouFool", "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"]
+    },
+    {
+      "source": "AWonderfulWorldYetNowhereToBeFound", "target": "TheWholeBlueWorld", "kind": "tradeoff",
+      "mechanism": "周期HP上限缓解生成代价",
+      "condition": "镜花水月已生效且本周期剩余生命损失额度低于5，蓝世界结算后仍存活且战斗继续。",
+      "reason": "蓝世界实际失血可少于5而仍生成2张Song；同时减少本次为Masquerade新增的缺失HP，不是治疗。",
+      "evidence": ["src/Powers/TogawasakikoSongPowers.cs#MirrorFlowerWaterMoonPower", "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"]
+    },
+    {
+      "source": "SymbolIii", "target": "Face", "kind": "supply",
+      "mechanism": "成长格挡保护反应窗口",
+      "condition": "颜仍生效，已有SymbolIII等来源的格挡，怪物造成正TotalDamage事件，即使全部被格挡。",
+      "reason": "格挡减少生命损失而不必牺牲颜每层3压力的受击反应；这不是自身失血触发颜。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#SymbolIii", "src/Powers/TogawasakikoSongPowers.cs#FaceReactionPower"]
+    },
+    {
+      "source": "Face", "target": "Unmask", "kind": "tradeoff",
+      "mechanism": "消费全部颜换即时抽牌与压力",
+      "condition": "Unmask首次抽牌后自己仍拥有正层数颜；其压力收益还要求目标存活。",
+      "reason": "Unmask移除全部颜，额外抽1并施加3/5压力，放弃剩余反应窗口；多层颜也不会成倍增加Unmask奖励。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Face", "src/Cards/TogawasakikoBridgeCards.cs#Unmask"]
+    },
+    {
+      "source": "TreasurePleasure", "target": "Ether", "kind": "replay",
+      "mechanism": "重放全效果再次攻击与施压",
+      "condition": "攻击重放能力仍生效，Ether完成一次打出且有合法重放目标，八芒星等规则未阻止后续自动打出。",
+      "reason": "第二次Ether重新执行2/3段攻击及存活后的2/3压力，既是输出又是补压；不能仅按伤害翻倍描述。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Ether", "src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower", "src/ModSupport.cs#ModSupport"]
+    },
+    {
+      "source": "TreasurePleasure", "target": "STheWay", "kind": "tradeoff",
+      "mechanism": "攻击重放也重复未击杀代价",
+      "condition": "重放能力生效且STheWay被额外打出；每次各自判断目标是否死亡。",
+      "reason": "更多攻击与可能的击杀抽牌，同时可能再次损失4HP和减双方敏捷；不是无代价重放，也不假定Unpowered自伤被人格解离翻倍。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#STheWay", "src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower", "src/Powers/TogawasakikoPowers.cs#PersonaDissociationPower"]
+    },
+    {
+      "source": "TreasurePleasure", "target": "OctagramDance", "kind": "conflict",
+      "mechanism": "自动Attack重放形成同类型连续打出",
+      "condition": "两者能力同时生效，攻击后自动重放且中间没有不同类型牌的实际打出。",
+      "reason": "自动重复也是Attack，触发八芒星的类型违例与结束回合；不能将免费和攻击重复当作无条件乘法收益。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower", "src/Powers/OctagramDancePower.cs#OctagramDancePower", "src/Patches/OctagramReplayPatches.cs#OctagramAutoPlayPatches"]
+    },
+    {
+      "source": "InYourBlueEyes", "target": "SymbolIii", "kind": "replay",
+      "mechanism": "原实例重复成长与格挡",
+      "condition": "SymbolIII是被随机选中的消耗堆Song，或升级蓝眼选中的弃牌堆Song；两次实际结算均获准进行。",
+      "reason": "同一实例连续打出，第二次享有第一次+1成长，两次都继续成长并同步已有DeckVersion；不会获得两种Symbol。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes", "src/Cards/TogawasakikoSongCards.cs#SymbolIii"]
+    },
+    {
+      "source": "InYourBlueEyes", "target": "BlackBirthday", "kind": "replay",
+      "mechanism": "消耗堆能量牌重复兑现",
+      "condition": "消耗堆BlackBirthday被随机选中且两次重放完成；每次各自检查自动目标的压力>5。",
+      "reason": "每次产生1或3能量且不支付其手动费用，基础黑色生日无需升级也可成为恢复资源；不能保证随机目标都有高压力。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes", "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"]
+    },
+    {
+      "source": "InYourBlueEyes", "target": "Divine", "kind": "tradeoff",
+      "mechanism": "双重结算分别消费衍生牌",
+      "condition": "Divine被选中重放；每次结算时都另有一张合法自有手牌压力衍生牌。",
+      "reason": "可以获得两次能量和抽牌，但第二次不能复用第一次已消耗的token；首次抽牌可能补足新token，却不保证如此。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes", "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"]
+    },
+    {
+      "source": "InYourBlueEyes", "target": "OctagramDance", "kind": "conflict",
+      "mechanism": "同一Song连续两次与类型序列冲突",
+      "condition": "八芒星生效，蓝眼自身及被选Song的实际类型序列出现相邻相同类型。",
+      "reason": "即使先选Attack避开蓝眼的Skill，第二次Attack仍可能违例；违规效果后可跳过尚未开始的重复及升级版第二来源。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes", "src/Powers/OctagramDancePower.cs#OctagramDancePower", "src/Patches/OctagramReplayPatches.cs#OctagramReplayPatches", "src/Patches/OctagramReplayPatches.cs#OctagramAutoPlayPatches"]
+    },
+    {
+      "source": "ChoirSChoir", "target": "TreasurePleasure", "kind": "replay",
+      "mechanism": "回收基础态消耗技能启动攻击重放",
+      "condition": "TreasurePleasure已在Choir的消耗堆快照中，自动打出未被阻止；后续仍有攻击可打。",
+      "reason": "基础态自然消耗可被回收，升级移除消耗后不再天然提供此入口；回收又增加自身人格解离，重复能力本身不叠加。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#ChoirSChoir", "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure", "src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower"]
+    },
+    {
+      "source": "ChoirSChoir", "target": "MasqueradeRhapsodyRequest", "kind": "replay",
+      "mechanism": "回收压力爆发并重新读取缺失HP",
+      "condition": "Masquerade实例已进入Choir的消耗快照且可自动选敌，自身此时缺失HP>=2。",
+      "reason": "免费再次把当前缺失HP转为压力；基础态自然进入消耗堆，升级态需要额外消耗来源，不能假设升级后仍有同一回收路线。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#ChoirSChoir", "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"]
+    },
+    {
+      "source": "ChoirSChoir", "target": "OctagramDance", "kind": "conflict",
+      "mechanism": "消耗堆自动播放顺序未保证类型交替",
+      "condition": "八芒星生效，Choir自身或其快照自动播放序列出现相邻同类型；也可能在快照内先启动八芒星。",
+      "reason": "Choir按快照遍历，不规划Attack/Skill/Power交替；违规后尚未开始的自动打出被挡住，不能承诺清空整堆。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#ChoirSChoir", "src/Powers/OctagramDancePower.cs#OctagramDancePower", "src/Patches/OctagramReplayPatches.cs#OctagramAutoPlayPatches"]
+    },
+    {
+      "source": "Divine", "target": "LingeringResonance", "kind": "supply",
+      "mechanism": "支付消耗与自身消耗提供两个事件",
+      "condition": "余响能力已生效，本回合尚有其前2次消耗配额，Divine成功消耗token并最终自身消耗，战斗仍继续。",
+      "reason": "未打出的token也产生Exhaust事件，随后Divine自身可占另一个配额；每事件给全敌施加能力Amount压力，非无限触发。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#Divine", "src/Powers/LingeringResonancePower.cs#LingeringResonancePower"]
+    },
+    {
+      "source": "Divine", "target": "BackstageSupport", "kind": "tradeoff",
+      "mechanism": "消耗token放弃该实例的打出收益",
+      "condition": "后台支援已生效且还有本回合前2次token打出配额，某token被Divine作为支付直接消耗而非打出。",
+      "reason": "Divine换得能量和抽牌，但支付token不会执行其效果或触发后台支援格挡；这是资源分流，不是消耗自动触发打出奖励。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#Divine", "src/Powers/BackstageSupportPower.cs#BackstageSupportPower"]
+    },
+    {
+      "source": "BlackBirthday", "target": "CrucifixX", "kind": "supply",
+      "mechanism": "即时能量转化为X攻击段数",
+      "condition": "先完成黑色生日，再在当前能量被其他牌消耗前使用CrucifixX；是否获得额外2能量按所选目标压力>5判断。",
+      "reason": "X取可用能量，因此黑色生日的能量不仅帮助付费，还增加X段数；全敌4压力的额外2段是独立条件。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#BlackBirthday", "src/Cards/TogawasakikoSongCards.cs#CrucifixX", "src/Patches/SongFreeXCostPatches.cs#SongFreeXCostPatches"]
+    },
+    {
+      "source": "OctagramDance", "target": "CrucifixX", "kind": "payoff",
+      "mechanism": "保留当前能量作为免费X",
+      "condition": "八芒星免费能力仍有效且拥有者未结束回合；手动打出CrucifixX时当前有能量。",
+      "reason": "专门补丁保留当前能量为X并支付0能量，不是令X变0；Crucifix是Attack，可接在八芒星的Skill起点之后，但再次Attack会冲突。",
+      "evidence": ["src/Patches/SongFreeXCostPatches.cs#SongFreeXCostPatches", "src/Powers/OctagramDancePower.cs#OctagramDancePower", "src/Cards/TogawasakikoSongCards.cs#CrucifixX"]
+    },
+    {
+      "source": "TheWholeBlueWorld", "target": "TwoMoonsDeepIntoTheForest", "kind": "generation",
+      "mechanism": "生成实例相对减费兼容历史Song折扣",
+      "condition": "普通蓝世界随机生成TwoMoons；本场已有或之后继续实际打出自己的Song。",
+      "reason": "生成实例的本场-1叠加TwoMoons自身历史折扣并继续变化，不冻结费用；升级蓝世界则将生成实例设为0，其他同名牌不受该生成减费影响。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld", "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"]
+    },
+    {
+      "source": "TheWholeBlueWorld", "target": "ImprisonedXii", "kind": "generation",
+      "mechanism": "不可打出Song的生成入手触发",
+      "condition": "随机结果包含ImprisonedXii，且该实例确实进入手牌而不是因手牌溢出进入其他堆。",
+      "reason": "新生成的未升级实例进入手牌抽1；免费不解除无法打出，也不把入手算作Song打出。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld", "src/Cards/TogawasakikoSongCards.cs#ImprisonedXii"]
+    },
+    {
+      "source": "AveMujica", "target": "ImprisonedXii", "kind": "sequence",
+      "mechanism": "堆顶无法打出时抽入触发额外抽牌",
+      "condition": "AveMujica回合开始处理时堆顶为ImprisonedXii，CanPlay为false，随后该实例确实进入手牌。",
+      "reason": "走抽牌回退而非自动打出，入手后再抽1/2；保留无法打出与Song计数边界，不应误建自动重放收益。",
+      "evidence": ["src/Powers/TogawasakikoSongPowers.cs#AveMujicaPower", "src/Cards/TogawasakikoSongCards.cs#ImprisonedXii"]
+    }
+  ]
+}

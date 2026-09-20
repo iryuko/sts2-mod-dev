@@ -1,0 +1,303 @@
+{
+  "families": [
+    {
+      "id": "pressure-storage",
+      "from": ["Unendurable", "Completeness", "Ether", "GeorgetteMeGeorgetteYou", "Notebook", "MasqueradeRhapsodyRequest", "AnswerMe", "Unmask"],
+      "to": ["Slander", "Curseslander", "CrucifixX", "BlackBirthday", "MusicOfTheCelestialSphere", "KillKiss", "PullmanCrash"],
+      "kind": "supply", "mechanism": "压力存量",
+      "condition": "来源牌的施压分支实际生效；后续收益读取同一目标剩余压力。十字架X要求所有存活敌人均达门槛，给一个敌人施压不保证成立。",
+      "reason": "提高压力倍率、阈值或按压力计算的效果；不是额外伤害已经发生的保证。",
+      "evidence": ["src/ModSupport.cs#ApplyPressure", "src/Cards/TogawasakikoSongCards.cs#CrucifixX", "src/Powers/TogawasakikoSongPowers.cs#KillKissPowerBase"]
+    },
+    {
+      "id": "pressure-debuff-budget",
+      "from": ["Unendurable", "Completeness", "Ether", "GeorgetteMeGeorgetteYou", "Notebook", "MasqueradeRhapsodyRequest", "AnswerMe", "Unmask"],
+      "to": ["PutOnYourMask", "SakiMovePlz", "BladeThroughTheHeart", "BailMoney", "MusicOfTheCelestialSphere", "SymbolIi", "Sophie", "Angles", "STheWay"],
+      "kind": "supply", "mechanism": "压力兑换预算",
+      "condition": "同一存活敌人的共享压力足够；后续牌实际成功施加虚弱/易伤/负力量或敏捷/自卑，且满足自身分支。被Artifact阻止不兑换。",
+      "reason": "压力让原有Debuff额外兑换临时牌；受成功事件和唯一收益归属约束，不是每层Debuff重复发牌。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged", "src/ModSupport.cs#TryConsumePressure"]
+    },
+    {
+      "id": "pressure-clearing-tradeoff",
+      "from": ["SheIsRadiant", "ComposedResponse", "LeaveItToMe"],
+      "to": ["Slander", "Curseslander", "CrucifixX", "BlackBirthday", "MusicOfTheCelestialSphere", "KillKiss", "PullmanCrash"],
+      "kind": "tradeoff", "mechanism": "支出与存压冲突",
+      "condition": "来源牌实际移除后续目标需要的压力；她在发光清全体，其余为目标支出。所有玩家共享，队友阈值也受影响。",
+      "reason": "即时力量、防御或回复可能降低后续倍率/阈值；其他收益不会抵消这条资源争用事实。",
+      "evidence": ["src/Cards/TogawasakikoCards.cs#SheIsRadiant", "src/Cards/TogawasakikoCards.cs#LeaveItToMe", "src/Cards/TogawasakikoPressureCards.cs#ComposedResponse"]
+    },
+    {
+      "id": "redemption-vs-storage",
+      "from": ["PutOnYourMask", "BladeThroughTheHeart", "Angles", "SymbolIi", "Sophie", "SakiMovePlz", "BailMoney", "MusicOfTheCelestialSphere", "AnswerMe", "STheWay"],
+      "to": ["Slander", "Curseslander", "CrucifixX", "BlackBirthday", "MusicOfTheCelestialSphere", "KillKiss", "PullmanCrash"],
+      "kind": "tradeoff", "mechanism": "兑换消耗共享压力",
+      "condition": "仅当Debuff分支成功且压力足够、watcher实际兑换时；失败/无压力/不走该分支时不支出。",
+      "reason": "获得临时牌也会减掉后续牌读取的压力；不能把Debuff和存压阈值永远画成正协同。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged", "src/Powers/TogawasakikoPowers.cs#IsPressureRedemptionOwner"]
+    },
+    {
+      "id": "song-history-discount",
+      "from": {"song": true}, "to": ["TwoMoonsDeepIntoTheForest"],
+      "except": [["ImprisonedXii", "TwoMoonsDeepIntoTheForest"]],
+      "kind": "payoff", "mechanism": "本战歌曲次数",
+      "condition": "同一持有者实际打出；自动打出和重复打出计入，只获得、抽到、弃置或消耗而未打出不计入。被囚禁12正常无法打出，因此排除。",
+      "reason": "每次歌曲出牌使两轮月亮本战费用下降1，不要求不同卡名。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"]
+    },
+    {
+      "id": "song-adjacency-completed",
+      "from": {"song": true}, "to": ["SakiMovePlz"],
+      "except": [["ImprisonedXii", "SakiMovePlz"]],
+      "kind": "sequence", "mechanism": "上一张歌曲",
+      "condition": "同一持有者、本回合watcher在AfterCardPlayed记录的上一张为歌曲，查询排除当前同一实例；嵌套自动打出不能等同于开始顺序。",
+      "reason": "开启祥，移动的易伤；普通顺序出牌时是先歌后攻击，嵌套时按完成钩子的历史判断。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#ShouldApplyVulnerable", "src/ModSupport.cs#GetPreviouslyPlayedCardThisTurn"]
+    },
+    {
+      "id": "song-adjacency-started",
+      "from": {"song": true}, "to": ["FollowingPhrase"],
+      "except": [["ImprisonedXii", "FollowingPhrase"]],
+      "kind": "sequence", "mechanism": "上一张歌曲",
+      "condition": "同一持有者、本回合CardPlaysStarted中排除当前出牌事件后的上一张为歌曲；按开始顺序而非完成钩子记录。",
+      "reason": "开启接续小节的额外抽牌，嵌套自动打出时与祥，移动的历史语义可能不同。",
+      "evidence": ["src/Cards/TogawasakikoBridgeCards.cs#FollowsSong"]
+    },
+    {
+      "id": "random-song-generation",
+      "from": ["Compose", "TheWholeBlueWorld"], "to": {"song": true},
+      "kind": "generation", "mechanism": "随机歌曲候选",
+      "condition": "仅表示候选资格，不保证随机抽中。谱曲本战0费；Blue World基础-1、升级免费，不代表生成升级版。被囚禁12仍无法打出。",
+      "reason": "已有歌曲池生成入口，生成战斗临时实例而非永久入组；免费不豁免自伤等代价。",
+      "evidence": ["src/ModSupport.cs#GetSongPoolCanonicals", "src/Cards/TogawasakikoSongCards.cs#Compose", "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"]
+    },
+    {
+      "id": "song-discard-cost",
+      "from": {"song": true}, "to": ["Thrilled"],
+      "kind": "supply", "mechanism": "歌曲弃牌代价",
+      "condition": "歌曲在手中且被选中弃置；被囚禁12也可作为弃牌。不把弃牌算作打出或消耗。",
+      "reason": "可以支付兴奋不已的手牌整理代价；当前无歌曲时它也会给能量，因此不是必要前置。",
+      "evidence": ["src/Cards/TogawasakikoCards.cs#Thrilled"]
+    },
+    {
+      "id": "rehearsal-common",
+      "from": ["RehearsalOrder"], "to": {"song": true, "rarity": "Common"},
+      "kind": "sequence", "mechanism": "定向检索",
+      "condition": "所选歌曲在自己的抽牌堆中；只移动原实例，不生成，不免费打出。",
+      "reason": "普通歌曲可稳定检索，包括Symbol I，减少组合对自然抽牌的依赖。",
+      "evidence": ["src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder"]
+    },
+    {
+      "id": "rehearsal-uncommon",
+      "from": ["RehearsalOrder"], "to": {"song": true, "rarity": "Uncommon"},
+      "kind": "sequence", "mechanism": "定向检索",
+      "condition": "所选歌曲在自己的抽牌堆中；只移动原实例，不生成，不免费打出；被囚禁12的入手抽牌是特殊互动。",
+      "reason": "非凡歌曲可稳定检索，包括Symbol II/III；不覆盖稀有的Symbol IV/KillKiss。",
+      "evidence": ["src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder", "src/Cards/TogawasakikoSongCards.cs#ImprisonedXii"]
+    },
+    {
+      "id": "song-discard-topdeck",
+      "from": ["UnfinishedScore"], "to": {"song": true},
+      "kind": "sequence", "mechanism": "弃牌歌曲置顶",
+      "condition": "歌曲实际位于自己的弃牌堆；保留该实例的升级和成长。不直接入手或打出，下回合常规抽牌会先消耗牌顶。",
+      "reason": "编排下一次抽取；不承诺它一定成为Ave Mujica在常规抽牌后的自动出牌。",
+      "evidence": ["src/Cards/TogawasakikoBridgeCards.cs#UnfinishedScore"]
+    },
+    {
+      "id": "blue-eyes-song-replay",
+      "from": ["InYourBlueEyes"], "to": {"song": true},
+      "except": [["InYourBlueEyes", "ImprisonedXii"]],
+      "kind": "replay", "mechanism": "随机歌曲重放",
+      "condition": "合法歌曲在消耗堆；升级另从弃牌堆快照选一张。随机抽中才打出两次，仍支付效果代价并遵守原牌去向。",
+      "reason": "复用真实实例，因此永久成长和升级保留；不是免费生成canonical替身。同类另一实例的嵌套另以经审查自环记录。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"]
+    },
+    {
+      "id": "random-token-generation",
+      "from": ["RestorationOfPower", "Curseslander", "AveMujica"], "to": {"pool": "token"},
+      "kind": "generation", "mechanism": "压力衍生牌候选",
+      "condition": "来源效果实际触发并随机选中；复权立即生成，Ave Mujica在其抽牌后时点；仅诅咒直接把其生成牌设本战0费。",
+      "reason": "给四种衍生牌提供独立于Debuff兑换的入口；候选连边不是每次获得全部四张。",
+      "evidence": ["src/Cards/TogawasakikoCards.cs#RestorationOfPower", "src/Cards/TogawasakikoCards.cs#Curseslander", "src/Powers/TogawasakikoSongPowers.cs#AveMujicaPower"]
+    },
+    {
+      "id": "token-as-payment",
+      "from": {"pool": "token"}, "to": ["Divine", "UnspokenWords"],
+      "kind": "supply", "mechanism": "手牌消耗材料",
+      "condition": "衍生牌在自己的手中，被选择并实际消耗；不会执行该衍生牌本身的效果。",
+      "reason": "将当前不需要的衍生牌转为回能/抽牌或格挡；失去本来可打出的工具效果。",
+      "evidence": ["src/Cards/TogawasakikoSongExpansionCards.cs#Divine", "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"]
+    },
+    {
+      "id": "token-play-block",
+      "from": {"pool": "token"}, "to": ["BackstageSupport"],
+      "kind": "payoff", "mechanism": "打出衍生牌收益",
+      "condition": "幕后支撑已生效，自己的本回合前两次衍生牌实际打出；自动打出计入。主动消耗或虚无消耗而未打出不计入。",
+      "reason": "衍生牌正常效果之外提供格挡；次数上限属于持有者，不因叠加能力增加。",
+      "evidence": ["src/Powers/BackstageSupportPower.cs#AfterCardPlayed"]
+    },
+    {
+      "id": "token-retention",
+      "from": ["UntilNextAct"], "to": {"pool": "token"},
+      "kind": "sequence", "mechanism": "移除虚无并保留",
+      "condition": "选择自己手中的1/2张衍生牌；仅本战实例失去虚无并获得保留，原费用和消耗保持。",
+      "reason": "把攻击、控制或消耗支付材料存到更合适的回合。",
+      "evidence": ["src/Cards/TogawasakikoPressureCards.cs#UntilNextAct"]
+    },
+    {
+      "id": "ordinary-exhaust-feedback",
+      "from": ["Speak", "RestorationOfPower", "Fragility", "Compose", "IHaveAscended", "WeightliftingChampion", "BlackBirthday", "TreasurePleasure", "MasqueradeRhapsodyRequest", "PullmanCrash", "Unmask", "RehearsalOrder", "UntilNextAct", "OctagramDance", "Divine", "UnspokenWords", "PersonaDissociation", "SocialWithdrawal", "AllYouThinkAboutIsYourself", "OverworkAnxiety"],
+      "to": ["LingeringResonance"], "kind": "payoff", "mechanism": "实际消耗反馈",
+      "condition": "能力已生效且本回合前两次自己的实际消耗；包括虚无。升级去消耗的牌不再自动提供此事件；不必说出口提供所选牌的消耗事件。",
+      "reason": "旧消耗牌也能提供全体压力，不限最近四张压力牌，不要求被消耗牌先打出。",
+      "evidence": ["src/Powers/LingeringResonancePower.cs#AfterCardExhausted"]
+    },
+    {
+      "id": "choir-exhaust-targets",
+      "from": ["ChoirSChoir"],
+      "to": ["Speak", "RestorationOfPower", "Fragility", "Compose", "IHaveAscended", "WeightliftingChampion", "BlackBirthday", "TreasurePleasure", "MasqueradeRhapsodyRequest", "PullmanCrash", "Unmask", "RehearsalOrder", "UntilNextAct", "OctagramDance", "Divine", "PersonaDissociation", "SocialWithdrawal", "AllYouThinkAboutIsYourself", "OverworkAnxiety", "BarkingBarkingBarking"],
+      "kind": "replay", "mechanism": "消耗堆演出",
+      "condition": "牌实际位于Choir取快照时的消耗堆且能自动打出；升级去消耗的牌不会天然在该堆。大狗由乔迁生成的实例带消耗和虚无。仍按每次出牌支付生命/手牌/压力等效果代价。",
+      "reason": "旧消耗牌、衍生牌、新消耗牌共享同一回放入口；消耗不是每场只能使用一次。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#ChoirSChoir", "src/Cards/TogawasakikoCards.cs#Housewarming"]
+    },
+    {
+      "id": "strength-amplification",
+      "from": ["SheIsRadiant", "WeightliftingChampion"], "to": {"type": "Attack"},
+      "kind": "supply", "mechanism": "力量增伤",
+      "condition": "自己的力量实际获得后，通过原版攻击伤害链结算；多段每段受益。自伤、费用和其他条件不因此豁免。",
+      "reason": "攻击牌承接已有的力量投资；她在发光同时清空压力，正负关系需要并读。",
+      "evidence": ["src/Cards/TogawasakikoCards.cs#SheIsRadiant", "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"]
+    },
+    {
+      "id": "dexterity-block",
+      "from": ["WeightliftingChampion"],
+      "to": ["DefendTogawasakiko", "Unendurable", "Fragility", "Face", "SymbolIii", "Sophie", "UnfinishedScore", "FollowingPhrase", "UnspokenWords", "ComposedResponse"],
+      "kind": "supply", "mechanism": "敏捷增益",
+      "condition": "敏捷已获得且后续格挡走卡牌BlockVar链；不必说出口按每次实际消耗分别给格挡。",
+      "reason": "自伤成长可以接入全卡池的防御牌，而不只是生成新歌曲。",
+      "evidence": ["src/Cards/TogawasakikoCards.cs#WeightliftingChampion", "src/Cards/TogawasakikoSongCards.cs#SymbolIii", "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"]
+    },
+    {
+      "id": "attack-replay",
+      "from": ["TreasurePleasure"], "to": {"type": "Attack"},
+      "kind": "replay", "mechanism": "攻击额外打出",
+      "condition": "本回合重放Power已生效、属于同一持有者、仍有合法战斗和目标；再次结算卡牌效果，资源代价也重新处理。",
+      "reason": "覆盖旧攻击、生成攻击与未来攻击；不能把新攻击按只打一次评估。与八芒星的相邻同类型规则冲突。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#TreasurePleasure", "src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower"]
+    },
+    {
+      "id": "actual-hp-loss",
+      "from": ["GodYouFool", "STheWay", "WeightliftingChampion", "TheWholeBlueWorld"],
+      "to": ["MasqueradeRhapsodyRequest"], "kind": "supply", "mechanism": "已损生命",
+      "condition": "来源效果实际失去生命且之后未被回复；看当前已损生命而非累计受伤历史，受原版伤害修正与存活限制。",
+      "reason": "已有自伤效率牌把生命预算转为Masquerade的压力；不是鼓励无上限自伤。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest", "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"]
+    },
+    {
+      "id": "healing-vs-missing-hp",
+      "from": ["Fragility", "LeaveItToMe", "BarkingBarkingBarking"],
+      "to": ["MasqueradeRhapsodyRequest"], "kind": "tradeoff", "mechanism": "回复与失血收益",
+      "condition": "先实际回复生命，再读取当前已损生命；大狗给予回复Power，须等其治疗实际发生，不是打出就立刻回血。并非回复是坏事，而是会降低本次施压量。",
+      "reason": "同一生命预算既用于生存又用于失血兑现，顺序影响输出。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest", "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"]
+    },
+    {
+      "id": "face-removal-choice",
+      "from": ["Face", "PutOnYourMask", "Fragility"], "to": ["Unmask"],
+      "kind": "supply", "mechanism": "颜的主动兑现",
+      "condition": "来源实际给予颜，且揭面时尚未过期；面具戴好要求目标原本有虚弱。揭面移除全部颜，但额外奖励只结算一次。",
+      "reason": "旧防御反应能改为主动抽牌/施压，代价是放弃剩余受击施压机会。",
+      "evidence": ["src/Cards/TogawasakikoBridgeCards.cs#Unmask", "src/Powers/TogawasakikoSongPowers.cs#FaceReactionPower"]
+    },
+    {
+      "id": "face-delayed-pressure",
+      "from": ["Face", "PutOnYourMask", "Fragility"],
+      "to": ["Slander", "Curseslander", "CrucifixX", "BlackBirthday", "MusicOfTheCelestialSphere", "KillKiss", "PullmanCrash", "BladeThroughTheHeart", "SakiMovePlz", "BailMoney", "SymbolIi", "Sophie", "Angles", "STheWay"],
+      "kind": "supply", "mechanism": "颜的延迟施压",
+      "condition": "先成功获得颜，且其失效前受到怪物造成的正TotalDamage事件，对该怪物施压；随后仍保有压力。面具戴好需目标原有虚弱。敌方行动中的反应赶不上该次敌方回合开始的KillKiss检查。",
+      "reason": "旧防御路线也能提供存压或兑换预算，但不能把打出Face视为立即施压。完全格挡的正伤害事件仍可能满足TotalDamage条件。",
+      "evidence": ["src/Powers/TogawasakikoSongPowers.cs#FaceReactionPower", "src/Powers/TogawasakikoSongPowers.cs#KillKissPowerBase", "src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged"]
+    },
+    {
+      "id": "lingering-pressure-output",
+      "from": ["LingeringResonance"],
+      "to": ["Slander", "Curseslander", "CrucifixX", "BlackBirthday", "MusicOfTheCelestialSphere", "KillKiss", "PullmanCrash", "PutOnYourMask", "BladeThroughTheHeart", "SakiMovePlz", "BailMoney", "SymbolIi", "Sophie", "Angles", "STheWay"],
+      "kind": "supply", "mechanism": "消耗反馈的压力出口",
+      "condition": "能力已生效，本回合自己的前两次实际消耗已经产生全体压力；后续收益还需自身分支、目标存活和剩余压力条件。",
+      "reason": "补全消耗→施压→存量收益或兑换的链路；能力入场本身不施压。",
+      "evidence": ["src/Powers/LingeringResonancePower.cs#AfterCardExhausted", "src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged"]
+    },
+    {
+      "id": "inferiority-hit-reactions",
+      "from": ["Angles", "SymbolIi", "Sophie"], "to": {"type": "Attack"},
+      "kind": "payoff", "mechanism": "逐段自卑反应",
+      "condition": "目标已实际获得自卑，攻击造成正TotalDamage事件；每段尝试减1力量，成功且共享压力足够时可兑换自闭。多段需要逐段检查存活、Artifact和压力。",
+      "reason": "旧多段攻击不仅放大力量，也增加控制事件；成功兑换同时支出压力，不保证后续阈值仍成立。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#InferiorityPower", "src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged"]
+    },
+    {
+      "id": "healing-georgette-branch",
+      "from": ["Fragility", "LeaveItToMe", "BarkingBarkingBarking"], "to": ["GeorgetteMeGeorgetteYou"],
+      "kind": "sequence", "mechanism": "治疗改变生命比较分支",
+      "condition": "自己实际回复后，当前HP由低于目标变成大于等于目标；大狗要等回复Power真实结算，不能把打出时当作治疗。",
+      "reason": "使Georgette从直接伤害转为压力，是否更好取决于当前存压需求；与Masquerade的失血收益构成取舍。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou", "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"]
+    },
+    {
+      "id": "proposal-inferiority",
+      "from": ["Angles", "SymbolIi", "Sophie"], "to": ["proposal:RewrittenAccent", "proposal:ClosingCadence", "proposal:Staccato"],
+      "kind": "payoff", "mechanism": "逐段自卑与兑换",
+      "condition": "提案按正常攻击链实现且目标带自卑，每个正伤害事件尝试减力量；压力足够并成功时兑换。断奏第二段须先支付材料。",
+      "reason": "评价新攻击必须包含旧自卑控制链；断奏的第二段还多一次控制机会，同时可能多支出一份共享压力。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#InferiorityPower", "src/Powers/TogawasakikoPowers.cs#AfterPowerAmountChanged", "proposal:Staccato"]
+    },
+    {
+      "id": "proposal-sophie-weak",
+      "from": ["Sophie"], "to": ["proposal:RewrittenAccent", "proposal:Staccato"],
+      "kind": "tradeoff", "mechanism": "自身虚弱",
+      "condition": "Sophie向持有者施加的虚弱仍生效，后续提案伤害按原版攻击链修正。",
+      "reason": "提供敌方自卑的同时降低自身攻击，不能只计入控制收益。",
+      "evidence": ["src/Cards/TogawasakikoSongCards.cs#Sophie", "proposal:RewrittenAccent", "proposal:Staccato"]
+    },
+    {
+      "id": "proposal-killkiss-hp",
+      "from": ["proposal:RewrittenAccent", "proposal:ClosingCadence", "proposal:Staccato"], "to": ["KillKiss"],
+      "kind": "sequence", "mechanism": "削减当前生命改变门槛",
+      "condition": "攻击实际降低目标HP且目标存活；敌方回合开始时剩余压力仍大于当前HP的一半。自卑兑换等可能同时耗压抵消优势。",
+      "reason": "新攻击应评估和旧处决门槛的联系；只有破格挡而未伤及HP时不降低此门槛。",
+      "evidence": ["src/Powers/TogawasakikoSongPowers.cs#KillKissPowerBase", "src/Powers/TogawasakikoPowers.cs#InferiorityPower", "proposal:ClosingCadence"]
+    },
+    {
+      "id": "proposal-despair-echo",
+      "from": ["DawnOfDespair"], "to": ["proposal:RewrittenAccent", "proposal:ClosingCadence", "proposal:Staccato"],
+      "kind": "payoff", "mechanism": "绝望回响的伤害反应",
+      "condition": "Dawn攻击结束后目标存活且已有回响；后续命中满足回响的正伤害事件条件。断奏每段各检查，不能把初次Dawn自己的前置伤害算入新回响。",
+      "reason": "新攻击也能沿旧回响施压，多段不只是面板伤害倍增。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#SakikoDespairEchoPower", "src/Cards/TogawasakikoCards.cs#DawnOfDespair", "proposal:Staccato"]
+    },
+    {
+      "id": "proposal-ave-timing",
+      "from": ["AveMujica"], "to": ["proposal:RewrittenAccent", "proposal:ClosingCadence", "proposal:Staccato"],
+      "kind": "sequence", "mechanism": "抽牌后堆顶演出",
+      "condition": "能力常规抽牌和衍生牌生成之后，剩余牌顶仍是提案且能自动打出；改写重拍此时未必有弃牌，收束未必有格挡，断奏可选择刚生成的材料但放弃其原效果。",
+      "reason": "旧自动演出提供省能量入口，同时放大提前兑现的机会成本；前回合置顶不保证保留到此时。",
+      "evidence": ["src/Powers/TogawasakikoSongPowers.cs#AveMujicaPower", "proposal:RewrittenAccent", "proposal:ClosingCadence", "proposal:Staccato"]
+    },
+    {
+      "id": "symbol-combinations",
+      "from": ["SymbolI", "SymbolIi", "SymbolIii", "SymbolIv"],
+      "to": ["SymbolI", "SymbolIi", "SymbolIii", "SymbolIv"],
+      "kind": "payoff", "mechanism": "不同Symbol组合",
+      "condition": "自己回合结算时同时拥有不同Symbol状态；2/3/4种奖励逐级累加。I/II/III临时，IV常驻，重复同一种不补齐种类。",
+      "reason": "同回合组织套牌而非只收集同名牌；边表示共同组成集合，不表示两张单独就触发四种奖励。",
+      "evidence": ["src/Powers/TogawasakikoPowers.cs#AfterSideTurnEnd", "src/ModSupport.cs#CountOwnedSymbolKinds"]
+    }
+  ],
+  "reviewed_relations": [
+    {"source":"BarkingBarkingBarking","target":"LingeringResonance","kind":"payoff","mechanism":"乔迁生成实例的消耗反馈","condition":"乔迁生成的大狗带消耗和虚无，实例实际消耗时余音已生效且自己的本回合两次额度未用完；普通奖励版本没有这个原生消耗关键词。","reason":"旧生成攻击也能触发余音，不把其全部实例都当成消耗牌。","evidence":["src/Cards/TogawasakikoCards.cs#Housewarming","src/Powers/LingeringResonancePower.cs#AfterCardExhausted"]},
+    {"source":"TwoMoonsDeepIntoTheForest","target":"TwoMoonsDeepIntoTheForest","kind":"payoff","mechanism":"自身歌曲打出计数","condition":"同持有者的两轮月亮实际完成出牌后也触发歌曲折扣；只影响本战后续费用，不追溯退还此次支付。","reason":"类节点自环表示同牌自身历史或另一同类实例受益，不是无条件无限出牌。","evidence":["src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"],"self_reviewed":true},
+    {"source":"TheWholeBlueWorld","target":"TheWholeBlueWorld","kind":"generation","mechanism":"随机生成同类新实例","condition":"支付实际生命代价后仍存活，随机歌曲池抽中蓝世界；新战斗实例基础降1费，来源升级则本战免费。","reason":"生成池没有排除自身，但不是必定抽中，也不免除后续生命代价。","evidence":["src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld","src/ModSupport.cs#GetSongPoolCanonicals"],"self_reviewed":true},
+    {"source":"InYourBlueEyes","target":"InYourBlueEyes","kind":"replay","mechanism":"另一实例的受限嵌套","condition":"目标是所选消耗堆或升级后弃牌堆快照里的另一实例，不是this且_playing为false；执行前仍在合法战斗牌堆，不在Play也未移除。","reason":"同名不等于同实例；_playing防重入和牌堆检查限制递归，不能画成无限自我重放。","evidence":["src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"],"self_reviewed":true}
+  ]
+}
