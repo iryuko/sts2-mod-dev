@@ -71,5 +71,15 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(result[0],503);self.assertEqual(path.read_text(),'corrupt')
         self.assertNotIn(str(self.temp.name),json.dumps(result[1]))
 
+    def test_analysis_and_preview_do_not_write_workspace(self):
+        created=self.request('POST','/api/commands',{'expected_revision':0,'command':{'action':'create','card':card(song=True)}})[1]
+        identifier=created['result']['id'];path=Path(self.temp.name)/'workspace.json';before=path.read_bytes()
+        for route in ['/api/analyze','/api/preview']:
+            status,result,_=self.request('POST',route,{'draft_id':identifier,'card':card(song=True)})
+            self.assertEqual(status,200)
+            self.assertTrue((result.get('analysis') or result)['suggestions'])
+            self.assertEqual(path.read_bytes(),before)
+        self.assertEqual(self.request('POST','/api/analyze',{'draft_id':'unknown','card':card()})[0],422)
+
 
 if __name__=='__main__': unittest.main()

@@ -1,0 +1,3387 @@
+{
+  "schema_version": 1,
+  "source_revision": "057b6396b0eb26d217eadade0be21b07d30c07f6",
+  "cards": {
+    "AWonderfulWorldYetNowhereToBeFound": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：3费能力。获得镜花水月：从生效到自己下次回合开始、此后每个自身回合周期，累计生命损失上限为20；超过剩余额度的部分被截断。 升级：生命损失上限20降至17。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#AWonderfulWorldYetNowhereToBeFound"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "上限是整个周期累计值，不是每次受伤上限；包含自身失血，不是治疗或格挡。",
+        "同上限重复施加不叠加；不同上限会移除旧能力再施加。",
+        "能力通过ModifyHpLostAfterOsty限额，AfterDamageReceived累计UnblockedDamage，自己的回合开始前段清零。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#AWonderfulWorldYetNowhereToBeFound"
+      ]
+    },
+    "AllYouThinkAboutIsYourself": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：3费攻击，消耗、虚无：单体9伤害，然后对目标调用Stun。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：3费攻击，消耗、虚无：单体9伤害，然后对目标调用Stun。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：3费攻击，消耗、虚无：单体9伤害，然后对目标调用Stun。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：3费攻击，消耗、虚无：单体9伤害，然后对目标调用Stun。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "token_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "压力衍生牌实际打出，不只是主动消耗；原效果：3费攻击，消耗、虚无：单体9伤害，然后对目标调用Stun。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "仅自定义生成；不能进入普通奖励或原版随机生成。",
+        "实际眩晕行为依赖原版目标逻辑；本次未运行验证。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
+      ]
+    },
+    "Angles": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：1费技能。若所有存活且有意图的敌人都包含攻击意图，对所有存活敌人施加1自卑；否则施加1易伤。 升级：费用1降至0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Angles"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "inferiority",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自卑分支实际施加，后续每个正TotalDamage降低1力量；原效果：1费技能。若所有存活且有意图的敌人都包含攻击意图，对所有存活敌人施加1自卑；否则施加1易伤。 升级：费用1降至0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Angles"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先成功施加自卑，再有正TotalDamage；包括被完全格挡的正总伤害；原效果：1费技能。若所有存活且有意图的敌人都包含攻击意图，对所有存活敌人施加1自卑；否则施加1易伤。 升级：费用1降至0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Angles"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费技能。若所有存活且有意图的敌人都包含攻击意图，对所有存活敌人施加1自卑；否则施加1易伤。 升级：费用1降至0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Angles"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "没有存活敌人或没有任何有意图敌人时直接返回，不施加易伤。",
+        "自卑成功增加且目标压力>=1时，消耗1压力生成过劳焦虑；易伤成功增加且压力>=3时，消耗3压力生成满脑子都想着自己。",
+        "赎回按成功的能力变化事件一次，不按层数；被阻止的施加不赎回。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#Angles"
+      ]
+    },
+    "AnswerMe": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支实际成立，非任意分支都产压；原效果：2费技能：逐个敌人检查，压力低于5则增加7压力，否则力量降低1。 升级：费用2→1。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AnswerMe"
+          ]
+        },
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：2费技能：逐个敌人检查，压力低于5则增加7压力，否则力量降低1。 升级：费用2→1。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#AnswerMe"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "是增加7压力，不是设为7。",
+        "降力量实际发生时可消耗1压力兑换自闭；两个分支互斥。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#AnswerMe"
+      ]
+    },
+    "AveMujica": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "after_draw",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自身回合常规抽牌完成后触发能力；原效果：3费能力。获得1层Ave Mujica：自己的回合开始后段，每层随机生成1张压力衍生牌到手牌，然后处理抽牌堆顶1张牌；可打出则自动打出，否则抽入手牌。 升级：费用3降至2。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#AveMujica"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：3费能力。获得1层Ave Mujica：自己的回合开始后段，每层随机生成1张压力衍生牌到手牌，然后处理抽牌堆顶1张牌；可打出则自动打出，否则抽入手牌。 升级：费用3降至2。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#AveMujica"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "本目录事实基线为release worktree的057b6396（0.2.3），仅静态源码核对，未执行新运行时验证。",
+        "能力可叠层；抽牌堆为空时跳过堆顶处理，不因此取消衍生牌生成。",
+        "生成的衍生牌不是Song；自动打出的堆顶也不限定Song。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#AveMujica"
+      ]
+    },
+    "BackstageSupport": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "token_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": 2,
+          "condition": "自己的前2次GeneratedPressureCard实际打出；主动消耗不算打出；原效果：1费能力：生效期间每回合前2次打出自己的压力衍生牌，各获得3格挡。 升级：每次格挡3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#BackstageSupport"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": 2,
+          "condition": "能力已生效、自己的前2次压力衍生牌打出；Unpowered格挡不吃敏捷；原效果：1费能力：生效期间每回合前2次打出自己的压力衍生牌，各获得3格挡。 升级：每次格挡3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#BackstageSupport"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "只匹配GeneratedPressureCard；自动打出也计数，纯消耗不计数。",
+        "格挡为Unpowered；叠层增加单次收益但不刷新2次额度；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoBridgeCards.cs#BackstageSupport"
+      ]
+    },
+    "BailMoney": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：0费攻击：单体8伤害，目标敏捷降低1，然后失去10金币。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BailMoney"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：0费攻击：单体8伤害，目标敏捷降低1，然后失去10金币。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BailMoney"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：0费攻击：单体8伤害，目标敏捷降低1，然后失去10金币。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BailMoney"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：0费攻击：单体8伤害，目标敏捷降低1，然后失去10金币。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BailMoney"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "源码没有持有至少10金币的出牌前置检查。",
+        "目标存活、敏捷实际降低且压力至少1时，可兑换自闭。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#BailMoney"
+      ]
+    },
+    "BarkingBarkingBarking": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "heal",
+          "scope": "self",
+          "timing": "own_turn_end",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "获得回复能力后，按原版回复时点治疗；不是立即治疗；原效果：1费攻击：单体8伤害，自己获得3层回复。 升级：伤害8→11；回复3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：单体8伤害，自己获得3层回复。 升级：伤害8→11；回复3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：单体8伤害，自己获得3层回复。 升级：伤害8→11；回复3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：单体8伤害，自己获得3层回复。 升级：伤害8→11；回复3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "BestCompanion获得时加入永久牌组；本体不带消耗、虚无。",
+        "Housewarming生成的实例另带消耗、虚无；它不是压力衍生牌。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
+      ]
+    },
+    "BlackBirthday": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "读取同一目标剩余压力；阈值见原效果；原效果：1费技能，消耗。获得1能量；若选定敌人压力>5，再获得2能量。 升级：费用1降至0，保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：1费技能，消耗。获得1能量；若选定敌人压力>5，再获得2能量。 升级：费用1降至0，保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费技能，消耗。获得1能量；若选定敌人压力>5，再获得2能量。 升级：费用1降至0，保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "条件是至少6压力，不是5；只读取、不消费压力。",
+        "未升级手动打出净能量为0或+2，升级为+1或+3；免费自动打出不扣其原本1费。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"
+      ]
+    },
+    "BladeThroughTheHeart": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：2费攻击：逐敌先施加2易伤、2虚弱并降低1敏捷，然后对全敌造成12伤害。 升级：伤害12→20。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：2费攻击：逐敌先施加2易伤、2虚弱并降低1敏捷，然后对全敌造成12伤害。 升级：伤害12→20。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：2费攻击：逐敌先施加2易伤、2虚弱并降低1敏捷，然后对全敌造成12伤害。 升级：伤害12→20。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：2费攻击：逐敌先施加2易伤、2虚弱并降低1敏捷，然后对全敌造成12伤害。 升级：伤害12→20。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "先Debuff后伤害；每个目标的三种兑换依次消费同一个压力计数。",
+        "压力恰有6且变动均成功时，依次消费3、2、1压力生成三种Token。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
+      ]
+    },
+    "ChoirSChoir": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_discarded",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己的牌确实从手中弃置；无可选牌不产生事件；原效果：3费技能。若还有手牌则选择弃1张；随后快照消耗堆，对快照中的每张牌设置打出前费用为0并尝试自动打出。 升级：费用3降至2。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#ChoirSChoir"
+          ]
+        },
+        {
+          "action": "replay",
+          "resource": "exhaust_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "合法实例在消耗堆快照、排除当前打出的实例；碧眼只选Song且打出两次；原效果：3费技能。若还有手牌则选择弃1张；随后快照消耗堆，对快照中的每张牌设置打出前费用为0并尝试自动打出。 升级：费用3降至2。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#ChoirSChoir"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：3费技能。若还有手牌则选择弃1张；随后快照消耗堆，对快照中的每张牌设置打出前费用为0并尝试自动打出。 升级：费用3降至2。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#ChoirSChoir"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "自身没有消耗关键词；目标不限Song，包含压力衍生牌。",
+        "不是递归清空消耗堆：快照后新加入的牌不自动加入本次列表；弃掉的牌也不因此进入消耗快照。",
+        "需要可安全解析的目标；设置0费不等于解除Unplayable或其他原生限制。",
+        "结算后去向遵循被打出牌自身规则，八芒星可阻止尚未开始的自动打出。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#ChoirSChoir"
+      ]
+    },
+    "Completeness": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支实际成立，非任意分支都产压；原效果：0费技能：选择弃掉任意n张手牌并抽n张，然后对所有敌人施加2n压力。 升级：获得保留。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Completeness"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_discarded",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己的牌确实从手中弃置；无可选牌不产生事件；原效果：0费技能：选择弃掉任意n张手牌并抽n张，然后对所有敌人施加2n压力。 升级：获得保留。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Completeness"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "允许选择0张；先弃抽，再施压；不消耗。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Completeness"
+      ]
+    },
+    "Compose": {
+      "facts": [
+        {
+          "action": "generate",
+          "resource": "song_pool_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "仅歌曲池随机候选，不保证抽中；非永久入组；原效果：1费技能，消耗：随机生成1张歌曲牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Compose"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "虽定义于SongCards文件，本卡不是歌曲；不升级生成牌。",
+        "普通SetThisCombat(0)路径，不添加TheWholeBlueWorld的X费专用标记。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#Compose"
+      ]
+    },
+    "ComposedResponse": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能：移除目标至多5压力，然后获得6格挡。 升级：格挡6→8。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#ComposedResponse"
+          ]
+        },
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能：移除目标至多5压力，然后获得6格挡。 升级：格挡6→8。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#ComposedResponse"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "零压力也给足格挡；收益不按消费量增长；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoPressureCards.cs#ComposedResponse"
+      ]
+    },
+    "CrucifixX": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "逐敌检查；十字架要求所有存活检查对象都达门槛；原效果：X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。 升级：每段伤害6增至7。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。 升级：每段伤害6增至7。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。 升级：每段伤害6增至7。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。 升级：每段伤害6增至7。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：X费攻击。对所有敌人造成6伤害X次；若所有符合检查的存活敌人都有至少4压力，额外攻击2次。 升级：每段伤害6增至7。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "压力条件在本次效果开始时检查一次；不直接消耗压力，X=0仍可有条件地攻击2次。",
+        "八芒星能力或升级蓝世界生成实例的专门规则允许不耗能量且X取当前能量；不能推广到任意0费修改。",
+        "自卑造成的逐段压力赎回可影响后续牌或下一次重放的阈值，不追溯撤销本次已确定的段数。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
+      ]
+    },
+    "Curseslander": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "读取同一目标剩余压力；阈值见原效果；原效果：1费攻击：单体伤害为4+目标当前压力×2；生成2张随机压力衍生牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Curseslander"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "生成手牌成功；随机生成不保证具体卡名；原效果：1费攻击：单体伤害为4+目标当前压力×2；生成2张随机压力衍生牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Curseslander"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：单体伤害为4+目标当前压力×2；生成2张随机压力衍生牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Curseslander"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：单体伤害为4+目标当前压力×2；生成2张随机压力衍生牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Curseslander"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：单体伤害为4+目标当前压力×2；生成2张随机压力衍生牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Curseslander"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "Ancient，不是普通奖励牌。",
+        "生成可重复同名；只修改本次生成实例费用；不消费目标压力。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Curseslander"
+      ]
+    },
+    "DawnOfDespair": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "despair_echo",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "在本卡攻击完成之后才施加；玩家侧回合末失效；原效果：1费攻击：对单体造成2伤害6次，然后对存活目标施加1层绝望回响。 升级：攻击次数6→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先施加回响，再有后续正TotalDamage；本卡初始攻击不享受刚施加回响；原效果：1费攻击：对单体造成2伤害6次，然后对存活目标施加1层绝望回响。 升级：攻击次数6→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：对单体造成2伤害6次，然后对存活目标施加1层绝望回响。 升级：攻击次数6→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：对单体造成2伤害6次，然后对存活目标施加1层绝望回响。 升级：攻击次数6→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：对单体造成2伤害6次，然后对存活目标施加1层绝望回响。 升级：攻击次数6→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "回响在本卡攻击后施加；目标随后每次正TotalDamage产生每层3压力；玩家侧回合末移除。",
+        "目标死亡后停止剩余攻击，也不再施加回响。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
+      ]
+    },
+    "DefendTogawasakiko": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能：获得5格挡。 升级：格挡5→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#DefendTogawasakiko"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "Basic；具有Defend标签。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#DefendTogawasakiko"
+      ]
+    },
+    "Divine": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "选择自己手中GeneratedPressureCard并确实消耗，不打出其效果；原效果：0费技能，消耗。选择并消耗自己手牌中的1张压力衍生牌；成功后获得1能量并抽2张牌。 升级：抽牌2增至3；仍需消耗1张衍生牌，自身仍消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "手中压力衍生牌实际被主动消耗；不同于打出；原效果：0费技能，消耗。选择并消耗自己手牌中的1张压力衍生牌；成功后获得1能量并抽2张牌。 升级：抽牌2增至3；仍需消耗1张衍生牌，自身仍消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗。选择并消耗自己手牌中的1张压力衍生牌；成功后获得1能量并抽2张牌。 升级：抽牌2增至3；仍需消耗1张衍生牌，自身仍消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：0费技能，消耗。选择并消耗自己手牌中的1张压力衍生牌；成功后获得1能量并抽2张牌。 升级：抽牌2增至3；仍需消耗1张衍生牌，自身仍消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "需要GeneratedPressureCard实例、属于自己且仍在手牌；无合法目标不获得能量和抽牌。",
+        "重复结算每次重新支付一张衍生牌，不能重复使用首次已消耗实例。",
+        "支付是Exhaust而非Play，不执行衍生牌效果、不触发其打出奖励；死亡或战斗结束可中止收益。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
+      ]
+    },
+    "Ether": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。 升级：攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Ether"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。 升级：攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Ether"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。 升级：攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Ether"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。 升级：攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Ether"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费攻击。对同一敌人造成5伤害2次；目标仍存活时施加2压力。 升级：攻击次数2增至3，压力2增至3；每段仍为5伤害。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Ether"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "压力在所有攻击段之后施加，不能为这些攻击段中的赎回预付压力。",
+        "目标死亡时停止后续攻击段，且不再施加压力。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#Ether"
+      ]
+    },
+    "Face": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能。获得8格挡及1层颜；直到自己的下回合开始，每次受到怪物来源的正TotalDamage事件时，对该怪物施加每层颜3压力。 升级：格挡8增至12。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Face"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "enemy_hit",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先有颜，再受到怪物来源正TotalDamage；下次自身回合开始移除；原效果：1费技能。获得8格挡及1层颜；直到自己的下回合开始，每次受到怪物来源的正TotalDamage事件时，对该怪物施加每层颜3压力。 升级：格挡8增至12。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Face"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费技能。获得8格挡及1层颜；直到自己的下回合开始，每次受到怪物来源的正TotalDamage事件时，对该怪物施加每层颜3压力。 升级：格挡8增至12。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Face"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "完全格挡的命中仍可触发；要求dealer是怪物，自己的失血不是触发来源。",
+        "颜可叠层，自己下回合开始前段全部移除。",
+        "没有消费颜的操作时，反应触发不扣颜层数。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#Face"
+      ]
+    },
+    "FinalCurtain": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：对所有敌人造成5伤害，攻击次数等于施放时存活敌人数。 升级：每次伤害5→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#FinalCurtain"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：对所有敌人造成5伤害，攻击次数等于施放时存活敌人数。 升级：每次伤害5→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#FinalCurtain"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：对所有敌人造成5伤害，攻击次数等于施放时存活敌人数。 升级：每次伤害5→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#FinalCurtain"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "总次数为初始存活敌人数，不是该数再加1；中途不重新计算次数。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#FinalCurtain"
+      ]
+    },
+    "FollowingPhrase": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能：获得6格挡；本回合自己上一张开始打出的牌是歌曲时，抽1张牌。 升级：格挡6→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#FollowingPhrase"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者上一张歌曲；小节按开始历史，祥移动按完成历史，嵌套时不同；原效果：1费技能：获得6格挡；本回合自己上一张开始打出的牌是歌曲时，抽1张牌。 升级：格挡6→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#FollowingPhrase"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "按CardPlaysStarted筛选同回合、同玩家，并排除本次CardPlay；非按整张牌实例排除。",
+        "本卡非歌曲；升级不增加抽牌数。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoBridgeCards.cs#FollowingPhrase"
+      ]
+    },
+    "Fragility": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：3费技能，消耗：获得17格挡、1层颜，回复8生命。 升级：格挡17→21；治疗8→11。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Fragility"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "enemy_hit",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先有颜，再受到怪物来源正TotalDamage；下次自身回合开始移除；原效果：3费技能，消耗：获得17格挡、1层颜，回复8生命。 升级：格挡17→21；治疗8→11。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Fragility"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "heal",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自身实际回复生命；原效果：3费技能，消耗：获得17格挡、1层颜，回复8生命。 升级：格挡17→21；治疗8→11。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Fragility"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：3费技能，消耗：获得17格挡、1层颜，回复8生命。 升级：格挡17→21；治疗8→11。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Fragility"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "颜层数不随升级增加；在自己下次回合开始清除。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Fragility"
+      ]
+    },
+    "GeorgetteMeGeorgetteYou": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：1费技能。自身当前HP>=目标当前HP时施加7压力；否则对目标造成7直接伤害。 升级：压力7增至9，伤害7增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "heal",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "治疗后当前HP满足与目标HP的比较，才进入施压分支；原效果：1费技能。自身当前HP>=目标当前HP时施加7压力；否则对目标造成7直接伤害。 升级：压力7增至9，伤害7增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费技能。自身当前HP>=目标当前HP时施加7压力；否则对目标造成7直接伤害。 升级：压力7增至9，伤害7增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "比较当前HP绝对值，不是比例、最大HP或已损失HP；两个分支互斥。",
+        "虽然可以造成伤害，类型仍是Skill，不触发仅Attack的重放。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"
+      ]
+    },
+    "GodYouFool": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "hp_loss",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际扣除生命、玩家存活；可能受损失上限影响；原效果：0费技能。失去3HP，然后抽2张牌。 升级：自身失血3降至1；仍抽2张。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#GodYouFool"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：0费技能。失去3HP，然后抽2张牌。 升级：自身失血3降至1；仍抽2张。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#GodYouFool"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "自身伤害使用Unblockable、Unpowered、Move；格挡不抵扣，实际生命损失仍可受生命损失上限影响。",
+        "不自带消耗；不能触发要求怪物来源的颜。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#GodYouFool"
+      ]
+    },
+    "Housewarming": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "只在生成实例大狗后续打出消耗或回合末虚无消耗时；乔迁本体不消耗；原效果：0费技能：生成1张带虚无、消耗的大狗大狗叫叫叫加入手牌。 升级：改为生成该牌升级版。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Housewarming"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "本卡不消耗；生成牌仍为1费。",
+        "生成牌虽有消耗、虚无，但不是GeneratedPressureCard。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Housewarming"
+      ]
+    },
+    "IHaveAscended": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗：生成1张原版Apotheosis加入弃牌堆。 升级：生成Apotheosis升级版，改为加入手牌。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#IHaveAscended"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "不直接升级现有牌；生成卡的效果仍需其自身打出。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#IHaveAscended"
+      ]
+    },
+    "ImprisonedXii": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "OnPlay为空；抽牌效果来自换堆钩子，不要求通过常规抽牌进入手牌。",
+        "无法打出在升级后保留；免费、Song身份都不解除它，InYourBlueEyes明确排除它。",
+        "仅进入手牌不会增加Song打出计数；手牌内操作不重复触发。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#ImprisonedXii"
+      ]
+    },
+    "InYourBlueEyes": {
+      "facts": [
+        {
+          "action": "replay",
+          "resource": "exhaust_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "合法实例在消耗堆快照、排除当前打出的实例；碧眼只选Song且打出两次；原效果：2费技能。从自己的消耗堆随机选择1张可选Song，自动打出该原实例两次。 升级：额外从弃牌堆随机选择1张Song也打出两次；先消耗堆来源，后弃牌堆来源。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"
+          ]
+        },
+        {
+          "action": "replay",
+          "resource": "discard_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "upgraded",
+          "amount": "",
+          "limit": null,
+          "condition": "升级碧眼另从弃牌堆快照选择Song，遵循原牌结算去向；原效果：2费技能。从自己的消耗堆随机选择1张可选Song，自动打出该原实例两次。 升级：额外从弃牌堆随机选择1张Song也打出两次；先消耗堆来源，后弃牌堆来源。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费技能。从自己的消耗堆随机选择1张可选Song，自动打出该原实例两次。 升级：额外从弃牌堆随机选择1张Song也打出两次；先消耗堆来源，后弃牌堆来源。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "两处候选在重放前一并快照；之后实例因抽牌或洗牌移动不一定失效，但移除、转移所有者或进入Play等会跳过。",
+        "排除Unplayable、本实例和正在执行的同类实例；不是创建副本，也不为目标永久减费。",
+        "自身没有消耗关键词；基础态没有弃牌堆来源，升级不改变2费。",
+        "目标的原有消耗/能力离场规则保留；八芒星可截断后续重复或第二来源。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"
+      ]
+    },
+    "Innocence": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "打出时不立即施加自闭。",
+        "自闭在目标侧回合末固定造成7伤害并减1层，层数不乘伤害。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Innocence"
+      ]
+    },
+    "KillKiss": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "enemy_turn_start",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌方回合开始前已生效，且压力严格大于目标当前HP一半；原效果：1费能力。敌方回合开始时，对压力严格大于其当前HP一半的每个存活敌人造成25直接伤害。 升级：条件伤害由25改为目标最大HP。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#KillKiss"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费能力。敌方回合开始时，对压力严格大于其当前HP一半的每个存活敌人造成25直接伤害。 升级：条件伤害由25改为目标最大HP。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#KillKiss"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "判断为压力>当前HP/2，不是>=；在敌方回合开始重新读取，不锁定出牌时状态。",
+        "不直接消耗压力；重复施加不叠加，升级能力取代普通能力。",
+        "升级效果仍是伤害，不是无条件移除敌人；伤害可参与其他受伤触发链。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#KillKiss"
+      ]
+    },
+    "LeaveItToMe": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：2费攻击：单体11伤害；移除目标至多7压力；回复自己5生命；若目标存活且仍有压力，施加1虚弱。 升级：伤害11→15。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "heal",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自身实际回复生命；原效果：2费攻击：单体11伤害；移除目标至多7压力；回复自己5生命；若目标存活且仍有压力，施加1虚弱。 升级：伤害11→15。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：2费攻击：单体11伤害；移除目标至多7压力；回复自己5生命；若目标存活且仍有压力，施加1虚弱。 升级：伤害11→15。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：2费攻击：单体11伤害；移除目标至多7压力；回复自己5生命；若目标存活且仍有压力，施加1虚弱。 升级：伤害11→15。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：2费攻击：单体11伤害；移除目标至多7压力；回复自己5生命；若目标存活且仍有压力，施加1虚弱。 升级：伤害11→15。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "治疗不要求成功消耗压力。",
+        "条件虚弱实际增加且仍有至少2压力时，还会兑换人格解离。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
+      ]
+    },
+    "LingeringResonance": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": 2,
+          "condition": "自己的本回合前2次实际消耗，能力先已生效；虚无计入；原效果：1费能力：生效期间每回合前2次自己的牌被消耗，各对所有敌人施加1压力。 升级：每次压力1→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#LingeringResonance"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": 2,
+          "condition": "能力先已生效，自己的前2次消耗触发；原效果：1费能力：生效期间每回合前2次自己的牌被消耗，各对所有敌人施加1压力。 升级：每次压力1→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#LingeringResonance"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "任意己方牌均可，包括虚无消耗，不限压力Token。",
+        "叠层不刷新额度；额度在拥有者回合开始重置；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoPressureCards.cs#LingeringResonance"
+      ]
+    },
+    "MasqueradeRhapsodyRequest": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：2费技能，消耗。对一个敌人施加floor((自身最大HP-当前HP)/2)压力。 升级：移除消耗，费用及压力公式不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "hp_loss",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "后续施放时缺失生命仍存在，期间未治回；原效果：2费技能，消耗。对一个敌人施加floor((自身最大HP-当前HP)/2)压力。 升级：移除消耗，费用及压力公式不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "base",
+          "amount": "",
+          "limit": null,
+          "condition": "只有未升级版带消耗；升级后移除；原效果：2费技能，消耗。对一个敌人施加floor((自身最大HP-当前HP)/2)压力。 升级：移除消耗，费用及压力公式不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费技能，消耗。对一个敌人施加floor((自身最大HP-当前HP)/2)压力。 升级：移除消耗，费用及压力公式不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "exhaust标签仅描述基础态；升级后不再自然进入消耗堆。",
+        "使用结算时累计缺失HP，不是本回合失血量；满血或只缺1HP时不施加压力。",
+        "本牌本身不造成自身失血。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
+      ]
+    },
+    "MusicOfTheCelestialSphere": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "逐敌检查；十字架要求所有存活检查对象都达门槛；原效果：2费技能。每个敌人按其当前压力计算，失去floor(压力/5)力量。 升级：除数5降至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere"
+          ]
+        },
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：2费技能。每个敌人按其当前压力计算，失去floor(压力/5)力量。 升级：除数5降至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费技能。每个敌人按其当前压力计算，失去floor(压力/5)力量。 升级：除数5降至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "没有足够压力产生至少1点减力量时跳过该目标。",
+        "成功的负力量变化可消耗1压力生成1张自闭；是每个目标的变化事件一次，不是每失去1力量一次。",
+        "因此本牌不是严格无消耗的压力阈值读取器。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere"
+      ]
+    },
+    "Notebook": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：2费技能：移除目标全部自闭，将移除层数转为等量压力。 升级：获得保留。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Notebook"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "目标没有正层数自闭时无效果。",
+        "转化放弃自闭剩余的后续伤害。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Notebook"
+      ]
+    },
+    "OctagramDance": {
+      "facts": [
+        {
+          "action": "sequence",
+          "resource": "card_type_order",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "本回合连续同类型时在第二张结算后结束自己的回合，队友不结束；原效果：4费技能，消耗。本回合自己的牌不消耗能量，X保留当前能量值；以Skill开始新序列，连续打出同类型牌时，在违规牌结算后结束自己的回合。 升级：费用4降至3；保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#OctagramDance"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：4费技能，消耗。本回合自己的牌不消耗能量，X保留当前能量值；以Skill开始新序列，连续打出同类型牌时，在违规牌结算后结束自己的回合。 升级：费用4降至3；保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#OctagramDance"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：4费技能，消耗。本回合自己的牌不消耗能量，X保留当前能量值；以Skill开始新序列，连续打出同类型牌时，在违规牌结算后结束自己的回合。 升级：费用4降至3；保留消耗。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#OctagramDance"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "能力在本牌效果内才施加，不自行免除本牌首次启动费用；已有能力时不重新施加或重置序列。",
+        "按CardType而非Song分类，Attack、Skill、Power均参与，自动打出和重复打出也参与。",
+        "只免能量，不承诺免除其他资源；结束后拦截后续自动打出及尚未开始的原生重复，已开始的违规效果仍结算。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongExpansionCards.cs#OctagramDance"
+      ]
+    },
+    "OverworkAnxiety": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗、虚无：抽1张牌。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#OverworkAnxiety"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "token_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "压力衍生牌实际打出，不只是主动消耗；原效果：0费技能，消耗、虚无：抽1张牌。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#OverworkAnxiety"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "仅自定义生成；不能进入普通奖励或原版随机生成。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#OverworkAnxiety"
+      ]
+    },
+    "PerkUp": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "无色候选受解锁及多人卡池限制；不修改生成牌费用；不消耗。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#PerkUp"
+      ]
+    },
+    "PersonaDissociation": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：1费技能，消耗、虚无：对目标施加1层人格解离，使其下一次正伤害乘2。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PersonaDissociation"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "token_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "压力衍生牌实际打出，不只是主动消耗；原效果：1费技能，消耗、虚无：对目标施加1层人格解离，使其下一次正伤害乘2。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PersonaDissociation"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "仅自定义生成；不能进入普通奖励或原版随机生成。",
+        "正TotalDamage结算后减1层；不限攻击牌；多层不是单次伤害乘更多倍。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#PersonaDissociation"
+      ]
+    },
+    "PullmanCrash": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "读取同一目标剩余压力；阈值见原效果；原效果：3费攻击，消耗：单体49伤害；攻击后目标压力大于8则施加1易伤。 升级：伤害49→61。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：3费攻击，消耗：单体49伤害；攻击后目标压力大于8则施加1易伤。 升级：伤害49→61。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：3费攻击，消耗：单体49伤害；攻击后目标压力大于8则施加1易伤。 升级：伤害49→61。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：3费攻击，消耗：单体49伤害；攻击后目标压力大于8则施加1易伤。 升级：伤害49→61。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：3费攻击，消耗：单体49伤害；攻击后目标压力大于8则施加1易伤。 升级：伤害49→61。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "BlackLimousine获得时加入永久牌组；不入普通奖励。",
+        "易伤在伤害之后；兑换还要求目标存活且易伤实际增加。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#PullmanCrash"
+      ]
+    },
+    "PutOnYourMask": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：1费技能：对单体施加2虚弱；目标施加前已有虚弱时，自己获得1层颜。 升级：虚弱2→3。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PutOnYourMask"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "enemy_hit",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先有颜，再受到怪物来源正TotalDamage；下次自身回合开始移除；原效果：1费技能：对单体施加2虚弱；目标施加前已有虚弱时，自己获得1层颜。 升级：虚弱2→3。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#PutOnYourMask"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "虚弱实际增加且目标压力至少2时，可消耗2压力兑换人格解离。",
+        "颜在怪物对自己造成正TotalDamage时，每层给伤害来源3压力；下次己方回合开始移除。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#PutOnYourMask"
+      ]
+    },
+    "RehearsalOrder": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "draw_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "抽牌堆现有普通或非凡Song，排除稀有，不生成；原效果：1费技能，消耗：从抽牌堆选择1张普通或非凡歌曲牌加入手牌。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：1费技能，消耗：从抽牌堆选择1张普通或非凡歌曲牌加入手牌。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "移动已有实例而非生成；排除Rare歌曲；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder"
+      ]
+    },
+    "RestorationOfPower": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "生成手牌成功；随机生成不保证具体卡名；原效果：0费技能，消耗：生成1张随机压力衍生牌加入手牌。 升级：生成数量1→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#RestorationOfPower"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗：生成1张随机压力衍生牌加入手牌。 升级：生成数量1→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#RestorationOfPower"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "不修改衍生牌的正常费用；升级的两次生成可同名。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#RestorationOfPower"
+      ]
+    },
+    "STheWay": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "hp_loss",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际扣除生命、玩家存活；可能受损失上限影响；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：0费攻击。造成8伤害；若目标死亡，抽1张牌；否则自身失去4HP，并使自身与目标本回合各失去1敏捷。 升级：伤害8增至14；未击杀的4HP代价和双方-1敏捷不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#STheWay"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "击杀分支与失血/减敏捷分支互斥；重复打出每次重新判断。",
+        "目标成功失去敏捷且压力>=1时可消耗1压力生成自闭，自身减敏捷不兑换敌人压力。",
+        "自身失血为Unblockable、Unpowered；临时减敏捷通过隐藏TemporaryDexterity子类实现，不应把其记账变化重复计算为赎回。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#STheWay"
+      ]
+    },
+    "SakiMovePlz": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：1费攻击：单体9伤害；若本回合自己此前打出的牌是歌曲，攻击后对存活目标施加1易伤。 升级：伤害9→13。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者上一张歌曲；小节按开始历史，祥移动按完成历史，嵌套时不同；原效果：1费攻击：单体9伤害；若本回合自己此前打出的牌是歌曲，攻击后对存活目标施加1易伤。 升级：伤害9→13。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：单体9伤害；若本回合自己此前打出的牌是歌曲，攻击后对存活目标施加1易伤。 升级：伤害9→13。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：单体9伤害；若本回合自己此前打出的牌是歌曲，攻击后对存活目标施加1易伤。 升级：伤害9→13。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：单体9伤害；若本回合自己此前打出的牌是歌曲，攻击后对存活目标施加1易伤。 升级：伤害9→13。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "虽定义于SongCards文件，本卡不是歌曲；易伤在本次伤害之后。",
+        "使用GetPreviouslyPlayedCardThisTurn查询；实际增加易伤且目标压力至少3时可兑换眩晕Token。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
+      ]
+    },
+    "SeverThePast": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "draw_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "弃牌非空才合并洗牌；会破坏既有置顶顺序；原效果：1费攻击：单体8伤害；将弃牌堆并入抽牌堆，然后洗牌。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SeverThePast"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：单体8伤害；将弃牌堆并入抽牌堆，然后洗牌。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SeverThePast"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：单体8伤害；将弃牌堆并入抽牌堆，然后洗牌。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SeverThePast"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：单体8伤害；将弃牌堆并入抽牌堆，然后洗牌。 升级：伤害8→12。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SeverThePast"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "不直接抽牌；弃牌堆为空时不洗牌。",
+        "有弃牌时会打乱原抽牌堆顶的安排。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#SeverThePast"
+      ]
+    },
+    "ShadowOfThePastI": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "来自UnattendedPiano；非普通奖励或随机生成。",
+        "只在Deck实例的战斗结束钩子计数，不要求抽到。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#ShadowOfThePastI"
+      ]
+    },
+    "ShadowOfThePastII": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "来自UnattendedPiano；按StrikeTogawasakiko和DefendTogawasakiko类型各找第一张。",
+        "缺少某一类就跳过该类，不要求未升级；只在Deck实例计数。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#ShadowOfThePastII"
+      ]
+    },
+    "ShadowOfThePastIII": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "来自UnattendedPiano；没有DollMask则无替换收益，但仍移除自身。",
+        "替换后每个己方回合开始对全敌施压由1变3；只在Deck实例计数。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#ShadowOfThePastIII"
+      ]
+    },
+    "SheIsRadiant": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "all_enemies",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费能力：移除所有敌人全部当前压力，自己获得3力量。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SheIsRadiant"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费能力：移除所有敌人全部当前压力，自己获得3力量。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SheIsRadiant"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "无压力也获得3力量；收益不随移除量增加。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#SheIsRadiant"
+      ]
+    },
+    "Slander": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "读取同一目标剩余压力；阈值见原效果；原效果：1费攻击：单体伤害为4+目标当前压力×2。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Slander"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：单体伤害为4+目标当前压力×2。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Slander"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：单体伤害为4+目标当前压力×2。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Slander"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：单体伤害为4+目标当前压力×2。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Slander"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "只读取目标压力，不消耗压力。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Slander"
+      ]
+    },
+    "SoManyMaggots": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_discarded",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己的牌确实从手中弃置；无可选牌不产生事件；原效果：1费技能：自己有手牌则弃1张；移除指定玩家身上全部Debuff型能力。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SoManyMaggots"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "可指定队友；没有手牌仍执行净化。",
+        "按PowerType.Debuff筛选，不等于移除所有负数能力。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#SoManyMaggots"
+      ]
+    },
+    "SocialWithdrawal": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗、虚无：对目标施加3层自闭；目标侧回合末造成7伤害并减1层。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SocialWithdrawal"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "token_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "压力衍生牌实际打出，不只是主动消耗；原效果：0费技能，消耗、虚无：对目标施加3层自闭；目标侧回合末造成7伤害并减1层。 升级：源码未定义专属升级增益。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#SocialWithdrawal"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "仅自定义生成；不能进入普通奖励或原版随机生成。",
+        "层数控制持续次数，不是每层7伤害。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#SocialWithdrawal"
+      ]
+    },
+    "Sophie": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。 升级：格挡7增至12；其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Sophie"
+          ]
+        },
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。 升级：格挡7增至12；其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Sophie"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "inferiority",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自卑分支实际施加，后续每个正TotalDamage降低1力量；原效果：2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。 升级：格挡7增至12；其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Sophie"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先成功施加自卑，再有正TotalDamage；包括被完全格挡的正总伤害；原效果：2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。 升级：格挡7增至12；其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Sophie"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费技能。自身获得7格挡，对目标施加1自卑，自身获得1虚弱。 升级：格挡7增至12；其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Sophie"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "weak标签指自身虚弱，不是给敌人虚弱；不能据此建立敌方虚弱赎回人格解离的供给边。",
+        "目标成功获得自卑且有足够压力可兑换过劳焦虑；自卑后的伤害还可引起减力量赎回。",
+        "自身虚弱会削弱后续攻击，需与多段自卑收益同时评估。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#Sophie"
+      ]
+    },
+    "Speak": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "生成手牌成功；随机生成不保证具体卡名；原效果：0费技能，消耗：生成1张人格解离加入手牌，设为本场0费。 升级：获得固有。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Speak"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗：生成1张人格解离加入手牌，设为本场0费。 升级：获得固有。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Speak"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "生成未升级的人格解离；其原有消耗、虚无保留。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Speak"
+      ]
+    },
+    "StrikeTogawasakiko": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击：对单体造成6伤害。 升级：伤害6→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#StrikeTogawasakiko"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击：对单体造成6伤害。 升级：伤害6→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#StrikeTogawasakiko"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击：对单体造成6伤害。 升级：伤害6→9。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#StrikeTogawasakiko"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "Basic；具有Strike标签。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#StrikeTogawasakiko"
+      ]
+    },
+    "SymbolI": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：1费攻击。造成3伤害3次，每段独立随机选敌；之后获得1层本回合Symbol I。 升级：每段伤害3增至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolI"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：1费攻击。造成3伤害3次，每段独立随机选敌；之后获得1层本回合Symbol I。 升级：每段伤害3增至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolI"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：1费攻击。造成3伤害3次，每段独立随机选敌；之后获得1层本回合Symbol I。 升级：每段伤害3增至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolI"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费攻击。造成3伤害3次，每段独立随机选敌；之后获得1层本回合Symbol I。 升级：每段伤害3增至4。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolI"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "回合结束按不同Symbol种类计数：>=2种获得5格挡，>=3种另对随机敌人造成13伤害，4种另对所有敌人施加10压力。",
+        "同种重复层数不增加种类；I、II、III在结算后全部移除，IV保留。",
+        "三段不保证命中同一敌人。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#SymbolI"
+      ]
+    },
+    "SymbolIi": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "Debuff确实增加且压力足够时watcher才兑换；多人共享压力、唯一收益归属；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "inferiority",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自卑分支实际施加，后续每个正TotalDamage降低1力量；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "先成功施加自卑，再有正TotalDamage；包括被完全格挡的正总伤害；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费攻击。对所有敌人造成6伤害，再对存活目标各施加1自卑；自身获得1层本回合Symbol II。 升级：群体伤害6增至9。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "先伤害后施加自卑，新施加的自卑不追溯本次伤害。",
+        "自卑成功增加且目标压力>=1时消耗1压力生成过劳焦虑；自卑生效后每次正伤害事件使目标失去1力量，另可按1压力赎回自闭。",
+        "自卑多层延长存续，不将每次减力量乘以层数；同种Symbol多层不增加种类。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
+      ]
+    },
+    "SymbolIii": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：0费技能。获得初始3加已有成长值的格挡；之后此牌永久成长+1格挡，并获得1层本回合Symbol III。 升级：初始格挡3增至7；每次成长仍为+1。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIii"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：0费技能。获得初始3加已有成长值的格挡；之后此牌永久成长+1格挡，并获得1层本回合Symbol III。 升级：初始格挡3增至7；每次成长仍为+1。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIii"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "每次实际打出都会成长，当前实例及存在的DeckVersion同步增加；不是旧文档中的每次+3。",
+        "战斗临时生成的实例没有DeckVersion，不凭空创建永久牌组牌。",
+        "Symbol标记仅本回合，格挡基础成长是另一种持久状态。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#SymbolIii"
+      ]
+    },
+    "SymbolIv": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：2费能力。获得1层持久Symbol IV；自己的回合开始后段每层额外抽1张牌。 升级：费用2降至1。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#SymbolIv"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "可叠层增加抽牌，但回合结束无论多少层只算1种Symbol。",
+        "与Symbol I、II、III不同，不在Symbol回合末结算后移除。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#SymbolIv"
+      ]
+    },
+    "TheWholeBlueWorld": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "hp_loss",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际扣除生命、玩家存活；可能受损失上限影响；原效果：1费技能。失去5HP，然后随机生成2张Song加入手牌；这些新实例本场费用减1。 升级：生成实例改为本场能量费用0；其中X牌不消耗能量且X取当前能量。5HP与2张数量不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"
+          ]
+        },
+        {
+          "action": "generate",
+          "resource": "song_pool_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "仅歌曲池随机候选，不保证抽中；非永久入组；原效果：1费技能。失去5HP，然后随机生成2张Song加入手牌；这些新实例本场费用减1。 升级：生成实例改为本场能量费用0；其中X牌不消耗能量且X取当前能量。5HP与2张数量不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：1费技能。失去5HP，然后随机生成2张Song加入手牌；这些新实例本场费用减1。 升级：生成实例改为本场能量费用0；其中X牌不消耗能量且X取当前能量。5HP与2张数量不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "自身没有消耗；生成来源为维护的Song卡池，不要求可手动打出，因此可能得到被囚禁的12。",
+        "不升级生成牌、不修改其他同名实例或永久牌组；普通态是相对减费，不冻结后续费用变化。",
+        "失血为Unblockable、Unpowered；失血后死亡或战斗结束不继续生成。",
+        "生成本身不是打出；升级免费X规则跟随该战斗的生成实例来源及零费修改。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"
+      ]
+    },
+    "Thrilled": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_discarded",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己的牌确实从手中弃置；无可选牌不产生事件；原效果：0费技能：获得2能量；若手中有歌曲牌，选择弃掉1张。 升级：能量2→3。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Thrilled"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "先给能量；没有歌曲手牌也可获得能量。",
+        "本卡非歌曲，不消耗。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Thrilled"
+      ]
+    },
+    "TreasurePleasure": {
+      "facts": [
+        {
+          "action": "replay",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "本回合、自己攻击牌完整结算后；再次支付效果代价；原效果：0费技能，消耗。自身获得1人格解离，并获得本回合的攻击重放能力；每次自己的攻击牌打出后，尝试额外自动打出同一实例。 升级：移除消耗，其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "base",
+          "amount": "",
+          "limit": null,
+          "condition": "只有未升级版带消耗；升级后移除；原效果：0费技能，消耗。自身获得1人格解离，并获得本回合的攻击重放能力；每次自己的攻击牌打出后，尝试额外自动打出同一实例。 升级：移除消耗，其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：0费技能，消耗。自身获得1人格解离，并获得本回合的攻击重放能力；每次自己的攻击牌打出后，尝试额外自动打出同一实例。 升级：移除消耗，其他效果不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "exhaust标签描述基础态，升级后不再自带消耗。",
+        "重放能力不叠加，并有同实例递归保护；重放整个攻击效果而非只复制伤害。",
+        "自身人格解离可累积，在正受伤事件后减1层；不会随本回合重放能力一起移除。不能直接断言Unpowered自身失血会被翻倍。",
+        "原目标存活则优先复用，否则尝试合法替代；自动重放会参与八芒星类型序列。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure"
+      ]
+    },
+    "TwoMoonsDeepIntoTheForest": {
+      "facts": [
+        {
+          "action": "read",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "只统计同一持有者本场战斗的实际歌曲出牌；原效果：初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。 升级：伤害20增至30；初始费用及折扣规则不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "正常攻击伤害走力量修正；多段逐段计算，目标需存活；原效果：初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。 升级：伤害20增至30；初始费用及折扣规则不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "attack_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际打出而非单次攻击段数；原效果：初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。 升级：伤害20增至30；初始费用及折扣规则不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "damage_received",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "敌人确实受到正TotalDamage，独立命中逐次结算；原效果：初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。 升级：伤害20增至30；初始费用及折扣规则不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "song_played",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "同一持有者实际打出；不是生成/抽取/消耗；原效果：初始7费攻击。造成20伤害；本场每实际打出1张自己的Song，此牌费用降低1。 升级：伤害20增至30；初始费用及折扣规则不变。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "重复打出的Song也计数，其他玩家的Song与非Song不计数。",
+        "晚进入战斗的非克隆实例从已完成打出历史补折扣；克隆保留原费用修改，不重复回溯。",
+        "生成、抽入、丢弃或单纯消耗Song不是打出；其自身实际打出也可增加后续折扣。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
+      ]
+    },
+    "Unendurable": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：2费技能：获得8格挡，对指定敌人施加3压力。 升级：格挡8→11；压力3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Unendurable"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：2费技能：获得8格挡，对指定敌人施加3压力。 升级：格挡8→11；压力3→4。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#Unendurable"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "需要指定敌人；先获得格挡，再施加压力。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#Unendurable"
+      ]
+    },
+    "UnfinishedScore": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "block",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能：获得5格挡；从弃牌堆选择1张歌曲牌置于抽牌堆顶。 升级：格挡5→8。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#UnfinishedScore"
+          ]
+        },
+        {
+          "action": "read",
+          "resource": "discard_pile_access",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "歌曲实际在弃牌堆，置顶不等于直接入手或打出；原效果：1费技能：获得5格挡；从弃牌堆选择1张歌曲牌置于抽牌堆顶。 升级：格挡5→8。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#UnfinishedScore"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "没有歌曲候选仍获得格挡；不直接抽取该牌；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoBridgeCards.cs#UnfinishedScore"
+      ]
+    },
+    "Unmask": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "pressure",
+          "scope": "enemy",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "施压分支成立、目标存活；共享敌方压力未被花掉；原效果：0费技能，消耗：抽1张；若自己有颜，移除全部颜，再抽1张并对目标施加3压力。 升级：条件压力3→5。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#Unmask"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗：抽1张；若自己有颜，移除全部颜，再抽1张并对目标施加3压力。 升级：条件压力3→5。",
+          "evidence": [
+            "src/Cards/TogawasakikoBridgeCards.cs#Unmask"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "没有颜时只抽1；消耗多层颜也只结算一次额外收益。",
+        "施压要求目标仍存活；本卡非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoBridgeCards.cs#Unmask"
+      ]
+    },
+    "UnspokenWords": {
+      "facts": [
+        {
+          "action": "consume",
+          "resource": "pressure_token",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "选择自己手中GeneratedPressureCard并确实消耗，不打出其效果；原效果：1费技能：选择手中任意n张压力衍生牌并消耗，每张获得5格挡。 升级：每张格挡5→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "手中压力衍生牌实际被主动消耗；不同于打出；原效果：1费技能：选择手中任意n张压力衍生牌并消耗，每张获得5格挡。 升级：每张格挡5→7。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "允许选0张；没有固定基础格挡；本卡本身不消耗。",
+        "消耗前快照选择集，不包含消耗钩子新抽到的牌；非歌曲。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"
+      ]
+    },
+    "UntilNextAct": {
+      "facts": [],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "只改选中实例，不改变费用，也不移除原有消耗。",
+        "不适用于Housewarming生成的大狗大狗叫叫叫；本卡非歌曲。",
+        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoPressureCards.cs#UntilNextAct"
+      ]
+    },
+    "WeightliftingChampion": {
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "strength",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能，消耗：失去4生命，获得1力量和1敏捷。 升级：失去生命4→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "dexterity",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "无额外条件；原效果：1费技能，消耗：失去4生命，获得1力量和1敏捷。 升级：失去生命4→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "hp_loss",
+          "scope": "self",
+          "timing": "on_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "实际扣除生命、玩家存活；可能受损失上限影响；原效果：1费技能，消耗：失去4生命，获得1力量和1敏捷。 升级：失去生命4→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
+          ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：1费技能，消耗：失去4生命，获得1力量和1敏捷。 升级：失去生命4→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
+          ]
+        }
+      ],
+      "limitations": [
+        "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
+        "先支付生命；升级不增加属性收益。"
+      ],
+      "evidence": [
+        "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
+      ]
+    }
+  }
+}

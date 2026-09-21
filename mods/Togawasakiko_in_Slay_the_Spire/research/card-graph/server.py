@@ -15,6 +15,8 @@ from urllib.parse import unquote, urlsplit
 from workbench_model import ValidationError, RevisionConflict, CorruptWorkspace, compose_graph
 from workbench_store import WorkspaceStore
 from workbench_assets import MAX_BYTES
+from relation_rules import load_profiles, suggest_relations
+from workbench_model import require
 
 STATIC=set(('index.html graph.css graph.js graph-data.js relation-style.js card-references.js card-aliases.js '
             'workbench-api.js draft-editor.js draft-editor.css workbench.js README.md '
@@ -27,7 +29,8 @@ class HttpError(Exception):
 
 def create_server(root:Path, workspace:Path, port=8765):
     root=Path(root).resolve();baseline=json.loads((root/'graph.json').read_text())
-    store=WorkspaceStore(workspace,baseline)
+    profiles=load_profiles(root/'mechanic-profiles.json',baseline)
+    store=WorkspaceStore(workspace,baseline,profiles)
     token=secrets.token_urlsafe(32)
     assets=(root.parents[3]/baseline['meta']['source_worktree']/baseline['meta']['mod_directory']/'assets').resolve()
     portraits={n['id']:(root/n['portrait']).resolve() for n in baseline['nodes'] if n.get('portrait')}
@@ -68,7 +71,7 @@ def create_server(root:Path, workspace:Path, port=8765):
                 if path=='/api/bootstrap':
                     return self.reply(200,{'token':token,'graph':http_graph(compose_graph(baseline,store.read(),store.profiles)),
                         'workspace':store.read(),'profiles_revision':store.profiles.get('revision','none'),
-                        'capabilities':{'editing':True,'analysis':False}})
+                        'capabilities':{'editing':True,'analysis':True}})
                 if path=='/api/graph': return self.reply(200,http_graph(compose_graph(baseline,store.read(),store.profiles)))
                 if path=='/api/export': return self.reply(200,store.read(),download=True)
                 if path.startswith('/api/portraits/'):
@@ -113,7 +116,13 @@ def create_server(root:Path, workspace:Path, port=8765):
             except (ValueError,UnicodeDecodeError): raise HttpError(400,'JSON格式无效')
             if not isinstance(body,dict): raise HttpError(400,'请求必须为对象')
             if path=='/api/commands': return self.reply(200,store.apply(body.get('command'),body.get('expected_revision')))
-            if path in ('/api/analyze','/api/preview'): raise HttpError(503,'分析档案尚未加载')
+            if path in ('/api/analyze','/api/preview'):
+                state=store.read();identifier=body.get('draft_id')
+                require(isinstance(identifier,str) and identifier in state['entries'],'找不到草稿')
+                analysis=suggest_relations(identifier,body.get('card'),baseline,state,profiles)
+                if path=='/api/analyze': return self.reply(200,analysis)
+                preview={**body,'relations':analysis['suggestions']}
+                return self.reply(200,{'graph':http_graph(compose_graph(baseline,state,profiles,preview)), 'analysis':analysis})
             raise HttpError(404,'接口不存在')
 
     try:
