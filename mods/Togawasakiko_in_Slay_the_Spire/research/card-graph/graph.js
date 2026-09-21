@@ -1,7 +1,7 @@
 /* global cytoscape, lucide */
 (() => {
   "use strict";
-  const graph = window.CARD_GRAPH;
+  let graph = window.CARD_GRAPH;
   const $ = id => document.getElementById(id);
   if (!graph || typeof cytoscape !== "function") {
     $("error").hidden = false;
@@ -32,7 +32,33 @@
       {selector:"edge.highlight",style:{"width":3,"opacity":1,"z-index":10}},
       {selector:".dim",style:{"opacity":0.15}}
     ]});
-  window.cardGraphView = {cy, state, data:graph};
+  const history=[];
+  let resolveExtra=()=>null;
+  function capture(){return {state:{...state},nodePositions:Object.fromEntries(cy.nodes().map(n=>[n.id(),{...n.position()}])),zoom:cy.zoom(),pan:{...cy.pan()}};}
+  function restore(snapshot){
+    Object.assign(state,snapshot.state);
+    if(!nodes.has(state.selected)){state.selected='Completeness';state.edge=null;$('error').hidden=false;$('error').textContent='原卡牌已不可用，已返回完美无缺。';}
+    const edge=state.edge;syncControls();renderList();renderGraph();
+    cy.nodes().forEach(n=>{if(snapshot.nodePositions[n.id()])n.position(snapshot.nodePositions[n.id()]);});
+    cy.zoom(snapshot.zoom);cy.pan(snapshot.pan);
+    const relation=graph.edges.find(e=>e.id===edge);if(relation)selectEdge(relation);
+  }
+  function syncControls(){
+    $('search').value=state.search;$('type-filter').value=state.type;$('pool-filter').value=state.pool;
+    $('proposal-filter').checked=state.showProposals;$('relation-filter').value=state.kind;$('direction-filter').value=state.direction;
+  }
+  function navigate(id){
+    if(!nodes.has(id)){window.dispatchEvent(new CustomEvent('card-reference-open',{detail:{id}}));return;}
+    history.push(capture());state.showProposals=true;state.kind='all';state.direction='both';syncControls();selectNode(id);
+  }
+  function historyButton(box){if(history.length){const back=el('button','back-button','返回上个视图');back.type='button';back.onclick=()=>restore(history.pop());box.prepend(back);}}
+  window.cardGraphView = {cy,state,get data(){return graph;},capture,restore,focusCard:navigate,
+    selectEdge:id=>{const edge=graph.edges.find(e=>e.id===id);if(edge)selectEdge(edge);},
+    setReferenceResolver:resolver=>{resolveExtra=resolver;},
+    replaceGraph(next,{preserveView=true}={}){const previous=capture();graph=next;nodes.clear();graph.nodes.forEach(n=>nodes.set(n.id,n));
+      $('total-count').textContent=`${graph.counts.implemented} 已实现 · ${graph.counts.proposals} 提案`;
+      if(preserveView)restore(previous);else{if(!nodes.has(state.selected))state.selected='Completeness';renderList();renderGraph();}
+    }};
 
   function baseNodes() { return graph.nodes.filter(n => state.showProposals || n.status!=="proposal"); }
   function filteredEdges() {
@@ -77,7 +103,7 @@
     if(!result.length)list.append(el("p","empty","没有匹配的卡牌"));
     $("list-count").textContent=`${result.length} 张`;
   }
-  function section(title,text) { const box=el("section","effect-section");box.append(el("h3","",title),el("p","",text));return box; }
+  function section(title,text) { const box=el("section","effect-section"),p=el('p');CardReferences.render(p,CardReferences.tokenize(text||'',nodes,CardAliases),navigate);box.append(el("h3","",title),p);return box; }
   function evidenceLinks(container,references) {
     [...new Set(references)].forEach(reference=>{
       const entry=graph.evidence[reference];
@@ -102,7 +128,7 @@
       button.append(row,el("span","relation-type",`${kindNames[edge.kind]} · ${edge.mechanism}${edge.status==="proposal"?" · 提案":""}`));button.onclick=()=>selectEdge(edge);box.append(button);
     });
     if(!edges.length)box.append(el("p","empty","该筛选下无已记录的直接关系。"));
-    icons();
+    historyButton(box);icons();
   }
   function selectNode(id) {
     state.selected=id;renderList();renderGraph();
@@ -115,11 +141,12 @@
     const box=$("detail-content");box.replaceChildren();
     const back=el("button","back-button","返回卡牌");back.type="button";back.onclick=()=>{state.edge=null;cy.elements().removeClass("highlight dim");renderDetail();};box.append(back);
     const heading=el("h2","edge-heading");
-    [edge.source,edge.target].forEach((id,i)=>{if(i)heading.append(el("span",""," → "));const button=el("button","",nodes.get(id).name);button.type="button";button.onclick=()=>selectNode(id);heading.append(button);});
+    [edge.source,edge.target].forEach((id,i)=>{if(i)heading.append(el("span",""," → "));const button=el("button","card-reference",nodes.get(id).name);button.type="button";button.dataset.cardId=id;button.onclick=()=>navigate(id);heading.append(button);});
     box.append(heading,el("p",`badge ${negative(edge)?"negative":""}`,`${kindNames[edge.kind]} · ${edge.mechanism}`));
     if(edge.status==="proposal")box.append(el("p","status-note","涉及未实现提案，不代表当前游戏效果"));
     box.append(section("成立条件",edge.condition),section("关系解释",edge.reason));
     const evidence=el("section","effect-section");evidence.append(el("h3","","源码依据 · 0.2.3"));evidenceLinks(evidence,edge.evidence);box.append(evidence);
+    historyButton(box);
   }
   cy.on("tap","node",event=>selectNode(event.target.id()));
   cy.on("mouseover","node",event=>event.target.addClass("hovered"));
@@ -152,4 +179,5 @@
   });
   $("total-count").textContent=`${graph.counts.implemented} 已实现 · ${graph.counts.proposals} 提案`;
   renderList();renderGraph();icons();
+  CardReferences.bindPreview(document.body,id=>nodes.get(id)||resolveExtra(id),navigate);
 })();
