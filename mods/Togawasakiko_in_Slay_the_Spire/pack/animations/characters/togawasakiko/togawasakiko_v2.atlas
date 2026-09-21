@@ -243,3 +243,16 @@ death_fall_prone
   orig: 1024, 1536
   offset: 0, 0
   index: -1
+
+images/death_halo_ring.png
+size: 193,193
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+death_halo_ring
+  rotate: false
+  xy: 0, 0
+  size: 193, 193
+  orig: 193, 193
+  offset: 0, 0
+  index: -1

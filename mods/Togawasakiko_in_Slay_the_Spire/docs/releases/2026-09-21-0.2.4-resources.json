@@ -1,0 +1,8 @@
+{
+  "animations/characters/togawasakiko/togawasakiko_v2.atlas": "8a12c86df0a190c3b3c30cd5e7fe3fa8bc27b89b715d3ca99d9d21f2e2653b43",
+  "animations/characters/togawasakiko/togawasakiko_v2.spine-json": "ac70e31f902b3e772de061ef97e0c14acfca1328f8a067b911c6822325b92670",
+  "animations/characters/togawasakiko/images/death_halo_ring.png": "1b9aa0dce6f8d9347c7f76fb07ec78afea162e8ca399aed3fbf635bf55c2e008",
+  "animations/characters/togawasakiko/images/fall_prone_candidate_v3_idle_locked.png": "44d29aa578320a1eba2ef50c9a94e2a338365763f7417a0cca4c0919e1533f39",
+  "scenes/vfx/togawasakiko/thorn_restraint.gd": "8e8cd9693c8923b7f0749dd24e84d2a4f865d1fe8a28d723b53215f4c33f5567",
+  "scenes/vfx/togawasakiko/thorn_shadow.gdshader": "352917227eb97a103e5e812bc061f15385031668f251c7cea4f5b4ae082c49b7"
+}
