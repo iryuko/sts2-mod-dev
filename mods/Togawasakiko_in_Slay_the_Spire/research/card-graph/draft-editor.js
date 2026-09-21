@@ -125,7 +125,7 @@
     const beforeUnload=e=>{if(seq!==saved){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',beforeUnload);
     return {async open(next){await flush();entry=structuredClone(next);working=structuredClone(next.working);seq=0;saved=0;status.textContent='已保存';message.textContent='';title.textContent=next.archived?'已归档草案':'设计草案';
         for(const [key,input] of Object.entries(fields)){if(key==='song')input.checked=working.song;else input.value=key.includes('keywords')?working[key].join(', '):working[key]??'';}
-        form.querySelectorAll('input,select,textarea,button').forEach(input=>input.disabled=next.archived);save.disabled=next.archived;analyze.disabled=next.archived;renderMechanics();readFields();renderPreview();},
+        save.disabled=next.archived;analyze.disabled=next.archived;renderMechanics();form.querySelectorAll('input,select,textarea,button').forEach(input=>input.disabled=next.archived);readFields();renderPreview();},
       flush,get id(){return entry?.id;},get card(){readFields();return structuredClone(working);},get dirty(){return seq!==saved;},
       download(){download({id:entry?.id,card:working,form:Object.fromEntries(Object.entries(fields).map(([k,input])=>[k,input.type==='checkbox'?input.checked:input.value]))},'sakiko-local-draft.json');},
       discard(){clearTimeout(timer);saved=seq;},dispose(){clearTimeout(timer);window.removeEventListener('beforeunload',beforeUnload);root.replaceChildren();}};

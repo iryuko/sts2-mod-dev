@@ -71,6 +71,29 @@ const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/p
       await page.setViewportSize({width,height});
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     }
+    await page.setViewportSize({width:1440,height:1000});
+    await page.getByRole('button',{name:'试放并分析',exact:true}).click();
+    await page.waitForFunction(()=>cardGraphView.data.nodes.some(n=>n.id.startsWith('draft:')));
+    await page.locator('.review-row summary').first().click();
+    await page.getByRole('button',{name:'确认关系',exact:true}).first().click();
+    await page.getByRole('button',{name:'纳入全局提案',exact:true}).click();
+    await page.getByRole('button',{name:'确认纳入',exact:true}).click();
+    await page.waitForFunction(()=>Object.values(sakikoWorkbench.api.workspace.entries).some(e=>e.published));
+    const id=await page.evaluate(()=>sakikoWorkbench.editor.id);
+    const originalEffect=await page.evaluate(async id=>(await sakikoWorkbench.api.graph()).nodes.find(n=>n.id===id).base,id);
+    await page.getByRole('button',{name:'草案',exact:true}).click();
+    await page.getByLabel('基础效果',{exact:true}).fill('修改草稿不应自动发布');
+    await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='已保存');
+    assert.equal(await page.evaluate(async id=>(await sakikoWorkbench.api.graph()).nodes.find(n=>n.id===id).base,id),originalEffect);
+    await page.getByRole('button',{name:'试放并分析',exact:true}).click();
+    await page.getByRole('button',{name:/待复核/}).click();
+    assert.ok(await page.locator('.review-row').count()>0);
+    page.on('dialog',dialog=>dialog.accept());
+    await page.getByRole('button',{name:'撤回提案',exact:true}).click();
+    await page.waitForFunction(()=>Object.values(sakikoWorkbench.api.workspace.entries).every(e=>!e.published));
+    assert.equal(await page.evaluate(async id=>(await sakikoWorkbench.api.graph()).nodes.some(n=>n.id===id),id),false);
+    assert.ok(await page.evaluate(id=>sakikoWorkbench.api.workspace.entries[id],id));
     assert.deepEqual(errors,[]);
     console.log('PASS draft fields, image upload, persistence, stale tab conflict, late save, responsive layouts');
   } finally {

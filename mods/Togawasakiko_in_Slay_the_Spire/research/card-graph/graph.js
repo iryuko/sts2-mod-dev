@@ -29,7 +29,8 @@
       {selector:"node.overview",style:{"label":""}},
       {selector:"node.overview.selected, node.overview.hovered",style:{"label":"data(label)"}},
       {selector:"edge",style:{"width":1.6,"line-color":"data(color)","target-arrow-color":"data(color)","target-arrow-shape":"data(arrowShape)","line-style":"data(lineStyle)","line-dash-pattern":e=>e.data('dashPattern'),"arrow-scale":1,"curve-style":"bezier","opacity":0.68}},
-      {selector:"edge.proposal",style:{"opacity":0.45}},
+      {selector:"edge.proposal",style:{"opacity":0.55}},
+      {selector:"edge.suggested",style:{"opacity":0.3}},
       {selector:"edge.highlight",style:{"width":3,"opacity":1,"z-index":10}},
       {selector:".dim",style:{"opacity":0.15}}
     ]});
@@ -77,7 +78,7 @@
     cy.batch(() => {
       cy.elements().remove();
       cy.add(shown.map(n=>({group:"nodes",data:{id:n.id,label:label(n),color:colors[n.type]||"#737672"},classes:[n.id===state.selected?"selected":"",n.status==="proposal"?"proposal":"",state.mode==="global"?"overview":""].join(" ")})));
-      cy.add(visibleEdges.filter(e=>ids.has(e.source)&&ids.has(e.target)).map(e=>({group:"edges",data:{id:e.id,source:e.source,target:e.target,kind:e.kind,...RelationStyle.styles(e.kind)},classes:[negative(e)?"negative":"",e.status==="proposal"?"proposal":""].join(" ")})));
+      cy.add(visibleEdges.filter(e=>ids.has(e.source)&&ids.has(e.target)).map(e=>({group:"edges",data:{id:e.id,source:e.source,target:e.target,kind:e.kind,...RelationStyle.styles(e.kind)},classes:[negative(e)?"negative":"",e.status==="proposal"?"proposal":"",e.suggested?'suggested':''].join(" ")})));
     });
     layout=cy.layout(state.mode==="focus"
       ? {name:"concentric",animate:false,fit:true,padding:32,nodeDimensionsIncludeLabels:true,avoidOverlap:true,minNodeSpacing:18,concentric:node=>node.id()===state.selected?2:1,levelWidth:()=>1}
