@@ -41,5 +41,23 @@ class StoreTests(unittest.TestCase):
             with self.assertRaises(CorruptWorkspace): WorkspaceStore(self.root,BASE)
             self.assertEqual((self.root/'workspace.json').read_text(),payload)
 
+    def test_symlinked_storage_folders_never_write_outside_root(self):
+        for folder in ['history','uploads']:
+            with self.subTest(folder=folder), tempfile.TemporaryDirectory() as root, tempfile.TemporaryDirectory() as outside:
+                store=WorkspaceStore(Path(root),BASE)
+                try:
+                    (Path(root)/folder).symlink_to(outside,target_is_directory=True)
+                    if folder=='history':
+                        with self.assertRaises((OSError,CorruptWorkspace)):
+                            store.apply({'action':'create','card':card()},0)
+                    else:
+                        from io import BytesIO
+                        from PIL import Image
+                        data=BytesIO();Image.new('RGB',(2,2)).save(data,format='PNG')
+                        with self.assertRaises((OSError,CorruptWorkspace)): store.add_image(data.getvalue(),0)
+                    self.assertEqual(list(Path(outside).iterdir()),[])
+                    self.assertEqual(store.read()['revision'],0)
+                finally: store.close()
+
 
 if __name__=='__main__': unittest.main()

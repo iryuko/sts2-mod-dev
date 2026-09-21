@@ -10,6 +10,7 @@ const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/p
 
 (async()=>{
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'sakiko-workbench-ui-'));
+  const screenshots=path.resolve(__dirname,'../../../../local/card-workbench-2026-09-21');fs.mkdirSync(screenshots,{recursive:true});
   const server=spawn(PY,['server.py','--workspace',temp,'--port','0'],{cwd:__dirname,stdio:['ignore','pipe','pipe']});
   let logs='';server.stderr.on('data',data=>logs+=data);
   const lines=readline.createInterface({input:server.stdout});
@@ -70,11 +71,14 @@ const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/p
     for(const [width,height] of [[1440,1000],[768,1024],[390,844]]){
       await page.setViewportSize({width,height});
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+      await page.waitForFunction(()=>[...document.querySelectorAll('#draft-preview img')].every(img=>img.complete&&img.naturalWidth>0));
+      await page.screenshot({path:path.join(screenshots,`editor-${width}.png`),fullPage:true});
     }
     await page.setViewportSize({width:1440,height:1000});
     await page.getByRole('button',{name:'试放并分析',exact:true}).click();
     await page.waitForFunction(()=>cardGraphView.data.nodes.some(n=>n.id.startsWith('draft:')));
     await page.locator('.review-row summary').first().click();
+    await page.screenshot({path:path.join(screenshots,'review.png'),fullPage:true});
     await page.getByRole('button',{name:'确认关系',exact:true}).first().click();
     await page.getByRole('button',{name:'纳入全局提案',exact:true}).click();
     await page.getByRole('button',{name:'确认纳入',exact:true}).click();
@@ -94,6 +98,23 @@ const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/p
     await page.waitForFunction(()=>Object.values(sakikoWorkbench.api.workspace.entries).every(e=>!e.published));
     assert.equal(await page.evaluate(async id=>(await sakikoWorkbench.api.graph()).nodes.some(n=>n.id===id),id),false);
     assert.ok(await page.evaluate(id=>sakikoWorkbench.api.workspace.entries[id],id));
+    await page.getByRole('button',{name:'草案',exact:true}).click();
+    await page.getByLabel('卡牌名称',{exact:true}).fill('长名称'.repeat(50));
+    await page.getByLabel('基础效果',{exact:true}).fill('LongUnbrokenWord'.repeat(500));
+    await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='已保存');
+    for(const width of [1440,768,390]){await page.setViewportSize({width,height:900});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));}
+    await page.getByRole('button',{name:'归档草案',exact:true}).click();
+    await page.waitForFunction(()=>sakikoWorkbench.api.workspace.entries[sakikoWorkbench.editor.id].archived);
+    await page.getByRole('button',{name:'恢复草案',exact:true}).click();
+    await page.waitForFunction(()=>!sakikoWorkbench.api.workspace.entries[sakikoWorkbench.editor.id].archived);
+    assert.equal(await page.evaluate(()=>sakikoWorkbench.api.workspace.entries[sakikoWorkbench.editor.id].published),null);
+    const touch=await browser.newPage({viewport:{width:390,height:844},hasTouch:true});touch.on('pageerror',e=>errors.push(e.message));await touch.goto(url);
+    await touch.waitForFunction(()=>sakikoWorkbench.api.workspace);
+    await touch.locator('.relation-row').first().tap();
+    await touch.locator('.edge-heading [data-card-id]').first().tap();
+    const bounds=await touch.locator('.card-popover').boundingBox();assert.ok(bounds&&bounds.x>=0&&bounds.y>=0&&bounds.x+bounds.width<=390&&bounds.y+bounds.height<=844);
+    await touch.screenshot({path:path.join(screenshots,'touch-preview.png'),fullPage:true});await touch.close();
     assert.deepEqual(errors,[]);
     console.log('PASS draft fields, image upload, persistence, stale tab conflict, late save, responsive layouts');
   } finally {

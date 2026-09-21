@@ -1,4 +1,4 @@
-# 丰川祥子全卡池关系图
+# 丰川祥子卡牌设计工作台
 
 2026-09-21 新建的持续研究区。**请文档/资产整理会话保留这里，不归档、不合并进旧设计稿，不把提案写成已实现。** 本区不修改游戏。
 
@@ -25,7 +25,50 @@ PerkUp 的主要输出是原版攻击牌，ShadowOfThePastI 的主要输出是�
 
 ## 使用
 
-直接在浏览器打开 `index.html`，不需要服务器或在线依赖。
+### 本机编辑入口
+
+在本目录运行以下命令，打开终端输出的本机URL：
+
+```sh
+/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 server.py
+```
+
+默认仅监听 `127.0.0.1:8765`；端口占用时选择空闲端口，不停止别的服务。
+其他机器可用Python 3.10+，先安装 `requirements-workbench.txt`。本机已验证Python 3.12/Pillow 12.3.0。
+使用 `--port 0` 可始终自动选端口，`--workspace /absolute/path` 可选择另一个独立保存目录。
+同一工作区只允许一个服务进程；多个浏览器页可以读取，旧revision写入会被拒绝。
+
+图谱保留原卡目录；“新建草案”或“复制选中卡”进入编辑器。
+填写名称、基础/升级费用、效果、独立词条、Song、来源、品质，并上传自己的卡图。
+效果正文输入 `@` 选择卡名引用；保存的是稳定ID，不靠同名判断。
+未填完的草案可以保存，纳入全局前需要完整的基础字段。
+关系建议依据显式机制、类型、已知词条和Song资格；**不会从自由卡文自动理解任意效果**。
+
+“试放并分析”只改变当前预览；关系可以确认、改写、拒绝，或手工添加。
+“纳入全局提案”保存当前卡牌和确认关系的快照，仍是未实现研究提案。
+继续编辑草案不会改变上一快照；再次纳入前显示字段差异。
+费用、效果、机制等变化使关系待复核；改名、换图不影响机制身份。
+撤回保留草稿；归档撤回快照，恢复不自动重新纳入。
+没有已确认关系的草案也可纳入，不把零建议等同于差设计。
+
+### 保存与恢复
+
+- `workspace/workspace.json`：所有草稿、关系审核、发布快照与图片登记。
+- `workspace/uploads/`：上传的原始图片；只接受可解码PNG/JPEG/WebP，最大10MiB、3200万像素，不重绘、不裁剪。
+- `workspace/history/workspace-*.json`：最近20份旧JSON快照。图片不自动删除，因此旧快照仍可引用旧图。
+- JSON导出不包含图片字节；完整备份应包含整个workspace目录。
+- 恢复时先停止服务，保留当前JSON，再用一份history快照替换workspace.json并重启；不要在服务运行时手工改文件。
+- 冲突或断线时保留本页输入、暂停后续写入。先“下载本页草稿”，再重新连接或明确丢弃本页内容并重新加载。
+- 同一revision的服务重启允许重新连接继续保存；revision已变化则不能自动覆盖。
+- 损坏或未知版本JSON不会被初始化成空工作区；启动会拒绝加载，需人工恢复。
+
+服务只白名单提供页面、已知卡图和上传图片，不公开仓库根目录、源码、备份文件。
+所有写入、分析和试放需要同源Origin、正确Host和当次服务token；token不进入导出。
+本轮没有游戏补丁生成、C#修改、资源打包、自动Git提交、安装或release功能。
+
+### 文件只读入口
+
+直接在浏览器打开 `index.html`，不需要服务器或在线依赖，但只显示固定基线，不读取个人workspace。
 左侧按名称/C# 类名、类型和来源筛选卡牌目录；中间按关系类型筛图，聚焦模式还可筛流入/流出。
 “全局”显示所有允许的节点；“选中牌关系”仅显示该牌的一跳关系，不暗示隐藏节点互无关系。
 全局为避免名称重叠，只展开选中或悬停节点的标签；目录和详情始终保留完整名称。
@@ -48,6 +91,11 @@ PerkUp 的主要输出是原版攻击牌，ShadowOfThePastI 的主要输出是�
 | `build_graph.py` | 节点清点、证据定位、关系展开和校验 |
 | `graph.json` / `graph-data.js` | 生成结果；JS 供离线 HTML 使用，不手工改 |
 | `test_graph.py` / `test_ui.cjs` | 数据契约及浏览器回归 |
+| `server.py` / `workbench_store.py` / `workbench_model.py` | 本机接口、原子保存与状态机 |
+| `mechanic-profiles.json` / `build_profiles.py` | 72张卡的显式机制档案与可复现人工映射；不解析卡文猜机制 |
+| `relation_rules.py` | 带条件、变体、时点和证据的候选关系 |
+| `draft-editor.js` / `workbench.js` / `workbench-api.js` | 编辑器、关系审核、顺序保存 |
+| `workspace/` | 用户设计数据，不能清理或当作构建缓存 |
 
 节点 ID 使用已存在的 C# 类名，不猜测本地化 Entry；提案使用 `proposal:` 前缀。
 基本字段为 `id/name/base/upgrade/tags/notes/source`；已实现节点的类型、基础费用、稀有度、来源和 Song 身份由源码核对。
@@ -63,11 +111,11 @@ PerkUp 的主要输出是原版攻击牌，ShadowOfThePastI 的主要输出是�
 ## 每次设计或改牌
 
 1. 先确定要研究的提交和干净源码。游戏本体 API 相关判断先反编译对应版本，不按方法名猜。
-2. 新构想先在 `proposals.json` 加节点，标明暂定数值、升级差异、限制及原作解释是否只是设计解读。
+2. 新构想先在工作台保存草稿，标明暂定数值、升级差异、限制及原作解释是否只是设计解读；不要覆盖固定基线 `proposals.json`。
 3. 对照全部现有牌补供给、收益和负向边，至少检查压力存量/兑换、力量/多段、自卑、重放、Song 资格、生命/格挡代价、多人归属。没有直接关系可以不连边，不凑数量。
 4. 实现获批且代码落入选定基线后，把节点移入对应 catalog，改用实际类名，迁移所有端点/证据；不可同时保留成两张牌。旧牌改效果时同时复审其入边和出边。
 5. 更新 `graph-config.json` 的版本、revision、tree 和工作树。源码适配器遇到新声明格式应明确支持，不能跳过无法解析的牌。
-6. 重建并运行测试，人工查看全局和新牌聚焦图，再更新 `design-review.md` 的结论。不要把数据测试通过写成游戏内实测通过。
+6. 游戏基线真正更新时，重建graph并复审机制档案，再运行测试；workspace基线迁移应另行审查，不能直接改revision冒充兼容。更新 `design-review.md` 的结论。不要把数据测试通过写成游戏内实测通过。
 
 在仓库根目录运行：
 
@@ -76,9 +124,14 @@ python3 mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/build_graph.py
 python3 mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/build_graph.py --check
 python3 -m unittest discover -s mods/Togawasakiko_in_Slay_the_Spire/research/card-graph -p test_graph.py -v
 node mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_ui.cjs
+python3 -m unittest discover -s mods/Togawasakiko_in_Slay_the_Spire/research/card-graph -p 'test_*.py' -v
+node --test mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_view_modules.cjs
+node mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_workbench_ui.cjs
+node --test mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_workbench_review.cjs
 ```
 
-最后一条需要 Node、Playwright 及其 Chromium；本机验证使用 Codex bundled runtime 的 Node 与 NODE_PATH。
+JS测试需要 Node、Playwright 及其 Chromium；本机验证使用 Codex bundled runtime 的 Node 与 NODE_PATH。
+HTTP浏览器测试自行使用临时工作区、临时服务，结束后关闭，不会修改你的草稿。
 浏览器截图输出至仓库 `local/card-graph-2026-09-21/`。该测试不会启动 Godot、Steam 或游戏。
 可通过 `--source-root /absolute/path/to/checkout` 指定同一已核验树的另一检出目录。
 
@@ -93,6 +146,9 @@ node mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_ui.cjs
 - 本区与当前新提案尚未推送到远端；已完成的远端操作仅为旧 PR 收尾和已发布源码归并。
 
 ## 本轮验证
+
+工作台实现与最终审查记录见 [workbench-implementation-report.md](workbench-implementation-report.md)。
+下述11项为最初只读图谱的历史验收，不代表工作台完整测试数。
 
 2026-09-21：11项数据契约通过，生成结果 `--check` 通过，JavaScript语法检查通过。
 Playwright在1440×1000和390×844核对搜索空结果、X费、类型/方向筛选、隐藏提案、

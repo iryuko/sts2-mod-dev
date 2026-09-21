@@ -81,5 +81,29 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(path.read_bytes(),before)
         self.assertEqual(self.request('POST','/api/analyze',{'draft_id':'unknown','card':card()})[0],422)
 
+    def test_preview_honors_rejection_manual_edges_and_edited_conditions(self):
+        result=self.request('POST','/api/commands',{'expected_revision':0,'command':{'action':'create','card':card(song=True)}})[1]
+        identifier=result['result']['id'];payload={'draft_id':identifier,'card':card(song=True)}
+        analysis=self.request('POST','/api/analyze',payload)[1];suggestion=analysis['suggestions'][0]
+        relation={k:v for k,v in suggestion.items() if k not in ('suggested','status')}
+        self.request('POST','/api/commands',{'expected_revision':1,'command':{'action':'review','id':identifier,
+                     'relation':relation,'decision':'rejected','expected_endpoint_hashes':relation['endpoint_hashes']}})
+        preview=self.request('POST','/api/preview',payload)[1]
+        self.assertFalse(any(e['id']==relation['id'] for e in preview['graph']['edges']))
+        relation={**relation,'id':None,'condition':'我明确修改的成立条件'}
+        del relation['id']
+        result=self.request('POST','/api/commands',{'expected_revision':2,'command':{'action':'review','id':identifier,
+                      'relation':relation,'decision':'accepted','expected_endpoint_hashes':relation['endpoint_hashes']}})[1]
+        preview=self.request('POST','/api/preview',payload)[1]
+        self.assertTrue(any(e['condition']=='我明确修改的成立条件' for e in preview['graph']['edges']))
+
+    def test_copy_metadata_preserves_native_keyword_upgrade_changes(self):
+        nodes={n['id']:n for n in self.boot['graph']['nodes']}
+        self.assertEqual(nodes['Completeness'].get('upgraded_keywords'),['Retain'])
+        self.assertEqual(nodes['MasqueradeRhapsodyRequest'].get('keywords'),['Exhaust'])
+        self.assertEqual(nodes['MasqueradeRhapsodyRequest'].get('upgraded_keywords'),[])
+        self.assertEqual(nodes['Compose'].get('keywords'),['Exhaust'])
+        self.assertEqual(nodes['UntilNextAct'].get('keywords'),['Exhaust'])
+
 
 if __name__=='__main__': unittest.main()

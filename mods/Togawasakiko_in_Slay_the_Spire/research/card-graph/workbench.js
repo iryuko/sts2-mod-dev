@@ -12,7 +12,7 @@
     const list=$('draft-list');list.replaceChildren();
     Object.values(api.workspace?.entries||{}).filter(e=>$('show-archived').checked||!e.archived).forEach(entry=>{
       const button=el('button','',entry.working.name||'未命名草案');button.type='button';button.setAttribute('aria-label',entry.working.name||'未命名草案');button.setAttribute('aria-current',entry.id===editor.id);
-      button.append(el('small','',entry.archived?'已归档':entry.published?'已纳入提案':'草稿'));
+      button.append(el('small','',`${entry.archived?'已归档':entry.published?'已纳入提案':'草稿'} · ${entry.id.slice(-6)}`));
       button.onclick=()=>run(async()=>{await editor.open(entry);analysis=null;$('review-panel').hidden=true;$('draft-editor').hidden=false;renderList();renderActions();});list.append(button);
     });
     $('draft-count').textContent=`${Object.keys(api.workspace?.entries||{}).length} 张`;
@@ -20,8 +20,13 @@
   async function create(card=DraftEditor.empty(),origin_id=null){await editor.flush();const result=await api.command({action:'create',card,origin_id});await editor.open(result.workspace.entries[result.result.id]);analysis=null;$('review-panel').hidden=true;$('draft-editor').hidden=false;show('drafts');renderList();renderActions();}
   $('new-draft').onclick=()=>run(()=>create());
   $('clone-card').onclick=()=>run(async()=>{
-    const node=view.data.nodes.find(n=>n.id===view.state.selected);if(!node)return;
-    const card={...DraftEditor.empty(),name:node.name,cost:node.cost,type:node.type,rarity:node.rarity,source_pool:['main','token','event','relic'].includes(node.pool)?node.pool:'special',song:node.song,base:node.base,upgrade:node.upgrade,upgrade_mode:'delta',notes:(node.notes||[]).join('\n'),portrait_source_id:node.status==='implemented'?node.id:null};
+    await editor.flush();
+    const identifier=!$('draft-workspace').hidden&&editor.id?editor.id:view.state.selected;
+    const entry=api.workspace.entries[identifier];
+    if(entry){await create(structuredClone(!$('draft-workspace').hidden?entry.working:entry.published?.card||entry.working),identifier);return;}
+    const node=view.data.nodes.find(n=>n.id===identifier);if(!node)return;
+    const card={...DraftEditor.empty(),name:node.name,cost:node.cost,upgraded_cost:node.upgraded_cost??null,type:node.type,rarity:node.rarity,source_pool:['main','token','event','relic'].includes(node.pool)?node.pool:'special',song:node.song,base:node.base,upgrade:node.upgrade,upgrade_mode:'delta',notes:(node.notes||[]).join('\n'),portrait_source_id:node.status==='implemented'?node.id:null,
+      keywords:node.keywords||[],upgraded_keywords:node.upgraded_keywords||[],mechanics:node.mechanics||[]};
     await create(card,node.id);
   });
   $('graph-tab').onclick=()=>run(async()=>{await editor.flush();if(!previewing)view.replaceGraph(await api.graph());show('graph');});$('draft-tab').onclick=()=>show('drafts');$('show-archived').onchange=renderList;
@@ -78,14 +83,16 @@
     const map=new Map(view.data.nodes.map(n=>[n.id,n]));
     Object.values(api.workspace.entries).forEach(e=>map.set(e.id,{...e.working,id:e.id,name:e.working.name||'未命名草案'}));return map;
   }
-  function current(review){return review.profile_revision===analysis.profile_revision&&[review.source,review.target].every(id=>analysis.endpoint_hashes[id]&&analysis.endpoint_hashes[id]===review.endpoint_hashes[id]);}
+  function current(review){return review.profile_revision===analysis.profile_revision&&[review.source,review.target].every(id=>analysis.endpoint_hashes[id]?analysis.endpoint_hashes[id]===review.endpoint_hashes[id]:review.decision==='rejected'&&review.endpoint_hashes[id]===null);}
   async function review(relation,decision,latest=analysis){
     await editor.flush();
     const allowed=['id','source','target','kind','mechanism','condition','reason','evidence','rule_id','self_reviewed'];
     const clean=Object.fromEntries(allowed.filter(k=>Object.hasOwn(relation,k)).map(k=>[k,relation[k]]));
     await api.command({action:'review',id:editor.id,relation:clean,decision,
       expected_endpoint_hashes:Object.fromEntries([clean.source,clean.target].map(id=>[id,latest.endpoint_hashes[id]]))});
-    analysis=await api.analyze(editor.id,editor.card);renderReviews();
+    if(previewing){const result=await api.preview(editor.id,editor.card);analysis=result.analysis;view.replaceGraph(result.graph);}
+    else analysis=await api.analyze(editor.id,editor.card);
+    renderReviews();
   }
   function renderReviews(){
     const entry=api.workspace?.entries[editor.id];if(!entry||!analysis)return;

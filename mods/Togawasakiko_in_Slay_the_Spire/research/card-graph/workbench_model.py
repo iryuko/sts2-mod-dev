@@ -1,5 +1,6 @@
 """Pure draft validation and research publication; never modifies game data."""
 from copy import deepcopy
+from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -113,8 +114,17 @@ def endpoint_hashes(baseline, state, draft_id=None, card=None):
 
 def review_current(review, hashes, profiles):
     return (review.get('profile_revision')==profiles.get('revision','none')
-            and all(hashes.get(i)==review.get('endpoint_hashes',{}).get(i) and i in hashes
+            and all(hashes.get(i)==review.get('endpoint_hashes',{}).get(i)
+                    and (i in hashes or review.get('decision')=='rejected' and i in review.get('endpoint_hashes',{}))
                     for i in (review['source'],review['target'])))
+
+
+def preview_relations(analysis, entry, profiles):
+    reviews=entry['reviews'];hashes=analysis['endpoint_hashes']
+    active={i:r for i,r in reviews.items() if review_current(r,hashes,profiles)}
+    suggested=[deepcopy(r) for r in analysis['suggestions'] if r['id'] not in active]
+    accepted=[{**deepcopy(r),'status':'proposal'} for r in active.values() if r['decision']=='accepted']
+    return suggested+accepted
 
 
 def validate_references(card, state, baseline):
@@ -136,7 +146,7 @@ def reduce_command(state, command, baseline, profiles=None):
     if action=='create':
         require(len(current['entries'])<500,'草稿已达500张上限')
         origin=command.get('origin_id')
-        require(origin is None or origin in card_universe(baseline,current),'原卡不存在')
+        require(origin is None or origin in card_universe(baseline,current) or origin in current['entries'],'原卡不存在')
         identifier=f'draft:{uuid.uuid4()}'
         current['entries'][identifier]={'id':identifier,'origin_id':origin,'archived':False,'working':card,
                                        'reviews':{},'published':None,'created_at':now(),'updated_at':now()}
@@ -153,26 +163,33 @@ def reduce_command(state, command, baseline, profiles=None):
             require(not(set(relation)-keys),'关系含未知字段')
             source,target=relation.get('source'),relation.get('target')
             hashes=endpoint_hashes(baseline,current,identifier,entry['working'])
-            require(isinstance(source,str) and isinstance(target,str) and source in hashes and target in hashes
+            prior=entry['reviews'].get(relation.get('id'))
+            retiring=(command.get('decision')=='rejected' and prior
+                      and (source,target)==(prior['source'],prior['target']))
+            require(isinstance(source,str) and isinstance(target,str) and (source in hashes and target in hashes or retiring)
                     and identifier in (source,target),'关系端点必须包含当前草稿及已纳入卡牌')
             require(source!=target or relation.get('self_reviewed') is True,'自环需要明确审核')
             require(relation.get('kind') in KINDS,'未知关系类型')
             for key in ('mechanism','condition','reason'): text(relation.get(key),4000,key,True)
-            expected={i:hashes[i] for i in (source,target)}
+            expected={i:hashes[i] for i in (source,target) if i in hashes}
             if command.get('expected_endpoint_hashes')!=expected:
                 raise RevisionConflict('卡牌机制已变化，请重新分析','endpoint_conflict')
             require(command.get('decision') in ('accepted','rejected'),'审核状态无效')
             evidence=relation.get('evidence',[])
             require(isinstance(evidence,list) and len(evidence)<=32,'证据列表无效')
-            for ref in evidence: require(isinstance(ref,str) and (ref in baseline.get('evidence',{}) or ref in hashes),'未知证据引用')
+            for ref in evidence: require(isinstance(ref,str) and (ref in baseline.get('evidence',{}) or ref in hashes or retiring and ref in current['entries']),'未知证据引用')
             rid=relation.get('id') or f'manual:{uuid.uuid4()}'
             require(isinstance(rid,str) and len(rid)<=200,'关系ID无效')
             require(sum(len(e['reviews']) for e in current['entries'].values())<10000 or rid in entry['reviews'],'关系数量达到上限')
             entry['reviews'][rid]={**deepcopy(relation),'id':rid,'decision':command['decision'],
-                                   'endpoint_hashes':expected,'profile_revision':profiles.get('revision','none'),
+                                   'endpoint_hashes':{i:hashes.get(i) for i in (source,target)},'profile_revision':profiles.get('revision','none'),
                                    'evidence':evidence,'self_reviewed':relation.get('self_reviewed') is True}
         elif action=='publish':
             validate_card(entry['working'],publishing=True)
+            known={n['id'] for n in baseline['nodes']}|set(current['entries'])
+            for key in ('base','upgrade','notes'):
+                refs=re.findall(r'\[\[card:([^\]\r\n]+)\]\]',entry['working'][key])
+                require(all(ref in known for ref in refs),'卡文包含未知卡牌引用',key)
             hashes=endpoint_hashes(baseline,current,identifier,entry['working'])
             accepted=[r for r in entry['reviews'].values() if r['decision']=='accepted']
             require(all(review_current(r,hashes,profiles) for r in accepted),'已确认关系需要重新审核','reviews')
@@ -209,7 +226,8 @@ def compose_graph(baseline, state, profiles=None, preview=None):
         graph['edges']=[e for e in graph['edges'] if identifier not in (e['source'],e['target'])]
         graph['edges']+=deepcopy(preview.get('relations',[]))
     graph['counts']={**graph.get('counts',{}),'implemented':sum(n.get('status')=='implemented' for n in graph['nodes']),
-                     'proposals':sum(n.get('status')=='proposal' for n in graph['nodes'])}
+                     'proposals':sum(n.get('status')=='proposal' for n in graph['nodes']),
+                     'edges':len(graph['edges']),'kinds':dict(Counter(e['kind'] for e in graph['edges']))}
     return graph
 
 

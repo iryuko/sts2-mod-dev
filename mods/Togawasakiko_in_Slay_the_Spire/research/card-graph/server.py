@@ -16,7 +16,7 @@ from workbench_model import ValidationError, RevisionConflict, CorruptWorkspace,
 from workbench_store import WorkspaceStore
 from workbench_assets import MAX_BYTES
 from relation_rules import load_profiles, suggest_relations
-from workbench_model import require
+from workbench_model import require, preview_relations
 
 STATIC=set(('index.html graph.css graph.js graph-data.js relation-style.js card-references.js card-aliases.js '
             'workbench-api.js draft-editor.js draft-editor.css workbench.js README.md '
@@ -38,6 +38,10 @@ def create_server(root:Path, workspace:Path, port=8765):
     def http_graph(graph):
         for node in graph['nodes']:
             if node['id'] in portraits: node['portrait']='/api/portraits/'+node['id']
+            profile=profiles['cards'].get(node['id'])
+            if profile:
+                for key in ('keywords','upgraded_keywords','upgraded_cost'):node[key]=profile[key]
+                node['mechanics']=profile['facts']
         return graph
 
     class Handler(BaseHTTPRequestHandler):
@@ -84,7 +88,7 @@ def create_server(root:Path, workspace:Path, port=8765):
                     extension=meta.get('extension')
                     if extension not in ('png','jpg','webp'): raise HttpError(404,'图片不存在')
                     image=store.root/'uploads'/f'{identifier}.{extension}'
-                    return self.reply(200,self.safe_file(image,(store.root/'uploads').resolve()),meta['mime'])
+                    return self.reply(200,self.safe_file(image,store.root),meta['mime'])
                 name=path.lstrip('/') if path!='/' else 'index.html'
                 if name not in STATIC: raise HttpError(404,'文件不存在')
                 return self.reply(200,self.safe_file(root/name,root),mimetypes.guess_type(name)[0] or 'text/plain; charset=utf-8')
@@ -121,7 +125,7 @@ def create_server(root:Path, workspace:Path, port=8765):
                 require(isinstance(identifier,str) and identifier in state['entries'],'找不到草稿')
                 analysis=suggest_relations(identifier,body.get('card'),baseline,state,profiles)
                 if path=='/api/analyze': return self.reply(200,analysis)
-                preview={**body,'relations':analysis['suggestions']}
+                preview={**body,'relations':preview_relations(analysis,state['entries'][identifier],profiles)}
                 return self.reply(200,{'graph':http_graph(compose_graph(baseline,state,profiles,preview)), 'analysis':analysis})
             raise HttpError(404,'接口不存在')
 

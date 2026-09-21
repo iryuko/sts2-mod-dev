@@ -49,6 +49,12 @@ class ModelTests(unittest.TestCase):
         with self.assertRaises(ValidationError): self.cmd(action='update', id='Real', card=card())
         with self.assertRaises(ValidationError): self.cmd(action='create', card=card(image_id='missing'))
 
+    def test_unknown_explicit_card_reference_can_save_but_not_publish(self):
+        identifier=self.cmd(action='create',card=card(base='参照 [[card:missing]]'))['id']
+        with self.assertRaises(ValidationError): self.cmd(action='publish',id=identifier)
+        self.cmd(action='update',id=identifier,card=card(base='参照 [[card:Real]]'))
+        self.cmd(action='publish',id=identifier)
+
     def test_hash_ignores_name_image_whitespace_not_effects(self):
         self.assertEqual(mechanism_hash(card()), mechanism_hash(card(name='新名', image_id='art', base='  造成6伤害 \n')))
         for changes in [{'cost':2}, {'base':'造成7伤害'}, {'upgraded_keywords':['Retain']}, {'song':True}]:
@@ -65,6 +71,7 @@ class ModelTests(unittest.TestCase):
         self.cmd(action='review', id=a, relation=relation, decision='accepted', expected_endpoint_hashes=expected)
         self.cmd(action='publish', id=a)
         self.assertEqual(len(compose_graph(BASE,self.state,PROFILES)['edges']),1)
+        self.assertEqual(compose_graph(BASE,self.state,PROFILES)['counts']['edges'],1)
         self.cmd(action='update', id=b, card=card(base='变了'))
         self.assertEqual(len(compose_graph(BASE,self.state,PROFILES)['edges']),1)
         self.cmd(action='publish', id=b)
@@ -79,6 +86,18 @@ class ModelTests(unittest.TestCase):
             with self.assertRaises(ValidationError):
                 self.cmd(action='review',id=a,relation={'source':a,'target':target,'kind':'supply',
                     'mechanism':'m','condition':'c','reason':'r'},decision='accepted',expected_endpoint_hashes={})
+
+    def test_missing_endpoint_review_can_be_rejected_and_owner_republished(self):
+        a=self.cmd(action='create',card=card())['id'];b=self.cmd(action='create',card=card())['id']
+        self.cmd(action='publish',id=b)
+        hashes=endpoint_hashes(BASE,self.state,a,card())
+        relation={'source':a,'target':b,'kind':'supply','mechanism':'m','condition':'c','reason':'r','evidence':[]}
+        self.cmd(action='review',id=a,relation=relation,decision='accepted',expected_endpoint_hashes={k:hashes[k] for k in [a,b]})
+        self.cmd(action='publish',id=a);self.cmd(action='archive',id=b)
+        review=next(iter(self.state['entries'][a]['reviews'].values()))
+        self.cmd(action='review',id=a,relation=review,decision='rejected',expected_endpoint_hashes={a:hashes[a]})
+        self.cmd(action='publish',id=a)
+        self.assertEqual(compose_graph(BASE,self.state,PROFILES)['edges'],[])
 
 
 if __name__ == '__main__': unittest.main()

@@ -38,6 +38,11 @@ def suggest_relations(draft_id,card,baseline,workspace,profiles):
     hashes=endpoint_hashes(baseline,workspace,draft_id,card)
     facts={i:profiles['cards'][i]['facts'] if i in profiles['cards'] else declared_facts(c) for i,c in cards.items()}
     suggestions=[];seen=set()
+    def describe(fact):
+        return f"{fact['variant']}/{fact['timing']}：{fact['condition']}；数量 {fact['amount'] or '依原效果'}；次数上限 {fact['limit'] if fact['limit'] is not None else '未限定'}"
+    def playable_variants(candidate):
+        return [variant for variant,key in [('base','keywords'),('upgraded','upgraded_keywords')]
+                if 'Unplayable' not in candidate.get(key,[])]
     def emit(source,target,kind,rule,condition,reason,evidence=()):
         if source==target or draft_id not in (source,target): return
         signature=[source,target,rule,condition];identifier='suggested:'+digest(signature)[:24]
@@ -57,7 +62,7 @@ def suggest_relations(draft_id,card,baseline,workspace,profiles):
                     supply=a['action']=='produce' and b['action'] in ('read','consume')
                     tradeoff=a['action']=='consume' and b['action']=='read' and a['resource']=='pressure'
                     if not(supply or tradeoff):continue
-                    timing=f"来源 {a['variant']}/{a['timing']}：{a['condition']}；接收 {b['variant']}/{b['timing']}：{b['condition']}。"
+                    timing=f"来源 {describe(a)}；接收 {describe(b)}。"
                     if a['scope'] in ('enemy','all_enemies'):timing+='必须是同一受影响敌人；压力由全队共享。'
                     else:timing+='必须是同一持有者，不能把队友计数混在一起。'
                     if a['timing']=='enemy_hit' and b['timing']=='enemy_turn_start':timing+='受击后才产压，不能赶上当前敌方回合开始的检查。'
@@ -76,10 +81,15 @@ def suggest_relations(draft_id,card,baseline,workspace,profiles):
                     if source!=source_id or source_id=='RehearsalOrder' and not common:continue
                     if source_id=='InYourBlueEyes' and (target=='ImprisonedXii' or 'Unplayable' in candidate.get('keywords',[]) and 'Unplayable' in candidate.get('upgraded_keywords',[])):continue
                     emit(source,target,kind,rule,condition,'候选资格不保证随机命中；提案仍未实现。',profiles['cards'][source]['evidence'])
-            if candidate.get('type')=='Attack' and any(f['action']=='replay' and f['resource']=='attack_played' for f in facts[source]):
-                emit(source,target,'replay','attack-replay','同一持有者、本回合攻击重放能力生效；原牌完整结算及代价重复。','重放实际攻击牌，不是增加攻击段数。')
+            if candidate.get('type')=='Attack' and playable_variants(candidate):
+                for replay in facts[source]:
+                    if replay['action']=='replay' and replay['resource']=='attack_played':
+                        emit(source,target,'replay','attack-replay',
+                             f"来源 {describe(replay)}；对象 {replay['scope']}；目标可打出版本 {'/'.join(playable_variants(candidate))}。来源能力先已生效，原牌完整结算及代价重复。",
+                             '重放实际攻击牌，不是增加攻击段数。',replay['evidence'])
             if any(f['action']=='sequence' and f['resource']=='card_type_order' for f in facts[source]) and any(f['action']=='replay' and f['resource']=='attack_played' for f in facts[target]):
-                emit(source,target,'conflict','alternation-replay','交错序列和攻击重放同时生效；相邻两次攻击均算出牌。','重复同类型可能在第二次结算后强制结束自己的回合。')
+                restrictions='；'.join(describe(f) for f in facts[source]+facts[target] if f['action'] in ('sequence','replay'))
+                emit(source,target,'conflict','alternation-replay','交错序列和攻击重放同时生效；相邻两次攻击均算出牌。'+restrictions,'重复同类型可能在第二次结算后强制结束自己的回合。')
     limitations=['建议不是战斗模拟或平衡评分；没有连边不代表没有配合。',
                  '自由文本和自定义词条不会自动解释；未编码的牌组、事件、遗物和原版卡效果需要人工连边。']
     if not card['mechanics']:limitations.append('当前草案没有显式机制，仅按类型、Song及已知词条分析。')

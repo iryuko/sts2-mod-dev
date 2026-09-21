@@ -26,7 +26,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#AWonderfulWorldYetNowhereToBeFound"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "AllYouThinkAboutIsYourself": {
       "facts": [
@@ -103,7 +106,16 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#AllYouThinkAboutIsYourself"
-      ]
+      ],
+      "keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_cost": null
     },
     "Angles": {
       "facts": [
@@ -168,7 +180,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#Angles"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 0
     },
     "AnswerMe": {
       "facts": [
@@ -206,7 +221,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#AnswerMe"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 1
     },
     "AveMujica": {
       "facts": [
@@ -245,7 +263,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#AveMujica"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 2
     },
     "BackstageSupport": {
       "facts": [
@@ -283,7 +304,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoBridgeCards.cs#BackstageSupport"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "BailMoney": {
       "facts": [
@@ -347,7 +371,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#BailMoney"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "BarkingBarkingBarking": {
       "facts": [
@@ -411,7 +438,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#BarkingBarkingBarking"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "BlackBirthday": {
       "facts": [
@@ -462,7 +492,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#BlackBirthday"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": 0
     },
     "BladeThroughTheHeart": {
       "facts": [
@@ -526,7 +563,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#BladeThroughTheHeart"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "ChoirSChoir": {
       "facts": [
@@ -579,7 +619,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#ChoirSChoir"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 2
     },
     "Completeness": {
       "facts": [
@@ -616,7 +659,12 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Completeness"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [
+        "Retain"
+      ],
+      "upgraded_cost": null
     },
     "Compose": {
       "facts": [
@@ -632,6 +680,19 @@
           "evidence": [
             "src/Cards/TogawasakikoSongCards.cs#Compose"
           ]
+        },
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：1费技能，消耗：随机生成1张歌曲牌加入手牌，并设为本场0费。 升级：费用1→0。",
+          "evidence": [
+            "src/Cards/TogawasakikoSongCards.cs#Compose"
+          ]
         }
       ],
       "limitations": [
@@ -641,7 +702,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#Compose"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": 0
     },
     "ComposedResponse": {
       "facts": [
@@ -678,7 +746,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoPressureCards.cs#ComposedResponse"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "CrucifixX": {
       "facts": [
@@ -756,7 +827,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#CrucifixX"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Curseslander": {
       "facts": [
@@ -833,7 +907,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Curseslander"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 0
     },
     "DawnOfDespair": {
       "facts": [
@@ -910,7 +987,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#DawnOfDespair"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "DefendTogawasakiko": {
       "facts": [
@@ -934,7 +1014,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#DefendTogawasakiko"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Divine": {
       "facts": [
@@ -999,7 +1082,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongExpansionCards.cs#Divine"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "Ether": {
       "facts": [
@@ -1076,7 +1166,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#Ether"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Face": {
       "facts": [
@@ -1128,7 +1221,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#Face"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "FinalCurtain": {
       "facts": [
@@ -1178,7 +1274,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#FinalCurtain"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "FollowingPhrase": {
       "facts": [
@@ -1216,7 +1315,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoBridgeCards.cs#FollowingPhrase"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Fragility": {
       "facts": [
@@ -1279,7 +1381,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Fragility"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "GeorgetteMeGeorgetteYou": {
       "facts": [
@@ -1330,7 +1439,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#GeorgetteMeGeorgetteYou"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "GodYouFool": {
       "facts": [
@@ -1368,7 +1480,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#GodYouFool"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Housewarming": {
       "facts": [
@@ -1393,7 +1508,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Housewarming"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "IHaveAscended": {
       "facts": [
@@ -1417,7 +1535,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#IHaveAscended"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "ImprisonedXii": {
       "facts": [],
@@ -1430,7 +1555,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#ImprisonedXii"
-      ]
+      ],
+      "keywords": [
+        "Unplayable"
+      ],
+      "upgraded_keywords": [
+        "Unplayable"
+      ],
+      "upgraded_cost": null
     },
     "InYourBlueEyes": {
       "facts": [
@@ -1483,7 +1615,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongExpansionCards.cs#InYourBlueEyes"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Innocence": {
       "facts": [],
@@ -1495,7 +1630,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Innocence"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "KillKiss": {
       "facts": [
@@ -1534,7 +1672,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#KillKiss"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "LeaveItToMe": {
       "facts": [
@@ -1611,7 +1752,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#LeaveItToMe"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "LingeringResonance": {
       "facts": [
@@ -1649,7 +1793,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoPressureCards.cs#LingeringResonance"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "MasqueradeRhapsodyRequest": {
       "facts": [
@@ -1714,7 +1861,12 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#MasqueradeRhapsodyRequest"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "MusicOfTheCelestialSphere": {
       "facts": [
@@ -1766,7 +1918,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#MusicOfTheCelestialSphere"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Notebook": {
       "facts": [
@@ -1791,7 +1946,12 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Notebook"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [
+        "Retain"
+      ],
+      "upgraded_cost": null
     },
     "OctagramDance": {
       "facts": [
@@ -1843,7 +2003,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongExpansionCards.cs#OctagramDance"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": 3
     },
     "OverworkAnxiety": {
       "facts": [
@@ -1880,7 +2047,16 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#OverworkAnxiety"
-      ]
+      ],
+      "keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_cost": null
     },
     "PerkUp": {
       "facts": [],
@@ -1891,7 +2067,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#PerkUp"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "PersonaDissociation": {
       "facts": [
@@ -1929,7 +2108,16 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#PersonaDissociation"
-      ]
+      ],
+      "keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_cost": null
     },
     "PullmanCrash": {
       "facts": [
@@ -2006,7 +2194,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#PullmanCrash"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "PutOnYourMask": {
       "facts": [
@@ -2044,7 +2239,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#PutOnYourMask"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "RehearsalOrder": {
       "facts": [
@@ -2081,7 +2279,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoBridgeCards.cs#RehearsalOrder"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": 0
     },
     "RestorationOfPower": {
       "facts": [
@@ -2118,7 +2323,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#RestorationOfPower"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "STheWay": {
       "facts": [
@@ -2209,7 +2421,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#STheWay"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SakiMovePlz": {
       "facts": [
@@ -2286,7 +2501,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#SakiMovePlz"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SeverThePast": {
       "facts": [
@@ -2350,7 +2568,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#SeverThePast"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "ShadowOfThePastI": {
       "facts": [],
@@ -2362,7 +2583,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#ShadowOfThePastI"
-      ]
+      ],
+      "keywords": [
+        "Unplayable"
+      ],
+      "upgraded_keywords": [
+        "Unplayable"
+      ],
+      "upgraded_cost": null
     },
     "ShadowOfThePastII": {
       "facts": [],
@@ -2374,7 +2602,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#ShadowOfThePastII"
-      ]
+      ],
+      "keywords": [
+        "Unplayable"
+      ],
+      "upgraded_keywords": [
+        "Unplayable"
+      ],
+      "upgraded_cost": null
     },
     "ShadowOfThePastIII": {
       "facts": [],
@@ -2386,7 +2621,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#ShadowOfThePastIII"
-      ]
+      ],
+      "keywords": [
+        "Unplayable"
+      ],
+      "upgraded_keywords": [
+        "Unplayable"
+      ],
+      "upgraded_cost": null
     },
     "SheIsRadiant": {
       "facts": [
@@ -2423,7 +2665,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#SheIsRadiant"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 0
     },
     "Slander": {
       "facts": [
@@ -2486,7 +2731,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Slander"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 0
     },
     "SoManyMaggots": {
       "facts": [
@@ -2511,7 +2759,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#SoManyMaggots"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 0
     },
     "SocialWithdrawal": {
       "facts": [
@@ -2549,7 +2800,16 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#SocialWithdrawal"
-      ]
+      ],
+      "keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_keywords": [
+        "Exhaust",
+        "Ethereal"
+      ],
+      "upgraded_cost": null
     },
     "Sophie": {
       "facts": [
@@ -2627,7 +2887,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#Sophie"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Speak": {
       "facts": [
@@ -2664,7 +2927,15 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Speak"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust",
+        "Innate"
+      ],
+      "upgraded_cost": null
     },
     "StrikeTogawasakiko": {
       "facts": [
@@ -2714,7 +2985,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#StrikeTogawasakiko"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SymbolI": {
       "facts": [
@@ -2779,7 +3053,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#SymbolI"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SymbolIi": {
       "facts": [
@@ -2883,7 +3160,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#SymbolIi"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SymbolIii": {
       "facts": [
@@ -2922,7 +3202,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#SymbolIii"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "SymbolIv": {
       "facts": [
@@ -2947,7 +3230,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#SymbolIv"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": 1
     },
     "TheWholeBlueWorld": {
       "facts": [
@@ -3000,7 +3286,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongExpansionCards.cs#TheWholeBlueWorld"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Thrilled": {
       "facts": [
@@ -3025,7 +3314,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Thrilled"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "TreasurePleasure": {
       "facts": [
@@ -3078,7 +3370,12 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#TreasurePleasure"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "TwoMoonsDeepIntoTheForest": {
       "facts": [
@@ -3156,7 +3453,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoSongCards.cs#TwoMoonsDeepIntoTheForest"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Unendurable": {
       "facts": [
@@ -3193,7 +3493,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#Unendurable"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "UnfinishedScore": {
       "facts": [
@@ -3230,7 +3533,10 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoBridgeCards.cs#UnfinishedScore"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "Unmask": {
       "facts": [
@@ -3268,7 +3574,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoBridgeCards.cs#Unmask"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "UnspokenWords": {
       "facts": [
@@ -3306,19 +3619,42 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoPressureCards.cs#UnspokenWords"
-      ]
+      ],
+      "keywords": [],
+      "upgraded_keywords": [],
+      "upgraded_cost": null
     },
     "UntilNextAct": {
-      "facts": [],
+      "facts": [
+        {
+          "action": "produce",
+          "resource": "card_exhausted",
+          "scope": "self",
+          "timing": "after_play",
+          "variant": "both",
+          "amount": "",
+          "limit": null,
+          "condition": "自己实际打出并按原牌消耗；虚无牌还可未打出而消耗；原效果：0费技能，消耗：选择手中1张压力衍生牌，本场移除虚无并获得保留。 升级：选择数量1→2。",
+          "evidence": [
+            "src/Cards/TogawasakikoPressureCards.cs#UntilNextAct"
+          ]
+        }
+      ],
       "limitations": [
         "档案仅覆盖显式列出的机制，不是完整战斗模拟。",
         "只改选中实例，不改变费用，也不移除原有消耗。",
-        "不适用于Housewarming生成的大狗大狗叫叫叫；本卡非歌曲。",
-        "此牌特殊效果暂未编码到有限规则，请保留人工连边。"
+        "不适用于Housewarming生成的大狗大狗叫叫叫；本卡非歌曲。"
       ],
       "evidence": [
         "src/Cards/TogawasakikoPressureCards.cs#UntilNextAct"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     },
     "WeightliftingChampion": {
       "facts": [
@@ -3381,7 +3717,14 @@
       ],
       "evidence": [
         "src/Cards/TogawasakikoCards.cs#WeightliftingChampion"
-      ]
+      ],
+      "keywords": [
+        "Exhaust"
+      ],
+      "upgraded_keywords": [
+        "Exhaust"
+      ],
+      "upgraded_cost": null
     }
   }
 }

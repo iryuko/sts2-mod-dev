@@ -10,7 +10,7 @@ const { pathToFileURL } = require('node:url');
   const browser = await chromium.launch({ headless: true });
   const errors = [];
   try {
-    for (const [name, width, height] of [['desktop', 1440, 1000], ['mobile', 390, 844]]) {
+    for (const [name, width, height] of [['desktop', 1440, 1000], ['tablet',768,1024], ['mobile', 390, 844]]) {
       const page = await browser.newPage({ viewport: { width, height }, hasTouch:true });
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(pathToFileURL(path.join(__dirname, 'index.html')).href);
@@ -57,6 +57,15 @@ const { pathToFileURL } = require('node:url');
       assert.equal(await page.evaluate(()=>window.injected),undefined);
       await page.keyboard.press('Escape');
       await page.evaluate(()=>document.querySelector('#safe-reference-test').remove());
+      await page.evaluate(()=>{
+        const graph=structuredClone(cardGraphView.data);graph.nodes.find(n=>n.id==='Completeness').base='[[card:draft:archived]]';
+        cardGraphView.setReferenceResolver(id=>id==='draft:archived'?{id,name:'已归档引用',base:'旧版效果',upgrade:'不变',cost:1,type:'Skill'}:null);
+        cardGraphView.replaceGraph(graph);cardGraphView.focusCard('Completeness');
+      });
+      await page.getByRole('button',{name:'已归档引用',exact:true}).hover();
+      assert.ok((await page.locator('.card-popover').textContent()).includes('旧版效果'));
+      await page.keyboard.press('Escape');
+      await page.evaluate(()=>{cardGraphView.replaceGraph(window.CARD_GRAPH);cardGraphView.setReferenceResolver(()=>null);});
       await page.locator('#search').fill('RewrittenAccent');
       assert.equal(await page.locator('.card-item').count(), 1);
       await page.getByRole('button', { name: '改写重拍（草案）', exact: true }).click();

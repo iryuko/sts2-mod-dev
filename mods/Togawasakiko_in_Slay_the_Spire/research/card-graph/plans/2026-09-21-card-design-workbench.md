@@ -1,5 +1,8 @@
 # Card Design Workbench Implementation Plan
 
+执行状态：8项任务已实施并验收，见[实现记录](../workbench-implementation-report.md)。
+以下保留原始计划步骤；实际测试与实施裁决以实现记录为准。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 在已有丰川祥子关系图上加入可辨识的边、卡牌引用预览，以及可靠落盘的草案设计与全局提案分析。

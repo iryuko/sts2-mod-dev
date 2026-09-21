@@ -7,7 +7,7 @@
   const el=(tag,cls,text)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(text!==undefined)node.textContent=text;return node;};
   function download(value,name){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function mount(root,{api,onPreview,onOpenCard}){
-    let entry=null,working=empty(),seq=0,saved=0,timer,flushing=null,upgraded=false;
+    let entry=null,working=empty(),seq=0,saved=0,timer,flushing=null,uploadTask=null,upgraded=false;
     const fields={},mechanics=el('div','mechanic-list'),preview=el('aside','draft-preview');preview.id='draft-preview';
     const form=el('form','draft-form');form.onsubmit=e=>e.preventDefault();
     const status=el('span','save-status','已保存');status.id='save-status';status.setAttribute('role','status');
@@ -46,10 +46,16 @@
       }
       fields[key].parentElement.append(choices);
     }
+    const keywordRow=el('div','keyword-fields');keywordRow.append(fields.keywords.parentElement,fields.upgraded_keywords.parentElement);fieldsArea.append(keywordRow);
     field('基础效果','base','textarea');field('升级效果','upgrade','textarea');field('设计备注','notes','textarea');
     const imageLabel=el('label','field wide','卡图'),upload=el('input');upload.type='file';upload.accept='image/png,image/jpeg,image/webp';upload.setAttribute('aria-label','上传卡图');
     const remove=el('button','command-button','移除卡图');remove.type='button';remove.onclick=()=>{working.image_id=null;working.portrait_source_id=null;mark();};
-    upload.onchange=()=>run(async()=>{const file=upload.files[0];if(!file)return;if(file.size>10*1024*1024)throw Error('图片不能超过10MiB');await flush();const result=await api.upload(file);working.image_id=result.image_id;working.portrait_source_id=null;mark();await flush();upload.value='';});
+    upload.onchange=()=>run(async()=>{
+      if(uploadTask)await uploadTask;
+      const file=upload.files[0];if(!file)return;if(file.size>10*1024*1024)throw Error('图片不能超过10MiB');
+      uploadTask=(async()=>{await flush();const result=await api.upload(file);working.image_id=result.image_id;working.portrait_source_id=null;mark();await flush();upload.value='';})();
+      try{await uploadTask;}finally{uploadTask=null;}
+    });
     imageLabel.append(upload,remove);fieldsArea.append(imageLabel);
     const mechanicsHead=el('div','section-heading');mechanicsHead.append(el('h3','','显式机制'));
     const add=el('button','command-button','添加机制');add.type='button';add.onclick=()=>{working.mechanics.push({action:'produce',resource:'pressure',scope:'enemy',timing:'on_play',variant:'both',amount:'',limit:null,condition:'无额外条件',evidence:[]});renderMechanics();mark();};
@@ -72,7 +78,7 @@
       clearTimeout(timer);if(flushing){await flushing;if(seq!==saved)return flush();return;}
       if(!entry||seq===saved)return;
       readFields();
-      flushing=(async()=>{while(seq!==saved){const version=seq;status.textContent='保存中';await api.command({action:'update',id:entry.id,card:structuredClone(working)});saved=version;}
+      flushing=(async()=>{while(seq!==saved){readFields();const version=seq;status.textContent='保存中';await api.command({action:'update',id:entry.id,card:structuredClone(working)});saved=version;}
         status.textContent='已保存';message.textContent='';})();
       try{await flushing;}finally{flushing=null;}
     }
@@ -108,6 +114,7 @@
       if(upgraded&&working.upgrade_mode==='full')effect=working.upgrade;
       else if(upgraded&&working.upgrade_mode==='delta')effect+=`\n升级改动：${working.upgrade}`;
       const index=new Map(window.cardGraphView.data.nodes.map(n=>[n.id,n]));
+      Object.values(api.workspace?.entries||{}).forEach(e=>index.set(e.id,{...e.working,id:e.id,name:e.working.name||'未命名草案'}));
       CardReferences.render(p,CardReferences.tokenize(effect,index,CardAliases),onOpenCard);face.append(p);
       const words=el('div','preview-keywords');(upgraded?working.upgraded_keywords:working.keywords).forEach(word=>words.append(el('span','',word)));face.append(words);preview.append(face);
     }
@@ -117,13 +124,15 @@
         if(!list.parentElement)input.parentElement.append(list);
         const start=input.selectionStart,match=/@([^@\n]{0,50})$/.exec(input.value.slice(0,start));
         list.replaceChildren();list.hidden=!match;if(!match)return;
-        const cards=window.cardGraphView.data.nodes.filter(n=>`${n.name} ${n.id}`.toLowerCase().includes(match[1].toLowerCase())).slice(0,8);
+        const candidates=new Map(window.cardGraphView.data.nodes.map(n=>[n.id,n]));
+        Object.values(api.workspace?.entries||{}).forEach(e=>candidates.set(e.id,{...e.working,id:e.id,name:e.working.name||'未命名草案'}));
+        const cards=[...candidates.values()].filter(n=>`${n.name} ${n.id}`.toLowerCase().includes(match[1].toLowerCase())).slice(0,8);
         for(const card of cards){const button=el('button','',card.name);button.type='button';button.onclick=()=>{input.setRangeText(`[[card:${card.id}]]`,start-match[0].length,start,'end');list.hidden=true;change();input.focus();};list.append(button);}
       });
       input.addEventListener('keydown',e=>{if(e.key==='Escape')list.hidden=true;});
     }
     const beforeUnload=e=>{if(seq!==saved){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',beforeUnload);
-    return {async open(next){await flush();entry=structuredClone(next);working=structuredClone(next.working);seq=0;saved=0;status.textContent='已保存';message.textContent='';title.textContent=next.archived?'已归档草案':'设计草案';
+    return {async open(next){if(uploadTask)await uploadTask;await flush();next=api.workspace.entries[next.id];entry=structuredClone(next);working=structuredClone(next.working);seq=0;saved=0;status.textContent='已保存';message.textContent='';title.textContent=next.archived?'已归档草案':'设计草案';
         for(const [key,input] of Object.entries(fields)){if(key==='song')input.checked=working.song;else input.value=key.includes('keywords')?working[key].join(', '):working[key]??'';}
         save.disabled=next.archived;analyze.disabled=next.archived;renderMechanics();form.querySelectorAll('input,select,textarea,button').forEach(input=>input.disabled=next.archived);readFields();renderPreview();},
       flush,get id(){return entry?.id;},get card(){readFields();return structuredClone(working);},get dirty(){return seq!==saved;},

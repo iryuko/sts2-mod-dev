@@ -105,7 +105,10 @@
     if(!result.length)list.append(el("p","empty","没有匹配的卡牌"));
     $("list-count").textContent=`${result.length} 张`;
   }
-  function section(title,text) { const box=el("section","effect-section"),p=el('p');CardReferences.render(p,CardReferences.tokenize(text||'',nodes,CardAliases),navigate);box.append(el("h3","",title),p);return box; }
+  function section(title,text) {
+    const box=el('section','effect-section'),p=el('p'),index={has:id=>nodes.has(id)||!!resolveExtra(id),get:id=>nodes.get(id)||resolveExtra(id)};
+    CardReferences.render(p,CardReferences.tokenize(text||'',index,CardAliases),navigate);box.append(el('h3','',title),p);return box;
+  }
   function evidenceLinks(container,references) {
     [...new Set(references)].forEach(reference=>{
       const entry=graph.evidence[reference];

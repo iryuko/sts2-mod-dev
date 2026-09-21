@@ -64,10 +64,21 @@ def build():
     add('SeverThePast','produce','draw_pile_access',condition='弃牌非空才合并洗牌；会破坏既有置顶顺序')
     add('RehearsalOrder','read','draw_pile_access',condition='抽牌堆现有普通或非凡Song，排除稀有，不生成')
     add('Compose TheWholeBlueWorld','generate','song_pool_access',condition='仅歌曲池随机候选，不保证抽中；非永久入组')
-    exhaust='IHaveAscended Speak RestorationOfPower WeightliftingChampion PullmanCrash Fragility PersonaDissociation SocialWithdrawal AllYouThinkAboutIsYourself OverworkAnxiety Unmask RehearsalOrder BlackBirthday Divine OctagramDance'
+    exhaust='IHaveAscended Speak RestorationOfPower WeightliftingChampion PullmanCrash Fragility PersonaDissociation SocialWithdrawal AllYouThinkAboutIsYourself OverworkAnxiety Unmask RehearsalOrder BlackBirthday Divine OctagramDance Compose UntilNextAct'
     add(exhaust,'produce','card_exhausted',timing='after_play',condition='自己实际打出并按原牌消耗；虚无牌还可未打出而消耗')
     add('MasqueradeRhapsodyRequest TreasurePleasure','produce','card_exhausted',timing='after_play',variant='base',condition='只有未升级版带消耗；升级后移除')
+    upgraded_costs={'Angles':0,'AnswerMe':1,'AveMujica':2,'BlackBirthday':0,'ChoirSChoir':2,'Compose':0,
+                    'Curseslander':0,'OctagramDance':3,'RehearsalOrder':0,'SheIsRadiant':0,'Slander':0,
+                    'SoManyMaggots':0,'SymbolIv':1}
     for identifier,node in nodes.items():
+        keywords=['Exhaust'] if identifier in exhaust.split() or identifier in ('MasqueradeRhapsodyRequest','TreasurePleasure') else []
+        if node['pool']=='token': keywords.append('Ethereal')
+        if identifier in ('ImprisonedXii','ShadowOfThePastI','ShadowOfThePastII','ShadowOfThePastIII'):keywords=['Unplayable']
+        upgraded_keywords=list(keywords)
+        if identifier in ('MasqueradeRhapsodyRequest','TreasurePleasure'):upgraded_keywords=[]
+        if identifier in ('Completeness','Notebook'):upgraded_keywords.append('Retain')
+        if identifier=='Speak':upgraded_keywords.append('Innate')
+        profiles[identifier].update(keywords=keywords,upgraded_keywords=upgraded_keywords,upgraded_cost=upgraded_costs.get(identifier))
         if node['type']=='Attack':
             add(identifier,'read','strength',condition='正常攻击伤害走力量修正；多段逐段计算，目标需存活')
             add(identifier,'produce','attack_played',timing='after_play',condition='实际打出而非单次攻击段数')

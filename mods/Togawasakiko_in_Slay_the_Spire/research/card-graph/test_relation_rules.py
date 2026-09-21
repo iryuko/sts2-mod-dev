@@ -50,5 +50,14 @@ class RulesTests(unittest.TestCase):
         edge=next(e for e in result['suggestions'] if e['target']=='LingeringResonance')
         self.assertIn('base',edge['condition']);self.assertNotIn('upgraded',edge['condition'])
 
+    def test_attack_replay_retains_source_constraints_and_target_playability(self):
+        trigger=fact('replay','attack_played',timing='own_turn_end',condition='生命小于2')
+        trigger['variant']='upgraded';trigger['limit']=1
+        result=self.analyze(mechanics=[trigger])
+        edge=next(e for e in result['suggestions'] if e['rule_id']=='attack-replay' and e['target']=='StrikeTogawasakiko')
+        for text in ['upgraded','own_turn_end','生命小于2','1']:self.assertIn(text,edge['condition'])
+        result=self.analyze(keywords=['Unplayable'],upgraded_keywords=['Unplayable'])
+        self.assertFalse(any(e['rule_id']=='attack-replay' for e in result['suggestions']))
+
 
 if __name__=='__main__': unittest.main()
