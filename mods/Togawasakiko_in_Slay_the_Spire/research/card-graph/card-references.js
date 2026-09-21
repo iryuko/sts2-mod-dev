@@ -31,7 +31,7 @@
   function bindPreview(root,resolveCard,onNavigate) {
     const popup=document.createElement('section');popup.className='card-popover';popup.hidden=true;
     popup.setAttribute('role','dialog');popup.setAttribute('aria-label','卡牌预览');document.body.append(popup);
-    let anchor=null,timer;
+    let anchor=null,timer,lastPointer='mouse';
     const hide=()=>{clearTimeout(timer);popup.hidden=true;anchor=null;};
     const later=()=>{clearTimeout(timer);timer=setTimeout(hide,180);};
     const show=target=>{
@@ -50,12 +50,13 @@
       go.onclick=()=>{const id=target.dataset.cardId;hide();onNavigate(id);};popup.append(content,go);
       const rect=target.getBoundingClientRect(),w=popup.offsetWidth,h=popup.offsetHeight;
       popup.style.left=`${Math.max(8,Math.min(innerWidth-w-8,rect.left))}px`;
-      popup.style.top=`${Math.max(8,Math.min(innerHeight-h-8,rect.bottom+8))}px`;
+      const top=rect.bottom+8+h<=innerHeight?rect.bottom+8:rect.top-h-8;
+      popup.style.top=`${Math.max(8,Math.min(innerHeight-h-8,top))}px`;
     };
-    const over=e=>{const target=e.target.closest?.('[data-card-id]');if(target)show(target);};
+    const over=e=>{if(e.pointerType==='touch'||(e.type==='focusin'&&lastPointer==='touch'))return;const target=e.target.closest?.('[data-card-id]');if(target)show(target);};
     const touch=e=>{const target=e.target.closest?.('[data-card-id]');if(e.pointerType==='touch'&&target){e.preventDefault();e.stopImmediatePropagation();show(target);}};
-    const key=e=>{if(e.key==='Escape')hide();};
-    const outside=e=>{if(!popup.contains(e.target)&&!e.target.closest?.('[data-card-id]'))hide();};
+    const key=e=>{lastPointer='keyboard';if(e.key==='Escape')hide();};
+    const outside=e=>{lastPointer=e.pointerType;if(!popup.contains(e.target)&&!e.target.closest?.('[data-card-id]'))hide();};
     root.addEventListener('pointerover',over);root.addEventListener('focusin',over);root.addEventListener('pointerout',later);
     root.addEventListener('click',touch,true);document.addEventListener('keydown',key);document.addEventListener('pointerdown',outside);
     popup.onpointerenter=()=>clearTimeout(timer);popup.onpointerleave=later;popup.onfocusin=()=>clearTimeout(timer);
