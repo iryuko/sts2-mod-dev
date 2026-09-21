@@ -47,6 +47,19 @@ internal abstract class TogawasakikoCard : CardModel
 
     public override CardPoolModel VisualCardPool => ModelDb.CardPool<TogawasakikoCardPool>();
 
+    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    {
+        // Native hooks visit every card in every pile, including other copies.
+        if (cardPlay.Card != this
+            || Type is not (CardType.Skill or CardType.Power)
+            || Owner?.Creature is not { IsAlive: true } creature)
+        {
+            return Task.CompletedTask;
+        }
+
+        return CreatureCmd.TriggerAnim(creature, "Cast", Owner.Character.CastAnimDelay);
+    }
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
@@ -1360,7 +1373,8 @@ internal sealed class AllYouThinkAboutIsYourself : GeneratedPressureCard
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCard(this)
             .Targeting(cardPlay.Target)
-            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.AttackAnimDelay)
+            .WithAttackerAnim("Cast", Owner.Character.CastAnimDelay)
+            .WithSingleTargetThorns(cardPlay.Target, Owner.Character.CastAnimDelay)
             .Execute(choiceContext);
         await CreatureCmd.Stun(cardPlay.Target, string.Empty);
     }

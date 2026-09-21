@@ -139,7 +139,7 @@ internal static class PressureCardRegression
                     ModelDb.Power<DexterityPower>().ToMutable().ApplyInternal(f.Players[0].Creature, 2, true);
                     await f.PlayEffect(card);
                     Equal(Math.Max(0, pressure - 5), f.PressureAmount);
-                    Equal(upgraded ? 10 : 8, f.Players[0].Creature.Block);
+                    Equal(upgraded ? 14 : 10, f.Players[0].Creature.Block);
                     Equal(0, f.Players[0].PlayerCombatState!.Hand.Cards.Count);
                 });
             }
@@ -176,7 +176,7 @@ internal static class PressureCardRegression
                 using var select = CardSelectCmd.UseSelector(new Selection([token], [token], 0, 1));
                 ModelDb.Power<DexterityPower>().ToMutable().ApplyInternal(f.Players[0].Creature, 2, true);
                 card.UpdateDynamicVarPreview(CardPreviewMode.Normal, null, card.DynamicVars);
-                int expected = name == "UnspokenWords" ? 9 : 10;
+                int expected = name == "UnspokenWords" ? 9 : 14;
                 Equal((decimal)expected, card.DynamicVars.Block.PreviewValue);
                 Equal(true, Description(card).Contains(expected.ToString()));
                 await f.PlayEffect(card);
@@ -362,7 +362,7 @@ internal static class PressureCardRegression
                 var f = new CombatFixture();
                 foreach ((string name, string variable, int before, int after) in new[] {
                     ("UnspokenWords", "Block", 5, 7), ("LingeringResonance", "Power", 1, 2),
-                    ("UntilNextAct", "Cards", 1, 2), ("ComposedResponse", "Block", 6, 8) })
+                    ("UntilNextAct", "Cards", 1, 2), ("ComposedResponse", "Block", 8, 12) })
                 {
                     CardModel card = f.Card(name);
                     string plain = Description(card);
