@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>丰川祥子 · 卡牌关系图</title>
   <link rel="stylesheet" href="graph.css">
+  <link rel="stylesheet" href="draft-editor.css">
   <script defer src="vendor/cytoscape-3.33.1.min.js"></script>
   <script defer src="vendor/lucide-0.468.0.min.js"></script>
   <script defer src="graph-data.js"></script>
@@ -12,12 +13,27 @@
   <script defer src="card-aliases.js"></script>
   <script defer src="card-references.js"></script>
   <script defer src="graph.js"></script>
+  <script defer src="workbench-api.js"></script>
+  <script defer src="draft-editor.js"></script>
+  <script defer src="workbench.js"></script>
 </head>
 <body>
   <header class="page-header">
     <div><span class="eyebrow">TOGAWASAKIKO / DESIGN RESEARCH</span><h1>丰川祥子 <span>卡牌关系图</span></h1></div>
     <div class="baseline"><strong id="version">0.2.3</strong><span id="total-count"></span><a href="README.md">数据与边界</a></div>
   </header>
+  <nav class="workbench-bar" aria-label="工作台">
+    <div class="segmented"><button id="graph-tab" type="button" aria-pressed="true">图谱</button><button id="draft-tab" type="button" aria-pressed="false" disabled>草案</button></div>
+    <button id="new-draft" class="command-button" type="button" disabled><i data-lucide="plus"></i>新建草案</button>
+    <button id="clone-card" class="command-button" type="button" disabled><i data-lucide="copy"></i>复制选中卡</button>
+    <span id="connection-status" class="connection-status">连接中</span>
+  </nav>
+  <p id="connection-error" role="alert"></p>
+  <div id="recovery-tools" class="recovery-tools" hidden><button id="download-local" class="command-button" type="button">下载本页草稿</button><button id="reconnect" class="command-button" type="button">重新连接</button><button id="reload-workspace" class="command-button" type="button">重新加载工作区</button></div>
+  <section id="draft-workspace" class="draft-workspace" hidden aria-label="草案工作区">
+    <aside class="draft-sidebar"><div class="list-heading"><h2>设计草案</h2><span id="draft-count"></span></div><label class="check-label"><input id="show-archived" type="checkbox">包含已归档</label><div id="draft-list" class="draft-list"></div></aside>
+    <section id="draft-editor" class="draft-editor" hidden aria-label="草案编辑器"></section>
+  </section>
   <main class="workspace">
     <aside class="catalog" aria-label="卡牌目录">
       <div class="catalog-filters">

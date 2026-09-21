@@ -2,6 +2,7 @@
 (() => {
   "use strict";
   let graph = window.CARD_GRAPH;
+  if(location.protocol!=='file:'&&graph){graph=structuredClone(graph);graph.nodes.forEach(n=>{if(n.portrait)n.portrait='/api/portraits/'+encodeURIComponent(n.id);});}
   const $ = id => document.getElementById(id);
   if (!graph || typeof cytoscape !== "function") {
     $("error").hidden = false;

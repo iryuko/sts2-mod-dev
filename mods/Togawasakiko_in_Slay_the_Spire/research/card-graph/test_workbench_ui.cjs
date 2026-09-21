@@ -1,0 +1,81 @@
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const os=require('node:os');
+const path=require('node:path');
+const {spawn}=require('node:child_process');
+const {once}=require('node:events');
+const readline=require('node:readline');
+const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3';
+
+(async()=>{
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'sakiko-workbench-ui-'));
+  const server=spawn(PY,['server.py','--workspace',temp,'--port','0'],{cwd:__dirname,stdio:['ignore','pipe','pipe']});
+  let logs='';server.stderr.on('data',data=>logs+=data);
+  const lines=readline.createInterface({input:server.stdout});
+  let browser;
+  try {
+    const [line]=await Promise.race([once(lines,'line'),once(server,'exit').then(()=>{throw Error(logs);})]);
+    const {url}=JSON.parse(line);browser=await chromium.launch({headless:true});
+    const page=await browser.newPage({viewport:{width:1440,height:1000}});page.setDefaultTimeout(4000);
+    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(url);
+    await page.getByRole('button',{name:'新建草案',exact:true}).click();
+    await page.getByLabel('卡牌名称',{exact:true}).fill('浏览器测试牌');
+    await page.getByLabel('基础效果',{exact:true}).fill('造成6点伤害');
+    await page.getByLabel('基础费用',{exact:true}).fill('X');
+    await page.getByLabel('卡牌类型',{exact:true}).selectOption('Attack');
+    await page.getByLabel('品质',{exact:true}).selectOption('Uncommon');
+    await page.getByLabel('卡牌来源',{exact:true}).selectOption('main');
+    await page.getByLabel('Song',{exact:true}).check();
+    await page.getByLabel('基础关键词',{exact:true}).fill('Exhaust');
+    await page.getByLabel('升级关键词',{exact:true}).fill('Retain');
+    await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='已保存');
+    const graph=JSON.parse(fs.readFileSync(path.join(__dirname,'graph.json')));
+    const image=path.resolve(__dirname,graph.nodes.find(n=>n.portrait).portrait);
+    await page.getByLabel('上传卡图',{exact:true}).setInputFiles(image);
+    await page.waitForFunction(()=>document.querySelector('#draft-preview img')?.src.includes('/api/images/'));
+    await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await page.reload();
+    await page.getByRole('button',{name:'草案',exact:true}).click();
+    await page.getByRole('button',{name:'浏览器测试牌',exact:true}).click();
+    assert.equal(await page.getByLabel('基础效果',{exact:true}).inputValue(),'造成6点伤害');
+    assert.equal(await page.getByLabel('基础费用',{exact:true}).inputValue(),'X');
+    assert.equal(await page.getByLabel('升级关键词',{exact:true}).inputValue(),'Retain');
+    assert.equal(await page.locator('#draft-preview img').count(),1);
+    const other=await browser.newPage();await other.goto(url);
+    await other.waitForFunction(()=>sakikoWorkbench.api.workspace);
+    await page.getByLabel('设计备注',{exact:true}).fill('first tab saved');
+    await page.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='已保存');
+    await other.getByRole('button',{name:'草案',exact:true}).click();
+    await other.getByRole('button',{name:'浏览器测试牌',exact:true}).click();
+    await other.getByLabel('设计备注',{exact:true}).fill('second tab must not overwrite');
+    await other.getByRole('button',{name:'保存草稿',exact:true}).click();
+    await other.waitForFunction(()=>sakikoWorkbench.api.blocked);
+    assert.equal(await other.getByLabel('设计备注',{exact:true}).inputValue(),'second tab must not overwrite');
+    assert.ok(fs.readFileSync(path.join(temp,'workspace.json'),'utf8').includes('first tab saved'));
+    other.on('dialog',dialog=>dialog.accept());await other.close();
+    let release;
+    const gate=new Promise(resolve=>release=resolve);
+    await page.route('**/api/commands',async route=>{await gate;await route.continue();});
+    await page.getByLabel('基础效果',{exact:true}).fill('较早的输入');
+    const firstSave=page.getByRole('button',{name:'保存草稿',exact:true}).click();await firstSave;
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='保存中');
+    await page.getByLabel('基础效果',{exact:true}).fill('晚到响应不能回滚这段新内容');release();
+    await page.waitForFunction(()=>document.querySelector('#save-status').textContent==='已保存');
+    assert.equal(await page.getByLabel('基础效果',{exact:true}).inputValue(),'晚到响应不能回滚这段新内容');
+    await page.unroute('**/api/commands');
+    for(const [width,height] of [[1440,1000],[768,1024],[390,844]]){
+      await page.setViewportSize({width,height});
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+    }
+    assert.deepEqual(errors,[]);
+    console.log('PASS draft fields, image upload, persistence, stale tab conflict, late save, responsive layouts');
+  } finally {
+    if(browser)await browser.close();lines.close();
+    if(server.exitCode===null){server.kill('SIGTERM');await once(server,'exit');}
+    fs.rmSync(temp,{recursive:true,force:true});
+  }
+})().catch(error=>{console.error(error);process.exitCode=1;});
