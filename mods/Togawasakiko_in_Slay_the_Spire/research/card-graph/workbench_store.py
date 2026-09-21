@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import tempfile
 import threading
+import uuid
 
 from workbench_model import (empty_workspace, validate_workspace, reduce_command,
                              RevisionConflict, CorruptWorkspace, WorkspaceLocked)
@@ -72,3 +73,16 @@ class WorkspaceStore:
         if not self.closed:
             self.closed=True
             fcntl.flock(self.lock,fcntl.LOCK_UN);self.lock.close()
+
+    def add_image(self, data, expected_revision):
+        from workbench_assets import validate_image
+        metadata=validate_image(data)
+        with self.mutex:
+            self._check(expected_revision)
+            identifier=str(uuid.uuid4());filename=f'{identifier}.{metadata["extension"]}'
+            uploads=self.root/'uploads';uploads.mkdir(exist_ok=True)
+            with (uploads/filename).open('xb') as handle:
+                handle.write(data);handle.flush();os.fsync(handle.fileno())
+            state=deepcopy(self.state);state['images'][identifier]={**metadata,'filename':filename}
+            state['revision']+=1;self._commit(state)
+            return {'workspace':self.read(),'image_id':identifier}
