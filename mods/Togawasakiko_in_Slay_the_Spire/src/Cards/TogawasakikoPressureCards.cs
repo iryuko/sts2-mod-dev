@@ -144,7 +144,7 @@ internal sealed class ComposedResponse : TogawasakikoCard
     public override bool GainsBlock => true;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
-        new DynamicVar[] { new BlockVar(6m, ValueProp.Move), new DynamicVar("PressureAmount", 5m) };
+        new DynamicVar[] { new BlockVar(8m, ValueProp.Move), new DynamicVar("PressureAmount", 5m) };
 
     public ComposedResponse()
         : base(1, CardType.Skill, CardRarity.Common, TargetType.AnyEnemy,
@@ -172,6 +172,6 @@ internal sealed class ComposedResponse : TogawasakikoCard
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Block.UpgradeValueBy(2m);
+        DynamicVars.Block.UpgradeValueBy(4m);
     }
 }

@@ -207,6 +207,7 @@ await BridgeCardRegression.Run(Check);
 await PressureCardRegression.Run(Check);
 await SongExpansionRegression.Run(Check);
 await OctagramReplayRegression.Run(Check);
+await CastAnimationRegression.Run(Check);
 
 Console.WriteLine($"RESULT {passed} passed, {failures} failed");
 Environment.ExitCode = failures == 0 ? 0 : 1;

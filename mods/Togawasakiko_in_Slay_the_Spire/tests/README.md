@@ -85,3 +85,12 @@ read with a managed 1/60s clock; the shuffle RNG, card moves, draws and hooks st
 native. It checks DIVINE reshuffling Blue Eyes' already-selected discard Song
 into hand, which must still receive both plays.
 The dedicated album-portrait regression brings the full suite to 107 checks.
+
+The 2026-09-21 cast integration adds 10 checks (117 total). Native card playback
+must request Cast for skills, powers and all four pressure tokens. The attack
+token must keep its damage/stun and avoid an Attack interruption; ordinary
+attacks and vanilla casting cards keep their existing animation selection.
+Tests cover other copies/owners, pre-effect ordering, Burst repeats and token
+exhaustion. A scoped Harmony prefix observes the real CreatureCmd.TriggerAnim
+arguments without replacing the command. TestMode has no creature scene, so
+rendered motion, fast-play transitions and live multiplayer remain Steam checks.
