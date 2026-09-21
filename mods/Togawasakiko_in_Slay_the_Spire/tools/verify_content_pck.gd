@@ -12,9 +12,16 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var args := OS.get_cmdline_user_args()
-	if args.size() != 2 or not ProjectSettings.load_resource_pack(args[0], true):
+	if args.size() < 2 or args.size() > 3 or not ProjectSettings.load_resource_pack(args[0], true):
 		_fail("Expected PCK and source Spine SHA256; mount failed")
 		return
+	if args.size() == 3:
+		var expected: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(args[2]))
+		for path in expected:
+			if FileAccess.get_sha256("res://" + path) != expected[path]:
+				_fail("PCK resource differs from approved candidate: " + path)
+				return
+		print("CANDIDATE_HASHES_OK=", expected.size())
 	var json_path := ANIMATION_ROOT + "togawasakiko_v2.spine-json"
 	if FileAccess.get_sha256(json_path) != args[1]:
 		_fail("PCK Spine differs from verified formal source")
@@ -25,12 +32,16 @@ func _run() -> void:
 		_fail("Old death timeline in PCK")
 		return
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://mod_manifest.json"))
-	if manifest.get("version") != "0.2.3":
+	if manifest.get("version") != "0.2.4":
 		_fail("Wrong embedded version")
 		return
 	var fall: Texture2D = load(ANIMATION_ROOT + "images/fall_prone_candidate_v3_idle_locked.png")
 	if fall == null or fall.get_size() != Vector2(1024, 1536):
 		_fail("Accepted V3 texture failed to load")
+		return
+	var halo: Texture2D = load(ANIMATION_ROOT + "images/death_halo_ring.png")
+	if halo == null or halo.get_size() != Vector2(193, 193):
+		_fail("Death halo texture failed to load")
 		return
 	for card in CARDS:
 		var texture: Texture2D = load("res://mod_assets/cards/normal/" + card + ".png")
@@ -55,6 +66,23 @@ func _run() -> void:
 			_fail("Animation missing: " + action)
 			return
 		print("SPINE_ACTION_OK=", action)
+	var skeleton: Object = sprite.call("get_skeleton")
+	var halo_slot: Object = skeleton.call("find_slot", "death_halo")
+	if halo_slot == null or skeleton.call("find_bone", "death_halo_motion") == null:
+		_fail("Death halo rig missing from imported Spine")
+		return
+	state.call("clear_tracks")
+	state.call("set_animation", "die", false, 0)
+	sprite.call("update_skeleton", 0.6)
+	var halo_attachment: Object = halo_slot.call("get_attachment")
+	if halo_attachment == null or halo_attachment.call("get_attachment_name") != "death_halo_ring":
+		_fail("Death halo not attached during rolling tail")
+		return
+	sprite.call("update_skeleton", 1.2)
+	if halo_slot.call("get_attachment") != null:
+		_fail("Death halo not hidden after tail")
+		return
+	print("DEATH_HALO_PCK_OK=visible_at_0.6_hidden_at_1.8")
 	var thorn_scene: PackedScene = load("res://scenes/vfx/togawasakiko/thorn_restraint.tscn")
 	if thorn_scene == null:
 		_fail("Thorn scene failed to load")
@@ -62,6 +90,10 @@ func _run() -> void:
 	var thorn: Node = thorn_scene.instantiate()
 	thorn.connect("hit_frame_reached", func(): _hit = true)
 	root.add_child(thorn)
+	thorn.set("position", Vector2(500.0, 550.0))
+	if thorn.get("_cluster_material") == null:
+		_fail("Shadow thorn material missing")
+		return
 	await create_timer(0.4).timeout
 	if not _hit:
 		_fail("Thorn hit signal missing")
@@ -72,7 +104,7 @@ func _run() -> void:
 		return
 	sprite.queue_free()
 	await process_frame
-	print("CONTENT_PCK_PASS: cards, icons, six animations, 0.21s death, thorn lifecycle, version")
+	print("CONTENT_PCK_PASS: cards, icons, six animations, 0.21s body fall, halo tail, shadow thorn lifecycle, version")
 	quit(0)
 
 func _fail(message: String) -> void:
