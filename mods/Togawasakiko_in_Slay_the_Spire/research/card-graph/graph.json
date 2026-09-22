@@ -49,10 +49,7 @@
     "src/Relics/DollMask.cs": "4cd035ad6f1e18b2e256d713b51fe9fd68e91b000a5888b19e50f00836e85617",
     "src/Relics/PianoOfMom.cs": "ff44b3504767f6c80db128a731c654ea20079203345c6f9c51c2e0af03cfee10",
     "src/Relics/UpgradedDollMask.cs": "a38cc7f96282131b8ef8665cb507d799a4f1fcb7e15d06c7fa87e9ab8f4c859b",
-    "src/TogawasakikoCombatVfx.cs": "9be0e26538a5d5973d062068ecc6701a9fab8d27c276438e38f77f57fa65814c",
-    "src/obj/Release/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs": "0be1a8399fbefa553e3202c44c7fb653cf774b73b6633960d3f702df47a494b2",
-    "src/obj/Release/net9.0/Togawasakiko_in_Slay_the_Spire.AssemblyInfo.cs": "00e1024ff448b0295eb51269664a1722970704bd596b0a2e1938448fd6fd29f9",
-    "src/obj/Release/net9.0/Togawasakiko_in_Slay_the_Spire.GlobalUsings.g.cs": "8f86a2cbf00ff3eee0bda2bc0eb5e1fc19c8544d5dc650c53d0132325956b592"
+    "src/TogawasakikoCombatVfx.cs": "9be0e26538a5d5973d062068ecc6701a9fab8d27c276438e38f77f57fa65814c"
   },
   "nodes": [
     {

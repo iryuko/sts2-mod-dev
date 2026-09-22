@@ -5,13 +5,14 @@
 - [打开交互图](index.html)
 - [设计评价与三个攻击候选](design-review.md)
 - [机器可读图谱](graph.json)
-- [旧 PR 处理记录](../../../../docs/audits/pr-reconciliation-2026-09-21.md)
+- [GitHub 上传与验证记录](github-publication-2026-09-22.md)
 
 ## 基线与范围
 
 以已发布 `0.2.3` 的 `057b6396b0eb26d217eadade0be21b07d30c07f6` 为源码依据。
 远端 main 的整合提交为 `d1df1c45e340a44b6f3e49fd0538ef5cc677844e`，二者 Git tree 相同。
 共享工作区的旧 `src/` 不是这一基线，不能混读。
+研究基线不会随着仓库 main 自动升级；后续 mod 0.2.4/0.2.5 的动画或数值修改不在本图谱中。
 
 完整登记 **72 个具体 mod 卡牌类**：63 主池、4 压力衍生、3 往日之影、2 遗物授予。
 其中常规奖励可选 58 张，Song 26 张。另有 3 个未批准提案，不计入游戏卡池。
@@ -25,12 +26,41 @@ PerkUp 的主要输出是原版攻击牌，ShadowOfThePastI 的主要输出是�
 
 ## 使用
 
-### 本机编辑入口
+### 从 GitHub 开始
+
+当前编辑服务支持 macOS/Linux；Windows 请在 WSL 中运行，原生 Windows 的文件锁尚未适配。
+需要 Git、Python 3.10+。不需要游戏、Godot、.NET 或 Codex。
+本工具不是 GitHub Pages 在线服务；GitHub 保存源码，编辑与个人数据留在本机。
+
+PR 合并前，可检出工具分支：
+
+```sh
+git clone --branch codex/card-design-workbench-20260922 https://github.com/iryuko/sts2-mod-dev.git
+cd sts2-mod-dev
+```
+
+从包含本工具的仓库根目录执行以下步骤。固定版本的只读检出用于提供卡图和校验源码，
+不能用当前 main 的游戏源码代替；不要直接下载单个 HTML 或只复制 card-graph 目录。
+
+```sh
+git worktree add --detach .worktrees/bridge-card-art-fix-20260906 057b6396b0eb26d217eadade0be21b07d30c07f6
+cd mods/Togawasakiko_in_Slay_the_Spire/research/card-graph
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-workbench.txt
+python server.py
+```
+
+若该基线目录已存在，不要覆盖或删除；先核对 `git -C .worktrees/bridge-card-art-fix-20260906 rev-parse HEAD`。
+如果浅克隆中没有上述提交，先在仓库根运行 `git fetch --unshallow origin`。
+
+### 后续启动
 
 在本目录运行以下命令，打开终端输出的本机URL：
 
 ```sh
-/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 server.py
+. .venv/bin/activate
+python server.py
 ```
 
 默认仅监听 `127.0.0.1:8765`；端口占用时选择空闲端口，不停止别的服务。
@@ -57,6 +87,7 @@ PerkUp 的主要输出是原版攻击牌，ShadowOfThePastI 的主要输出是�
 - `workspace/uploads/`：上传的原始图片；只接受可解码PNG/JPEG/WebP，最大10MiB、3200万像素，不重绘、不裁剪。
 - `workspace/history/workspace-*.json`：最近20份旧JSON快照。图片不自动删除，因此旧快照仍可引用旧图。
 - JSON导出不包含图片字节；完整备份应包含整个workspace目录。
+- 默认workspace已加入Git忽略规则，防止草案、历史及上传原图误入公开提交；忽略不等于缓存，不可清理。自选保存目录的Git规则需自行检查。
 - 恢复时先停止服务，保留当前JSON，再用一份history快照替换workspace.json并重启；不要在服务运行时手工改文件。
 - 冲突或断线时保留本页输入、暂停后续写入。先“下载本页草稿”，再重新连接或明确丢弃本页内容并重新加载。
 - 同一revision的服务重启允许重新连接继续保存；revision已变化则不能自动覆盖。
@@ -130,7 +161,15 @@ node mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_workbench_ui.c
 node --test mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/test_workbench_review.cjs
 ```
 
-JS测试需要 Node、Playwright 及其 Chromium；本机验证使用 Codex bundled runtime 的 Node 与 NODE_PATH。
+JS测试需要 Node、Playwright 及其 Chromium。在工具目录可安装已验证的浏览器测试依赖：
+
+```sh
+npm install --no-save --package-lock=false playwright@1.62.1
+npx playwright install chromium
+```
+
+先激活上述Python虚拟环境；浏览器测试默认使用PATH中的 `python3`，也可通过 `PYTHON=/path/to/python` 指定解释器。
+运行页面本身不需要 Node 或 Playwright。
 HTTP浏览器测试自行使用临时工作区、临时服务，结束后关闭，不会修改你的草稿。
 浏览器截图输出至仓库 `local/card-graph-2026-09-21/`。该测试不会启动 Godot、Steam 或游戏。
 可通过 `--source-root /absolute/path/to/checkout` 指定同一已核验树的另一检出目录。
@@ -143,7 +182,7 @@ HTTP浏览器测试自行使用临时工作区、临时服务，结束后关闭�
 - 压力在敌人上共享，兑换临时牌不是每个祥子都领一份；出牌/弃牌历史和消耗收益按各自 Owner 判断。
 - 颜、自卑读取 `TotalDamage`，不等于生命损失。此次重新反编译发布 Mac 参考的 `DamageResult`，确认为 `BlockedDamage + UnblockedDamage`。DLL SHA-256：`e7ceb80669bfaf5c8fccabaa126ae2bb283aba514be5b5b55612579cfd285f18`。这不是游戏内受击实测。
 - 临时生成牌、DeckVersion、基础/升级分支、消耗后去向和回合时点都写进条件；类图仍不能表示每个运行时实例与所有嵌套顺序。
-- 本区与当前新提案尚未推送到远端；已完成的远端操作仅为旧 PR 收尾和已发布源码归并。
+- 2026-09-22 本区通过独立工具分支提交 GitHub；个人workspace、上传图、日志及本机环境不在上传范围。具体交付范围见上传记录。
 
 ## 本轮验证
 

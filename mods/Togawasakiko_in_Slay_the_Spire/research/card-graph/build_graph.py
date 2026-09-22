@@ -174,6 +174,13 @@ def validate_clean_source(source_root, mod_directory):
         raise ValueError("Uncommitted gameplay source: choose a clean, reviewed baseline")
 
 
+def tracked_source_hashes(mod):
+    paths = subprocess.check_output(
+        ["git", "-C", str(mod), "ls-files", "-z", "--", "src"], text=True).split("\0")
+    return {name: hashlib.sha256((mod / name).read_bytes()).hexdigest()
+            for name in sorted(paths) if name.endswith(".cs")}
+
+
 def build(write=True, source_root=None):
     config = read_json(HERE / "graph-config.json")
     source_root = Path(source_root) if source_root else REPO / config["source_worktree"]
@@ -205,8 +212,7 @@ def build(write=True, source_root=None):
     references = {ref for edge in edges for ref in edge["evidence"]}
     references |= {f"{n['source']}#{n['id']}" for n in nodes if n["status"] == "implemented"}
     evidence = {ref: resolve_evidence(ref, mod, config["source_revision"]) for ref in sorted(references)}
-    hashes = {path.relative_to(mod).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
-              for path in sorted((mod / "src").rglob("*.cs"))}
+    hashes = tracked_source_hashes(mod)
     result = {"meta": config, "source_hashes": hashes,
               "nodes": sorted(nodes, key=lambda n: n["id"]), "edges": edges, "evidence": evidence,
               "counts": {"implemented": len(inventory), "proposals": len(proposals["cards"]),

@@ -16,6 +16,13 @@
 - commit `59260271`
 - 详情见 `references/api-notes/app/release_info.json`
 
+## 卡牌设计工作台
+
+[丰川祥子卡牌设计工作台](mods/Togawasakiko_in_Slay_the_Spire/research/card-graph/README.md)
+提供卡牌关系图、悬浮卡面、草案编辑、卡图上传和关系审核。
+它是独立的本机研究工具，不需要启动游戏，不生成游戏补丁；个人设计默认不上传 Git。
+研究数据固定在 mod 0.2.3，不能视为后续游戏版本的最新卡面数值。启动前请按工具说明准备固定版本卡图。
+
 ## 目录职责
 
 ```text

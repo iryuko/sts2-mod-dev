@@ -10,7 +10,7 @@ const readline=require('node:readline');
 let server,browser,temp,url,lines;
 before(async()=>{
   temp=fs.mkdtempSync(path.join(os.tmpdir(),'sakiko-review-'));
-  server=spawn('/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3',['server.py','--port','0','--workspace',temp],{cwd:__dirname,stdio:['ignore','pipe','inherit']});
+  server=spawn(process.env.PYTHON || 'python3',['server.py','--port','0','--workspace',temp],{cwd:__dirname,stdio:['ignore','pipe','inherit']});
   lines=readline.createInterface({input:server.stdout});const [line]=await once(lines,'line');url=JSON.parse(line).url;
   browser=await chromium.launch({headless:true});
 });

@@ -112,6 +112,26 @@ class GraphContracts(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Uncommitted"):
                 self.builder.validate_clean_source(root, "mod")
 
+    def test_generated_csharp_does_not_change_source_fingerprints(self):
+        fingerprint = getattr(self.builder, "tracked_source_hashes", None)
+        self.assertTrue(callable(fingerprint), "Fingerprint only Git-tracked C# source")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            subprocess.run(["git", "init", "-q", str(root)], check=True)
+            mod = root / "mod"
+            src = mod / "src"
+            src.mkdir(parents=True)
+            (src / "Card.cs").write_text("original")
+            (root / ".gitignore").write_text("**/obj/\n")
+            subprocess.run(["git", "-C", directory, "add", "."], check=True)
+            before = fingerprint(mod)
+            self.assertEqual({"src/Card.cs"}, set(before))
+            (src / "obj").mkdir()
+            (src / "obj/AssemblyInfo.cs").write_text("generated")
+            self.assertEqual(before, fingerprint(mod))
+            (src / "Card.cs").write_text("changed")
+            self.assertNotEqual(before, fingerprint(mod))
+
     def test_graph_retains_real_global_conflicts_and_old_card_loops(self):
         graph = self.builder.build(write=False)
         edges = {(e["source"], e["target"], e["kind"]) for e in graph["edges"]}

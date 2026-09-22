@@ -6,7 +6,7 @@ const path=require('node:path');
 const {spawn}=require('node:child_process');
 const {once}=require('node:events');
 const readline=require('node:readline');
-const PY='/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3';
+const PY=process.env.PYTHON || 'python3';
 
 (async()=>{
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'sakiko-workbench-ui-'));
