@@ -1,9 +1,15 @@
 # 下一轮任务
 
+## 0.2.6 已发布（2026-09-24）
+
+用户明确要求发布后，已发布 [0.2.6 Release](https://github.com/iryuko/sts2-mod-dev/releases/tag/togawasakiko-v0.2.6-20260924)，标记为最新正式版。Tag 指向 `d8c1e7c6`；ZIP 和校验文件的 GitHub SHA-256 均与本地一致，旧 Release 未覆盖。
+包含本轮九类稳定性修复，保留 0.2.5 的立绘、Spine、施法动作和数值。571 项 PCK 内容只有版本号变化；147 项玩法、11 项原生资源/音频、28 项 Python、双端 API 构建及最终 PCK/荆棘渲染验证通过。下载与三件套身份见[发布说明](../mods/Togawasakiko_in_Slay_the_Spire/docs/releases/2026-09-24-0.2.6.md)。
+本轮没有更新本机安装，PR #10 仍未合并 main；另一任务的百科卡牌全显示候选保持原状，不在本次发布中。Windows 实际运行、双机联机和完整游戏 SL/UI 仍待验收，不把构建通过当作实机通过。
+
 ## 卡牌悬空修复已推送（2026-09-24）
 
 本轮清单中的九类已识别问题已完成代码修复：第一轮卡牌悬空、资源缓存、磁力重放、奥斯提误选与 Ave Mujica 费用判断，以及第二轮弹琴离场音乐、联机展示隔离、jukebox 音量叠声、Shadow 获得楼层。147 项玩法回归、11 项原生资源/音频检查、28 项 Python 检查及 Mac/Win v0.107.1 引用构建通过，原生宿主无 ERROR 或资源泄漏警告。
-修复位于 `/Users/user/.codex/worktrees/card-stall-fix-20260922/sts2-mod-dev`，分支 `codex/card-stall-fix-20260922`；代码提交 `f66d1c38` 已推送并创建 [PR #10](https://github.com/iryuko/sts2-mod-dev/pull/10)，尚未合并、安装或发布。保留已发布 0.2.5，且已同步 main 的 PR #9 卡牌设计工作台；不能从共享旧源码覆盖这个基线。立绘、Spine、PCK 与另一任务的百科卡牌显示改动未动。
+修复位于 `/Users/user/.codex/worktrees/card-stall-fix-20260922/sts2-mod-dev`，分支 `codex/card-stall-fix-20260922`；代码提交 `f66d1c38` 已推送并创建 [PR #10](https://github.com/iryuko/sts2-mod-dev/pull/10)，随后已发布 0.2.6，尚未合并 main 或安装到游戏。保留 0.2.5 内容与 PR #9 卡牌设计工作台；立绘和 Spine 不变，PCK 只更新版本号，另一任务的百科卡牌显示候选未纳入。
 [审计与验收清单](audits/card-stall-and-risk-audit-2026-09-22.md)已更新推送前复核与测试夹具清理修正：147 项玩法、28 项 Python、双端 API 构建通过，11 项原生检查连续复跑 5 次无错误/泄漏告警。下一步是候选安装与同进程 SL、Windows 和双机实机回归，不能把编译/宿主测试通过当作完整实机通过；推送前构建身份见审计。
 
 

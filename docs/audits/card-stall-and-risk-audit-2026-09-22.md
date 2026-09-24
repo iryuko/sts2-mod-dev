@@ -7,11 +7,13 @@
 - 修复分支：`codex/card-stall-fix-20260922`。
 - 工作树：`/Users/user/.codex/worktrees/card-stall-fix-20260922/sts2-mod-dev`。
 - 游戏/API：`v0.107.1` / `59260271`。保留的 Mac 与 Win DLL 不是同一二进制，但属于同一游戏版本。
-- 本轮只改 C# 逻辑、测试和文档；没有改卡图、Spine、GDScript 特效、PCK、版本号或玩家存档。2026-09-24 已推送代码并创建 PR #10；未合并、安装或发布。
+- 修复阶段只改 C# 逻辑、测试和文档。2026-09-24 用户追加发布授权后更新内外版本号为 0.2.6，重新打包 PCK；卡图、Spine、GDScript 特效和玩家存档未变。0.2.6 已发布，PR #10 尚未合并，本机未安装。
 
 本机反馈时安装的 DLL SHA-256 为 `118fd49f60f77e0df998ec679c7ce667c6c931c93de25fb35a6b7fc5681f9209`，与 0.2.5 发布 DLL 一致；PCK/manifest 仍是先前通过用户测试的 0.2.4 标记候选。这是标签差异，不是本次异常的原因。
 
 ## 推送前复核（2026-09-24）
+
+后续发布状态：用户另行明确要求发 Release；[0.2.6](https://github.com/iryuko/sts2-mod-dev/releases/tag/togawasakiko-v0.2.6-20260924) 已于 2026-09-24 12:46:45 UTC 正式发布。Tag 指向 `d8c1e7c6`，构建源码为 `8dc924c1`。571 项 PCK 内容只有内嵌版本标签变化，最终 ZIP 三件套与本地 staging 一致，两个上传资产的 GitHub SHA-256 核对通过。完整制品身份与验收边界见[发布说明](../../mods/Togawasakiko_in_Slay_the_Spire/docs/releases/2026-09-24-0.2.6.md)。以下是此前仅推送代码阶段的历史复核记录。
 
 - 用户明确允许推送。先快进同步远端 main `b2f70818`，保留 PR #9 卡牌设计工作台；它未修改本轮生产代码。
 - 代码提交：`f66d1c38`；[PR #10](https://github.com/iryuko/sts2-mod-dev/pull/10) 目标为 main。只推送功能分支，不合并、不发布 Release、不改本机安装；另一任务的百科卡牌显示候选不在本 PR 中。
