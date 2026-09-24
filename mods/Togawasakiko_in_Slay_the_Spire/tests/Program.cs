@@ -208,6 +208,11 @@ await PressureCardRegression.Run(Check);
 await SongExpansionRegression.Run(Check);
 await OctagramReplayRegression.Run(Check);
 await CastAnimationRegression.Run(Check);
+await AutoPlayEligibilityRegression.Run(Check);
+await MagneticForceRegression.Run(Check);
+await EnemyTargetRegression.Run(Check);
+await PianoEventRegression.Run(Check);
+await ShadowMigrationRegression.Run(Check);
 
 Console.WriteLine($"RESULT {passed} passed, {failures} failed");
 Environment.ExitCode = failures == 0 ? 0 : 1;

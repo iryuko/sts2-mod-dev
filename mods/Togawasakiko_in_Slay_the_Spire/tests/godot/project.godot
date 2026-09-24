@@ -1,0 +1,12 @@
+config_version=5
+
+[application]
+config/name="Togawasakiko Resource Lifecycle Regression"
+run/main_scene="res://Runner.tscn"
+config/features=PackedStringArray("4.5", "C#")
+
+[dotnet]
+project/assembly_name="ResourceLifecycle"
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

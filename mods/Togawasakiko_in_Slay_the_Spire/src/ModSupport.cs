@@ -75,8 +75,7 @@ internal static class ModSupport
         "THE_WHOLE_BLUE_WORLD"
     };
 
-    private static AudioStream? _shadowEventMusicStream;
-    private static AudioStreamPlayer? _shadowEventMusicPlayer;
+    private const string ShadowEventMusicPlayerName = "TogawasakikoShadowQuestionRoomMusic";
     private static readonly FieldInfo? CardEnergyCostLocalModifiersField =
         AccessTools.Field(typeof(CardEnergyCost), "_localModifiers");
 
@@ -882,7 +881,7 @@ internal static class ModSupport
         CombatState? combatState = GetCombatState(creature);
         return combatState == null
             ? Enumerable.Empty<Creature>()
-            : combatState.Creatures.Where(other => other.IsMonster && other.IsAlive);
+            : combatState.HittableEnemies;
     }
 
     public static IEnumerable<Creature> GetLivingEnemiesWithIntent(Creature creature)
@@ -1613,8 +1612,14 @@ internal static class ModSupport
         NEventRoom.Instance?.SetPortrait(portrait);
     }
 
-    public static void TryPlayShadowQuestionRoomEventMusic()
+    public static void TryPlayShadowQuestionRoomEventMusic(Node? eventNode)
     {
+        if (eventNode == null || !GodotObject.IsInstanceValid(eventNode) || !eventNode.IsInsideTree())
+        {
+            LogWarn("Shadow question-room event music skipped because its event node is unavailable.");
+            return;
+        }
+
         string musicPath = GetShadowQuestionRoomEventMusicPath();
         if (string.IsNullOrWhiteSpace(musicPath))
         {
@@ -1622,18 +1627,7 @@ internal static class ModSupport
             return;
         }
 
-        if (Engine.GetMainLoop() is not SceneTree tree || tree.Root == null)
-        {
-            LogWarn("Shadow question-room event music skipped because SceneTree root is unavailable.");
-            return;
-        }
-
-        AudioStream? stream = _shadowEventMusicStream;
-        if (stream == null || stream.ResourcePath != musicPath)
-        {
-            stream = GD.Load<AudioStream>(musicPath);
-            _shadowEventMusicStream = stream;
-        }
+        AudioStream? stream = PreloadManager.Cache.GetAsset<AudioStream>(musicPath);
 
         if (stream == null)
         {
@@ -1641,29 +1635,39 @@ internal static class ModSupport
             return;
         }
 
-        if (!GodotObject.IsInstanceValid(_shadowEventMusicPlayer))
+        AudioStreamPlayer? musicPlayer = eventNode.GetNodeOrNull<AudioStreamPlayer>(ShadowEventMusicPlayerName);
+        if (musicPlayer == null)
         {
-            _shadowEventMusicPlayer = new AudioStreamPlayer
+            musicPlayer = new AudioStreamPlayer
             {
-                Name = "TogawasakikoShadowQuestionRoomMusic",
+                Name = ShadowEventMusicPlayerName,
                 Bus = "Master"
             };
-            tree.Root.AddChild(_shadowEventMusicPlayer);
+            eventNode.AddChild(musicPlayer);
         }
 
         NRunMusicController.Instance?.StopMusic();
-        _shadowEventMusicPlayer.Stop();
-        _shadowEventMusicPlayer.Stream = stream;
-        _shadowEventMusicPlayer.Play();
+        musicPlayer.Stop();
+        musicPlayer.Stream = stream;
+        musicPlayer.Play();
     }
 
-    public static void StopShadowQuestionRoomEventMusic()
+    public static void StopShadowQuestionRoomEventMusic(Node? eventNode)
     {
-        if (GodotObject.IsInstanceValid(_shadowEventMusicPlayer))
+        if (eventNode == null || !GodotObject.IsInstanceValid(eventNode) || !eventNode.IsInsideTree())
         {
-            _shadowEventMusicPlayer.Stop();
+            return;
         }
 
+        AudioStreamPlayer? musicPlayer = eventNode.GetNodeOrNull<AudioStreamPlayer>(ShadowEventMusicPlayerName);
+        if (musicPlayer == null || musicPlayer.IsQueuedForDeletion())
+        {
+            return;
+        }
+
+        musicPlayer.Stop();
+        musicPlayer.Stream = null;
+        musicPlayer.QueueFree();
         NRunMusicController.Instance?.UpdateMusic();
     }
 

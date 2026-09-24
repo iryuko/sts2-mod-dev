@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="godot/**/*.cs" />
     <ProjectReference Include="../src/Togawasakiko_in_Slay_the_Spire.csproj" />
     <Reference Include="sts2">
       <HintPath>../../../references/game-dlls/sts2/arm64/sts2.dll</HintPath>

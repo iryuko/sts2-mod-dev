@@ -103,8 +103,6 @@ internal sealed class PersonaDissociationPower : PowerModel
 
 internal sealed class MagneticForceHellWargodPower : PowerModel
 {
-    private HashSet<CardModel>? _cardsQueuedForReplay;
-
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Single;
@@ -113,48 +111,15 @@ internal sealed class MagneticForceHellWargodPower : PowerModel
 
     public override LocString Description => new("powers", "MAGNETIC_FORCE_HELL_WARGOD_POWER.description");
 
-    private HashSet<CardModel> CardsQueuedForReplay
+    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
     {
-        get
+        if (Owner?.Player == null || card.Owner != Owner.Player || card.Type != CardType.Attack)
         {
-            AssertMutable();
-            return _cardsQueuedForReplay ??= new HashSet<CardModel>();
-        }
-    }
-
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
-    {
-        if (Owner?.Player == null || cardPlay.Card?.Owner != Owner.Player || cardPlay.Card.Type != CardType.Attack)
-        {
-            return;
+            return playCount;
         }
 
-        CardModel card = cardPlay.Card;
-        if (CardsQueuedForReplay.Remove(card))
-        {
-            return;
-        }
-
-        if (!ModSupport.TryResolveReplayTarget(cardPlay, out Creature? replayTarget))
-        {
-            return;
-        }
-
-        CardsQueuedForReplay.Add(card);
-        try
-        {
-            await CardCmd.AutoPlay(
-                choiceContext,
-                card,
-                replayTarget,
-                AutoPlayType.Default,
-                false,
-                false);
-        }
-        finally
-        {
-            CardsQueuedForReplay.Remove(card);
-        }
+        // Reapplication does not multiply this single, turn-long replay effect.
+        return playCount + 1;
     }
 
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)

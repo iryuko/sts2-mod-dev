@@ -52,7 +52,10 @@ internal sealed class AveMujicaPower : PowerModel
                 continue;
             }
 
-            if (topCard.CanPlay())
+            topCard.CanPlay(out UnplayableReason reason, out _);
+            // Autoplay is free, but genuine play restrictions still draw instead.
+            const UnplayableReason costs = UnplayableReason.EnergyCostTooHigh | UnplayableReason.StarCostTooHigh;
+            if ((reason & ~costs) == UnplayableReason.None)
             {
                 await CardPileCmd.AutoPlayFromDrawPile(choiceContext, player, 1, CardPilePosition.Top, false);
                 continue;

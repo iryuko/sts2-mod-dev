@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -86,8 +87,12 @@ internal sealed class UnattendedPiano : EventModel
 
     private async Task BeginPlaying()
     {
-        ModSupport.TrySetCurrentEventPortrait(ModSupport.GetShadowQuestionRoomEventMainPath("shadow_piano.png"));
-        ModSupport.TryPlayShadowQuestionRoomEventMusic();
+        if (LocalContext.IsMe(Owner))
+        {
+            ModSupport.TrySetCurrentEventPortrait(ModSupport.GetShadowQuestionRoomEventMainPath("shadow_piano.png"));
+            ModSupport.TryPlayShadowQuestionRoomEventMusic(Node);
+        }
+
         await AdvancePlayingState(1);
     }
 
@@ -116,7 +121,10 @@ internal sealed class UnattendedPiano : EventModel
 
     protected override void OnEventFinished()
     {
-        ModSupport.StopShadowQuestionRoomEventMusic();
+        if (LocalContext.IsMe(Owner))
+        {
+            ModSupport.StopShadowQuestionRoomEventMusic(Node);
+        }
     }
 
     private async Task AdvancePlayingState(int stage)

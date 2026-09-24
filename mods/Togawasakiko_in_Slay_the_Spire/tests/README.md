@@ -1,5 +1,41 @@
 # Gameplay Regression
 
+## 2026-09-22 Lifecycle And Replay Regression
+
+The managed suite now has 147 checks. New cases cover Following Phrase followed
+by an attack, free Ave Mujica autoplay with insufficient energy, unplayable-card
+fallback, Magnetic Force with native Spiral/One Two Punch, paid X/stars,
+forced exhaustion, and native Osty/non-hittable-enemy exclusion. The closeout
+adds event-owner presentation isolation with actual piano choices/rewards,
+all three Shadows' native save/load metadata and independent instances, star-only
+and mixed resource restrictions, and native first-hit lethal replay behavior.
+
+Native resource lifetime needs a separate real Godot .NET host:
+
+```bash
+bash shared/scripts/test-togawasakiko-resources.sh
+```
+
+Set `GODOT_MONO` to a Godot 4.5.1 .NET executable, or place the official macOS
+build at `local/tools/godot-mono-4.5.1/Godot_mono.app/Contents/MacOS/Godot`.
+This project uses Godot.NET.Sdk 4.5.1 and the same .NET 9 runtime as the managed
+suite. Run the managed suite first to prepare its reference dependencies.
+It does not start STS2 or modify saves. It exercises the actual mod lookups and
+native `AssetCache.UnloadAssets` with deferred disposal: three scene cycles,
+two event/audio cycles, stale-event cleanup isolation, and five jukebox checks.
+The minimal scene isolates ownership from Spine/art. Piano tests use actual
+EventModel/choices and an event-owned Control, a silent audio resource, and
+observed native music commands. Jukebox tests execute native slider/settings
+and NAudioManager volume conversion against a recording proxy in place of FMOD.
+Loading, instantiation, playback and disposal use the real engine. This does not
+validate the complete event UI, actual audio output or multiplayer transport.
+The script rejects errors, resource-leak warnings and a timeout without success.
+The jukebox fixture waits for native stream references to return to fixture-only
+ownership (with a two-second timeout), rather than assuming stopped playback is
+released after a fixed 50 ms. This also verifies cleanup before the host quits.
+
+Historical suite notes follow.
+
 Uses the actual mod and STS2 v0.107.1 assemblies with the original `TestMode`.
 No test framework packages or copied gameplay implementations are required.
 

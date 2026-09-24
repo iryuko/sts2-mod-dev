@@ -123,6 +123,21 @@ internal static class BridgeCardRegression
             Equal(0, f.Players[0].PlayerCombatState!.Hand.Cards.Count);
         });
 
+        await check("Following Phrase native play completes and the next attack leaves the Play pile", async () =>
+        {
+            var f = new CombatFixture();
+            CardModel phrase = f.Card("FollowingPhrase"), attack = f.Card("StrikeTogawasakiko");
+            int hp = f.Enemy.CurrentHp;
+            await CardCmd.AutoPlay(f.Choice, phrase, null, skipCardPileVisuals: true);
+            await CardCmd.AutoPlay(f.Choice, attack, f.Enemy, skipCardPileVisuals: true);
+            Equal(6, f.Players[0].Creature.Block);
+            Equal(hp - 6, f.Enemy.CurrentHp);
+            Equal(PileType.Discard, phrase.Pile!.Type);
+            Equal(PileType.Discard, attack.Pile!.Type);
+            Equal(0, f.Players[0].PlayerCombatState!.PlayPile.Cards.Count);
+            Equal(false, CombatManager.Instance.IsExecutingCardOrPotionEffect(f.Players[0]));
+        });
+
         await check("Following Phrase counts Choir before nested autoplay and not after it finishes", async () =>
         {
             var f = new CombatFixture();
