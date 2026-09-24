@@ -32,7 +32,7 @@ func _run() -> void:
 		_fail("Old death timeline in PCK")
 		return
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://mod_manifest.json"))
-	if manifest.get("version") != "0.2.5":
+	if manifest.get("version") != "0.2.6":
 		_fail("Wrong embedded version")
 		return
 	var fall: Texture2D = load(ANIMATION_ROOT + "images/fall_prone_candidate_v3_idle_locked.png")
