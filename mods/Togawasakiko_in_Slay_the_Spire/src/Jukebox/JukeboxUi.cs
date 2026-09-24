@@ -1066,6 +1066,11 @@ internal sealed partial class JukeboxOverlay : Control
         _isFmodBgmMutedForCustomTrack = true;
     }
 
+    internal static float FilterBgmVolume(float volume)
+    {
+        return _isFmodBgmMutedForCustomTrack ? 0.0f : volume;
+    }
+
     private static void RestoreFmodBgmIfNeeded()
     {
         if (!_isFmodBgmMutedForCustomTrack)
@@ -1073,8 +1078,9 @@ internal sealed partial class JukeboxOverlay : Control
             return;
         }
 
-        NAudioManager.Instance?.SetBgmVol(SaveManager.Instance.SettingsSave.VolumeBgm);
+        // Release ownership before the volume filter sees the restored preference.
         _isFmodBgmMutedForCustomTrack = false;
+        NAudioManager.Instance?.SetBgmVol(SaveManager.Instance.SettingsSave.VolumeBgm);
     }
 
     private static int ResolveBgmBusIndex()

@@ -118,14 +118,13 @@ class GameplayStateContracts(unittest.TestCase):
         self.assertIn("cardSource?.Owner?.Character is Togawasakiko", powers)
         self.assertIn("applier?.Player?.Character is Togawasakiko", powers)
 
-    def test_replay_state_is_lazy_per_mutable_power(self) -> None:
+    def test_magnetic_replay_uses_native_play_count(self) -> None:
         powers = read_source("src/Powers/TogawasakikoPowers.cs")
-        self.assertIn("private HashSet<CardModel>? _cardsQueuedForReplay;", powers)
-        self.assertIn("_cardsQueuedForReplay ??= new HashSet<CardModel>()", powers)
-        self.assertNotIn(
-            "private readonly HashSet<CardModel> _cardsQueuedForReplay",
-            powers,
-        )
+        magnetic = powers.split("internal sealed class MagneticForceHellWargodPower", 1)[1]
+        magnetic = magnetic.split("internal sealed class SocialWithdrawalPower", 1)[0]
+        self.assertIn("override int ModifyCardPlayCount(", magnetic)
+        self.assertNotIn("CardCmd.AutoPlay", magnetic)
+        self.assertNotIn("HashSet<CardModel>", magnetic)
 
     def test_relic_cards_use_original_command_chain(self) -> None:
         relics = read_source("src/Relics/BestCompanion.cs")

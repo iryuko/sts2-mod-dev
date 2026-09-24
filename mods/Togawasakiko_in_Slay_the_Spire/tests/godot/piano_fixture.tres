@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamWAV" format=3]
+
+[resource]
+format = 0
+loop_mode = 1
+loop_end = 16
+mix_rate = 8000
+data = PackedByteArray(128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128)

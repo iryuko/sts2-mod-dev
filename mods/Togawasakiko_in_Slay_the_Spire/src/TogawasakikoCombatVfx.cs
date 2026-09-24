@@ -1,4 +1,5 @@
 using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 
@@ -11,8 +12,6 @@ internal static class TogawasakikoCombatVfx
 
     // The runtime thorn and the current pointing animation both contact at 0.31s.
     private const float StandardContactTime = 0.31f;
-    private static PackedScene? _thornScene;
-    private static bool _thornSceneLoadAttempted;
     private static bool _missingRuntimeNodeLogged;
 
     internal static AttackCommand WithSingleTargetThorns(
@@ -91,14 +90,7 @@ internal static class TogawasakikoCombatVfx
 
     private static PackedScene? GetThornScene()
     {
-        if (_thornSceneLoadAttempted)
-        {
-            return _thornScene;
-        }
-
-        _thornSceneLoadAttempted = true;
-        _thornScene = ResourceLoader.Load<PackedScene>(ThornScenePath);
-        return _thornScene;
+        return PreloadManager.Cache.GetScene(ThornScenePath);
     }
 
     private static Node2D CreateSelfFreeingNoop(string warning)

@@ -189,6 +189,7 @@ public static class TogawasakikoMod
         if (!ReferenceEquals(freshShadow, shadow))
         {
             freshShadow.CombatsSeen = shadow.CombatsSeen;
+            freshShadow.FloorAddedToDeck = shadow.FloorAddedToDeck;
         }
 
         return freshShadow;
