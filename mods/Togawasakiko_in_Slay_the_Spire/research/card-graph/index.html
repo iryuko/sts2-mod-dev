@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>丰川祥子 · 卡牌设计工作台</title>
+  <link rel="stylesheet" href="graph.css">
+  <link rel="stylesheet" href="draft-editor.css">
+  <script defer src="vendor/cytoscape-3.33.1.min.js"></script>
+  <script defer src="vendor/lucide-0.468.0.min.js"></script>
+  <script defer src="graph-data.js"></script>
+  <script defer src="relation-style.js"></script>
+  <script defer src="card-aliases.js"></script>
+  <script defer src="card-references.js"></script>
+  <script defer src="graph.js"></script>
+  <script defer src="workbench-api.js"></script>
+  <script defer src="draft-editor.js"></script>
+  <script defer src="workbench.js"></script>
+</head>
+<body>
+  <header class="page-header">
+    <div><span class="eyebrow">TOGAWASAKIKO / DESIGN RESEARCH</span><h1>丰川祥子 <span>卡牌工作台</span></h1></div>
+    <div class="baseline"><strong id="version">0.2.3</strong><span id="total-count"></span><a href="README.md">数据与边界</a></div>
+  </header>
+  <nav class="workbench-bar" aria-label="工作台">
+    <div class="segmented"><button id="graph-tab" type="button" aria-pressed="true">图谱</button><button id="draft-tab" type="button" aria-pressed="false" disabled>草案</button></div>
+    <button id="new-draft" class="command-button" type="button" disabled><i data-lucide="plus"></i>新建草案</button>
+    <button id="clone-card" class="command-button" type="button" disabled><i data-lucide="copy"></i>复制选中卡</button>
+    <span id="connection-status" class="connection-status">连接中</span>
+  </nav>
+  <p id="connection-error" role="alert"></p>
+  <div id="recovery-tools" class="recovery-tools" hidden><button id="download-local" class="command-button" type="button">下载本页草稿</button><button id="reconnect" class="command-button" type="button">重新连接</button><button id="reload-workspace" class="command-button" type="button">重新加载工作区</button></div>
+  <section id="draft-workspace" class="draft-workspace" hidden aria-label="草案工作区">
+    <aside class="draft-sidebar"><div class="list-heading"><h2>设计草案</h2><span id="draft-count"></span></div><label class="check-label"><input id="show-archived" type="checkbox">包含已归档</label><div id="draft-list" class="draft-list"></div></aside>
+    <section id="draft-editor" class="draft-editor" hidden aria-label="草案编辑器"></section>
+  </section>
+  <main class="workspace">
+    <aside class="catalog" aria-label="卡牌目录">
+      <div class="catalog-filters">
+        <label class="search-box"><i data-lucide="search" aria-hidden="true"></i><input id="search" type="search" aria-label="搜索卡牌名称或类名" placeholder="名称 / C# 类名"></label>
+        <div class="filter-pair">
+          <label>类型<select id="type-filter"><option value="all">全部类型</option><option value="Attack">攻击</option><option value="Skill">技能</option><option value="Power">能力</option><option value="Curse">诅咒</option></select></label>
+          <label>来源<select id="pool-filter"><option value="all">全部来源</option><option value="main">主卡池</option><option value="token">压力衍生</option><option value="event">事件牌</option><option value="relic">遗物授予</option><option value="proposal">设计提案</option></select></label>
+        </div>
+        <label class="check-label"><input id="proposal-filter" type="checkbox" checked> 包含未批准提案</label>
+      </div>
+      <div class="list-heading"><h2>卡牌</h2><span id="list-count"></span></div>
+      <div id="card-list" class="card-list" role="group" aria-label="卡牌列表"></div>
+    </aside>
+    <section class="graph-section" aria-label="卡牌关系网络">
+      <div class="graph-toolbar">
+        <div class="segmented" role="group" aria-label="图谱范围"><button id="focus-mode" type="button" aria-pressed="true">选中牌关系</button><button id="global-mode" type="button" aria-pressed="false">全局</button></div>
+        <label>关系<select id="relation-filter"><option value="all">全部关系</option><option value="supply">资源供给</option><option value="payoff">效果收益</option><option value="sequence">牌序编排</option><option value="replay">重复打出</option><option value="generation">生成候选</option><option value="tradeoff">资源取舍</option><option value="conflict">流程冲突</option></select></label>
+        <label>方向<select id="direction-filter"><option value="both">双向</option><option value="in">流入</option><option value="out">流出</option></select></label>
+        <div class="icon-tools">
+          <button id="zoom-in" type="button" title="放大" aria-label="放大"><i data-lucide="zoom-in"></i></button>
+          <button id="zoom-out" type="button" title="缩小" aria-label="缩小"><i data-lucide="zoom-out"></i></button>
+          <button id="fit" type="button" title="适合画布" aria-label="适合画布"><i data-lucide="maximize"></i></button>
+          <button id="export" type="button" title="导出当前关系 JSON" aria-label="导出当前关系 JSON"><i data-lucide="download"></i></button>
+        </div>
+      </div>
+      <div class="graph-title"><h2 id="graph-title">全卡池</h2><span id="visible-count" aria-live="polite"></span></div>
+      <div id="graph" role="img" aria-label="有向卡牌关系图，具体卡牌和关系也列于两侧"></div>
+      <div class="graph-legend"><span class="key attack">攻击</span><span class="key skill">技能</span><span class="key power">能力</span><span class="key curse">事件诅咒</span></div>
+      <div id="relation-legend" class="relation-legend" aria-label="关系图例"></div>
+      <div id="error" role="alert" hidden></div>
+    </section>
+    <aside class="detail" aria-label="卡牌及关系详情"><div id="detail-content"></div></aside>
+  </main>
+</body>
+</html>

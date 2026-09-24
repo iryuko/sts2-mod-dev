@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-21",
+  "release": "0.2.3",
+  "source_revision": "057b6396b0eb26d217eadade0be21b07d30c07f6",
+  "source_tree": "6fce73a24071f26cd7c96e71e4855fcbcf8aede2",
+  "source_worktree": ".worktrees/bridge-card-art-fix-20260906",
+  "mod_directory": "mods/Togawasakiko_in_Slay_the_Spire",
+  "main_integration": "d1df1c45e340a44b6f3e49fd0538ef5cc677844e",
+  "scope": "All 72 concrete mod cards; native generated cards and relics are documented boundaries, not fabricated mod card nodes."
+}

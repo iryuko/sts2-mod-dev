@@ -1,0 +1,53 @@
+{
+  "cards": [
+    {
+      "id": "proposal:RewrittenAccent", "name": "改写重拍（草案）", "type": "Attack", "rarity": "Common", "cost": 1,
+      "base": "造成6点伤害。本回合你每实际弃置1张牌，伤害增加2，最多计3张（总基础伤害最多12）。",
+      "upgrade": "基础伤害6→9，最多仍计3张（总基础伤害最多15）。",
+      "tags": ["discard", "attack", "bounded_scaling"],
+      "notes": ["未获实现批准，数值未平衡测试。候选优先级：先讨论。", "只统计自身、本回合、实际弃置的牌；消耗、入消耗堆、队友弃牌不是弃牌。", "不自带弃牌、过牌或回能；同回合重打不会让计数因本牌自身增长。", "Treasure Pleasure仍能完整重打这张攻击；上限限制的是读取的弃牌数，不是禁止原有重打。", "主题是重新安排已经放下的材料，来自两季连续的编排/面对过去研究；不是某首真实歌曲，也不是原作台词。"]
+    },
+    {
+      "id": "proposal:ClosingCadence", "name": "收束终止式（草案）", "type": "Attack", "rarity": "Common", "cost": 1,
+      "base": "失去8点格挡（不足则失去全部）。造成6点伤害，并增加等于实际失去格挡的伤害（最多14）。",
+      "upgrade": "基础伤害6→9，格挡支出上限仍为8（最多17）。",
+      "tags": ["block_spend", "attack", "bounded_scaling"],
+      "notes": ["未获实现批准，数值未平衡测试。候选优先级：与改写重拍一起比较，不默认两张都加。", "自动支付min(当前格挡,8)，没有选择数量弹窗；自动打出也照常支付。每次重打重新支付，不能复用第一次的支出。", "支付格挡不是受到攻击/失去生命，不触发颜或按HP损失计算的效果。", "使用单次正常攻击伤害链，格挡支出上限阻止Symbol III在本局跨战斗的成长直接转成无上限攻击。", "主题是主动放下部分保护、选择何时结束一个乐句；不是把自伤当人物的唯一核心。"]
+    },
+    {
+      "id": "proposal:Staccato", "name": "断奏（保留案）", "type": "Attack", "rarity": "Common", "cost": 1,
+      "base": "可消耗手牌中的1张压力衍生牌。造成6点伤害；若成功消耗，再造成6点伤害。",
+      "upgrade": "每段伤害6→9。",
+      "tags": ["token_payment", "attack", "exhaust_material_not_self"],
+      "notes": ["上一轮提案保留作比较，不视为用户已接受；优先级低于弃牌/格挡支出两种全局缺口。", "DIVINE与不必说出口已经提供衍生牌支付出口；这张只补攻击兑现，不证明必须继续扩这个分支。", "原衍生牌效果不会执行；不会因主动消耗触发幕后支撑。", "一次出牌两段伤害，不是两次打出；Treasure Pleasure额外打出时必须再次支付材料。"]
+    }
+  ],
+  "relations": [
+    {"source":"Completeness","target":"proposal:RewrittenAccent","kind":"supply","mechanism":"本回合弃牌计数","condition":"自己主动弃换的牌实际完成弃置，最多只读取3张。","reason":"核心旧牌能同时提供手牌重组、压力与有限攻击增幅；不是只与新牌配合。","evidence":["src/Cards/TogawasakikoCards.cs#Completeness","proposal:RewrittenAccent"]},
+    {"source":"Thrilled","target":"proposal:RewrittenAccent","kind":"supply","mechanism":"弃歌与能量","condition":"手中有歌曲且实际弃置，贡献1次弃牌；无歌的免费能量分支不贡献弃牌数。","reason":"旧回能牌同时为攻击支付费用并提供有限增幅。","evidence":["src/Cards/TogawasakikoCards.cs#Thrilled","proposal:RewrittenAccent"]},
+    {"source":"SoManyMaggots","target":"proposal:RewrittenAccent","kind":"supply","mechanism":"自身实际弃牌","condition":"好多蛆的持有者实际弃牌；即使净化目标是队友，弃牌代价仍由持有者支付。其他玩家自己的弃牌不计入。","reason":"已有净化代价可形成进攻准备，保留多人归属约束。","evidence":["src/Cards/TogawasakikoCards.cs#SoManyMaggots","proposal:RewrittenAccent"]},
+    {"source":"ChoirSChoir","target":"proposal:RewrittenAccent","kind":"supply","mechanism":"演出前弃牌","condition":"本回合Choir实际弃掉1张自己的手牌；其后其他弃牌仍合计最多3张。","reason":"连接旧回放入口，但既不自动把本提案加入消耗堆，也不解除其费用。","evidence":["src/Cards/TogawasakikoSongCards.cs#ChoirSChoir","proposal:RewrittenAccent"]},
+    {"source":"DefendTogawasakiko","target":"proposal:ClosingCadence","kind":"supply","mechanism":"当前格挡预算","condition":"先获得并保有格挡，本牌实际支出至多8。","reason":"起始防御也能参与进攻转换，不依赖抽到特定新牌。","evidence":["src/Cards/TogawasakikoCards.cs#DefendTogawasakiko","proposal:ClosingCadence"]},
+    {"source":"Unendurable","target":"proposal:ClosingCadence","kind":"supply","mechanism":"当前格挡预算","condition":"先打出难熬且格挡未被消耗；随后支出最多8。","reason":"把起始牌的格挡与施压分支连接到另一种攻击选择。","evidence":["src/Cards/TogawasakikoCards.cs#Unendurable","proposal:ClosingCadence"]},
+    {"source":"Fragility","target":"proposal:ClosingCadence","kind":"supply","mechanism":"多余格挡支出","condition":"剩余格挡足够且愿意放弃至多8点防御。","reason":"旧高费防御牌可转出少量攻击，但不是把回复或颜转伤害。","evidence":["src/Cards/TogawasakikoCards.cs#Fragility","proposal:ClosingCadence"]},
+    {"source":"Face","target":"proposal:ClosingCadence","kind":"supply","mechanism":"即时格挡","condition":"只使用Face当前给的格挡，不消费颜Power；仍需评估之后承受攻击的风险。","reason":"已有防御歌曲能准备进攻，而不是又增加随机歌曲生成。","evidence":["src/Cards/TogawasakikoSongCards.cs#Face","proposal:ClosingCadence"]},
+    {"source":"SymbolIii","target":"proposal:ClosingCadence","kind":"supply","mechanism":"成长格挡的有限支出","condition":"Symbol III先给出当前格挡；无论永久成长多高，单次最多支付8。","reason":"旧成长系统有攻击出口，但硬上限阻止同一run跨战斗成长无界放大。","evidence":["src/Cards/TogawasakikoSongCards.cs#SymbolIii","proposal:ClosingCadence"]},
+    {"source":"Sophie","target":"proposal:ClosingCadence","kind":"tradeoff","mechanism":"格挡供给与自身虚弱","condition":"Sophie提供格挡，也向自己施加虚弱；随后的攻击伤害仍受虚弱影响。","reason":"不是所有格挡来源都对攻击净增益，预览需要显示真实修正。","evidence":["src/Cards/TogawasakikoSongCards.cs#Sophie","proposal:ClosingCadence"]},
+    {"source":"BackstageSupport","target":"proposal:ClosingCadence","kind":"supply","mechanism":"打出衍生牌所得格挡","condition":"能力生效，实际打出的衍生牌触发其前两次收益后，还有格挡可付。","reason":"新分支是额外入口之一，而不是本提案唯一依赖。","evidence":["src/Powers/BackstageSupportPower.cs#AfterCardPlayed","proposal:ClosingCadence"]},
+    {"source":"UnspokenWords","target":"proposal:ClosingCadence","kind":"supply","mechanism":"消耗所得格挡","condition":"先成功消耗自己的衍生牌并获得格挡；本攻击仍需支付能量及格挡。","reason":"提供材料到防御再到攻击的多步转换，必须评估总投入。","evidence":["src/Cards/TogawasakikoPressureCards.cs#UnspokenWords","proposal:ClosingCadence"]},
+    {"source":"RestorationOfPower","target":"proposal:Staccato","kind":"supply","mechanism":"生成消耗材料","condition":"生成的衍生牌仍在手中，并被实际选中消耗。","reason":"旧复权是原始入口，不依赖最近的Song扩展。","evidence":["src/Cards/TogawasakikoCards.cs#RestorationOfPower","proposal:Staccato"]},
+    {"source":"Speak","target":"proposal:Staccato","kind":"tradeoff","mechanism":"免费人格解离的用途竞争","condition":"把说话生成的免费人格解离当材料会放弃其下一次伤害翻倍效果。","reason":"可能牺牲比追加一段伤害更高的收益，不能只算消耗是免费。","evidence":["src/Cards/TogawasakikoCards.cs#Speak","src/Powers/TogawasakikoPowers.cs#PersonaDissociationPower","proposal:Staccato"]},
+    {"source":"Curseslander","target":"proposal:Staccato","kind":"supply","mechanism":"生成消耗材料","condition":"诅咒生成的本战免费衍生牌在手中；选择消耗会放弃免费打出效果。","reason":"连接Ancient内容，但需要比较直接打出与支付的机会成本。","evidence":["src/Cards/TogawasakikoCards.cs#Curseslander","proposal:Staccato"]},
+    {"source":"proposal:Staccato","target":"LingeringResonance","kind":"payoff","mechanism":"实际消耗反馈","condition":"能力已经生效、本回合触发次数未用完且材料实际被消耗。","reason":"可额外施加压力；并不触发幕后支撑的打出条件。","evidence":["src/Powers/LingeringResonancePower.cs#AfterCardExhausted","proposal:Staccato"]},
+    {"source":"proposal:Staccato","target":"Divine","kind":"tradeoff","mechanism":"同一衍生牌争用","condition":"手牌材料有限；消耗给断奏的牌不能再次支付DIVINE。","reason":"攻击兑现与回能过牌互相竞争，不应把共同材料都画成正协同。","evidence":["src/Cards/TogawasakikoSongExpansionCards.cs#Divine","proposal:Staccato"]},
+    {"source":"TreasurePleasure","target":"proposal:RewrittenAccent","kind":"replay","mechanism":"攻击额外打出","condition":"同持有者本回合已有攻击重放，额外打出再次读取当时的弃牌计数，上限仍3。","reason":"需按重放后的整套伤害评估，而不是只看印刷基础伤害。","evidence":["src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower","proposal:RewrittenAccent"]},
+    {"source":"TreasurePleasure","target":"proposal:ClosingCadence","kind":"replay","mechanism":"重打重新支付格挡","condition":"第二次重新支付当时仍有的至多8格挡；不能沿用第一次支出缓存。","reason":"总格挡有限，明确阻止一次支付重复获益。","evidence":["src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower","proposal:ClosingCadence"]},
+    {"source":"TreasurePleasure","target":"proposal:Staccato","kind":"replay","mechanism":"重打重新支付材料","condition":"额外出牌再次选择并消耗一张材料才能追加该次第二段。","reason":"没有第二张材料就不能继续复制首次成功支付。","evidence":["src/Powers/TogawasakikoPowers.cs#MagneticForceHellWargodPower","proposal:Staccato"]},
+    {"source":"SheIsRadiant","target":"proposal:RewrittenAccent","kind":"supply","mechanism":"力量增伤","condition":"力量已生效；弃牌附加值有独立上限，清空压力不清空实际弃牌历史。","reason":"给已消费压力的力量路线提供不依赖目标剩余压力的攻击。","evidence":["src/Cards/TogawasakikoCards.cs#SheIsRadiant","proposal:RewrittenAccent"]},
+    {"source":"SheIsRadiant","target":"proposal:ClosingCadence","kind":"supply","mechanism":"力量增伤","condition":"力量已生效，格挡费用另行支付，不读取目标压力。","reason":"连接压力转力量路线与旧防御牌，不再增加存压阈值。","evidence":["src/Cards/TogawasakikoCards.cs#SheIsRadiant","proposal:ClosingCadence"]},
+    {"source":"SheIsRadiant","target":"proposal:Staccato","kind":"supply","mechanism":"逐段力量增伤","condition":"有力量，且材料支付成功才有第二段；每段正常计算。","reason":"两段攻击放大力量收益，是该提案必须计入的风险。","evidence":["src/Cards/TogawasakikoCards.cs#SheIsRadiant","proposal:Staccato"]},
+    {"source":"OctagramDance","target":"proposal:RewrittenAccent","kind":"sequence","mechanism":"技能后攻击交错","condition":"八芒星生效、上一张不是攻击且自己回合未结束；免费不取消条件。","reason":"提供类型交错选择，但与Treasure Pleasure的攻击重放同时使用仍可能强制结束。","evidence":["src/Powers/OctagramDancePower.cs#OctagramDancePower","proposal:RewrittenAccent"]},
+    {"source":"OctagramDance","target":"proposal:ClosingCadence","kind":"sequence","mechanism":"免费能量但仍付格挡","condition":"出牌顺序合法；只免能量，仍实际失去格挡。","reason":"避免免费效果意外变成所有资源代价都免费。","evidence":["src/Powers/OctagramDancePower.cs#OctagramDancePower","proposal:ClosingCadence"]},
+    {"source":"OctagramDance","target":"proposal:Staccato","kind":"sequence","mechanism":"技能后攻击交错","condition":"顺序合法；一次出牌的两段伤害不是两次打出，额外重放则另计。","reason":"区分伤害段数与出牌次数；不能仅因有两段就判定违反类型规则。","evidence":["src/Powers/OctagramDancePower.cs#OctagramDancePower","proposal:Staccato"]}
+  ]
+}

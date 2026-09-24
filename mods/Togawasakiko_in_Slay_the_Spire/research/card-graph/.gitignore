@@ -1,0 +1,7 @@
+__pycache__/
+*.lock
+.workspace-*.tmp
+.venv/
+node_modules/
+# Personal designs and original uploads are persistent data, not cleanup targets.
+workspace/
