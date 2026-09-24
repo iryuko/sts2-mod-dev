@@ -56,6 +56,8 @@
 
 ## 兼容性与护栏
 
+- [卡牌悬空与同类风险审计](../../../docs/audits/card-stall-and-risk-audit-2026-09-22.md)：0.2.5 基线上的九类资源、玩法、音频和存档修复；PR #10 已推送，实机验收仍待完成。
+
 - [T4 经验与护栏](t4-lessons-and-guardrails.md)：原版优先、资源接线和回归经验。
 - [Windows 发布问题调查](win-release-bug-investigation-2026-06-24.md)：Win 卡牌卡中间与换房停歌的证据清单。
 
